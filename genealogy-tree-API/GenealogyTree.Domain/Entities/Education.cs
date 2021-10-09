@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GenealogyTree.Domain.Enums;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
@@ -9,10 +11,11 @@ namespace GenealogyTree.Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public int IdEducationType { get; set; }
-        public int IdUser { get; set; }
+        public EducationLevel EducationLevel { get; set; }
 
-        public virtual EducationType EducationType { get; set; }
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }
 }
