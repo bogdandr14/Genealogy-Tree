@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
-    public class SynchronizedUsers
+    public class SynchedUsers
     {
         public int Id { get; set; }
 

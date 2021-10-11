@@ -31,7 +31,7 @@ namespace GenealogyTree.Data
         public DbSet<Relationship> Relationships { get; set; }
         public DbSet<Marriage> Marriages { get; set; }
         public DbSet<SyncRequest> SyncRequests { get; set; }
-        public DbSet<SynchronizedUsers> SynchronizedUsers { get; set; }
+        public DbSet<SynchedUsers> SynchronizedUsers { get; set; }
 
     }
 }
