@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GenealogyTree.Domain.Interfaces.Repositories
+﻿namespace GenealogyTree.Domain.Interfaces.Repositories
 {
-    interface IRepositoryWrapper
+    public interface IRepositoryWrapper
     {
         IEducationRepository Education { get; }
         IGenderRepository Gender { get; }
@@ -16,8 +10,9 @@ namespace GenealogyTree.Domain.Interfaces.Repositories
         IPersonRepository Person { get; }
         IRelationshipRepository Relationship { get; }
         IReligionRepository Religion { get; }
-        ISynchedUsersRepository SyncedUser { get; }
+        ISynchedUsersRepository SynchedUsers { get; }
         ISyncRequestRepository SyncRequest { get; }
         IUserRepository User { get; }
+        void Save();
     }
 }

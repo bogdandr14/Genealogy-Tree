@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenealogyTree.Domain.Models
 {
-    public class EdicationModel
+    public class EducationModel
     {
         public int Id { get; set; }
         public string EducationInstituteName { get; set; }

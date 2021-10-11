@@ -13,4 +13,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GenealogyTree.Data\GenealogyTree.Data.csproj" />
+    <ProjectReference Include="..\GenealogyTree.Domain\GenealogyTree.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

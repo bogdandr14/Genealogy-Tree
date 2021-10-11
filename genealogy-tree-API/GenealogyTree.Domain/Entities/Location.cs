@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GenealogyTree.Domain.Entities
+﻿namespace GenealogyTree.Domain.Entities
 {
     public class Location
     {

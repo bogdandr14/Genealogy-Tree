@@ -2,7 +2,7 @@
 
 namespace GenealogyTree.Domain.Interfaces.Repositories
 {
-    interface IRelationshipRepository : IRepositoryBase<Relationship>
+    public interface IRelationshipRepository : IRepositoryBase<Relationship>
     {
     }
 }

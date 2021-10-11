@@ -2,7 +2,7 @@
 
 namespace GenealogyTree.Domain.Interfaces.Repositories
 {
-    interface IReligionRepository : IRepositoryBase<Religion>
+    public interface IReligionRepository : IRepositoryBase<Religion>
     {
     }
 }

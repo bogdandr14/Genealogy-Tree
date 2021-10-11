@@ -1,6 +1,5 @@
 ﻿using GenealogyTree.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace GenealogyTree.Data
 {

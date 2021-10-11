@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,6 +23,7 @@ namespace GenealogyTree.Domain.Entities
         [ForeignKey("SecondPersonId")]
         public virtual Person SecondPerson { get; set; }
 
-/*        public virtual ICollection<Person> Children { get; set; }
-*/    }
+        /*        public virtual ICollection<Person> Children { get; set; }
+        */
+    }
 }

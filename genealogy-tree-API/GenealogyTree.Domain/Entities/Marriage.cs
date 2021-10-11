@@ -12,6 +12,6 @@ namespace GenealogyTree.Domain.Entities
         public int CoupleId { get; set; }
 
         [ForeignKey("CoupleId")]
-        public virtual Relationship Couple{ get; set; }
+        public virtual Relationship Couple { get; set; }
     }
 }

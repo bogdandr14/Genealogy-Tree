@@ -2,7 +2,7 @@
 
 namespace GenealogyTree.Domain.Interfaces.Repositories
 {
-    public interface IEducationRepository: IRepositoryBase<Education>
+    public interface IEducationRepository : IRepositoryBase<Education>
     {
     }
 }

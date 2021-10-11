@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,8 +34,8 @@ namespace GenealogyTree.Domain.Entities
         [ForeignKey("PlaceOfBirthId")]
         public virtual Location PlaceOfBirth { get; set; }
 
-       /* public virtual ICollection<SyncRequest> SyncRequests { get; set; }
-        public virtual ICollection<SynchronizedUsers> SynchronizedUsers { get; set; }
-        public virtual ICollection<Relationship> Relationships { get; set; }*/
+        /* public virtual ICollection<SyncRequest> SyncRequests { get; set; }
+         public virtual ICollection<SynchronizedUsers> SynchronizedUsers { get; set; }
+         public virtual ICollection<Relationship> Relationships { get; set; }*/
     }
 }

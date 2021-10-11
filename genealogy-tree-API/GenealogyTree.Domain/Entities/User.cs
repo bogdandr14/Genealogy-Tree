@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
@@ -33,7 +32,7 @@ namespace GenealogyTree.Domain.Entities
         [ForeignKey("PlaceOfLivingId")]
         public virtual Location PlaceOfLiving { get; set; }
 
-/*        public virtual ICollection<Education> Educations { get; set; }
-        public virtual ICollection<Occupation> Occupations { get; set; }*/
+        /*        public virtual ICollection<Education> Educations { get; set; }
+                public virtual ICollection<Occupation> Occupations { get; set; }*/
     }
 }
