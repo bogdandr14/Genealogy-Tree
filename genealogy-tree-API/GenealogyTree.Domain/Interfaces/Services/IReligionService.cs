@@ -6,8 +6,8 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IReligionService
     {
-        Task AddReligion();
-        Task<List<Religion>> GetReligions();
-        Task<List<Religion>> FindReligion(string religionName);
+        void AddReligion(Religion religion);
+        List<Religion> GetReligions();
+        List<Religion> FindReligion(string religionName);
     }
 }
