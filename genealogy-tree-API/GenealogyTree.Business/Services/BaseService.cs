@@ -9,16 +9,11 @@ namespace GenealogyTree.Business.Services
 {
     public class BaseService
     {
-        protected IRepositoryWrapper repositoryWrapper;
+        protected IUnitOfWork unitOfWork;
 
-        public BaseService(IRepositoryWrapper iRepositoryWrapper)
+        public BaseService(IUnitOfWork iRepositoryWrapper)
         {
-            repositoryWrapper = iRepositoryWrapper;
-        }
-
-        public void Save()
-        {
-            repositoryWrapper.Save();
+            unitOfWork = iRepositoryWrapper;
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using GenealogyTree.Domain.Interfaces.Repositories;
+using System.Threading.Tasks;
 
 namespace GenealogyTree.Data.Repositories
 {
-    public class RepositoryWrapper : IRepositoryWrapper
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext _repoContext;
+        private readonly GenealogyTreeDbContext _repoContext;
         private IEducationRepository _education;
         private IGenderRepository _gender;
         private ILocationRepository _location;
@@ -17,7 +18,7 @@ namespace GenealogyTree.Data.Repositories
         private ISyncRequestRepository _syncRequest;
         private IUserRepository _user;
 
-        public RepositoryWrapper(ApplicationDbContext repositoryContext)
+        public UnitOfWork(GenealogyTreeDbContext repositoryContext)
         {
             _repoContext = repositoryContext;
         }
@@ -33,10 +34,5 @@ namespace GenealogyTree.Data.Repositories
         public ISynchedUsersRepository SynchedUsers => _synchedUsers ??= new SynchedUsersRepository(_repoContext);
         public ISyncRequestRepository SyncRequest => _syncRequest ??= new SyncRequestRepository(_repoContext);
         public IUserRepository User => _user ??= new UserRepository(_repoContext);
-
-        public void Save()
-        {
-            _repoContext.SaveChanges();
-        }
     }
 }

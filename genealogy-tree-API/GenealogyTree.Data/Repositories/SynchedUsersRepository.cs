@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class SynchedUsersRepository : RepositoryBase<SynchedUsers>, ISynchedUsersRepository
     {
-        public SynchedUsersRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public SynchedUsersRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

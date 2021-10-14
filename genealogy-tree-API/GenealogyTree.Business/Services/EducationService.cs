@@ -1,41 +1,65 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using AutoMapper;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Repositories;
 using GenealogyTree.Domain.Interfaces.Services;
 using GenealogyTree.Domain.Models;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Services
 {
     public class EducationService : BaseService, IEducationService
     {
-        public EducationService(IRepositoryWrapper repositoryWrapper) : base(repositoryWrapper)
+        private readonly IMapper _mapper;
+        public EducationService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
         {
-        }
-        public Task AddEducation(EducationModel education)
-        {
-            repositoryWrapper.Education.Create(education);
+            _mapper = mapper;
         }
 
-        public Task DeleteEducation(int educationId)
+        public List<EducationModel> GetAllEducationsForPerson(int userId)
         {
-            throw new NotImplementedException();
+            List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).ToList();
+            var returnEvent = _mapper.Map<List<EducationModel>>(educations);
+            return returnEvent;
         }
 
-        public Task<List<Education>> GetAllEducationsForPerson(int personId)
+        public async Task<EducationModel> GetEducationAsync(int educationId)
         {
-            throw new NotImplementedException();
+            Education education = await unitOfWork.Education.FindById(educationId);
+            var returnEvent = _mapper.Map<EducationModel>(education);
+            return returnEvent;
         }
 
-        public Task<Education> GetEducation(int educationId)
+        public async Task<EducationModel> AddEducationAsync(EducationModel education)
         {
-            throw new NotImplementedException();
+            if (education == null)
+            {
+                return null;
+            }
+            var educationEntity = _mapper.Map<Education>(education);
+            educationEntity = await unitOfWork.Education.Create(educationEntity);
+            var returnEvent = _mapper.Map<EducationModel>(educationEntity);
+            return returnEvent;
         }
 
-        public Task<Education> UpdateEducation()
+        public async Task<EducationModel> DeleteEducationAsync(int educationId)
         {
-            throw new NotImplementedException();
+            var educationEntity = await unitOfWork.Education.Delete(educationId);
+            var returnEvent = _mapper.Map<EducationModel>(educationEntity);
+            return returnEvent;
+        }
+
+        public async Task<EducationModel> UpdateEducationAsync(EducationModel education)
+        {
+            if (education == null)
+            {
+                return null;
+            }
+            var educationEntity = _mapper.Map<Education>(education);
+            educationEntity = await unitOfWork.Education.Update(educationEntity);
+            var returnEvent = _mapper.Map<EducationModel>(educationEntity);
+            return returnEvent;
         }
     }
 }

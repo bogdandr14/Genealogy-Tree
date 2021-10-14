@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class ReligionRepository : RepositoryBase<Religion>, IReligionRepository
     {
-        public ReligionRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public ReligionRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

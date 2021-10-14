@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class MarriageRepository : RepositoryBase<Marriage>, IMarriageRepository
     {
-        public MarriageRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public MarriageRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

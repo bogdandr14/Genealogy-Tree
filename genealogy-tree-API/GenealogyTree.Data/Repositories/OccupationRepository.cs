@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class OccupationRepository : RepositoryBase<Occupation>, IOccupationRepository
     {
-        public OccupationRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public OccupationRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

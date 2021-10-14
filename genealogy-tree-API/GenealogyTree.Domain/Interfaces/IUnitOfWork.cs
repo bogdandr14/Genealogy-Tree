@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Domain.Interfaces.Repositories
 {
-    public interface IRepositoryWrapper
+    public interface IUnitOfWork
     {
         IEducationRepository Education { get; }
         IGenderRepository Gender { get; }
@@ -13,6 +13,5 @@
         ISynchedUsersRepository SynchedUsers { get; }
         ISyncRequestRepository SyncRequest { get; }
         IUserRepository User { get; }
-        void Save();
     }
 }

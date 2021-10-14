@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        public UserRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public UserRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

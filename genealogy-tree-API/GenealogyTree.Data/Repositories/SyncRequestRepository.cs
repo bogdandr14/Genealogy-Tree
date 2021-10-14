@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class SyncRequestRepository : RepositoryBase<SyncRequest>, ISyncRequestRepository
     {
-        public SyncRequestRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public SyncRequestRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

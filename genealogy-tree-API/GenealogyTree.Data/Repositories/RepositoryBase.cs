@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace GenealogyTree.Data.Repositories
 {
@@ -10,51 +11,74 @@ namespace GenealogyTree.Data.Repositories
     {
         private bool disposed = false;
 
-        protected ApplicationDbContext RepositoryContext { get; set; }
+        protected GenealogyTreeDbContext Context { get; set; }
 
-        public RepositoryBase(ApplicationDbContext repositoryContext)
+        public RepositoryBase(GenealogyTreeDbContext context)
         {
-            RepositoryContext = repositoryContext;
+            Context = context;
         }
 
+        protected DbSet<T> DbSet
+        {
+            get { return Context.Set<T>(); }
+        }
+
+        public virtual int Count
+        {
+            get { return Queryable.Count(DbSet); }
+
+        }
+
+        #region Queries
         public IQueryable<T> GetAll()
         {
-            return RepositoryContext.Set<T>().AsNoTracking();
+            return DbSet.AsNoTracking();
         }
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        public IQueryable<T> Filter(Expression<Func<T, bool>> expression)
         {
-            return RepositoryContext.Set<T>().Where(expression).AsNoTracking();
+            return DbSet.Where(expression).AsNoTracking();
         }
 
-        public T FindById(params object[] keyValues)
+        public async Task<T> FindById(params object[] keyValues)
         {
-            return RepositoryContext.Set<T>().Find(keyValues);
+            return await DbSet.FindAsync(keyValues);
+        }
+        #endregion
+
+        #region Commands
+        public async Task<T> Create(T entity)
+        {
+            DbSet.Add(entity);
+            await Context.SaveChangesAsync();
+            return entity;
         }
 
-        public void Create(T entity)
+        public async Task<T> Update(T entity)
         {
-            RepositoryContext.Set<T>().Add(entity);
+            Context.Entry(entity).State = EntityState.Modified;
+            await Context.SaveChangesAsync();
+            return entity;
         }
 
-        public void Update(T entity)
+        public async Task<T> Delete(int id)
         {
-            RepositoryContext.Set<T>().Update(entity);
-        }
+            var entity = await DbSet.FindAsync(id);
+            if (entity == null)
+            {
+                return entity;
+            }
 
-        public void Delete(T entity)
-        {
-            RepositoryContext.Set<T>().Remove(entity);
+            DbSet.Remove(entity);
+            await Context.SaveChangesAsync();
+            return entity;
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!disposed && disposing)
             {
-                if (disposing)
-                {
-                    RepositoryContext.Dispose();
-                }
+                Context.Dispose();
             }
             disposed = true;
         }
@@ -64,5 +88,6 @@ namespace GenealogyTree.Data.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
     }
 }

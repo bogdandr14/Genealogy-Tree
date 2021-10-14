@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GenealogyTree.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(GenealogyTreeDbContext))]
     [Migration("20211009212029_FirstDatabaseForm")]
     partial class FirstDatabaseForm
     {

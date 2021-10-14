@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class EducationRepository : RepositoryBase<Education>, IEducationRepository
     {
-        public EducationRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public EducationRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

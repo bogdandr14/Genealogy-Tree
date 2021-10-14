@@ -5,7 +5,7 @@ namespace GenealogyTree.Data.Repositories
 {
     public class LocationRepository : RepositoryBase<Location>, ILocationRepository
     {
-        public LocationRepository(ApplicationDbContext repositoryContext) : base(repositoryContext)
+        public LocationRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {
         }
     }

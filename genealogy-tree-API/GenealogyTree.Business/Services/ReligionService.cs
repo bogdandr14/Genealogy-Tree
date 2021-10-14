@@ -3,27 +3,37 @@ using GenealogyTree.Domain.Interfaces.Repositories;
 using GenealogyTree.Domain.Interfaces.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Services
 {
-    class ReligionService : BaseService, IReligionService
+    public class ReligionService : BaseService, IReligionService
     {
-        public ReligionService(IRepositoryWrapper repositoryWrapper) : base(repositoryWrapper)
+        public ReligionService(IUnitOfWork repositoryWrapper) : base(repositoryWrapper)
         {
-        }
-        public void AddReligion(Religion religion)
-        {
-            repositoryWrapper.Religion.Create(religion);
         }
 
-        public List<Religion> FindReligion(string religionName)
+        public async Task<List<Religion>> GetAllReligionsAsync()
         {
-            return repositoryWrapper.Religion.FindByCondition(x => x.Name.Contains(religionName)).ToList();
+            return unitOfWork.Religion.GetAll().OrderBy(x => x.Name).ToList();
         }
 
-        public List<Religion> GetReligions()
+        public List<Religion> FindReligions(string name)
         {
-            return repositoryWrapper.Religion.GetAll().ToList();
+            return unitOfWork.Religion.Filter(x => x.Name.Contains(name)).OrderBy(x => x.Name).ToList();
+        }
+
+        public Task<Religion> AddReligionAsync(string religionName)
+        {
+            if (religionName == null)
+            {
+                return null;
+            }
+            Religion religion = new Religion()
+            {
+                Name = religionName
+            };
+            return unitOfWork.Religion.Create(religion);
         }
     }
 }
