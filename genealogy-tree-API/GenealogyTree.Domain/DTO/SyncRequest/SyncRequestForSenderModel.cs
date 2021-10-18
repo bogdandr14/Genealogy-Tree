@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int SenderUserId { get; set; }
-        public UserModel ReceiverUser { get; set; }
-        public PersonModel ReceiverReferenceInSenderTree { get; set; }
+        public UserDetailsModel ReceiverUser { get; set; }
+        public PersonDetailsModel ReceiverReferenceInSenderTree { get; set; }
     }
 }

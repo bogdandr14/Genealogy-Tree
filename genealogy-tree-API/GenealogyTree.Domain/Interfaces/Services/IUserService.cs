@@ -1,15 +1,15 @@
-﻿using GenealogyTree.Domain.Entities;
-using System.Collections.Generic;
+﻿using GenealogyTree.Domain.DTO.User;
+using GenealogyTree.Domain.Models;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<User> RegisterUser();
-        Task<User> LoginUser();
-        Task<User> GetUser(int userId);
-        Task<User> UpdateUser();
-        Task<List<User>> GetRelatedUsers(int userId);
+        Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister);
+        Task<UserDetailsModel> LoginUser(LoginModel userLogin);
+        Task<UserDetailsModel> GetUserAsync(int userId);
+        Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword);
+        Task<UserDetailsModel> UpdateUser(UserUpdateModel user);
     }
 }

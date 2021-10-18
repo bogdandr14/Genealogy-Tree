@@ -20,14 +20,14 @@ namespace GenealogyTree.Business.Services
         public List<EducationModel> GetAllEducationsForPerson(int userId)
         {
             List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).ToList();
-            var returnEvent = _mapper.Map<List<EducationModel>>(educations);
+            EducationModel returnEvent = _mapper.Map<List<EducationModel>>(educations);
             return returnEvent;
         }
 
         public async Task<EducationModel> GetEducationAsync(int educationId)
         {
             Education education = await unitOfWork.Education.FindById(educationId);
-            var returnEvent = _mapper.Map<EducationModel>(education);
+            EducationModel returnEvent = _mapper.Map<EducationModel>(education);
             return returnEvent;
         }
 
@@ -37,28 +37,27 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
-            var educationEntity = _mapper.Map<Education>(education);
+            Education educationEntity = _mapper.Map<Education>(education);
             educationEntity = await unitOfWork.Education.Create(educationEntity);
-            var returnEvent = _mapper.Map<EducationModel>(educationEntity);
+            EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
             return returnEvent;
         }
-
-        public async Task<EducationModel> DeleteEducationAsync(int educationId)
-        {
-            var educationEntity = await unitOfWork.Education.Delete(educationId);
-            var returnEvent = _mapper.Map<EducationModel>(educationEntity);
-            return returnEvent;
-        }
-
         public async Task<EducationModel> UpdateEducationAsync(EducationModel education)
         {
             if (education == null)
             {
                 return null;
             }
-            var educationEntity = _mapper.Map<Education>(education);
+            Education educationEntity = _mapper.Map<Education>(education);
             educationEntity = await unitOfWork.Education.Update(educationEntity);
-            var returnEvent = _mapper.Map<EducationModel>(educationEntity);
+            EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
+            return returnEvent;
+        }
+
+        public async Task<EducationModel> DeleteEducationAsync(int educationId)
+        {
+            Education educationEntity = await unitOfWork.Education.Delete(educationId);
+            EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
             return returnEvent;
         }
     }
