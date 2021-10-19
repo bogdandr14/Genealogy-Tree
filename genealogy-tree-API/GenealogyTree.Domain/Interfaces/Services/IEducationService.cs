@@ -12,6 +12,5 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<EducationModel> AddEducationAsync(EducationModel education);
         Task<EducationModel> UpdateEducationAsync(EducationModel education);
         Task<EducationModel> DeleteEducationAsync(int educationId);
-
     }
 }

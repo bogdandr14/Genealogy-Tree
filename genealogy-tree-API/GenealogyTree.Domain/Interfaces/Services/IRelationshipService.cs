@@ -1,4 +1,4 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using GenealogyTree.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,10 +6,10 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IRelationshipService
     {
-        Task AddRelationship();
-        Task<Relationship> GetRelationship(int relationshipId);
-        Task<Relationship> UpdateRelationship();
-        Task DeleteMarriage(int relationshipId);
-        Task<List<Relationship>> GetAllRelationshipsForPerson(int personId);
+        Task<List<RelationshipModel>> GetAllRelationshipsForPerson(int personId);
+        Task<RelationshipModel> GetRelationship(int relationshipId);
+        Task<RelationshipModel> AddRelationshipAsync(RelationshipModel relationship);
+        Task<RelationshipModel> UpdateRelationshipAsync(RelationshipModel relationship);
+        Task<RelationshipModel> DeleteRelationshipAsync(int relationshipId);
     }
 }

@@ -20,7 +20,7 @@ namespace GenealogyTree.Business.Services
         public List<EducationModel> GetAllEducationsForPerson(int userId)
         {
             List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).ToList();
-            EducationModel returnEvent = _mapper.Map<List<EducationModel>>(educations);
+            List<EducationModel> returnEvent = _mapper.Map<List<EducationModel>>(educations);
             return returnEvent;
         }
 
