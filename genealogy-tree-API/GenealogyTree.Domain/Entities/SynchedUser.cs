@@ -2,7 +2,7 @@
 
 namespace GenealogyTree.Domain.Entities
 {
-    public class SynchedUsers
+    public class SynchedUser
     {
         public int Id { get; set; }
 

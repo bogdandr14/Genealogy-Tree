@@ -3,7 +3,7 @@ using GenealogyTree.Domain.Interfaces.Repositories;
 
 namespace GenealogyTree.Data.Repositories
 {
-    public class SynchedUsersRepository : RepositoryBase<SynchedUsers>, ISynchedUsersRepository
+    public class SynchedUsersRepository : RepositoryBase<SynchedUser>, ISynchedUsersRepository
     {
         public SynchedUsersRepository(GenealogyTreeDbContext repositoryContext) : base(repositoryContext)
         {

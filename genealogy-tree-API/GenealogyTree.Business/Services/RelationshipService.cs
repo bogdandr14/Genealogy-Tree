@@ -57,9 +57,11 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public Task<RelationshipModel> DeleteRelationshipAsync(int relationshipId)
+        public async Task<RelationshipModel> DeleteRelationshipAsync(int relationshipId)
         {
-            throw new NotImplementedException();
+            Relationship relationship = await unitOfWork.Relationship.Delete(relationshipId);
+            RelationshipModel returnEvent = _mapper.Map<RelationshipModel>(relationship);
+            return returnEvent;
         }
     }
 }

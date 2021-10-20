@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Domain.Models
 {
-    public class SyncRequestForReceiver
+    public class SyncRequestForReceiverModel
     {
         public int Id { get; set; }
         public UserDetailsModel SenderUser { get; set; }
