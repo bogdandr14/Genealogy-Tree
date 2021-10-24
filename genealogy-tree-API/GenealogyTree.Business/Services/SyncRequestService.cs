@@ -2,9 +2,11 @@
 using GenealogyTree.Domain.Interfaces.Repositories;
 using GenealogyTree.Domain.Interfaces.Services;
 using GenealogyTree.Domain.Models;
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GenealogyTree.Domain.Entities;
+using GenealogyTree.Domain.DTO;
 
 namespace GenealogyTree.Business.Services
 {
@@ -17,33 +19,69 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public Task<List<SyncRequestForSenderModel>> GetSyncRequestsSent(int senderId)
+        public async Task<List<SyncRequestForSenderModel>> GetSyncRequestsSent(int senderId)
         {
-            throw new NotImplementedException();
+            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.SenderId == senderId).ToList();
+            List<SyncRequestForSenderModel> returnEvent = _mapper.Map<List<SyncRequestForSenderModel>>(syncRequests);
+            return returnEvent;
         }
 
-        public Task<List<SyncRequestForReceiverModel>> GetSyncRequestsReceived(int receiverId)
+        public async Task<List<SyncRequestForReceiverModel>> GetSyncRequestsReceived(int receiverId)
         {
-            throw new NotImplementedException();
+            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.ReceiverId == receiverId).ToList();
+            List<SyncRequestForReceiverModel> returnEvent = _mapper.Map<List<SyncRequestForReceiverModel>>(syncRequests);
+            return returnEvent;
         }
 
-        public Task<SyncRequestResponse> GetRespondedSyncRequests(int senderId)
+        public async Task<SyncRequestForReceiverModel> GetRespondedSyncRequests(int senderId)
         {
-            throw new NotImplementedException();
+            SyncRequest syncRequest = await unitOfWork.SyncRequest.FindById(senderId);
+            SyncRequestForReceiverModel returnEvent = _mapper.Map<SyncRequestForReceiverModel>(syncRequest);
+            return returnEvent;
         }
 
-        public Task<SyncRequestForSenderModel> AddSyncRequest(SyncRequestForSenderModel syncRequest)
+        public async Task<SyncRequestForSenderModel> AddSyncRequest(SyncRequestForSenderModel syncRequest)
         {
-            throw new NotImplementedException();
-        }
-        public Task<SynchedUserModel> RespondToSyncRequest(SyncRequestForReceiverModel respondedRequest)
-        {
-            throw new NotImplementedException();
+            if (syncRequest == null)
+            {
+                return null;
+            }
+            SyncRequest syncRequestEntity = _mapper.Map<SyncRequest>(syncRequest);
+            SyncRequest createdSyncRequest = await unitOfWork.SyncRequest.Create(syncRequestEntity);
+            SyncRequestForSenderModel returnEvent = _mapper.Map<SyncRequestForSenderModel>(createdSyncRequest);
+            return returnEvent;
         }
 
-        public Task<SyncRequestForSenderModel> DeleteMSyncdRequest(int syncRequestId)
+        public async Task<UsersToSyncModel> RespondToSyncRequest(SyncRequestForReceiverModel respondedRequest)
         {
-            throw new NotImplementedException();
+            if (respondedRequest == null)
+            {
+                return null;
+            }
+            SyncRequest syncRequest = await unitOfWork.SyncRequest.FindById(respondedRequest.Id);
+            syncRequest.ReceiverResponded = true;
+            syncRequest.Response = respondedRequest.Response;
+
+            SynchedUsers alreadySynchedUser = unitOfWork.SynchedUsers.Filter(x => x.PrimaryUserId == syncRequest.ReceiverId && x.SynchedUserId == syncRequest.SenderId).FirstOrDefault();
+            if (respondedRequest.ReceiverReferenceInSenderTree != null && alreadySynchedUser != default(SynchedUsers))
+            {
+                syncRequest.ReceiverReferenceInSenderTreeId = respondedRequest.ReceiverReferenceInSenderTree.Id;
+            }
+            SyncRequest updatedSyncRequest = await unitOfWork.SyncRequest.Update(syncRequest);
+
+            if (!respondedRequest.Response)
+            {
+                return null;
+            }
+            UsersToSyncModel returnEvent = _mapper.Map<UsersToSyncModel>(updatedSyncRequest);
+            return returnEvent;
+        }
+
+        public async Task<SyncRequestForSenderModel> DeleteSyncRequest(int syncRequestId)
+        {
+            SyncRequest syncRequest = await unitOfWork.SyncRequest.Delete(syncRequestId);
+            SyncRequestForSenderModel returnEvent = _mapper.Map<SyncRequestForSenderModel>(syncRequest);
+            return returnEvent;
         }
     }
 }

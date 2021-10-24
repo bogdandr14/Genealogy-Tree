@@ -21,7 +21,7 @@ namespace GenealogyTree.Data
         public virtual DbSet<Relationship> Relationships { get; set; }
         public virtual DbSet<Marriage> Marriages { get; set; }
         public virtual DbSet<SyncRequest> SyncRequests { get; set; }
-        public virtual DbSet<SynchedUser> SynchronizedUsers { get; set; }
+        public virtual DbSet<SynchedUsers> SynchronizedUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

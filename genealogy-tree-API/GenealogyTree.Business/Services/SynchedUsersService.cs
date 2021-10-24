@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Repositories;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -20,7 +21,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<SynchedUserModel>> GetAllSynchedUsersForUser(int userId)
         {
-            List<SynchedUser> synchedUsers = unitOfWork.SynchedUsers.Filter(x => x.PrimaryUserId == userId).ToList();
+            List<SynchedUsers> synchedUsers = unitOfWork.SynchedUsers.Filter(x => x.PrimaryUserId == userId).ToList();
 
             List<SynchedUserModel> returnEvent = _mapper.Map<List<SynchedUserModel>>(synchedUsers);
             return returnEvent;
@@ -28,22 +29,39 @@ namespace GenealogyTree.Business.Services
 
         public async Task<SynchedUserModel> GetSynchedUser(int synchedUserId)
         {
-            SynchedUser synchedUser = await unitOfWork.SynchedUsers.FindById(synchedUserId);
+            SynchedUsers synchedUser = await unitOfWork.SynchedUsers.FindById(synchedUserId);
             SynchedUserModel returnEvent = _mapper.Map<SynchedUserModel>(synchedUser);
             return returnEvent;
         }
 
-        public async Task<SynchedUserModel> AddSynchedUser(SynchedUserModel synchedUser)
+        public async Task<SynchedUserModel> AddSynchedUser(UsersToSyncModel usersToSync)
         {
-            SynchedUser synchedUserEntity = _mapper.Map<SynchedUser>(synchedUser);
-            SynchedUser createdSynchedUser = await unitOfWork.SynchedUsers.Create(synchedUserEntity);
-            SynchedUserModel returnEvent = _mapper.Map<SynchedUserModel>(createdSynchedUser);
+            SynchedUsers senderSynchedUsers = new SynchedUsers()
+            {
+                PrimaryUserId = usersToSync.PrimaryUserId,
+                SynchedUserId = usersToSync.SynchedUserId,
+                SynchedPersonInPrimaryTreeId = usersToSync.SynchedPersonInPrimaryTreeId
+            };
+            SynchedUsers createdSenderSynchedUser = await unitOfWork.SynchedUsers.Create(senderSynchedUsers);
+            SynchedUserModel returnEvent = _mapper.Map<SynchedUserModel>(createdSenderSynchedUser);
+
+            if (usersToSync.PrimaryPersonInSynchedTreeId != 0)
+            {
+                SynchedUsers receiverSynchedUsers = new SynchedUsers()
+                {
+                    PrimaryUserId = usersToSync.SynchedUserId,
+                    SynchedUserId = usersToSync.PrimaryUserId,
+                    SynchedPersonInPrimaryTreeId = usersToSync.PrimaryPersonInSynchedTreeId
+                };
+                SynchedUsers createdReceiverSynchedUser = await unitOfWork.SynchedUsers.Create(receiverSynchedUsers);
+                returnEvent = _mapper.Map<SynchedUserModel>(createdReceiverSynchedUser);
+            }
             return returnEvent;
         }
 
         public async Task<SynchedUserModel> DeleteMSynchedUser(int synchedUserId)
         {
-            SynchedUser synchedUserEntity = await unitOfWork.SynchedUsers.Delete(synchedUserId);
+            SynchedUsers synchedUserEntity = await unitOfWork.SynchedUsers.Delete(synchedUserId);
             SynchedUserModel returnEvent = _mapper.Map<SynchedUserModel>(synchedUserEntity);
             return returnEvent;
         }

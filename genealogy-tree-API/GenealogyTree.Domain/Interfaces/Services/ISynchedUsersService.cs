@@ -1,4 +1,4 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<List<SynchedUserModel>> GetAllSynchedUsersForUser(int userId);
         Task<SynchedUserModel> GetSynchedUser(int synchedUserId);
-        Task<SynchedUserModel> AddSynchedUser(SynchedUserModel synchedUser);
+        Task<SynchedUserModel> AddSynchedUser(UsersToSyncModel usersToSync);
         Task<SynchedUserModel> DeleteMSynchedUser(int synchedUserId);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Models;
 
@@ -21,20 +23,58 @@ namespace GenealogyTree.Business.Helpers
         private void ConfigureMappings()
         {
             CreateMap<Education, EducationModel>()
-               .ForMember(x => x.EducationLevelId, y => y.MapFrom(x =>  (int)x.EducationLevel))
-               .ForMember(x => x.PersonName, y => y.MapFrom(x => string.Format("{0} {1}", x.User.Person.FirstName, x.User.Person.LastName)))
+               .ForMember(x => x.EducationLevelId, y => y.MapFrom(z => (int)z.EducationLevel))
+               .ForMember(x => x.PersonName, y => y.MapFrom(z => string.Format("{0} {1}", z.User.Person.FirstName, z.User.Person.LastName)))
                .ReverseMap();
+
+            CreateMap<Marriage, MarriageModel>()
+                .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.DateStarted))
+                .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.DateEnded))
+                .ForMember(x => x.FirstPersonId, y => y.MapFrom(z => z.Couple.FirstPersonId))
+                .ForMember(x => x.SecondPersonId, y => y.MapFrom(z => z.Couple.SecondPersonId))
+                .ReverseMap();
+
+            CreateMap<Person, PersonDetailsModel>()
+                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.PlaceOfLiving))
+                .ForMember(x => x.ReligionName, y => y.MapFrom(z => z.Religion.Name))
+                .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.PlaceOfBirth))
+                .ForMember(x => x.GenderName, y => y.MapFrom(z => z.Gender.Name))
+                .ReverseMap();
+
+            CreateMap<Person, PersonUpdateModel>()
+                .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.PlaceOfBirth))
+                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.PlaceOfLiving))
+                .ReverseMap();
+
+            CreateMap<Occupation, OccupationModel>()
+                .ReverseMap();
+
+            CreateMap<Relationship, RelationshipModel>()
+                .ForMember(x => x.DateStarted, y => y.MapFrom(z => z.StartDate))
+                .ForMember(x => x.DateEnded, y => y.MapFrom(z => z.EndDate))
+                .ReverseMap();
+
+            CreateMap<SynchedUsers, SynchedUserModel>()
+                .ReverseMap();
+
+            CreateMap<SyncRequest, SyncRequestForReceiverModel>()
+                .ReverseMap();
+
+            CreateMap<SyncRequest, SyncRequestForSenderModel>()
+                .ForMember(x => x.SenderUserId, y => y.MapFrom(z => z.SenderId))
+                .ReverseMap();
 
             CreateMap<User, UserDetailsModel>()
                 .ReverseMap();
+
             CreateMap<User, LoginResponseModel>()
                 .ReverseMap();
-            CreateMap<Person, PersonUpdateModel>()
-                .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.PlaceOfBirth))
-                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.PlaceOfLiving));
-            CreateMap<Person, PersonDetailsModel>()
-                .ForMember(x => x.GenderName, y => y.MapFrom(z => z.Gender.Name))
-                .ForMember(x => x.ReligionName, y => y.MapFrom(z => z.Religion.Name));//TODO add for abou email and phone
+
+            CreateMap<User, UserRegisterModel>()
+                .ReverseMap();
+
+            CreateMap<User, UserUpdateModel>()
+                .ReverseMap();
         }
     }
 }
