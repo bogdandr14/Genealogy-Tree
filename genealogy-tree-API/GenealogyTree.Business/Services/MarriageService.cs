@@ -20,14 +20,14 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<MarriageModel>> GetAllMarriagesForPerson(int personId)
         {
-            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.Couple.FirstPersonId == personId || x.Couple.SecondPersonId == personId).ToList();
+            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId || x.SecondPersonId == personId).ToList();
             List<MarriageModel> returnEvent = _mapper.Map<List<MarriageModel>>(marriages);
             return returnEvent;
         }
 
         public async Task<MarriageModel> GetCurrentMarriageForPerson(int personId)
         {
-            Marriage marriage = unitOfWork.Marriage.Filter(x => (x.Couple.FirstPersonId == personId || x.Couple.SecondPersonId == personId) && x.DateEnded == default(DateTime)).FirstOrDefault();
+            Marriage marriage = unitOfWork.Marriage.Filter(x => (x.FirstPersonId == personId || x.SecondPersonId == personId) && x.DateEnded == default(DateTime)).FirstOrDefault();
             MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriage);
             return returnEvent;
         }
@@ -46,13 +46,6 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Marriage marriageEntity = _mapper.Map<Marriage>(marriage);
-            Relationship relationshipEntity = unitOfWork.Relationship.Filter(x => (x.FirstPersonId == marriage.FirstPersonId && x.SecondPersonId == marriage.SecondPersonId) ||
-                                                x.SecondPersonId == marriage.FirstPersonId && x.FirstPersonId == marriage.SecondPersonId).FirstOrDefault();
-            if (relationshipEntity == default(Relationship))
-            {
-                return null;
-            }
-            marriageEntity.CoupleId = relationshipEntity.Id;
             Marriage marriageCreated = await unitOfWork.Marriage.Create(marriageEntity);
             MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriageCreated);
             return returnEvent;

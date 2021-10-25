@@ -19,18 +19,21 @@ namespace GenealogyTree.Domain.Entities
         public string LastName { get; set; }
         public string Nationality { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
         public DateTime LastUpdate { get; set; }
 
-        public int? ParentsId { get; set; }
-        public int GenderId { get; set; }
+        public int? FirstParentId { get; set; }
+        public int? SecondParentId { get; set; }
+        public int? GenderId { get; set; }
         public int? ReligionId { get; set; }
         public int? PlaceOfBirthId { get; set; }
         public int? PlaceOfLivingId { get; set; }
 
-        [ForeignKey("ParentsId")]
-        public virtual Relationship Parents { get; set; }
+        [ForeignKey("FirstParentId")]
+        public virtual Person FirstParent { get; set; }
+        [ForeignKey("SecondParentId")]
+        public virtual Person SecondParent { get; set; }
         [ForeignKey("GenderId")]
         public virtual Gender Gender { get; set; }
         [ForeignKey("ReligionId")]

@@ -8,7 +8,6 @@
         IMarriageRepository Marriage { get; }
         IOccupationRepository Occupation { get; }
         IPersonRepository Person { get; }
-        IRelationshipRepository Relationship { get; }
         IReligionRepository Religion { get; }
         ISynchedUsersRepository SynchedUsers { get; }
         ISyncRequestRepository SyncRequest { get; }

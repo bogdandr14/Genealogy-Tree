@@ -21,22 +21,22 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<SyncRequestForSenderModel>> GetSyncRequestsSent(int senderId)
         {
-            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.SenderId == senderId).ToList();
+            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.SenderId == senderId && x.ReceiverResponded == false).ToList();
             List<SyncRequestForSenderModel> returnEvent = _mapper.Map<List<SyncRequestForSenderModel>>(syncRequests);
             return returnEvent;
         }
 
         public async Task<List<SyncRequestForReceiverModel>> GetSyncRequestsReceived(int receiverId)
         {
-            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.ReceiverId == receiverId).ToList();
+            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.ReceiverId == receiverId && x.ReceiverResponded == false).ToList();
             List<SyncRequestForReceiverModel> returnEvent = _mapper.Map<List<SyncRequestForReceiverModel>>(syncRequests);
             return returnEvent;
         }
 
-        public async Task<SyncRequestForReceiverModel> GetRespondedSyncRequests(int senderId)
+        public async Task<List<SyncRequestForSenderModel>> GetRespondedSyncRequests(int senderId)
         {
-            SyncRequest syncRequest = await unitOfWork.SyncRequest.FindById(senderId);
-            SyncRequestForReceiverModel returnEvent = _mapper.Map<SyncRequestForReceiverModel>(syncRequest);
+            List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.SenderId == senderId && x.ReceiverResponded == true).ToList();
+            List<SyncRequestForSenderModel> returnEvent = _mapper.Map<List<SyncRequestForSenderModel>>(syncRequests);
             return returnEvent;
         }
 

@@ -44,7 +44,7 @@ namespace GenealogyTree.Business.Services
                 loginResponseModel.Email = user.Email;
                 loginResponseModel.FirstName = user.Person.FirstName;
                 loginResponseModel.LastName = user.Person.LastName;
-
+                loginResponseModel.Id = user.Id;
                 return loginResponseModel;
             }
             return null;

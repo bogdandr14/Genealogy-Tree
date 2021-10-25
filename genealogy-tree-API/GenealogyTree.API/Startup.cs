@@ -3,6 +3,8 @@ using GenealogyTree.Business.Authorization;
 using GenealogyTree.Business.Helpers;
 using GenealogyTree.Business.Services;
 using GenealogyTree.Data;
+using GenealogyTree.Data.Repositories;
+using GenealogyTree.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -56,6 +58,7 @@ namespace GenealogyTree.API
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -91,7 +94,7 @@ namespace GenealogyTree.API
 
             app.UseRouting();
             app.UseMiddleware<JwtMiddleware>();
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

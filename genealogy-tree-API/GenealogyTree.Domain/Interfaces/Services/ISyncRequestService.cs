@@ -9,7 +9,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<List<SyncRequestForSenderModel>> GetSyncRequestsSent(int senderId);
         Task<List<SyncRequestForReceiverModel>> GetSyncRequestsReceived(int receiverId);
-        Task<SyncRequestForReceiverModel> GetRespondedSyncRequests(int senderId);
+        Task<List<SyncRequestForSenderModel>> GetRespondedSyncRequests(int senderId);
         Task<SyncRequestForSenderModel> AddSyncRequest(SyncRequestForSenderModel syncRequest);
         Task<UsersToSyncModel> RespondToSyncRequest(SyncRequestForReceiverModel respondedRequest);
         Task<SyncRequestForSenderModel> DeleteSyncRequest(int syncRequestId);

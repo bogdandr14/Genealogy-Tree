@@ -12,7 +12,6 @@ namespace GenealogyTree.Data.Repositories
         private IMarriageRepository _marriage;
         private IOccupationRepository _occupation;
         private IPersonRepository _person;
-        private IRelationshipRepository _relationship;
         private IReligionRepository _religion;
         private ISynchedUsersRepository _synchedUsers;
         private ISyncRequestRepository _syncRequest;
@@ -29,7 +28,6 @@ namespace GenealogyTree.Data.Repositories
         public IMarriageRepository Marriage => _marriage ??= new MarriageRepository(_repoContext);
         public IOccupationRepository Occupation => _occupation ??= new OccupationRepository(_repoContext);
         public IPersonRepository Person => _person ??= new PersonRepository(_repoContext);
-        public IRelationshipRepository Relationship => _relationship ??= new RelationshipRepository(_repoContext);
         public IReligionRepository Religion => _religion ??= new ReligionRepository(_repoContext);
         public ISynchedUsersRepository SynchedUsers => _synchedUsers ??= new SynchedUsersRepository(_repoContext);
         public ISyncRequestRepository SyncRequest => _syncRequest ??= new SyncRequestRepository(_repoContext);

@@ -18,22 +18,12 @@ namespace GenealogyTree.Data
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<Occupation> Occupations { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<Relationship> Relationships { get; set; }
         public virtual DbSet<Marriage> Marriages { get; set; }
         public virtual DbSet<SyncRequest> SyncRequests { get; set; }
         public virtual DbSet<SynchedUsers> SynchronizedUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>()
-                        .HasOne(e => e.Parents)
-                        .WithOne();
-            modelBuilder.Entity<Relationship>()
-                        .HasOne(e => e.FirstPerson)
-                        .WithOne();
-            modelBuilder.Entity<Relationship>()
-                        .HasOne(e => e.SecondPerson)
-                        .WithOne();
         }
 
         public DbSet<T> DbSet<T>() where T : class

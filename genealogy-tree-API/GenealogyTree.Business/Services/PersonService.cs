@@ -36,7 +36,14 @@ namespace GenealogyTree.Business.Services
 
         public async Task<PersonDetailsModel> AddPersonAsync(PersonCreationModel person)
         {
-            throw new NotImplementedException();
+            if (person == null)
+            {
+                return null;
+            }
+            Person personEntity = _mapper.Map<Person>(person);
+            personEntity = await unitOfWork.Person.Create(personEntity);
+            PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
+            return returnEvent;
         }
 
         public async Task<PersonDetailsModel> UpdatePersonAsync(PersonUpdateModel person)

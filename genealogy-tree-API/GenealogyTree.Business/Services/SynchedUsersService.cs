@@ -59,7 +59,7 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<SynchedUserModel> DeleteMSynchedUser(int synchedUserId)
+        public async Task<SynchedUserModel> DeleteSynchedUser(int synchedUserId)
         {
             SynchedUsers synchedUserEntity = await unitOfWork.SynchedUsers.Delete(synchedUserId);
             SynchedUserModel returnEvent = _mapper.Map<SynchedUserModel>(synchedUserEntity);

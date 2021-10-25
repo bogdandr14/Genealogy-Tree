@@ -30,8 +30,6 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<Marriage, MarriageModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.DateStarted))
                 .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.DateEnded))
-                .ForMember(x => x.FirstPersonId, y => y.MapFrom(z => z.Couple.FirstPersonId))
-                .ForMember(x => x.SecondPersonId, y => y.MapFrom(z => z.Couple.SecondPersonId))
                 .ReverseMap();
 
             CreateMap<Person, PersonDetailsModel>()
@@ -47,11 +45,6 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<Occupation, OccupationModel>()
-                .ReverseMap();
-
-            CreateMap<Relationship, RelationshipModel>()
-                .ForMember(x => x.DateStarted, y => y.MapFrom(z => z.StartDate))
-                .ForMember(x => x.DateEnded, y => y.MapFrom(z => z.EndDate))
                 .ReverseMap();
 
             CreateMap<SynchedUsers, SynchedUserModel>()
