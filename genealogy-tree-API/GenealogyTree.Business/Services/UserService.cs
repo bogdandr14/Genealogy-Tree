@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using GenealogyTree.Business.Authorization;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Repositories;
 using GenealogyTree.Domain.Interfaces.Services;
 using GenealogyTree.Domain.Models;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,19 +26,58 @@ namespace GenealogyTree.Business.Services
             return _mapper.Map<UserDetailsModel>(user);
         }
 
-        public Task<UserDetailsModel> LoginUser(LoginModel userLogin)
+        public async Task<LoginResponseModel> LoginUser(LoginModel userLogin)
         {
-            throw new NotImplementedException();
+            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).FirstOrDefault();
+            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
+            {
+                IList<string> list = new List<string>();
+                list.Add("Customer");
+                LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(TokenService.GenerateToken(user, list));
+                loginResponseModel.Username = user.Username;
+                loginResponseModel.Email = user.Email;
+                loginResponseModel.FirstName = user.Person.FirstName;
+                loginResponseModel.LastName = user.Person.LastName;
+
+                return loginResponseModel;
+            }
+            return null;
         }
 
-        public Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister)
+        public async Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister)
         {
-            throw new NotImplementedException();
+            User user = _mapper.Map<User>(userRegister);
+            Person person = _mapper.Map<Person>(userRegister.Person);
+            Location birthPlace = _mapper.Map<Location>(userRegister.Person.BirthPlace);
+            Location livingPlace = _mapper.Map<Location>(userRegister.Person.LivingPlace);
+
+            Location birthPlaceCreated = await unitOfWork.Location.Create(birthPlace);
+            person.PlaceOfBirthId = birthPlaceCreated.Id;
+
+            Location livingPlaceCreated = await unitOfWork.Location.Create(livingPlace);
+            person.PlaceOfLivingId = livingPlaceCreated.Id;
+
+            Person personCreated = await unitOfWork.Person.Create(person);
+            user.PersonId = personCreated.Id;
+
+            user.PasswordSalt = Salt.Create();
+            user.PasswordHash = Hash.CreateHash(userRegister.Password, user.PasswordSalt);
+            User createdUser = await unitOfWork.User.Create(user);
+            UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(createdUser);
+            return returnEvent;
         }
 
-        public Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword)
+        public async Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword)
         {
-            throw new NotImplementedException();
+            User user = unitOfWork.User.Filter(x => x.Username == updatePassword.Username).FirstOrDefault();
+            if (Hash.ValidateHash(updatePassword.CurrentPassword, user.PasswordSalt, user.PasswordHash))
+            {
+                user.PasswordSalt = Salt.Create();
+                user.PasswordHash = Hash.CreateHash(updatePassword.NewPassword, user.PasswordSalt);
+                unitOfWork.User.Update(user);
+            }
+            UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
+            return returnEvent;
         }
 
         public async Task<UserDetailsModel> UpdateUser(UserUpdateModel user)

@@ -1,19 +1,21 @@
 using AutoMapper;
+using GenealogyTree.Business.Authorization;
 using GenealogyTree.Business.Helpers;
 using GenealogyTree.Business.Services;
 using GenealogyTree.Data;
-using GenealogyTree.Data.Repositories;
-using GenealogyTree.Domain.Interfaces.Repositories;
-using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NetCore.AutoRegisterDi;
 using System.Reflection;
+using System.Text;
 
 namespace GenealogyTree.API
 {
@@ -29,12 +31,12 @@ namespace GenealogyTree.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //string securityString = "782hjs9jkw30934ujo9zk870a";
+            string securityString = "782Jjs9jkw3E934ujoLzkA70a";
 
             services.AddDbContext<GenealogyTreeDbContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
-            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(option =>
                {
                    option.TokenValidationParameters = new TokenValidationParameters
@@ -50,25 +52,18 @@ namespace GenealogyTree.API
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
-            });*/
-            services.AddControllers();
+            });
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<IGenderService, GenderService>();
-            services.AddScoped<IReligionService, ReligionService>();
-            services.AddScoped<IEducationService, EducationService>();
-            
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GenealogyTree.API", Version = "v1" });
             });
             services
-               .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(BaseService)))
+               .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(PersonService)))
                .Where(x => x.Name.EndsWith("Service")).AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
             services
                 .AddMvc();
@@ -95,7 +90,7 @@ namespace GenealogyTree.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseMiddleware<JwtMiddleware>();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
