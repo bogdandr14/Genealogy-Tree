@@ -1,5 +1,5 @@
-﻿using GenealogyTree.Domain.Interfaces.Services;
-using GenealogyTree.Domain.Models;
+﻿using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,21 +11,21 @@ namespace GenealogyTree.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class EducationController : Controller
+    public class OccupationController : Controller
     {
-        private readonly IEducationService _educationService;
-        public EducationController(IEducationService educationService)
+        private readonly IOccupationService _occupationService;
+        public OccupationController(IOccupationService occupationService)
         {
-            _educationService = educationService;
+            _occupationService = occupationService;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetPersonEducations(int personId)
+        public async Task<ActionResult> GetPersonOccupations(int personId)
         {
             try
             {
-                List<EducationModel> returnEvent = _educationService.GetAllEducationsForPerson(personId);
+                List<OccupationModel> returnEvent = _occupationService.GetAllOccupationsForPerson(personId);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -36,27 +36,26 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetEducation(int id)
+        public async Task<ActionResult> GetOccupation(int id)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.GetEducationAsync(id);
+                OccupationModel returnEvent = await _occupationService.GetOccupationAsync(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)
             {
                 return BadRequest(e);
             }
-
         }
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddEducation(EducationModel education)
+        public async Task<ActionResult> AddOccupation(OccupationModel occupation)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.AddEducationAsync(education);
+                OccupationModel returnEvent = await _occupationService.AddOccupationAsync(occupation);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -67,11 +66,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult> UpdateEducation(EducationModel education)
+        public async Task<ActionResult> UpdateOccupation(OccupationModel occupation)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.UpdateEducationAsync(education);
+                OccupationModel returnEvent = await _occupationService.UpdateOccupationAsync(occupation);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -82,11 +81,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id}/delete")]
-        public async Task<ActionResult> DeleteEducation(int id)
+        public async Task<ActionResult> DeleteOccupation(int id)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.DeleteEducationAsync(id);
+                OccupationModel returnEvent = await _occupationService.DeleteOccupationAsync(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)

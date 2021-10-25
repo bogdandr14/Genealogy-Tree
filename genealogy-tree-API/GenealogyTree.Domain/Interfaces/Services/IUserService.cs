@@ -8,7 +8,9 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister);
         Task<LoginResponseModel> LoginUser(LoginModel userLogin);
-        Task<UserDetailsModel> GetUserAsync(int userId);
+        Task<UserDetailsModel> GetUserByIdAsync(int userId);
+        Task<UserDetailsModel> GetUser(string username);
+
         Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword);
         Task<UserDetailsModel> UpdateUser(UserUpdateModel user);
     }

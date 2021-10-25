@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
@@ -11,21 +12,36 @@ namespace GenealogyTree.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class EducationController : Controller
+    public class MarriageController : Controller
     {
-        private readonly IEducationService _educationService;
-        public EducationController(IEducationService educationService)
+        private readonly IMarriageService _marriageService;
+        public MarriageController(IMarriageService marriageService)
         {
-            _educationService = educationService;
+            _marriageService = marriageService;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetPersonEducations(int personId)
+        public async Task<ActionResult> GetPersonMarriages(int personId)
         {
             try
             {
-                List<EducationModel> returnEvent = _educationService.GetAllEducationsForPerson(personId);
+                List<MarriageModel> returnEvent = await _marriageService.GetAllMarriagesForPerson(personId);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("current")]
+        public async Task<ActionResult> GetPersonCurrentMarriage(int personId)
+        {
+            try
+            {
+                MarriageModel returnEvent = await _marriageService.GetCurrentMarriageForPerson(personId);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -36,11 +52,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetEducation(int id)
+        public async Task<ActionResult> GetMarriage(int id)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.GetEducationAsync(id);
+                MarriageModel returnEvent = await _marriageService.GetMarriageAsync(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -52,11 +68,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddEducation(EducationModel education)
+        public async Task<ActionResult> AddMarriage(MarriageModel marriage)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.AddEducationAsync(education);
+                MarriageModel returnEvent = await _marriageService.AddMarriageAsync(marriage);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -67,26 +83,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult> UpdateEducation(EducationModel education)
+        public async Task<ActionResult> UpdateMarriage(MarriageModel marriage)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.UpdateEducationAsync(education);
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpDelete]
-        [Route("{id}/delete")]
-        public async Task<ActionResult> DeleteEducation(int id)
-        {
-            try
-            {
-                EducationModel returnEvent = await _educationService.DeleteEducationAsync(id);
+                MarriageModel returnEvent = await _marriageService.UpdateMarriageAsync(marriage);
                 return Ok(returnEvent);
             }
             catch (Exception e)

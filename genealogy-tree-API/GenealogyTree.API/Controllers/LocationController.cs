@@ -3,7 +3,6 @@ using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
@@ -11,51 +10,21 @@ namespace GenealogyTree.API.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class GenderController : Controller
+    public class LocationController : Controller
     {
-        private readonly IGenderService _genderService;
-        public GenderController(IGenderService genderService)
+        private readonly ILocationService _locationService;
+        public LocationController(ILocationService locationService)
         {
-            _genderService = genderService;
-        }
-
-        [HttpGet]
-        [Route("")]
-        public async Task<ActionResult> GetAllGenders()
-        {
-            try
-            {
-                List<Gender> returnEvent = await _genderService.GetAllGendersAsync();
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
+            _locationService = locationService;
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetGender(int id)
+        public async Task<ActionResult> GetLocationAsync(int id)
         {
             try
             {
-                Gender returnEvent = await _genderService.GetGenderAsync(id);
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpGet]
-        [Route("find/{name}")]
-        public async Task<ActionResult> FindGender(string name)
-        {
-            try
-            {
-                List<Gender> returnEvent = _genderService.FindGenders(name);
+                Location returnEvent = await _locationService.GetLocationAsync(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -66,11 +35,41 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddGender(string genderName)
+        public async Task<ActionResult> AddLocation(Location location)
         {
             try
             {
-                Gender returnEvent = await _genderService.AddGenderAsync(genderName);
+                Location returnEvent = await _locationService.AddLocationAsync(location);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        [Route("update")]
+        public async Task<ActionResult> UpdateLocation(Location location)
+        {
+            try
+            {
+                Location returnEvent = await _locationService.UpdateLocation(location);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id}/delete")]
+        public async Task<ActionResult> DeleteLocation(int id)
+        {
+            try
+            {
+                Location returnEvent = await _locationService.DeleteLocation(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)

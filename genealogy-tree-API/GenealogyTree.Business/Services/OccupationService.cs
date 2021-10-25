@@ -19,7 +19,7 @@ namespace GenealogyTree.Business.Services
 
         public List<OccupationModel> GetAllOccupationsForPerson(int personId)
         {
-            List<Occupation> occupations = unitOfWork.Occupation.Filter(x => x.UserId == personId).ToList();
+            List<Occupation> occupations = unitOfWork.Occupation.Filter(x => x.PersonId == personId).ToList();
             List<OccupationModel> returnEvent = _mapper.Map<List<OccupationModel>>(occupations);
             return returnEvent;
         }

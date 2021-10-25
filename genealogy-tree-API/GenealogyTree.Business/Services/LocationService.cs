@@ -23,7 +23,7 @@ namespace GenealogyTree.Business.Services
             }
             return await unitOfWork.Location.Create(location);
         }
-        public async Task<Location> UpdatePerson(Location location)
+        public async Task<Location> UpdateLocation(Location location)
         {
             if (location == null)
             {

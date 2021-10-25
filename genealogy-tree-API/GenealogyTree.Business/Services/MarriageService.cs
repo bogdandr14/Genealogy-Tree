@@ -32,14 +32,14 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<MarriageModel> GetMarriage(int marriageId)
+        public async Task<MarriageModel> GetMarriageAsync(int marriageId)
         {
             Task<Marriage> marriage = unitOfWork.Marriage.FindById(marriageId);
             MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriage);
             return returnEvent;
         }
 
-        public async Task<MarriageModel> AddMarriage(MarriageModel marriage)
+        public async Task<MarriageModel> AddMarriageAsync(MarriageModel marriage)
         {
             if (marriage == null)
             {
@@ -57,7 +57,7 @@ namespace GenealogyTree.Business.Services
             MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriageCreated);
             return returnEvent;
         }
-        public async Task<MarriageModel> UpdateMarriage(MarriageModel marriage)
+        public async Task<MarriageModel> UpdateMarriageAsync(MarriageModel marriage)
         {
             if (marriage == null)
             {
@@ -69,7 +69,7 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<MarriageModel> DeleteMarriage(int marriageId)
+        public async Task<MarriageModel> DeleteMarriageAsync(int marriageId)
         {
             Marriage marriageEntity = await unitOfWork.Marriage.Delete(marriageId);
             MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriageEntity);

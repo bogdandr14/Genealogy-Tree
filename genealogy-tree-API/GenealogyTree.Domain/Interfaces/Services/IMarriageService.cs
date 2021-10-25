@@ -8,10 +8,10 @@ namespace GenealogyTree.Domain.Interfaces.Services
     public interface IMarriageService
     {
         Task<List<MarriageModel>> GetAllMarriagesForPerson(int personId);
-        Task<MarriageModel> GetMarriage(int marriageId);
+        Task<MarriageModel> GetMarriageAsync(int marriageId);
         Task<MarriageModel> GetCurrentMarriageForPerson(int personId);
-        Task<MarriageModel> AddMarriage(MarriageModel marriage);
-        Task<MarriageModel> UpdateMarriage(MarriageModel marriage);
-        Task<MarriageModel> DeleteMarriage(int marriageId);
+        Task<MarriageModel> AddMarriageAsync(MarriageModel marriage);
+        Task<MarriageModel> UpdateMarriageAsync(MarriageModel marriage);
+        Task<MarriageModel> DeleteMarriageAsync(int marriageId);
     }
 }

@@ -1,86 +1,114 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GenealogyTree.Domain.DTO.User;
+using GenealogyTree.Domain.Interfaces.Services;
+using GenealogyTree.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UserController : Controller
     {
-        // GET: UserController
-        public ActionResult Index()
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            return View();
+            _userService = userService;
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpGet]
+        [Route("login")]
+        public async Task<ActionResult> Login(LoginModel loginCredentials)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                LoginResponseModel loginResponse = await _userService.LoginUser(loginCredentials);
+                return Ok(loginResponse);
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return BadRequest(e);
             }
         }
 
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [Route("register")]
+        public async Task<ActionResult> Register(UserRegisterModel userRegister)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                UserDetailsModel userDetails = await _userService.RegisterUser(userRegister);
+                return Ok(userDetails);
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return BadRequest(e);
             }
         }
 
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [Authorize]
+        [HttpGet]
+        [Route("info")]
+        public async Task<ActionResult> GetPersonalInfo(string username)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                UserDetailsModel userDetails = await _userService.GetUser(username);
+                return Ok(userDetails);
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return BadRequest(e);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("info/{id}")]
+        public async Task<ActionResult> GetUserInfo(int id)
+        {
+            try
+            {
+                UserDetailsModel userDetails = await _userService.GetUserByIdAsync(id);
+                return Ok(userDetails);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("info/update")]
+        public async Task<ActionResult> UpdateUser(UserUpdateModel user)
+        {
+            try
+            {
+                UserDetailsModel updatedUser = await _userService.UpdateUser(user);
+                return Ok(updatedUser);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("info/change-password")]
+        public async Task<ActionResult> ChangePassword(UpdatePasswordModel updatePassword)
+        {
+            try
+            {
+                UserDetailsModel updatedUser = await _userService.UpdatePassword(updatePassword);
+                return Ok(updatedUser);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
             }
         }
     }

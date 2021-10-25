@@ -11,7 +11,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<Location> GetLocationAsync(int locationId);
         Task<Location> AddLocationAsync(Location location);
-        Task<Location> UpdatePerson(Location location);
+        Task<Location> UpdateLocation(Location location);
         Task<Location> DeleteLocation(int locationId);
     }
 }

@@ -20,9 +20,15 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<UserDetailsModel> GetUserAsync(int userId)
+        public async Task<UserDetailsModel> GetUserByIdAsync(int userId)
         {
             User user = await unitOfWork.User.FindById(userId);
+            return _mapper.Map<UserDetailsModel>(user);
+        }
+
+        public async Task<UserDetailsModel> GetUser(string username)
+        {
+            User user = unitOfWork.User.Filter(x => x.Username == username).FirstOrDefault();
             return _mapper.Map<UserDetailsModel>(user);
         }
 
@@ -92,9 +98,12 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
-            userEntity.Id = userToUpdate.Id;
-            userEntity.PersonId = userToUpdate.PersonId;
-            userEntity = await unitOfWork.User.Update(userEntity);
+            if (Hash.ValidateHash(user.Password, userToUpdate.PasswordSalt, userToUpdate.PasswordHash))
+            {
+                userEntity.Id = userToUpdate.Id;
+                userEntity.PersonId = userToUpdate.PersonId;
+                userEntity = await unitOfWork.User.Update(userEntity);
+            }
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
             return returnEvent;
         }
