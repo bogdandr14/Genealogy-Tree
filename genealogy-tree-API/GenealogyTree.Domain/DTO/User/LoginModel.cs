@@ -1,4 +1,4 @@
-﻿namespace GenealogyTree.Domain.Models
+﻿namespace GenealogyTree.Domain.DTO.User
 {
     public class LoginModel
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GenealogyTree.Domain.Models
+namespace GenealogyTree.Domain.DTO
 {
     public class EducationModel
     {

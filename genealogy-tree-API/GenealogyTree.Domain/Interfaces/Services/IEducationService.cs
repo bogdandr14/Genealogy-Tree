@@ -1,5 +1,4 @@
-﻿using GenealogyTree.Domain.Entities;
-using GenealogyTree.Domain.Models;
+﻿using GenealogyTree.Domain.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

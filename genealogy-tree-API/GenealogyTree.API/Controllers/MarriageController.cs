@@ -1,10 +1,9 @@
-﻿using GenealogyTree.Domain.Interfaces.Services;
-using GenealogyTree.Domain.Models;
+﻿using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers

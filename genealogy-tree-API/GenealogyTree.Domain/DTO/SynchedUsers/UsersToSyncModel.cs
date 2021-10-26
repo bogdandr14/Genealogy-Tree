@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GenealogyTree.Domain.DTO
+﻿namespace GenealogyTree.Domain.DTO.SynchedUser
 {
     public class UsersToSyncModel
     {

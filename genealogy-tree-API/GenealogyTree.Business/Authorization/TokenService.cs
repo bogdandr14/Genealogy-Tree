@@ -1,7 +1,6 @@
 ﻿using GenealogyTree.Business.Helpers;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Entities;
-using GenealogyTree.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System;

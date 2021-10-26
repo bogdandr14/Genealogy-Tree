@@ -1,7 +1,6 @@
-﻿using GenealogyTree.Domain.DTO;
+﻿using GenealogyTree.Domain.DTO.SynchedUser;
+using GenealogyTree.Domain.DTO.SyncRequest;
 using GenealogyTree.Domain.Interfaces.Services;
-using GenealogyTree.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

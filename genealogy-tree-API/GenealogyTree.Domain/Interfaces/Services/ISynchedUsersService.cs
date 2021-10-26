@@ -1,5 +1,4 @@
-﻿using GenealogyTree.Domain.DTO;
-using GenealogyTree.Domain.Models;
+﻿using GenealogyTree.Domain.DTO.SynchedUser;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

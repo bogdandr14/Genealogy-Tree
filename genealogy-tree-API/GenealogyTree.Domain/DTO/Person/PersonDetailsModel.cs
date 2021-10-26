@@ -1,10 +1,6 @@
-﻿using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.Entities;
-using System;
-
-namespace GenealogyTree.Domain.Models
+﻿namespace GenealogyTree.Domain.DTO.Person
 {
-    public class PersonDetailsModel: PersonUpdateModel
+    public class PersonDetailsModel : PersonUpdateModel
     {
         public string GenderName { get; set; }
         public string ReligionName { get; set; }

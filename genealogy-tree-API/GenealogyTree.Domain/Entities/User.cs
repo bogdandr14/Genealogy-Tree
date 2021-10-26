@@ -17,7 +17,6 @@ namespace GenealogyTree.Domain.Entities
         public string PasswordSalt { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string About { get; set; }
         public bool NotifyUpdates { get; set; }
         public bool NotifyBirthdays { get; set; }
         public bool SharePersonalInfo { get; set; }
@@ -28,7 +27,7 @@ namespace GenealogyTree.Domain.Entities
 
         [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }
-        
+
         /*        public virtual ICollection<Education> Educations { get; set; }
                 public virtual ICollection<Occupation> Occupations { get; set; }*/
     }

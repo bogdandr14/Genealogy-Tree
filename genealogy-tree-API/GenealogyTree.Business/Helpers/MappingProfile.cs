@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.DTO.SynchedUser;
+using GenealogyTree.Domain.DTO.SyncRequest;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
-using GenealogyTree.Domain.Models;
 
 namespace GenealogyTree.Business.Helpers
 {

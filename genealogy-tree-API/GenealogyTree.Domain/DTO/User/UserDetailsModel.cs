@@ -1,7 +1,6 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.Entities;
 
-namespace GenealogyTree.Domain.Models
+namespace GenealogyTree.Domain.DTO.User
 {
     public class UserDetailsModel
     {

@@ -1,14 +1,6 @@
-﻿using GenealogyTree.Business.Helpers;
-using GenealogyTree.Domain.Entities;
-using GenealogyTree.Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Authorization

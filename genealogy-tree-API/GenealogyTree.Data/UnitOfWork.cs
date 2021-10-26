@@ -1,7 +1,8 @@
-﻿using GenealogyTree.Domain.Interfaces.Repositories;
-using System.Threading.Tasks;
+﻿using GenealogyTree.Data.Repositories;
+using GenealogyTree.Domain.Interfaces;
+using GenealogyTree.Domain.Interfaces.Repositories;
 
-namespace GenealogyTree.Data.Repositories
+namespace GenealogyTree.Data
 {
     public class UnitOfWork : IUnitOfWork
     {

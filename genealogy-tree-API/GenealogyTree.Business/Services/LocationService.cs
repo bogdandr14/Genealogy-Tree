@@ -1,5 +1,5 @@
 ﻿using GenealogyTree.Domain.Entities;
-using GenealogyTree.Domain.Interfaces.Repositories;
+using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using System.Threading.Tasks;
 

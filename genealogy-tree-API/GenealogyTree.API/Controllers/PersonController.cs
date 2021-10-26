@@ -1,6 +1,5 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Interfaces.Services;
-using GenealogyTree.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

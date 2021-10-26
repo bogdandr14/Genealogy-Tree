@@ -1,4 +1,6 @@
-﻿namespace GenealogyTree.Domain.Interfaces.Repositories
+﻿using GenealogyTree.Domain.Interfaces.Repositories;
+
+namespace GenealogyTree.Domain.Interfaces
 {
     public interface IUnitOfWork
     {

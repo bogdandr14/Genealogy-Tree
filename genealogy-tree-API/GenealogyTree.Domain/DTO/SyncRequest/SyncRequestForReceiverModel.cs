@@ -1,4 +1,7 @@
-﻿namespace GenealogyTree.Domain.Models
+﻿using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.DTO.User;
+
+namespace GenealogyTree.Domain.DTO.SyncRequest
 {
     public class SyncRequestForReceiverModel
     {

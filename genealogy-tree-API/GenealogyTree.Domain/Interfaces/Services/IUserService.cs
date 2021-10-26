@@ -1,5 +1,4 @@
 ﻿using GenealogyTree.Domain.DTO.User;
-using GenealogyTree.Domain.Models;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Domain.Interfaces.Services

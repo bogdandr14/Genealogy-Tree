@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
-using GenealogyTree.Domain.Interfaces.Repositories;
+using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
-using GenealogyTree.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Services
