@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, NgForm } from '@angular/forms';
+import { UserLoginModel } from '../../models/user-login.model';
 
 @Component({
   selector: 'app-login',
@@ -7,17 +8,21 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('loginForm') loginForm: NgForm;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
   onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
     }
-    const email = form.value.email;
-    const password = form.value.password;
 
+    const loginModel: UserLoginModel = {
+      username: form.value.username,
+      password: form.value.password,
+    };
+    //return loginModel;
     //this.authenticate(email, password);
   }
 }

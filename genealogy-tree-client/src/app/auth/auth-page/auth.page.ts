@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 
 import { AuthService } from '../auth.service';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-auth',
@@ -11,6 +13,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
+  @ViewChild('signup') signup: SignupComponent;
+  @ViewChild('login') login: LoginComponent;
+
   isLoading = false;
   isLogin = true;
 
@@ -54,14 +59,27 @@ export class AuthPage implements OnInit {
     this.isLogin = !this.isLogin;
   }
 
-  onSubmit(form: NgForm) {
-    if (!form.valid) {
-      return;
+  public checkFormValidity() {
+    if (this.isLogin) {
+      return this.login?.loginForm.valid;
+    } else {
+      return this.signup?.signupForm.valid;
     }
-    const email = form.value.email;
-    const password = form.value.password;
+  }
 
-    this.authenticate(email, password);
+  onSubmit(form: NgForm) {
+    // if(this.isLogin){
+    //   this.login.loginForm.submitted = true;
+    // }
+    // else{
+    //   this.signup.signupForm.onSubmit();
+    // }
+    // if(!form.valid){
+    //   return;
+    // }
+    // const email = form.value.email;
+    // const password = form.value.password;
+    // this.authenticate(email, password);
   }
 
   private showAlert(message: string) {
