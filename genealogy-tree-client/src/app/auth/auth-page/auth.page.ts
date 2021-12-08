@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
@@ -6,6 +6,8 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { UserLoginModel } from '../models/user-login.model';
+import { UserSignupModel } from '../models/user-signup.model';
 
 @Component({
   selector: 'app-auth',
@@ -13,8 +15,6 @@ import { LoginComponent } from './login/login.component';
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  @ViewChild('signup') signup: SignupComponent;
-  @ViewChild('login') login: LoginComponent;
 
   isLoading = false;
   isLogin = true;
@@ -28,7 +28,34 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {}
 
-  authenticate(email: string, password: string) {
+  authenticate(loginModel: UserLoginModel) {
+    this.isLoading = true;
+    this.authService.login();
+    this.loadingCtrl
+      .create({ keyboardClose: true, message: 'Logging in...' })
+      .then((loadingEl) => {
+        loadingEl.present();
+        // this.authService.signup(email, password).subscribe(
+        //   resData => {
+        //     console.log(resData);
+        //     this.isLoading = false;
+        //     loadingEl.dismiss();
+        //     this.router.navigateByUrl('/places/tabs/discover');
+        //   },
+        //   errRes => {
+        //     loadingEl.dismiss();
+        //     const code = errRes.error.error.message;
+        //     let message = 'Could not sign you up, please try again.';
+        //     if (code === 'EMAIL_EXISTS') {
+        //       message = 'This email address exists already!';
+        //     }
+        //     this.showAlert(message);
+        //   }
+        // );
+      });
+  }
+
+  register(signupModel: UserSignupModel) {
     this.isLoading = true;
     this.authService.login();
     this.loadingCtrl
@@ -57,29 +84,6 @@ export class AuthPage implements OnInit {
 
   onSwitchAuthMode() {
     this.isLogin = !this.isLogin;
-  }
-
-  public checkFormValidity() {
-    if (this.isLogin) {
-      return this.login?.loginForm.valid;
-    } else {
-      return this.signup?.signupForm.valid;
-    }
-  }
-
-  onSubmit(form: NgForm) {
-    // if(this.isLogin){
-    //   this.login.loginForm.submitted = true;
-    // }
-    // else{
-    //   this.signup.signupForm.onSubmit();
-    // }
-    // if(!form.valid){
-    //   return;
-    // }
-    // const email = form.value.email;
-    // const password = form.value.password;
-    // this.authenticate(email, password);
   }
 
   private showAlert(message: string) {

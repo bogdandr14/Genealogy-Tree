@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthPage } from './auth-page/auth.page';
 import { LoginComponent } from './auth-page/login/login.component';
 import { SignupComponent } from './auth-page/signup/signup.component';
+import { AuthService } from './auth.service';
 
 const routes: Routes = [
   {
@@ -20,9 +21,17 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
   ],
-  declarations: [AuthPage, LoginComponent, SignupComponent],
+  declarations: [
+    AuthPage,
+    LoginComponent,
+    SignupComponent
+  ],
+  providers:[
+    AuthService
+  ]
 })
 export class AuthPageModule {}

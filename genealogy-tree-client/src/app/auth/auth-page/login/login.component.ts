@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, NgForm } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { UserLoginModel } from '../../models/user-login.model';
 
 @Component({
@@ -8,21 +8,35 @@ import { UserLoginModel } from '../../models/user-login.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('loginForm') loginForm: NgForm;
+  @Output() tryLogin = new EventEmitter<UserLoginModel>();
 
-  constructor() {}
+  public loginGroup: FormGroup;
+  public usernameCtrl: FormControl;
+  public passwordCtrl: FormControl;
 
-  ngOnInit() {}
-  onSubmit(form: NgForm) {
-    if (!form.valid) {
+  constructor(private formBuilder: FormBuilder) {
+    this.loadForm();
+  }
+
+  ngOnInit() { }
+
+  onSubmit() {
+    if (this.loginGroup.invalid) {
       return;
     }
 
     const loginModel: UserLoginModel = {
-      username: form.value.username,
-      password: form.value.password,
+      username: this.usernameCtrl.value,
+      password: this.passwordCtrl.value,
     };
-    //return loginModel;
-    //this.authenticate(email, password);
+    this.loginGroup.reset();
+    this.tryLogin.emit(loginModel);
+  }
+
+  private loadForm() {
+    this.loginGroup = this.formBuilder.group({
+      username: (this.usernameCtrl = new FormControl(null, [Validators.required])),
+      password: (this.passwordCtrl = new FormControl(null, [Validators.minLength(8)]))
+    });
   }
 }
