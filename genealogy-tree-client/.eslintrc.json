@@ -9,8 +9,7 @@
         "createDefaultProgram": true
       },
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
@@ -32,10 +31,15 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-debugger": "error"
       }
     },
     {

@@ -1,0 +1,9 @@
+:host ::ng-deep{
+  min-height: 20px !important;
+}
+
+.content{
+  overflow: auto;
+  height: calc(100% - 55px);
+  align-items: center;
+}

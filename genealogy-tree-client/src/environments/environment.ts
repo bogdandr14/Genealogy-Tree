@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseApiUrl: '',//'http://boilerplates-api.stage02.netromsoftware.ro',
+  defaultLanguage: 'en',
+  appSettings: {
+    version: '',
+    languages: [
+      { translationKey: "languageEN", iso: "en-us", languageKey: "en" },
+      { translationKey: "languageRO", iso: "ro-ro", languageKey: "ro" }
+    ]
+  },
 };
 
 /*

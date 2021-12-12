@@ -1,0 +1,32 @@
+<ion-menu side="end" content-id="main">
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title>{{ "menu" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <img
+            width="24"
+            alt="GeneTree Logo"
+            src="../../../../../assets/icon/favicon-32x32.png"
+          />
+        </ion-label>
+      </ion-item>
+      <app-navigation *ngIf="authService.isLoggedIn()"></app-navigation>
+      <app-theme-select></app-theme-select>
+      <app-language-select></app-language-select>
+      <ion-button
+        *ngIf="authService.isLoggedIn()"
+        expand="block"
+        fill="clear"
+        color="danger"
+        (click)="onLogout()"
+      >
+        {{ "logout" | translate }}
+      </ion-button>
+    </ion-list>
+  </ion-content>
+</ion-menu>

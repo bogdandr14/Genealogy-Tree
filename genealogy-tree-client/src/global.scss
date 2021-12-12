@@ -24,3 +24,21 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.errors {
+  --min-height: 20px;
+  margin: 0px;
+  color: #eb445a;
+  font-size: 0.8em;
+}
+
+.error {
+  margin: 2px !important;
+}
+.required {
+  margin: 10px 0px;
+  color: #eb445a;
+}
+.submit-button{
+  margin-top: 15px;
+}

@@ -1,0 +1,67 @@
+{
+  "welcomeText": "Welcome to GeneTree version {key}",
+  "toggleTheme": "Toggle dark theme",
+  "language": "Language",
+  "_languages": {
+    "languageEN": "English",
+    "languageRO": "Romanian"
+  },
+  "logout": "Logout",
+  "username": "Username",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "gender": "Gender",
+  "nationality": "Nationality",
+  "birthday": "Birthday",
+  "email": "E-Mail address",
+  "login": "Login",
+  "register": "Register",
+  "backToLogin": "Back to Login",
+  "registerHere": "Register here",
+  "passwordRequired": "Password is required",
+  "invalidPassword": "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number",
+  "confirmPasswordRequired": "Confirm Password is required",
+  "passwordMustMatch": "Passwords must match",
+  "options": "Options",
+  "edit": "Edit",
+  "delete": "Delete",
+  "archive": "Archive",
+  "menu": "Menu",
+  "_menu": {
+    "_links": {
+      "home": "Home",
+      "orders": "Orders",
+      "login": "Login",
+      "register": "Register"
+    }
+  },
+  "_common": {
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "back": "Back"
+  },
+  "_validation": {
+    "fieldRequired": "Field is required.",
+    "minLength": "Field must be at least { length } characters long.",
+    "maxLength": "Field must be at most { length } characters long.",
+    "minValue": "Must be at least {value}.",
+    "maxValue": "Must be at most {value}."
+  },
+  "loadingMessage": "Loading...",
+  "_paginator": {
+    "itemsPerPage": "Items per page",
+    "currentPageMessage": "Page {currentPage} of {numberOfPages}"
+  },
+  "_genders": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "_nationalities": {
+    "gb": "British",
+    "ro": "Romanian",
+    "bg": "Bulgarian"
+  }
+}

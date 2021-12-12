@@ -1,0 +1,67 @@
+{
+  "welcomeText": "Bine ai venit la GeneTree versiunea {key}",
+  "toggleTheme": "Comută mod întunecat",
+  "language": "Limba",
+  "_languages": {
+    "languageEN": "Engleză",
+    "languageRO": "Română"
+  },
+  "logout": "Deconectare",
+  "username": "Nume utilizator",
+  "password": "Parolă",
+  "confirmPassword": "Confirmă Parola",
+  "firstName": "Prenume",
+  "lastName": "Nume",
+  "login": "Autentificare",
+  "gender": "Gen",
+  "nationality": "Naţionalitate",
+  "birthday": "Zi de naştere",
+  "email": "Adresă de e-Mail",
+  "register": "Înregistrare",
+  "backToLogin": "Înapoi la autentificare",
+  "registerHere": "Înregistrează-te aici",
+  "passwordRequired": "Parola este necesară",
+  "invalidPassword": "Parola trebuie să aibă minimum 8 caractere, cel puțin o majusculă, 1 minusculă și 1 număr",
+  "confirmPasswordRequired": "Confirmarea parolei este necesară",
+  "passwordMustMatch": "Parolele trebuie să se potrtivească",
+  "options": "Opţiuni",
+  "edit": "Editare",
+  "delete": "Şterge",
+  "archive": "Arhivează",
+  "menu": "Meniu",
+  "_menu": {
+    "_links": {
+      "home": "Acasă",
+      "orders": "#Orders",
+      "login": "Logare",
+      "register": "Înregistrare"
+    }
+  },
+  "_common": {
+    "cancel": "Anulează",
+    "submit": "Trimite",
+    "back": "Înapoi"
+  },
+  "_validation": {
+    "fieldRequired": "Câmpul este obligatoriu",
+    "minLength": "Câmpul trebuie să aibă cel puțin { length } caractere.",
+    "maxLength": "Câmpul trebuie să aibă cel mult { length } caractere.",
+    "minValue": "Trebuie să fie cel puţin {value}.",
+    "maxValue": "Trebuie să fie cel mult {value}."
+  },
+  "loadingMessage": "Se încarcă...",
+  "_paginator": {
+    "itemsPerPage": "Articole pe pagină",
+    "currentPageMessage": "Pagina {currentPage} din {numberOfPages}"
+  },
+  "_genders": {
+    "male": "Bărbat",
+    "female": "Femeie",
+    "other": "Altceva"
+  },
+  "_nationalities": {
+    "gb": "Britanic",
+    "ro": "Român",
+    "bg": "Bulgar"
+  }
+}
