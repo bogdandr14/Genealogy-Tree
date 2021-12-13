@@ -69,6 +69,8 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<User, UserUpdateModel>()
                 .ReverseMap();
+            CreateMap<TokenResponseModel, LoginResponseModel>()
+                .ReverseMap();
         }
     }
 }

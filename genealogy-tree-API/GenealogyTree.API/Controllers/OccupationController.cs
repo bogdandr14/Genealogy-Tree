@@ -21,11 +21,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetPersonOccupations(int personId)
+        public async Task<ActionResult<List<OccupationModel>>> GetPersonOccupations(int personId)
         {
             try
             {
                 List<OccupationModel> returnEvent = _occupationService.GetAllOccupationsForPerson(personId);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -36,11 +40,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetOccupation(int id)
+        public async Task<ActionResult<OccupationModel>> GetOccupation(int id)
         {
             try
             {
                 OccupationModel returnEvent = await _occupationService.GetOccupationAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -51,7 +59,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddOccupation(OccupationModel occupation)
+        public async Task<ActionResult<OccupationModel>> AddOccupation(OccupationModel occupation)
         {
             try
             {
@@ -66,7 +74,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult> UpdateOccupation(OccupationModel occupation)
+        public async Task<ActionResult<OccupationModel>> UpdateOccupation(OccupationModel occupation)
         {
             try
             {
@@ -81,7 +89,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id}/delete")]
-        public async Task<ActionResult> DeleteOccupation(int id)
+        public async Task<ActionResult<OccupationModel>> DeleteOccupation(int id)
         {
             try
             {

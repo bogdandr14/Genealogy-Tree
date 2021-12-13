@@ -20,11 +20,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetPersonEducations(int personId)
+        public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(int personId)
         {
             try
             {
                 List<EducationModel> returnEvent = _educationService.GetAllEducationsForPerson(personId);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -34,12 +38,16 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult> GetEducation(int id)
+        [Route("{id:int}")]
+        public async Task<ActionResult<EducationModel>> GetEducation(int id)
         {
             try
             {
                 EducationModel returnEvent = await _educationService.GetEducationAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -51,7 +59,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddEducation(EducationModel education)
+        public async Task<ActionResult<EducationModel>> AddEducation(EducationModel education)
         {
             try
             {
@@ -66,7 +74,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult> UpdateEducation(EducationModel education)
+        public async Task<ActionResult<EducationModel>> UpdateEducation(EducationModel education)
         {
             try
             {

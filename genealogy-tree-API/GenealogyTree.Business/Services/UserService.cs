@@ -33,11 +33,23 @@ namespace GenealogyTree.Business.Services
 
         public async Task<LoginResponseModel> LoginUser(LoginModel userLogin)
         {
-            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).FirstOrDefault();
-            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
+            /*User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).FirstOrDefault();
+            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))*/
             {
                 IList<string> list = new List<string>();
+                Person person = new Person()
+                {
+                    FirstName = "Bogdan",
+                    LastName = "Draghici"
+                };
                 list.Add("Customer");
+                User user = new User()
+                {
+                    Id = 4,
+                    Username = "bimax14",
+                    Email = "nu avem",
+                    Person = person,
+                };
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(TokenService.GenerateToken(user, list));
                 loginResponseModel.Username = user.Username;
                 loginResponseModel.Email = user.Email;

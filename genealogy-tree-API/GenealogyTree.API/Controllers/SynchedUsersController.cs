@@ -19,11 +19,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetSynchedUsersForCurrentUser(int userId)
+        public async Task<ActionResult<List<SynchedUserModel>>> GetSynchedUsersForCurrentUser(int userId)
         {
             try
             {
                 List<SynchedUserModel> returnEvent = await _synchedUsersService.GetAllSynchedUsersForUser(userId);
+                if(returnEvent== null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -33,12 +37,16 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<ActionResult> GetSynchedUser(int id)
         {
             try
             {
                 SynchedUserModel returnEvent = await _synchedUsersService.GetSynchedUser(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -49,7 +57,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> SynchedUsersResponded(UsersToSyncModel usersToSync)
+        public async Task<ActionResult<UsersToSyncModel>> SynchedUsersResponded(UsersToSyncModel usersToSync)
         {
             try
             {
@@ -63,8 +71,8 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}/remove")]
-        public async Task<ActionResult> RemoveSynchedUser(int id)
+        [Route("{id:int}/remove")]
+        public async Task<ActionResult<SynchedUserModel>> RemoveSynchedUser(int id)
         {
             try
             {

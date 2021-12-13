@@ -21,7 +21,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetAllGenders()
+        public async Task<ActionResult<List<Gender>> > GetAllGenders()
         {
             try
             {
@@ -35,12 +35,16 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult> GetGender(int id)
+        [Route("{id:int}")]
+        public async Task<ActionResult<Gender>> GetGender(int id)
         {
             try
             {
                 Gender returnEvent = await _genderService.GetGenderAsync(id);
+                if(returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -51,11 +55,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("find/{name}")]
-        public async Task<ActionResult> FindGender(string name)
+        public async Task<ActionResult<List<Gender>>> FindGender(string name)
         {
             try
             {
                 List<Gender> returnEvent = _genderService.FindGenders(name);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -66,7 +74,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddGender(string genderName)
+        public async Task<ActionResult<Gender>> AddGender(string genderName)
         {
             try
             {

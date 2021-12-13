@@ -18,12 +18,16 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult> GetPersonDetails(int id)
+        [Route("{id:int}")]
+        public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)
         {
             try
             {
                 PersonDetailsModel returnEvent = await _personService.GetPersonAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -34,11 +38,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public async Task<ActionResult> SearchPersons(string name)
+        public async Task<ActionResult<PersonDetailsModel>> SearchPersons(string name)
         {
             try
             {
                 List<PersonDetailsModel> returnEvent = await _personService.FindPerson(name);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -50,7 +58,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddPerson(PersonCreationModel person)
+        public async Task<ActionResult<PersonDetailsModel>> AddPerson(PersonCreationModel person)
         {
             try
             {
@@ -65,7 +73,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult> UpdatePerson(PersonUpdateModel person)
+        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(PersonUpdateModel person)
         {
             try
             {
@@ -79,8 +87,8 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}/delete")]
-        public async Task<ActionResult> DeleteEducation(int id)
+        [Route("{id:int}/delete")]
+        public async Task<ActionResult<PersonDetailsModel>> DeletePerson(int id)
         {
             try
             {

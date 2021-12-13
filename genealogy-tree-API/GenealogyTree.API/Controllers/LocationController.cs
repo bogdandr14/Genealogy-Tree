@@ -19,12 +19,16 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult> GetLocationAsync(int id)
+        [Route("{id:int}")]
+        public async Task<ActionResult<Location>> GetLocationAsync(int id)
         {
             try
             {
                 Location returnEvent = await _locationService.GetLocationAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -35,7 +39,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult> AddLocation(Location location)
+        public async Task<ActionResult<Location>> AddLocation(Location location)
         {
             try
             {
@@ -50,7 +54,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult> UpdateLocation(Location location)
+        public async Task<ActionResult<Location>> UpdateLocation(Location location)
         {
             try
             {
@@ -65,7 +69,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id}/delete")]
-        public async Task<ActionResult> DeleteLocation(int id)
+        public async Task<ActionResult<Location>> DeleteLocation(int id)
         {
             try
             {

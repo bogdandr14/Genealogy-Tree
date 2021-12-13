@@ -2,6 +2,7 @@
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
@@ -19,11 +20,15 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult> GetAllReligions()
+        public async Task<ActionResult<List<Religion>>> GetAllReligions()
         {
             try
             {
-                System.Collections.Generic.List<Religion> religions = await _religionService.GetAllReligionsAsync();
+                List<Religion> religions = await _religionService.GetAllReligionsAsync();
+                if (religions == null)
+                {
+                    return NotFound();
+                }
                 return Ok(religions);
             }
             catch (Exception e)
@@ -33,12 +38,16 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Find/{name}")]
-        public async Task<ActionResult> FindReligion(string name)
+        [Route("find/{name}")]
+        public async Task<ActionResult<List<Religion>>> FindReligion(string name)
         {
             try
             {
-                System.Collections.Generic.List<Religion> religions = _religionService.FindReligions(name);
+                List<Religion> religions = _religionService.FindReligions(name);
+                if (religions == null)
+                {
+                    return NotFound();
+                }
                 return Ok(religions);
             }
             catch (Exception e)
@@ -49,7 +58,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<ActionResult> AddReligion(string religionName)
+        public async Task<ActionResult<Religion>> AddReligion(string religionName)
         {
             try
             {

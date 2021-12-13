@@ -17,14 +17,22 @@ button {
   padding: 5px 20px;
   cursor: pointer;
 }
-.spinner {
-  margin: 0 auto;
-  height: 64px;
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
   width: 64px;
-  animation: rotate 0.8s infinite linear;
-  border: 5px solid #a5be00;
-  border-right-color: transparent;
+  height: 64px;
+  margin: 0 auto;
   border-radius: 50%;
+  border: 6px solid rgb(38, 97, 8);
+  border-color: rgb(38, 97, 8) transparent rgb(38, 97, 8) transparent;
+  animation: rotate 1.2s linear infinite;
 }
 @keyframes rotate {
   0% {

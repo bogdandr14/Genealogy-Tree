@@ -36,14 +36,13 @@ namespace GenealogyTree.Business.Authorization
                 ConstantsJwt.Issuer,
                 ConstantsJwt.Audience,
                 authClaims,
-                expires: DateTime.UtcNow.AddMinutes(30),
+                expires: DateTime.UtcNow.AddSeconds(104),
                 signingCredentials: new SigningCredentials(authSignIngKey, SecurityAlgorithms.HmacSha256)
                 );
 
             return new TokenResponseModel
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiration = token.ValidTo
             };
         }
 

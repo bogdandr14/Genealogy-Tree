@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: '',//'http://boilerplates-api.stage02.netromsoftware.ro',
+  baseApiUrl: 'http://localhost:48888',
   defaultLanguage: 'en',
   appSettings: {
     version: '',
