@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Business.Helpers
 {
-    class ConstantsJwt
+    public class ConstantsJwt
     {
         public const string Issuer = "GeneTree";
         public const string Audience = "User";

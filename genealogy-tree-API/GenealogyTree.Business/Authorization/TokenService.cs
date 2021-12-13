@@ -36,7 +36,7 @@ namespace GenealogyTree.Business.Authorization
                 ConstantsJwt.Issuer,
                 ConstantsJwt.Audience,
                 authClaims,
-                expires: DateTime.UtcNow.AddSeconds(104),
+                expires: DateTime.UtcNow.AddMinutes(104),
                 signingCredentials: new SigningCredentials(authSignIngKey, SecurityAlgorithms.HmacSha256)
                 );
 
@@ -51,14 +51,14 @@ namespace GenealogyTree.Business.Authorization
             // Token handler used in order to validate the token
             var tokenHandler = new JwtSecurityTokenHandler();
             // Get the secret key from the jwtSettings instance
-            var key = Encoding.ASCII.GetBytes(ConstantsJwt.Secret);
+            var key = Encoding.UTF8.GetBytes(ConstantsJwt.Secret);
 
             try
             {
                 // Validate the token and store it in the validatedToken variable
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
+                    ValidateIssuerSigningKey = false,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false,

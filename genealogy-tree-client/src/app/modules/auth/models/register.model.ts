@@ -1,9 +1,9 @@
 export class RegisterModel {
   firstName: string;
   lastName: string;
-  gender: string;
+  genderId: number;
   nationality: string;
-  birthdate: Date;
+  birthDate: Date;
   email: string;
   username?: string;
   password?: string;

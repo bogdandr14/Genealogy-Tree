@@ -32,7 +32,6 @@ namespace GenealogyTree.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string securityString = "782Jjs9jkw3E934ujoLzkA70a";
 
             services.AddDbContext<GenealogyTreeDbContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
@@ -40,9 +39,10 @@ namespace GenealogyTree.API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(option =>
                {
+                   string secret = ConstantsJwt.Secret;
                    option.TokenValidationParameters = new TokenValidationParameters
                    {
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(securityString)),
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
                        ValidateAudience = false,
                        ValidateIssuer = false,
                        ValidateIssuerSigningKey = true
@@ -60,9 +60,32 @@ namespace GenealogyTree.API
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GenealogyTree.API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "GenealogyTree.API", Version = "v1" });
+                options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "bearerAuth"
+                                }
+                            },
+                            new string[] {}
+                    }
+                });
             });
             services
                .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(PersonService)))
@@ -93,7 +116,7 @@ namespace GenealogyTree.API
 
             app.UseRouting();
             app.UseMiddleware<JwtMiddleware>();
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -15,7 +15,7 @@ namespace GenealogyTree.Domain.DTO.Person
         public Location BirthPlace { get; set; }
         public Location LivingPlace { get; set; }
         public int ParentsId { get; set; }
-        public string GenderId { get; set; }
+        public int GenderId { get; set; }
         public int ReligionId { get; set; }
     }
 }

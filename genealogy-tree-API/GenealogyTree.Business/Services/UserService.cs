@@ -33,23 +33,24 @@ namespace GenealogyTree.Business.Services
 
         public async Task<LoginResponseModel> LoginUser(LoginModel userLogin)
         {
-            /*User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).FirstOrDefault();
-            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))*/
+            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).FirstOrDefault();
+            user.Person= await unitOfWork.Person.FindById(user.PersonId);
+            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
                 IList<string> list = new List<string>();
-                Person person = new Person()
+                list.Add("Customer");
+                /*Person person = new Person()
                 {
                     FirstName = "Bogdan",
                     LastName = "Draghici"
                 };
-                list.Add("Customer");
                 User user = new User()
                 {
                     Id = 4,
                     Username = "bimax14",
                     Email = "nu avem",
                     Person = person,
-                };
+                };*/
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(TokenService.GenerateToken(user, list));
                 loginResponseModel.Username = user.Username;
                 loginResponseModel.Email = user.Email;
@@ -64,15 +65,15 @@ namespace GenealogyTree.Business.Services
         public async Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister)
         {
             User user = _mapper.Map<User>(userRegister);
-            Person person = _mapper.Map<Person>(userRegister.Person);
-            Location birthPlace = _mapper.Map<Location>(userRegister.Person.BirthPlace);
-            Location livingPlace = _mapper.Map<Location>(userRegister.Person.LivingPlace);
+            Person person = _mapper.Map<Person>(userRegister);
+            //Location birthPlace = _mapper.Map<Location>(userRegister.Person.BirthPlace);
+            //Location livingPlace = _mapper.Map<Location>(userRegister.Person.LivingPlace);
 
-            Location birthPlaceCreated = await unitOfWork.Location.Create(birthPlace);
-            person.PlaceOfBirthId = birthPlaceCreated.Id;
+            //Location birthPlaceCreated = await unitOfWork.Location.Create(birthPlace);
+            //person.PlaceOfBirthId = birthPlaceCreated.Id;
 
-            Location livingPlaceCreated = await unitOfWork.Location.Create(livingPlace);
-            person.PlaceOfLivingId = livingPlaceCreated.Id;
+            //Location livingPlaceCreated = await unitOfWork.Location.Create(livingPlace);
+            //person.PlaceOfLivingId = livingPlaceCreated.Id;
 
             Person personCreated = await unitOfWork.Person.Create(person);
             user.PersonId = personCreated.Id;

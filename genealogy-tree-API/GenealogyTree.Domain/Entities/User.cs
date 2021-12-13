@@ -22,6 +22,8 @@ namespace GenealogyTree.Domain.Entities
         public bool SharePersonalInfo { get; set; }
         public DateTime LastTreeUpdate { get; set; }
         public DateTime? LastSyncCheck { get; set; }
+        public string About { get; set; }
+
 
         public int PersonId { get; set; }
 

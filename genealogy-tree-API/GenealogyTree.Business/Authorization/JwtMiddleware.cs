@@ -31,6 +31,7 @@ namespace GenealogyTree.Business.Authorization
 
         public void attachUserToContext(HttpContext context, JwtSecurityToken jwtToken)
         {
+            context.Response.Headers["Authorization"] = "Bearer " + jwtToken.RawData;
             context.Items["Username"] = jwtToken.Claims.First(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value;
             context.Items["FullName"] = jwtToken.Claims.First(x => x.Type == JwtRegisteredClaimNames.GivenName).Value + " " +
                                         jwtToken.Claims.First(x => x.Type == JwtRegisteredClaimNames.FamilyName).Value;
