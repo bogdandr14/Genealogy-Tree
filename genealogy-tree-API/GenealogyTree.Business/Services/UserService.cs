@@ -4,6 +4,7 @@ using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,8 +34,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<LoginResponseModel> LoginUser(LoginModel userLogin)
         {
-            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).FirstOrDefault();
-            user.Person= await unitOfWork.Person.FindById(user.PersonId);
+            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u=> u.Person).FirstOrDefault();
             if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
                 IList<string> list = new List<string>();
@@ -66,14 +66,6 @@ namespace GenealogyTree.Business.Services
         {
             User user = _mapper.Map<User>(userRegister);
             Person person = _mapper.Map<Person>(userRegister);
-            //Location birthPlace = _mapper.Map<Location>(userRegister.Person.BirthPlace);
-            //Location livingPlace = _mapper.Map<Location>(userRegister.Person.LivingPlace);
-
-            //Location birthPlaceCreated = await unitOfWork.Location.Create(birthPlace);
-            //person.PlaceOfBirthId = birthPlaceCreated.Id;
-
-            //Location livingPlaceCreated = await unitOfWork.Location.Create(livingPlace);
-            //person.PlaceOfLivingId = livingPlaceCreated.Id;
 
             Person personCreated = await unitOfWork.Person.Create(person);
             user.PersonId = personCreated.Id;

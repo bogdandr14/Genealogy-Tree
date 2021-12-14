@@ -55,7 +55,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("info")]
         public async Task<ActionResult<UserDetailsModel>> GetPersonalInfo(string username)
@@ -75,7 +75,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<UserDetailsModel>> GetUserInfo(int id)
@@ -95,7 +95,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult<UserDetailsModel>> UpdateUser(UserUpdateModel user)
@@ -115,7 +115,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpPut]
         [Route("changePassword")]
         public async Task<ActionResult<UserDetailsModel>> ChangePassword(UpdatePasswordModel updatePassword)

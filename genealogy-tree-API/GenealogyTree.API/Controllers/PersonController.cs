@@ -18,7 +18,7 @@ namespace GenealogyTree.API.Controllers
             _personService = personService;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)

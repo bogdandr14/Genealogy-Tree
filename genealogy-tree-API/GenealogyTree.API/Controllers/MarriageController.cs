@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MarriageController : Controller
