@@ -33,6 +33,7 @@
     "_links": {
       "home": "Home",
       "orders": "Orders",
+      "profile": "Profile",
       "login": "Login",
       "register": "Register"
     }

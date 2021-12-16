@@ -17,9 +17,9 @@ export class NavigationComponent {
         icon: 'home',
       },
       {
-        title: '_menu._links.orders',
-        path: '/orders',
-        icon: 'trash',
+        title: '_menu._links.profile',
+        path: '/user/profile',
+        icon: 'person',
       },
     ];
   }

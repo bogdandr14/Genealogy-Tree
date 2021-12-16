@@ -33,6 +33,7 @@
     "_links": {
       "home": "Acasă",
       "orders": "#Orders",
+      "profile": "Profil",
       "login": "Logare",
       "register": "Înregistrare"
     }
