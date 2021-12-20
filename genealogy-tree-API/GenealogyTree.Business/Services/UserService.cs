@@ -2,6 +2,7 @@
 using GenealogyTree.Business.Authorization;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
+using GenealogyTree.Domain.Enums;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
@@ -37,8 +38,8 @@ namespace GenealogyTree.Business.Services
             User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u=> u.Person).FirstOrDefault();
             if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
-                IList<string> list = new List<string>();
-                list.Add("Customer");
+                IList<UserRoleEnum> list = new List<UserRoleEnum>();
+                list.Add(UserRoleEnum.User);
                 /*Person person = new Person()
                 {
                     FirstName = "Bogdan",

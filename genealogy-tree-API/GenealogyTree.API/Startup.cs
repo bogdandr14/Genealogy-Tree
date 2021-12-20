@@ -48,12 +48,7 @@ namespace GenealogyTree.API
                        ValidateIssuerSigningKey = true
                    };
                });
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-            });
+            
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -115,7 +110,7 @@ namespace GenealogyTree.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseMiddleware<JwtMiddleware>();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

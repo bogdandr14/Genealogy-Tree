@@ -1,6 +1,7 @@
 ﻿using GenealogyTree.Business.Helpers;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Entities;
+using GenealogyTree.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,9 +13,9 @@ using System.Text;
 
 namespace GenealogyTree.Business.Authorization
 {
-    class TokenService
+    public class TokenService
     {
-        public static TokenResponseModel GenerateToken(User user, IList<string> userRoles)
+        public static TokenResponseModel GenerateToken(User user, ICollection<UserRoleEnum> userRoles)
         {
             var authClaims = new List<Claim>
                 {
@@ -27,7 +28,7 @@ namespace GenealogyTree.Business.Authorization
 
             foreach (var userRole in userRoles)
             {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                authClaims.Add(new Claim(ClaimTypes.Role, ((int)userRole).ToString()));
             }
 
             var authSignIngKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConstantsJwt.Secret));
@@ -44,6 +45,11 @@ namespace GenealogyTree.Business.Authorization
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
             };
+        }
+
+        public static string GetClaim(string claimName, JwtSecurityToken token)
+        {
+            return token.Claims.FirstOrDefault(claim => claim.Type == claimName)?.Value;
         }
 
         public static JwtSecurityToken ValidateToken(string token)
@@ -88,15 +94,5 @@ namespace GenealogyTree.Business.Authorization
             return false;
         }
 
-        public static bool IsUserInRole(HttpContext context, string role)
-        {
-            var token = context.Request.Cookies["Authorization"]?.Split(" ").Last();
-            var jwtToken = ValidateToken(token);
-            if (jwtToken != null)
-            {
-                return jwtToken.Claims.Any(x => x.Type == ClaimTypes.Role && x.Value == role);
-            }
-            return false;
-        }
     }
 }

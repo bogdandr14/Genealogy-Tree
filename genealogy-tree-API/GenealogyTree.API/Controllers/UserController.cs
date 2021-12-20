@@ -1,4 +1,5 @@
-﻿using GenealogyTree.Domain.DTO.User;
+﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        //[Authorize]
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("info")]
         public async Task<ActionResult<UserDetailsModel>> GetPersonalInfo(string username)
