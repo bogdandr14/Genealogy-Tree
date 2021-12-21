@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
 
 namespace GenealogyTree.API.Attributes
 {
@@ -42,18 +40,10 @@ namespace GenealogyTree.API.Attributes
             try
             {
                 var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-                if (token != null)
+                if (token != null && TokenService.ValidateToken(token))
                 {
-                    var jwtSecurityToken = TokenService.ValidateToken(token);
-                    if (jwtSecurityToken != null)
-                    {
-                        int.TryParse(TokenService.GetClaim(JwtRegisteredClaimNames.Typ, jwtSecurityToken), out var userRole);
-                        if (!allowRoles.Contains((UserRoleEnum)userRole))
-                        {
-                            AppendUnauthorizedRequest(context);
-                        }
-                    }
-                    else
+                    int.TryParse(TokenService.GetClaim(token, TokenService.UserRole), out var userRole);
+                    if (!allowRoles.Contains((UserRoleEnum)userRole))
                     {
                         AppendUnauthorizedRequest(context);
                     }

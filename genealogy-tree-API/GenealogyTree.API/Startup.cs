@@ -36,18 +36,6 @@ namespace GenealogyTree.API
             services.AddDbContext<GenealogyTreeDbContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(option =>
-               {
-                   string secret = ConstantsJwt.Secret;
-                   option.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
-                       ValidateAudience = false,
-                       ValidateIssuer = false,
-                       ValidateIssuerSigningKey = true
-                   };
-               });
             
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             var mapper = mappingConfig.CreateMapper();

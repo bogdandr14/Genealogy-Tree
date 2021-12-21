@@ -35,10 +35,10 @@ namespace GenealogyTree.Business.Services
 
         public async Task<LoginResponseModel> LoginUser(LoginModel userLogin)
         {
-          /*  User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u=> u.Person).FirstOrDefault();
-            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))*/
+            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
+            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
-                Person person = new Person()
+                /*Person person = new Person()
                 {
                     FirstName = "Bogdan",
                     LastName = "Draghici"
@@ -49,9 +49,9 @@ namespace GenealogyTree.Business.Services
                     Username = "bimax14",
                     Email = "nu avem",
                     Person = person,
-                };
+                };*/
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(user);
-                loginResponseModel.Token = TokenService.GenerateToken(user, UserRoleEnum.User).Token;
+                loginResponseModel.Token = TokenService.GenerateToken(user, UserRoleEnum.User);
                 return loginResponseModel;
             }
             return null;
@@ -59,6 +59,14 @@ namespace GenealogyTree.Business.Services
 
         public async Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister)
         {
+            if (unitOfWork.User.Filter(x => x.Username == userRegister.Username).FirstOrDefault()!= default(User))
+            {
+                return null;
+            }
+            if (unitOfWork.User.Filter(x => x.Email == userRegister.Email).FirstOrDefault() != default(User))
+            {
+                return null;
+            }
             User user = _mapper.Map<User>(userRegister);
             Person person = _mapper.Map<Person>(userRegister);
 

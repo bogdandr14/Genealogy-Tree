@@ -1,8 +1,6 @@
 ﻿using GenealogyTree.Business.Helpers;
-using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Enums;
-using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -15,8 +13,11 @@ namespace GenealogyTree.Business.Authorization
 {
     public class TokenService
     {
-        public static TokenResponseModel GenerateToken(User user, UserRoleEnum userRole)
+        public static readonly string UserRole = "user_role";
+
+        public static string GenerateToken(User user, UserRoleEnum userRole)
         {
+
             var authClaims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
@@ -24,7 +25,7 @@ namespace GenealogyTree.Business.Authorization
                 new Claim(JwtRegisteredClaimNames.GivenName, user.Person.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName, user.Person.LastName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Typ, ((int)userRole).ToString())
+                new Claim(UserRole, ((int)userRole).ToString())
             };
 
             var authSignIngKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConstantsJwt.Secret));
@@ -37,42 +38,42 @@ namespace GenealogyTree.Business.Authorization
                 signingCredentials: new SigningCredentials(authSignIngKey, SecurityAlgorithms.HmacSha256)
                 );
 
-            return new TokenResponseModel
-            {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-            };
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public static string GetClaim(string claimName, JwtSecurityToken token)
+        public static string GetClaim(string token, string claimName)
         {
-            return token.Claims.FirstOrDefault(claim => claim.Type == claimName)?.Value;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
+            return securityToken.Claims.FirstOrDefault(claim => claim.Type == claimName)?.Value;
         }
 
-        public static JwtSecurityToken ValidateToken(string token)
+        public static bool ValidateToken(string token)
         {
             // Token handler used in order to validate the token
             var tokenHandler = new JwtSecurityTokenHandler();
             // Get the secret key from the jwtSettings instance
-            var key = Encoding.UTF8.GetBytes(ConstantsJwt.Secret);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConstantsJwt.Secret));
 
             try
             {
                 // Validate the token and store it in the validatedToken variable
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    IssuerSigningKey = key,
+                    ValidIssuer = ConstantsJwt.Issuer,
+                    ValidAudience = ConstantsJwt.Audience,
                     ClockSkew = TimeSpan.Zero // This is used so that the token expires exactly at its expiry time, not 5 minutes later
                 }, out SecurityToken validatedToken);
-
-                return (JwtSecurityToken)validatedToken;
+                return true;
             }
             catch
             {
-                // Return null if validation fails
-                return null;
+                // Return false if validation fails
+                return false;
             }
         }
     }
