@@ -8,7 +8,7 @@ namespace GenealogyTree.Domain.Enums
 {
     public enum UserRoleEnum
     {
-        User = 1,
-        Admin = 2
+        User = 2,
+        Admin = 44
     }
 }

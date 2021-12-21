@@ -1,6 +1,6 @@
-﻿using GenealogyTree.Domain.DTO;
+﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    //[Authorize]
+    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MarriageController : Controller

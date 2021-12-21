@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 
@@ -31,6 +32,10 @@ namespace GenealogyTree.API.Attributes
             };
         }
 
+        private void AppendUnauthorizedRequest(AuthorizationFilterContext context)
+        {
+            context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+        }
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -39,22 +44,28 @@ namespace GenealogyTree.API.Attributes
                 var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
                 if (token != null)
                 {
-
                     var jwtSecurityToken = TokenService.ValidateToken(token);
-                    int.TryParse(TokenService.GetClaim(ClaimTypes.Role, jwtSecurityToken), out var userRole);
-                    if (!allowRoles.Contains((UserRoleEnum)userRole))
+                    if (jwtSecurityToken != null)
                     {
-                        context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                        int.TryParse(TokenService.GetClaim(JwtRegisteredClaimNames.Typ, jwtSecurityToken), out var userRole);
+                        if (!allowRoles.Contains((UserRoleEnum)userRole))
+                        {
+                            AppendUnauthorizedRequest(context);
+                        }
+                    }
+                    else
+                    {
+                        AppendUnauthorizedRequest(context);
                     }
                 }
                 else
                 {
-                    context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                    AppendUnauthorizedRequest(context);
                 }
             }
             catch
             {
-                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                AppendUnauthorizedRequest(context);
             }
         }
     }

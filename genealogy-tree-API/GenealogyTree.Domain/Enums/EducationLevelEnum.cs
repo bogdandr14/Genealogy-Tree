@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Domain.Enums
 {
-    public enum EducationLevel
+    public enum EducationLevelEnum
     {
         Kindergarten = 1,
         Primary = 2,

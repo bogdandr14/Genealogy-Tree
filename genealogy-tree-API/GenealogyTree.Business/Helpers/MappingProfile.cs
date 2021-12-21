@@ -62,10 +62,13 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<User, LoginResponseModel>()
+                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
                 .ReverseMap();
 
             CreateMap<User, UserRegisterModel>()
                 .ReverseMap();
+
             CreateMap<Person, UserRegisterModel>()
                 .ReverseMap();
 

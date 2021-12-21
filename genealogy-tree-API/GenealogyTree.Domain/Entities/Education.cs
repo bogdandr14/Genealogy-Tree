@@ -11,7 +11,7 @@ namespace GenealogyTree.Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public EducationLevel EducationLevel { get; set; }
+        public EducationLevelEnum EducationLevel { get; set; }
 
         public int UserId { get; set; }
 

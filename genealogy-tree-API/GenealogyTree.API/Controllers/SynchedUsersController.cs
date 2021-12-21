@@ -24,7 +24,7 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<SynchedUserModel> returnEvent = await _synchedUsersService.GetAllSynchedUsersForUser(userId);
-                if(returnEvent== null)
+                if (returnEvent == null)
                 {
                     return NotFound();
                 }

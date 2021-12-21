@@ -1,4 +1,5 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    //[Authorize]
+    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ReligionController : Controller

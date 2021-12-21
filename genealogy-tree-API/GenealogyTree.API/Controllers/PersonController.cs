@@ -1,6 +1,6 @@
-﻿using GenealogyTree.Domain.DTO.Person;
+﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace GenealogyTree.API.Controllers
             _personService = personService;
         }
 
-        //[Authorize]
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)

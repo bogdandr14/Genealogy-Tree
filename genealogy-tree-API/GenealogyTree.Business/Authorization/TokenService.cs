@@ -15,21 +15,17 @@ namespace GenealogyTree.Business.Authorization
 {
     public class TokenService
     {
-        public static TokenResponseModel GenerateToken(User user, ICollection<UserRoleEnum> userRoles)
+        public static TokenResponseModel GenerateToken(User user, UserRoleEnum userRole)
         {
             var authClaims = new List<Claim>
-                {
-                    new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(JwtRegisteredClaimNames.GivenName, user.Person.FirstName),
-                    new Claim(JwtRegisteredClaimNames.FamilyName, user.Person.LastName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
-
-            foreach (var userRole in userRoles)
             {
-                authClaims.Add(new Claim(ClaimTypes.Role, ((int)userRole).ToString()));
-            }
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.GivenName, user.Person.FirstName),
+                new Claim(JwtRegisteredClaimNames.FamilyName, user.Person.LastName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Typ, ((int)userRole).ToString())
+            };
 
             var authSignIngKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConstantsJwt.Secret));
 
@@ -79,20 +75,5 @@ namespace GenealogyTree.Business.Authorization
                 return null;
             }
         }
-
-        public static bool IsUserLoggedId(HttpContext context)
-        {
-            var token = context.Request.Cookies["Authorization"]?.Split(" ").Last();
-            if (token != null)
-            {
-                var jwtToken = ValidateToken(token);
-                if (jwtToken != null)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
     }
 }

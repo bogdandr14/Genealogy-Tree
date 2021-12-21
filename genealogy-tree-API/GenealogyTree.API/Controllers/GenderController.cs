@@ -1,6 +1,6 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    //[Authorize]
+    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GenderController : Controller
@@ -21,7 +21,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Gender>> > GetAllGenders()
+        public async Task<ActionResult<List<Gender>>> GetAllGenders()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 Gender returnEvent = await _genderService.GetGenderAsync(id);
-                if(returnEvent == null)
+                if (returnEvent == null)
                 {
                     return NotFound();
                 }

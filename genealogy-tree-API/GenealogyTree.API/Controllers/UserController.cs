@@ -1,7 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -76,7 +75,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        //[Authorize]
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<UserDetailsModel>> GetUserInfo(int id)
@@ -96,7 +95,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        //[Authorize]
+        [GeneTreeAuthorize]
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult<UserDetailsModel>> UpdateUser(UserUpdateModel user)
@@ -116,7 +115,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-       // [Authorize]
+        [GeneTreeAuthorize]
         [HttpPut]
         [Route("changePassword")]
         public async Task<ActionResult<UserDetailsModel>> ChangePassword(UpdatePasswordModel updatePassword)
