@@ -26,6 +26,8 @@ import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ThemeSelectComponent } from './components/theme-select/theme-select.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
@@ -44,6 +46,7 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -57,6 +60,15 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
       defaultLanguage: environment.defaultLanguage,
       useDefaultLang: true,
     }),
+    ToastrModule.forRoot(
+      {
+        timeOut: 4000,
+        positionClass: 'toast-bottom-center',
+        easeTime: 250,
+        enableHtml: true,
+        closeButton: true,
+      }
+    ),
     SharedModule,
     RouterModule,
   ],

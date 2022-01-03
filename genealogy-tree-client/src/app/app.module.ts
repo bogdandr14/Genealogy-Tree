@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app-component/app.component';
 import { AppRoutingModule } from './app-routing.module';
