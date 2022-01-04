@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app-component/app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './modules/core/core.module';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { CoreModule } from './modules/core/core.module';
     CoreModule,
   ],
   providers: [
+    Clipboard,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
