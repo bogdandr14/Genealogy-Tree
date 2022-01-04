@@ -1,5 +1,6 @@
 export class AppError {
   public message: string;
+  public status: number;
   constructor(public originalErr?: any) {
     if (originalErr?.message) {
       this.message = originalErr?.message;
@@ -15,6 +16,9 @@ export class AppError {
       this.message = text;
     } else {
       this.message = originalErr ?? '';
+    }
+    if(originalErr?.status){
+      this.status  = originalErr.status;
     }
   }
 }

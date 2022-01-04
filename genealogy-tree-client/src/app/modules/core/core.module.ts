@@ -62,11 +62,11 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
     }),
     ToastrModule.forRoot(
       {
-        timeOut: 4000,
         positionClass: 'toast-bottom-center',
-        easeTime: 250,
         enableHtml: true,
         closeButton: true,
+        progressBar: true,
+        tapToDismiss: false
       }
     ),
     SharedModule,

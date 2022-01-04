@@ -10,19 +10,19 @@ export class NotificationService {
   }
 
   showSuccess(message: any) {
-    this.toastrService.success(message.toString(), 'Success')
+    this.toastrService.success(message, 'Success')
   }
 
   showError(message: any) {
-    this.toastrService.error(message.toString(), 'Error')
+    this.toastrService.error(message, 'Error')
 
   }
 
   showInfo(message: any) {
-    this.toastrService.info(message.toString(), 'Information');
+    this.toastrService.info(message, 'Information');
   }
 
   showWarning(message: any) {
-    this.toastrService.warning(message.toString(), 'Warning');
+    this.toastrService.warning(message, 'Warning');
   }
 }

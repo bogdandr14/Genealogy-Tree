@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { AuthService } from './../services/auth.service';
 import { HttpInterceptorParams } from 'src/app/modules/core/models/http-interceptor-params.model';
 import {
@@ -21,7 +22,7 @@ import { AlertService } from '../services/alert.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
-  constructor(private alertService: AlertService, private authService: AuthService) {}
+  constructor(private alertService: AlertService, private authService: AuthService) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -44,28 +45,38 @@ export class AppHttpInterceptor implements HttpInterceptor {
   }
 
   public handleError(errorResponse: HttpErrorResponse): Observable<never> {
+    let error: AppError;
     switch (errorResponse?.status) {
       case HttpStatusCode.BadRequest: {
-        throw new BadRequestError(errorResponse?.error);
+        error = new BadRequestError(errorResponse?.error);
+        break;
       }
       case HttpStatusCode.NotFound: {
-        throw new NotFoundError(errorResponse?.error);
+        error = new NotFoundError(errorResponse?.error);
+        break;
       }
       case HttpStatusCode.Conflict: {
-        throw new ConflictError(errorResponse?.error);
+        error = new ConflictError(errorResponse?.error);
+        break;
       }
       case HttpStatusCode.Forbidden: {
-        throw new ForbiddenError(errorResponse?.error);
+        error = new ForbiddenError(errorResponse?.error);
+        break;
       }
       case HttpStatusCode.Unauthorized: {
         this.authService.logout();
-        throw new UnauthorizedError(errorResponse?.error);
+        error = new UnauthorizedError(errorResponse?.error);
+        break;
       }
       case HttpStatusCode.InternalServerError: {
-        throw new AppError('Invalid Request');
+        error = new AppError('Invalid Request');
+        break;
+      }
+      default: {
+        error = new AppError(errorResponse);
       }
     }
-
-    return throwError(() => errorResponse);
+    this.alertService.showError(error.message, error.status);
+    throw error;
   }
 }
