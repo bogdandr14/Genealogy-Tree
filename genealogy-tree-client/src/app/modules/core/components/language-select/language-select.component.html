@@ -1,17 +1,16 @@
 <ion-item>
-  <ion-label>
-    <ion-icon name="language" slot="start"></ion-icon>
-    {{ "language" | translate }}
-  </ion-label>
+  <ion-icon name="language" slot="start"></ion-icon>
+  <ion-label>{{ "language" | translate }}</ion-label>
   <ion-select
     class="language-select"
-    [formControl]="formControl"
+    [formControl]="selectedLaguage"
     interface="popover"
-    [selectedText]="formControl.value | uppercase"
+    [selectedText]="selectedLaguage.value | uppercase"
   >
     <ion-select-option
       *ngFor="let option of languageOptions"
       [value]="option.languageKey"
+      slot="end"
       >{{ "_languages." + option.translationKey | translate }}
     </ion-select-option>
   </ion-select>

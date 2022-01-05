@@ -55,7 +55,7 @@
                   <ion-label>Education</ion-label>
                 </ion-item>
                 <ion-list slot="content">
-                  <div *ngFor="let education; in: educations">
+                  <div *ngFor="let education of educations">
                     <ion-item>
                       <ion-label>{{ education.name }}</ion-label>
                       <ion-button fill="clear" color="secondary">
@@ -74,14 +74,12 @@
                   <ion-label>Occupation</ion-label>
                 </ion-item>
                 <ion-list slot="content">
-                  <div *ngFor="let occupation; in: occupations">
-                    <ion-item>
+                    <ion-item *ngFor="let occupation of occupations">
                       <ion-label>{{ occupation.name }}</ion-label>
                       <ion-button fill="clear" color="secondary">
                         {{ "edit" | translate }}
                       </ion-button>
                     </ion-item>
-                  </div>
                   <ion-button expand="block" fill="clear" color="success">
                     {{ "add occupation" | translate }}
                   </ion-button>
@@ -95,14 +93,14 @@
                 <ion-list slot="content">
                   <ion-item>
                     {{ "email" | translate }}:
-                    <ion-chip color="secondary" (click)="copyInfo('das@djisa')">
+                    <ion-chip color="secondary" (click)="copyMail('das@djisa')">
                       <ion-icon name="mail-outline"></ion-icon>
                       <ion-label>das@djisa </ion-label>
                     </ion-chip>
                   </ion-item>
                   <ion-item class="ion-justify-content-start">
                     {{ "phone" | translate }}:
-                    <ion-chip color="secondary" (click)="copyInfo('0231789312')">
+                    <ion-chip color="secondary" (click)="copyPhone('0231789312')">
                       <ion-icon name="call-outline"></ion-icon>
                       <ion-label>0231789312 </ion-label>
                     </ion-chip>

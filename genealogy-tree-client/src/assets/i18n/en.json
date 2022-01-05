@@ -18,7 +18,7 @@
   "birthday": "Birthday",
   "email": "E-Mail",
   "emailAddress": "E-Mail address",
-  "phone" : "Phone",
+  "phone": "Phone",
   "phoneNumber": "Phone number",
   "login": "Login",
   "register": "Register",
@@ -68,5 +68,21 @@
     "gb": "British",
     "ro": "Romanian",
     "bg": "Bulgarian"
+  },
+  "error": "Error",
+  "_errorMessage": {
+    "wrongCredentials": "Invalid credentials, please try again"
+  },
+  "warning": "Warning",
+  "_warningMessage": {},
+  "success": "Success",
+  "_successMessage": {
+    "register": "The account was successfuly created! Please login to enter the account",
+    "login": "Welcome back, { firstName }!"
+  },
+  "information": "Information",
+  "_informationMessage": {
+    "phoneCopied": "Phone number copied to clipboard",
+    "emailCopied": "Email address copied to clipboard"
   }
 }

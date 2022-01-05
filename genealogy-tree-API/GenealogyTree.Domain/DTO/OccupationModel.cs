@@ -9,6 +9,5 @@ namespace GenealogyTree.Domain.DTO
         public string WorkingPlaceName { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int PersonId { get; set; }
     }
 }

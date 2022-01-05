@@ -1,5 +1,4 @@
-/* eslint-disable no-debugger */
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 
 @Injectable()
 export class AppErrorHandler implements ErrorHandler {

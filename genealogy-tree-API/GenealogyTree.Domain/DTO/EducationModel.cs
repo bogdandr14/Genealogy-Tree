@@ -10,6 +10,5 @@ namespace GenealogyTree.Domain.DTO
         public DateTime EndDate { get; set; }
 
         public int EducationLevelId { get; set; }
-        public string PersonName { get; set; }
     }
 }

@@ -68,5 +68,21 @@
     "gb": "Britanic",
     "ro": "Român",
     "bg": "Bulgar"
+  },
+  "error": "Eroare",
+  "_errorMessage": {
+    "wrongCredentials": "Credentialele sunt invalide, te rog incearca din nou"
+  },
+  "warning": "Avertisment",
+  "_warningMessage": {},
+  "success": "Succes",
+  "_successMessage": {
+    "register": "Contul a fost creat cu success! Logează-te pentru a accesa contul",
+    "login": "Bine ai revenit, { firstName }!"
+  },
+  "information": "Informare",
+  "_informationMessage": {
+    "phoneCopied": "Numărul de telefon a fost copiat în clipboard",
+    "emailCopied": "Adresa de e-mail a fost copiată în clipboard"
   }
 }

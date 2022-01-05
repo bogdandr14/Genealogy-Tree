@@ -1,9 +1,10 @@
+/* eslint-disable no-debugger */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
-import { UserModel } from 'src/app/modules/core/models/user.model';
+import { UserProfileModel } from '../../models/user-profile.model';
 
 @Component({
   selector: 'app-profile',
@@ -13,20 +14,29 @@ import { UserModel } from 'src/app/modules/core/models/user.model';
 export class ProfileComponent implements OnInit {
   @ViewChild(IonAccordionGroup, { static: true })
   accordionGroup: IonAccordionGroup;
-  personalInfo: UserModel;
-  constructor(private clipboard: Clipboard, private alertService: AlertService, private userService: UserService) {}
+  personalInfo: UserProfileModel;
+  public occupations: any[] = [];
+  public educations: any[] = [];
+  constructor(private clipboard: Clipboard, private alertService: AlertService, private userService: UserService) { }
 
-  // Copy
   ngOnInit() {
-    this.userService.user$.subscribe((user)=>{
-       this.userService.getOneById<UserModel>(user.id).subscribe((res)=> {
-        this.personalInfo = res;
-       });
+    this.userService.user$.subscribe((user) => {
+      debugger;
+      if (!!user) {
+        this.userService.getOneById<UserProfileModel>(user.id).subscribe((res) => {
+          this.personalInfo = res;
+        });
+      }
     });
   }
 
-  copyInfo(info: string) {
+  copyPhone(info: string) {
     this.clipboard.copy(info);
-    this.alertService.showInfo("Text copied to clipboard");
+    this.alertService.showInfo("_informationMessage.phoneCopied");
+  }
+
+  copyMail(info: string) {
+    this.clipboard.copy(info);
+    this.alertService.showInfo("_informationMessage.emailCopied");
   }
 }

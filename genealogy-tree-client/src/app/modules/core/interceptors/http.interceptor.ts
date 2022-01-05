@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { AuthService } from './../services/auth.service';
 import { HttpInterceptorParams } from 'src/app/modules/core/models/http-interceptor-params.model';
 import {
@@ -48,24 +47,24 @@ export class AppHttpInterceptor implements HttpInterceptor {
     let error: AppError;
     switch (errorResponse?.status) {
       case HttpStatusCode.BadRequest: {
-        error = new BadRequestError(errorResponse?.error);
+        error = new BadRequestError(errorResponse);
         break;
       }
       case HttpStatusCode.NotFound: {
-        error = new NotFoundError(errorResponse?.error);
+        error = new NotFoundError(errorResponse);
         break;
       }
       case HttpStatusCode.Conflict: {
-        error = new ConflictError(errorResponse?.error);
+        error = new ConflictError(errorResponse);
         break;
       }
       case HttpStatusCode.Forbidden: {
-        error = new ForbiddenError(errorResponse?.error);
+        error = new ForbiddenError(errorResponse);
         break;
       }
       case HttpStatusCode.Unauthorized: {
         this.authService.logout();
-        error = new UnauthorizedError(errorResponse?.error);
+        error = new UnauthorizedError(errorResponse);
         break;
       }
       case HttpStatusCode.InternalServerError: {
@@ -76,7 +75,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
         error = new AppError(errorResponse);
       }
     }
-    this.alertService.showError(error.message, error.status);
+    this.alertService.showError(error);
     throw error;
   }
 }

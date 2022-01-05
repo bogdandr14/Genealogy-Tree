@@ -12,12 +12,12 @@ import { LanguageModel } from '../../models/language.model';
 })
 export class LanguageSelectComponent implements OnInit, OnDestroy {
   public currentLanguage: string = '';
-  public formControl: FormControl;
+  public selectedLaguage: FormControl;
   public languageOptions: LanguageModel[];
   private subscriptions: Subscription[] = [];
 
   constructor(private translateService: TranslateService) {
-    this.formControl = new FormControl();
+    this.selectedLaguage = new FormControl();
     this.languageOptions = environment.appSettings.languages;
   }
 
@@ -25,10 +25,10 @@ export class LanguageSelectComponent implements OnInit, OnDestroy {
     this.currentLanguage =
       this.translateService.currentLang || this.translateService.defaultLang;
 
-    this.formControl.setValue(this.currentLanguage);
+    this.selectedLaguage.setValue(this.currentLanguage);
 
     this.subscriptions.push(
-      this.formControl.valueChanges.subscribe({
+      this.selectedLaguage.valueChanges.subscribe({
         next: (newVal) => this.translateService.use(newVal),
       })
     );
