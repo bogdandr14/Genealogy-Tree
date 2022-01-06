@@ -25,7 +25,6 @@ namespace GenealogyTree.Business.Helpers
         {
             CreateMap<Education, EducationModel>()
                .ForMember(x => x.EducationLevelId, y => y.MapFrom(z => (int)z.EducationLevel))
-               .ForMember(x => x.PersonName, y => y.MapFrom(z => string.Format("{0} {1}", z.User.Person.FirstName, z.User.Person.LastName)))
                .ReverseMap();
 
             CreateMap<Marriage, MarriageModel>()

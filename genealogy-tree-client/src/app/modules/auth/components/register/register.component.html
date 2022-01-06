@@ -117,24 +117,25 @@
                     <span class="required"> *</span>
                   </b>
                 </ion-label>
-                <ion-datetime
+                <!-- <ion-datetime
                   displayFormat="DD/MM/YYYY"
                   pickerFormat="DD MMM YYYY"
                   name="bday"
                   #bday="ngModel"
+                  type="date"
                   [(ngModel)]="registerModel.birthDate"
                   min="1900-01-01"
                   max="2020-12-31"
                   required
-                ></ion-datetime>
-                <!-- <ion-input
+                ></ion-datetime> -->
+                <ion-input
                   type="date"
                   name="bday"
                   #bday="ngModel"
-                  [(ngModel)]="registerModel.birthdate"
+                  [(ngModel)]="registerModel.birthDate"
                   placeholder=""
                   required
-                ></ion-input> -->
+                ></ion-input>
               </ion-item>
               <ion-item
                 *ngIf="!bday.valid && bday.touched"

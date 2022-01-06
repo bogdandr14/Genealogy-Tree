@@ -5,6 +5,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { UserProfileModel } from '../../models/user-profile.model';
+import { AuthService } from 'src/app/modules/core/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,17 +18,17 @@ export class ProfileComponent implements OnInit {
   personalInfo: UserProfileModel;
   public occupations: any[] = [];
   public educations: any[] = [];
-  constructor(private clipboard: Clipboard, private alertService: AlertService, private userService: UserService) { }
+  constructor(private clipboard: Clipboard, private alertService: AlertService, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.userService.user$.subscribe((user) => {
-      debugger;
+    debugger;
+    const user = JSON.parse(sessionStorage.getItem('user'));
       if (!!user) {
-        this.userService.getOneById<UserProfileModel>(user.id).subscribe((res) => {
-          this.personalInfo = res;
-        });
+        // this.userService.getPersonalInfo<UserProfileModel>(user.username).subscribe((res) => {
+        //   this.personalInfo = res;
+        // });
       }
-    });
+
   }
 
   copyPhone(info: string) {

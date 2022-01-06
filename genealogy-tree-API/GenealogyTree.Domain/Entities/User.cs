@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
     public class User
     {
-        /*public User()
+        public User()
         {
             this.Educations = new HashSet<Education>();
             this.Occupations = new HashSet<Occupation>();
-        }*/
+        }
 
         public int Id { get; set; }
         public string Username { get; set; }
@@ -30,7 +31,7 @@ namespace GenealogyTree.Domain.Entities
         [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }
 
-        /*        public virtual ICollection<Education> Educations { get; set; }
-                public virtual ICollection<Occupation> Occupations { get; set; }*/
+        public virtual ICollection<Education> Educations { get; set; }
+        public virtual ICollection<Occupation> Occupations { get; set; }
     }
 }

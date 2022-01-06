@@ -1,16 +1,18 @@
-﻿namespace GenealogyTree.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace GenealogyTree.Domain.Entities
 {
     public class Gender
     {
-        /*public Gender()
+        public Gender()
         {
-            this.Persons = new HashSet<Person>();
-        }*/
+            this.People = new HashSet<Person>();
+        }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
-        /*        public virtual ICollection<Person> Persons { get; set; }
-        */
+        public virtual ICollection<Person> People { get; set; }
+
     }
 }

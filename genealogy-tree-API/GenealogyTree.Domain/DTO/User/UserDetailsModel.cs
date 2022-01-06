@@ -1,11 +1,13 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
+using System.Collections.Generic;
 
 namespace GenealogyTree.Domain.DTO.User
 {
-    public class UserDetailsModel
+    public class UserDetailsModel: PersonDetailsModel
     {
-        public PersonDetailsModel Person { get; set; }
-        public string Username { get; set; }
-        public bool SharePersonalInfo { get; set; }
+        public ICollection<OccupationModel> occupations { get; set; }
+        public ICollection<EducationModel> educations { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

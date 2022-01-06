@@ -24,6 +24,58 @@ namespace GenealogyTree.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasMany<Education>(u => u.Educations)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany<Occupation>(u => u.Occupations)
+                .WithOne(o => o.User)
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Gender>()
+               .HasMany<Person>(g => g.People)
+               .WithOne(p => p.Gender)
+               .HasForeignKey(p => p.GenderId)
+               .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Person>()
+                  .HasOne<Location>(m => m.PlaceOfBirth)
+                  .WithOne()
+                  .HasForeignKey<Person>(m => m.PlaceOfBirthId)
+                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Person>()
+                  .HasOne<Location>(m => m.PlaceOfLiving)
+                  .WithOne()
+                  .HasForeignKey<Person>(m => m.PlaceOfLivingId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Marriage>()
+                  .HasOne<Person>(m => m.FirstPerson)
+                  .WithOne()
+                  .HasForeignKey<Marriage>(m => m.FirstPersonId)
+                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Marriage>()
+                   .HasOne<Person>(m => m.SecondPerson)
+                   .WithOne()
+                   .HasForeignKey<Marriage>(m => m.SecondPersonId)
+                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Religion>()
+               .HasMany<Person>(g => g.People)
+               .WithOne(p => p.Religion)
+               .HasForeignKey(p => p.ReligionId)
+               .OnDelete(DeleteBehavior.SetNull);
+
+          /*  modelBuilder.Entity<Person>()
+                .HasMany<Location>(u => u.PlaceOfLiving && u.PlaceOfBirth)
+                .WithOne(l => l.Person)
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);*/
+
         }
 
         public DbSet<T> DbSet<T>() where T : class

@@ -57,7 +57,7 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("info")]
+        [Route("info/{username}")]
         public async Task<ActionResult<UserDetailsModel>> GetPersonalInfo(string username)
         {
             try

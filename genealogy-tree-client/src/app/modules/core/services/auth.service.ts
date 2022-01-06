@@ -66,7 +66,8 @@ export class AuthService extends DataService {
   private setUserInfo() {
     const token = this.getJwt();
     const tokenInfo = (JSON.parse(atob(token.split('.')[1])));
-    this.userService.setUser({ id: 404, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name });
+    sessionStorage.setItem('user',JSON.stringify({ username: tokenInfo.unique_name, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name }));
+    this.userService.setUser({ id: tokenInfo.jti, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name });
   }
 
   private setExpirationCounter() {

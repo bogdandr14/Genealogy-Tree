@@ -13,10 +13,10 @@
             </ion-col>
             <ion-col size="6" class="ion-padding-start">
               <ion-card-title>
-                <ion-label> <h1>First name</h1></ion-label>
+                <ion-label> <h1>{{personalInfo?.firstName}}</h1></ion-label>
               </ion-card-title>
               <ion-card-subtitle>
-                <ion-label> <h1>Last name</h1></ion-label>
+                <ion-label> <h1>{{personalInfo?.lastName}}</h1></ion-label>
               </ion-card-subtitle>
             </ion-col>
           </ion-row>
@@ -34,15 +34,19 @@
                 <ion-list slot="content">
                   <ion-item>
                     <ion-label> {{ "gender" | translate }}:</ion-label>
+                    <span> {{personalInfo?.genderName}}</span>
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "nationality" | translate }}:</ion-label>
+                    <span> {{personalInfo?.nationality}}</span>
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "religion" | translate }}:</ion-label>
+                    <span> {{personalInfo?.religion}}</span>
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "birthday" | translate }}:</ion-label>
+                    <span> {{personalInfo?.birthDate}}</span>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="secondary">
                     {{ "edit information" | translate }}
@@ -95,14 +99,14 @@
                     {{ "email" | translate }}:
                     <ion-chip color="secondary" (click)="copyMail('das@djisa')">
                       <ion-icon name="mail-outline"></ion-icon>
-                      <ion-label>das@djisa </ion-label>
+                      <ion-label>{{personalInfo?.email}} </ion-label>
                     </ion-chip>
                   </ion-item>
                   <ion-item class="ion-justify-content-start">
                     {{ "phone" | translate }}:
                     <ion-chip color="secondary" (click)="copyPhone('0231789312')">
                       <ion-icon name="call-outline"></ion-icon>
-                      <ion-label>0231789312 </ion-label>
+                      <ion-label>{{personalInfo?.phoneNumber}} </ion-label>
                     </ion-chip>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="secondary">
