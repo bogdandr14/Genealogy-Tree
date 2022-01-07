@@ -24,57 +24,64 @@ namespace GenealogyTree.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //One to many User - Educations
             modelBuilder.Entity<User>()
                 .HasMany<Education>(u => u.Educations)
                 .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            //One to many User - Occupations
             modelBuilder.Entity<User>()
                 .HasMany<Occupation>(u => u.Occupations)
                 .WithOne(o => o.User)
                 .HasForeignKey(o => o.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            //One to many Gender - People
             modelBuilder.Entity<Gender>()
                .HasMany<Person>(g => g.People)
                .WithOne(p => p.Gender)
                .HasForeignKey(p => p.GenderId)
                .OnDelete(DeleteBehavior.SetNull);
 
+            //One to one Person - Place of birth
             modelBuilder.Entity<Person>()
-                  .HasOne<Location>(m => m.PlaceOfBirth)
-                  .WithOne()
-                  .HasForeignKey<Person>(m => m.PlaceOfBirthId)
+                .HasOne<Location>(m => m.PlaceOfBirth)
+                .WithOne()
+                .HasForeignKey<Person>(m => m.PlaceOfBirthId)
                 .OnDelete(DeleteBehavior.SetNull);
+            //One to one Person - Place of living
             modelBuilder.Entity<Person>()
-                  .HasOne<Location>(m => m.PlaceOfLiving)
-                  .WithOne()
-                  .HasForeignKey<Person>(m => m.PlaceOfLivingId)
+                .HasOne<Location>(m => m.PlaceOfLiving)
+                .WithOne()
+                .HasForeignKey<Person>(m => m.PlaceOfLivingId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            //Many to one Marriages - Person
             modelBuilder.Entity<Marriage>()
-                  .HasOne<Person>(m => m.FirstPerson)
-                  .WithOne()
-                  .HasForeignKey<Marriage>(m => m.FirstPersonId)
+                .HasOne<Person>(m => m.FirstPerson)
+                .WithMany(p => p.Marriages)
+                .HasForeignKey(m => m.FirstPersonId)
                 .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Marriage>()
-                   .HasOne<Person>(m => m.SecondPerson)
-                   .WithOne()
-                   .HasForeignKey<Marriage>(m => m.SecondPersonId)
-                 .OnDelete(DeleteBehavior.SetNull);
+                .HasOne<Person>(m => m.SecondPerson)
+                .WithMany(p => p.Marriages)
+                .HasForeignKey(m => m.SecondPersonId)
+                .OnDelete(DeleteBehavior.SetNull);
 
+            //One to many Religion - People
             modelBuilder.Entity<Religion>()
                .HasMany<Person>(g => g.People)
                .WithOne(p => p.Religion)
                .HasForeignKey(p => p.ReligionId)
                .OnDelete(DeleteBehavior.SetNull);
 
-          /*  modelBuilder.Entity<Person>()
-                .HasMany<Location>(u => u.PlaceOfLiving && u.PlaceOfBirth)
-                .WithOne(l => l.Person)
-                .HasForeignKey(e => e.UserId)
-                .OnDelete(DeleteBehavior.Cascade);*/
+            /*  modelBuilder.Entity<Person>()
+                  .HasMany<Location>(u => u.PlaceOfLiving && u.PlaceOfBirth)
+                  .WithOne(l => l.Person)
+                  .HasForeignKey(e => e.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);*/
 
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,12 +7,12 @@ namespace GenealogyTree.Domain.Entities
 {
     public class Person
     {
-        /*public Person()
+        public Person()
         {
             this.SyncRequests = new HashSet<SyncRequest>();
-            this.SynchronizedUsers = new HashSet<SynchronizedUsers>();
-            this.Relationships = new HashSet<Relationship>();
-        }*/
+            this.SynchedUsers = new HashSet<SynchedUsers>();
+            this.Marriages = new HashSet<Marriage>();
+        }
 
         [Key]
         public int Id { get; set; }
@@ -43,8 +44,8 @@ namespace GenealogyTree.Domain.Entities
         [ForeignKey("PlaceOfLivingId")]
         public virtual Location PlaceOfLiving { get; set; }
 
-        /* public virtual ICollection<SyncRequest> SyncRequests { get; set; }
-         public virtual ICollection<SynchronizedUsers> SynchronizedUsers { get; set; }
-         public virtual ICollection<Relationship> Relationships { get; set; }*/
+        public virtual ICollection<SyncRequest> SyncRequests { get; set; }
+        public virtual ICollection<SynchedUsers> SynchedUsers { get; set; }
+        public virtual ICollection<Marriage> Marriages { get; set; }
     }
 }
