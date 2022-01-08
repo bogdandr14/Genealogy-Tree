@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenealogyTree.Domain.DTO.Generic;
+using System;
 
 namespace GenealogyTree.Domain.DTO
 {
@@ -9,6 +10,6 @@ namespace GenealogyTree.Domain.DTO
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public int EducationLevelId { get; set; }
+        public GenericNameModel EducationLevel { get; set; }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Generic;
+using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.SynchedUser;
+using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.Sync;
 using GenealogyTree.Domain.DTO.SyncRequest;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
@@ -24,55 +27,87 @@ namespace GenealogyTree.Business.Helpers
         private void ConfigureMappings()
         {
             CreateMap<Education, EducationModel>()
-               .ForMember(x => x.EducationLevelId, y => y.MapFrom(z => (int)z.EducationLevel))
                .ReverseMap();
 
-            CreateMap<Marriage, MarriageModel>()
-                .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.DateStarted))
-                .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.DateEnded))
+            CreateMap<EducationLevel, GenericNameModel>()
+               .ReverseMap();
+
+            CreateMap<Gender, GenericNameModel>()
+               .ReverseMap();
+
+            CreateMap<Location, LocationModel>()
+               .ReverseMap();
+
+            CreateMap<Marriage, MarriedPersonModel>()
+                .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
+                .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))
+                .ReverseMap();
+            CreateMap<Marriage, MarriageDetailsModel>()
+                .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
+                .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))
                 .ReverseMap();
 
-            CreateMap<Person, PersonDetailsModel>()
-                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.PlaceOfLiving))
-                .ForMember(x => x.ReligionName, y => y.MapFrom(z => z.Religion.Name))
-                .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.PlaceOfBirth))
-                .ForMember(x => x.GenderName, y => y.MapFrom(z => z.Gender.Name))
-                .ReverseMap();
-
-            CreateMap<Person, PersonUpdateModel>()
-                .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.PlaceOfBirth))
-                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.PlaceOfLiving))
-                .ReverseMap();
+            CreateMap<Nationality, GenericNameModel>()
+               .ReverseMap();
 
             CreateMap<Occupation, OccupationModel>()
+               .ReverseMap();
+
+            CreateMap<ParentChild, ChildModel>()
+               .ReverseMap();
+            CreateMap<ParentChild, ParentModel>()
+               .ReverseMap();
+            CreateMap<ParentChild, ParentChildDetailsModel>()
+               .ReverseMap();
+            CreateMap<ParentChild, ParentChildCreateUpdateModel>()
+               .ReverseMap();
+
+            CreateMap<Person, PersonDetailsModel>()
+                .ReverseMap();
+            CreateMap<Person, PersonCreateUpdateModel>()
                 .ReverseMap();
 
-            CreateMap<SynchedUsers, SynchedUserModel>()
+            CreateMap<Religion, GenericNameModel>()
                 .ReverseMap();
 
-            CreateMap<SyncRequest, SyncRequestForReceiverModel>()
+            CreateMap<Sync, SyncedUserModel>()
                 .ReverseMap();
 
-            CreateMap<SyncRequest, SyncRequestForSenderModel>()
+            CreateMap<SyncRequest, SyncRequestDetailsModel>()
+                 .ForMember(x => x.ReceiverUser, y => y.MapFrom(z => z.Receiver))
+                .ForMember(x => x.SenderUser, y => y.MapFrom(z => z.Sender))
+                .ReverseMap();
+            CreateMap<SyncRequest, SyncRequestCreateUpdateModel>()
+                .ForMember(x => x.ReceiverUser, y => y.MapFrom(z => z.Receiver))
                 .ForMember(x => x.SenderUserId, y => y.MapFrom(z => z.SenderId))
                 .ReverseMap();
 
+
+            CreateMap<User, UserRegisterModel>()
+               .ReverseMap();
+            CreateMap<Person, UserRegisterModel>()
+                .ReverseMap();
             CreateMap<User, UserDetailsModel>()
+               .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
+               .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
+               .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Person.BirthDate))
+               .ForMember(x => x.Gender, y => y.MapFrom(z => z.Person.Gender))
+               .ForMember(x => x.Nationality, y => y.MapFrom(z => z.Person.Nationality))
+               .ForMember(x => x.Religion, y => y.MapFrom(z => z.Person.Religion))
+               .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.Person.BirthPlace))
+               .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.Person.LivingPlace))
+               .ForMember(x => x.Parents, y => y.MapFrom(z => z.Person.Parents))
+               .ForMember(x => x.Children, y => y.MapFrom(z => z.Person.Children))
+               .ReverseMap();
+            CreateMap<User, UserUpdateModel>()
+                .ReverseMap();
+            CreateMap<Person, UserUpdateModel>()
                 .ReverseMap();
 
             CreateMap<User, LoginResponseModel>()
-                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
-                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
-                .ReverseMap();
-
-            CreateMap<User, UserRegisterModel>()
-                .ReverseMap();
-
-            CreateMap<Person, UserRegisterModel>()
-                .ReverseMap();
-
-            CreateMap<User, UserUpdateModel>()
-                .ReverseMap();
+               .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
+               .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
+               .ReverseMap();
             CreateMap<TokenResponseModel, LoginResponseModel>()
                 .ReverseMap();
         }

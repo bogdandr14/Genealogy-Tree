@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GenderController : Controller
@@ -72,6 +71,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpPost]
         [Route("add")]
         public async Task<ActionResult<Gender>> AddGender(string genderName)

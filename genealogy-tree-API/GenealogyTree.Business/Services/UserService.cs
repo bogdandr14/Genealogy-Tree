@@ -6,7 +6,6 @@ using GenealogyTree.Domain.Enums;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,16 +28,16 @@ namespace GenealogyTree.Business.Services
 
         public async Task<UserDetailsModel> GetUser(string username)
         {
-            User user = unitOfWork.User.Filter(x => x.Username == username).FirstOrDefault();
+            User user = unitOfWork.User.Filter(x => x.Username == username).Include(u => u.Person).FirstOrDefault();
             return _mapper.Map<UserDetailsModel>(user);
         }
 
         public async Task<LoginResponseModel> LoginUser(LoginModel userLogin)
         {
-            /*User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
-            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))*/
+            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
+            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
-                Person person = new Person()
+                /*Person person = new Person()
                 {
                     FirstName = "Bogdan",
                     LastName = "Draghici"
@@ -49,7 +48,7 @@ namespace GenealogyTree.Business.Services
                     Username = "bimax14",
                     Email = "nu avem",
                     Person = person,
-                };
+                };*/
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(user);
                 loginResponseModel.Token = TokenService.GenerateToken(user, UserRoleEnum.User);
                 return loginResponseModel;
@@ -59,7 +58,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<UserDetailsModel> RegisterUser(UserRegisterModel userRegister)
         {
-            if (unitOfWork.User.Filter(x => x.Username == userRegister.Username).FirstOrDefault()!= default(User))
+            if (unitOfWork.User.Filter(x => x.Username == userRegister.Username).FirstOrDefault() != default(User))
             {
                 return null;
             }
@@ -105,12 +104,9 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
-            if (Hash.ValidateHash(user.Password, userToUpdate.PasswordSalt, userToUpdate.PasswordHash))
-            {
-                userEntity.Id = userToUpdate.Id;
-                userEntity.PersonId = userToUpdate.PersonId;
-                userEntity = await unitOfWork.User.Update(userEntity);
-            }
+            userEntity.Id = userToUpdate.Id;
+            userEntity.PersonId = userToUpdate.PersonId;
+            userEntity = await unitOfWork.User.Update(userEntity);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
             return returnEvent;
         }

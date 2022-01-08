@@ -1,4 +1,4 @@
-﻿using GenealogyTree.Domain.DTO;
+﻿using GenealogyTree.Domain.DTO.Marriage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,11 +6,11 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IMarriageService
     {
-        Task<List<MarriageModel>> GetAllMarriagesForPerson(int personId);
-        Task<MarriageModel> GetMarriageAsync(int marriageId);
-        Task<MarriageModel> GetCurrentMarriageForPerson(int personId);
-        Task<MarriageModel> AddMarriageAsync(MarriageModel marriage);
-        Task<MarriageModel> UpdateMarriageAsync(MarriageModel marriage);
-        Task<MarriageModel> DeleteMarriageAsync(int marriageId);
+        Task<List<MarriedPersonModel>> GetAllMarriagesForPerson(int personId);
+        Task<MarriageDetailsModel> GetMarriageAsync(int marriageId);
+        Task<MarriedPersonModel> GetCurrentMarriageForPerson(int personId);
+        Task<MarriageDetailsModel> AddMarriageAsync(MarriageDetailsModel marriage);
+        Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageDetailsModel marriage);
+        Task<MarriageDetailsModel> DeleteMarriageAsync(int marriageId);
     }
 }

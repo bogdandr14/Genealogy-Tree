@@ -1,4 +1,4 @@
-﻿namespace GenealogyTree.Domain.DTO.SynchedUser
+﻿namespace GenealogyTree.Domain.DTO.Sync
 {
     public class UsersToSyncModel
     {

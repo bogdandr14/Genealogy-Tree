@@ -31,7 +31,7 @@ namespace GenealogyTree.Business.Services
             return _mapper.Map<PersonDetailsModel>(person);
         }
 
-        public async Task<PersonDetailsModel> AddPersonAsync(PersonCreationModel person)
+        public async Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person)
         {
             if (person == null)
             {
@@ -43,7 +43,7 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<PersonDetailsModel> UpdatePersonAsync(PersonUpdateModel person)
+        public async Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person)
         {
             if (person == null)
             {

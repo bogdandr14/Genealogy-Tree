@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GenealogyTree.Domain.DTO.User
+﻿namespace GenealogyTree.Domain.DTO.User
 {
     public class LoginResponseModel
     {

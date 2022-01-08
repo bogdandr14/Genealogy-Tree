@@ -1,4 +1,4 @@
-﻿using GenealogyTree.Domain.DTO.SynchedUser;
+﻿using GenealogyTree.Domain.DTO.Sync;
 using GenealogyTree.Domain.DTO.SyncRequest;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +20,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("sent")]
-        public async Task<ActionResult<List<SyncRequestForSenderModel>>> SyncRequestsSent(int userId)
+        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsSent(int userId)
         {
             try
             {
-                List<SyncRequestForSenderModel> returnEvent = await _syncRequestService.GetSyncRequestsSent(userId);
+                List<SyncRequestDetailsModel> returnEvent = await _syncRequestService.GetSyncRequestsSent(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -39,11 +39,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("received")]
-        public async Task<ActionResult<List<SyncRequestForReceiverModel>>> SyncRequestsReceived(int userId)
+        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsReceived(int userId)
         {
             try
             {
-                List<SyncRequestForReceiverModel> returnEvent = await _syncRequestService.GetSyncRequestsReceived(userId);
+                List<SyncRequestDetailsModel> returnEvent = await _syncRequestService.GetSyncRequestsReceived(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -58,11 +58,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("responded")]
-        public async Task<ActionResult<List<SyncRequestForSenderModel>>> SyncRequestsResponded(int userId)
+        public async Task<ActionResult<List<SyncRequestCreateUpdateModel>>> SyncRequestsResponded(int userId)
         {
             try
             {
-                List<SyncRequestForSenderModel> returnEvent = await _syncRequestService.GetRespondedSyncRequests(userId);
+                List<SyncRequestCreateUpdateModel> returnEvent = await _syncRequestService.GetRespondedSyncRequests(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -77,11 +77,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("send")]
-        public async Task<ActionResult<SyncRequestForSenderModel>> SendSyncRequest(SyncRequestForSenderModel syncRequest)
+        public async Task<ActionResult<SyncRequestCreateUpdateModel>> SendSyncRequest(SyncRequestCreateUpdateModel syncRequest)
         {
             try
             {
-                SyncRequestForSenderModel returnEvent = await _syncRequestService.AddSyncRequest(syncRequest);
+                SyncRequestCreateUpdateModel returnEvent = await _syncRequestService.AddSyncRequest(syncRequest);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -96,7 +96,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("respond")]
-        public async Task<ActionResult<UsersToSyncModel>> RespondToSyncRequest(SyncRequestForReceiverModel syncRequest)
+        public async Task<ActionResult<UsersToSyncModel>> RespondToSyncRequest(SyncRequestResponseModel syncRequest)
         {
             try
             {
@@ -115,11 +115,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id:int}/delete")]
-        public async Task<ActionResult<SyncRequestForSenderModel>> RemoveSyncRequest(int id)
+        public async Task<ActionResult<SyncRequestDetailsModel>> RemoveSyncRequest(int id)
         {
             try
             {
-                SyncRequestForSenderModel returnEvent = await _syncRequestService.DeleteSyncRequest(id);
+                SyncRequestDetailsModel returnEvent = await _syncRequestService.DeleteSyncRequest(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)

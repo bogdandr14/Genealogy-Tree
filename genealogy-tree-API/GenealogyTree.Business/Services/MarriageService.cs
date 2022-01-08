@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -18,28 +19,28 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<MarriageModel>> GetAllMarriagesForPerson(int personId)
+        public async Task<List<MarriedPersonModel>> GetAllMarriagesForPerson(int personId)
         {
             List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId || x.SecondPersonId == personId).ToList();
-            List<MarriageModel> returnEvent = _mapper.Map<List<MarriageModel>>(marriages);
+            List<MarriedPersonModel> returnEvent = _mapper.Map<List<MarriedPersonModel>>(marriages);
             return returnEvent;
         }
 
-        public async Task<MarriageModel> GetCurrentMarriageForPerson(int personId)
+        public async Task<MarriedPersonModel> GetCurrentMarriageForPerson(int personId)
         {
-            Marriage marriage = unitOfWork.Marriage.Filter(x => (x.FirstPersonId == personId || x.SecondPersonId == personId) && x.DateEnded == default(DateTime)).FirstOrDefault();
-            MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriage);
+            Marriage marriage = unitOfWork.Marriage.Filter(x => (x.FirstPersonId == personId || x.SecondPersonId == personId) && x.EndDate == default(DateTime)).FirstOrDefault();
+            MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriage);
             return returnEvent;
         }
 
-        public async Task<MarriageModel> GetMarriageAsync(int marriageId)
+        public async Task<MarriageDetailsModel> GetMarriageAsync(int marriageId)
         {
             Task<Marriage> marriage = unitOfWork.Marriage.FindById(marriageId);
-            MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriage);
+            MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriage);
             return returnEvent;
         }
 
-        public async Task<MarriageModel> AddMarriageAsync(MarriageModel marriage)
+        public async Task<MarriageDetailsModel> AddMarriageAsync(MarriageDetailsModel marriage)
         {
             if (marriage == null)
             {
@@ -47,10 +48,10 @@ namespace GenealogyTree.Business.Services
             }
             Marriage marriageEntity = _mapper.Map<Marriage>(marriage);
             Marriage marriageCreated = await unitOfWork.Marriage.Create(marriageEntity);
-            MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriageCreated);
+            MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageCreated);
             return returnEvent;
         }
-        public async Task<MarriageModel> UpdateMarriageAsync(MarriageModel marriage)
+        public async Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageDetailsModel marriage)
         {
             if (marriage == null)
             {
@@ -58,14 +59,14 @@ namespace GenealogyTree.Business.Services
             }
             Marriage marriageEntity = _mapper.Map<Marriage>(marriage);
             Marriage marriageUpdated = await unitOfWork.Marriage.Update(marriageEntity);
-            MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriageUpdated);
+            MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageUpdated);
             return returnEvent;
         }
 
-        public async Task<MarriageModel> DeleteMarriageAsync(int marriageId)
+        public async Task<MarriageDetailsModel> DeleteMarriageAsync(int marriageId)
         {
             Marriage marriageEntity = await unitOfWork.Marriage.Delete(marriageId);
-            MarriageModel returnEvent = _mapper.Map<MarriageModel>(marriageEntity);
+            MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageEntity);
             return returnEvent;
         }
     }

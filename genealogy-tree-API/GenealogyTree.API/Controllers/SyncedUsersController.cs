@@ -1,4 +1,4 @@
-﻿using GenealogyTree.Domain.DTO.SynchedUser;
+﻿using GenealogyTree.Domain.DTO.Sync;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,21 +9,21 @@ namespace GenealogyTree.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SynchedUsersController : Controller
+    public class SyncedUsersController : Controller
     {
         private readonly ISynchedUsersService _synchedUsersService;
-        public SynchedUsersController(ISynchedUsersService synchedUsersService)
+        public SyncedUsersController(ISynchedUsersService synchedUsersService)
         {
             _synchedUsersService = synchedUsersService;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<SynchedUserModel>>> GetSynchedUsersForCurrentUser(int userId)
+        public async Task<ActionResult<List<SyncedUserModel>>> GetSynchedUsersForCurrentUser(int userId)
         {
             try
             {
-                List<SynchedUserModel> returnEvent = await _synchedUsersService.GetAllSynchedUsersForUser(userId);
+                List<SyncedUserModel> returnEvent = await _synchedUsersService.GetAllSynchedUsersForUser(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -42,7 +42,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                SynchedUserModel returnEvent = await _synchedUsersService.GetSynchedUser(id);
+                SyncedUserModel returnEvent = await _synchedUsersService.GetSynchedUser(id);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -61,7 +61,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                SynchedUserModel returnEvent = await _synchedUsersService.AddSynchedUser(usersToSync);
+                SyncedUserModel returnEvent = await _synchedUsersService.AddSynchedUser(usersToSync);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -72,11 +72,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id:int}/remove")]
-        public async Task<ActionResult<SynchedUserModel>> RemoveSynchedUser(int id)
+        public async Task<ActionResult<SyncedUserModel>> RemoveSynchedUser(int id)
         {
             try
             {
-                SynchedUserModel returnEvent = await _synchedUsersService.DeleteSynchedUser(id);
+                SyncedUserModel returnEvent = await _synchedUsersService.DeleteSynchedUser(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)

@@ -1,5 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
 using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,19 +9,21 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EducationController : Controller
     {
         private readonly IEducationService _educationService;
-        public EducationController(IEducationService educationService)
+        private readonly IEducationLevelService _educationLevelService;
+        public EducationController(IEducationService educationService, IEducationLevelService educationLevelService)
         {
             _educationService = educationService;
+            _educationLevelService = educationLevelService;
         }
 
+        [GeneTreeAuthorize]
         [HttpGet]
-        [Route("")]
+        [Route("{personId:int}")]
         public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(int personId)
         {
             try
@@ -38,6 +41,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<EducationModel>> GetEducation(int id)
@@ -55,9 +59,9 @@ namespace GenealogyTree.API.Controllers
             {
                 return BadRequest(e);
             }
-
         }
 
+        [GeneTreeAuthorize]
         [HttpPost]
         [Route("add")]
         public async Task<ActionResult<EducationModel>> AddEducation(EducationModel education)
@@ -73,6 +77,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult<EducationModel>> UpdateEducation(EducationModel education)
@@ -88,6 +93,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpDelete]
         [Route("{id}/delete")]
         public async Task<ActionResult> DeleteEducation(int id)
@@ -95,6 +101,59 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 EducationModel returnEvent = await _educationService.DeleteEducationAsync(id);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("levels")]
+        public async Task<ActionResult<List<GenericNameModel>>> GetEducationLevels()
+        {
+            try
+            {
+                List<GenericNameModel> returnEvent = await _educationLevelService.GetAllEducationLevelsAsync();
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("level/{id:int}")]
+        public async Task<ActionResult<GenericNameModel>> GetEducationLevel(int id)
+        {
+            try
+            {
+                GenericNameModel returnEvent = await _educationLevelService.GetEducationLevelAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPost]
+        [Route("levels/add")]
+        public async Task<ActionResult<GenericNameModel>> AddEducationLevel(string name)
+        {
+            try
+            {
+                GenericNameModel returnEvent = await _educationLevelService.AddEducationLevelAsync(name);
                 return Ok(returnEvent);
             }
             catch (Exception e)

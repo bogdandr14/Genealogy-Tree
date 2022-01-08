@@ -29,7 +29,7 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<string>("EducationInstituteName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EducationLevel")
+                    b.Property<int?>("EducationLevelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -43,9 +43,26 @@ namespace GenealogyTree.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EducationLevelId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Educations");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.EducationLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EducationLevels");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Gender", b =>
@@ -91,10 +108,7 @@ namespace GenealogyTree.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateEnded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateStarted")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FirstPersonId")
@@ -103,6 +117,9 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<int>("SecondPersonId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FirstPersonId");
@@ -110,6 +127,21 @@ namespace GenealogyTree.Data.Migrations
                     b.HasIndex("SecondPersonId");
 
                     b.ToTable("Marriages");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Nationality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Nationalities");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Occupation", b =>
@@ -125,20 +157,45 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<string>("OccupationName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("WorkingPlaceName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Occupations");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.ParentChild", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("BloodRelatives")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ChildId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChildId");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("ParentsChildren");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Person", b =>
@@ -151,14 +208,14 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("BirthPlaceId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DeathDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FirstParentId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("GenderId")
                         .HasColumnType("int");
@@ -169,36 +226,28 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Nationality")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlaceOfBirthId")
+                    b.Property<int?>("LivingPlaceId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlaceOfLivingId")
+                    b.Property<int?>("NationalityId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ReligionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SecondParentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("FirstParentId");
+                    b.HasIndex("BirthPlaceId");
 
                     b.HasIndex("GenderId");
 
-                    b.HasIndex("PlaceOfBirthId");
+                    b.HasIndex("LivingPlaceId");
 
-                    b.HasIndex("PlaceOfLivingId");
+                    b.HasIndex("NationalityId");
 
                     b.HasIndex("ReligionId");
 
-                    b.HasIndex("SecondParentId");
-
-                    b.ToTable("Persons");
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Religion", b =>
@@ -214,6 +263,37 @@ namespace GenealogyTree.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Religions");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Sync", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PrimaryUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SyncedPersonInPrimaryTreeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SyncedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SynchedUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrimaryUserId");
+
+                    b.HasIndex("SyncedPersonInPrimaryTreeId")
+                        .IsUnique();
+
+                    b.HasIndex("SyncedUserId");
+
+                    b.ToTable("Syncs");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.SyncRequest", b =>
@@ -247,33 +327,6 @@ namespace GenealogyTree.Data.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("SyncRequests");
-                });
-
-            modelBuilder.Entity("GenealogyTree.Domain.Entities.SynchedUsers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PrimaryUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SynchedPersonInPrimaryTreeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SynchedUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PrimaryUserId");
-
-                    b.HasIndex("SynchedPersonInPrimaryTreeId");
-
-                    b.HasIndex("SynchedUserId");
-
-                    b.ToTable("SynchronizedUsers");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.User", b =>
@@ -328,11 +381,18 @@ namespace GenealogyTree.Data.Migrations
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Education", b =>
                 {
+                    b.HasOne("GenealogyTree.Domain.Entities.EducationLevel", "EducationLevel")
+                        .WithMany("Educations")
+                        .HasForeignKey("EducationLevelId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("GenealogyTree.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Educations")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("EducationLevel");
 
                     b.Navigation("User");
                 });
@@ -340,15 +400,15 @@ namespace GenealogyTree.Data.Migrations
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Marriage", b =>
                 {
                     b.HasOne("GenealogyTree.Domain.Entities.Person", "FirstPerson")
-                        .WithMany()
+                        .WithMany("FirstPersonMarriages")
                         .HasForeignKey("FirstPersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GenealogyTree.Domain.Entities.Person", "SecondPerson")
-                        .WithMany()
+                        .WithMany("SecondPersonMarriages")
                         .HasForeignKey("SecondPersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("FirstPerson");
@@ -358,72 +418,117 @@ namespace GenealogyTree.Data.Migrations
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Occupation", b =>
                 {
-                    b.HasOne("GenealogyTree.Domain.Entities.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("GenealogyTree.Domain.Entities.User", "User")
+                        .WithMany("Occupations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Person");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.ParentChild", b =>
+                {
+                    b.HasOne("GenealogyTree.Domain.Entities.Person", "Child")
+                        .WithMany("Parents")
+                        .HasForeignKey("ChildId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GenealogyTree.Domain.Entities.Person", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Child");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Person", b =>
                 {
-                    b.HasOne("GenealogyTree.Domain.Entities.Person", "FirstParent")
-                        .WithMany()
-                        .HasForeignKey("FirstParentId");
+                    b.HasOne("GenealogyTree.Domain.Entities.Location", "BirthPlace")
+                        .WithMany("PeopleBornHere")
+                        .HasForeignKey("BirthPlaceId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GenealogyTree.Domain.Entities.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId");
+                        .WithMany("People")
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("GenealogyTree.Domain.Entities.Location", "PlaceOfBirth")
-                        .WithMany()
-                        .HasForeignKey("PlaceOfBirthId");
+                    b.HasOne("GenealogyTree.Domain.Entities.Location", "LivingPlace")
+                        .WithMany("PeopleLivingHere")
+                        .HasForeignKey("LivingPlaceId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("GenealogyTree.Domain.Entities.Location", "PlaceOfLiving")
-                        .WithMany()
-                        .HasForeignKey("PlaceOfLivingId");
+                    b.HasOne("GenealogyTree.Domain.Entities.Nationality", "Nationality")
+                        .WithMany("People")
+                        .HasForeignKey("NationalityId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GenealogyTree.Domain.Entities.Religion", "Religion")
-                        .WithMany()
-                        .HasForeignKey("ReligionId");
+                        .WithMany("People")
+                        .HasForeignKey("ReligionId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("GenealogyTree.Domain.Entities.Person", "SecondParent")
-                        .WithMany()
-                        .HasForeignKey("SecondParentId");
-
-                    b.Navigation("FirstParent");
+                    b.Navigation("BirthPlace");
 
                     b.Navigation("Gender");
 
-                    b.Navigation("PlaceOfBirth");
+                    b.Navigation("LivingPlace");
 
-                    b.Navigation("PlaceOfLiving");
+                    b.Navigation("Nationality");
 
                     b.Navigation("Religion");
+                });
 
-                    b.Navigation("SecondParent");
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Sync", b =>
+                {
+                    b.HasOne("GenealogyTree.Domain.Entities.User", "PrimaryUser")
+                        .WithMany("SyncedToUsers")
+                        .HasForeignKey("PrimaryUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GenealogyTree.Domain.Entities.Person", "SyncedPersonInPrimaryTree")
+                        .WithOne("SyncedUserToPerson")
+                        .HasForeignKey("GenealogyTree.Domain.Entities.Sync", "SyncedPersonInPrimaryTreeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GenealogyTree.Domain.Entities.User", "SyncedUser")
+                        .WithMany("SyncedByUsers")
+                        .HasForeignKey("SyncedUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("PrimaryUser");
+
+                    b.Navigation("SyncedPersonInPrimaryTree");
+
+                    b.Navigation("SyncedUser");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.SyncRequest", b =>
                 {
                     b.HasOne("GenealogyTree.Domain.Entities.User", "Receiver")
-                        .WithMany()
+                        .WithMany("ReceivedRequests")
                         .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GenealogyTree.Domain.Entities.Person", "ReceiverReferenceInSenderTree")
-                        .WithMany()
+                        .WithMany("SenderSyncRequestsForPerson")
                         .HasForeignKey("ReceiverReferenceInSenderTreeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GenealogyTree.Domain.Entities.User", "Sender")
-                        .WithMany()
+                        .WithMany("SentRequests")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Receiver");
@@ -431,33 +536,6 @@ namespace GenealogyTree.Data.Migrations
                     b.Navigation("ReceiverReferenceInSenderTree");
 
                     b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("GenealogyTree.Domain.Entities.SynchedUsers", b =>
-                {
-                    b.HasOne("GenealogyTree.Domain.Entities.User", "PrimaryUser")
-                        .WithMany()
-                        .HasForeignKey("PrimaryUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GenealogyTree.Domain.Entities.Person", "SynchedPersonInPrimaryTree")
-                        .WithMany()
-                        .HasForeignKey("SynchedPersonInPrimaryTreeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GenealogyTree.Domain.Entities.User", "SynchedUser")
-                        .WithMany()
-                        .HasForeignKey("SynchedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PrimaryUser");
-
-                    b.Navigation("SynchedPersonInPrimaryTree");
-
-                    b.Navigation("SynchedUser");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.User", b =>
@@ -469,6 +547,63 @@ namespace GenealogyTree.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.EducationLevel", b =>
+                {
+                    b.Navigation("Educations");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Gender", b =>
+                {
+                    b.Navigation("People");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Location", b =>
+                {
+                    b.Navigation("PeopleBornHere");
+
+                    b.Navigation("PeopleLivingHere");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Nationality", b =>
+                {
+                    b.Navigation("People");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Person", b =>
+                {
+                    b.Navigation("Children");
+
+                    b.Navigation("FirstPersonMarriages");
+
+                    b.Navigation("Parents");
+
+                    b.Navigation("SecondPersonMarriages");
+
+                    b.Navigation("SenderSyncRequestsForPerson");
+
+                    b.Navigation("SyncedUserToPerson");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Religion", b =>
+                {
+                    b.Navigation("People");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Educations");
+
+                    b.Navigation("Occupations");
+
+                    b.Navigation("ReceivedRequests");
+
+                    b.Navigation("SentRequests");
+
+                    b.Navigation("SyncedByUsers");
+
+                    b.Navigation("SyncedToUsers");
                 });
 #pragma warning restore 612, 618
         }

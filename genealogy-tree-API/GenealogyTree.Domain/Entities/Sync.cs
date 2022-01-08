@@ -2,19 +2,20 @@
 
 namespace GenealogyTree.Domain.Entities
 {
-    public class SynchedUsers
+    public class Sync
     {
         public int Id { get; set; }
 
         public int PrimaryUserId { get; set; }
-        public int SynchedUserId { get; set; }
-        public int SynchedPersonInPrimaryTreeId { get; set; }
-
         [ForeignKey("PrimaryUserId")]
         public virtual User PrimaryUser { get; set; }
+
+        public int SyncedUserId { get; set; }
         [ForeignKey("SynchedUserId")]
-        public virtual User SynchedUser { get; set; }
-        [ForeignKey("SynchedPersonInPrimaryTreeId")]
-        public virtual Person SynchedPersonInPrimaryTree { get; set; }
+        public virtual User SyncedUser { get; set; }
+
+        public int SyncedPersonInPrimaryTreeId { get; set; }
+        [ForeignKey("SyncedPersonInPrimaryTreeId")]
+        public virtual Person SyncedPersonInPrimaryTree { get; set; }
     }
 }

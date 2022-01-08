@@ -12,7 +12,6 @@ namespace GenealogyTree.Domain.Entities
         public DateTime? EndDate { get; set; }
 
         public int UserId { get; set; }
-
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }

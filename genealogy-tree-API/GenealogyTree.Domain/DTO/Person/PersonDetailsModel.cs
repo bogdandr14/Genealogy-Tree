@@ -1,23 +1,13 @@
-﻿using GenealogyTree.Domain.Entities;
-using System;
+﻿using GenealogyTree.Domain.DTO.Marriage;
+using GenealogyTree.Domain.DTO.Relative;
+using System.Collections.Generic;
 
 namespace GenealogyTree.Domain.DTO.Person
 {
-    public class PersonDetailsModel
+    public class PersonDetailsModel : PersonCreateUpdateModel
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Nationality { get; set; }
-
-        public DateTime BirthDate { get; set; }
-        public DateTime? DeathDate { get; set; }
-        public Location BirthPlace { get; set; }
-        public Location LivingPlace { get; set; }
-        public int ParentsId { get; set; }
-        public int GenderId { get; set; }
-        public int ReligionId { get; set; }
-        public string GenderName { get; set; }
-        public string ReligionName { get; set; }
+        public ICollection<ParentModel> Parents { get; set; }
+        public ICollection<ChildModel> Children { get; set; }
+        public ICollection<MarriedPersonModel> Marriages { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public List<OccupationModel> GetAllOccupationsForPerson(int personId)
+        public List<OccupationModel> GetAllOccupationsForPerson(int userId)
         {
-            List<Occupation> occupations = unitOfWork.Occupation.Filter(x => x.PersonId == personId).ToList();
+            List<Occupation> occupations = unitOfWork.Occupation.Filter(x => x.UserId == userId).ToList();
             List<OccupationModel> returnEvent = _mapper.Map<List<OccupationModel>>(occupations);
             return returnEvent;
         }

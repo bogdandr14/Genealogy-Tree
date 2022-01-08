@@ -60,7 +60,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<PersonDetailsModel>> AddPerson(PersonCreationModel person)
+        public async Task<ActionResult<PersonDetailsModel>> AddPerson(PersonCreateUpdateModel person)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(PersonUpdateModel person)
+        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(PersonCreateUpdateModel person)
         {
             try
             {

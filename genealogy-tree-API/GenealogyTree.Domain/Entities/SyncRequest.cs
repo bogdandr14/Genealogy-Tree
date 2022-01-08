@@ -9,13 +9,14 @@ namespace GenealogyTree.Domain.Entities
         public bool Response { get; set; }
 
         public int SenderId { get; set; }
-        public int ReceiverId { get; set; }
-        public int ReceiverReferenceInSenderTreeId { get; set; }
-
         [ForeignKey("SenderId")]
         public User Sender { get; set; }
+
+        public int ReceiverId { get; set; }
         [ForeignKey("ReceiverId")]
         public User Receiver { get; set; }
+        
+        public int ReceiverReferenceInSenderTreeId { get; set; }
         [ForeignKey("ReceiverReferenceInSenderTreeId")]
         public Person ReceiverReferenceInSenderTree { get; set; }
     }

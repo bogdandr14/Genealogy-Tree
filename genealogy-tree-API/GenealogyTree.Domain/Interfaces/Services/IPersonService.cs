@@ -8,8 +8,8 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<List<PersonDetailsModel>> FindPerson(string name);
         Task<PersonDetailsModel> GetPersonAsync(int personId);
-        Task<PersonDetailsModel> AddPersonAsync(PersonCreationModel person);
-        Task<PersonDetailsModel> UpdatePersonAsync(PersonUpdateModel person);
+        Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person);
+        Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person);
         Task<PersonDetailsModel> DeletePersonAsync(int personId);
     }
 }
