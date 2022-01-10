@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
+    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonController : Controller
@@ -18,7 +19,6 @@ namespace GenealogyTree.API.Controllers
             _personService = personService;
         }
 
-        [GeneTreeAuthorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)
@@ -39,12 +39,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{name}")]
-        public async Task<ActionResult<PersonDetailsModel>> SearchPersons(string name)
+        [Route("search/{name}")]
+        public async Task<ActionResult<PersonDetailsModel>> SearchPeople(string name)
         {
             try
             {
-                List<PersonDetailsModel> returnEvent = await _personService.FindPerson(name);
+                List<PersonDetailsModel> returnEvent = await _personService.FindPeople(name);
                 if (returnEvent == null)
                 {
                     return NotFound();

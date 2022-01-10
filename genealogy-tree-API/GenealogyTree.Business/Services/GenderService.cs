@@ -1,4 +1,6 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using AutoMapper;
+using GenealogyTree.Domain.DTO.Generic;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using System.Collections.Generic;
@@ -9,26 +11,34 @@ namespace GenealogyTree.Business.Services
 {
     public class GenderService : BaseService, IGenderService
     {
-        public GenderService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IMapper _mapper;
+        public GenderService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
         {
+            _mapper = mapper;
         }
 
-        public async Task<List<Gender>> GetAllGendersAsync()
+        public async Task<List<GenericNameModel>> GetAllGendersAsync()
         {
-            return unitOfWork.Gender.GetAll().OrderBy(x => x.Name).ToList();
+            List<Gender> genders = unitOfWork.Gender.GetAll().OrderBy(x => x.Name).ToList();
+            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(genders);
+            return returnEvent;
         }
 
-        public async Task<Gender> GetGenderAsync(int genderId)
+        public async Task<GenericNameModel> GetGenderAsync(int genderId)
         {
-            return await unitOfWork.Gender.FindById(genderId);
+            Gender gender = await unitOfWork.Gender.FindById(genderId);
+            GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(gender);
+            return returnEvent;
         }
 
-        public List<Gender> FindGenders(string name)
+        public List<GenericNameModel> FindGenders(string name)
         {
-            return unitOfWork.Gender.Filter(x => x.Name.Contains(name)).OrderBy(x => x.Name).ToList();
+            List<Gender> genders = unitOfWork.Gender.Filter(x => x.Name.Contains(name)).OrderBy(x => x.Name).ToList();
+            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(genders);
+            return returnEvent;
         }
 
-        public async Task<Gender> AddGenderAsync(string genderName)
+        public async Task<GenericNameModel> AddGenderAsync(string genderName)
         {
             if (genderName == null)
             {
@@ -38,7 +48,9 @@ namespace GenealogyTree.Business.Services
             {
                 Name = genderName
             };
-            return await unitOfWork.Gender.Create(gender);
+            Gender genderEntity = await unitOfWork.Gender.Create(gender);
+            GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(genderEntity);
+            return returnEvent;
         }
     }
 }

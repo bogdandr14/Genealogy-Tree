@@ -1,13 +1,13 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using GenealogyTree.Domain.DTO;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface ILocationService
     {
-        Task<Location> GetLocationAsync(int locationId);
-        Task<Location> AddLocationAsync(Location location);
-        Task<Location> UpdateLocation(Location location);
-        Task<Location> DeleteLocation(int locationId);
+        Task<LocationModel> GetLocationAsync(int locationId);
+        Task<LocationModel> AddLocationAsync(LocationModel location);
+        Task<LocationModel> UpdateLocation(LocationModel location);
+        Task<LocationModel> DeleteLocation(int locationId);
     }
 }

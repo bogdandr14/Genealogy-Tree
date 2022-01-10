@@ -1,4 +1,5 @@
-﻿using GenealogyTree.Domain.DTO.Sync;
+﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.DTO.Sync;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
+    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SyncedUsersController : Controller

@@ -1,5 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
-using GenealogyTree.Domain.Entities;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,11 +20,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        public async Task<ActionResult<Location>> GetLocationAsync(int id)
+        public async Task<ActionResult<LocationModel>> GetLocationAsync(int id)
         {
             try
             {
-                Location returnEvent = await _locationService.GetLocationAsync(id);
+                LocationModel returnEvent = await _locationService.GetLocationAsync(id);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -39,11 +39,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<Location>> AddLocation(Location location)
+        public async Task<ActionResult<LocationModel>> AddLocation(LocationModel location)
         {
             try
             {
-                Location returnEvent = await _locationService.AddLocationAsync(location);
+                LocationModel returnEvent = await _locationService.AddLocationAsync(location);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -54,11 +54,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult<Location>> UpdateLocation(Location location)
+        public async Task<ActionResult<LocationModel>> UpdateLocation(LocationModel location)
         {
             try
             {
-                Location returnEvent = await _locationService.UpdateLocation(location);
+                LocationModel returnEvent = await _locationService.UpdateLocation(location);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -69,11 +69,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id}/delete")]
-        public async Task<ActionResult<Location>> DeleteLocation(int id)
+        public async Task<ActionResult<LocationModel>> DeleteLocation(int id)
         {
             try
             {
-                Location returnEvent = await _locationService.DeleteLocation(id);
+                LocationModel returnEvent = await _locationService.DeleteLocation(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)

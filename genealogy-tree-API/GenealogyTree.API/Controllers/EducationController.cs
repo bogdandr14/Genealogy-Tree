@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Business.Auth;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -147,6 +148,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
         [Route("levels/add")]
         public async Task<ActionResult<GenericNameModel>> AddEducationLevel(string name)

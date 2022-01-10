@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
+    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
@@ -17,45 +18,6 @@ namespace GenealogyTree.API.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        [Route("login")]
-        public async Task<ActionResult<LoginResponseModel>> Login(LoginModel loginCredentials)
-        {
-            try
-            {
-                LoginResponseModel loginResponse = await _userService.LoginUser(loginCredentials);
-                if (loginResponse == null)
-                {
-                    return NotFound();
-                }
-                return Ok(loginResponse);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpPost]
-        [Route("register")]
-        public async Task<ActionResult<UserDetailsModel>> Register(UserRegisterModel userRegister)
-        {
-            try
-            {
-                UserDetailsModel userDetails = await _userService.RegisterUser(userRegister);
-                if (userDetails == null)
-                {
-                    return NotFound();
-                }
-                return Ok(userDetails);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [GeneTreeAuthorize]
         [HttpGet]
         [Route("info/{username}")]
         public async Task<ActionResult<UserDetailsModel>> GetPersonalInfo(string username)
@@ -75,7 +37,6 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<UserDetailsModel>> GetUserInfo(int id)
@@ -95,7 +56,6 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize]
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult<UserDetailsModel>> UpdateUser(UserUpdateModel user)
@@ -115,14 +75,32 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize]
-        [HttpPut]
-        [Route("changePassword")]
-        public async Task<ActionResult<UserDetailsModel>> ChangePassword(UpdatePasswordModel updatePassword)
+        [HttpGet]
+        [Route("settings/{username}")]
+        public async Task<ActionResult<UserSettingsModel>> GetUserSettings(string username)
         {
             try
             {
-                UserDetailsModel updatedUser = await _userService.UpdatePassword(updatePassword);
+                UserSettingsModel updatedUser = await _userService.GetUserSettings(username);
+                if (updatedUser == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedUser);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        [Route("settings/update")]
+        public async Task<ActionResult<UserSettingsModel>> UpdateUserSettings(UserSettingsModel user)
+        {
+            try
+            {
+                UserSettingsModel updatedUser = await _userService.UpdateUserSettings(user);
                 if (updatedUser == null)
                 {
                     return NotFound();

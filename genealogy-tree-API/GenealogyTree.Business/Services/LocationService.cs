@@ -1,40 +1,57 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using AutoMapper;
+using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Generic;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Services
 {
     class LocationService : BaseService, ILocationService
     {
-        public LocationService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        private readonly IMapper _mapper;
+        public LocationService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
         {
+            _mapper = mapper;
         }
-        public async Task<Location> GetLocationAsync(int locationId)
+        public async Task<LocationModel> GetLocationAsync(int locationId)
         {
-            return await unitOfWork.Location.FindById(locationId);
+            Location location = await unitOfWork.Location.FindById(locationId);
+            LocationModel returnEvent = _mapper.Map<LocationModel>(location);
+            return returnEvent;
         }
 
-        public async Task<Location> AddLocationAsync(Location location)
+        public async Task<LocationModel> AddLocationAsync(LocationModel location)
         {
             if (location == null)
             {
                 return null;
             }
-            return await unitOfWork.Location.Create(location);
+            Location locationEntity = _mapper.Map<Location>(location);
+            locationEntity = await unitOfWork.Location.Create(locationEntity);
+            LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
+            return returnEvent;
         }
-        public async Task<Location> UpdateLocation(Location location)
+        public async Task<LocationModel> UpdateLocation(LocationModel location)
         {
             if (location == null)
             {
                 return null;
             }
-            return await unitOfWork.Location.Update(location);
+            Location locationEntity = _mapper.Map<Location>(location);
+            locationEntity = await unitOfWork.Location.Update(locationEntity);
+            LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
+            return returnEvent;
         }
 
-        public async Task<Location> DeleteLocation(int locationId)
+        public async Task<LocationModel> DeleteLocation(int locationId)
         {
-            return await unitOfWork.Location.Delete(locationId);
+            Location locationEntity = await unitOfWork.Location.Delete(locationId);
+            LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
+            return returnEvent;
         }
     }
 }

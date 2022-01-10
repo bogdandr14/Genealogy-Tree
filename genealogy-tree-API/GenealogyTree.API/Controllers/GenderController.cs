@@ -1,5 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
-using GenealogyTree.Domain.Entities;
+using GenealogyTree.Business.Auth;
+using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,11 +21,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Gender>>> GetAllGenders()
+        public async Task<ActionResult<List<GenericNameModel>>> GetAllGenders()
         {
             try
             {
-                List<Gender> returnEvent = await _genderService.GetAllGendersAsync();
+                List<GenericNameModel> returnEvent = await _genderService.GetAllGendersAsync();
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -35,11 +36,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        public async Task<ActionResult<Gender>> GetGender(int id)
+        public async Task<ActionResult<GenericNameModel>> GetGender(int id)
         {
             try
             {
-                Gender returnEvent = await _genderService.GetGenderAsync(id);
+                GenericNameModel returnEvent = await _genderService.GetGenderAsync(id);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -53,12 +54,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("find/{name}")]
-        public async Task<ActionResult<List<Gender>>> FindGender(string name)
+        [Route("search/{name}")]
+        public async Task<ActionResult<List<GenericNameModel>>> SearchGenders(string name)
         {
             try
             {
-                List<Gender> returnEvent = _genderService.FindGenders(name);
+                List<GenericNameModel> returnEvent = _genderService.FindGenders(name);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -71,14 +72,14 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize]
+        [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<Gender>> AddGender(string genderName)
+        public async Task<ActionResult<GenericNameModel>> AddGender(string genderName)
         {
             try
             {
-                Gender returnEvent = await _genderService.AddGenderAsync(genderName);
+                GenericNameModel returnEvent = await _genderService.AddGenderAsync(genderName);
                 return Ok(returnEvent);
             }
             catch (Exception e)

@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Business.Auth;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -38,8 +39,8 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("find/{name}")]
-        public async Task<ActionResult<List<Religion>>> FindReligion(string name)
+        [Route("search/{name}")]
+        public async Task<ActionResult<List<Religion>>> SearchReligion(string name)
         {
             try
             {
@@ -56,7 +57,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize]
+        [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
         [Route("add")]
         public async Task<ActionResult<Religion>> AddReligion(string religionName)

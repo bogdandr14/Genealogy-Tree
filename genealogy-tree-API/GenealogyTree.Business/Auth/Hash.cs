@@ -2,9 +2,9 @@
 using System;
 using System.Text;
 
-namespace GenealogyTree.Business.Authorization
+namespace GenealogyTree.Business.Auth
 {
-    public class Hash
+    class Hash
     {
         public static string CreateHash(string value, string salt)
         {

@@ -18,7 +18,7 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<PersonDetailsModel>> FindPerson(string name)
+        public async Task<List<PersonDetailsModel>> FindPeople(string name)
         {
             List<Person> people = unitOfWork.Person.Filter(x => string.Format("{0} {1}", x.FirstName, x.LastName).Contains(name))
                                     .OrderBy(x => x.FirstName).ToList();

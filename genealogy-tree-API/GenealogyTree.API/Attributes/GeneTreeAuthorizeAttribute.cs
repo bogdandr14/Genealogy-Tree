@@ -1,5 +1,4 @@
-﻿using GenealogyTree.Business.Authorization;
-using GenealogyTree.Domain.Enums;
+﻿using GenealogyTree.Business.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

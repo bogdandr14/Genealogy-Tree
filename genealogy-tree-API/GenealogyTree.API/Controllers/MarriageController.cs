@@ -1,5 +1,4 @@
 ﻿using GenealogyTree.API.Attributes;
-using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -80,7 +79,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<MarriageDetailsModel>> AddMarriage(MarriageDetailsModel marriage)
+        public async Task<ActionResult<MarriageDetailsModel>> AddMarriage(MarriageCreateUpdateModel marriage)
         {
             try
             {
@@ -95,7 +94,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<ActionResult<MarriageDetailsModel>> UpdateMarriage(MarriageDetailsModel marriage)
+        public async Task<ActionResult<MarriageDetailsModel>> UpdateMarriage(MarriageCreateUpdateModel marriage)
         {
             try
             {

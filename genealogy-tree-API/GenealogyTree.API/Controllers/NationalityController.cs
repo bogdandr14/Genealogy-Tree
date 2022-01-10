@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Business.Auth;
 using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -57,8 +58,8 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("find/{name}")]
-        public async Task<ActionResult<List<GenericNameModel>>> FindNationality(string name)
+        [Route("search/{name}")]
+        public async Task<ActionResult<List<GenericNameModel>>> SearchNationalities(string name)
         {
             try
             {
@@ -75,7 +76,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize]
+        [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
         [Route("add")]
         public async Task<ActionResult<GenericNameModel>> AddNationality(string nationalityName)

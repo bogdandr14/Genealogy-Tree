@@ -9,8 +9,8 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<List<MarriedPersonModel>> GetAllMarriagesForPerson(int personId);
         Task<MarriageDetailsModel> GetMarriageAsync(int marriageId);
         Task<MarriedPersonModel> GetCurrentMarriageForPerson(int personId);
-        Task<MarriageDetailsModel> AddMarriageAsync(MarriageDetailsModel marriage);
-        Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageDetailsModel marriage);
+        Task<MarriageDetailsModel> AddMarriageAsync(MarriageCreateUpdateModel marriage);
+        Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageCreateUpdateModel marriage);
         Task<MarriageDetailsModel> DeleteMarriageAsync(int marriageId);
     }
 }

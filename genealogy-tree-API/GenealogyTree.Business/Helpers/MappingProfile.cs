@@ -46,6 +46,8 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
                 .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))
                 .ReverseMap();
+            CreateMap<Marriage, MarriageCreateUpdateModel>()
+                .ReverseMap();
 
             CreateMap<Nationality, GenericNameModel>()
                .ReverseMap();
@@ -72,6 +74,8 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<Sync, SyncedUserModel>()
                 .ReverseMap();
+            CreateMap<Sync, UsersToSyncModel>()
+                .ReverseMap();
 
             CreateMap<SyncRequest, SyncRequestDetailsModel>()
                  .ForMember(x => x.ReceiverUser, y => y.MapFrom(z => z.Receiver))
@@ -82,11 +86,6 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.SenderUserId, y => y.MapFrom(z => z.SenderId))
                 .ReverseMap();
 
-
-            CreateMap<User, UserRegisterModel>()
-               .ReverseMap();
-            CreateMap<Person, UserRegisterModel>()
-                .ReverseMap();
             CreateMap<User, UserDetailsModel>()
                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
@@ -102,6 +101,11 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<User, UserUpdateModel>()
                 .ReverseMap();
             CreateMap<Person, UserUpdateModel>()
+                .ReverseMap();
+
+            CreateMap<User, RegisterModel>()
+               .ReverseMap();
+            CreateMap<Person, RegisterModel>()
                 .ReverseMap();
 
             CreateMap<User, LoginResponseModel>()

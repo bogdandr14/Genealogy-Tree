@@ -40,7 +40,7 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<MarriageDetailsModel> AddMarriageAsync(MarriageDetailsModel marriage)
+        public async Task<MarriageDetailsModel> AddMarriageAsync(MarriageCreateUpdateModel marriage)
         {
             if (marriage == null)
             {
@@ -51,7 +51,7 @@ namespace GenealogyTree.Business.Services
             MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageCreated);
             return returnEvent;
         }
-        public async Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageDetailsModel marriage)
+        public async Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageCreateUpdateModel marriage)
         {
             if (marriage == null)
             {

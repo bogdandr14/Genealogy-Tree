@@ -1,22 +1,17 @@
 using AutoMapper;
-using GenealogyTree.Business.Authorization;
 using GenealogyTree.Business.Helpers;
 using GenealogyTree.Business.Services;
 using GenealogyTree.Data;
 using GenealogyTree.Domain.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NetCore.AutoRegisterDi;
 using System.Reflection;
-using System.Text;
 
 namespace GenealogyTree.API
 {
@@ -36,7 +31,7 @@ namespace GenealogyTree.API
             services.AddDbContext<GenealogyTreeDbContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
-            
+
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

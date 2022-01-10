@@ -2,7 +2,7 @@
 
 namespace GenealogyTree.Domain.DTO.User
 {
-    public class UserRegisterModel : LoginModel
+    public class RegisterModel : LoginModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

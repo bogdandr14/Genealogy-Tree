@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace GenealogyTree.Business.Authorization
+namespace GenealogyTree.Business.Auth
 {
-    public class Salt
+    class Salt
     {
         public static string Create()
         {
