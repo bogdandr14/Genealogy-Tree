@@ -13,10 +13,14 @@
             </ion-col>
             <ion-col size="6" class="ion-padding-start">
               <ion-card-title>
-                <ion-label> <h1>{{personalInfo?.firstName}}</h1></ion-label>
+                <ion-label>
+                  <h1>{{ personalInfo?.firstName }}</h1></ion-label
+                >
               </ion-card-title>
               <ion-card-subtitle>
-                <ion-label> <h1>{{personalInfo?.lastName}}</h1></ion-label>
+                <ion-label>
+                  <h1>{{ personalInfo?.lastName }}</h1></ion-label
+                >
               </ion-card-subtitle>
             </ion-col>
           </ion-row>
@@ -34,22 +38,40 @@
                 <ion-list slot="content">
                   <ion-item>
                     <ion-label> {{ "gender" | translate }}:</ion-label>
-                    <span> {{personalInfo?.genderName}}</span>
+                    <span>
+                      {{
+                        "_genders." + personalInfo?.gender?.name
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "nationality" | translate }}:</ion-label>
-                    <span> {{personalInfo?.nationality}}</span>
+                    <span>
+                      {{
+                        "_nationalities." + personalInfo?.nationality?.name
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "religion" | translate }}:</ion-label>
-                    <span> {{personalInfo?.religion}}</span>
+                    <span>
+                      {{
+                        "_religions." + personalInfo?.religion?.name
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "birthday" | translate }}:</ion-label>
-                    <span> {{personalInfo?.birthDate}}</span>
+                    <span> {{ personalInfo?.birthDate.getFullYear }}</span>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="secondary">
-                    {{ "edit information" | translate }}
+                    {{ "_edit.information" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
@@ -78,12 +100,12 @@
                   <ion-label>Occupation</ion-label>
                 </ion-item>
                 <ion-list slot="content">
-                    <ion-item *ngFor="let occupation of occupations">
-                      <ion-label>{{ occupation.name }}</ion-label>
-                      <ion-button fill="clear" color="secondary">
-                        {{ "edit" | translate }}
-                      </ion-button>
-                    </ion-item>
+                  <ion-item *ngFor="let occupation of occupations">
+                    <ion-label>{{ occupation.name }}</ion-label>
+                    <ion-button fill="clear" color="secondary">
+                      {{ "edit" | translate }}
+                    </ion-button>
+                  </ion-item>
                   <ion-button expand="block" fill="clear" color="success">
                     {{ "add occupation" | translate }}
                   </ion-button>
@@ -99,14 +121,17 @@
                     {{ "email" | translate }}:
                     <ion-chip color="secondary" (click)="copyMail('das@djisa')">
                       <ion-icon name="mail-outline"></ion-icon>
-                      <ion-label>{{personalInfo?.email}} </ion-label>
+                      <ion-label>{{ personalInfo?.email }} </ion-label>
                     </ion-chip>
                   </ion-item>
                   <ion-item class="ion-justify-content-start">
                     {{ "phone" | translate }}:
-                    <ion-chip color="secondary" (click)="copyPhone('0231789312')">
+                    <ion-chip
+                      color="secondary"
+                      (click)="copyPhone('0231789312')"
+                    >
                       <ion-icon name="call-outline"></ion-icon>
-                      <ion-label>{{personalInfo?.phoneNumber}} </ion-label>
+                      <ion-label>{{ personalInfo?.phoneNumber }} </ion-label>
                     </ion-chip>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="secondary">

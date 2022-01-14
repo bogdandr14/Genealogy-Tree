@@ -26,7 +26,15 @@ namespace GenealogyTree.Business.Services
 
         public async Task<UserDetailsModel> GetUser(string username)
         {
-            User user = unitOfWork.User.Filter(x => x.Username == username).Include(u => u.Person).FirstOrDefault();
+            User user = unitOfWork.User.Filter(x => x.Username == username)
+                            .Include(u => u.Person)
+                            .ThenInclude(p=>p.Gender)
+                            .Include(u =>u.Person.Nationality)
+                            .Include(u =>u.Person.Religion)
+                            .Include(u =>u.Person.LivingPlace)
+                            .Include(u =>u.Person.BirthPlace)
+                            .Include(u => u.Educations)
+                            .Include(u=>u.Occupations).FirstOrDefault();
             return _mapper.Map<UserDetailsModel>(user);
         }
 

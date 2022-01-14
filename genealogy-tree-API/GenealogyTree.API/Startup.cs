@@ -3,6 +3,7 @@ using GenealogyTree.Business.Helpers;
 using GenealogyTree.Business.Services;
 using GenealogyTree.Data;
 using GenealogyTree.Domain.Interfaces;
+using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -68,9 +69,7 @@ namespace GenealogyTree.API
             services
                .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(PersonService)))
                .Where(x => x.Name.EndsWith("Service")).AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
-            services
-                .AddMvc();
-
+            //services.AddScoped<IAuthService, AuthService>
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,6 +11,6 @@ import { DataService } from '../../core/services/data.service';
 })
 export class GenderService extends DataService {
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'gender', environment.baseApiUrl);
+    super(httpClient, 'api/gender', environment.baseApiUrl);
   }
 }

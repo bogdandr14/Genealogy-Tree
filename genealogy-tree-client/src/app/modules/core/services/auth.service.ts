@@ -13,7 +13,7 @@ import { UserService } from './user.service';
 export class AuthService extends DataService {
   timerSubscription = new Subscription();
   constructor(public http: HttpClient, private router: Router, private userService: UserService) {
-    super(http, 'api/User');
+    super(http, 'api/auth');
     console.log("in constructor");
     if (this.isLoggedIn()) {
       this.setExpirationCounter();

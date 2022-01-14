@@ -8,6 +8,5 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<LoginResponseModel> Login(LoginModel userLogin);
         Task<UserDetailsModel> Register(RegisterModel userRegister);
         Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword);
-
     }
 }

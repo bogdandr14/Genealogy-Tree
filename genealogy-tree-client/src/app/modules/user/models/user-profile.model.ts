@@ -1,11 +1,12 @@
+import { CommonObject } from "../../shared/models/common-object";
 import { LocationModel } from "../../shared/models/location.model";
 
 export class UserProfileModel {
   firstName: string;
   lastName: string;
-  genderName: string;
-  nationality: string;
-  religion: string;
+  gender: CommonObject;
+  nationality: CommonObject;
+  religion: CommonObject;
   email: string;
   phoneNumber: string;
   about: string;

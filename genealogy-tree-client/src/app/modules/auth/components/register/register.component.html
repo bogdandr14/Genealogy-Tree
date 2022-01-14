@@ -75,12 +75,13 @@
                   #gender="ngModel"
                   [(ngModel)]="registerModel.genderId"
                   interface="popover"
+                  [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
                 >
                   <ion-select-option
                     *ngFor="let gender of genderOptions"
                     [value]="gender.id"
                   >
-                    {{ "_genders." + gender.name | translate }}
+                    {{ "_genders." + gender.name | lowercase | translate }}
                   </ion-select-option>
                 </ion-select>
               </ion-item>
@@ -90,18 +91,19 @@
               <ion-item color="transparent">
                 <ion-label for="nat" position="floating">
                   <b>
-                    {{ "nationality" | translate }}
+                    {{ "nationality" | lowercase | translate }}
                   </b>
                 </ion-label>
                 <ion-select
                   name="nat"
                   #nat="ngModel"
-                  [(ngModel)]="registerModel.nationality"
+                  [(ngModel)]="registerModel.nationalityId"
                   interface="popover"
+                  [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
                 >
                   <ion-select-option
                     *ngFor="let nationality of nationalityOptions"
-                    [value]="nationality.name"
+                    [value]="nationality.id"
                   >
                     {{ "_nationalities." + nationality.name | translate }}
                   </ion-select-option>

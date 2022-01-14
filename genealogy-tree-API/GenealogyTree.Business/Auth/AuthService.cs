@@ -3,12 +3,14 @@ using GenealogyTree.Business.Services;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
+using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Auth
 {
-    class AuthService : BaseService, IAuthService
+    public class AuthService : BaseService, IAuthService
     {
         private readonly IMapper _mapper;
         public AuthService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
@@ -17,10 +19,10 @@ namespace GenealogyTree.Business.Auth
         }
         public async Task<LoginResponseModel> Login(LoginModel userLogin)
         {
-            /*User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
-            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))*/
+            User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
+            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
-                Person person = new Person()
+                /*Person person = new Person()
                 {
                     FirstName = "Bogdan",
                     LastName = "Draghici"
@@ -31,7 +33,7 @@ namespace GenealogyTree.Business.Auth
                     Username = "bimax14",
                     Email = "nu avem",
                     Person = person,
-                };
+                };*/
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(user);
                 loginResponseModel.Token = TokenService.GenerateToken(user, UserRoleEnum.User);
                 return loginResponseModel;

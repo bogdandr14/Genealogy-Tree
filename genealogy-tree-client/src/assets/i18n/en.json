@@ -30,6 +30,9 @@
   "passwordMustMatch": "Passwords must match",
   "options": "Options",
   "edit": "Edit",
+  "_edit":{
+    "information":"Edit information"
+  },
   "delete": "Delete",
   "archive": "Archive",
   "menu": "Menu",
@@ -68,6 +71,9 @@
     "gb": "British",
     "ro": "Romanian",
     "bg": "Bulgarian"
+  },
+  "_religions":{
+    "null": "Unknown"
   },
   "error": "Error",
   "_errorMessage": {

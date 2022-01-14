@@ -6,9 +6,9 @@ import { DataService } from '../../core/services/data.service';
 @Injectable({
   providedIn: 'root'
 })
-export class NationalityService extends DataService {
+export class ReligionService extends DataService{
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'api/nationality', environment.baseApiUrl);
-   }
+    super(httpClient,'religion', environment.baseApiUrl);
+  }
 }

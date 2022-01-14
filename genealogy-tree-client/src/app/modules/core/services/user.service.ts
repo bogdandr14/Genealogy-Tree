@@ -11,7 +11,7 @@ export class UserService extends DataService {
   public user$ = this.user.asObservable();
 
   constructor(httpClient: HttpClient) {
-    super(httpClient, 'api/User', environment.baseApiUrl);
+    super(httpClient, 'api/user', environment.baseApiUrl);
   }
   public setUser(user: UserModel): void {
     this.user.next(user);

@@ -30,6 +30,9 @@
   "passwordMustMatch": "Parolele trebuie să se potrtivească",
   "options": "Opţiuni",
   "edit": "Editare",
+  "_edit":{
+    "information":"Editează informaţii"
+  },
   "delete": "Şterge",
   "archive": "Arhivează",
   "menu": "Meniu",
@@ -68,6 +71,9 @@
     "gb": "Britanic",
     "ro": "Român",
     "bg": "Bulgar"
+  },
+  "_religions":{
+    "null": "Necunoscută"
   },
   "error": "Eroare",
   "_errorMessage": {
