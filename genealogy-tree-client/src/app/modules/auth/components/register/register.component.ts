@@ -1,8 +1,10 @@
+/* eslint-disable no-debugger */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
+import { UserService } from 'src/app/modules/core/services/user.service';
 import { CommonObject } from 'src/app/modules/shared/models/common-object';
 import { GenderService } from 'src/app/modules/shared/services/gender.service';
 import { NationalityService } from 'src/app/modules/shared/services/nationality.service';
@@ -27,11 +29,14 @@ export class RegisterComponent implements OnDestroy, OnInit {
     { id: 2, name: 'bg' },
     { id: 3, name: 'gb' },
   ];
+  public isUsernameAvailable: boolean = true;
+  public isEmailAvailable: boolean = true;
 
   constructor(
     private authService: AuthService,
     private genderService: GenderService,
     private nationalityService: NationalityService,
+    private userService: UserService,
     private router: Router
   ) {}
 

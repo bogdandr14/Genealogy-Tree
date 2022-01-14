@@ -28,13 +28,13 @@ namespace GenealogyTree.Business.Services
         {
             User user = unitOfWork.User.Filter(x => x.Username == username)
                             .Include(u => u.Person)
-                            .ThenInclude(p=>p.Gender)
-                            .Include(u =>u.Person.Nationality)
-                            .Include(u =>u.Person.Religion)
-                            .Include(u =>u.Person.LivingPlace)
-                            .Include(u =>u.Person.BirthPlace)
+                            .ThenInclude(p => p.Gender)
+                            .Include(u => u.Person.Nationality)
+                            .Include(u => u.Person.Religion)
+                            .Include(u => u.Person.LivingPlace)
+                            .Include(u => u.Person.BirthPlace)
                             .Include(u => u.Educations)
-                            .Include(u=>u.Occupations).FirstOrDefault();
+                            .Include(u => u.Occupations).FirstOrDefault();
             return _mapper.Map<UserDetailsModel>(user);
         }
 
@@ -51,6 +51,18 @@ namespace GenealogyTree.Business.Services
             userEntity = await unitOfWork.User.Update(userEntity);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
             return returnEvent;
+        }
+
+        public async Task<bool> CheckUsernameAvailable(string username)
+        {
+            User user = unitOfWork.User.Filter(x => x.Username == username).FirstOrDefault();
+            return user == default(User);
+        }
+
+        public async Task<bool> CheckEmailAvailable(string email)
+        {
+            User user = unitOfWork.User.Filter(x => x.Email == email).FirstOrDefault();
+            return user == default(User);
         }
 
         public async Task<UserSettingsModel> GetUserSettings(string username)

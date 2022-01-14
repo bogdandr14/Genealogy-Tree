@@ -7,6 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { MatchPasswordDirective } from './directives/matchPassword.directive';
 import { PasswordPatternDirective } from './directives/passwordPattern.directive';
 import { CommonModule } from '@angular/common';
+import { UsernameCheckDirective } from './directives/usernameCheck.directive';
+import { EmailCheckDirective } from './directives/emailCheck.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { CommonModule } from '@angular/common';
     RegisterComponent,
     MatchPasswordDirective,
     PasswordPatternDirective,
+    UsernameCheckDirective,
+    EmailCheckDirective
   ],
   imports: [SharedModule, AuthRoutingModule],
   providers: []

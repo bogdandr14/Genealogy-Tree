@@ -159,10 +159,11 @@
                   </b>
                 </ion-label>
                 <ion-input
-                  type="email"
+                  type="text"
                   name="email"
                   #email="ngModel"
                   [(ngModel)]="registerModel.email"
+                  emailCheck
                   required
                 ></ion-input>
               </ion-item>
@@ -172,11 +173,14 @@
                 lines="none"
                 class="errors"
               >
+                <ion-label class="error" *ngIf="email.errors?.invalidEmail">
+                  {{ "_validation.invalidEmail" | translate }}
+                </ion-label>
+                <ion-label class="error" *ngIf="email.errors?.emailTaken">
+                  {{ "_validation.emailTaken" | translate }}
+                </ion-label>
                 <ion-label class="error" *ngIf="email.errors?.required">
                   {{ "_validation.fieldRequired" | translate }}
-                </ion-label>
-                <ion-label class="error" *ngIf="email.errors?.email">
-                  {{ "_validation.invalidEmail" | translate }}
                 </ion-label>
               </ion-item>
             </ion-item-group>
@@ -194,6 +198,8 @@
                   name="uname"
                   #uname="ngModel"
                   [(ngModel)]="registerModel.username"
+                  usernameCheck
+                  minlength="6"
                   required
                 ></ion-input>
               </ion-item>
@@ -203,6 +209,12 @@
                 lines="none"
                 class="errors"
               >
+                <ion-label class="error" *ngIf="uname.errors?.minlength">
+                  {{ "_validation.minLength" | translate: { length: 6 } }}
+                </ion-label>
+                <ion-label class="error" *ngIf="uname.errors">
+                  {{ "_validation.usernameTaken" | translate}}
+                </ion-label>
                 <ion-label class="error" *ngIf="uname.errors?.required">
                   {{ "_validation.fieldRequired" | translate }}
                 </ion-label>

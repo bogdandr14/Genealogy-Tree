@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
 {
-    [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
@@ -18,6 +17,7 @@ namespace GenealogyTree.API.Controllers
             _userService = userService;
         }
 
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("info/{username}")]
         public async Task<ActionResult<UserDetailsModel>> GetPersonalInfo(string username)
@@ -37,6 +37,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<UserDetailsModel>> GetUserInfo(int id)
@@ -56,6 +57,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult<UserDetailsModel>> UpdateUser(UserUpdateModel user)
@@ -76,6 +78,37 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
+        [Route("usernameAvailable/{username}")]
+        public async Task<ActionResult<bool>> CheckUsername(string username)
+        {
+            try
+            {
+                //bool isAvailable = await _userService.CheckUsernameAvailable(username);
+                return Ok(false);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("emailAvailable/{email}")]
+        public async Task<ActionResult<UserDetailsModel>> CheckEmail(string email)
+        {
+            try
+            {
+                //bool isAvailable = await _userService.CheckEmailAvailable(email);
+                return Ok(false);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [GeneTreeAuthorize]
+        [HttpGet]
         [Route("settings/{username}")]
         public async Task<ActionResult<UserSettingsModel>> GetUserSettings(string username)
         {
@@ -94,6 +127,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [GeneTreeAuthorize]
         [HttpPut]
         [Route("settings/update")]
         public async Task<ActionResult<UserSettingsModel>> UpdateUserSettings(UserSettingsModel user)
