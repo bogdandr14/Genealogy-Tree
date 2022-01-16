@@ -5,6 +5,7 @@ export class RegisterModel {
   nationalityId: number;
   birthDate: Date;
   email: string;
+  phoneNumber: string;
   username?: string;
   password?: string;
   confirmPassword?: string;

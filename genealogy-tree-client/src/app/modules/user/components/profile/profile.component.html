@@ -68,10 +68,25 @@
                   </ion-item>
                   <ion-item>
                     <ion-label>{{ "birthday" | translate }}:</ion-label>
-                    <span> {{ personalInfo?.birthDate.getFullYear }}</span>
+                    <span>
+                      {{ personalInfo?.birthDate | date: "longDate" }}</span
+                    >
                   </ion-item>
-                  <ion-button expand="block" fill="clear" color="secondary">
+                  <ion-button
+                    expand="block"
+                    fill="clear"
+                    color="warning"
+                    [routerLink]="['/person/edit/', personalInfo.personId]"
+                  >
                     {{ "_edit.information" | translate }}
+                  </ion-button>
+                  <ion-button
+                    expand="block"
+                    fill="clear"
+                    color="secondary"
+                    [routerLink]="['/person/details/', personalInfo.personId]"
+                  >
+                    {{ "view details" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
@@ -134,7 +149,7 @@
                       <ion-label>{{ personalInfo?.phoneNumber }} </ion-label>
                     </ion-chip>
                   </ion-item>
-                  <ion-button expand="block" fill="clear" color="secondary">
+                  <ion-button expand="block" fill="clear" color="warning">
                     {{ "edit contact" | translate }}
                   </ion-button>
                 </ion-list>

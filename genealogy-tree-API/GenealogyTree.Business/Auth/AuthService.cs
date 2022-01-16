@@ -5,6 +5,7 @@ using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,16 +52,25 @@ namespace GenealogyTree.Business.Auth
             {
                 return null;
             }
-            User user = _mapper.Map<User>(userRegister);
+
+            Tree userTree = new Tree()
+            {
+                LastUpdate = DateTime.UtcNow
+            };
+            userTree = await unitOfWork.Tree.Create(userTree);
+
             Person person = _mapper.Map<Person>(userRegister);
-
+            person.TreeId = userTree.Id;
             Person personCreated = await unitOfWork.Person.Create(person);
-            user.PersonId = personCreated.Id;
 
+            User user = _mapper.Map<User>(userRegister);
+            user.Id = Guid.NewGuid();
+            user.PersonId = personCreated.Id;
             user.PasswordSalt = Salt.Create();
             user.PasswordHash = Hash.CreateHash(userRegister.Password, user.PasswordSalt);
             User createdUser = await unitOfWork.User.Create(user);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(createdUser);
+
             return returnEvent;
         }
 

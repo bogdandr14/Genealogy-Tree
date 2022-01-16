@@ -6,7 +6,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatchPasswordDirective } from './directives/matchPassword.directive';
 import { PasswordPatternDirective } from './directives/passwordPattern.directive';
-import { CommonModule } from '@angular/common';
 import { UsernameCheckDirective } from './directives/usernameCheck.directive';
 import { EmailCheckDirective } from './directives/emailCheck.directive';
 
@@ -17,7 +16,7 @@ import { EmailCheckDirective } from './directives/emailCheck.directive';
     MatchPasswordDirective,
     PasswordPatternDirective,
     UsernameCheckDirective,
-    EmailCheckDirective
+    EmailCheckDirective,
   ],
   imports: [SharedModule, AuthRoutingModule],
   providers: []

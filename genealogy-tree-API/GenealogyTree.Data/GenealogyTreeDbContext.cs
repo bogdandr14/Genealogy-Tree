@@ -13,16 +13,17 @@ namespace GenealogyTree.Data
 
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<EducationLevel> EducationLevels { get; set; }
-        public virtual DbSet<Gender> Genders { get; set; }        
+        public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Marriage> Marriages { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<Occupation> Occupations { get; set; }
         public virtual DbSet<ParentChild> ParentsChildren { get; set; }
         public virtual DbSet<Person> People { get; set; }
-        public virtual DbSet<Religion> Religions { get; set; } 
+        public virtual DbSet<Religion> Religions { get; set; }
         public virtual DbSet<Sync> Syncs { get; set; }
         public virtual DbSet<SyncRequest> SyncRequests { get; set; }
+        public virtual DbSet<Tree> Trees { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,7 +45,7 @@ namespace GenealogyTree.Data
 
             //One to many Birth place - People
             modelBuilder.Entity<Location>()
-                .HasMany<Person>(l=> l.PeopleBornHere)
+                .HasMany<Person>(l => l.PeopleBornHere)
                 .WithOne(p => p.BirthPlace)
                 .HasForeignKey(p => p.BirthPlaceId)
                 .OnDelete(DeleteBehavior.NoAction);
@@ -112,6 +113,13 @@ namespace GenealogyTree.Data
                .HasForeignKey(p => p.ReligionId)
                .OnDelete(DeleteBehavior.NoAction);
 
+            //One to many Tree - People
+            modelBuilder.Entity<Tree>()
+                .HasMany<Person>(u => u.PeopleInTree)
+                .WithOne(p => p.Tree)
+                .HasForeignKey(p => p.TreeId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             //One to many User - Educations
             modelBuilder.Entity<User>()
                 .HasMany<Education>(u => u.Educations)
@@ -153,6 +161,12 @@ namespace GenealogyTree.Data
                .WithOne(p => p.Receiver)
                .HasForeignKey(p => p.ReceiverId)
                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Person>().Navigation(p => p.Gender).AutoInclude();
+            modelBuilder.Entity<Person>().Navigation(p => p.Nationality).AutoInclude();
+            modelBuilder.Entity<Person>().Navigation(p => p.Religion).AutoInclude();
+            modelBuilder.Entity<Person>().Navigation(p => p.BirthPlace).AutoInclude();
+            modelBuilder.Entity<Person>().Navigation(p => p.LivingPlace).AutoInclude();
         }
 
         public DbSet<T> DbSet<T>() where T : class

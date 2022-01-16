@@ -4,6 +4,7 @@ using GenealogyTree.Domain.DTO.SyncRequest;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,21 +20,21 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<SyncRequestDetailsModel>> GetSyncRequestsSent(int senderId)
+        public async Task<List<SyncRequestDetailsModel>> GetSyncRequestsSent(Guid senderId)
         {
             List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.SenderId == senderId && x.ReceiverResponded == false).ToList();
             List<SyncRequestDetailsModel> returnEvent = _mapper.Map<List<SyncRequestDetailsModel>>(syncRequests);
             return returnEvent;
         }
 
-        public async Task<List<SyncRequestDetailsModel>> GetSyncRequestsReceived(int receiverId)
+        public async Task<List<SyncRequestDetailsModel>> GetSyncRequestsReceived(Guid receiverId)
         {
             List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.ReceiverId == receiverId && x.ReceiverResponded == false).ToList();
             List<SyncRequestDetailsModel> returnEvent = _mapper.Map<List<SyncRequestDetailsModel>>(syncRequests);
             return returnEvent;
         }
 
-        public async Task<List<SyncRequestCreateUpdateModel>> GetRespondedSyncRequests(int senderId)
+        public async Task<List<SyncRequestCreateUpdateModel>> GetRespondedSyncRequests(Guid senderId)
         {
             List<SyncRequest> syncRequests = unitOfWork.SyncRequest.Filter(x => x.SenderId == senderId && x.ReceiverResponded == true).ToList();
             List<SyncRequestCreateUpdateModel> returnEvent = _mapper.Map<List<SyncRequestCreateUpdateModel>>(syncRequests);
@@ -65,7 +66,7 @@ namespace GenealogyTree.Business.Services
             Sync alreadySynchedUser = unitOfWork.SynchedUsers.Filter(x => x.PrimaryUserId == syncRequest.ReceiverId && x.SyncedUserId == syncRequest.SenderId).FirstOrDefault();
             if (respondedRequest.SenderReferenceInReceiverTree != null && alreadySynchedUser != default(Sync))
             {
-                syncRequest.ReceiverReferenceInSenderTreeId = respondedRequest.SenderReferenceInReceiverTree.Id;
+                syncRequest.ReceiverReferenceInSenderTreeId = respondedRequest.SenderReferenceInReceiverTree.PersonId;
             }
             SyncRequest updatedSyncRequest = await unitOfWork.SyncRequest.Update(syncRequest);
 

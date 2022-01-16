@@ -21,7 +21,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<SyncedUserModel>>> GetSynchedUsersForCurrentUser(int userId)
+        public async Task<ActionResult<List<SyncedUserModel>>> GetSynchedUsersForCurrentUser(Guid userId)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}/remove")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult<SyncedUserModel>> RemoveSynchedUser(int id)
         {
             try

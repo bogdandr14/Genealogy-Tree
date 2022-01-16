@@ -16,6 +16,7 @@ namespace GenealogyTree.Domain.Interfaces
         IReligionRepository Religion { get; }
         ISyncedUsersRepository SynchedUsers { get; }
         ISyncRequestRepository SyncRequest { get; }
+        ITreeRepository Tree { get; }
         IUserRepository User { get; }
     }
 }

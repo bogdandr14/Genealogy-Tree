@@ -28,7 +28,13 @@ namespace GenealogyTree.Business.Services
         public async Task<PersonDetailsModel> GetPersonAsync(int personId)
         {
             Person person = await unitOfWork.Person.FindById(personId);
-            return _mapper.Map<PersonDetailsModel>(person);
+            User user = unitOfWork.User.Filter(u => u.PersonId == person.Id).FirstOrDefault();
+            PersonDetailsModel personEntity = _mapper.Map<PersonDetailsModel>(person);
+            if (user != default(User))
+            {
+                personEntity.UserId = user.Id;
+            }
+            return personEntity;
         }
 
         public async Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person)

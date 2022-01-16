@@ -21,11 +21,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<OccupationModel>>> GetPersonOccupations(int personId)
+        public async Task<ActionResult<List<OccupationModel>>> GetUserOccupations(Guid userId)
         {
             try
             {
-                List<OccupationModel> returnEvent = _occupationService.GetAllOccupationsForPerson(personId);
+                List<OccupationModel> returnEvent = _occupationService.GetAllOccupationsForUser(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -88,7 +88,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}/delete")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult<OccupationModel>> DeleteOccupation(int id)
         {
             try

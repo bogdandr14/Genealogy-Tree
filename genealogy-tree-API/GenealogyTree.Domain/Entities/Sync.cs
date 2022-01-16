@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
@@ -6,11 +7,11 @@ namespace GenealogyTree.Domain.Entities
     {
         public int Id { get; set; }
 
-        public int PrimaryUserId { get; set; }
+        public Guid PrimaryUserId { get; set; }
         [ForeignKey("PrimaryUserId")]
         public virtual User PrimaryUser { get; set; }
 
-        public int SyncedUserId { get; set; }
+        public Guid SyncedUserId { get; set; }
         [ForeignKey("SynchedUserId")]
         public virtual User SyncedUser { get; set; }
 

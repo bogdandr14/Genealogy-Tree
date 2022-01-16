@@ -4,7 +4,7 @@ namespace GenealogyTree.Domain.DTO.Person
 {
     public class GenericPersonModel
     {
-        public int Id { get; set; }
+        public int PersonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

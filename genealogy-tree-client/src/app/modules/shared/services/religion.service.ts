@@ -9,6 +9,6 @@ import { DataService } from '../../core/services/data.service';
 export class ReligionService extends DataService{
 
   constructor(httpClient: HttpClient) {
-    super(httpClient,'religion', environment.baseApiUrl);
+    super(httpClient,'api/religion', environment.baseApiUrl);
   }
 }

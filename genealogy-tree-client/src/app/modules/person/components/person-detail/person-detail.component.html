@@ -1,0 +1,181 @@
+<ion-grid>
+  <ion-row class="ion-align-item-center">
+    <ion-col size-sm="6" offset-sm="3">
+      <ion-card>
+        <ion-card-header class="ion-align-self-center">
+          <ion-row class="ion-justify-content-start">
+            <ion-col size-xl="1" size-md="2" size-xs="3">
+              <ion-avatar class="">
+                <img
+                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+                />
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="6" class="ion-padding-start">
+              <ion-card-title>
+                <ion-label>
+                  <h1>{{ personDetails?.firstName }}</h1></ion-label
+                >
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-label>
+                  <h1>{{ personDetails?.lastName }}</h1></ion-label
+                >
+              </ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list inset="true">
+            <ion-list-header
+              ><ion-label><h1>Person details</h1></ion-label></ion-list-header
+            >
+            <ion-accordion-group>
+              <ion-accordion value="colors">
+                <ion-item slot="header">
+                  <ion-label>Personal information</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <ion-item>
+                    <ion-label> {{ "gender" | translate }}:</ion-label>
+                    <span>
+                      {{
+                        "_genders." + personDetails?.gender?.name
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>{{ "nationality" | translate }}:</ion-label>
+                    <span>
+                      {{
+                        "_nationalities." + personDetails?.nationality?.name
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>{{ "religion" | translate }}:</ion-label>
+                    <span>
+                      {{
+                        "_religions." + personDetails?.religion?.name
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>{{ "birthday" | translate }}:</ion-label>
+                    <span>
+                      {{ personDetails?.birthDate | date: "longDate" }}</span
+                    >
+                  </ion-item>
+                  <ion-button
+                    expand="block"
+                    fill="clear"
+                    color="warning"
+                    [routerLink]="['/person/edit/', personDetails.id]"
+                  >
+                    {{ "_edit.information" | translate }}
+                  </ion-button>
+                </ion-list>
+              </ion-accordion>
+              <ion-accordion value="places">
+                <ion-item slot="header">
+                  <ion-label>Locations</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+
+                  <ion-item>
+                    <ion-label>{{ "from" | translate }}:</ion-label>
+                    <span>
+                      {{
+                        "_religions." + personDetails?.birthPlace?.city
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>{{ "lives in" | translate }}:</ion-label>
+                    <span>
+                      {{
+                        "_religions." + personDetails?.livingPlace?.city
+                          | lowercase
+                          | translate
+                      }}</span
+                    >
+                  </ion-item>
+                  <ion-button expand="block" fill="clear" color="warning">
+                    {{ "edit location" | translate }}
+                  </ion-button>
+                </ion-list>
+              </ion-accordion>
+              <ion-accordion value="parents">
+                <ion-item slot="header">
+                  <ion-label>Parents</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <div *ngFor="let parent of personDetails.parents">
+                    <ion-item>
+                      <ion-label>{{ parent.parent.firstName }}</ion-label>
+                      <ion-button fill="clear" color="secondary">
+                        {{ "view" | translate }}
+                      </ion-button>
+                    </ion-item>
+                  </div>
+                  <ion-button expand="block" fill="clear" color="success">
+                    {{ "add parent" | translate }}
+                  </ion-button>
+                </ion-list>
+              </ion-accordion>
+              <ion-accordion value="children">
+                <ion-item slot="header">
+                  <ion-label>Children</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <div *ngFor="let child of personDetails.children">
+                    <ion-item>
+                      <ion-label>{{ child.child.firstName }}</ion-label>
+                      <ion-button fill="clear" color="secondary">
+                        {{ "view" | translate }}
+                      </ion-button>
+                    </ion-item>
+                  </div>
+                  <ion-button expand="block" fill="clear" color="success">
+                    {{ "add children" | translate }}
+                  </ion-button>
+                </ion-list>
+              </ion-accordion>
+              <ion-accordion value="marriages">
+                <ion-item slot="header">
+                  <ion-label>Marriages</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                  <div *ngFor="let marriages of personDetails.marriages">
+                    <ion-item>
+                      <ion-label>{{
+                        marriages.secondPerson.firstName
+                      }}</ion-label>
+                      <ion-button fill="clear" color="secondary">
+                        {{ "view" | translate }}
+                      </ion-button>
+                    </ion-item>
+                  </div>
+                  <ion-button expand="block" fill="clear" color="success">
+                    {{ "add marriage" | translate }}
+                  </ion-button>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+            <ion-button  *ngIf="!personDetails.userId" expand="block" fill="clear" color="danger">
+              {{ "delete person" | translate }}
+            </ion-button>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

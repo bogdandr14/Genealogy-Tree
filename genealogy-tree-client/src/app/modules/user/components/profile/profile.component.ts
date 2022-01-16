@@ -1,11 +1,9 @@
-/* eslint-disable no-debugger */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { UserService } from 'src/app/modules/core/services/user.service';
 import { UserProfileModel } from '../../models/user-profile.model';
-import { AuthService } from 'src/app/modules/core/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,26 +16,30 @@ export class ProfileComponent implements OnInit {
   personalInfo: UserProfileModel;
   public occupations: any[] = [];
   public educations: any[] = [];
-  constructor(private clipboard: Clipboard, private alertService: AlertService, private userService: UserService, private authService: AuthService) { }
+  constructor(
+    private clipboard: Clipboard,
+    private alertService: AlertService,
+    private userService: UserService,
+  ) {}
 
   ngOnInit() {
-    debugger;
     const user = JSON.parse(sessionStorage.getItem('user'));
-      if (!!user) {
-        // this.userService.getPersonalInfo<UserProfileModel>(user.username).subscribe((res) => {
-        //   this.personalInfo = res;
-        // });
-      }
-
+    if (!!user) {
+      this.userService
+        .getPersonalInfo<UserProfileModel>(user.username)
+        .subscribe((res) => {
+          this.personalInfo = res;
+        });
+    }
   }
 
   copyPhone(info: string) {
     this.clipboard.copy(info);
-    this.alertService.showInfo("_informationMessage.phoneCopied");
+    this.alertService.showInfo('_informationMessage.phoneCopied');
   }
 
   copyMail(info: string) {
     this.clipboard.copy(info);
-    this.alertService.showInfo("_informationMessage.emailCopied");
+    this.alertService.showInfo('_informationMessage.emailCopied');
   }
 }

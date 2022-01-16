@@ -22,7 +22,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("sent")]
-        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsSent(int userId)
+        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsSent(Guid userId)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("received")]
-        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsReceived(int userId)
+        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsReceived(Guid userId)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("responded")]
-        public async Task<ActionResult<List<SyncRequestCreateUpdateModel>>> SyncRequestsResponded(int userId)
+        public async Task<ActionResult<List<SyncRequestCreateUpdateModel>>> SyncRequestsResponded(Guid userId)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}/delete")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult<SyncRequestDetailsModel>> RemoveSyncRequest(int id)
         {
             try

@@ -74,7 +74,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("update")]
+        [Route("update/{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(PersonCreateUpdateModel person)
         {
             try
@@ -89,7 +89,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}/delete")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> DeletePerson(int id)
         {
             try

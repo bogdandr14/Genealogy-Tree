@@ -19,6 +19,7 @@ namespace GenealogyTree.Data
         private IReligionRepository _religion;
         private ISyncedUsersRepository _synchedUsers;
         private ISyncRequestRepository _syncRequest;
+        private ITreeRepository _tree;
         private IUserRepository _user;
 
         public UnitOfWork(GenealogyTreeDbContext repositoryContext)
@@ -38,6 +39,7 @@ namespace GenealogyTree.Data
         public IReligionRepository Religion => _religion ??= new ReligionRepository(_repoContext);
         public ISyncedUsersRepository SynchedUsers => _synchedUsers ??= new SynchedUsersRepository(_repoContext);
         public ISyncRequestRepository SyncRequest => _syncRequest ??= new SyncRequestRepository(_repoContext);
+        public ITreeRepository Tree => _tree ??= new TreeRepository(_repoContext);
         public IUserRepository User => _user ??= new UserRepository(_repoContext);
     }
 }

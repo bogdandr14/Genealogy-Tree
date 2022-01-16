@@ -4,6 +4,7 @@ using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<UserDetailsModel> GetUserByIdAsync(int userId)
+        public async Task<UserDetailsModel> GetUserByIdAsync(Guid userId)
         {
             User user = await unitOfWork.User.FindById(userId);
             return _mapper.Map<UserDetailsModel>(user);
@@ -45,7 +46,7 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             User userEntity = _mapper.Map<User>(user);
-            User userToUpdate = unitOfWork.User.Filter(x => x.Username == user.Username).FirstOrDefault();
+            User userToUpdate = await unitOfWork.User.FindById(user.UserId);
             userEntity.Id = userToUpdate.Id;
             userEntity.PersonId = userToUpdate.PersonId;
             userEntity = await unitOfWork.User.Update(userEntity);

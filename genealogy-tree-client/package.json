@@ -29,6 +29,7 @@
     "@ionic/angular": "^6.0.1",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "guid-typescript": "^1.0.9",
     "messageformat": "^2.3.0",
     "ngx-toastr": "^14.2.1",
     "ngx-translate-messageformat-compiler": "^4.11.0",

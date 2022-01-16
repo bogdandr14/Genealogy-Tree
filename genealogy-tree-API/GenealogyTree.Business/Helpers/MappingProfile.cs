@@ -65,8 +65,10 @@ namespace GenealogyTree.Business.Helpers
                .ReverseMap();
 
             CreateMap<Person, PersonDetailsModel>()
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
                 .ReverseMap();
             CreateMap<Person, PersonCreateUpdateModel>()
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
                 .ReverseMap();
 
             CreateMap<Religion, GenericNameModel>()
@@ -97,10 +99,15 @@ namespace GenealogyTree.Business.Helpers
                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.Person.LivingPlace))
                .ForMember(x => x.Parents, y => y.MapFrom(z => z.Person.Parents))
                .ForMember(x => x.Children, y => y.MapFrom(z => z.Person.Children))
+               .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
+               .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
                .ReverseMap();
             CreateMap<User, UserUpdateModel>()
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
                 .ReverseMap();
             CreateMap<Person, UserUpdateModel>()
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
                 .ReverseMap();
 
             CreateMap<User, RegisterModel>()
@@ -111,9 +118,10 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<User, LoginResponseModel>()
                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
+               .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
+               .ForMember(x => x.Username, y => y.MapFrom(z => z.Username))
+               .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
                .ReverseMap();
-            CreateMap<TokenResponseModel, LoginResponseModel>()
-                .ReverseMap();
         }
     }
 }

@@ -11,7 +11,7 @@ import { UserSearchComponent } from './components/user-search/user-search.compon
   declarations: [ProfileComponent, UserSearchComponent],
   imports: [
     SharedModule,
-    UserRoutingModule
+    UserRoutingModule,
   ]
 })
 export class UserModule { }

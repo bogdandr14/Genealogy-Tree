@@ -3,6 +3,7 @@ using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public List<EducationModel> GetAllEducationsForPerson(int userId)
+        public List<EducationModel> GetAllEducationsForUser(Guid userId)
         {
             List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).ToList();
             List<EducationModel> returnEvent = _mapper.Map<List<EducationModel>>(educations);

@@ -68,7 +68,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}/delete")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult<LocationModel>> DeleteLocation(int id)
         {
             try

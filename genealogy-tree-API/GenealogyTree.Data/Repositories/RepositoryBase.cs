@@ -61,7 +61,7 @@ namespace GenealogyTree.Data.Repositories
             return entity;
         }
 
-        public async Task<T> Delete(int id)
+        public async Task<T> Delete(params object[] id)
         {
             var entity = await DbSet.FindAsync(id);
             if (entity == null)

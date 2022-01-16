@@ -20,7 +20,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("/parents/{childId:int}")]
+        [Route("parents/{childId:int}")]
         public async Task<ActionResult<List<ParentModel>>> GetAllParents(int childId)
         {
             try
@@ -39,7 +39,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("/children/{parentId:int}")]
+        [Route("children/{parentId:int}")]
         public async Task<ActionResult<List<ParentModel>>> GetAllChildren(int parentId)
         {
             try
@@ -107,7 +107,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}/delete")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult<ParentChildDetailsModel>> DeleteLocation(int id)
         {
             try

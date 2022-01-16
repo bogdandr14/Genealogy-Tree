@@ -24,12 +24,12 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("{personId:int}")]
-        public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(int personId)
+        [Route("{personId:Guid}")]
+        public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(Guid personId)
         {
             try
             {
-                List<EducationModel> returnEvent = _educationService.GetAllEducationsForPerson(personId);
+                List<EducationModel> returnEvent = _educationService.GetAllEducationsForUser(personId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -96,7 +96,7 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpDelete]
-        [Route("{id}/delete")]
+        [Route("delete/{id:int}")]
         public async Task<ActionResult> DeleteEducation(int id)
         {
             try

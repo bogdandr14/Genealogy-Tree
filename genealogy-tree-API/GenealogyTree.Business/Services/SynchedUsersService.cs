@@ -3,6 +3,7 @@ using GenealogyTree.Domain.DTO.Sync;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace GenealogyTree.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<SyncedUserModel>> GetAllSynchedUsersForUser(int userId)
+        public async Task<List<SyncedUserModel>> GetAllSynchedUsersForUser(Guid userId)
         {
             List<Sync> synchedUsers = unitOfWork.SynchedUsers.Filter(x => x.PrimaryUserId == userId).ToList();
 

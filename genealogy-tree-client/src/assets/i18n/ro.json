@@ -55,7 +55,10 @@
     "minLength": "Câmpul trebuie să aibă cel puțin { length } caractere.",
     "maxLength": "Câmpul trebuie să aibă cel mult { length } caractere.",
     "minValue": "Trebuie să fie cel puţin {value}.",
-    "maxValue": "Trebuie să fie cel mult {value}."
+    "maxValue": "Trebuie să fie cel mult {value}.",
+    "invalidEmail": "Format de email invalid.",
+    "emailTaken": "E-mailul este deja folosit.",
+    "usernameTaken": "Utilizatorul este deja folosit."
   },
   "loadingMessage": "Se încarcă...",
   "_paginator": {

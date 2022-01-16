@@ -8,6 +8,7 @@ namespace GenealogyTree.Domain.Entities
     {
         public User()
         {
+            this.Id = Guid.NewGuid();
             this.Educations = new HashSet<Education>();
             this.Occupations = new HashSet<Occupation>();
             this.SyncedToUsers = new HashSet<Sync>();
@@ -16,22 +17,20 @@ namespace GenealogyTree.Domain.Entities
             this.ReceivedRequests = new HashSet<SyncRequest>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public bool NotifyUpdates { get; set; }
+        public string About { get; set; }
         public bool NotifyBirthdays { get; set; }
+        public bool NotifyUpdates { get; set; }
         public bool SharePersonalInfo { get; set; }
         public bool ThemePreference { get; set; }
         public string LanguagePreference { get; set; }
 
-        public DateTime LastTreeUpdate { get; set; }
         public DateTime? LastSyncCheck { get; set; }
-        public string About { get; set; }
-
 
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]

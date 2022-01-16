@@ -13,6 +13,6 @@ namespace GenealogyTree.Domain.Interfaces.Repositories
         Task<T> FindById(params object[] keys);
         Task<T> Create(T entity);
         Task<T> Update(T entity);
-        Task<T> Delete(int id);
+        Task<T> Delete(params object[] id);
     }
 }

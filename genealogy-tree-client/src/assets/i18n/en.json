@@ -55,7 +55,10 @@
     "minLength": "Field must be at least { length } characters long.",
     "maxLength": "Field must be at most { length } characters long.",
     "minValue": "Must be at least {value}.",
-    "maxValue": "Must be at most {value}."
+    "maxValue": "Must be at most {value}.",
+    "invalidEmail": "Invalid email format.",
+    "emailTaken": "The email is already in use.",
+    "usernameTaken": "The username is already in use."
   },
   "loadingMessage": "Loading...",
   "_paginator": {

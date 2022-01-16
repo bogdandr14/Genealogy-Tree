@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -34,6 +35,7 @@ export class AuthService extends DataService {
   }
 
   public register(registerDetails: RegisterModel): Observable<void> {
+    debugger;
     const path = `register`;
 
     return super

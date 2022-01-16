@@ -39,8 +39,8 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("{id:int}")]
-        public async Task<ActionResult<UserDetailsModel>> GetUserInfo(int id)
+        [Route("{id:Guid}")]
+        public async Task<ActionResult<UserDetailsModel>> GetUserInfo(Guid id)
         {
             try
             {
@@ -83,8 +83,8 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                //bool isAvailable = await _userService.CheckUsernameAvailable(username);
-                return Ok(false);
+                bool isAvailable = await _userService.CheckUsernameAvailable(username);
+                return Ok(isAvailable);
             }
             catch (Exception e)
             {
@@ -98,8 +98,8 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                //bool isAvailable = await _userService.CheckEmailAvailable(email);
-                return Ok(false);
+                bool isAvailable = await _userService.CheckEmailAvailable(email);
+                return Ok(isAvailable);
             }
             catch (Exception e)
             {

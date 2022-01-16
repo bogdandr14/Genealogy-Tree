@@ -21,6 +21,16 @@ export class NavigationComponent {
         path: '/user/profile',
         icon: 'person',
       },
+      {
+        title: '_menu._links.relatives',
+        path: '/person/list',
+        icon: 'people',
+      },
+      {
+        title: '_menu._links.settings',
+        path: '/user/settings',
+        icon: 'settings',
+      },
     ];
   }
 }

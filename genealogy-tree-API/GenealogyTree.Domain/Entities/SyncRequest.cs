@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
@@ -8,11 +9,11 @@ namespace GenealogyTree.Domain.Entities
         public bool ReceiverResponded { get; set; }
         public bool Response { get; set; }
 
-        public int SenderId { get; set; }
+        public Guid SenderId { get; set; }
         [ForeignKey("SenderId")]
         public User Sender { get; set; }
 
-        public int ReceiverId { get; set; }
+        public Guid ReceiverId { get; set; }
         [ForeignKey("ReceiverId")]
         public User Receiver { get; set; }
         

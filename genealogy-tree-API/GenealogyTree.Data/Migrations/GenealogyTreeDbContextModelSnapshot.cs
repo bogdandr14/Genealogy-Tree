@@ -4,16 +4,14 @@ using GenealogyTree.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GenealogyTree.Data.Migrations
 {
     [DbContext(typeof(GenealogyTreeDbContext))]
-    [Migration("20220108173455_modifiedEntitiesForeignKeys")]
-    partial class modifiedEntitiesForeignKeys
+    partial class GenealogyTreeDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,8 +38,8 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -162,8 +160,8 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("WorkingPlaceName")
                         .HasColumnType("nvarchar(max)");
@@ -237,6 +235,9 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<int?>("ReligionId")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("TreeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BirthPlaceId");
@@ -248,6 +249,8 @@ namespace GenealogyTree.Data.Migrations
                     b.HasIndex("NationalityId");
 
                     b.HasIndex("ReligionId");
+
+                    b.HasIndex("TreeId");
 
                     b.ToTable("People");
                 });
@@ -274,17 +277,17 @@ namespace GenealogyTree.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PrimaryUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PrimaryUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SyncedPersonInPrimaryTreeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SyncedUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SyncedUserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("SynchedUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("SynchedUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -305,8 +308,8 @@ namespace GenealogyTree.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ReceiverId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ReceiverReferenceInSenderTreeId")
                         .HasColumnType("int");
@@ -317,8 +320,8 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<bool>("Response")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -331,12 +334,28 @@ namespace GenealogyTree.Data.Migrations
                     b.ToTable("SyncRequests");
                 });
 
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Tree", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Trees");
+                });
+
             modelBuilder.Entity("GenealogyTree.Domain.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
@@ -344,10 +363,10 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastSyncCheck")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("LanguagePreference")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("LastTreeUpdate")
+                    b.Property<DateTime?>("LastSyncCheck")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("NotifyBirthdays")
@@ -369,6 +388,9 @@ namespace GenealogyTree.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SharePersonalInfo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ThemePreference")
                         .HasColumnType("bit");
 
                     b.Property<string>("Username")
@@ -475,6 +497,12 @@ namespace GenealogyTree.Data.Migrations
                         .HasForeignKey("ReligionId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("GenealogyTree.Domain.Entities.Tree", "Tree")
+                        .WithMany("PeopleInTree")
+                        .HasForeignKey("TreeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("BirthPlace");
 
                     b.Navigation("Gender");
@@ -484,6 +512,8 @@ namespace GenealogyTree.Data.Migrations
                     b.Navigation("Nationality");
 
                     b.Navigation("Religion");
+
+                    b.Navigation("Tree");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Sync", b =>
@@ -591,6 +621,11 @@ namespace GenealogyTree.Data.Migrations
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Religion", b =>
                 {
                     b.Navigation("People");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Tree", b =>
+                {
+                    b.Navigation("PeopleInTree");
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.User", b =>
