@@ -28,12 +28,14 @@
         <ion-card-content>
           <ion-list inset="true">
             <ion-list-header
-              ><ion-label><h1>User details</h1></ion-label></ion-list-header
+              ><ion-label
+                ><h1>{{ "_user.details" | translate }}</h1></ion-label
+              ></ion-list-header
             >
             <ion-accordion-group>
               <ion-accordion value="colors">
                 <ion-item slot="header">
-                  <ion-label>Personal information</ion-label>
+                  <ion-label>{{ "_person.information" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <ion-item>
@@ -69,7 +71,7 @@
                   <ion-item>
                     <ion-label>{{ "birthday" | translate }}:</ion-label>
                     <span>
-                      {{ personalInfo?.birthDate | date: "longDate" }}</span
+                      {{ personalInfo?.birthDate | date: "dd/MM/yyyy" }}</span
                     >
                   </ion-item>
                   <ion-button
@@ -86,14 +88,14 @@
                     color="secondary"
                     [routerLink]="['/person/details/', personalInfo.personId]"
                   >
-                    {{ "view details" | translate }}
+                    {{ "viewDetails" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
 
               <ion-accordion value="educations">
                 <ion-item slot="header">
-                  <ion-label>Education</ion-label>
+                  <ion-label>{{ "educations" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <div *ngFor="let education of educations">
@@ -105,14 +107,14 @@
                     </ion-item>
                   </div>
                   <ion-button expand="block" fill="clear" color="success">
-                    {{ "add education" | translate }}
+                    {{ "_add.education" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
 
               <ion-accordion value="occupations">
                 <ion-item slot="header">
-                  <ion-label>Occupation</ion-label>
+                  <ion-label>{{ "occupations" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <ion-item *ngFor="let occupation of occupations">
@@ -122,14 +124,14 @@
                     </ion-button>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="success">
-                    {{ "add occupation" | translate }}
+                    {{ "_add.occupation" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
 
               <ion-accordion value="cont">
                 <ion-item slot="header">
-                  <ion-label>Contact</ion-label>
+                  <ion-label>{{ "contact" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <ion-item>
@@ -150,7 +152,7 @@
                     </ion-chip>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="warning">
-                    {{ "edit contact" | translate }}
+                    {{ "_edit.contact" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>

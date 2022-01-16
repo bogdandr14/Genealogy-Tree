@@ -25,7 +25,7 @@ export class PersonEditComponent implements OnInit {
   public religionOptions: CommonObject[] = [];
 
   private person$: Observable<PersonEditModel>;
-  private isUpdate: boolean = false;
+  public  isUpdate: boolean = false;
   private destroy$: Subject<boolean> = new Subject();
 
   constructor(
@@ -46,7 +46,9 @@ export class PersonEditComponent implements OnInit {
           this.isUpdate = true;
           return this.personService.getPerson(this.personId);
         } else {
-          return of(new PersonEditModel());
+          const personEdit = new PersonEditModel();
+          personEdit.treeId = JSON.parse(sessionStorage.getItem('user')).treeId;
+          return of(personEdit);
         }
       })
     );
@@ -78,18 +80,20 @@ export class PersonEditComponent implements OnInit {
 
   onSubmit() {
     let personUpdated: Subscription;
-    personUpdated;
+    debugger;
     if (this.isUpdate) {
       personUpdated = this.personService
         .updatePerson(this.personId, this.personEdit)
         .subscribe((person) => {
-          this.router.navigate(['person', 'details', person.id]);
+          debugger;
+          this.router.navigate(['/person/details', person.personId]);
         });
     } else {
       personUpdated = this.personService
         .createPerson(this.personEdit)
         .subscribe((person) => {
-          this.router.navigate(['person', 'details', person.id]);
+          debugger;
+          this.router.navigate(['/person/details', person.personId]);
         });
     }
   }

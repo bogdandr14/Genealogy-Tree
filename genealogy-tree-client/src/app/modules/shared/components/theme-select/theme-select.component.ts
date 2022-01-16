@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Renderer2 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./theme-select.component.scss'],
 })
 export class ThemeSelectComponent implements OnInit {
+  @Output() themeChanged = new EventEmitter<boolean>();
+
   public darkTheme: boolean;
   public themeCtrl: FormControl;
 
@@ -29,5 +31,6 @@ export class ThemeSelectComponent implements OnInit {
     } else {
       this.renderer.setAttribute(document.body, 'color-theme', 'light');
     }
+    this.themeChanged.emit(theme);
   }
 }

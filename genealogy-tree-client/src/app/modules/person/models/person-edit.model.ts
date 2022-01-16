@@ -12,7 +12,8 @@ export class PersonEditModel extends PersonBaseModel {
     this.birthPlace = new LocationModel();
     this.livingPlace = new LocationModel();
   }
-  userId: Guid;
+  userId: string;
+  treeId: string;
   gender: CommonObject;
   nationality: CommonObject;
   religion: CommonObject;

@@ -1,6 +1,6 @@
 import { Guid } from "guid-typescript";
 export class LoginResponseModel {
-  userId!: Guid;
-  personId!: number;
+  userId!: string;
+  treeId!: string;
   token!: string;
 }

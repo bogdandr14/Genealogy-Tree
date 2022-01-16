@@ -1,6 +1,5 @@
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { LanguageSelectComponent } from './components/language-select/language-select.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import {
   HttpClient,
@@ -25,7 +24,6 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
-import { ThemeSelectComponent } from './components/theme-select/theme-select.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,11 +35,9 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
 @NgModule({
   declarations: [
     NavigationComponent,
-    LanguageSelectComponent,
     LoadingSpinnerComponent,
     HeaderComponent,
     MenuComponent,
-    ThemeSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +72,6 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
     TranslateModule,
     ReactiveFormsModule,
     NavigationComponent,
-    LanguageSelectComponent,
     LoadingSpinnerComponent,
     HeaderComponent,
     MenuComponent,

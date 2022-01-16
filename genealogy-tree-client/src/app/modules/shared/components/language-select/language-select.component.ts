@@ -1,9 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LanguageModel } from '../../models/language.model';
+import { LanguageModel } from '../../../core/models/language.model';
 
 @Component({
   selector: 'app-language-select',
@@ -11,6 +17,8 @@ import { LanguageModel } from '../../models/language.model';
   styleUrls: ['./language-select.component.scss'],
 })
 export class LanguageSelectComponent implements OnInit, OnDestroy {
+  @Output() languageChanged = new EventEmitter<string>();
+
   public currentLanguage: string = '';
   public selectedLaguage: FormControl;
   public languageOptions: LanguageModel[];
@@ -29,7 +37,10 @@ export class LanguageSelectComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       this.selectedLaguage.valueChanges.subscribe({
-        next: (newVal) => this.translateService.use(newVal),
+        next: (newVal) => {
+          this.languageChanged.emit(newVal);
+          this.translateService.use(newVal);
+        },
       })
     );
   }

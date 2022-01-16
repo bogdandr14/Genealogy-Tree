@@ -75,9 +75,11 @@
                   #gender="ngModel"
                   [(ngModel)]="personEdit.gender"
                   [selectedText]="
-                    '_genders.' + personEdit.gender?.name
-                      | lowercase
-                      | translate
+                    personEdit.gender?.id
+                      ? ('_genders.' + personEdit.gender?.name
+                        | lowercase
+                        | translate)
+                      : ''
                   "
                   interface="popover"
                   [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
@@ -105,9 +107,11 @@
                   #nat="ngModel"
                   [(ngModel)]="personEdit.nationality"
                   [selectedText]="
-                    '_nationalities.' + personEdit.nationality?.name
-                      | lowercase
-                      | translate
+                    personEdit.nationality?.id
+                      ? ('_nationalities.' + personEdit.nationality?.name
+                        | lowercase
+                        | translate)
+                      : ''
                   "
                   interface="popover"
                   [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
@@ -135,9 +139,11 @@
                   #nat="ngModel"
                   [(ngModel)]="personEdit.religion"
                   [selectedText]="
-                    '_religions.' + personEdit.religion?.name
-                      | lowercase
-                      | translate
+                    personEdit.religion?.id
+                      ? ('_religions.' + personEdit.religion?.name
+                        | lowercase
+                        | translate)
+                      : ''
                   "
                   interface="popover"
                   [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
@@ -155,7 +161,7 @@
             <!-- BIRTHDAY -->
             <ion-item-group id="birthday">
               <ion-item color="transparent">
-                <ion-label for="bday" position="floating">
+                <ion-label for="bday" position="floating" stacked>
                   <b>
                     {{ "birthday" | translate }}
                     <span class="required"> *</span>
@@ -166,6 +172,11 @@
                   name="bday"
                   #bday="ngModel"
                   [(ngModel)]="personEdit.birthDate"
+                  [value]="
+                    personEdit.birthDate
+                      ? (personEdit.birthDate | date: 'dd/MM/yyyy')
+                      : ''
+                  "
                   required
                 ></ion-input>
               </ion-item>
@@ -206,7 +217,7 @@
               expand="block"
               [disabled]="form.invalid"
             >
-              {{ "save" | translate }}
+              {{ "_common.save" | translate }}
             </ion-button>
           </form>
           <ion-button
@@ -214,9 +225,9 @@
             color="secondary"
             fill="clear"
             expand="block"
-            [routerLink]="['/person/details', personEdit.id]"
+            [routerLink]="['/person/list']"
           >
-            {{ "backToDetails" | translate }}
+            {{ "_common.cancel" | translate }}
           </ion-button>
         </ion-card-content>
       </ion-card>

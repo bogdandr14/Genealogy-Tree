@@ -1,5 +1,5 @@
 export class PersonBaseModel {
-  id: number;
+  personId: number;
   firstName: string;
   lastName: string;
   birthDate: Date;

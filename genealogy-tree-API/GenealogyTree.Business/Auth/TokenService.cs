@@ -20,10 +20,9 @@ namespace GenealogyTree.Business.Auth
             var authClaims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.Person.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName, user.Person.LastName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
                 new Claim(UserRole, ((int)userRole).ToString())
             };
 

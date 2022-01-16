@@ -3,6 +3,7 @@ using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,13 @@ namespace GenealogyTree.Business.Services
             return personEntity;
         }
 
+        public async Task<List<GenericPersonModel>> GetAllPeopleInTree(Guid treeId)
+        {
+            List<Person> person = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
+            List<GenericPersonModel> personEntity = _mapper.Map<List<GenericPersonModel>>(person);
+            return personEntity;
+        }
+
         public async Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person)
         {
             if (person == null)
@@ -44,6 +52,9 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Person personEntity = _mapper.Map<Person>(person);
+            personEntity.Gender = null;
+            personEntity.Nationality = null;
+            personEntity.Religion = null;
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             return returnEvent;

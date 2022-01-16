@@ -1,7 +1,8 @@
 export class UserSettingsModel{
-  id: number;
-  username: string;
+  id: string;
   notifyUpdates: boolean;
   notifyBirthdays: boolean;
   sharePersonalInfo: boolean;
+  themePreference: boolean;
+  languagePreference: string;
 }

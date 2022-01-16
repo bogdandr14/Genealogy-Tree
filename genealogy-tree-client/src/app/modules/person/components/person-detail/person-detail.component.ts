@@ -1,7 +1,10 @@
+/* eslint-disable no-debugger */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { UserService } from 'src/app/modules/core/services/user.service';
 import { PersonDetailsModel } from '../../models/person-details.model';
 import { PersonEditModel } from '../../models/person-edit.model';
 import { PersonService } from '../../services/person.service';
@@ -20,6 +23,7 @@ export class PersonDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private userService: UserService,
     private personService: PersonService
   ) {}
 
@@ -39,5 +43,16 @@ export class PersonDetailComponent implements OnInit {
     this.person$.subscribe((person) => {
       this.personDetails = person;
     });
+  }
+
+  public get canDelete() {
+    return !this.userService.isCurrentUser(this.personDetails.userId);
+  }
+
+  public get isUser() {
+    return (
+      this.personDetails.userId &&
+      this.personDetails.userId != '00000000-0000-0000-0000-000000000000'
+    );
   }
 }

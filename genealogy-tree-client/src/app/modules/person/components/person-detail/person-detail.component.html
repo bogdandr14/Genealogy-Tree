@@ -27,13 +27,27 @@
         </ion-card-header>
         <ion-card-content>
           <ion-list inset="true">
-            <ion-list-header
-              ><ion-label><h1>Person details</h1></ion-label></ion-list-header
-            >
+            <ion-list-header>
+              <ion-row class="ion-justify-content-start">
+                <ion-col>
+                  <ion-label><h1>{{ "_person.details" | translate }}</h1></ion-label>
+                </ion-col>
+                <ion-col size="2" *ngIf="isUser">
+                  <ion-button
+                    type="button"
+                    [routerLink]="['/user/profile']"
+                    fill="clear"
+                    color="success"
+                  >
+                    <ion-icon name="person-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-list-header>
             <ion-accordion-group>
               <ion-accordion value="colors">
                 <ion-item slot="header">
-                  <ion-label>Personal information</ion-label>
+                  <ion-label>{{ "_person.information" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <ion-item>
@@ -69,14 +83,20 @@
                   <ion-item>
                     <ion-label>{{ "birthday" | translate }}:</ion-label>
                     <span>
-                      {{ personDetails?.birthDate | date: "longDate" }}</span
+                      {{ personDetails?.birthDate | date: "dd/MM/yyyy" }}</span
+                    >
+                  </ion-item>
+                  <ion-item *ngIf="personDetails?.deathDate">
+                    <ion-label>{{ "deathday" | translate }}:</ion-label>
+                    <span>
+                      {{ personDetails?.deathDate | date: "dd/MM/yyyy" }}</span
                     >
                   </ion-item>
                   <ion-button
                     expand="block"
                     fill="clear"
                     color="warning"
-                    [routerLink]="['/person/edit/', personDetails.id]"
+                    [routerLink]="['/person/edit/', personId]"
                   >
                     {{ "_edit.information" | translate }}
                   </ion-button>
@@ -84,38 +104,25 @@
               </ion-accordion>
               <ion-accordion value="places">
                 <ion-item slot="header">
-                  <ion-label>Locations</ion-label>
+                  <ion-label>{{ "locations" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
-
                   <ion-item>
-                    <ion-label>{{ "from" | translate }}:</ion-label>
-                    <span>
-                      {{
-                        "_religions." + personDetails?.birthPlace?.city
-                          | lowercase
-                          | translate
-                      }}</span
-                    >
+                    <ion-label>{{ "_location.from" | translate }}:</ion-label>
+                    <span> {{ personDetails?.birthPlace?.city }}</span>
                   </ion-item>
                   <ion-item>
-                    <ion-label>{{ "lives in" | translate }}:</ion-label>
-                    <span>
-                      {{
-                        "_religions." + personDetails?.livingPlace?.city
-                          | lowercase
-                          | translate
-                      }}</span
-                    >
+                    <ion-label>{{ "_location.lives" | translate }}:</ion-label>
+                    <span> {{ personDetails?.livingPlace?.city }}</span>
                   </ion-item>
                   <ion-button expand="block" fill="clear" color="warning">
-                    {{ "edit location" | translate }}
+                    {{ "_edit.locations" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
               <ion-accordion value="parents">
                 <ion-item slot="header">
-                  <ion-label>Parents</ion-label>
+                  <ion-label>{{ "parents" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <div *ngFor="let parent of personDetails.parents">
@@ -127,13 +134,13 @@
                     </ion-item>
                   </div>
                   <ion-button expand="block" fill="clear" color="success">
-                    {{ "add parent" | translate }}
+                    {{ "_add.parent" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
               <ion-accordion value="children">
                 <ion-item slot="header">
-                  <ion-label>Children</ion-label>
+                  <ion-label>{{ "children" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <div *ngFor="let child of personDetails.children">
@@ -145,13 +152,13 @@
                     </ion-item>
                   </div>
                   <ion-button expand="block" fill="clear" color="success">
-                    {{ "add children" | translate }}
+                    {{ "_add.child" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
               <ion-accordion value="marriages">
                 <ion-item slot="header">
-                  <ion-label>Marriages</ion-label>
+                  <ion-label>{{ "marriages" | translate }}</ion-label>
                 </ion-item>
                 <ion-list slot="content">
                   <div *ngFor="let marriages of personDetails.marriages">
@@ -165,13 +172,26 @@
                     </ion-item>
                   </div>
                   <ion-button expand="block" fill="clear" color="success">
-                    {{ "add marriage" | translate }}
+                    {{ "_add.marriage" | translate }}
                   </ion-button>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
-            <ion-button  *ngIf="!personDetails.userId" expand="block" fill="clear" color="danger">
-              {{ "delete person" | translate }}
+            <ion-button
+              [routerLink]="['/person/list']"
+              expand="block"
+              fill="clear"
+              color="secondary"
+            >
+              {{ "goToRelatives" | translate }}
+            </ion-button>
+            <ion-button
+              *ngIf="canDelete"
+              expand="block"
+              fill="clear"
+              color="danger"
+            >
+              {{ "_delete.person" | translate }}
             </ion-button>
           </ion-list>
         </ion-card-content>

@@ -1,3 +1,67 @@
-<p>
-  people-list works!
-</p>
+<ion-list>
+  <ion-button
+    fill="clear"
+    color="success"
+    expand="block"
+    [routerLink]="['/person/create']"
+  >
+    {{ "_add.person" | translate }}
+  </ion-button>
+  <ion-card *ngFor="let person of peopleList">
+    <ion-card-header class="ion-align-self-center">
+      <ion-row class="ion-justify-content-start">
+        <ion-col size-xl="1" size-md="2" size-xs="3">
+          <ion-avatar class="">
+            <img
+              src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+            />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="6" class="ion-padding-start">
+          <ion-card-title>
+            <ion-label>
+              <h1>{{ person?.firstName }}</h1></ion-label
+            >
+          </ion-card-title>
+          <ion-card-subtitle>
+            <ion-label>
+              <h1>{{ person?.lastName }}</h1></ion-label
+            >
+          </ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label> {{ "birthday" | translate }}:</ion-label>
+        <span> {{ person?.birthDate | date: 'dd/MM/yyyy' }}</span>
+      </ion-item>
+      <ion-item *ngIf="person?.deathDate">
+        <ion-label> {{ "deathday" | translate }}:</ion-label>
+        <span> {{ person?.deathDate | date: "dd/MM/yyyy" }}</span>
+      </ion-item>
+      <ion-item>
+        <ion-button
+          [routerLink]="['/person/details', person.personId]"
+          fill="clear"
+          color="secondary"
+          slot="start"
+        >
+          {{ "viewDetails" | translate }}
+        </ion-button>
+        <ion-button
+          *ngIf="isUser()"
+          type="button"
+          [routerLink]="['/user/profile']"
+          fill="clear"
+          color="success"
+        >
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" slot="end">
+          {{ "delete" | translate }}
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-list>

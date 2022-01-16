@@ -39,6 +39,25 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
+        [Route("tree/{treeId:Guid}")]
+        public async Task<ActionResult<GenericPersonModel>> GetPeopleInTree(Guid treeId)
+        {
+            try
+            {
+                List<GenericPersonModel> returnEvent = await _personService.GetAllPeopleInTree(treeId);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
         [Route("search/{name}")]
         public async Task<ActionResult<PersonDetailsModel>> SearchPeople(string name)
         {

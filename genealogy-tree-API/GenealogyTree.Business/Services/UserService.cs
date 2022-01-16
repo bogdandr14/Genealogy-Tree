@@ -68,7 +68,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<UserSettingsModel> GetUserSettings(string username)
         {
-            User user = unitOfWork.User.Filter(x => x.Username == username).Include(u => u.Person).FirstOrDefault();
+            User user = unitOfWork.User.Filter(x => x.Username == username).FirstOrDefault();
             return _mapper.Map<UserSettingsModel>(user);
         }
 

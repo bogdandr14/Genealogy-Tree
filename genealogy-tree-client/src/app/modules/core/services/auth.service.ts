@@ -2,6 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { Observable, of, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { LoginModel } from '../../auth/models/login.model';
@@ -15,7 +16,6 @@ export class AuthService extends DataService {
   timerSubscription = new Subscription();
   constructor(public http: HttpClient, private router: Router, private userService: UserService) {
     super(http, 'api/auth');
-    console.log("in constructor");
     if (this.isLoggedIn()) {
       this.setExpirationCounter();
     }
@@ -29,7 +29,7 @@ export class AuthService extends DataService {
         tap(login => {
           this.setJwt(login.token);
           this.setExpirationCounter();
-          this.setUserInfo();
+          this.setUserInfo(login);
           this.router.navigate(['home']);
         }));
   }
@@ -65,11 +65,10 @@ export class AuthService extends DataService {
     return expiration;
   }
 
-  private setUserInfo() {
-    const token = this.getJwt();
-    const tokenInfo = (JSON.parse(atob(token.split('.')[1])));
-    sessionStorage.setItem('user',JSON.stringify({ username: tokenInfo.unique_name, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name }));
-    this.userService.setUser({ id: tokenInfo.jti, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name });
+  private setUserInfo(loginResponse: LoginResponseModel) {
+    const tokenInfo = (JSON.parse(atob(loginResponse.token.split('.')[1])));
+    sessionStorage.setItem('user',JSON.stringify({ username: tokenInfo.unique_name, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name, treeId: loginResponse.treeId, userId: loginResponse.userId }));
+    this.userService.setUser({ id: loginResponse.userId, treeId: loginResponse.treeId, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name });
   }
 
   private setExpirationCounter() {
