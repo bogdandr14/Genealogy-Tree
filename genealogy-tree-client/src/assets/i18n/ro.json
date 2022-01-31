@@ -126,6 +126,7 @@
     "birthdays": "Notifică-mă când sunt zile de naştere"
   },
   "shareContact": "Împărtăşeşte e-mail-ul şi numărul de telefon cu alţi utilizatori",
+  "changePassword":"Schimbă parola",
   "error": "Eroare",
   "_errorMessage": {
     "wrongCredentials": "Credentialele sunt invalide, te rog incearca din nou"

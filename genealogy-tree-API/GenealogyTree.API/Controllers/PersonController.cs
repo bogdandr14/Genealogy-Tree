@@ -108,7 +108,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{id:int}")]
+        [Route("{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> DeletePerson(int id)
         {
             try

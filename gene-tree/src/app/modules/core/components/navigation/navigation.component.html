@@ -1,0 +1,67 @@
+<ion-list *ngIf="authService.isLoggedIn()" lines="none">
+  <ion-list-header> GeneTree </ion-list-header>
+  <ion-menu-toggle
+    autoHide="false"
+    *ngFor="let link of navLinks; let i = index"
+  >
+    <ion-item
+      [routerLink]="link.path"
+      [queryParams]="link.queryParams"
+      routerLinkActive="selected"
+      routerDirection="root"
+      detail="false"
+    >
+      <ion-icon slot="start" [name]="link.icon"></ion-icon>
+      <ion-label>
+        {{ link.title | translate }}
+      </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list>
+<!-- <ion-list *ngIf="authService.isLoggedIn()" lines="none">
+  <ion-list-header> {{ "Account" | translate }} </ion-list-header>
+  <ion-menu-toggle autoHide="false">
+    <ion-item
+      routerLink="/account"
+      routerLinkActive="selected"
+      routerDirection="root"
+      detail="false"
+    >
+      <ion-icon slot="start" name="person"></ion-icon>
+      <ion-label> {{ "_pages.profile" | translate }} </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+
+  <ion-menu-toggle autoHide="false">
+    <ion-item button (click)="authService.logout()" detail="false">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+      <ion-label> {{ "logout" | translate }} </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list> -->
+
+<ion-list *ngIf="!authService.isLoggedIn()" lines="none">
+  <ion-list-header> {{ "account" | translate }} </ion-list-header>
+  <ion-menu-toggle autoHide="false">
+    <ion-item
+      routerLink="/account/login"
+      routerLinkActive="selected"
+      routerDirection="root"
+      detail="false"
+    >
+      <ion-icon slot="start" name="log-in"></ion-icon>
+      <ion-label> {{ "_pages.login" | translate }} </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+  <ion-menu-toggle autoHide="false">
+    <ion-item
+      routerLink="/account/register"
+      routerLinkActive="selected"
+      routerDirection="root"
+      detail="false"
+    >
+      <ion-icon slot="start" name="person-add"></ion-icon>
+      <ion-label> {{ "_pages.register" | translate }} </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list>

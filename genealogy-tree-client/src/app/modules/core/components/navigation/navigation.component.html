@@ -1,13 +1,16 @@
-<ng-container *ngFor="let link of navLinks">
-  <ion-button
-    type="button"
-    [routerLink]="[link.path]"
-    [queryParams]="link.queryParams"
-    fill="clear"
-    expand="block"
-    color="secondary"
-  >
-    <ion-icon name="{{ link.icon }}" slot="start"></ion-icon>
-    {{ link.title | translate }}
-  </ion-button>
-</ng-container>
+<ion-toolbar>
+  <ng-container *ngFor="let link of navLinks">
+    <ion-button
+      menuToggle
+      type="button"
+      [routerLink]="[link.path]"
+      [queryParams]="link.queryParams"
+      fill="clear"
+      expand="block"
+      color="secondary"
+    >
+      <ion-icon name="{{ link.icon }}" slot="start"></ion-icon>
+      {{ link.title | translate }}
+    </ion-button>
+  </ng-container>
+</ion-toolbar>

@@ -8,6 +8,7 @@ import {
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/modules/core/services/user.service';
 import { environment } from 'src/environments/environment';
 import { LanguageModel } from '../../../core/models/language.model';
 
@@ -24,16 +25,17 @@ export class LanguageSelectComponent implements OnInit, OnDestroy {
   public languageOptions: LanguageModel[];
   private subscriptions: Subscription[] = [];
 
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService,
+    private userService: UserService
+  ) {
     this.selectedLaguage = new FormControl();
     this.languageOptions = environment.appSettings.languages;
   }
 
   ngOnInit(): void {
-    this.currentLanguage =
-      this.translateService.currentLang || this.translateService.defaultLang;
+    this.currentLanguage = this.translateService.currentLang;
 
-    this.selectedLaguage.setValue(this.currentLanguage);
 
     this.subscriptions.push(
       this.selectedLaguage.valueChanges.subscribe({
@@ -43,6 +45,12 @@ export class LanguageSelectComponent implements OnInit, OnDestroy {
         },
       })
     );
+    this.selectedLaguage.setValue(this.currentLanguage);
+    this.userService
+      .getUserSettings(JSON.parse(sessionStorage.getItem('user')).username)
+      .subscribe((settings) => {
+        this.selectedLaguage.setValue(settings.languagePreference);
+      });
   }
 
   ngOnDestroy(): void {

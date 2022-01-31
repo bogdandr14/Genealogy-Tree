@@ -54,8 +54,14 @@
             >
               {{ "_common.save" | translate }}
             </ion-button>
-
             <br />
+            <ion-button
+            expand="block"
+            fill="clear"
+            color="warning"
+          >
+            {{ "changePassword" | translate }}
+          </ion-button>
             <br />
             <ion-button
               *ngIf="authService.isLoggedIn()"
@@ -72,3 +78,4 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+

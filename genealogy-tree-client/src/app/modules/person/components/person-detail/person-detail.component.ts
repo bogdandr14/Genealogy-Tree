@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
@@ -43,6 +42,12 @@ export class PersonDetailComponent implements OnInit {
     this.person$.subscribe((person) => {
       this.personDetails = person;
     });
+  }
+
+  deletePerson() {
+    this.personService
+      .delete(this.personDetails.personId)
+      .subscribe(() => this.router.navigate(['person', 'list']));
   }
 
   public get canDelete() {

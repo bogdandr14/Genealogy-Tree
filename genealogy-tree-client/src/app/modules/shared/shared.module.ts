@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemeSelectComponent } from './components/theme-select/theme-select.component';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
+import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
     HoverClassDirective,
     PaginatorComponent,
     ThemeSelectComponent,
-    LanguageSelectComponent
+    LanguageSelectComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { LanguageSelectComponent } from './components/language-select/language-s
     HoverClassDirective,
     PaginatorComponent,
     ThemeSelectComponent,
-    LanguageSelectComponent
+    LanguageSelectComponent,
+    DeleteConfirmationComponent
   ],
 })
 export class SharedModule {}

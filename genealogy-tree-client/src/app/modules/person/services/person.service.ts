@@ -43,4 +43,10 @@ export class PersonService extends DataService {
     const path = 'add';
     return super.post<PersonDetailsModel>(path, personCreate);
   }
+  public deletePerson(
+    personId:number
+  ){
+    const path=`delete/${personId}`;
+    return super.delete(personId,"delete");
+  }
 }

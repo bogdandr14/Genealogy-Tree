@@ -34,7 +34,7 @@ namespace GenealogyTree.API
             );
 
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
-            var mapper = mappingConfig.CreateMapper();
+            IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();

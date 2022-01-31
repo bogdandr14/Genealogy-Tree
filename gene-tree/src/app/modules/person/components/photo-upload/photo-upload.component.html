@@ -1,0 +1,83 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ "changePicture" | translate }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">{{
+        "_common.cancel" | translate
+      }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-card>
+  <ion-card-content>
+    <form #form="ngForm" (ngSubmit)="submitPhoto()">
+      <ion-item-group id="changePhoto">
+        <ion-item color="transparent">
+          <ion-label for="photo" position="stacked">
+            <b>
+              {{ "photoToUpload" | translate }}
+              <span class="required"> *</span>
+            </b>
+          </ion-label>
+          <!-- <ion-input
+            type="file"
+            name="photo"
+            #photo="ngModel"
+            ngModel
+            (change)="onFileChange($event)"
+            required
+          >
+          </ion-input> -->
+          <input
+            type="file"
+            name="photo"
+            #photo="ngModel"
+            ngModel
+            class="file-input"
+            (change)="onFileChange($event)"
+            #fileUpload
+            required
+          />
+          <ion-button
+            name="photoButton"
+            *ngIf="!photo.control.value; else selectedFile"
+            color="success"
+            fill="clear"
+            expand="block"
+            (click)="fileUpload.click()"
+          >
+            {{ "chooseFile" | translate }}
+            <ion-icon name="image" slot="end"></ion-icon>
+          </ion-button>
+          <ng-template #selectedFile>
+            <ion-button
+              name="photoButton"
+              color="secondary"
+              fill="clear"
+              expand="block"
+              (click)="photo.control.setValue(null)"
+            >
+              {{ file.name | translate }}
+              <ion-icon name="close" slot="end"></ion-icon>
+            </ion-button>
+          </ng-template>
+        </ion-item>
+        <app-validation-errors [model]="photo"></app-validation-errors>
+      </ion-item-group>
+
+      <ion-button
+        type="submit"
+        class="submit-button"
+        color="warning"
+        fill="clear"
+        expand="block"
+        [disabled]="form.invalid || form.pristine"
+      >
+        {{ "_common.confirm" | translate }}
+      </ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>

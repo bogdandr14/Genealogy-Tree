@@ -1,10 +1,17 @@
-/* eslint-disable no-debugger */
+import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+  Injector,
+  Renderer2,
+  RendererFactory2,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Guid } from 'guid-typescript';
 import { Observable, of, Subscription } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay, first, tap } from 'rxjs/operators';
 import { LoginModel } from '../../auth/models/login.model';
 import { RegisterModel } from '../../auth/models/register.model';
 import { LoginResponseModel } from '../models/login-response.model';
@@ -14,32 +21,32 @@ import { UserService } from './user.service';
 @Injectable({ providedIn: 'root' })
 export class AuthService extends DataService {
   timerSubscription = new Subscription();
-  constructor(public http: HttpClient, private router: Router, private userService: UserService) {
+  constructor(
+    public http: HttpClient,
+    private router: Router,
+    private userService: UserService
+  ) {
     super(http, 'api/auth');
     if (this.isLoggedIn()) {
       this.setExpirationCounter();
+      // this.userService.setPreferences();
     }
   }
 
-
   public login(userCredentials: LoginModel): Observable<LoginResponseModel> {
-    return super
-      .post<LoginResponseModel>('login', userCredentials)
-      .pipe(
-        tap(login => {
-          this.setJwt(login.token);
-          this.setExpirationCounter();
-          this.setUserInfo(login);
-          this.router.navigate(['home']);
-        }));
+    return super.post<LoginResponseModel>('login', userCredentials).pipe(
+      tap((login) => {
+        this.setJwt(login.token);
+        this.setExpirationCounter();
+        this.setUserInfo(login);
+        this.router.navigate(['home']);
+      })
+    );
   }
 
   public register(registerDetails: RegisterModel): Observable<void> {
-    debugger;
     const path = `register`;
-
-    return super
-      .post<void>(path, registerDetails);
+    return super.post<void>(path, registerDetails);
   }
 
   public logout(): void {
@@ -51,6 +58,7 @@ export class AuthService extends DataService {
   public isLoggedIn(): boolean {
     return !!this.getJwt();
   }
+
   public getJwt(): string | null {
     return sessionStorage.getItem('token');
   }
@@ -61,14 +69,28 @@ export class AuthService extends DataService {
 
   private getTokenExpiration(): number {
     const token = this.getJwt();
-    const expiration = <number>(JSON.parse(atob(token.split('.')[1]))).exp * 1000; //expiration in milliseconds
+    const expiration = <number>JSON.parse(atob(token.split('.')[1])).exp * 1000; //expiration in milliseconds
     return expiration;
   }
 
   private setUserInfo(loginResponse: LoginResponseModel) {
-    const tokenInfo = (JSON.parse(atob(loginResponse.token.split('.')[1])));
-    sessionStorage.setItem('user',JSON.stringify({ username: tokenInfo.unique_name, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name, treeId: loginResponse.treeId, userId: loginResponse.userId }));
-    this.userService.setUser({ id: loginResponse.userId, treeId: loginResponse.treeId, firstName: tokenInfo.given_name, lastName: tokenInfo.family_name });
+    const tokenInfo = JSON.parse(atob(loginResponse.token.split('.')[1]));
+    sessionStorage.setItem(
+      'user',
+      JSON.stringify({
+        username: tokenInfo.unique_name,
+        firstName: tokenInfo.given_name,
+        lastName: tokenInfo.family_name,
+        treeId: loginResponse.treeId,
+        userId: loginResponse.userId,
+      })
+    );
+    this.userService.setUser({
+      id: loginResponse.userId,
+      treeId: loginResponse.treeId,
+      firstName: tokenInfo.given_name,
+      lastName: tokenInfo.family_name,
+    });
   }
 
   private setExpirationCounter() {
@@ -76,13 +98,14 @@ export class AuthService extends DataService {
     const timeout = expiration - new Date().valueOf();
     if (timeout < 0) {
       this.logout();
-    }
-    else {
+    } else {
       this.timerSubscription.unsubscribe();
-      this.timerSubscription = of(null).pipe(delay(timeout)).subscribe((expired) => {
-        console.log('EXPIRED!!');
-        this.logout();
-      });
+      this.timerSubscription = of(null)
+        .pipe(delay(timeout))
+        .subscribe((expired) => {
+          console.log('TOKEN EXPIRED!!');
+          this.logout();
+        });
     }
   }
 }

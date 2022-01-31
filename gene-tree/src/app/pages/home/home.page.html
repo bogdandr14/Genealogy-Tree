@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{'_pages.home' | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+      <strong>GeneTree home page</strong>
+      <br/>
+      <button (click)="showToasterSuccess()">
+        Success Toaster
+    </button>
+
+    <button (click)="showToasterError()">
+        Error Toaster
+    </button>
+
+    <button (click)="showToasterInfo()">
+        Info Toaster
+    </button>
+
+    <button (click)="showToasterWarning()">
+        Warning Toaster
+    </button>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div>
+</ion-content>

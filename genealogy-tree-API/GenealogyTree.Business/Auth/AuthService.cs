@@ -23,18 +23,6 @@ namespace GenealogyTree.Business.Auth
             User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
             if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
-                /*Person person = new Person()
-                {
-                    FirstName = "Bogdan",
-                    LastName = "Draghici"
-                };
-                User user = new User()
-                {
-                    Id = 4,
-                    Username = "bimax14",
-                    Email = "nu avem",
-                    Person = person,
-                };*/
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(user);
                 loginResponseModel.Token = TokenService.GenerateToken(user, UserRoleEnum.User);
                 return loginResponseModel;

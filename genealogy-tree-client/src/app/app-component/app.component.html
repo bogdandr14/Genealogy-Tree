@@ -1,6 +1,9 @@
 <ion-app>
   <app-header></app-header>
-  <app-menu></app-menu>
+  <div *ngIf="authService.isLoggedIn()">
+
+    <app-menu ></app-menu>
+  </div>
   <!-- Content -->
   <div class="content" role="main">
     <ion-content>

@@ -126,6 +126,7 @@
     "birthdays": "Notify me about birthdays"
   },
   "shareContact": "Share my e-mail and phone number with other users",
+  "changePassword":"Change password",
   "error": "Error",
   "_errorMessage": {
     "wrongCredentials": "Invalid credentials, please try again"

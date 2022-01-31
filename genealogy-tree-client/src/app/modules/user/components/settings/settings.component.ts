@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/core/services/auth.service';
@@ -28,7 +27,7 @@ export class SettingsComponent implements OnInit {
   }
 
   saveSettings(){
-    //this.userService.saveSettings();
+    this.userService.saveUserSettings(this.userSettings).subscribe();
   }
 
   onLanguageChange(language: string){

@@ -1,6 +1,11 @@
-/* eslint-disable no-debugger */
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  Injectable,
+  Injector,
+  Renderer2,
+  RendererFactory2,
+} from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Guid } from 'guid-typescript';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,13 +18,38 @@ import { DataService } from './data.service';
 export class UserService extends DataService {
   private user = new BehaviorSubject<UserModel>(new UserModel());
   public user$ = this.user.asObservable();
+  private renderer: Renderer2;
 
-  constructor(httpClient: HttpClient) {
+  constructor(
+    httpClient: HttpClient,
+    private injector: Injector,
+    rendererFactory: RendererFactory2
+  ) {
     super(httpClient, 'api/user', environment.baseApiUrl);
+    this.renderer = rendererFactory.createRenderer(null, null);
   }
   public setUser(user: UserModel): void {
-    debugger;
+    this.setPreferences();
     this.user.next(user);
+  }
+
+  public async setPreferences() {
+    const username = JSON.parse(sessionStorage.getItem('user')).username;
+    if (username) {
+      this.getUserSettings(username)
+        .pipe()
+        .subscribe((userSettings) => {
+          let translateService = this.injector.get(TranslateService);
+          if (userSettings.themePreference) {
+            this.renderer.setAttribute(document.body, 'color-theme', 'dark');
+          } else {
+            this.renderer.setAttribute(document.body, 'color-theme', 'light');
+          }
+          if (userSettings.languagePreference) {
+            translateService.use(userSettings.languagePreference);
+          }
+        });
+    }
   }
 
   public isCurrentUser(userId: string) {
@@ -30,25 +60,30 @@ export class UserService extends DataService {
   public getUserSettings(username: string) {
     const params: HttpInterceptorConfig = { hideLoading: true };
     const path = `settings/${username}`;
-    return this.getOneByPath<UserSettingsModel>(path, params);
+    return super.getOneByPath<UserSettingsModel>(path, params);
+  }
+
+  public saveUserSettings(settings: UserSettingsModel) {
+    const path = `settings/update`;
+    return super.put<UserSettingsModel>(path, settings);
   }
 
   public checkUsernameTaken(username: string): Observable<boolean> {
     const params: HttpInterceptorConfig = { hideLoading: true };
     const path = `usernameAvailable/${username}`;
-    return this.getOneByPath<boolean>(path, params);
+    return super.getOneByPath<boolean>(path, params);
   }
 
   public checkEmailTaken(email: string): Observable<boolean> {
     const params: HttpInterceptorConfig = { hideLoading: true };
     const path = `emailAvailable/${email}`;
-    return this.getOneByPath<boolean>(path, params);
+    return super.getOneByPath<boolean>(path, params);
   }
 
   public getPersonalInfo<UserProfileModel>(
     username: string
   ): Observable<UserProfileModel> {
     const path = `info/${username}`;
-    return this.getOneByPath<UserProfileModel>(path);
+    return super.getOneByPath<UserProfileModel>(path);
   }
 }
