@@ -69,10 +69,14 @@ namespace GenealogyTree.Business.Auth
             {
                 user.PasswordSalt = Salt.Create();
                 user.PasswordHash = Hash.CreateHash(updatePassword.NewPassword, user.PasswordSalt);
-                unitOfWork.User.Update(user);
+                await unitOfWork.User.Update(user);
+                UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
+                return returnEvent;
             }
-            UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
-            return returnEvent;
+            else
+            {
+                return null;
+            }
         }
     }
 }

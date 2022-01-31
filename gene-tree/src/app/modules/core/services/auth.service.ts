@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { ChangePasswordModel } from '../../account/models/change-password.model';
 import { LoginModel } from '../../account/models/login.model';
 import { RegisterModel } from '../../account/models/register.model';
 import { LoginResponseModel } from '../models/login-response.model';
@@ -46,6 +47,13 @@ export class AuthService extends DataService {
   public register(registerDetails: RegisterModel): Observable<void> {
     const path = `register`;
     return super.post<void>(path, registerDetails);
+  }
+
+  public async changePassword(changePassword: ChangePasswordModel){
+    const user  = await this.storageService.getUser();
+    changePassword.username = user.username;
+    const path= `changePassword`;
+    return super.put<void>(path, changePassword);
   }
 
   public logout(): void {

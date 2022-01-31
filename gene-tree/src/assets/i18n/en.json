@@ -9,7 +9,7 @@
   "chooseFile": "Choose file",
   "photoToUpload": "Photo to upload",
   "changePicture": "Change picture",
-  "others":"Others",
+  "others": "Others",
   "logout": "Logout",
   "username": "Username",
   "password": "Password",
@@ -74,7 +74,7 @@
     "person": "Delete person"
   },
   "archive": "Archive",
-"menu": "Menu",
+  "menu": "Menu",
   "account": "Account",
   "_pages": {
     "home": "Home",
@@ -132,14 +132,16 @@
   "changePassword": "Change password",
   "error": "Error",
   "_errorMessage": {
-    "wrongCredentials": "Invalid credentials, please try again"
+    "wrongCredentials": "Invalid credentials, please try again",
+    "wrongPassword": "The password you introduced is not rigth. Please try again"
   },
   "warning": "Warning",
   "_warningMessage": {},
   "success": "Success",
   "_successMessage": {
     "register": "The account was successfuly created! Please login to enter the account",
-    "login": "Welcome back!"
+    "login": "Welcome back!",
+    "changePassword": "Password changed successfuly!"
   },
   "information": "Information",
   "_informationMessage": {

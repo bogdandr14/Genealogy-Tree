@@ -34,6 +34,7 @@ export class StorageService {
     this.token.next(await this.getJWT());
     this.user.next(await this.getUser());
     const preferences = await this.getPreferences();
+    console.log(this.user.value);
     if (preferences) {
       this.darkTheme.next(preferences.themePreference);
       this.language.next(preferences.languagePreference);
