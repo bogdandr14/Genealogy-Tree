@@ -10,6 +10,7 @@ import { DataService } from '../../core/services/data.service';
 import { PersonBaseModel } from '../models/person-base.model';
 import { PersonDetailsModel } from '../models/person-details.model';
 import { PersonEditModel } from '../models/person-edit.model';
+import { PersonImageModel } from '../models/person-image.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,8 +49,8 @@ export class PersonService extends DataService {
     return super.delete(personId, 'delete');
   }
 
-  public changePhoto(personId: number, file: FormData): Observable<any> {
-    const path = `uploadPhoto/${personId}`;
-    return super.post<any>(path, file);
+  public changePhoto(personImage : PersonImageModel): Observable<any> {
+    const path = `uploadPhoto`;
+    return super.post<any>(path, personImage);
   }
 }

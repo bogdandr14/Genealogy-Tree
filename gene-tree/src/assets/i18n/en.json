@@ -6,7 +6,10 @@
     "languageEN": "English",
     "languageRO": "Romanian"
   },
-  "chooseFile": "Choose file",
+  "_file":{
+    "choose": "Choose file",
+    "change": "Change file"
+  },
   "photoToUpload": "Photo to upload",
   "changePicture": "Change picture",
   "others": "Others",
@@ -86,6 +89,7 @@
   },
   "_common": {
     "cancel": "Cancel",
+    "remove": "Remove",
     "submit": "Submit",
     "save": "Save",
     "back": "Back",

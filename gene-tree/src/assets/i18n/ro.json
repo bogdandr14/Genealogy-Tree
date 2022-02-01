@@ -6,52 +6,50 @@
     "languageEN": "Engleză",
     "languageRO": "Română"
   },
-  "chooseFile": "Alege poza",
-  "photoToUpload": "Poza de încărcat",
-  "changePicture": "Schimbă poza",
-  "others": "Altele",
+  "register": "Înregistrare",
+  "login": "Autentificare",
   "logout": "Deconectare",
   "username": "Nume utilizator",
   "password": "Parolă",
-  "confirmPassword": "Confirmă Parola",
-  "firstName": "Prenume",
-  "lastName": "Nume",
-  "login": "Autentificare",
-  "gender": "Gen",
-  "nationality": "Naţionalitate",
-  "religion": "Religie",
-  "birthday": "Zi de naştere",
-  "deathday": "Zi deces",
+  "_password": {
+    "confirm": "Confirmă Parola",
+    "current": "Parola curentă",
+    "new": "Noua parolă",
+    "change": "Schimbă parola"
+  },
+  "person": "Porsoana",
+  "_person": {
+    "firstName": "Prenume",
+    "lastName": "Nume",
+    "gender": "Gen",
+    "nationality": "Naţionalitate",
+    "religion": "Religie",
+    "birthday": "Zi de naştere",
+    "deathday": "Zi deces",
+    "marriages": "Căsătorii",
+    "parents": "Părinţi",
+    "children": "Copii",
+    "details": "Detalii persoana",
+    "information": "Informaţii personale",
+  },
   "locations": "Locaţii",
   "_location": {
     "from": "Nascut în",
     "lives": "Locuieşte în"
   },
-  "marriages": "Căsătorii",
-  "parents": "Părinţi",
-  "children": "Copii",
-  "person": "Porsoana",
-  "_person": {
-    "details": "Detalii persoana",
-    "information": "Informaţii personale",
-    "add": "Adaugă persoana"
-  },
   "_user": {
+    "occupations": "Ocupaţii",
+    "educations": "Educaţie",
+    "contact": "Contact",
+    "email": "E-Mail",
+    "emailAddress": "Adresă de e-Mail",
+    "phone": "Telefon",
+    "phoneNumber": "Număr de telefon",
     "details": "Detalii utilizator"
   },
-  "occupations": "Ocupaţii",
-  "educations": "Educaţie",
-  "contact": "Contact",
   "goToRelatives": "Mergi la rude",
-  "email": "E-Mail",
-  "emailAddress": "Adresă de e-Mail",
-  "phone": "Telefon",
-  "phoneNumber": "Număr de telefon",
-  "register": "Înregistrare",
   "backToLogin": "Înapoi la autentificare",
   "registerHere": "Înregistrează-te aici",
-  "currentPassword": "Parola curentă",
-  "newPassword": "Noua parolă",
   "options": "Opţiuni",
   "edit": "Editare",
   "_edit": {
@@ -76,6 +74,11 @@
   "archive": "Arhivează",
   "menu": "Meniu",
   "account": "Cont",
+  "_image": {
+    "toUpload": "Poza de încărcat",
+    "choose": "Alege poza",
+    "change": "Schimbă poza"
+  },
   "_pages": {
     "home": "Acasă",
     "profile": "Profil",
@@ -86,6 +89,7 @@
   },
   "_common": {
     "cancel": "Anulează",
+    "remove": "Înlătură",
     "submit": "Trimite",
     "save": "Salvează",
     "back": "Înapoi",
@@ -103,7 +107,6 @@
     "invalidPassword": "Parola trebuie să aibă minimum 8 caractere, cel puțin o majusculă, 1 minusculă și 1 număr",
     "passwordMismatch": "Parolele trebuie să se potrtivească"
   },
-  "loadingMessage": "Se încarcă...",
   "_paginator": {
     "itemsPerPage": "Articole pe pagină",
     "currentPageMessage": "Pagina {currentPage} din {numberOfPages}"
@@ -126,26 +129,29 @@
   "preferences": "Preferinţe",
   "_notify": {
     "updates": "Notifică-mă când au loc actualizări",
-    "birthdays": "Notifică-mă când sunt zile de naştere"
+    "birthdays": "Notifică-mă când sunt zile de naştere",
+    "shareContact": "Împărtăşeşte e-mail-ul şi numărul de telefon cu alţi utilizatori"
   },
-  "shareContact": "Împărtăşeşte e-mail-ul şi numărul de telefon cu alţi utilizatori",
-  "changePassword": "Schimbă parola",
-  "error": "Eroare",
-  "_errorMessage": {
-    "wrongCredentials": "Credențialele sunt invalide, te rog incearcă din nou",
-    "wrongPassword": "Parola introdusă este incorectă. Încearcă din nou."
+  "_message": {
+    "loading": "Se încarcă...",
+    "information": "Informare",
+    "_information": {
+      "phoneCopied": "Numărul de telefon a fost copiat în clipboard",
+      "emailCopied": "Adresa de e-mail a fost copiată în clipboard"
+    },
+    "warning": "Avertisment",
+    "_warning": {},
+    "success": "Succes",
+    "_success": {
+      "register": "Contul a fost creat cu success! Logează-te pentru a accesa contul",
+      "login": "Bine ai revenit, { firstName }!",
+      "changePassword": "Parola a fost schimbată cu succes!"
+    },
+    "error": "Eroare",
+    "_error": {
+      "wrongCredentials": "Credențialele sunt invalide, te rog incearcă din nou",
+      "wrongPassword": "Parola introdusă este incorectă. Încearcă din nou."
+    }
   },
-  "warning": "Avertisment",
-  "_warningMessage": {},
-  "success": "Succes",
-  "_successMessage": {
-    "register": "Contul a fost creat cu success! Logează-te pentru a accesa contul",
-    "login": "Bine ai revenit, { firstName }!",
-    "changePassword": "Parola a fost schimbată cu succes!"
-  },
-  "information": "Informare",
-  "_informationMessage": {
-    "phoneCopied": "Numărul de telefon a fost copiat în clipboard",
-    "emailCopied": "Adresa de e-mail a fost copiată în clipboard"
-  }
+  "others": "Altele"
 }
