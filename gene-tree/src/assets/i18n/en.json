@@ -6,111 +6,47 @@
     "languageEN": "English",
     "languageRO": "Romanian"
   },
-  "_file":{
-    "choose": "Choose file",
-    "change": "Change file"
-  },
-  "photoToUpload": "Photo to upload",
-  "changePicture": "Change picture",
-  "others": "Others",
+  "menu": "Menu",
+  "preferences": "Preferences",
+  "register": "Register",
+  "login": "Login",
   "logout": "Logout",
   "username": "Username",
   "password": "Password",
-  "confirmPassword": "Confirm Password",
-  "firstName": "First Name",
-  "lastName": "Last Name",
-  "gender": "Gender",
-  "nationality": "Nationality",
-  "religion": "Religion",
-  "birthday": "Birthday",
-  "deathday": "Day deceased",
-  "locations": "Locations",
+  "_password": {
+    "confirm": "Confirm password",
+    "current": "Current password",
+    "new": "New password",
+    "change": "Change password"
+  },
+  "account": "Account",
+  "_user": {
+    "occupations": "Ocupations",
+    "educations": "Educations",
+    "locations": "Locations",
+    "contact": "Contact",
+    "email": "E-Mail",
+    "emailAddress": "E-Mail address",
+    "phone": "Phone",
+    "phoneNumber": "Phone number"
+  },
+  "person": "Person",
+  "_person": {
+    "information": "Personal information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "gender": "Gender",
+    "nationality": "Nationality",
+    "religion": "Religion",
+    "birthday": "Birthday",
+    "deathday": "Day deceased",
+    "parents": "Parents",
+    "children": "Children",
+    "marriages": "Marriages"
+  },
   "_location": {
     "from": "From",
     "lives": "Lives in"
-  },
-  "marriages": "Marriages",
-  "parents": "Parents",
-  "children": "Children",
-  "person": "Person",
-  "_person": {
-    "details": "Person details",
-    "information": "Personal information",
-    "add": "Add person"
-  },
-  "_user": {
-    "details": "User details"
-  },
-  "occupations": "Ocupations",
-  "educations": "Educations",
-  "contact": "Contact",
-  "goToRelatives": "Go to relatives",
-  "email": "E-Mail",
-  "emailAddress": "E-Mail address",
-  "phone": "Phone",
-  "phoneNumber": "Phone number",
-  "login": "Login",
-  "register": "Register",
-  "backToLogin": "Back to Login",
-  "registerHere": "Register here",
-  "currentPassword": "Current password",
-  "newPassword": "New password",
-  "options": "Options",
-  "edit": "Edit",
-  "_edit": {
-    "information": "Edit information",
-    "locations": "Edit locations",
-    "contact": "Edit contact"
-  },
-  "add": "Add",
-  "_add": {
-    "parent": "Add parent",
-    "child": "Add child",
-    "marriage": "Add marriage",
-    "person": "Add person",
-    "occupation": "Add occupation",
-    "education": "Add education"
-  },
-  "viewDetails": "View details",
-  "delete": "Delete",
-  "_delete": {
-    "person": "Delete person"
-  },
-  "archive": "Archive",
-  "menu": "Menu",
-  "account": "Account",
-  "_pages": {
-    "home": "Home",
-    "profile": "Profile",
-    "relatives": "Relatives",
-    "settings": "Settings",
-    "login": "Login",
-    "register": "Register"
-  },
-  "_common": {
-    "cancel": "Cancel",
-    "remove": "Remove",
-    "submit": "Submit",
-    "save": "Save",
-    "back": "Back",
-    "confirm": "Confirm"
-  },
-  "_validation": {
-    "required": "Field is required.",
-    "minlength": "Field must be at least { length } characters long.",
-    "maxlength": "Field must be at most { length } characters long.",
-    "minValue": "Must be at least {value}.",
-    "maxValue": "Must be at most {value}.",
-    "invalidEmail": "Invalid email format.",
-    "emailTaken": "The email is already in use.",
-    "usernameTaken": "The username is already in use.",
-    "invalidPassword": "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number",
-    "passwordMismatch": "Passwords must match"
-  },
-  "loadingMessage": "Loading...",
-  "_paginator": {
-    "itemsPerPage": "Items per page",
-    "currentPageMessage": "Page {currentPage} of {numberOfPages}"
   },
   "_genders": {
     "null": "Unknown",
@@ -127,29 +63,97 @@
   "_religions": {
     "null": "Unknown"
   },
-  "preferences": "Preferences",
+  "_pages": {
+    "home": "Home",
+    "profile": "Profile",
+    "relatives": "Relatives",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register"
+  },
+  "_links": {
+    "goToRelatives": "Go to relatives",
+    "backToLogin": "Back to Login",
+    "registerHere": "Register here"
+  },
+  "_common": {
+    "details": "Details",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "submit": "Submit",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "back": "Back"
+  },
+  "_details": {
+    "user": "User details",
+    "person": "Person details"
+  },
+  "_add": {
+    "occupation": "Add occupation",
+    "education": "Add education",
+    "person": "Add person",
+    "parent": "Add parent",
+    "child": "Add child",
+    "marriage": "Add marriage"
+  },
+  "_edit": {
+    "information": "Edit information",
+    "locations": "Edit locations",
+    "contact": "Edit contact"
+  },
+  "_delete": {
+    "person": "Delete person"
+  },
+  "changePicture": "Change picture",
+  "_image": {
+    "toUpload": "Image to upload",
+    "choose": "Choose image",
+    "change": "Change image"
+  },
+  "_validation": {
+    "required": "Field is required.",
+    "minlength": "Field must be at least { length } characters long.",
+    "maxlength": "Field must be at most { length } characters long.",
+    "minValue": "Must be at least {value}.",
+    "maxValue": "Must be at most {value}.",
+    "invalidEmail": "Invalid email format.",
+    "emailTaken": "The email is already in use.",
+    "usernameTaken": "The username is already in use.",
+    "invalidPassword": "Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number",
+    "passwordMismatch": "Passwords must match"
+  },
+  "_paginator": {
+    "itemsPerPage": "Items per page",
+    "currentPage": "Page {currentPage} of {numberOfPages}"
+  },
   "_notify": {
     "updates": "Notify me when there are updates",
-    "birthdays": "Notify me about birthdays"
+    "birthdays": "Notify me about birthdays",
+    "shareContact": "Share my e-mail and phone number with other users"
   },
-  "shareContact": "Share my e-mail and phone number with other users",
-  "changePassword": "Change password",
-  "error": "Error",
-  "_errorMessage": {
-    "wrongCredentials": "Invalid credentials, please try again",
-    "wrongPassword": "The password you introduced is not rigth. Please try again"
+  "_message": {
+    "loading": "Loading...",
+    "information": "Information",
+    "_information": {
+      "phoneCopied": "Phone number copied to clipboard",
+      "emailCopied": "Email address copied to clipboard"
+    },
+    "success": "Success",
+    "_success": {
+      "register": "The account was successfuly created! Please login to enter the account",
+      "login": "Welcome back!",
+      "changePassword": "Password changed successfuly!"
+    },
+    "warning": "Warning",
+    "_warning": {},
+    "error": "Error",
+    "_error": {
+      "wrongCredentials": "Invalid credentials, please try again",
+      "wrongPassword": "The password you introduced is not rigth. Please try again"
+    }
   },
-  "warning": "Warning",
-  "_warningMessage": {},
-  "success": "Success",
-  "_successMessage": {
-    "register": "The account was successfuly created! Please login to enter the account",
-    "login": "Welcome back!",
-    "changePassword": "Password changed successfuly!"
-  },
-  "information": "Information",
-  "_informationMessage": {
-    "phoneCopied": "Phone number copied to clipboard",
-    "emailCopied": "Email address copied to clipboard"
-  }
+  "others": "Others"
 }

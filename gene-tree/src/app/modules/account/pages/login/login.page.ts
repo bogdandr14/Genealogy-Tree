@@ -1,8 +1,7 @@
-/* eslint-disable no-debugger */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { first, takeUntil } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { LoginModel } from '../../models/login.model';
@@ -29,7 +28,7 @@ export class LoginPage implements OnDestroy {
 
   public onLogin(): void {
     this.authService.login(this.loginModel).pipe(first()).subscribe(
-      (data) => this.alertService.showSuccess('_successMessage.login'),
+      (data) => this.alertService.showSuccess('_message._success.login'),
       (error) => this.alertService.showError(error)
     );
   }

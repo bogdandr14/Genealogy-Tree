@@ -27,6 +27,10 @@ namespace GenealogyTree.Domain.Entities
         public DateTime? DeathDate { get; set; }
         public DateTime LastUpdate { get; set; }
 
+        public int? ImageId { get; set; }
+        [ForeignKey("ImageId")]
+        public virtual Image Image {get;set;}
+
         public Guid TreeId { get; set; }
         [ForeignKey("TreeId")]
         public virtual Tree Tree { get; set; }

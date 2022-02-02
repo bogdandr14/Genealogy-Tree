@@ -1,16 +1,12 @@
-/* eslint-disable no-debugger */
 import {
   Component,
   EventEmitter,
-  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/modules/core/services/storage.service';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { environment } from 'src/environments/environment';
 import { LanguageModel } from '../../../core/models/language.model';
 

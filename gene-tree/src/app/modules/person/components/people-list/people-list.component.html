@@ -33,11 +33,11 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label> {{ "birthday" | translate }}:</ion-label>
+        <ion-label> {{ "_person.birthday" | translate }}:</ion-label>
         <span> {{ person?.birthDate | date: "dd/MM/yyyy" }}</span>
       </ion-item>
       <ion-item *ngIf="person?.deathDate">
-        <ion-label> {{ "deathday" | translate }}:</ion-label>
+        <ion-label> {{ "_person.deathday" | translate }}:</ion-label>
         <span> {{ person?.deathDate | date: "dd/MM/yyyy" }}</span>
       </ion-item>
       <ion-item>
@@ -47,7 +47,7 @@
           color="secondary"
           slot="start"
         >
-          {{ "viewDetails" | translate }}
+          {{ "_common.details" | translate }}
         </ion-button>
         <ion-button
           *ngIf="isUser()"
@@ -64,7 +64,7 @@
           slot="end"
           (click)="deletePerson(person.personId)"
         >
-          {{ "delete" | translate }}
+          {{ "_common.delete" | translate }}
         </ion-button>
       </ion-item>
     </ion-card-content>

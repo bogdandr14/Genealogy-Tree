@@ -9,7 +9,7 @@
               <ion-item color="transparent">
                 <ion-label for="fname" position="floating">
                   <b>
-                    {{ "firstName" | translate }}
+                    {{ "_person.firstName" | translate }}
                     <span class="required"> *</span>
                   </b>
                 </ion-label>
@@ -38,7 +38,7 @@
               <ion-item color="transparent">
                 <ion-label for="lname" position="floating">
                   <b>
-                    {{ "lastName" | translate }}
+                    {{ "_person.lastName" | translate }}
                     <span class="required"> *</span>
                   </b>
                 </ion-label>
@@ -67,7 +67,7 @@
               <ion-item color="transparent">
                 <ion-label for="gender" position="floating">
                   <b>
-                    {{ "gender" | translate }}
+                    {{ "_person.gender" | translate }}
                   </b>
                 </ion-label>
                 <ion-select
@@ -99,7 +99,7 @@
               <ion-item color="transparent">
                 <ion-label for="nat" position="floating">
                   <b>
-                    {{ "nationality" | lowercase | translate }}
+                    {{ "_person.nationality" | lowercase | translate }}
                   </b>
                 </ion-label>
                 <ion-select
@@ -131,7 +131,7 @@
               <ion-item color="transparent">
                 <ion-label for="rel" position="floating">
                   <b>
-                    {{ "religion" | lowercase | translate }}
+                    {{ "_person.religion" | lowercase | translate }}
                   </b>
                 </ion-label>
                 <ion-select
@@ -152,7 +152,7 @@
                     *ngFor="let religion of religionOptions"
                     [value]="religion"
                   >
-                    {{ "_nationalities." + religion.name | translate }}
+                    {{ "_religions." + religion.name | translate }}
                   </ion-select-option>
                 </ion-select>
               </ion-item>
@@ -163,7 +163,7 @@
               <ion-item color="transparent">
                 <ion-label for="bday" position="floating" stacked>
                   <b>
-                    {{ "birthday" | translate }}
+                    {{ "_person.birthday" | translate }}
                     <span class="required"> *</span>
                   </b>
                 </ion-label>
@@ -172,7 +172,6 @@
                   name="bday"
                   #bday="ngModel"
                   [(ngModel)]="personEdit.birthDate"
-
                   required
                 ></ion-input>
               </ion-item>
@@ -193,7 +192,7 @@
               <ion-item color="transparent">
                 <ion-label for="dday" position="floating">
                   <b>
-                    {{ "deathday" | translate }}
+                    {{ "_person.deathday" | translate }}
                   </b>
                 </ion-label>
                 <ion-input

@@ -1,7 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
 import { AppError } from '../models/errors/app-error';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +12,7 @@ export class AlertService {
 
   public async showSuccess(success: any) {
     const toast = await this.createToast(
-      'success',
+      '_message.success',
       success,
       'success',
       'checkmark-circle'
@@ -25,21 +24,21 @@ export class AlertService {
     let toast: HTMLIonToastElement;
     if (error instanceof AppError) {
       toast = await this.createToast(
-        'error',
+        '_message.error',
         error.message,
         'danger',
         'close-circle',
         error.status
       );
     } else {
-      toast = await this.createToast('error', error, 'danger', 'close-circle');
+      toast = await this.createToast('_message.error', error, 'danger', 'close-circle');
     }
     toast.present();
   }
 
   public async showInfo(info: any) {
     const toast = await this.createToast(
-      'information',
+      '_message.information',
       info,
       'primary',
       'information-circle'
@@ -49,7 +48,7 @@ export class AlertService {
 
   public async showWarning(warning: any) {
     const toast = await this.createToast(
-      'warning',
+      '_message.warning',
       warning,
       'warning',
       'alert-circle'
@@ -79,7 +78,6 @@ export class AlertService {
           text: 'Ok',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
             return true;
           },
         },

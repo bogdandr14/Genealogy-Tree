@@ -14,6 +14,7 @@ namespace GenealogyTree.Data
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<EducationLevel> EducationLevels { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Marriage> Marriages { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
@@ -42,6 +43,13 @@ namespace GenealogyTree.Data
                .WithOne(p => p.Gender)
                .HasForeignKey(p => p.GenderId)
                .OnDelete(DeleteBehavior.NoAction);
+
+            //One to many Image - People
+            modelBuilder.Entity<Image>()
+                .HasMany<Person>(i => i.People)
+                .WithOne(p => p.Image)
+                .HasForeignKey(p => p.ImageId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             //One to many Birth place - People
             modelBuilder.Entity<Location>()

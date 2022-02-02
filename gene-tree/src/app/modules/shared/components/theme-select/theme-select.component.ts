@@ -1,10 +1,8 @@
-/* eslint-disable no-debugger */
 import {
   Component,
   EventEmitter,
   OnInit,
   Output,
-  Renderer2,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { StorageService } from 'src/app/modules/core/services/storage.service';

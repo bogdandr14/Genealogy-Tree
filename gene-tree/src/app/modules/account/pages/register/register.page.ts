@@ -75,7 +75,7 @@ export class RegisterPage implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe(
         (data) => {
-          this.alertService.showSuccess('_successMessage.register');
+          this.alertService.showSuccess('_message._success.register');
           this.onNavigateToLogin();
         },
         (error) => this.alertService.showError(error)

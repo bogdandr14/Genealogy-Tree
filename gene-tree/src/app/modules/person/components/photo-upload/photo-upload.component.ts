@@ -44,7 +44,9 @@ export class PhotoUploadComponent implements OnInit {
     console.log("🚀 ~ file: photo-upload.component.ts ~ line 21 ~ PhotoUploadComponent ~ onFileChange ~ fileChangeEvent", fileChangeEvent)
     this.file = fileChangeEvent.target.files[0];
     console.log("🚀 ~ file: photo-upload.component.ts ~ line 22 ~ PhotoUploadComponent ~ onFileChange ~ this.file", this.file)
-    this.checkIfFileOk(fileChangeEvent.target.files[0]);
+    if(this.file){
+      this.checkIfFileOk(fileChangeEvent.target.files[0]);
+    }
   }
 
   checkIfFileOk(file: File) {

@@ -22,7 +22,7 @@
                 <ion-item color="transparent">
                   <ion-label for="fname" position="floating">
                     <b>
-                      {{ "firstName" | translate }}
+                      {{ "_person.firstName" | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -41,7 +41,7 @@
                 <ion-item color="transparent">
                   <ion-label for="lname" position="floating">
                     <b>
-                      {{ "lastName" | translate }}
+                      {{ "_person.lastName" | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -60,7 +60,7 @@
                 <ion-item color="transparent">
                   <ion-label for="gender" position="floating">
                     <b>
-                      {{ "gender" | translate }}
+                      {{ "_person.gender" | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -87,7 +87,7 @@
                 <ion-item color="transparent">
                   <ion-label for="nat" position="floating">
                     <b>
-                      {{ "nationality" | lowercase | translate }}
+                      {{ "_person.nationality" | lowercase | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -118,7 +118,7 @@
                 >
                   <ion-label for="bday">
                     <b>
-                      {{ "birthday" | translate }}
+                      {{ "_person.birthday" | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -156,7 +156,7 @@
                 <ion-item color="transparent">
                   <ion-label for="email" position="floating">
                     <b>
-                      {{ "emailAddress" | translate }}
+                      {{ "_user.emailAddress" | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -226,7 +226,7 @@
                 <ion-item color="transparent">
                   <ion-label for="cpsw" position="floating">
                     <b
-                      >{{ "confirmPassword" | translate }}
+                      >{{ "_password.confirm" | translate }}
                       <span class="required"> *</span>
                     </b>
                   </ion-label>
@@ -260,7 +260,7 @@
               routerLinkActive="selected"
               routerDirection="root"
             >
-              {{ "backToLogin" | translate }}
+              {{ "_links.backToLogin" | translate }}
             </ion-button>
           </ion-card-content>
         </ion-card>

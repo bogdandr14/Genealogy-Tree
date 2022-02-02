@@ -21,7 +21,7 @@
   <ion-list inset="true">
     <ion-list-header
       ><ion-label
-        ><h1>{{ "_user.details" | translate }}</h1></ion-label
+        ><h1>{{ "_details.user" | translate }}</h1></ion-label
       ></ion-list-header
     >
     <ion-accordion-group>
@@ -31,28 +31,28 @@
         </ion-item>
         <ion-list slot="content">
           <ion-item>
-            <ion-label> {{ "gender" | translate }}:</ion-label>
+            <ion-label> {{ "_person.gender" | translate }}:</ion-label>
             <span>
               {{ "_genders." + personalInfo?.gender?.name | lowercase |
               translate }}</span
             >
           </ion-item>
           <ion-item>
-            <ion-label>{{ "nationality" | translate }}:</ion-label>
+            <ion-label>{{ "_person.nationality" | translate }}:</ion-label>
             <span>
               {{ "_nationalities." + personalInfo?.nationality?.name | lowercase
               | translate }}</span
             >
           </ion-item>
           <ion-item>
-            <ion-label>{{ "religion" | translate }}:</ion-label>
+            <ion-label>{{ "_person.religion" | translate }}:</ion-label>
             <span>
               {{ "_religions." + personalInfo?.religion?.name | lowercase |
               translate }}</span
             >
           </ion-item>
           <ion-item>
-            <ion-label>{{ "birthday" | translate }}:</ion-label>
+            <ion-label>{{ "_person.birthday" | translate }}:</ion-label>
             <span> {{ personalInfo?.birthDate | date: "dd/MM/yyyy" }}</span>
           </ion-item>
           <ion-button
@@ -69,21 +69,21 @@
             color="secondary"
             [routerLink]="['/person/details/', personalInfo?.personId]"
           >
-            {{ "viewDetails" | translate }}
+            {{ "_common.details" | translate }}
           </ion-button>
         </ion-list>
       </ion-accordion>
 
       <ion-accordion value="educations">
         <ion-item slot="header">
-          <ion-label>{{ "educations" | translate }}</ion-label>
+          <ion-label>{{ "_user.educations" | translate }}</ion-label>
         </ion-item>
         <ion-list slot="content">
           <div *ngFor="let education of educations">
             <ion-item>
               <ion-label>{{ education.name }}</ion-label>
               <ion-button fill="clear" color="secondary">
-                {{ "edit" | translate }}
+                {{ "_common.edit" | translate }}
               </ion-button>
             </ion-item>
           </div>
@@ -95,13 +95,13 @@
 
       <ion-accordion value="occupations">
         <ion-item slot="header">
-          <ion-label>{{ "occupations" | translate }}</ion-label>
+          <ion-label>{{ "_user.occupations" | translate }}</ion-label>
         </ion-item>
         <ion-list slot="content">
           <ion-item *ngFor="let occupation of occupations">
             <ion-label>{{ occupation.name }}</ion-label>
             <ion-button fill="clear" color="secondary">
-              {{ "edit" | translate }}
+              {{ "_common.edit" | translate }}
             </ion-button>
           </ion-item>
           <ion-button expand="block" fill="clear" color="success">
@@ -112,18 +112,18 @@
 
       <ion-accordion value="cont">
         <ion-item slot="header">
-          <ion-label>{{ "contact" | translate }}</ion-label>
+          <ion-label>{{ "_user.contact" | translate }}</ion-label>
         </ion-item>
         <ion-list slot="content">
           <ion-item>
-            {{ "email" | translate }}:
+            {{ "_user.email" | translate }}:
             <ion-chip color="secondary" (click)="copyMail('das@djisa')">
               <ion-icon name="mail-outline"></ion-icon>
               <ion-label>{{ personalInfo?.email }} </ion-label>
             </ion-chip>
           </ion-item>
           <ion-item class="ion-justify-content-start">
-            {{ "phone" | translate }}:
+            {{ "_user.phone" | translate }}:
             <ion-chip color="secondary" (click)="copyPhone('0231789312')">
               <ion-icon name="call-outline"></ion-icon>
               <ion-label>{{ personalInfo?.phoneNumber }} </ion-label>

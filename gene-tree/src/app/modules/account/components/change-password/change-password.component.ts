@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { AuthService } from 'src/app/modules/core/services/auth.service';
 import { ImputTypeEnum } from 'src/app/modules/shared/utils/imput-type-enum';
@@ -22,7 +21,7 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.changePassword);
     (await this.authService.changePassword(this.changePassword))
       .subscribe(() => {
-        this.alertService.showSuccess("_successMessage.changePassword");this.dismiss()});
+        this.alertService.showSuccess("_message._success.changePassword");this.dismiss()});
   }
   dismiss() {
     this.modalCtrl.dismiss();

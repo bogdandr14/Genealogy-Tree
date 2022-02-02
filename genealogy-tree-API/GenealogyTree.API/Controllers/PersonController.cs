@@ -1,5 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
 using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -121,5 +122,49 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
+
+        [HttpPut]
+        [Route("updatePhoto")]
+        public async Task<ActionResult<PersonDetailsModel>> UpdatePhoto([MaxImageSize(2 * 1024)]PersonImageUpdateModel imageUpdate)
+        {
+            try
+            {
+                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync(imageUpdate);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("photo")]
+        public async Task<ActionResult<PersonDetailsModel>> GetPhoto(int imageId)
+        {
+            try
+            {
+                var imagePath = await personservice.SaveEventImageAsync(eventId.Value, version, image.ToGenericFile());
+
+                Image image = await _imageService.getImageAsync(imageId);
+                if(image is null)
+                {
+                    return NoContent();
+                }
+                var imageContent =  await _imageService.GetFile(image.Path);
+                if(imageContent !=null && imageContent.Length > 0)
+                {
+                    return File(imageContent, image.MimeType);
+                }
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+
     }
 }

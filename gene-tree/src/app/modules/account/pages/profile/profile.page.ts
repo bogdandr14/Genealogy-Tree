@@ -31,11 +31,11 @@ export class ProfilePage implements OnInit {
 
   copyPhone(info: string) {
     this.clipboard.copy(info);
-    this.alertService.showInfo('_informationMessage.phoneCopied');
+    this.alertService.showInfo('_message._information.phoneCopied');
   }
 
   copyMail(info: string) {
     this.clipboard.copy(info);
-    this.alertService.showInfo('_informationMessage.emailCopied');
+    this.alertService.showInfo('_message._information.emailCopied');
   }
 }

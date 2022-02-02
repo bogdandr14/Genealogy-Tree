@@ -18,7 +18,7 @@
         <ion-item color="transparent">
           <ion-label for="photo" position="stacked">
             <b>
-              {{ "photoToUpload" | translate }}
+              {{ "_image.toUpload" | translate }}
               <span class="required"> *</span>
             </b>
           </ion-label>
@@ -35,12 +35,12 @@
           />
           <ion-button
             name="photoButton"
-            color="success"
+            [color]="(file ? 'warning': 'success')"
             fill="clear"
             expand="block"
             (click)="fileUpload.click()"
           >
-            {{ (file? "chooseFile": "changeFile") | translate }}
+            {{ (file ? "_image.change" : "_image.choose") | translate }}
             <ion-icon name="image" slot="end"></ion-icon>
           </ion-button>
           <div *ngIf="photo.control.value" class="file-info align-items-center">
@@ -54,7 +54,6 @@
               <span>{{ "_common.remove" | translate }}</span>
               <ion-icon name="close" slot="end"></ion-icon>
             </ion-button> -->
-
             <img
               [src]="this.imageBlobUrl"
               alt="uploaded-img"
@@ -62,7 +61,7 @@
             />
             <br />
             <p class="small">
-              {{ file.name | translate }}
+              {{ file.name }}
             </p>
             <p class="small">
               {{ file.type }}

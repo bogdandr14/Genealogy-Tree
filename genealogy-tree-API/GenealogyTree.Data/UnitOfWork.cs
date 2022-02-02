@@ -10,6 +10,7 @@ namespace GenealogyTree.Data
         private IEducationLevelRepository _educationLevel;
         private IEducationRepository _education;
         private IGenderRepository _gender;
+        private IImageRepository _image;
         private ILocationRepository _location;
         private IMarriageRepository _marriage;
         private INationalityRepository _nationality;
@@ -30,6 +31,7 @@ namespace GenealogyTree.Data
         public IEducationLevelRepository EducationLevel => _educationLevel ??= new EducationLevelRepository(_repoContext);
         public IEducationRepository Education => _education ??= new EducationRepository(_repoContext);
         public IGenderRepository Gender => _gender ??= new GenderRepository(_repoContext);
+        public IImageRepository Image => _image ??= new ImageRepository(_repoContext);
         public ILocationRepository Location => _location ??= new LocationRepository(_repoContext);
         public IMarriageRepository Marriage => _marriage ??= new MarriageRepository(_repoContext);
         public INationalityRepository Nationality => _nationality ??= new NationalityRepository(_repoContext);

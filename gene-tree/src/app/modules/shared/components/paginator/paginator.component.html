@@ -22,7 +22,7 @@
     </div>
     <div class="paginator-range-actions">
       <div class="paginator-range-label">
-        {{'_paginator.currentPageMessage' | translate : ({currentPage: currentPage.value + 1, numberOfPages: numberOfPages.value})}}
+        {{'_paginator.currentPage' | translate : ({currentPage: currentPage.value + 1, numberOfPages: numberOfPages.value})}}
       </div>
       <input
         [formControl]="currentPage"
