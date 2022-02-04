@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -6,7 +7,9 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config.model';
+import { HttpInterceptorParams } from '../../core/models/http-interceptor-params.model';
 import { DataService } from '../../core/services/data.service';
+import { ImageFile } from '../../shared/models/image-file';
 import { PersonBaseModel } from '../models/person-base.model';
 import { PersonDetailsModel } from '../models/person-details.model';
 import { PersonEditModel } from '../models/person-edit.model';
@@ -16,7 +19,7 @@ import { PersonImageModel } from '../models/person-image.model';
   providedIn: 'root',
 })
 export class PersonService extends DataService {
-  constructor(httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router) {
     super(httpClient, 'api/person', environment.baseApiUrl);
   }
 
@@ -49,8 +52,16 @@ export class PersonService extends DataService {
     return super.delete(personId, 'delete');
   }
 
-  public changePhoto(personImage : PersonImageModel): Observable<any> {
-    const path = `uploadPhoto`;
-    return super.post<any>(path, personImage);
+  public uploadPhoto(personId: number, image: File): Observable<ImageFile> {
+    console.log("🚀 ~ file: person.service.ts ~ line 56 ~ PersonService ~ uploadPhoto ~ image", image)
+    let path =`${environment.baseApiUrl}/api/person/photo/upload?personId=${personId}`;
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+    return this.httpClient.post<ImageFile>(path, formData);
+  }
+
+  public updatePhoto(personImage: PersonImageModel): Observable<ImageFile> {
+    let path = `photo/update`;
+    return this.httpClient.put<ImageFile>(path, personImage);
   }
 }

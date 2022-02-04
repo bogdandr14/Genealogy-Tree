@@ -12,7 +12,7 @@ export class LoadingService {
   public async startLoading() {
     this.isLoading = true;
     this.loadingComponent = await this.loadingController.create({
-      message: this.translateService.instant('loadingMessage'),
+      message: this.translateService.instant('_message.loading'),
       duration: 60000,
       translucent: true,
       cssClass: 'lds-dual-ring',

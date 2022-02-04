@@ -8,20 +8,19 @@
 </ion-header>
 
 <ion-content class="ion-padding-top ion-text-center">
-  <img
-    src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-    alt="avatar"
-  />
-  <ion-label>
-    <h1>
-      {{ personalInfo?.firstName }} {{ personalInfo?.lastName }}
-    </h1></ion-label
-  >
+  <ion-avatar class="avatar">
+    <img
+      [src]="image ? image : 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"
+      alt="avatar"
+    />
+  </ion-avatar>
 
   <ion-list inset="true">
     <ion-list-header
-      ><ion-label
-        ><h1>{{ "_details.user" | translate }}</h1></ion-label
+      ><ion-label>
+        <h1>
+          {{ personalInfo?.firstName }} {{ personalInfo?.lastName }}
+        </h1></ion-label
       ></ion-list-header
     >
     <ion-accordion-group>
@@ -147,6 +146,7 @@
     <ion-modal trigger="open-change-picture" [swipeToClose]="true">
       <ng-template>
         <app-photo-upload
+          (imageSave)="createImage($event)"
           [personId]="personalInfo?.personId"
         ></app-photo-upload>
       </ng-template>

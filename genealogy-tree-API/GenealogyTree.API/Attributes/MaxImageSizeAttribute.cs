@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace GenealogyTree.API.Attributes
@@ -13,7 +14,7 @@ namespace GenealogyTree.API.Attributes
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var image = (value as PersonImageUpdateModel).Image;
+            var image = (value as IFormFile);
             if (image != null)
             {
                 if (image.Length > _maxImageSize * 1024)

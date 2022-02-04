@@ -6,13 +6,15 @@ import { PersonDetailComponent } from './components/person-detail/person-detail.
 import { PersonRoutingModule } from './person-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PhotoUploadComponent } from './components/photo-upload/photo-upload.component';
+import { FileMaxSizeDirective } from './directives/file-max-size.directive';
 
 @NgModule({
   declarations: [
     PeopleListComponent,
     PersonEditComponent,
     PersonDetailComponent,
-    PhotoUploadComponent
+    PhotoUploadComponent,
+    FileMaxSizeDirective
   ],
   imports: [CommonModule,SharedModule, PersonRoutingModule],
   exports:[

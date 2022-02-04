@@ -1,13 +1,14 @@
+import { HttpInterceptorConfig } from './../../../core/models/http-interceptor-config.model';
+import { AlertService } from './../../../core/services/alert.service';
+import { NationalityService } from './../../../shared/services/nationality.service';
+import { GenderService } from './../../../shared/services/gender.service';
+import { AuthService } from './../../../core/services/auth.service';
+import { CommonObject } from './../../../shared/models/common-object';
+import { ReligionService } from './../../../shared/services/religion.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
-import { HttpInterceptorConfig } from 'src/app/modules/core/models/http-interceptor-config.model';
-import { AlertService } from 'src/app/modules/core/services/alert.service';
-import { AuthService } from 'src/app/modules/core/services/auth.service';
-import { CommonObject } from 'src/app/modules/shared/models/common-object';
-import { GenderService } from 'src/app/modules/shared/services/gender.service';
-import { NationalityService } from 'src/app/modules/shared/services/nationality.service';
 import { RegisterModel } from '../../models/register.model';
 
 @Component({
@@ -23,11 +24,13 @@ export class RegisterPage implements OnInit, OnDestroy {
   public isEmailAvailable: boolean = true;
   public genderOptions: CommonObject[] = [];
   public nationalityOptions: CommonObject[] = [];
+  public religionOptions: CommonObject[] = [];
 
   constructor(
     private authService: AuthService,
     private genderService: GenderService,
     private nationalityService: NationalityService,
+    private religionService: ReligionService,
     private alertService: AlertService,
     private router: Router
   ) {}
@@ -47,6 +50,12 @@ export class RegisterPage implements OnInit, OnDestroy {
       .subscribe((nationalities) => {
         this.nationalityOptions = nationalities;
       });
+    this.religionService
+      .getMany<CommonObject>(null, params)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((religions) => {
+        this.religionOptions = religions;
+      });
   }
 
   formatDate(date: string): Date {
@@ -57,13 +66,13 @@ export class RegisterPage implements OnInit, OnDestroy {
     this.destroy$.next(true);
     this.destroy$.complete();
   }
-  onBirthdayChange(){
+  onBirthdayChange() {
     console.log(this.registerModel);
   }
-  public show(toShow){
+  public show(toShow) {
     console.log(Object.keys(toShow));
   }
-  public getKeys(errors){
+  public getKeys(errors) {
     console.log(Object.keys(errors));
     return Object.keys(errors)[0];
   }

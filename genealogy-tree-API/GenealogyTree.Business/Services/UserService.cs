@@ -14,15 +14,19 @@ namespace GenealogyTree.Business.Services
     {
 
         private readonly IMapper _mapper;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        private readonly IFileManagementService _fileManagementService;
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
         {
             _mapper = mapper;
+            _fileManagementService = fileManagementService;
         }
 
         public async Task<UserDetailsModel> GetUserByIdAsync(Guid userId)
         {
             User user = await unitOfWork.User.FindById(userId);
-            return _mapper.Map<UserDetailsModel>(user);
+            UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
+            returnEvent.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
+            return returnEvent;
         }
 
         public async Task<UserDetailsModel> GetUser(string username)
@@ -34,9 +38,12 @@ namespace GenealogyTree.Business.Services
                             .Include(u => u.Person.Religion)
                             .Include(u => u.Person.LivingPlace)
                             .Include(u => u.Person.BirthPlace)
+                            .Include(u => u.Person.Image)
                             .Include(u => u.Educations)
                             .Include(u => u.Occupations).FirstOrDefault();
-            return _mapper.Map<UserDetailsModel>(user);
+            UserDetailsModel userEntity = _mapper.Map<UserDetailsModel>(user);
+            userEntity.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
+            return userEntity;
         }
 
         public async Task<UserDetailsModel> UpdateUser(UserUpdateModel user)
@@ -51,6 +58,7 @@ namespace GenealogyTree.Business.Services
             userEntity.PersonId = userToUpdate.PersonId;
             userEntity = await unitOfWork.User.Update(userEntity);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
+            returnEvent.ImageFile = await _fileManagementService.GetFile(userEntity.Person.Image);
             return returnEvent;
         }
 

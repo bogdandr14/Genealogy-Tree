@@ -1,10 +1,10 @@
 export class PersonImageModel {
   constructor(personId: number, file: File, fileId: number) {
     this.personId = personId;
-    this.file = file;
-    this.fileId = fileId;
+    this.image = file;
+    this.imageId = fileId;
   }
   personId: number;
-  fileId: number;
-  file: File;
+  imageId: number;
+  image: File;
 }

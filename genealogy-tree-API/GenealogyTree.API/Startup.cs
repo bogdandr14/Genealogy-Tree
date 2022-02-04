@@ -6,6 +6,7 @@ using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,12 @@ namespace GenealogyTree.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.Configure<FormOptions>(options =>
+            {
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue;
+                options.MemoryBufferThreshold = int.MaxValue;
+            });
             services.AddControllers();
 
             services.AddSwaggerGen(options =>
@@ -90,7 +97,7 @@ namespace GenealogyTree.API
             });
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

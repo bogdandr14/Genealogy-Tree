@@ -10,6 +10,7 @@ import { LanguageSelectComponent } from './components/language-select/language-s
 import { ThemeSelectComponent } from './components/theme-select/theme-select.component';
 import { InputTemplateComponent } from './components/input-template/input-template.component';
 import { ValidationErrorsComponent } from './components/validation-errors/validation-errors.component';
+import { SelectTemplateComponent } from './components/select-template/select-template.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ValidationErrorsComponent } from './components/validation-errors/valida
     LanguageSelectComponent,
     DeleteConfirmationComponent,
     InputTemplateComponent,
+    SelectTemplateComponent,
     ValidationErrorsComponent
   ],
   imports: [
@@ -40,6 +42,7 @@ import { ValidationErrorsComponent } from './components/validation-errors/valida
     LanguageSelectComponent,
     DeleteConfirmationComponent,
     InputTemplateComponent,
+    SelectTemplateComponent,
     ValidationErrorsComponent
   ],
 })

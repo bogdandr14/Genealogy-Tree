@@ -1,4 +1,5 @@
 import { CommonObject } from "../../shared/models/common-object";
+import { ImageFile } from "../../shared/models/image-file";
 import { LocationModel } from "../../shared/models/location.model";
 
 export class AccountProfileModel {
@@ -15,4 +16,5 @@ export class AccountProfileModel {
   birthPlace: LocationModel;
   birthDate: Date;
   lastTreeUpdate: Date;
+  imageFile: ImageFile;
 }

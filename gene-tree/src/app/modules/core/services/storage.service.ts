@@ -35,6 +35,10 @@ export class StorageService {
     this.user.next(await this.getUser());
     const preferences = await this.getPreferences();
     console.log(this.user.value);
+    this.checkPreferences(preferences);
+  }
+
+  checkPreferences(preferences: AccountSettingsModel) {
     if (preferences) {
       this.darkTheme.next(preferences.themePreference);
       this.language.next(preferences.languagePreference);
@@ -84,8 +88,7 @@ export class StorageService {
 
   setPreferences(preferences: AccountSettingsModel) {
     this.set('preferences', preferences);
-    this.darkTheme.next(preferences.themePreference);
-    this.language.next(preferences.languagePreference);
+    this.checkPreferences(preferences);
   }
 
   async getPreferences(): Promise<AccountSettingsModel> {

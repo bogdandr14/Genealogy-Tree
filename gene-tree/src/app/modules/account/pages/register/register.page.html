@@ -83,32 +83,19 @@
                 <app-validation-errors [model]="gender"></app-validation-errors>
               </ion-item-group>
 
-              <ion-item-group id="nationality">
-                <ion-item color="transparent">
-                  <ion-label for="nat" position="floating">
-                    <b>
-                      {{ "_person.nationality" | lowercase | translate }}
-                      <span class="required"> *</span>
-                    </b>
-                  </ion-label>
-                  <ion-select
-                    name="nat"
-                    #nat="ngModel"
-                    [(ngModel)]="registerModel.nationalityId"
-                    interface="popover"
-                    [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
-                    required
-                  >
-                    <ion-select-option
-                      *ngFor="let nationality of nationalityOptions"
-                      [value]="nationality.id"
-                    >
-                      {{ "_nationalities." + nationality.name | translate }}
-                    </ion-select-option>
-                  </ion-select>
-                </ion-item>
-                <app-validation-errors [model]="nat"></app-validation-errors>
-              </ion-item-group>
+              <app-select-template
+                name="_person.nationality"
+                optionsPrefix="_nationalities"
+                [options]="nationalityOptions"
+                [(field)]="registerModel.nationalityId"
+              ></app-select-template>
+
+              <app-select-template
+                name="_person.religion"
+                optionsPrefix="_religions"
+                [options]="religionOptions"
+                [(field)]="registerModel.religionId"
+              ></app-select-template>
 
               <ion-item-group id="birthday">
                 <ion-item
@@ -175,7 +162,7 @@
               <app-input-template
                 id="phone"
                 [(field)]="registerModel.phoneNumber"
-                name="phone"
+                name="_user.phone"
               ></app-input-template>
 
               <ion-item-group id="username">
@@ -198,7 +185,7 @@
                 </ion-item>
                 <app-validation-errors
                   [model]="uname"
-                  [length]="6"
+                  [number]="6"
                 ></app-validation-errors>
               </ion-item-group>
 

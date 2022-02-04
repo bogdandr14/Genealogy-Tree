@@ -80,6 +80,27 @@ namespace GenealogyTree.Data.Migrations
                     b.ToTable("Genders");
                 });
 
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MimeType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("SizeInBytes")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -220,6 +241,9 @@ namespace GenealogyTree.Data.Migrations
                     b.Property<int?>("GenderId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -243,6 +267,8 @@ namespace GenealogyTree.Data.Migrations
                     b.HasIndex("BirthPlaceId");
 
                     b.HasIndex("GenderId");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("LivingPlaceId");
 
@@ -482,6 +508,11 @@ namespace GenealogyTree.Data.Migrations
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("GenealogyTree.Domain.Entities.Image", "Image")
+                        .WithMany("People")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("GenealogyTree.Domain.Entities.Location", "LivingPlace")
                         .WithMany("PeopleLivingHere")
                         .HasForeignKey("LivingPlaceId")
@@ -506,6 +537,8 @@ namespace GenealogyTree.Data.Migrations
                     b.Navigation("BirthPlace");
 
                     b.Navigation("Gender");
+
+                    b.Navigation("Image");
 
                     b.Navigation("LivingPlace");
 
@@ -587,6 +620,11 @@ namespace GenealogyTree.Data.Migrations
                 });
 
             modelBuilder.Entity("GenealogyTree.Domain.Entities.Gender", b =>
+                {
+                    b.Navigation("People");
+                });
+
+            modelBuilder.Entity("GenealogyTree.Domain.Entities.Image", b =>
                 {
                     b.Navigation("People");
                 });

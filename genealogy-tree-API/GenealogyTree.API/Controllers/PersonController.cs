@@ -1,10 +1,14 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Business.Helpers;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.API.Controllers
@@ -15,9 +19,11 @@ namespace GenealogyTree.API.Controllers
     public class PersonController : Controller
     {
         private readonly IPersonService _personService;
-        public PersonController(IPersonService personService)
+        private readonly IImageService _imageService;
+        public PersonController(IPersonService personService, IImageService imageService)
         {
             _personService = personService;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -41,11 +47,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("tree/{treeId:Guid}")]
-        public async Task<ActionResult<GenericPersonModel>> GetPeopleInTree(Guid treeId)
+        public async Task<ActionResult<BasePersonModel>> GetPeopleInTree(Guid treeId)
         {
             try
             {
-                List<GenericPersonModel> returnEvent = await _personService.GetAllPeopleInTree(treeId);
+                List<BasePersonModel> returnEvent = await _personService.GetAllPeopleInTree(treeId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -124,13 +130,13 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("updatePhoto")]
-        public async Task<ActionResult<PersonDetailsModel>> UpdatePhoto([MaxImageSize(2 * 1024)]PersonImageUpdateModel imageUpdate)
+        [Route("photo/update")]
+        public async Task<ActionResult<ImageFile>> UpdatePhoto([FromQuery] int personId, [FromQuery] int imageId)
         {
             try
             {
-                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync(imageUpdate);
-                return Ok(returnEvent);
+                ImageFile imageFile = await _personService.UpdatePictureAsync(personId, imageId);
+                return Ok(imageFile);
             }
             catch (Exception e)
             {
@@ -138,33 +144,20 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("photo")]
-        public async Task<ActionResult<PersonDetailsModel>> GetPhoto(int imageId)
+        [HttpPost]
+        [Route("photo/upload")]
+        public async Task<ActionResult<ImageFile>> UploadPhoto([FromQuery] int personId, [Required][FromForm][MaxImageSize(4 * 1024)] IFormFile image)
         {
             try
             {
-                var imagePath = await personservice.SaveEventImageAsync(eventId.Value, version, image.ToGenericFile());
-
-                Image image = await _imageService.getImageAsync(imageId);
-                if(image is null)
-                {
-                    return NoContent();
-                }
-                var imageContent =  await _imageService.GetFile(image.Path);
-                if(imageContent !=null && imageContent.Length > 0)
-                {
-                    return File(imageContent, image.MimeType);
-                }
-                return NoContent();
+                Image createdImage = await _imageService.AddImageAsync(image.ToImageFile());
+                ImageFile imageFile = await _personService.UpdatePictureAsync(personId, createdImage.Id);
+                return Ok(imageFile);
             }
             catch (Exception e)
             {
                 return BadRequest(e);
             }
         }
-
-
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.DTO.Marriage;
@@ -8,6 +9,8 @@ using GenealogyTree.Domain.DTO.Sync;
 using GenealogyTree.Domain.DTO.SyncRequest;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
+using System;
+using System.IO;
 
 namespace GenealogyTree.Business.Helpers
 {
@@ -34,6 +37,9 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<Gender, GenericNameModel>()
                .ReverseMap();
+            CreateMap<Image, ImageFile>()
+                .ForMember(x => x.Name, y=> y.MapFrom(z=> Guid.Parse(Path.GetFileNameWithoutExtension(z.FileName))));
+            CreateMap<ImageFile, Image>();
 
             CreateMap<Location, LocationModel>()
                .ReverseMap();
@@ -64,7 +70,7 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<ParentChild, ParentChildCreateUpdateModel>()
                .ReverseMap();
 
-            CreateMap<Person, GenericPersonModel>()
+            CreateMap<Person, BasePersonModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
                 .ReverseMap();
             CreateMap<Person, PersonDetailsModel>()

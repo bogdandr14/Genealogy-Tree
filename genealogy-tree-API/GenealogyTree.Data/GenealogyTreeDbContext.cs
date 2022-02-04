@@ -171,6 +171,7 @@ namespace GenealogyTree.Data
                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Person>().Navigation(p => p.Gender).AutoInclude();
+            modelBuilder.Entity<Person>().Navigation(p => p.Image).AutoInclude();
             modelBuilder.Entity<Person>().Navigation(p => p.Nationality).AutoInclude();
             modelBuilder.Entity<Person>().Navigation(p => p.Religion).AutoInclude();
             modelBuilder.Entity<Person>().Navigation(p => p.BirthPlace).AutoInclude();

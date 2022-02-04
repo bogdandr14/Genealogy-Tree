@@ -126,7 +126,7 @@ namespace GenealogyTree.Data
                 new Nationality {
                     Name = "Lithuanian" },
                 new Nationality {
-                    Name = "Northern Irish" },
+                    Name = "Northern_Irish" },
                 new Nationality {
                     Name = "Norwegian" },
                 new Nationality {

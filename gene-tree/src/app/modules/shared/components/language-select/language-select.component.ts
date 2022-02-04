@@ -32,7 +32,7 @@ export class LanguageSelectComponent implements OnInit {
   ngOnInit(): void {
     this.selectedLaguage.setValue(this.translateService.currentLang);
     this.storageService.language$.subscribe((language) => {
-      if (this.selectedLaguage.value != language) {
+      if (language != null && this.selectedLaguage.value != language) {
         this.selectedLaguage.setValue(language);
       }
     });

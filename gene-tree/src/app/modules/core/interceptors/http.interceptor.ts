@@ -21,7 +21,10 @@ import { AlertService } from '../services/alert.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
-  constructor(private alertService: AlertService, private authService: AuthService) { }
+  constructor(
+    private alertService: AlertService,
+    private authService: AuthService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -30,9 +33,15 @@ export class AppHttpInterceptor implements HttpInterceptor {
     const config = (req.params as HttpInterceptorParams).interceptorConfig;
     const successMessage = config?.successMessage ?? '';
     const showSuccessMessage = config?.showSuccessMessage;
-    const request = req.clone({
-      headers: req.headers.set('Content-Type', 'application/json'),
-    });
+    const request = req.clone(
+      req.url.includes('photo/upload')
+        ? {
+            headers: req.headers.delete('Content-Type'),
+          }
+        : {
+            headers: req.headers.set('Content-Type', 'application/json'),
+          }
+    );
 
     return next.handle(request).pipe(
       filter((e) => e.type !== 0),

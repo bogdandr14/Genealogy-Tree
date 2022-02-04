@@ -9,7 +9,7 @@ namespace GenealogyTree.Domain.Entities
             this.People = new HashSet<Person>();
         }
         public int Id { get; set; }
-        public string Path { get; set; }
+        public string FileName { get; set; }
         public string MimeType { get; set; }
         public long SizeInBytes { get; set; }
         public virtual ICollection<Person> People { get; set; }

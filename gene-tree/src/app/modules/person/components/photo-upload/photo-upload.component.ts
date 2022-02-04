@@ -1,6 +1,13 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+/* eslint-disable no-debugger */
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PersonImageModel } from '../../models/person-image.model';
+import { ImageFile } from 'src/app/modules/shared/models/image-file';
 import { PersonService } from '../../services/person.service';
 
 @Component({
@@ -9,61 +16,47 @@ import { PersonService } from '../../services/person.service';
   styleUrls: ['./photo-upload.component.scss'],
 })
 export class PhotoUploadComponent implements OnInit {
-  @ViewChild("fileUpload", { static: true }) uploader: ElementRef<HTMLInputElement>;
+  @Output() imageSave = new EventEmitter<ImageFile>();
   @Input() maxSizeMb = 4;
   public file: File;
-  isFileValid = true;
   imageBlobUrl: any;
   @Input() personId: number;
   constructor(
     public modalCtrl: ModalController,
     private personService: PersonService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  popFileChooser(): void {
-    this.uploader.nativeElement.click();
+  onFileChange(event) {
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.createImageToBlob(this.file);
+    }
   }
 
   createImageToBlob(image: Blob) {
     const reader = new FileReader();
     reader.addEventListener(
-      'load', () => {
+      'load',
+      () => {
         this.imageBlobUrl = reader.result;
       },
       false
     );
     if (image) {
       reader.readAsDataURL(image);
-      this.isFileValid = this.file.size < this.maxSizeMb * 1024 * 1024;
     }
-  }
-
-  onFileChange(fileChangeEvent) {
-    console.log("🚀 ~ file: photo-upload.component.ts ~ line 21 ~ PhotoUploadComponent ~ onFileChange ~ fileChangeEvent", fileChangeEvent)
-    this.file = fileChangeEvent.target.files[0];
-    console.log("🚀 ~ file: photo-upload.component.ts ~ line 22 ~ PhotoUploadComponent ~ onFileChange ~ this.file", this.file)
-    if(this.file){
-      this.checkIfFileOk(fileChangeEvent.target.files[0]);
-    }
-  }
-
-  checkIfFileOk(file: File) {
-    if (file.type.indexOf('image') === -1) {
-      return false;
-    }
-    this.file = file;
-    this.createImageToBlob(this.file);
-    return true;
   }
 
   submitPhoto() {
-    let personImage = new PersonImageModel(this.personId, this.file, null);
-    this.personService.changePhoto(personImage).subscribe(() => {
-      console.log(personImage);
-      this.dismiss();
-    });
+    console.log(this.file);
+    this.personService
+      .uploadPhoto(this.personId, this.file)
+      .subscribe((imageFile) => {
+        this.imageSave.emit(imageFile);
+        this.dismiss();
+      });
   }
   dismiss() {
     this.modalCtrl.dismiss();

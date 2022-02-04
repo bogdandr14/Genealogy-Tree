@@ -7,8 +7,7 @@
   <ion-label text-wrap class="error" *ngFor="let error of [model.errors]">
     {{
       "_validation." + getErrorKey(error)
-        | translate
-          : (getErrorKey(error).includes("length") ? { length: length } : {})
+        | translate: getTranslationParameters(error)
     }}
   </ion-label>
 </ion-item>

@@ -238,6 +238,14 @@
   --ion-color-food: #3bc7c4;
   --ion-color-documentation: #b16be3;
   --ion-color-navigation: #6600cc;
+
+  ion-content{
+    --background:none;
+    background:#fff url(../assets/light-image.jpg)  no-repeat center center / cover;
+  }
+  ion-content.menu{
+    background: none;
+  }
 }
 
 /*
@@ -336,6 +344,15 @@
   --ion-color-light-contrast-rgb: 255,255,255;
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
+
+  ion-content{
+    --background:none;
+    background:#fff url(../assets/dark-image.jpg)  no-repeat center center / cover;
+
+  }
+  ion-content.menu{
+    background: none;
+  }
 }
 
 /*

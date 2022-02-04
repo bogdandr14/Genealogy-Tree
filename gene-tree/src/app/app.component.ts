@@ -20,10 +20,14 @@ export class AppComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.storageService.darkTheme$.subscribe((theme) => {
-      this.dark = theme;
+      if (theme != null && this.dark != theme) {
+        this.dark = theme;
+      }
     });
     this.storageService.language$.subscribe((language) => {
-      this.translateService.use(language);
+      if(language!=null){
+        this.translateService.use(language);
+      }
     });
   }
 }
