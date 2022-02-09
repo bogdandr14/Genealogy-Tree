@@ -1,8 +1,10 @@
+import { LocationEditComponent } from './components/location-edit/location-edit.component';
+import { PersonEditPage } from './pages/person-edit/person-edit.page';
+import { PersonDeleteCardComponent } from './components/person-delete-card/person-delete-card.component';
+import { LinkUserButtonsComponent } from './components/link-user-buttons/link-user-buttons.component';
+import { PersonDetailsPage } from './pages/person-details/person-details.page';
+import { RelativesListPage } from './pages/relatives-list/relatives-list.page';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PeopleListComponent } from './components/people-list/people-list.component';
-import { PersonEditComponent } from './components/person-edit/person-edit.component';
-import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 import { PersonRoutingModule } from './person-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PhotoUploadComponent } from './components/photo-upload/photo-upload.component';
@@ -10,13 +12,16 @@ import { FileMaxSizeDirective } from './directives/file-max-size.directive';
 
 @NgModule({
   declarations: [
-    PeopleListComponent,
-    PersonEditComponent,
-    PersonDetailComponent,
     PhotoUploadComponent,
-    FileMaxSizeDirective
+    PersonDetailsPage,
+    RelativesListPage,
+    PersonEditPage,
+    FileMaxSizeDirective,
+    LinkUserButtonsComponent,
+    PersonDeleteCardComponent,
+    LocationEditComponent
   ],
-  imports: [CommonModule,SharedModule, PersonRoutingModule],
+  imports: [SharedModule, PersonRoutingModule],
   exports:[
     PhotoUploadComponent
   ]

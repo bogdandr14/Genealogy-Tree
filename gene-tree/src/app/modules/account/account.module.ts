@@ -1,3 +1,5 @@
+import { OccupationEditComponent } from './components/occupation-edit/occupation-edit.component';
+import { EducationEditComponent } from './components/education-edit/education-edit.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { EmailCheckDirective } from './directives/emailCheck.directive';
@@ -24,6 +26,8 @@ import { PersonModule } from '../person/person.module';
     ProfilePage,
     SettingsPage,
     ChangePasswordComponent,
+    EducationEditComponent,
+    OccupationEditComponent
   ],
   imports: [SharedModule, AccountRoutingModule, PersonModule],
   providers: [Clipboard],

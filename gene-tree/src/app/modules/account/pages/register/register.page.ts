@@ -20,8 +20,6 @@ export class RegisterPage implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   public registerModel = new RegisterModel();
   public selectedDate: Date;
-  public isUsernameAvailable: boolean = true;
-  public isEmailAvailable: boolean = true;
   public genderOptions: CommonObject[] = [];
   public nationalityOptions: CommonObject[] = [];
   public religionOptions: CommonObject[] = [];
@@ -66,9 +64,7 @@ export class RegisterPage implements OnInit, OnDestroy {
     this.destroy$.next(true);
     this.destroy$.complete();
   }
-  onBirthdayChange() {
-    console.log(this.registerModel);
-  }
+
   public show(toShow) {
     console.log(Object.keys(toShow));
   }

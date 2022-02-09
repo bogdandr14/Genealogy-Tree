@@ -86,7 +86,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<PersonDetailsModel>> AddPerson(PersonCreateUpdateModel person)
+        public async Task<ActionResult<PersonDetailsModel>> AddPerson([FromBody]PersonCreateUpdateModel person)
         {
             try
             {

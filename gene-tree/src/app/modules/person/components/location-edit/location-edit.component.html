@@ -1,0 +1,73 @@
+<ion-modal class="delete-modal" [isOpen]="present" [swipeToClose]="true">
+  <ng-template>
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>{{ "_edit.locations" | translate }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="dismiss()">{{
+            "_common.cancel" | translate
+          }}</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-card>
+        <ion-card-content>
+          <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <ion-item-group id="bornIn">
+              <ion-label  class="ion-padding-top">
+                <b>
+                  <span>
+                    <h1>{{ "_location.from" | translate }}</h1>
+                  </span>
+                </b>
+              </ion-label>
+              <app-input-template
+                [(field)]="bornIn.state"
+                name="_location.state"
+              ></app-input-template>
+              <app-input-template
+                [(field)]="bornIn.country"
+                name="_location.country"
+              ></app-input-template>
+              <app-input-template
+                [(field)]="bornIn.city"
+                name="_location.city"
+              ></app-input-template>
+            </ion-item-group>
+
+            <ion-item-group id="liveIn">
+              <ion-label class="ion-padding-top">
+                <b>
+                  <span>
+                    <h1>{{ "_location.lives" | translate }}</h1>
+                  </span>
+                </b>
+              </ion-label>
+              <app-input-template
+                [(field)]="livesIn.state"
+                name="_location.state"
+              ></app-input-template>
+              <app-input-template
+                [(field)]="livesIn.country"
+                name="_location.country"
+              ></app-input-template>
+              <app-input-template
+                [(field)]="livesIn.city"
+                name="_location.city"
+              ></app-input-template>
+            </ion-item-group>
+            <ion-button
+              fill="solid"
+              color="success"
+              type="submit"
+              expand="block"
+            >
+              {{ "_common.save" | translate }}
+            </ion-button>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+  </ng-template>
+</ion-modal>

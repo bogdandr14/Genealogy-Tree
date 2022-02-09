@@ -1,20 +1,30 @@
-<!-- <ion-modal
-  [isOpen]="true"
-  [swipeToClose]="true"
->
+<ion-modal class="delete-modal"[isOpen]="present" [swipeToClose]="true">
   <ng-template>
-    <ion-content>Modal Content</ion-content>
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>{{ "_delete.confirm" | translate }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="dismiss()">{{
+            "_common.cancel" | translate
+          }}</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-item>
+        <ion-label
+          >{{ "_delete.warning" | translate }} {{ typeName | translate | lowercase}}?
+        </ion-label>
+      </ion-item>
+      <ng-container [ngTemplateOutlet]="template"></ng-container>
+      <ion-button
+        fill="solid"
+        color="danger"
+        expand="block"
+        (click)="confirm()"
+      >
+        {{ "_common.delete" | translate }}
+      </ion-button>
+    </ion-content>
   </ng-template>
 </ion-modal>
-
-<ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Modal Content</ion-title>
-    <ion-buttons slot="end">
-      <ion-button onclick="dismissModal()">Close</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content fullscreen>
-  yes
-</ion-content> -->

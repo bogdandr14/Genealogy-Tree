@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
-using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Services
 {
-    class LocationService : BaseService, ILocationService
+    public class LocationService : BaseService, ILocationService
     {
         private readonly IMapper _mapper;
         public LocationService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)

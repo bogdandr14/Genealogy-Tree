@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Generic;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,5 +13,8 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<EducationModel> AddEducationAsync(EducationModel education);
         Task<EducationModel> UpdateEducationAsync(EducationModel education);
         Task<EducationModel> DeleteEducationAsync(int educationId);
+        Task<List<GenericNameModel>> GetAllEducationLevelsAsync();
+        Task<GenericNameModel> GetEducationLevelAsync(int educationLevelId);
+        Task<GenericNameModel> AddEducationLevelAsync(string educationLevelName);
     }
 }

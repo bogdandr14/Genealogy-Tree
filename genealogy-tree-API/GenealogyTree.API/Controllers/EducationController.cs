@@ -15,11 +15,9 @@ namespace GenealogyTree.API.Controllers
     public class EducationController : Controller
     {
         private readonly IEducationService _educationService;
-        private readonly IEducationLevelService _educationLevelService;
-        public EducationController(IEducationService educationService, IEducationLevelService educationLevelService)
+        public EducationController(IEducationService educationService)
         {
             _educationService = educationService;
-            _educationLevelService = educationLevelService;
         }
 
         [GeneTreeAuthorize]
@@ -116,7 +114,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                List<GenericNameModel> returnEvent = await _educationLevelService.GetAllEducationLevelsAsync();
+                List<GenericNameModel> returnEvent = await _educationService.GetAllEducationLevelsAsync();
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -130,12 +128,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("level/{id:int}")]
+        [Route("levels/{id:int}")]
         public async Task<ActionResult<GenericNameModel>> GetEducationLevel(int id)
         {
             try
             {
-                GenericNameModel returnEvent = await _educationLevelService.GetEducationLevelAsync(id);
+                GenericNameModel returnEvent = await _educationService.GetEducationLevelAsync(id);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -155,7 +153,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                GenericNameModel returnEvent = await _educationLevelService.AddEducationLevelAsync(name);
+                GenericNameModel returnEvent = await _educationService.AddEducationLevelAsync(name);
                 return Ok(returnEvent);
             }
             catch (Exception e)

@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,9 +14,24 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./delete-confirmation.component.scss'],
 })
 export class DeleteConfirmationComponent implements OnInit {
-  @Input() title: string;
-  @Input() description: string;
-  @Input() id: number;
-  constructor(public modalController: ModalController) {}
+  @Input() template: TemplateRef<any>;
+  @Input() typeName: string;
+  @Output() deleteConfirmed = new EventEmitter<number>();
+  id: number;
+  present: boolean = false;
+
+  constructor(public modalCtrl: ModalController) {}
   ngOnInit() {}
+
+  public async presentModal(id: number) {
+    this.id = id;
+    this.present = true;
+  }
+  confirm() {
+    this.deleteConfirmed.emit(this.id);
+    this.dismiss();
+  }
+  dismiss() {
+    this.present = false;
+  }
 }

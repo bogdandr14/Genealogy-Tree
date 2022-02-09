@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
@@ -28,6 +29,51 @@ namespace GenealogyTree.Business.Services
         {
             List<ParentChild> parentsChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).ToList();
             List<ChildModel> returnEvent = _mapper.Map<List<ChildModel>>(parentsChildren);
+            return returnEvent;
+        }
+
+        public async Task<List<ParentModel>> GetAllAncestors(int personId)
+        {
+            List<ParentModel> foundParents = await GetAllParentsForPerson(personId);
+            List<ParentModel> returnEvent = new List<ParentModel>();
+            while (foundParents.Any())
+            {
+                returnEvent.AddRange(foundParents);
+                List<ParentModel> searchParents = foundParents;
+                foundParents.Clear();
+                foreach (ParentModel parent in searchParents)
+                {
+                    foundParents.AddRange(await GetAllParentsForPerson(parent.Parent.PersonId));
+                }
+            }
+            return returnEvent;
+        }
+
+        public async Task<List<ChildModel>> GetAllDescendants(int personId)
+        {
+            List<ChildModel> foundChildren = await GetAllChildrenForPerson(personId);
+            List<ChildModel> returnEvent = new List<ChildModel>();
+            while (foundChildren.Any())
+            {
+                returnEvent.AddRange(foundChildren);
+                List<ChildModel> searchChildren = foundChildren;
+                foundChildren.Clear();
+                foreach (ChildModel child in searchChildren)
+                {
+                    foundChildren.AddRange(await GetAllChildrenForPerson(child.Child.PersonId));
+                }
+            }
+            return returnEvent;
+        }
+
+        public async Task<List<BasePersonModel>> GetUnrelatedPeople(int personId)
+        {
+            List<ParentModel> ancestors = await GetAllAncestors(personId);
+            List<ChildModel> descendants = await GetAllDescendants(personId);
+            Person person = await unitOfWork.Person.FindById(personId);
+            IQueryable<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId);
+            List<Person> people = peopleInTree.Where(x => !ancestors.Exists(y => y.Parent.PersonId == x.Id) && !descendants.Exists(y => y.Child.PersonId == x.Id)).ToList();
+            List<BasePersonModel> returnEvent = _mapper.Map<List<BasePersonModel>>(people);
             return returnEvent;
         }
 

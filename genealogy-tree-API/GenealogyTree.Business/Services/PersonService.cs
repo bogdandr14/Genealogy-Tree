@@ -29,7 +29,7 @@ namespace GenealogyTree.Business.Services
             List<Person> people = unitOfWork.Person.Filter(x => string.Format("{0} {1}", x.FirstName, x.LastName).Contains(name))
                                     .OrderBy(x => x.FirstName).ToList();
             List<PersonDetailsModel> returnPoepleList = new List<PersonDetailsModel>();
-            foreach(var person in people)
+            foreach (var person in people)
             {
                 PersonDetailsModel returnPerson = _mapper.Map<PersonDetailsModel>(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
@@ -43,19 +43,42 @@ namespace GenealogyTree.Business.Services
             Person person = await unitOfWork.Person.FindById(personId);
             PersonDetailsModel personEntity = _mapper.Map<PersonDetailsModel>(person);
             personEntity.ImageFile = await _fileManagementService.GetFile(person.Image);
-            User user = unitOfWork.User.Filter(u => u.PersonId == person.Id).FirstOrDefault();
-            if (user != default(User))
+            if (person.SyncedUserToPerson != null)
             {
-                personEntity.UserId = user.Id;
+                personEntity.UserId = person.SyncedUserToPerson.SyncedUserId;
+            }
+            else
+            {
+                User user = unitOfWork.User.Filter(u => u.PersonId == person.Id).FirstOrDefault();
+                if (user != default(User))
+                {
+                    personEntity.UserId = user.Id;
+                }
             }
             return personEntity;
         }
 
         public async Task<List<BasePersonModel>> GetAllPeopleInTree(Guid treeId)
         {
-            List<Person> person = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
-            List<BasePersonModel> personEntity = _mapper.Map<List<BasePersonModel>>(person);
-            return personEntity;
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
+            List<BasePersonModel> returnPeopleList = new List<BasePersonModel>();
+            User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+
+            foreach (var person in poepleList)
+            {
+                BasePersonModel returnPerson = _mapper.Map<BasePersonModel>(person);
+                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
+                if (person.SyncedUserToPerson != null)
+                {
+                    returnPerson.UserId = person.SyncedUserToPerson.SyncedUserId;
+                }
+                if(person.Id == user.PersonId)
+                {
+                    returnPerson.UserId = user.Id;
+                }
+                returnPeopleList.Add(returnPerson);
+            }
+            return returnPeopleList;
         }
 
         public async Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person)
@@ -68,6 +91,8 @@ namespace GenealogyTree.Business.Services
             personEntity.Gender = null;
             personEntity.Nationality = null;
             personEntity.Religion = null;
+            personEntity.LivingPlace = new Location();
+            personEntity.BirthPlace = new Location();
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
@@ -112,6 +137,11 @@ namespace GenealogyTree.Business.Services
         public async Task<PersonDetailsModel> DeletePersonAsync(int personId)
         {
             Person personEntity = await unitOfWork.Person.Delete(personId);
+            int oldImageId = (personEntity.ImageId == null) ? 0 : (int)personEntity.ImageId;
+            if (oldImageId != 0)
+            {
+                await checkImageUsageAsync(oldImageId);
+            }
             return _mapper.Map<PersonDetailsModel>(personEntity);
         }
     }

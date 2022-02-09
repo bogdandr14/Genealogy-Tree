@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,63 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<ParentModel> parents = await _parentChildService.GetAllParentsForPerson(childId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("ancestors/{personId:int}")]
+        public async Task<ActionResult<List<ParentModel>>> GetAncestors(int personId)
+        {
+            try
+            {
+                List<ParentModel> parents = await _parentChildService.GetAllAncestors(personId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("descendants/{personId:int}")]
+        public async Task<ActionResult<List<ParentModel>>> GetDescendants(int personId)
+        {
+            try
+            {
+                List<ChildModel> parents = await _parentChildService.GetAllDescendants(personId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("unrelated/{personId:int}")]
+        public async Task<ActionResult<List<BasePersonModel>>> GetUnrelatedPeople(int personId)
+        {
+            try
+            {
+                List<BasePersonModel> parents = await _parentChildService.GetUnrelatedPeople(personId);
                 if (parents == null)
                 {
                     return NotFound();

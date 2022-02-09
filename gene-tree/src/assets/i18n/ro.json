@@ -21,8 +21,10 @@
   },
   "account": "Cont",
   "_user": {
+    "about": "Despre",
     "occupations": "Ocupaţii",
     "educations": "Educaţie",
+    "educationLevel": "Nivelul educaţiei",
     "locations": "Locaţii",
     "contact": "Contact",
     "email": "E-Mail",
@@ -30,7 +32,7 @@
     "phone": "Telefon",
     "phoneNumber": "Număr de telefon"
   },
-  "person": "Porsoana",
+  "person": "Persoana",
   "_person": {
     "information": "Informaţii personale",
     "firstName": "Prenume",
@@ -45,8 +47,11 @@
     "marriages": "Căsătorii"
   },
   "_location": {
-    "from": "Nascut în",
-    "lives": "Locuieşte în"
+    "from": "Născut în",
+    "lives": "Locuieşte în",
+    "state": "Stat",
+    "country": "Judeţ",
+    "city": "Oraş"
   },
   "_genders": {
     "null": "Necunoscut",
@@ -134,6 +139,7 @@
     "registerHere": "Înregistrează-te aici"
   },
   "_common": {
+    "you": "Tu",
     "details": "Detalii",
     "add": "Adaugă",
     "edit": "Editează",
@@ -162,6 +168,8 @@
     "contact": "Editează contact"
   },
   "_delete": {
+    "warning":"Această acţiune e permanentă. Eşti sigur(ă) că vrei să ştergi",
+    "confirm":"Confirmă ştergerea",
     "person": "Şterge persoana"
   },
   "changePicture": "Schimbă poza",

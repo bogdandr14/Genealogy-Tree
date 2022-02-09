@@ -19,21 +19,31 @@ export class ProfilePage implements OnInit {
   public image;
   public occupations: any[] = [];
   public educations: any[] = [];
-  private clipboard: Clipboard;
   constructor(
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private clipboard: Clipboard
   ) {}
 
   ngOnInit() {
-    this.userService.getPersonalInfo<AccountProfileModel>().pipe(first()).subscribe((res) => {
-      this.personalInfo = res;
-      this.createImage(res.imageFile);
-    });
+    this.userService
+      .getPersonalInfo<AccountProfileModel>()
+      .pipe(first())
+      .subscribe((res) => {
+        this.personalInfo = res;
+      });
   }
 
-  createImage(image: ImageFile){
-    this.image = `data:${image.mimeType};base64,${image.fileInBytes}`;
+  get imageUrl() {
+    if (this.personalInfo && this.personalInfo.imageFile) {
+      return `data:${this.personalInfo.imageFile.mimeType};base64,${this.personalInfo.imageFile.fileInBytes}`;
+    } else {
+      return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
+    }
+  }
+
+  setImageFile(image: ImageFile) {
+    this.personalInfo.imageFile = image;
   }
 
   copyPhone(info: string) {

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PeopleListComponent } from './components/people-list/people-list.component';
-import { PersonDetailComponent } from './components/person-detail/person-detail.component';
-import { PersonEditComponent } from './components/person-edit/person-edit.component';
+import { PersonDetailsPage } from './pages/person-details/person-details.page';
+import { PersonEditPage } from './pages/person-edit/person-edit.page';
+import { RelativesListPage } from './pages/relatives-list/relatives-list.page';
 
 
 const routes: Routes = [
@@ -13,23 +13,23 @@ const routes: Routes = [
   },
   {
     path: 'details',
-    component: PersonDetailComponent,
+    component: PersonDetailsPage,
   },
   {
     path: 'details/:id',
-    component: PersonDetailComponent,
+    component: PersonDetailsPage,
   },
   {
     path: 'edit/:id',
-    component: PersonEditComponent,
+    component: PersonEditPage,
   },
   {
     path: 'create',
-    component: PersonEditComponent,
+    component: PersonEditPage,
   },
   {
     path: 'list',
-    component: PeopleListComponent,
+    component: RelativesListPage
   },
 ];
 

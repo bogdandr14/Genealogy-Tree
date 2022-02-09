@@ -21,7 +21,7 @@ import { SelectTemplateComponent } from './components/select-template/select-tem
     DeleteConfirmationComponent,
     InputTemplateComponent,
     SelectTemplateComponent,
-    ValidationErrorsComponent
+    ValidationErrorsComponent,
   ],
   imports: [
     CommonModule,

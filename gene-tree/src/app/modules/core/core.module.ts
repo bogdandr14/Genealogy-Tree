@@ -22,6 +22,7 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
@@ -62,6 +63,7 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
+    Clipboard
   ],
 })
 export class CoreModule {

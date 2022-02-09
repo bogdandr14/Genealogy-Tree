@@ -7,6 +7,5 @@ namespace GenealogyTree.Domain.DTO.Person
     {
         public int PersonId { get; set; }
         public int? ImageId { get; set; }
-        public IFormFile Image { get; set; }
     }
 }

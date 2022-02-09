@@ -72,9 +72,11 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<Person, BasePersonModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
+                .ForMember(x=> x.UserId, y => y.MapFrom(z=> z.SyncedUserToPerson.SyncedUserId))
                 .ReverseMap();
             CreateMap<Person, PersonDetailsModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId))
                 .ReverseMap();
             CreateMap<Person, PersonCreateUpdateModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
@@ -128,8 +130,7 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<User, LoginResponseModel>()
                .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Person.TreeId))
-               .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
-               .ReverseMap();
+               .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id));
         }
     }
 }

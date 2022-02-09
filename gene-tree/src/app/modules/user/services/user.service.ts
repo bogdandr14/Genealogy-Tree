@@ -6,13 +6,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../../account/models/account-settings.model';
 import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config.model';
-import { UserModel } from '../../core/models/user.model';
+import { CurrentUserModel } from '../../core/models/current-user.model';
 import { DataService } from '../../core/services/data.service';
 import { StorageService } from '../../core/services/storage.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends DataService {
-  private userState = new BehaviorSubject<UserModel>(null);
+  private userState = new BehaviorSubject<CurrentUserModel>(null);
 
   constructor(httpClient: HttpClient, private storageService: StorageService) {
     super(httpClient, 'api/user', environment.baseApiUrl);
@@ -37,8 +37,14 @@ export class UserService extends DataService {
     }
   }
 
-  public isCurrentUser(userId: string) {
-    return (this.userState.value.userId = userId);
+  public isCurrentUser(userId: Guid) {
+    const l = this.userState.value.userId == userId;
+    console.log("🚀 ~ file: user.service.ts ~ line 42 ~ UserService ~ isCurrentUser ~ l", l)
+    return l;
+  }
+
+  public getCurrentUser(){
+    return this.userState.value;
   }
 
   public getUserSettings(username: string) {

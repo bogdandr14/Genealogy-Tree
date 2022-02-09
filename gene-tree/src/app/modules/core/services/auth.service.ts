@@ -50,7 +50,7 @@ export class AuthService extends DataService {
   }
 
   public async changePassword(changePassword: ChangePasswordModel){
-    const user  = await this.storageService.getUser();
+    const user  = await this.storageService.getCurrentUser();
     changePassword.username = user.username;
     const path= `changePassword`;
     return super.put<void>(path, changePassword);
@@ -70,8 +70,9 @@ export class AuthService extends DataService {
 
   private setUserInfo(loginResponse: LoginResponseModel) {
     const tokenInfo = JSON.parse(atob(loginResponse.token.split('.')[1]));
-    this.storageService.setUser({
-      userId: loginResponse.userId,
+    this.storageService.setCurrentUser({
+      personId : loginResponse.personId,
+      userId: tokenInfo.jti,
       treeId: loginResponse.treeId,
       firstName: tokenInfo.given_name,
       lastName: tokenInfo.family_name,

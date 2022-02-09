@@ -10,10 +10,10 @@ import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config
 import { HttpInterceptorParams } from '../../core/models/http-interceptor-params.model';
 import { DataService } from '../../core/services/data.service';
 import { ImageFile } from '../../shared/models/image-file';
-import { PersonBaseModel } from '../models/person-base.model';
-import { PersonDetailsModel } from '../models/person-details.model';
-import { PersonEditModel } from '../models/person-edit.model';
-import { PersonImageModel } from '../models/person-image.model';
+import { PersonBaseModel } from '../models/person/person-base.model';
+import { PersonDetailsModel } from '../models/person/person-details.model';
+import { PersonEditModel } from '../models/person/person-edit.model';
+import { PersonImageUpdateModel } from '../models/person/person-image-update.model';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +44,7 @@ export class PersonService extends DataService {
   public createPerson(
     personCreate: PersonEditModel
   ): Observable<PersonDetailsModel> {
+    debugger;
     const path = 'add';
     return super.post<PersonDetailsModel>(path, personCreate);
   }
@@ -53,14 +54,13 @@ export class PersonService extends DataService {
   }
 
   public uploadPhoto(personId: number, image: File): Observable<ImageFile> {
-    console.log("🚀 ~ file: person.service.ts ~ line 56 ~ PersonService ~ uploadPhoto ~ image", image)
     let path =`${environment.baseApiUrl}/api/person/photo/upload?personId=${personId}`;
     const formData = new FormData();
     formData.append('image', image, image.name);
     return this.httpClient.post<ImageFile>(path, formData);
   }
 
-  public updatePhoto(personImage: PersonImageModel): Observable<ImageFile> {
+  public updatePhoto(personImage: PersonImageUpdateModel): Observable<ImageFile> {
     let path = `photo/update`;
     return this.httpClient.put<ImageFile>(path, personImage);
   }

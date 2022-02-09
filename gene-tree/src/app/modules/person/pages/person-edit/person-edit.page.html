@@ -1,0 +1,251 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"_add.person" | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-item-center">
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-card>
+          <ion-card-content>
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+              <!-- FIRST NAME -->
+              <ion-item-group id="firstName">
+                <ion-item color="transparent">
+                  <ion-label for="fname" position="floating">
+                    <b>
+                      {{ "_person.firstName" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="fname"
+                    #fname="ngModel"
+                    [(ngModel)]="personEdit.firstName"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <app-validation-errors [model]="bday"></app-validation-errors>
+              </ion-item-group>
+
+              <!-- LAST NAME -->
+              <ion-item-group id="lastName">
+                <ion-item color="transparent">
+                  <ion-label for="lname" position="floating">
+                    <b>
+                      {{ "_person.lastName" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="lname"
+                    #lname="ngModel"
+                    [(ngModel)]="personEdit.lastName"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <app-validation-errors [model]="bday"></app-validation-errors>
+              </ion-item-group>
+
+              <!-- GENDER -->
+              <ion-item-group id="gender">
+                <ion-item color="transparent">
+                  <ion-label for="gender" position="floating">
+                    <b> {{ "_person.gender" | translate }} </b>
+                  </ion-label>
+                  <ion-select
+                    name="gender"
+                    #gender="ngModel"
+                    [(ngModel)]="personEdit.gender"
+                    [selectedText]="
+                      personEdit.gender?.id
+                        ? ('_genders.' + personEdit.gender?.name
+                          | lowercase
+                          | translate)
+                        : ''
+                    "
+                    interface="popover"
+                    [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
+                  >
+                    <ion-select-option
+                      *ngFor="let gender of genderOptions"
+                      [value]="gender"
+                    >
+                      {{ "_genders." + gender.name | lowercase | translate }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-item-group>
+
+              <!-- NATIONALITY -->
+              <ion-item-group id="nationality">
+                <ion-item color="transparent">
+                  <ion-label for="nat" position="floating">
+                    <b> {{ "_person.nationality" | lowercase | translate }} </b>
+                  </ion-label>
+                  <ion-select
+                    name="nat"
+                    #nat="ngModel"
+                    [(ngModel)]="personEdit.nationality"
+                    [selectedText]="
+                      personEdit.nationality?.id
+                        ? ('_nationalities.' + personEdit.nationality?.name
+                          | lowercase
+                          | translate)
+                        : ''
+                    "
+                    interface="popover"
+                    [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
+                  >
+                    <ion-select-option
+                      *ngFor="let nationality of nationalityOptions"
+                      [value]="nationality"
+                    >
+                      {{ "_nationalities." + nationality.name |lowercase |
+                      translate }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-item-group>
+
+              <!-- RELIGION -->
+              <ion-item-group id="religion">
+                <ion-item color="transparent">
+                  <ion-label for="rel" position="floating">
+                    <b> {{ "_person.religion" | lowercase | translate }} </b>
+                  </ion-label>
+                  <ion-select
+                    name="nat"
+                    #nat="ngModel"
+                    [(ngModel)]="personEdit.religion"
+                    [selectedText]="
+                      personEdit.religion?.id
+                        ? ('_religions.' + personEdit.religion?.name
+                          | lowercase
+                          | translate)
+                        : ''
+                    "
+                    interface="popover"
+                    [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
+                  >
+                    <ion-select-option
+                      *ngFor="let religion of religionOptions"
+                      [value]="religion"
+                    >
+                      {{ "_religions." + religion.name | lowercase | translate }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-item-group>
+
+              <!-- BIRTHDAY -->
+              <ion-item-group id="birthday">
+                <ion-item
+                  color="transparent"
+                  button="true"
+                  id="open-birth-date-input"
+                >
+                  <ion-label for="bday" position="floating" stacked>
+                    <b>
+                      {{ "_person.birthday" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    name="bday"
+                    #bday="ngModel"
+                    [(ngModel)]="personEdit.birthDate"
+                    [readonly]="true"
+                    [value]="(selectedBirthDate | date)"
+                    slot="end"
+                    required
+                  >
+                  </ion-input>
+                  <ion-popover
+                    trigger="open-birth-date-input"
+                    side="top"
+                    alignment="center"
+                  >
+                    <ng-template>
+                      <ion-datetime
+                        #popoverDate
+                        showDefaultButtons
+                        (ionChange)="selectedBirthDate = formatDate(popoverDate.value)"
+                        presentation="date"
+                      >
+                      </ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+                <app-validation-errors [model]="bday"></app-validation-errors>
+              </ion-item-group>
+
+              <!-- DEATHDAY -->
+              <ion-item-group id="deathday">
+                <ion-item
+                  color="transparent"
+                  button="true"
+                  id="open-death-date-input"
+                >
+                  <ion-label for="dday" position="floating">
+                    <b> {{ "_person.deathday" | translate }} </b>
+                  </ion-label>
+                  <ion-input
+                    name="dday"
+                    #dday="ngModel"
+                    [(ngModel)]="personEdit.deathDate"
+                    [readonly]="true"
+                    [value]="(selectedDeathDate | date)"
+                    slot="end"
+                  ></ion-input>
+
+                  <ion-popover
+                    trigger="open-death-date-input"
+                    side="top"
+                    alignment="center"
+                  >
+                    <ng-template>
+                      <ion-datetime
+                        #popoverDate
+                        showDefaultButtons
+                        (ionChange)="selectedDeathDate = formatDate(popoverDate.value)"
+                        presentation="date"
+                      >
+                      </ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+              </ion-item-group>
+
+              <ion-button
+                type="submit"
+                class="submit-button"
+                color="success"
+                expand="block"
+                [disabled]="form.invalid"
+              >
+                {{ "_common.save" | translate }}
+              </ion-button>
+            </form>
+            <ion-button
+              type="button"
+              color="secondary"
+              fill="clear"
+              expand="block"
+              [routerLink]="['/person/list']"
+            >
+              {{ "_common.cancel" | translate }}
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

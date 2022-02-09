@@ -1,7 +1,9 @@
-﻿namespace GenealogyTree.Domain.DTO.Person
+﻿using System;
+
+namespace GenealogyTree.Domain.DTO.Person
 {
     public class BasePersonModel : GenericPersonModel
     {
-        public ImageFile ImageFile { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

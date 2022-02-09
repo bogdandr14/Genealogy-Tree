@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../../account/models/account-settings.model';
-import { UserModel } from '../models/user.model';
+import { CurrentUserModel } from '../models/current-user.model';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class StorageService {
   private token = new BehaviorSubject<string>('');
   public token$ = this.token.asObservable();
 
-  private user = new BehaviorSubject<UserModel>(new UserModel());
+  private user = new BehaviorSubject<CurrentUserModel>(new CurrentUserModel());
   public user$ = this.user.asObservable();
 
   private darkTheme = new BehaviorSubject<boolean>(false);
@@ -32,7 +32,7 @@ export class StorageService {
     this._storage = await this.storage.create();
 
     this.token.next(await this.getJWT());
-    this.user.next(await this.getUser());
+    this.user.next(await this.getCurrentUser());
     const preferences = await this.getPreferences();
     console.log(this.user.value);
     this.checkPreferences(preferences);
@@ -71,13 +71,13 @@ export class StorageService {
     this.token.next(null);
   }
 
-  setUser(user: UserModel) {
+  setCurrentUser(user: CurrentUserModel) {
     this.set('user', user);
     this.user.next(user);
   }
 
-  async getUser(): Promise<UserModel | null> {
-    const user = await this.get<UserModel>('user');
+  async getCurrentUser(): Promise<CurrentUserModel | null> {
+    const user = await this.get<CurrentUserModel>('user');
     return user;
   }
 

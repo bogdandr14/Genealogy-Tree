@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"_pages.relatives"| translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button
+    class="ion-margin"
+    color="success"
+    expand="block"
+    [routerLink]="['/person/create']"
+  >
+    {{ "_add.person" | translate }}
+    <ion-icon name="person-add" slot="start"></ion-icon>
+  </ion-button>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let person of relativesList">
+        <ion-card>
+          <ion-card-header>
+            <ion-item>
+              <ion-avatar class="avatar" slot="start">
+                <img
+                  [src]="getImageUrl(person)"
+                  [alt]="person.firstName + person.lastName +'profile picture'"
+                />
+              </ion-avatar>
+              <ion-label class="ion-padding-start" text-wrap>
+                <h1>{{ person?.firstName }}</h1>
+                <h1>{{ person?.lastName }}</h1>
+              </ion-label>
+              <app-link-user-buttons
+                [userId]="person.userId"
+              ></app-link-user-buttons>
+            </ion-item>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list lines="none">
+              <ion-item>
+                <ion-label> {{ "_person.birthday" | translate }}:</ion-label>
+                <span> {{ person?.birthDate | date: "dd/MM/yyyy" }}</span>
+              </ion-item>
+              <ion-item *ngIf="person?.deathDate">
+                <ion-label> {{ "_person.deathday" | translate }}:</ion-label>
+                <span> {{ person?.deathDate | date: "dd/MM/yyyy" }}</span>
+              </ion-item>
+              <ion-item>
+                <ion-button
+                  [routerLink]="['/person/details', person.personId]"
+                  fill="clear"
+                  color="secondary"
+                  slot="start"
+                >
+                  {{ "_common.details" | translate }}
+                </ion-button>
+                <ion-button
+                  *ngIf="canDelete(person)"
+                  fill="clear"
+                  color="danger"
+                  slot="end"
+                  (click)="confirmDelete(person)"
+                >
+                <ion-icon name="person-remove" slot="start"></ion-icon>
+
+                  {{ "_common.delete" | translate }}
+                </ion-button>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<app-delete-confirmation
+  #deleteConfirmation
+  [template]="deleteTemplate"
+  typeName="person"
+  class="delete-modal"
+  (deleteConfirmed)="deletePerson($event)"
+></app-delete-confirmation>
+<ng-template #deleteTemplate>
+  <app-person-delete-card [person]="personToDelete"></app-person-delete-card>
+</ng-template>
