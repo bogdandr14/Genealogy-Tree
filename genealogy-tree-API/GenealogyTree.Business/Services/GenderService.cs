@@ -24,20 +24,6 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<GenericNameModel> GetGenderAsync(int genderId)
-        {
-            Gender gender = await unitOfWork.Gender.FindById(genderId);
-            GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(gender);
-            return returnEvent;
-        }
-
-        public List<GenericNameModel> FindGenders(string name)
-        {
-            List<Gender> genders = unitOfWork.Gender.Filter(x => x.Name.Contains(name)).OrderBy(x => x.Name).ToList();
-            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(genders);
-            return returnEvent;
-        }
-
         public async Task<GenericNameModel> AddGenderAsync(string genderName)
         {
             if (genderName == null)

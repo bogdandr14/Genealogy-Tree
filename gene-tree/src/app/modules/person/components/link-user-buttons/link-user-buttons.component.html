@@ -1,14 +1,14 @@
 <ion-buttons *ngIf="userId">
   <ion-button
-    *ngIf="isCurrentUser;else otherUser"
+    *ngIf="isCurrentUser; else otherUser"
     type="button"
     [routerLink]="['/account/profile']"
     fill="clear"
     color="secondary"
     slot="end"
   >
-    <ion-label> {{"_common.you" | translate }} </ion-label>
-    <ion-icon name="shield"></ion-icon>
+    <ion-icon name="shield" slot="start"></ion-icon>
+    <ion-label> {{ "_common.you" | translate }} </ion-label>
   </ion-button>
   <ng-template #otherUser>
     <ion-button

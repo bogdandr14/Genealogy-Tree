@@ -1,11 +1,9 @@
+import { CommonService } from './../../../shared/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, of, Subscription } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { CommonObject } from 'src/app/modules/shared/models/common-object';
-import { GenderService } from 'src/app/modules/shared/services/gender.service';
-import { NationalityService } from 'src/app/modules/shared/services/nationality.service';
-import { ReligionService } from 'src/app/modules/shared/services/religion.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonEditModel } from '../../models/person/person-edit.model';
 import { PersonService } from '../../services/person.service';
@@ -32,10 +30,8 @@ export class PersonEditPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private personService: PersonService,
-    private genderService: GenderService,
-    private nationalityService: NationalityService,
-    private userService: UserService,
-    private religionService: ReligionService
+    private commonService: CommonService,
+    private userService: UserService
   ) {}
 
   async ngOnInit() {
@@ -49,7 +45,10 @@ export class PersonEditPage implements OnInit {
         } else {
           const personEdit = new PersonEditModel();
           personEdit.treeId = this.userService.getCurrentUser().treeId;
-          console.log("🚀 ~ file: person-edit.page.ts ~ line 53 ~ PersonEditPage ~ switchMap ~ personEdit.treeId", personEdit.treeId)
+          console.log(
+            '🚀 ~ file: person-edit.page.ts ~ line 53 ~ PersonEditPage ~ switchMap ~ personEdit.treeId',
+            personEdit.treeId
+          );
           return of(personEdit);
         }
       })
@@ -60,20 +59,20 @@ export class PersonEditPage implements OnInit {
   }
 
   private initDropdowns() {
-    this.genderService
-      .getMany<CommonObject>(null)
+    this.commonService
+      .getGenders()
       .pipe(takeUntil(this.destroy$))
       .subscribe((genders) => {
         this.genderOptions = genders;
       });
-    this.nationalityService
-      .getMany<CommonObject>(null)
+    this.commonService
+      .getNationalities()
       .pipe(takeUntil(this.destroy$))
       .subscribe((nationalities) => {
         this.nationalityOptions = nationalities;
       });
-    this.religionService
-      .getMany<CommonObject>(null)
+    this.commonService
+      .getReligions()
       .pipe(takeUntil(this.destroy$))
       .subscribe((religions) => {
         this.religionOptions = religions;
@@ -86,7 +85,7 @@ export class PersonEditPage implements OnInit {
   onSubmit() {
     let personUpdated: Subscription;
     this.personEdit.birthDate = new Date(this.personEdit.birthDate);
-    if(this.personEdit.deathDate){
+    if (this.personEdit.deathDate) {
       this.personEdit.deathDate = new Date(this.personEdit.deathDate);
     }
 

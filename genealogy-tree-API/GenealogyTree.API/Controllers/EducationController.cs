@@ -127,25 +127,6 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("levels/{id:int}")]
-        public async Task<ActionResult<GenericNameModel>> GetEducationLevel(int id)
-        {
-            try
-            {
-                GenericNameModel returnEvent = await _educationService.GetEducationLevelAsync(id);
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
         [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
         [Route("levels/add")]

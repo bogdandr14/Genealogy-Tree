@@ -24,20 +24,6 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<GenericNameModel> GetNationalityAsync(int nationalityId)
-        {
-            Nationality nationality = await unitOfWork.Nationality.FindById(nationalityId);
-            GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(nationality);
-            return returnEvent;
-        }
-
-        public List<GenericNameModel> FindNationalities(string name)
-        {
-            List<Nationality> nationalities = unitOfWork.Nationality.Filter(x => x.Name.Contains(name)).OrderBy(x => x.Name).ToList();
-            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(nationalities);
-            return returnEvent;
-        }
-
         public async Task<GenericNameModel> AddNationalityAsync(string nationalityName)
         {
             if (nationalityName == null)

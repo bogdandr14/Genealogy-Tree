@@ -48,11 +48,14 @@
               *ngIf="photo.control.value"
               class="file-info align-items-center"
             >
-              <img
-                [src]="this.imageBlobUrl"
-                alt="uploaded-img"
-                class="img-thumbnail align-self-start"
-              />
+              <ion-avatar class="img-thumbnail">
+                <img
+                  [src]="imageBlobUrl"
+                  alt="uploaded-img"
+                  class="align-self-start"
+                />
+              </ion-avatar>
+
               <br />
               <p class="small">
                 {{ file.name }}
@@ -72,11 +75,12 @@
         <ion-button
           type="submit"
           class="submit-button"
-          color="warning"
+          color="success"
           fill="clear"
           expand="block"
           [disabled]="form.invalid || form.pristine"
         >
+          <ion-icon name="save" slot="start"></ion-icon>
           {{ "_common.confirm" | translate }}
         </ion-button>
       </form>

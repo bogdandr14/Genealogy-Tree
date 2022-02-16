@@ -1,14 +1,12 @@
 import { ImageFile } from './../../../shared/models/image-file';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DeleteConfirmationComponent } from 'src/app/modules/shared/components/delete-confirmation/delete-confirmation.component';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonDetailsModel } from '../../models/person/person-details.model';
 import { PersonService } from '../../services/person.service';
-import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-person-details',

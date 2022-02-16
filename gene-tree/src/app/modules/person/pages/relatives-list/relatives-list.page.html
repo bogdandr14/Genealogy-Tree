@@ -54,6 +54,7 @@
                   color="secondary"
                   slot="start"
                 >
+                  <ion-icon name="reader" slot="start"></ion-icon>
                   {{ "_common.details" | translate }}
                 </ion-button>
                 <ion-button
@@ -63,8 +64,7 @@
                   slot="end"
                   (click)="confirmDelete(person)"
                 >
-                <ion-icon name="person-remove" slot="start"></ion-icon>
-
+                  <ion-icon name="person-remove" slot="start"></ion-icon>
                   {{ "_common.delete" | translate }}
                 </ion-button>
               </ion-item>

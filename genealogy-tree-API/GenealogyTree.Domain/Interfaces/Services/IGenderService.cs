@@ -7,8 +7,6 @@ namespace GenealogyTree.Domain.Interfaces.Services
     public interface IGenderService
     {
         Task<List<GenericNameModel>> GetAllGendersAsync();
-        Task<GenericNameModel> GetGenderAsync(int genderId);
-        List<GenericNameModel> FindGenders(string name);
         Task<GenericNameModel> AddGenderAsync(string genderName);
     }
 }

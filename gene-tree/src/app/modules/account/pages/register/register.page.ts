@@ -1,10 +1,7 @@
-import { HttpInterceptorConfig } from './../../../core/models/http-interceptor-config.model';
+import { CommonService } from './../../../shared/services/common.service';
 import { AlertService } from './../../../core/services/alert.service';
-import { NationalityService } from './../../../shared/services/nationality.service';
-import { GenderService } from './../../../shared/services/gender.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { CommonObject } from './../../../shared/models/common-object';
-import { ReligionService } from './../../../shared/services/religion.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -26,30 +23,24 @@ export class RegisterPage implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private genderService: GenderService,
-    private nationalityService: NationalityService,
-    private religionService: ReligionService,
+    private commonService: CommonService,
     private alertService: AlertService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const params: HttpInterceptorConfig = { hideLoading: true };
 
-    this.genderService
-      .getMany<CommonObject>(null, params)
+    this.commonService.getGenders()
       .pipe(takeUntil(this.destroy$))
       .subscribe((genders) => {
         this.genderOptions = genders;
       });
-    this.nationalityService
-      .getMany<CommonObject>(null, params)
+    this.commonService.getNationalities()
       .pipe(takeUntil(this.destroy$))
       .subscribe((nationalities) => {
         this.nationalityOptions = nationalities;
       });
-    this.religionService
-      .getMany<CommonObject>(null, params)
+    this.commonService.getReligions()
       .pipe(takeUntil(this.destroy$))
       .subscribe((religions) => {
         this.religionOptions = religions;

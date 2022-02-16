@@ -20,10 +20,13 @@ namespace GenealogyTree.API.Controllers
     {
         private readonly IPersonService _personService;
         private readonly IImageService _imageService;
-        public PersonController(IPersonService personService, IImageService imageService)
+        private readonly ILocationService _locationService;
+
+        public PersonController(IPersonService personService, IImageService imageService, ILocationService locationService)
         {
             _personService = personService;
             _imageService = imageService;
+            _locationService = locationService;
         }
 
         [HttpGet]
@@ -129,14 +132,33 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("photo/update")]
-        public async Task<ActionResult<ImageFile>> UpdatePhoto([FromQuery] int personId, [FromQuery] int imageId)
+        [HttpGet]
+        [Route("location/{id:int}")]
+        public async Task<ActionResult<LocationModel>> GetLocationAsync(int id)
         {
             try
             {
-                ImageFile imageFile = await _personService.UpdatePictureAsync(personId, imageId);
-                return Ok(imageFile);
+                LocationModel returnEvent = await _locationService.GetLocationAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        [Route("location/update")]
+        public async Task<ActionResult<LocationModel>> UpdateLocation(LocationModel location)
+        {
+            try
+            {
+                LocationModel returnEvent = await _locationService.UpdateLocation(location);
+                return Ok(returnEvent);
             }
             catch (Exception e)
             {
@@ -152,6 +174,21 @@ namespace GenealogyTree.API.Controllers
             {
                 Image createdImage = await _imageService.AddImageAsync(image.ToImageFile());
                 ImageFile imageFile = await _personService.UpdatePictureAsync(personId, createdImage.Id);
+                return Ok(imageFile);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        [Route("photo/update")]
+        public async Task<ActionResult<ImageFile>> UpdatePhoto([FromQuery] int personId, [FromQuery] int imageId)
+        {
+            try
+            {
+                ImageFile imageFile = await _personService.UpdatePictureAsync(personId, imageId);
                 return Ok(imageFile);
             }
             catch (Exception e)

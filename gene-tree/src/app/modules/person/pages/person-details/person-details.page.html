@@ -88,6 +88,7 @@
                       color="warning"
                       [routerLink]="['/person/edit/', personId]"
                     >
+                      <ion-icon name="pencil" slot="start"></ion-icon>
                       {{ "_edit.information" | translate }}
                     </ion-button>
                   </ion-list>
@@ -121,6 +122,7 @@
                       color="warning"
                       (click)="editLocation.presentModal()"
                     >
+                      <ion-icon name="pencil" slot="start"></ion-icon>
                       {{ "_edit.locations" | translate }}
                     </ion-button>
                   </ion-list>
@@ -139,6 +141,7 @@
                       </ion-item>
                     </div>
                     <ion-button expand="block" fill="clear" color="success">
+                      <ion-icon name="add" slot="start"></ion-icon>
                       {{ "_add.parent" | translate }}
                     </ion-button>
                   </ion-list>
@@ -157,6 +160,7 @@
                       </ion-item>
                     </div>
                     <ion-button expand="block" fill="clear" color="success">
+                      <ion-icon name="add" slot="start"></ion-icon>
                       {{ "_add.child" | translate }}
                     </ion-button>
                   </ion-list>
@@ -177,6 +181,7 @@
                       </ion-item>
                     </div>
                     <ion-button expand="block" fill="clear" color="success">
+                      <ion-icon name="add" slot="start"></ion-icon>
                       {{ "_add.marriage" | translate }}
                     </ion-button>
                   </ion-list>

@@ -70,13 +70,6 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<GenericNameModel> GetEducationLevelAsync(int educationLevelId)
-        {
-            EducationLevel educationLevel = await unitOfWork.EducationLevel.FindById(educationLevelId);
-            GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(educationLevel);
-            return returnEvent;
-        }
-
         public async Task<GenericNameModel> AddEducationLevelAsync(string educationLevelName)
         {
             if (educationLevelName == null)

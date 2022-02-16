@@ -1,4 +1,6 @@
-﻿using GenealogyTree.Domain.Entities;
+﻿using AutoMapper;
+using GenealogyTree.Domain.DTO.Generic;
+using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using System.Collections.Generic;
@@ -9,21 +11,20 @@ namespace GenealogyTree.Business.Services
 {
     public class ReligionService : BaseService, IReligionService
     {
-        public ReligionService(IUnitOfWork repositoryWrapper) : base(repositoryWrapper)
+        private readonly IMapper _mapper;
+        public ReligionService(IUnitOfWork repositoryWrapper, IMapper mapper) : base(repositoryWrapper)
         {
+            _mapper = mapper;
         }
 
-        public async Task<List<Religion>> GetAllReligionsAsync()
+        public async Task<List<GenericNameModel>> GetAllReligionsAsync()
         {
-            return unitOfWork.Religion.GetAll().OrderBy(x => x.Name).ToList();
+            List<Religion> religions = unitOfWork.Religion.GetAll().OrderBy(x => x.Name).ToList();
+            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(religions);
+            return returnEvent;
         }
 
-        public List<Religion> FindReligions(string name)
-        {
-            return unitOfWork.Religion.Filter(x => x.Name.Contains(name)).OrderBy(x => x.Name).ToList();
-        }
-
-        public Task<Religion> AddReligionAsync(string religionName)
+        public async Task<GenericNameModel> AddReligionAsync(string religionName)
         {
             if (religionName == null)
             {
@@ -33,7 +34,9 @@ namespace GenealogyTree.Business.Services
             {
                 Name = religionName
             };
-            return unitOfWork.Religion.Create(religion);
+            Religion religionEntity = await unitOfWork.Religion.Create(religion);
+            GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(religionEntity);
+            return returnEvent;
         }
     }
 }

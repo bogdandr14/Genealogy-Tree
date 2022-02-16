@@ -21,17 +21,6 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<LocationModel> AddLocationAsync(LocationModel location)
-        {
-            if (location == null)
-            {
-                return null;
-            }
-            Location locationEntity = _mapper.Map<Location>(location);
-            locationEntity = await unitOfWork.Location.Create(locationEntity);
-            LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
-            return returnEvent;
-        }
         public async Task<LocationModel> UpdateLocation(LocationModel location)
         {
             if (location == null)
@@ -40,13 +29,6 @@ namespace GenealogyTree.Business.Services
             }
             Location locationEntity = _mapper.Map<Location>(location);
             locationEntity = await unitOfWork.Location.Update(locationEntity);
-            LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
-            return returnEvent;
-        }
-
-        public async Task<LocationModel> DeleteLocation(int locationId)
-        {
-            Location locationEntity = await unitOfWork.Location.Delete(locationId);
             LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
             return returnEvent;
         }

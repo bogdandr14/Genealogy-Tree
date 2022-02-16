@@ -12,10 +12,10 @@ namespace GenealogyTree.API.Controllers
     [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentChildController : Controller
+    public class RelativeController : Controller
     {
         private readonly IParentChildService _parentChildService;
-        public ParentChildController(IParentChildService parentChildService)
+        public RelativeController(IParentChildService parentChildService)
         {
             _parentChildService = parentChildService;
         }

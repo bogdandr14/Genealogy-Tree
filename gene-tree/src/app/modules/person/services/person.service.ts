@@ -10,6 +10,7 @@ import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config
 import { HttpInterceptorParams } from '../../core/models/http-interceptor-params.model';
 import { DataService } from '../../core/services/data.service';
 import { ImageFile } from '../../shared/models/image-file';
+import { LocationModel } from '../../shared/models/location.model';
 import { PersonBaseModel } from '../models/person/person-base.model';
 import { PersonDetailsModel } from '../models/person/person-details.model';
 import { PersonEditModel } from '../models/person/person-edit.model';
@@ -63,5 +64,10 @@ export class PersonService extends DataService {
   public updatePhoto(personImage: PersonImageUpdateModel): Observable<ImageFile> {
     let path = `photo/update`;
     return this.httpClient.put<ImageFile>(path, personImage);
+  }
+
+  public updateLocation(locationUpdate: LocationModel): Observable<LocationModel>{
+    const path = 'location/update';
+    return super.put<LocationModel>(path, locationUpdate);
   }
 }

@@ -1,7 +1,7 @@
 import { LocationModel } from './../../../shared/models/location.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { LocationService } from '../../services/location.service';
+import { PersonService } from '../../services/person.service';
 
 @Component({
   selector: 'app-location-edit',
@@ -15,15 +15,15 @@ export class LocationEditComponent implements OnInit {
   public present: boolean = false;
   constructor(
     public modalCtrl: ModalController,
-    private locationService: LocationService
+    private personsService: PersonService
   ) {}
 
   ngOnInit() {}
   onSubmit() {
-    this.locationService
+    this.personsService
       .updateLocation(this.livesIn)
       .subscribe(() =>
-        this.locationService
+        this.personsService
           .updateLocation(this.bornIn)
           .subscribe(() => this.saveConfirmed.emit())
       );

@@ -139,7 +139,8 @@
                       *ngFor="let religion of religionOptions"
                       [value]="religion"
                     >
-                      {{ "_religions." + religion.name | lowercase | translate }}
+                      {{ "_religions." + religion.name | lowercase | translate
+                      }}
                     </ion-select-option>
                   </ion-select>
                 </ion-item>
@@ -231,16 +232,18 @@
                 expand="block"
                 [disabled]="form.invalid"
               >
+                <ion-icon name="save" slot="start"></ion-icon>
                 {{ "_common.save" | translate }}
               </ion-button>
             </form>
             <ion-button
               type="button"
-              color="secondary"
+              color="danger"
               fill="clear"
               expand="block"
               [routerLink]="['/person/list']"
             >
+              <ion-icon name="close" slot="start"></ion-icon>
               {{ "_common.cancel" | translate }}
             </ion-button>
           </ion-card-content>

@@ -3,7 +3,12 @@
 }
 .file-info {
   padding: 0.5rem;
+
 }
 .img-thumbnail {
-  max-width: 90%;
+  margin: auto;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 300px !important; //any size
+  max-height: 300px !important; //any size
 }
