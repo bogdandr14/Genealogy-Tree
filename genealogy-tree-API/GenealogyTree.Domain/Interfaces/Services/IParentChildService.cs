@@ -14,8 +14,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<List<BasePersonModel>> GetUnrelatedPeople(int personId);
         Task<ParentChildDetailsModel> GetParentChildAsync(int parentChildId);
         Task<ParentChildDetailsModel> AddParentChildAsync(ParentChildCreateUpdateModel parentChild);
-        Task<ParentChildDetailsModel> UpdateParentChildAsync(ParentChildCreateUpdateModel parentChild);
-       
+        Task<ParentChildDetailsModel> UpdateParentChildAsync(int parentChildId, ParentChildCreateUpdateModel parentChild);
         Task<ParentChildDetailsModel> DeleteParentChildAsync(int parentChildId);
     }
 }

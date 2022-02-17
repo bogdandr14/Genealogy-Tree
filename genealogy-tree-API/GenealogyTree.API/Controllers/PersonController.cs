@@ -30,25 +30,6 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
-        public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)
-        {
-            try
-            {
-                PersonDetailsModel returnEvent = await _personService.GetPersonAsync(id);
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpGet]
         [Route("tree/{treeId:Guid}")]
         public async Task<ActionResult<BasePersonModel>> GetPeopleInTree(Guid treeId)
         {
@@ -85,6 +66,25 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
 
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)
+        {
+            try
+            {
+                PersonDetailsModel returnEvent = await _personService.GetPersonAsync(id);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
         [HttpPost]

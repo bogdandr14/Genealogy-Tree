@@ -40,6 +40,25 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
+        [Route("children/{parentId:int}")]
+        public async Task<ActionResult<List<ParentModel>>> GetAllChildren(int parentId)
+        {
+            try
+            {
+                List<ChildModel> children = await _parentChildService.GetAllChildrenForPerson(parentId);
+                if (children == null)
+                {
+                    return NotFound();
+                }
+                return Ok(children);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
         [Route("ancestors/{personId:int}")]
         public async Task<ActionResult<List<ParentModel>>> GetAncestors(int personId)
         {
@@ -97,25 +116,6 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("children/{parentId:int}")]
-        public async Task<ActionResult<List<ParentModel>>> GetAllChildren(int parentId)
-        {
-            try
-            {
-                List<ChildModel> children = await _parentChildService.GetAllChildrenForPerson(parentId);
-                if (children == null)
-                {
-                    return NotFound();
-                }
-                return Ok(children);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<ParentChildDetailsModel>> GetParentChild(int id)
         {
@@ -135,7 +135,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
+        [Route("")]
         public async Task<ActionResult<ParentChildDetailsModel>> AddParentChild(ParentChildCreateUpdateModel parentChild)
         {
             try
@@ -150,12 +150,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("update")]
-        public async Task<ActionResult<ParentChildDetailsModel>> UpdateLocation(ParentChildCreateUpdateModel parentChild)
+        [Route("{id:int}")]
+        public async Task<ActionResult<ParentChildDetailsModel>> UpdateLocation(int id, ParentChildCreateUpdateModel parentChild)
         {
             try
             {
-                ParentChildDetailsModel returnEvent = await _parentChildService.UpdateParentChildAsync(parentChild);
+                ParentChildDetailsModel returnEvent = await _parentChildService.UpdateParentChildAsync(id, parentChild);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{id:int}")]
+        [Route("{id:int}")]
         public async Task<ActionResult<ParentChildDetailsModel>> DeleteLocation(int id)
         {
             try

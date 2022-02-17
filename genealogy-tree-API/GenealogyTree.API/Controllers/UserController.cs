@@ -17,6 +17,36 @@ namespace GenealogyTree.API.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
+        [Route("usernameAvailable/{username}")]
+        public async Task<ActionResult<bool>> CheckUsername(string username)
+        {
+            try
+            {
+                bool isAvailable = await _userService.CheckUsernameAvailable(username);
+                return Ok(isAvailable);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("emailAvailable/{email}")]
+        public async Task<ActionResult<UserDetailsModel>> CheckEmail(string email)
+        {
+            try
+            {
+                bool isAvailable = await _userService.CheckEmailAvailable(email);
+                return Ok(isAvailable);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
         [GeneTreeAuthorize]
         [HttpGet]
         [Route("info/{username}")]
@@ -59,12 +89,12 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpPut]
-        [Route("update")]
-        public async Task<ActionResult<UserDetailsModel>> UpdateUser(UserUpdateModel user)
+        [Route("{id:Guid}")]
+        public async Task<ActionResult<UserDetailsModel>> UpdateUser(Guid id, UserUpdateModel user)
         {
             try
             {
-                UserDetailsModel updatedUser = await _userService.UpdateUser(user);
+                UserDetailsModel updatedUser = await _userService.UpdateUser(id, user);
                 if (updatedUser == null)
                 {
                     return NotFound();
@@ -77,44 +107,14 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("usernameAvailable/{username}")]
-        public async Task<ActionResult<bool>> CheckUsername(string username)
-        {
-            try
-            {
-                bool isAvailable = await _userService.CheckUsernameAvailable(username);
-                return Ok(isAvailable);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpGet]
-        [Route("emailAvailable/{email}")]
-        public async Task<ActionResult<UserDetailsModel>> CheckEmail(string email)
-        {
-            try
-            {
-                bool isAvailable = await _userService.CheckEmailAvailable(email);
-                return Ok(isAvailable);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("settings/{username}")]
-        public async Task<ActionResult<UserSettingsModel>> GetUserSettings(string username)
+        [Route("settings/{id:Guid}")]
+        public async Task<ActionResult<UserSettingsModel>> GetUserSettings(Guid id)
         {
             try
             {
-                UserSettingsModel updatedUser = await _userService.GetUserSettings(username);
+                UserSettingsModel updatedUser = await _userService.GetUserSettings(id);
                 if (updatedUser == null)
                 {
                     return NotFound();
@@ -129,12 +129,12 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpPut]
-        [Route("settings/update")]
-        public async Task<ActionResult<UserSettingsModel>> UpdateUserSettings(UserSettingsModel user)
+        [Route("settings/{id:Guid}")]
+        public async Task<ActionResult<UserSettingsModel>> UpdateUserSettings(Guid id, UserSettingsModel user)
         {
             try
             {
-                UserSettingsModel updatedUser = await _userService.UpdateUserSettings(user);
+                UserSettingsModel updatedUser = await _userService.UpdateUserSettings(id, user);
                 if (updatedUser == null)
                 {
                     return NotFound();

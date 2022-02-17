@@ -96,13 +96,14 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<ParentChildDetailsModel> UpdateParentChildAsync(ParentChildCreateUpdateModel parentChild)
+        public async Task<ParentChildDetailsModel> UpdateParentChildAsync(int parentChildId, ParentChildCreateUpdateModel parentChild)
         {
-            if (parentChild == null)
+            if ((await unitOfWork.ParentChild.FindById(parentChildId)) == null)
             {
                 return null;
             }
             ParentChild parentChildEntity = _mapper.Map<ParentChild>(parentChild);
+            parentChildEntity.Id = parentChildId;
             parentChildEntity = await unitOfWork.ParentChild.Update(parentChildEntity);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
             return returnEvent;

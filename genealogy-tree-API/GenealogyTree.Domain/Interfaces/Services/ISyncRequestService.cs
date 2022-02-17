@@ -12,7 +12,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<List<SyncRequestDetailsModel>> GetSyncRequestsReceived(Guid receiverId);
         Task<List<SyncRequestCreateUpdateModel>> GetRespondedSyncRequests(Guid senderId);
         Task<SyncRequestCreateUpdateModel> AddSyncRequest(SyncRequestCreateUpdateModel syncRequest);
-        Task<UsersToSyncModel> RespondToSyncRequest(SyncRequestResponseModel respondedRequest);
+        Task<UsersToSyncModel> RespondToSyncRequest(int syncRequestId, SyncRequestResponseModel respondedRequest);
         Task<SyncRequestDetailsModel> DeleteSyncRequest(int syncRequestId);
     }
 }

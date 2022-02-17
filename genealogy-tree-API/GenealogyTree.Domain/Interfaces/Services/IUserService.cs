@@ -8,10 +8,10 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<UserDetailsModel> GetUserByIdAsync(Guid userId);
         Task<UserDetailsModel> GetUser(string username);
-        Task<UserDetailsModel> UpdateUser(UserUpdateModel user);
+        Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user);
         Task<bool> CheckUsernameAvailable(string username);
         Task<bool> CheckEmailAvailable(string email);
-        Task<UserSettingsModel> GetUserSettings(string username);
-        Task<UserSettingsModel> UpdateUserSettings(UserSettingsModel userSettings);
+        Task<UserSettingsModel> GetUserSettings(Guid userId);
+        Task<UserSettingsModel> UpdateUserSettings(Guid userId, UserSettingsModel userSettings);
     }
 }

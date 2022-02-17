@@ -53,13 +53,13 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<UsersToSyncModel> RespondToSyncRequest(SyncRequestResponseModel respondedRequest)
+        public async Task<UsersToSyncModel> RespondToSyncRequest(int syncRequestId, SyncRequestResponseModel respondedRequest)
         {
-            if (respondedRequest == null)
+            SyncRequest syncRequest = await unitOfWork.SyncRequest.FindById(syncRequestId);
+            if (syncRequest == null)
             {
                 return null;
             }
-            SyncRequest syncRequest = await unitOfWork.SyncRequest.FindById(respondedRequest.Id);
             syncRequest.ReceiverResponded = true;
             syncRequest.Response = respondedRequest.Response;
 

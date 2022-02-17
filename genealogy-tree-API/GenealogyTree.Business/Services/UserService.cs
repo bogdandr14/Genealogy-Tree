@@ -46,15 +46,15 @@ namespace GenealogyTree.Business.Services
             return userEntity;
         }
 
-        public async Task<UserDetailsModel> UpdateUser(UserUpdateModel user)
+        public async Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user)
         {
-            if (user == null)
+            User userToUpdate = await unitOfWork.User.FindById(userId);
+            if (userToUpdate == null || user == null)
             {
                 return null;
             }
             User userEntity = _mapper.Map<User>(user);
-            User userToUpdate = await unitOfWork.User.FindById(user.UserId);
-            userEntity.Id = userToUpdate.Id;
+            userEntity.Id = userId;
             userEntity.PersonId = userToUpdate.PersonId;
             userEntity = await unitOfWork.User.Update(userEntity);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
@@ -74,19 +74,19 @@ namespace GenealogyTree.Business.Services
             return user == default(User);
         }
 
-        public async Task<UserSettingsModel> GetUserSettings(string username)
+        public async Task<UserSettingsModel> GetUserSettings(Guid userId)
         {
-            User user = unitOfWork.User.Filter(x => x.Username == username).FirstOrDefault();
+            User user = await unitOfWork.User.FindById(userId);
             return _mapper.Map<UserSettingsModel>(user);
         }
 
-        public async Task<UserSettingsModel> UpdateUserSettings(UserSettingsModel userSettings)
+        public async Task<UserSettingsModel> UpdateUserSettings(Guid userId, UserSettingsModel userSettings)
         {
-            if (userSettings == null)
+            User userToUpdate = await unitOfWork.User.FindById(userId);
+            if (userToUpdate == null || userSettings == null)
             {
                 return null;
             }
-            User userToUpdate = await unitOfWork.User.FindById(userSettings.Id);
             userToUpdate.NotifyUpdates = userSettings.NotifyUpdates;
             userToUpdate.NotifyBirthdays = userSettings.NotifyBirthdays;
             userToUpdate.SharePersonalInfo = userSettings.SharePersonalInfo;
