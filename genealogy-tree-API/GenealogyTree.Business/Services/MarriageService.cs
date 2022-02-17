@@ -51,13 +51,15 @@ namespace GenealogyTree.Business.Services
             MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageCreated);
             return returnEvent;
         }
-        public async Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageCreateUpdateModel marriage)
+
+        public async Task<MarriageDetailsModel> UpdateMarriageAsync(int id, MarriageCreateUpdateModel marriage)
         {
-            if (marriage == null)
+            if ((await unitOfWork.Marriage.FindById(id)) == null)
             {
                 return null;
             }
             Marriage marriageEntity = _mapper.Map<Marriage>(marriage);
+            marriageEntity.Id = id;
             Marriage marriageUpdated = await unitOfWork.Marriage.Update(marriageEntity);
             MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageUpdated);
             return returnEvent;

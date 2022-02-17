@@ -99,13 +99,14 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person)
+        public async Task<PersonDetailsModel> UpdatePersonAsync(int id, PersonCreateUpdateModel person)
         {
-            if (person == null)
+            if ((await unitOfWork.Person.FindById(id)) == null)
             {
                 return null;
             }
             Person personEntity = _mapper.Map<Person>(person);
+            personEntity.Id = id;
             personEntity = await unitOfWork.Person.Update(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
@@ -125,15 +126,6 @@ namespace GenealogyTree.Business.Services
             return await _fileManagementService.GetFile(personEntity.Image);
         }
 
-        private async Task checkImageUsageAsync(int imageId)
-        {
-            Image image = await _imageService.GetImageAsync(imageId);
-            if (image.People.Count() == 0)
-            {
-                await _imageService.DeleteImageAsync(imageId);
-            }
-        }
-
         public async Task<PersonDetailsModel> DeletePersonAsync(int personId)
         {
             Person personEntity = await unitOfWork.Person.Delete(personId);
@@ -143,6 +135,15 @@ namespace GenealogyTree.Business.Services
                 await checkImageUsageAsync(oldImageId);
             }
             return _mapper.Map<PersonDetailsModel>(personEntity);
+        }
+
+        private async Task checkImageUsageAsync(int imageId)
+        {
+            Image image = await _imageService.GetImageAsync(imageId);
+            if (image.People.Count() == 0)
+            {
+                await _imageService.DeleteImageAsync(imageId);
+            }
         }
     }
 }

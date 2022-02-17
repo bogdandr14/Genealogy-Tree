@@ -88,7 +88,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
+        [Route("")]
         public async Task<ActionResult<PersonDetailsModel>> AddPerson([FromBody]PersonCreateUpdateModel person)
         {
             try
@@ -103,12 +103,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("update/{id:int}")]
-        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(PersonCreateUpdateModel person)
+        [Route("{id:int}")]
+        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(int id, PersonCreateUpdateModel person)
         {
             try
             {
-                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync(person);
+                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync(id, person);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -152,12 +152,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("location/update")]
-        public async Task<ActionResult<LocationModel>> UpdateLocation(LocationModel location)
+        [Route("location/{id:int}")]
+        public async Task<ActionResult<LocationModel>> UpdateLocation(int id, LocationModel location)
         {
             try
             {
-                LocationModel returnEvent = await _locationService.UpdateLocation(location);
+                LocationModel returnEvent = await _locationService.UpdateLocation(id, location);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -167,7 +167,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPost]
-        [Route("photo/upload")]
+        [Route("photo/{personId:int}")]
         public async Task<ActionResult<ImageFile>> UploadPhoto([FromQuery] int personId, [Required][FromForm][MaxImageSize(4 * 1024)] IFormFile image)
         {
             try
@@ -183,7 +183,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("photo/update")]
+        [Route("photo")]
         public async Task<ActionResult<ImageFile>> UpdatePhoto([FromQuery] int personId, [FromQuery] int imageId)
         {
             try

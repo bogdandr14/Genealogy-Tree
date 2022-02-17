@@ -42,13 +42,14 @@ namespace GenealogyTree.Business.Services
             OccupationModel returnEvent = _mapper.Map<OccupationModel>(occupationCreated);
             return returnEvent;
         }
-        public async Task<OccupationModel> UpdateOccupationAsync(OccupationModel occupation)
+        public async Task<OccupationModel> UpdateOccupationAsync(int id, OccupationModel occupation)
         {
-            if (occupation == null)
+            if ((await unitOfWork.Occupation.FindById(id)) == null)
             {
                 return null;
             }
             Occupation occupationEntity = _mapper.Map<Occupation>(occupation);
+            occupationEntity.Id = id;
             Occupation occupationUpdated = await unitOfWork.Occupation.Update(occupationEntity);
             OccupationModel returnEvent = _mapper.Map<OccupationModel>(occupationUpdated);
             return returnEvent;

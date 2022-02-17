@@ -9,13 +9,13 @@ namespace GenealogyTree.Domain.Entities
     {
         public Person()
         {
-            this.FirstPersonMarriages = new HashSet<Marriage>();
-            this.SecondPersonMarriages = new HashSet<Marriage>();
+            FirstPersonMarriages = new HashSet<Marriage>();
+            SecondPersonMarriages = new HashSet<Marriage>();
 
-            this.Parents = new HashSet<ParentChild>();
-            this.Children = new HashSet<ParentChild>();
+            Parents = new HashSet<ParentChild>();
+            Children = new HashSet<ParentChild>();
 
-            this.SenderSyncRequestsForPerson = new HashSet<SyncRequest>();
+            SenderSyncRequestsForPerson = new HashSet<SyncRequest>();
         }
 
         [Key]

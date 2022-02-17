@@ -20,7 +20,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("{userId}")]
         public async Task<ActionResult<List<OccupationModel>>> GetUserOccupations(Guid userId)
         {
             try
@@ -58,7 +58,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
+        [Route("")]
         public async Task<ActionResult<OccupationModel>> AddOccupation(OccupationModel occupation)
         {
             try
@@ -73,12 +73,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("update")]
-        public async Task<ActionResult<OccupationModel>> UpdateOccupation(OccupationModel occupation)
+        [Route("{id:int}")]
+        public async Task<ActionResult<OccupationModel>> UpdateOccupation(int id, OccupationModel occupation)
         {
             try
             {
-                OccupationModel returnEvent = await _occupationService.UpdateOccupationAsync(occupation);
+                OccupationModel returnEvent = await _occupationService.UpdateOccupationAsync(id, occupation);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -88,7 +88,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/{id:int}")]
+        [Route("{id:int}")]
         public async Task<ActionResult<OccupationModel>> DeleteOccupation(int id)
         {
             try

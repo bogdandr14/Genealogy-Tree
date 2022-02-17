@@ -44,13 +44,14 @@ namespace GenealogyTree.Business.Services
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
             return returnEvent;
         }
-        public async Task<EducationModel> UpdateEducationAsync(EducationModel education)
+        public async Task<EducationModel> UpdateEducationAsync(int id, EducationModel education)
         {
-            if (education == null)
+            if ((await unitOfWork.Education.FindById(id)) == null)
             {
                 return null;
             }
             Education educationEntity = _mapper.Map<Education>(education);
+            educationEntity.Id = id;
             educationEntity = await unitOfWork.Education.Update(educationEntity);
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
             return returnEvent;
