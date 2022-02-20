@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GenealogyTree.Business.Services
 {
-    class OccupationService : BaseService, IOccupationService
+    public class OccupationService : BaseService, IOccupationService
     {
         private readonly IMapper _mapper;
         public OccupationService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
@@ -42,14 +42,13 @@ namespace GenealogyTree.Business.Services
             OccupationModel returnEvent = _mapper.Map<OccupationModel>(occupationCreated);
             return returnEvent;
         }
-        public async Task<OccupationModel> UpdateOccupationAsync(int id, OccupationModel occupation)
+        public async Task<OccupationModel> UpdateOccupationAsync(OccupationModel occupation)
         {
-            if ((await unitOfWork.Occupation.FindById(id)) == null)
+            if (occupation == null)
             {
                 return null;
             }
             Occupation occupationEntity = _mapper.Map<Occupation>(occupation);
-            occupationEntity.Id = id;
             Occupation occupationUpdated = await unitOfWork.Occupation.Update(occupationEntity);
             OccupationModel returnEvent = _mapper.Map<OccupationModel>(occupationUpdated);
             return returnEvent;

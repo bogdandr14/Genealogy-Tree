@@ -1,3 +1,4 @@
+import { Guid } from 'guid-typescript';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,7 +8,9 @@ import { HttpInterceptorConfig } from '../models/http-interceptor-config.model';
 
 export abstract class DataService {
   protected url: string;
-
+  protected static noLoadingConfig: HttpInterceptorConfig = {
+    hideLoading: true,
+  };
   constructor(
     public http: HttpClient,
     private urlString: string,
@@ -31,12 +34,28 @@ export abstract class DataService {
     const options = {
       params: new HttpInterceptorParams(params),
     };
-
     return this.http.get<T>(url, options);
   }
 
-  public getMany<T>(
+  public getOneById<T>(
+    id: number | Guid,
+    path?: string,
+    params?: HttpInterceptorConfig
+  ): Observable<T> {
+    const url = path ? `${this.url}/${path}/${id}` : `${this.url}/${id}`;
+    return this.getOne<T>(url, params);
+  }
+
+  public getOneByPath<T>(
     path: string,
+    params?: HttpInterceptorConfig
+  ): Observable<T> {
+    const url = `${this.url}/${path}`;
+    return this.getOne<T>(url, params);
+  }
+
+  public getMany<T>(
+    path?: string,
     params?: HttpInterceptorConfig
   ): Observable<T[]> {
     const url = path ? `${this.url}/${path}` : `${this.url}`;
@@ -47,19 +66,31 @@ export abstract class DataService {
     return this.http.get<T[]>(url, options);
   }
 
+  public getAll<T>(params?: HttpInterceptorConfig): Observable<T[]> {
+    return this.getMany<T>('', params);
+  }
+
   public update<T>(
-    id: number,
-    entity: any,
+    data: any,
     path?: string,
     params?: HttpInterceptorConfig
   ): Observable<T> {
-    const body = JSON.stringify(entity);
-    const url = path ? `${this.url}/${path}/${id}` : `${this.url}/${id}`;
+    const body = data ? JSON.stringify(data) : {};
+    const url = path ? `${this.url}/${path}` : `${this.url}`;
     const options = {
       params: new HttpInterceptorParams(params),
     };
-
     return this.http.put<T>(url, body, options);
+  }
+
+  public updateById<T>(
+    id: number | Guid,
+    data: any,
+    path?: string,
+    params?: HttpInterceptorConfig
+  ): Observable<T> {
+    const url = path ? `${path}/${id}` : `${id}`;
+    return this.update<T>(data, url, params);
   }
 
   public updateMultiple<T>(
@@ -68,7 +99,7 @@ export abstract class DataService {
     params?: HttpInterceptorConfig
   ): Observable<T> {
     const body = JSON.stringify(array);
-    const url = path ? `${this.url}/${path}/` : `${this.url}/`;
+    const url = path ? `${this.url}/${path}` : `${this.url}`;
     const options = {
       params: new HttpInterceptorParams(params),
     };
@@ -77,11 +108,11 @@ export abstract class DataService {
   }
 
   public add<T>(
-    entity: any,
+    data: any,
     path?: string,
     params?: HttpInterceptorConfig
   ): Observable<T> {
-    const body = JSON.stringify(entity);
+    const body = data ? JSON.stringify(data) : {};
     const url = path ? `${this.url}/${path}` : `${this.url}`;
     const options = {
       params: new HttpInterceptorParams(params),
@@ -90,81 +121,27 @@ export abstract class DataService {
     return this.http.post<T>(url, body, options);
   }
 
-  public post<T>(
-    path: string,
-    data: any,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const body = data ? JSON.stringify(data) : {};
-    const url = `${this.url}/${path}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-
-    return this.http.post<T>(url, body, options);
-  }
-
-  public put<T>(
-    path: string,
-    data: any,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const body = data ? JSON.stringify(data) : {};
-    const url = `${this.url}/${path}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-
-    return this.http.put<T>(url, body, options);
-  }
-
-  public delete(
-    id: number,
+  public remove(
+    id: number | Guid,
     path?: string,
     params?: HttpInterceptorConfig
   ): Observable<any> {
     const url = path ? `${this.url}/${path}/${id}` : `${this.url}/${id}`;
-
     const options = {
       params: new HttpInterceptorParams(params),
     };
-
     return this.http.delete<any>(url, options);
   }
 
-  public deleteMultiple(
+  public removeMultiple(
     ids: number[],
     path?: string,
     params?: HttpInterceptorConfig
   ): Observable<any> {
     const body = JSON.stringify(ids);
     const url = path ? `${this.url}/${path}` : `${this.url}`;
-
     const options = { params: new HttpInterceptorParams(params), body };
-
     return this.http.delete<any>(url, options);
-  }
-
-  public getOneById<T>(
-    id: number,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const url = `${this.url}/${id}`;
-
-    return this.getOne<T>(url, params);
-  }
-
-  public getOneByPath<T>(
-    path: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const url = `${this.url}/${path}`;
-
-    return this.getOne<T>(url, params);
-  }
-
-  public getAll<T>(params?: HttpInterceptorConfig): Observable<T[]> {
-    return this.getMany<T>('', params);
   }
 
   public getPaginated<T>(
@@ -177,7 +154,7 @@ export abstract class DataService {
     let path = apiPath ? `paginated/${apiPath}` : 'paginated';
     path = `${path}?pageIndex=${pageIndex}&itemsNumber=${itemsNumber}&key=${searchKey}`;
 
-    return this.post<PaginatedResultModel<T>>(path, {}, params);
+    return this.add<PaginatedResultModel<T>>({}, path, params);
   }
 
   /*
@@ -200,6 +177,6 @@ export abstract class DataService {
     }
     const path = `paginated?pageIndex=${pageIndex}&itemsNumber=${itemsNumber}&sortField=${sortField}&sortDirection=${sortDirection}`;
 
-    return this.post<PaginatedResultModel<T>>(path, filter, params);
+    return this.add<PaginatedResultModel<T>>(filter, path, params);
   }
 }

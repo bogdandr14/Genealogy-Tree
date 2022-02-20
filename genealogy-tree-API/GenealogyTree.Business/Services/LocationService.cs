@@ -22,14 +22,13 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<LocationModel> UpdateLocation(int id, LocationModel location)
+        public async Task<LocationModel> UpdateLocation(LocationModel location)
         {
-            if ((await unitOfWork.Location.FindById(id)) == null)
+            if (location == null)
             {
                 return null;
             }
             Location locationEntity = _mapper.Map<Location>(location);
-            locationEntity.Id = id;
             locationEntity = await unitOfWork.Location.Update(locationEntity);
             LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
             return returnEvent;

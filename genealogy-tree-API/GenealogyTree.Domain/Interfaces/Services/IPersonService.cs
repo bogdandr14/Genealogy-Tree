@@ -12,7 +12,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<PersonDetailsModel> GetPersonAsync(int personId);
         Task<List<BasePersonModel>> GetAllPeopleInTree(Guid treeId);
         Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person);
-        Task<PersonDetailsModel> UpdatePersonAsync(int id, PersonCreateUpdateModel person);
+        Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person);
         Task<ImageFile> UpdatePictureAsync(int personId, int imageId);
         Task<PersonDetailsModel> DeletePersonAsync(int personId);
     }

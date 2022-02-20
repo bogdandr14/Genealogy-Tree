@@ -4,21 +4,54 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config.model';
 import { DataService } from '../../core/services/data.service';
-import { PersonEditModel } from '../models/person/person-edit.model';
+import { RelativeDetailsModel } from '../models/relative/relative-details.model';
+import { ParentModel } from '../models/parent.model';
+import { ChildModel } from '../models/child.model';
+import { RelativeEditModel } from '../models/relative/relative-edit.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RelativesService extends DataService {
-  constructor(private httpClient: HttpClient, private router: Router) {
-    super(httpClient, 'api/parentChild', environment.baseApiUrl);
+  constructor(httpClient: HttpClient, private router: Router) {
+    super(httpClient, 'api/relative', environment.baseApiUrl);
   }
 
-  public getUnrelatedPeople(personId: number): Observable<any> {
-    const params: HttpInterceptorConfig = { hideLoading: true };
-    const path =`unrelated?personId=${personId}`
-    return super.getMany<PersonBaseModel[]>(path, params);
+  public getParents(personId: number): Observable<any> {
+    return super.getMany<ParentModel[]>(`parents/${personId}`);
+  }
+  public getChildren(personId: number): Observable<any> {
+    return super.getMany<ChildModel[]>(`children/${personId}`);
+  }
+  public getAncestors(personId: number): Observable<any> {
+    return super.getMany<ParentModel[]>(`ancestors/${personId}`);
+  }
+  public getDescendants(personId: number): Observable<any> {
+    return super.getMany<ChildModel[]>(`descendants/${personId}`);
+  }
+  public getUnrelatedPeople(personId: number): Observable<PersonBaseModel[]> {
+    return super.getMany<PersonBaseModel>(
+      `unrelated/${personId}`,
+      DataService.noLoadingConfig
+    );
+  }
+
+  public getRelative(relativeId: number): Observable<RelativeDetailsModel> {
+    return super.getOneById<RelativeDetailsModel>(relativeId);
+  }
+
+  updateRelative(
+    relative: RelativeEditModel
+  ): Observable<RelativeDetailsModel> {
+    return super.update<RelativeDetailsModel>(relative);
+  }
+
+  addRelative(relative: RelativeEditModel): Observable<RelativeDetailsModel> {
+    return super.add<RelativeDetailsModel>(relative);
+  }
+
+  deleteRelative(relativeId: number): Observable<any> {
+    return super.remove(relativeId);
   }
 }

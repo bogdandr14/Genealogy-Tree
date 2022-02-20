@@ -99,14 +99,13 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<PersonDetailsModel> UpdatePersonAsync(int id, PersonCreateUpdateModel person)
+        public async Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person)
         {
-            if ((await unitOfWork.Person.FindById(id)) == null)
+            if (person == null)
             {
                 return null;
             }
             Person personEntity = _mapper.Map<Person>(person);
-            personEntity.Id = id;
             personEntity = await unitOfWork.Person.Update(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);

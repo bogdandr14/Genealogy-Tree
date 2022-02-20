@@ -91,7 +91,7 @@ export class PersonEditPage implements OnInit {
 
     if (this.isUpdate) {
       personUpdated = this.personService
-        .updatePerson(this.personId, this.personEdit)
+        .updatePerson(this.personEdit)
         .subscribe((person) => {
           this.router.navigate(['/person/details', person.personId]);
         });

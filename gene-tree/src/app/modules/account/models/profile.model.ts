@@ -1,6 +1,8 @@
-import { CommonObject } from "../../shared/models/common-object";
-import { ImageFile } from "../../shared/models/image-file";
-import { LocationModel } from "../../shared/models/location.model";
+import { EducationModel } from './../../user/models/education.model';
+import { OccupationModel } from './../../user/models/occupation.model';
+import { CommonObject } from '../../shared/models/common-object';
+import { ImageFile } from '../../shared/models/image-file';
+import { LocationModel } from '../../shared/models/location.model';
 
 export class AccountProfileModel {
   personId: number;
@@ -17,4 +19,6 @@ export class AccountProfileModel {
   birthDate: Date;
   lastTreeUpdate: Date;
   imageFile: ImageFile;
+  occupations: OccupationModel[];
+  educations: EducationModel[];
 }

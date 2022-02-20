@@ -35,7 +35,7 @@ export class AuthService extends DataService {
   }
 
   public login(userCredentials: LoginModel): Observable<LoginResponseModel> {
-    return super.post<LoginResponseModel>('login', userCredentials).pipe(
+    return super.add<LoginResponseModel>(userCredentials, 'login').pipe(
       tap((login) => {
         this.storageService.setJWT(login.token);
         this.setUserInfo(login);
@@ -45,15 +45,13 @@ export class AuthService extends DataService {
   }
 
   public register(registerDetails: RegisterModel): Observable<void> {
-    const path = `register`;
-    return super.post<void>(path, registerDetails);
+    return super.add<void>(registerDetails, 'register');
   }
 
-  public async changePassword(changePassword: ChangePasswordModel){
-    const user  = await this.storageService.getCurrentUser();
+  public async changePassword(changePassword: ChangePasswordModel) {
+    const user = await this.storageService.getCurrentUser();
     changePassword.username = user.username;
-    const path= `changePassword`;
-    return super.put<void>(path, changePassword);
+    return super.update<void>(changePassword, 'changePassword');
   }
 
   public logout(): void {
@@ -71,7 +69,7 @@ export class AuthService extends DataService {
   private setUserInfo(loginResponse: LoginResponseModel) {
     const tokenInfo = JSON.parse(atob(loginResponse.token.split('.')[1]));
     this.storageService.setCurrentUser({
-      personId : loginResponse.personId,
+      personId: loginResponse.personId,
       userId: tokenInfo.jti,
       treeId: loginResponse.treeId,
       firstName: tokenInfo.given_name,

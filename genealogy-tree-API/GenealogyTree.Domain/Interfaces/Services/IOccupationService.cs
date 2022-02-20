@@ -10,7 +10,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
         List<OccupationModel> GetAllOccupationsForUser(Guid userId);
         Task<OccupationModel> GetOccupationAsync(int occupationId);
         Task<OccupationModel> AddOccupationAsync(OccupationModel occupation);
-        Task<OccupationModel> UpdateOccupationAsync(int id, OccupationModel occupation);
+        Task<OccupationModel> UpdateOccupationAsync(OccupationModel occupation);
         Task<OccupationModel> DeleteOccupationAsync(int occupationId);
     }
 }

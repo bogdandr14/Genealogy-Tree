@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PersonDeleteCardComponent } from './person-delete-card.component';
+import { PersonDeleteComponent } from './person-delete.component';
 
-describe('PersonDeleteCardComponent', () => {
-  let component: PersonDeleteCardComponent;
-  let fixture: ComponentFixture<PersonDeleteCardComponent>;
+describe('PersonDeleteComponent', () => {
+  let component: PersonDeleteComponent;
+  let fixture: ComponentFixture<PersonDeleteComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonDeleteCardComponent ],
+      declarations: [ PersonDeleteComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PersonDeleteCardComponent);
+    fixture = TestBed.createComponent(PersonDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

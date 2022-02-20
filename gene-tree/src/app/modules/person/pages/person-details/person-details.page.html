@@ -99,7 +99,9 @@
                   </ion-item>
                   <ion-list slot="content">
                     <ion-item>
-                      <ion-label>{{ "_location.from" | translate }}:</ion-label>
+                      <ion-label text-wrap
+                        >{{ "_location.from" | translate }}:</ion-label
+                      >
                       <span
                         >{{ personDetails?.birthPlace?.state }}, {{
                         personDetails?.birthPlace?.country }}, {{
@@ -107,7 +109,7 @@
                       >
                     </ion-item>
                     <ion-item>
-                      <ion-label
+                      <ion-label text-wrap
                         >{{ "_location.lives" | translate }}:</ion-label
                       >
                       <span
@@ -120,7 +122,7 @@
                       expand="block"
                       fill="clear"
                       color="warning"
-                      (click)="editLocation.presentModal()"
+                      id="open-location-edit"
                     >
                       <ion-icon name="pencil" slot="start"></ion-icon>
                       {{ "_edit.locations" | translate }}
@@ -219,7 +221,7 @@
                 expand="block"
                 fill="clear"
                 color="danger"
-                (click)="confirmDelete()"
+                id="open-delete-person"
               >
                 <ion-icon name="person-remove" slot="start"></ion-icon>
                 {{ "_delete.person" | translate }}
@@ -232,20 +234,23 @@
   </ion-grid>
 </ion-content>
 
-<app-location-edit
-  #editLocation
-  [livesIn]="personDetails.livingPlace"
-  [bornIn]="personDetails.birthPlace"
-  (saveConfirmed)="reload()"
->
-</app-location-edit>
-<app-delete-confirmation
-  #deleteConfirmation
-  [template]="deleteTemplate"
-  typeName="person"
-  class="delete-modal"
-  (deleteConfirmed)="deletePerson()"
-></app-delete-confirmation>
-<ng-template #deleteTemplate>
-  <app-person-delete-card [person]="personDetails"></app-person-delete-card>
-</ng-template>
+<ion-modal trigger="open-location-edit" [swipeToClose]="true">
+  <ng-template>
+    <app-location-edit
+      #editLocation
+      [livesIn]="personDetails.livingPlace"
+      [bornIn]="personDetails.birthPlace"
+      (saveConfirmed)="refreshPerson()"
+    >
+    </app-location-edit>
+  </ng-template>
+</ion-modal>
+
+<ion-modal trigger="open-delete-person" [swipeToClose]="true">
+  <ng-template>
+    <app-person-delete
+      [person]="personDetails"
+      (personDeleted)=" router.navigate(['/person/list'])"
+    ></app-person-delete>
+  </ng-template>
+</ion-modal>

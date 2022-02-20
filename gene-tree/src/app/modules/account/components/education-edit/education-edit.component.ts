@@ -12,16 +12,14 @@ import { subscribeOn } from 'rxjs/operators';
 })
 export class EducationEditComponent implements OnInit {
   @Input() education = new EducationModel();
-  @Input() personId: number;
   @Input() isUpdate = false;
   @Output() saveConfirmed = new EventEmitter<boolean>();
   public educationLevels: CommonObject[];
-  public present: boolean = false;
   public selectedStartDate: Date;
   public selectedEndDate: Date;
 
   constructor(
-    public modalCtrl: ModalController,
+    private modalCtrl: ModalController,
     private educationService: EducationService
   ) {}
 
@@ -49,7 +47,8 @@ export class EducationEditComponent implements OnInit {
   formatDate(date: string): Date {
     return new Date(date);
   }
+
   dismiss() {
-    this.present = false;
+    this.modalCtrl.dismiss();
   }
 }

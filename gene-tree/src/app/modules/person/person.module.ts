@@ -1,6 +1,6 @@
+import { PersonDeleteComponent } from './components/person-delete/person-delete.component';
 import { LocationEditComponent } from './components/location-edit/location-edit.component';
 import { PersonEditPage } from './pages/person-edit/person-edit.page';
-import { PersonDeleteCardComponent } from './components/person-delete-card/person-delete-card.component';
 import { LinkUserButtonsComponent } from './components/link-user-buttons/link-user-buttons.component';
 import { PersonDetailsPage } from './pages/person-details/person-details.page';
 import { RelativesListPage } from './pages/relatives-list/relatives-list.page';
@@ -18,8 +18,8 @@ import { FileMaxSizeDirective } from './directives/file-max-size.directive';
     PersonEditPage,
     FileMaxSizeDirective,
     LinkUserButtonsComponent,
-    PersonDeleteCardComponent,
-    LocationEditComponent
+    LocationEditComponent,
+    PersonDeleteComponent
   ],
   imports: [SharedModule, PersonRoutingModule],
   exports:[

@@ -18,7 +18,7 @@
         <app-input-template
           id="occupation-name"
           [(field)]="occupation.occupationName"
-          name="_occupation.instituteName"
+          name="_occupation.occupationName"
         ></app-input-template>
 
         <!-- WORKING PLACE -->
@@ -34,9 +34,9 @@
             button="true"
             id="open-start-date-input"
           >
-            <ion-label for="startdate" position="floating" stacked>
+            <ion-label for="startdate" position="floating">
               <b>
-                {{ "_person.birthday" | translate }}
+                {{ "_occupation.firstDay" | translate }}
                 <span class="required"> *</span>
               </b>
             </ion-label>
@@ -74,7 +74,7 @@
         <ion-item-group id="endDate">
           <ion-item color="transparent" button="true" id="open-end-date-input">
             <ion-label for="enddate" position="floating">
-              <b> {{ "_person.deathday" | translate }} </b>
+              <b> {{ "_occupation.lastDay" | translate }} </b>
             </ion-label>
             <ion-input
               name="enddate"

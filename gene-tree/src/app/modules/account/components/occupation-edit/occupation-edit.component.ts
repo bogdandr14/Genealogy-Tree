@@ -10,14 +10,12 @@ import { ModalController } from '@ionic/angular';
 })
 export class OccupationEditComponent {
   @Input() occupation = new OccupationModel();
-  @Input() personId: number;
   @Input() isUpdate = false;
   @Output() saveConfirmed = new EventEmitter<boolean>();
-  public present: boolean = false;
   public selectedStartDate: Date;
   public selectedEndDate: Date;
   constructor(
-    public modalCtrl: ModalController,
+    private modalCtrl: ModalController,
     private occupationService: OccupationService
   ) {}
 
@@ -40,7 +38,8 @@ export class OccupationEditComponent {
   formatDate(date: string): Date {
     return new Date(date);
   }
+
   dismiss() {
-    this.present = false;
+    this.modalCtrl.dismiss();
   }
 }

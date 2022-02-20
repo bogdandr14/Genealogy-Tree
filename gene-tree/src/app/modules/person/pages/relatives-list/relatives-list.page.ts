@@ -13,11 +13,8 @@ import { Guid } from 'guid-typescript';
   styleUrls: ['./relatives-list.page.scss'],
 })
 export class RelativesListPage implements OnInit {
-  @ViewChild('deleteConfirmation')
-  deleteConfirmation: DeleteConfirmationComponent;
   public relativesList: PersonBaseModel[] = [];
   private currentUser: CurrentUserModel;
-  public personToDelete: PersonBaseModel;
   constructor(
     private storageService: StorageService,
     private personService: PersonService
@@ -45,21 +42,4 @@ export class RelativesListPage implements OnInit {
 
   // TODO check who is the root of the tree
   isTreeRoot() {}
-  canDelete(person: PersonBaseModel) {
-    return (
-      this.currentUser.personId !== person.personId &&
-      this.currentUser.treeId === person.treeId
-    );
-  }
-
-  confirmDelete(person: PersonBaseModel) {
-    this.personToDelete = person;
-    this.deleteConfirmation.presentModal(person.personId);
-  }
-
-  deletePerson(personId: number) {
-    this.personService
-      .delete(personId)
-      .subscribe(() => window.location.reload());
-  }
 }

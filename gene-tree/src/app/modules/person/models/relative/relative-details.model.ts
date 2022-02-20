@@ -1,4 +1,4 @@
-import { PersonDetailsModel } from "../../person/models/person-details.model";
+import { PersonDetailsModel } from "../person/person-details.model";
 import { RelativeBaseModel } from "./relative-base.model";
 
 export class RelativeDetailsModel extends RelativeBaseModel{

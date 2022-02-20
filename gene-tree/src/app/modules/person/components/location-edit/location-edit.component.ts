@@ -12,9 +12,8 @@ export class LocationEditComponent implements OnInit {
   @Input() livesIn = new LocationModel();
   @Input() bornIn = new LocationModel();
   @Output() saveConfirmed = new EventEmitter();
-  public present: boolean = false;
   constructor(
-    public modalCtrl: ModalController,
+    private modalCtrl: ModalController,
     private personsService: PersonService
   ) {}
 
@@ -30,11 +29,7 @@ export class LocationEditComponent implements OnInit {
     this.dismiss();
   }
 
-  public async presentModal() {
-    this.present = true;
-  }
-
   dismiss() {
-    this.present = false;
+    this.modalCtrl.dismiss();
   }
 }

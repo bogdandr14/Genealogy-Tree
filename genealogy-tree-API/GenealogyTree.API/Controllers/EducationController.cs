@@ -22,7 +22,7 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("{personId:Guid}")]
+        [Route("ForPerson/{personId:Guid}")]
         public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(Guid personId)
         {
             try
@@ -78,12 +78,12 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpPut]
-        [Route("{id:int}")]
-        public async Task<ActionResult<EducationModel>> UpdateEducation(int id, EducationModel education)
+        [Route("")]
+        public async Task<ActionResult<EducationModel>> UpdateEducation( EducationModel education)
         {
             try
             {
-                EducationModel returnEvent = await _educationService.UpdateEducationAsync(id, education);
+                EducationModel returnEvent = await _educationService.UpdateEducationAsync(education);
                 return Ok(returnEvent);
             }
             catch (Exception e)

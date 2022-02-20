@@ -17,8 +17,6 @@ export class ProfilePage implements OnInit {
   accordionGroup: IonAccordionGroup;
   personalInfo: AccountProfileModel;
   public image;
-  public occupations: any[] = [];
-  public educations: any[] = [];
   constructor(
     private alertService: AlertService,
     private userService: UserService,
@@ -26,6 +24,10 @@ export class ProfilePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.setProfileInfo();
+  }
+
+  setProfileInfo() {
     this.userService
       .getPersonalInfo<AccountProfileModel>()
       .pipe(first())

@@ -41,7 +41,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("children/{parentId:int}")]
-        public async Task<ActionResult<List<ParentModel>>> GetAllChildren(int parentId)
+        public async Task<ActionResult<List<ChildModel>>> GetAllChildren(int parentId)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("descendants/{personId:int}")]
-        public async Task<ActionResult<List<ParentModel>>> GetDescendants(int personId)
+        public async Task<ActionResult<List<ChildModel>>> GetDescendants(int personId)
         {
             try
             {
@@ -150,12 +150,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
-        public async Task<ActionResult<ParentChildDetailsModel>> UpdateLocation(int id, ParentChildCreateUpdateModel parentChild)
+        [Route("")]
+        public async Task<ActionResult<ParentChildDetailsModel>> UpdateLocation(ParentChildCreateUpdateModel parentChild)
         {
             try
             {
-                ParentChildDetailsModel returnEvent = await _parentChildService.UpdateParentChildAsync(id, parentChild);
+                ParentChildDetailsModel returnEvent = await _parentChildService.UpdateParentChildAsync(parentChild);
                 return Ok(returnEvent);
             }
             catch (Exception e)

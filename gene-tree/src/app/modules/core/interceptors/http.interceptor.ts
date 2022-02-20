@@ -34,7 +34,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     const successMessage = config?.successMessage ?? '';
     const showSuccessMessage = config?.showSuccessMessage;
     const request = req.clone(
-      req.url.includes('photo/upload')
+      req.url.includes('photo/')
         ? {
             headers: req.headers.delete('Content-Type'),
           }

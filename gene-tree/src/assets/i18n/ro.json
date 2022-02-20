@@ -125,6 +125,17 @@
     "zoroastrianism": "Zoroastrianism",
     "null": "Necunoscută"
   },
+  "_education":{
+    "instituteName":"Numele instituţiei",
+    "enrollmentDay":"Data înscrierii",
+    "graduationDay":"Data absolvirii"
+  },
+  "_occupation":{
+    "occupationName":"Numele ocupaţiei",
+    "workingPlaceName":"Locul de muncă",
+    "firstDay": "Prima zi ",
+    "lastDay": "Ultima zi"
+  },
   "_pages": {
     "home": "Acasă",
     "profile": "Profil",

@@ -42,25 +42,6 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Users/{id:int}")]
-        public async Task<ActionResult> GetSynchedUser(int id)
-        {
-            try
-            {
-                SyncedUserModel returnEvent = await _synchedUsersService.GetSynchedUser(id);
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
         [HttpPost]
         [Route("Users")]
         public async Task<ActionResult<UsersToSyncModel>> SynchedUsersResponded(UsersToSyncModel usersToSync)

@@ -5,7 +5,7 @@ import { EducationLevelEnum } from "./education-level.enum";
 export class EducationModel {
   id: number;
   userId: Guid;
-  instituteName: string;
+  educationInstituteName: string;
   level: CommonObject;
   startDate?: Date;
   endDate?: Date;

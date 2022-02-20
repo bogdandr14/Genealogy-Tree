@@ -17,11 +17,11 @@
         <!-- INSTITUTE NAME -->
         <app-input-template
           id="institute"
-          [(field)]="education.instituteName"
+          [(field)]="education.educationInstituteName"
           name="_education.instituteName"
         ></app-input-template>
         <!-- EDUCATION LEVEL -->
-        <app-select-template
+        <app-select-template *ngIf="educationLevels"
           name="_education.educationLevel"
           optionsPrefix="_educationLevels"
           [options]="educationLevels"
@@ -36,7 +36,7 @@
           >
             <ion-label for="startdate" position="floating" stacked>
               <b>
-                {{ "_person.birthday" | translate }}
+                {{ "_education.enrollmentDay" | translate }}
                 <span class="required"> *</span>
               </b>
             </ion-label>
@@ -74,7 +74,7 @@
         <ion-item-group id="endDate">
           <ion-item color="transparent" button="true" id="open-end-date-input">
             <ion-label for="enddate" position="floating">
-              <b> {{ "_person.deathday" | translate }} </b>
+              <b> {{ "_education.graduationDay" | translate }} </b>
             </ion-label>
             <ion-input
               name="enddate"

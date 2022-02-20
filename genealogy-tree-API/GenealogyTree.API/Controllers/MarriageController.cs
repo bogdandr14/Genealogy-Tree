@@ -20,7 +20,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{personId:int}")]
+        [Route("ForPerson/{personId:int}")]
         public async Task<ActionResult<List<MarriedPersonModel>>> GetPersonMarriages(int personId)
         {
             try
@@ -39,7 +39,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("{personId:int}/current")]
+        [Route("ForPerson/{personId:int}/current")]
         public async Task<ActionResult<MarriedPersonModel>> GetPersonCurrentMarriage(int personId)
         {
             try
@@ -93,12 +93,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<ActionResult<MarriageDetailsModel>> UpdateMarriage(int id, MarriageCreateUpdateModel marriage)
+        [Route("")]
+        public async Task<ActionResult<MarriageDetailsModel>> UpdateMarriage(MarriageCreateUpdateModel marriage)
         {
             try
             {
-                MarriageDetailsModel returnEvent = await _marriageService.UpdateMarriageAsync(id, marriage);
+                MarriageDetailsModel returnEvent = await _marriageService.UpdateMarriageAsync(marriage);
                 return Ok(returnEvent);
             }
             catch (Exception e)

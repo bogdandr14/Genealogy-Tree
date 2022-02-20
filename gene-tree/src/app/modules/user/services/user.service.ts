@@ -5,7 +5,6 @@ import { Guid } from 'guid-typescript';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../../account/models/account-settings.model';
-import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config.model';
 import { CurrentUserModel } from '../../core/models/current-user.model';
 import { DataService } from '../../core/services/data.service';
 import { StorageService } from '../../core/services/storage.service';
@@ -21,57 +20,67 @@ export class UserService extends DataService {
   init() {
     this.storageService.user$.subscribe((user) => {
       this.userState.next(user);
-      if (user && user.username) {
-        this.setPreferences(user.username);
+      if (user && user.userId) {
+        this.setPreferences();
       }
     });
   }
 
-  public setPreferences(username: string) {
-    if (username) {
-      this.getUserSettings(username)
-        .pipe()
-        .subscribe((userSettings) => {
-          this.storageService.setPreferences(userSettings);
-        });
-    }
+  public setPreferences() {
+    this.getUserSettings()
+      .pipe()
+      .subscribe((userSettings) => {
+        this.storageService.setPreferences(userSettings);
+      });
   }
 
   public isCurrentUser(userId: Guid) {
     const l = this.userState.value.userId == userId;
-    console.log("🚀 ~ file: user.service.ts ~ line 42 ~ UserService ~ isCurrentUser ~ l", l)
     return l;
   }
 
-  public getCurrentUser(){
+  public getCurrentUser() {
     return this.userState.value;
   }
 
-  public getUserSettings(username: string) {
-    const params: HttpInterceptorConfig = { hideLoading: true };
-    const path = `settings/${username}`;
-    return super.getOneByPath<AccountSettingsModel>(path, params);
-  }
-
-  public saveUserSettings(settings: AccountSettingsModel) {
-    const path = `settings/update`;
-    return super.put<AccountSettingsModel>(path, settings);
-  }
-
   public checkUsernameTaken(username: string): Observable<boolean> {
-    const params: HttpInterceptorConfig = { hideLoading: true };
-    const path = `usernameAvailable/${username}`;
-    return super.getOneByPath<boolean>(path, params);
+    return super.getOneByPath<boolean>(
+      `usernameAvailable/${username}`,
+      DataService.noLoadingConfig
+    );
   }
 
   public checkEmailTaken(email: string): Observable<boolean> {
-    const params: HttpInterceptorConfig = { hideLoading: true };
-    const path = `emailAvailable/${email}`;
-    return super.getOneByPath<boolean>(path, params);
+    return super.getOneByPath<boolean>(
+      `emailAvailable/${email}`,
+      DataService.noLoadingConfig
+    );
   }
 
   public getPersonalInfo<UserProfileModel>(): Observable<UserProfileModel> {
     const path = `info/${this.userState.getValue().username}`;
     return super.getOneByPath<UserProfileModel>(path);
+  }
+
+  public getUser<UserProfileModel>(
+    userId: number
+  ): Observable<UserProfileModel> {
+    return super.getOneById<UserProfileModel>(userId);
+  }
+
+  public getUserSettings() {
+    return super.getOneById<AccountSettingsModel>(
+      this.userState.value.userId,
+      'settings',
+      DataService.noLoadingConfig
+    );
+  }
+
+  public saveUserSettings(settings: AccountSettingsModel) {
+    return super.updateById<AccountSettingsModel>(
+      this.userState.value.userId,
+      settings,
+      'settings'
+    );
   }
 }

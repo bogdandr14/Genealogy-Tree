@@ -94,16 +94,21 @@
                 <ion-label>{{ "_user.educations" | translate }}</ion-label>
               </ion-item>
               <ion-list slot="content">
-                <div *ngFor="let education of educations">
-                  <ion-item>
-                    <ion-label>{{ education.name }}</ion-label>
+                <div *ngIf="personalInfo && personalInfo.educations">
+                  <ion-item *ngFor="let education of personalInfo.educations">
+                    <ion-label>{{ education.educationInstituteName }}</ion-label>
                     <ion-button fill="clear" color="secondary">
                       <ion-icon name="pencil" slot="start"></ion-icon>
                       {{ "_common.edit" | translate }}
                     </ion-button>
                   </ion-item>
                 </div>
-                <ion-button expand="block" fill="clear" color="success">
+                <ion-button
+                  id="open-create-education"
+                  expand="block"
+                  fill="clear"
+                  color="success"
+                >
                   <ion-icon name="add" slot="start"></ion-icon>
                   {{ "_add.education" | translate }}
                 </ion-button>
@@ -115,13 +120,20 @@
                 <ion-label>{{ "_user.occupations" | translate }}</ion-label>
               </ion-item>
               <ion-list slot="content">
-                <ion-item *ngFor="let occupation of occupations">
-                  <ion-label>{{ occupation.name }}</ion-label>
-                  <ion-button fill="clear" color="secondary">
-                    {{ "_common.edit" | translate }}
-                  </ion-button>
-                </ion-item>
-                <ion-button expand="block" fill="clear" color="success">
+                <div *ngIf="personalInfo && personalInfo.occupations">
+                  <ion-item *ngFor="let occupation of personalInfo.occupations">
+                    <ion-label>{{ occupation.occupationName }}</ion-label>
+                    <ion-button fill="clear" color="secondary">
+                      {{ "_common.edit" | translate }}
+                    </ion-button>
+                  </ion-item>
+                </div>
+                <ion-button
+                  id="open-create-occupation"
+                  expand="block"
+                  fill="clear"
+                  color="success"
+                >
                   <ion-icon name="add" slot="start"></ion-icon>
                   {{ "_add.occupation" | translate }}
                 </ion-button>
@@ -187,3 +199,16 @@
   <!-- //https://ionic-5-full-starter-app-docs.ionicthemes.com/profile -->
   <!-- https://ionic-5-full-starter-app-docs.ionicthemes.com/profile -->
 </ion-content>
+<ion-modal trigger="open-create-occupation" [swipeToClose]="true">
+  <ng-template>
+    <app-occupation-edit [isUpdate]="false" (saveConfirmed)="setProfileInfo()">
+    </app-occupation-edit>
+  </ng-template>
+</ion-modal>
+
+<ion-modal trigger="open-create-education" [swipeToClose]="true">
+  <ng-template>
+    <app-education-edit [isUpdate]="false" (saveConfirmed)="setProfileInfo()">
+    </app-education-edit>
+  </ng-template>
+</ion-modal>

@@ -14,14 +14,26 @@ export class OccupationService extends DataService {
     super(httpClient, 'api/occupation', environment.baseApiUrl);
   }
 
-  updateOccupation(occupation: OccupationModel): Observable<OccupationModel> {
-    const path = 'update';
-    return super.put<OccupationModel>(path, occupation);
+  getOccupationsForUser(userId: number): Observable<OccupationModel[]> {
+    return super.getMany<OccupationModel>(`forUser/${userId}`, DataService.noLoadingConfig);
+  }
+
+  getOccupation(occupationId: number): Observable<OccupationModel> {
+    return this.getOneById(occupationId, null, DataService.noLoadingConfig);
+  }
+
+  updateOccupation(
+    occupation: OccupationModel
+  ): Observable<OccupationModel> {
+    return super.update<OccupationModel>(occupation);
   }
 
   addOccupation(occupation: OccupationModel): Observable<OccupationModel> {
-    const path = 'add';
     occupation.userId = this.userService.getCurrentUser().userId;
-    return super.post<OccupationModel>(path, occupation);
+    return super.add<OccupationModel>(occupation);
+  }
+
+  deleteOccupation(occupationId: number): Observable<OccupationModel> {
+    return super.remove(occupationId);
   }
 }

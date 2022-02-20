@@ -7,6 +7,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-delete-confirmation',
@@ -16,22 +17,18 @@ import { ModalController } from '@ionic/angular';
 export class DeleteConfirmationComponent implements OnInit {
   @Input() template: TemplateRef<any>;
   @Input() typeName: string;
-  @Output() deleteConfirmed = new EventEmitter<number>();
-  id: number;
-  present: boolean = false;
+  @Input() deleteId: number | Guid;
+  @Output() deleteConfirmed = new EventEmitter<number | Guid>();
 
   constructor(public modalCtrl: ModalController) {}
   ngOnInit() {}
 
-  public async presentModal(id: number) {
-    this.id = id;
-    this.present = true;
-  }
   confirm() {
-    this.deleteConfirmed.emit(this.id);
+    this.deleteConfirmed.emit(this.deleteId);
     this.dismiss();
   }
+
   dismiss() {
-    this.present = false;
+    this.modalCtrl.dismiss();
   }
 }

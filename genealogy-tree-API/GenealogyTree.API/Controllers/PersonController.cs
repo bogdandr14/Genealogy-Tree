@@ -103,12 +103,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("{id:int}")]
-        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(int id, PersonCreateUpdateModel person)
+        [Route("")]
+        public async Task<ActionResult<PersonDetailsModel>> UpdatePerson(PersonCreateUpdateModel person)
         {
             try
             {
-                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync(id, person);
+                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync( person);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -152,12 +152,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPut]
-        [Route("location/{id:int}")]
-        public async Task<ActionResult<LocationModel>> UpdateLocation(int id, LocationModel location)
+        [Route("location")]
+        public async Task<ActionResult<LocationModel>> UpdateLocation(LocationModel location)
         {
             try
             {
-                LocationModel returnEvent = await _locationService.UpdateLocation(id, location);
+                LocationModel returnEvent = await _locationService.UpdateLocation(location);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -168,7 +168,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("photo/{personId:int}")]
-        public async Task<ActionResult<ImageFile>> UploadPhoto([FromQuery] int personId, [Required][FromForm][MaxImageSize(4 * 1024)] IFormFile image)
+        public async Task<ActionResult<ImageFile>> UploadPhoto(int personId, [Required][FromForm][MaxImageSize(4 * 1024)] IFormFile image)
         {
             try
             {

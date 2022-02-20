@@ -1,0 +1,49 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{ "_delete.confirm" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">{{
+        "_common.cancel" | translate
+      }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label text-wrap
+      >{{ "_delete.warning" | translate }}
+      {{ "person" | translate | lowercase }}?
+    </ion-label>
+  </ion-item>
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-avatar class="avatar" slot="start">
+          <img
+            [src]="imageUrl"
+            [alt]="person.firstName + person.lastName + 'profilePicture'"
+          />
+        </ion-avatar>
+        <ion-label class="ion-padding-start" text-wrap>
+          <h1>{{ person?.firstName }}</h1>
+          <h1>{{ person?.lastName }}</h1>
+        </ion-label>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label> {{ "_person.birthday" | translate }}:</ion-label>
+          <span> {{ person?.birthDate | date: "dd/MM/yyyy" }}</span>
+        </ion-item>
+        <ion-item *ngIf="person?.deathDate">
+          <ion-label> {{ "_person.deathday" | translate }}:</ion-label>
+          <span> {{ person?.deathDate | date: "dd/MM/yyyy" }}</span>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-button fill="solid" color="danger" expand="block" (click)="confirm()">
+    {{ "_common.delete" | translate }}
+  </ion-button>
+</ion-content>

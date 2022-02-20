@@ -47,27 +47,15 @@
                 <ion-label> {{ "_person.deathday" | translate }}:</ion-label>
                 <span> {{ person?.deathDate | date: "dd/MM/yyyy" }}</span>
               </ion-item>
-              <ion-item>
-                <ion-button
-                  [routerLink]="['/person/details', person.personId]"
-                  fill="clear"
-                  color="secondary"
-                  slot="start"
-                >
-                  <ion-icon name="reader" slot="start"></ion-icon>
-                  {{ "_common.details" | translate }}
-                </ion-button>
-                <ion-button
-                  *ngIf="canDelete(person)"
-                  fill="clear"
-                  color="danger"
-                  slot="end"
-                  (click)="confirmDelete(person)"
-                >
-                  <ion-icon name="person-remove" slot="start"></ion-icon>
-                  {{ "_common.delete" | translate }}
-                </ion-button>
-              </ion-item>
+              <ion-button
+                [routerLink]="['/person/details', person.personId]"
+                fill="clear"
+                color="secondary"
+                expand="block"
+              >
+                <ion-icon name="reader" slot="start"></ion-icon>
+                {{ "_common.details" | translate }}
+              </ion-button>
             </ion-list>
           </ion-card-content>
         </ion-card>
@@ -75,14 +63,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-
-<app-delete-confirmation
-  #deleteConfirmation
-  [template]="deleteTemplate"
-  typeName="person"
-  class="delete-modal"
-  (deleteConfirmed)="deletePerson($event)"
-></app-delete-confirmation>
-<ng-template #deleteTemplate>
-  <app-person-delete-card [person]="personToDelete"></app-person-delete-card>
-</ng-template>

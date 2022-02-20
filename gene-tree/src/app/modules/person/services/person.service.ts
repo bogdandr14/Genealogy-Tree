@@ -25,49 +25,60 @@ export class PersonService extends DataService {
   }
 
   public getPerson(personId: number): Observable<any> {
-    const params: HttpInterceptorConfig = { hideLoading: true };
-    return super.getOneById<PersonEditModel>(personId, params);
+    return super.getOneById<PersonEditModel>(
+      personId,
+      null,
+      DataService.noLoadingConfig
+    );
   }
 
   public getAllPeopleInTree(treeId: Guid): Observable<PersonBaseModel[]> {
-    const path = `tree/${treeId}`;
-    return super.getMany<PersonBaseModel>(path);
+    return super.getMany<PersonBaseModel>(`tree/${treeId}`);
+  }
+
+  public searchPeople(personName: number): Observable<PersonBaseModel[]> {
+    return super.getMany<PersonBaseModel>(`search/${personName}`);
   }
 
   public updatePerson(
-    personId: number,
     personUpdate: PersonEditModel
   ): Observable<PersonDetailsModel> {
-    const path = 'update';
-    return super.update<PersonDetailsModel>(personId, personUpdate, path);
+    return super.update<PersonDetailsModel>(personUpdate);
   }
 
   public createPerson(
     personCreate: PersonEditModel
   ): Observable<PersonDetailsModel> {
-    debugger;
-    const path = 'add';
-    return super.post<PersonDetailsModel>(path, personCreate);
+    return super.add<PersonDetailsModel>(personCreate);
   }
+
   public deletePerson(personId: number) {
-    const path = `delete/${personId}`;
-    return super.delete(personId, 'delete');
+    return super.remove(personId);
+  }
+
+  public getLocation(locationId: number): Observable<LocationModel> {
+    return super.getOneById<LocationModel>(locationId, 'location');
+  }
+
+  public updateLocation(
+    locationUpdate: LocationModel
+  ): Observable<LocationModel> {
+    return super.update<LocationModel>(
+      locationUpdate,
+      'location'
+    );
   }
 
   public uploadPhoto(personId: number, image: File): Observable<ImageFile> {
-    let path =`${environment.baseApiUrl}/api/person/photo/upload?personId=${personId}`;
+    let path = `${this.url}/photo/${personId}`;
     const formData = new FormData();
     formData.append('image', image, image.name);
     return this.httpClient.post<ImageFile>(path, formData);
   }
 
-  public updatePhoto(personImage: PersonImageUpdateModel): Observable<ImageFile> {
-    let path = `photo/update`;
-    return this.httpClient.put<ImageFile>(path, personImage);
-  }
-
-  public updateLocation(locationUpdate: LocationModel): Observable<LocationModel>{
-    const path = 'location/update';
-    return super.put<LocationModel>(path, locationUpdate);
+  public updatePhoto(
+    personImage: PersonImageUpdateModel
+  ): Observable<ImageFile> {
+    return this.httpClient.put<ImageFile>('photo', personImage);
   }
 }

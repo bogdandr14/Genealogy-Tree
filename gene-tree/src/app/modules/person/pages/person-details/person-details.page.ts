@@ -1,9 +1,8 @@
 import { ImageFile } from './../../../shared/models/image-file';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { DeleteConfirmationComponent } from 'src/app/modules/shared/components/delete-confirmation/delete-confirmation.component';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonDetailsModel } from '../../models/person/person-details.model';
 import { PersonService } from '../../services/person.service';
@@ -14,8 +13,6 @@ import { PersonService } from '../../services/person.service';
   styleUrls: ['./person-details.page.scss'],
 })
 export class PersonDetailsPage implements OnInit {
-  @ViewChild('deleteConfirmation')
-  deleteConfirmation: DeleteConfirmationComponent;
   public personId: number;
   public personDetails: PersonDetailsModel = new PersonDetailsModel();
 
@@ -23,7 +20,7 @@ export class PersonDetailsPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     private userService: UserService,
     private personService: PersonService
   ) {}
@@ -45,6 +42,7 @@ export class PersonDetailsPage implements OnInit {
       this.personDetails = person;
     });
   }
+
   get imageUrl() {
     if (this.personDetails && this.personDetails.imageFile) {
       return `data:${this.personDetails.imageFile.mimeType};base64,${this.personDetails.imageFile.fileInBytes}`;
@@ -55,20 +53,14 @@ export class PersonDetailsPage implements OnInit {
   public get canDelete() {
     return !this.userService.isCurrentUser(this.personDetails.userId);
   }
-  confirmDelete() {
-    this.deleteConfirmation.presentModal(this.personDetails.personId);
-  }
 
   setImageFile(image: ImageFile) {
     this.personDetails.imageFile = image;
   }
 
-  reload() {
-    window.location.reload();
-  }
-  deletePerson() {
-    this.personService
-      .delete(this.personDetails.personId)
-      .subscribe(() => this.router.navigate(['/person/list']));
+  refreshPerson() {
+    this.person$.subscribe((person) => {
+      this.personDetails = person;
+    });
   }
 }

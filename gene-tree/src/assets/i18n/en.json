@@ -125,6 +125,17 @@
     "zoroastrianism": "Zoroastrianism",
     "null": "Unknown"
   },
+  "_education":{
+    "instituteName":"Institute name",
+    "enrollmentDay":"Enrollment day",
+    "graduationDay":"Graduation day"
+  },
+  "_occupation":{
+    "occupationName":"Occupation name",
+    "workingPlaceName":"Working place",
+    "firstDay": "First day",
+    "lastDay": "Last day"
+  },
   "_pages": {
     "home": "Home",
     "profile": "Profile",

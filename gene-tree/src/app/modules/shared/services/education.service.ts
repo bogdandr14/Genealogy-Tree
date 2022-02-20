@@ -16,20 +16,37 @@ export class EducationService extends DataService {
     super(httpClient, 'api/education', environment.baseApiUrl);
   }
 
-  getEducationLevels(): Observable<CommonObject[]> {
-    const params: HttpInterceptorConfig = { hideLoading: true };
-    const path = 'levels';
-    return super.getMany<CommonObject>(path, params);
+  getEducationsForPerson(personId: number): Observable<EducationModel[]> {
+    return super.getMany<EducationModel>(
+      `forPerson/${personId}`,
+      DataService.noLoadingConfig
+    );
   }
 
-  updateEducation(education: EducationModel): Observable<EducationModel> {
-    const path = 'update';
-    return super.put<EducationModel>(path, education);
+  getEducation(educationId: number): Observable<EducationModel> {
+    return this.getOneById(educationId, null, DataService.noLoadingConfig);
+  }
+
+  updateEducation(
+    education: EducationModel
+  ): Observable<EducationModel> {
+    return super.update<EducationModel>(education);
   }
 
   addEducation(education: EducationModel): Observable<EducationModel> {
-    const path = 'add';
     education.userId = this.userService.getCurrentUser().userId;
-    return super.post<EducationModel>(path, education);
+    return super.add<EducationModel>(education);
+  }
+
+  deleteEducation(educationId: number): Observable<EducationModel> {
+    return super.remove(educationId);
+  }
+
+  getEducationLevels(): Observable<CommonObject[]> {
+    return super.getMany<CommonObject>('levels', DataService.noLoadingConfig);
+  }
+
+  addEducationLevel(educationLevelName: string): Observable<EducationModel> {
+    return super.add<EducationModel>(educationLevelName, 'levels');
   }
 }
