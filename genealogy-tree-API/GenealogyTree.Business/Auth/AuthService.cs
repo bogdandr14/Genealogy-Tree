@@ -49,6 +49,8 @@ namespace GenealogyTree.Business.Auth
 
             Person person = _mapper.Map<Person>(userRegister);
             person.TreeId = userTree.Id;
+            person.LivingPlace = new Location();
+            person.BirthPlace = new Location();
             Person personCreated = await unitOfWork.Person.Create(person);
 
             User user = _mapper.Map<User>(userRegister);

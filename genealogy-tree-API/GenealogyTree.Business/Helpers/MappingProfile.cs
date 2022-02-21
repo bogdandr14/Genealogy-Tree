@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using GenealogyTree.Domain;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.DTO.Marriage;
