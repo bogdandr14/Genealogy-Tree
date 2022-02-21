@@ -1,0 +1,103 @@
+<ion-card>
+  <ion-card-header class="ion-text-center">
+    <ion-avatar class="avatar">
+      <img [src]="imageUrl" alt="avatar" />
+      <ion-fab-button class="inner" id="open-change-picture" color="success">
+        <ion-icon name="image"></ion-icon>
+      </ion-fab-button>
+      <ion-modal trigger="open-change-picture" [swipeToClose]="true">
+        <ng-template>
+          <app-photo-upload
+            (imageSave)="setImageFile($event)"
+            [personId]="personInfo?.personId"
+          ></app-photo-upload>
+        </ng-template>
+      </ion-modal>
+    </ion-avatar>
+    <ion-item class="ion-text-center">
+      <ion-label text-wrap>
+        <h1>{{ personInfo?.firstName }} {{ personInfo?.lastName }}</h1>
+      </ion-label>
+      <app-link-user-buttons
+        [userId]="personInfo.userId"
+      ></app-link-user-buttons>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-list slot="content">
+        <ion-item>
+          <ion-label> {{ "_person.gender" | translate }}:</ion-label>
+          <span>
+            {{
+              "_genders." + personInfo?.gender?.name | lowercase | translate
+            }}</span
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ "_person.nationality" | translate }}:</ion-label>
+          <span>
+            {{
+              "_nationalities." + personInfo?.nationality?.name
+                | lowercase
+                | translate
+            }}</span
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ "_person.religion" | translate }}:</ion-label>
+          <span>
+            {{
+              "_religions." + personInfo?.religion?.name | lowercase | translate
+            }}</span
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>{{ "_person.birthday" | translate }}:</ion-label>
+          <span> {{ personInfo?.birthDate | date: "dd/MM/yyyy" }}</span>
+        </ion-item>
+        <ion-item *ngIf="personInfo?.deathDate">
+          <ion-label>{{ "_person.deathday" | translate }}:</ion-label>
+          <span> {{ personInfo?.deathDate | date: "dd/MM/yyyy" }}</span>
+        </ion-item>
+
+        <ion-item>
+          <ion-label text-wrap>{{ "_location.from" | translate }}:</ion-label>
+          <span
+            >{{ personInfo?.birthPlace?.state }},
+            {{ personInfo?.birthPlace?.country }},
+            {{ personInfo?.birthPlace?.city }}</span
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label text-wrap>{{ "_location.lives" | translate }}:</ion-label>
+          <span
+            >{{ personInfo?.livingPlace?.state }},
+            {{ personInfo?.livingPlace?.country }},
+            {{ personInfo?.livingPlace?.city }}</span
+          >
+        </ion-item>
+        <ion-button
+          expand="block"
+          fill="clear"
+          color="warning"
+          [routerLink]="['/person/edit/', personInfo.personId]"
+        >
+          <ion-icon name="pencil" slot="start"></ion-icon>
+          {{ "_edit.information" | translate }}
+        </ion-button>
+      </ion-list>
+
+      <ion-button
+        *ngIf="canDelete"
+        expand="block"
+        fill="clear"
+        color="danger"
+        id="open-delete-person"
+      >
+        <ion-icon name="person-remove" slot="start"></ion-icon>
+        {{ "_delete.person" | translate }}
+      </ion-button>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

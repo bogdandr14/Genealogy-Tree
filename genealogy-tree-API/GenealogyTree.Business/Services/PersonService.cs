@@ -58,21 +58,21 @@ namespace GenealogyTree.Business.Services
             return personEntity;
         }
 
-        public async Task<List<BasePersonModel>> GetAllPeopleInTree(Guid treeId)
+        public async Task<List<GenericPersonModel>> GetAllPeopleInTree(Guid treeId)
         {
             List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
-            List<BasePersonModel> returnPeopleList = new List<BasePersonModel>();
+            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
 
             foreach (var person in poepleList)
             {
-                BasePersonModel returnPerson = _mapper.Map<BasePersonModel>(person);
+                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
                 if (person.SyncedUserToPerson != null)
                 {
                     returnPerson.UserId = person.SyncedUserToPerson.SyncedUserId;
                 }
-                if(person.Id == user.PersonId)
+                if (person.Id == user.PersonId)
                 {
                     returnPerson.UserId = user.Id;
                 }
@@ -106,10 +106,25 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Person personEntity = _mapper.Map<Person>(person);
+            await updateLocations(person);
+            personEntity.ImageId = person.ImageFile.Id;
             personEntity = await unitOfWork.Person.Update(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
             return returnEvent;
+        }
+        private async Task updateLocations(PersonCreateUpdateModel person)
+        {
+            if (person.LivingPlace != null)
+            {
+                Location locationEntity = _mapper.Map<Location>(person.LivingPlace);
+                await unitOfWork.Location.Update(locationEntity);
+            }
+            if (person.BirthPlace != null)
+            {
+                Location locationEntity = _mapper.Map<Location>(person.BirthPlace);
+                await unitOfWork.Location.Update(locationEntity);
+            }
         }
 
         public async Task<ImageFile> UpdatePictureAsync(int personId, int imageId)

@@ -10,7 +10,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<List<PersonDetailsModel>> FindPeople(string name);
         Task<PersonDetailsModel> GetPersonAsync(int personId);
-        Task<List<BasePersonModel>> GetAllPeopleInTree(Guid treeId);
+        Task<List<GenericPersonModel>> GetAllPeopleInTree(Guid treeId);
         Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person);
         Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person);
         Task<ImageFile> UpdatePictureAsync(int personId, int imageId);

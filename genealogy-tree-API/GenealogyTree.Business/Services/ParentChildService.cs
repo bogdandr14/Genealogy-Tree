@@ -66,14 +66,14 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<List<BasePersonModel>> GetUnrelatedPeople(int personId)
+        public async Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId)
         {
             List<ParentModel> ancestors = await GetAllAncestors(personId);
             List<ChildModel> descendants = await GetAllDescendants(personId);
             Person person = await unitOfWork.Person.FindById(personId);
             IQueryable<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId);
             List<Person> people = peopleInTree.Where(x => !ancestors.Exists(y => y.Parent.PersonId == x.Id) && !descendants.Exists(y => y.Child.PersonId == x.Id)).ToList();
-            List<BasePersonModel> returnEvent = _mapper.Map<List<BasePersonModel>>(people);
+            List<GenericPersonModel> returnEvent = _mapper.Map<List<GenericPersonModel>>(people);
             return returnEvent;
         }
 

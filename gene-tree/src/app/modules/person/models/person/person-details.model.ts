@@ -6,7 +6,6 @@ import { PersonEditModel } from "./person-edit.model";
 
 
 export class PersonDetailsModel extends PersonEditModel{
-  userId?: Guid;
   parents: ParentModel[];
   children: ChildModel[];
   marriages: MarriedPersonModel[];

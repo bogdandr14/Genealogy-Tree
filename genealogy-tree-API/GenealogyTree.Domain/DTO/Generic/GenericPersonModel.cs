@@ -5,6 +5,7 @@ namespace GenealogyTree.Domain.DTO.Person
     public class GenericPersonModel
     {
         public Guid TreeId { get; set; }
+        public Guid? UserId { get; set; }
         public int PersonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

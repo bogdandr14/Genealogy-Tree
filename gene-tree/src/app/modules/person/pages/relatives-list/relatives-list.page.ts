@@ -1,11 +1,8 @@
-import { DeleteConfirmationComponent } from './../../../shared/components/delete-confirmation/delete-confirmation.component';
 import { StorageService } from 'src/app/modules/core/services/storage.service';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { CurrentUserModel } from './../../../core/models/current-user.model';
 import { PersonService } from './../../services/person.service';
-import { PersonBaseModel } from '../../models/person/person-base.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Guid } from 'guid-typescript';
+import { GenericPersonModel } from '../../models/person/generic-person.model';
 
 @Component({
   selector: 'app-relatives-list',
@@ -13,7 +10,7 @@ import { Guid } from 'guid-typescript';
   styleUrls: ['./relatives-list.page.scss'],
 })
 export class RelativesListPage implements OnInit {
-  public relativesList: PersonBaseModel[] = [];
+  public relativesList: GenericPersonModel[] = [];
   private currentUser: CurrentUserModel;
   constructor(
     private storageService: StorageService,
@@ -29,7 +26,7 @@ export class RelativesListPage implements OnInit {
       });
   }
 
-  getImageUrl(person: PersonBaseModel): string {
+  getImageUrl(person: GenericPersonModel): string {
     if (person && person.imageFile) {
       return `data:${person.imageFile.mimeType};base64,${person.imageFile.fileInBytes}`;
     }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PersonBaseModel } from '../../models/person/person-base.model';
+import { GenericPersonModel } from '../../models/person/generic-person.model';
 import { PersonService } from '../../services/person.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { PersonService } from '../../services/person.service';
   styleUrls: ['./person-delete.component.scss'],
 })
 export class PersonDeleteComponent implements OnInit {
-  @Input() person: PersonBaseModel;
+  @Input() person: GenericPersonModel;
   @Output() personDeleted = new EventEmitter<void>();
   constructor(
     private modalCtrl: ModalController,

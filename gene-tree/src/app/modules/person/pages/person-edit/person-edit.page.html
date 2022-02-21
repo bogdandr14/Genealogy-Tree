@@ -8,12 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row class="ion-align-item-center">
-      <ion-col size-sm="6" offset-sm="3">
-        <ion-card>
-          <ion-card-content>
-            <form #form="ngForm" (ngSubmit)="onSubmit()">
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="ion-align-item-center">
+            <ion-col size-sm="3" offset-sm="1">
               <!-- FIRST NAME -->
               <ion-item-group id="firstName">
                 <ion-item color="transparent">
@@ -224,31 +224,62 @@
                   </ion-popover>
                 </ion-item>
               </ion-item-group>
-
-              <ion-button
-                type="submit"
-                class="submit-button"
-                color="success"
-                expand="block"
-                [disabled]="form.invalid"
-              >
-                <ion-icon name="save" slot="start"></ion-icon>
-                {{ "_common.save" | translate }}
-              </ion-button>
-            </form>
-            <ion-button
-              type="button"
-              color="danger"
-              fill="clear"
-              expand="block"
-              [routerLink]="['/person/list']"
-            >
-              <ion-icon name="close" slot="start"></ion-icon>
-              {{ "_common.cancel" | translate }}
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            </ion-col>
+            <ion-col size-sm="3" offset-sm="0">
+              <ion-title> {{ "_location.from" | translate }} </ion-title>
+              <ion-item-group>
+                <app-input-template
+                  [(field)]="personEdit.birthPlace.state"
+                  name="_location.state"
+                ></app-input-template>
+                <app-input-template
+                  [(field)]="personEdit.birthPlace.country"
+                  name="_location.country"
+                ></app-input-template>
+                <app-input-template
+                  [(field)]="personEdit.birthPlace.city"
+                  name="_location.city"
+                ></app-input-template>
+              </ion-item-group>
+              <ion-title> {{ "_location.lives" | translate }} </ion-title>
+              <ion-item-group>
+                <app-input-template
+                  [(field)]="personEdit.livingPlace.state"
+                  name="_location.state"
+                ></app-input-template>
+                <app-input-template
+                  [(field)]="personEdit.livingPlace.country"
+                  name="_location.country"
+                ></app-input-template>
+                <app-input-template
+                  [(field)]="personEdit.livingPlace.city"
+                  name="_location.city"
+                ></app-input-template>
+              </ion-item-group>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button
+          type="submit"
+          class="submit-button"
+          color="success"
+          expand="block"
+          [disabled]="form.invalid"
+        >
+          <ion-icon name="save" slot="start"></ion-icon>
+          {{ "_common.save" | translate }}
+        </ion-button>
+        <ion-button
+          type="button"
+          color="danger"
+          fill="clear"
+          expand="block"
+          [routerLink]="['/person/list']"
+        >
+          <ion-icon name="close" slot="start"></ion-icon>
+          {{ "_common.cancel" | translate }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>

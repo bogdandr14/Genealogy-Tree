@@ -98,11 +98,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("unrelated/{personId:int}")]
-        public async Task<ActionResult<List<BasePersonModel>>> GetUnrelatedPeople(int personId)
+        public async Task<ActionResult<List<GenericPersonModel>>> GetUnrelatedPeople(int personId)
         {
             try
             {
-                List<BasePersonModel> parents = await _parentChildService.GetUnrelatedPeople(personId);
+                List<GenericPersonModel> parents = await _parentChildService.GetUnrelatedPeople(personId);
                 if (parents == null)
                 {
                     return NotFound();

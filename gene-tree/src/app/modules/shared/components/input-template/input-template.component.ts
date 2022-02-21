@@ -21,6 +21,7 @@ export class InputTemplateComponent implements OnInit {
   @Output() fieldChange = new EventEmitter();
   @Input() set field(val: any) {
     this.fieldChange.emit(val);
+    console.log("🚀 ~ file: input-template.component.ts ~ line 24 ~ InputTemplateComponent ~ @Input ~ val", val)
     this._field = val;
   }
   get field() {

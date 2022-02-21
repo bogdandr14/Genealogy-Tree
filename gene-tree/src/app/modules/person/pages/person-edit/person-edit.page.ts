@@ -7,6 +7,7 @@ import { CommonObject } from 'src/app/modules/shared/models/common-object';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonEditModel } from '../../models/person/person-edit.model';
 import { PersonService } from '../../services/person.service';
+import { LocationModel } from 'src/app/modules/shared/models/location.model';
 
 @Component({
   selector: 'app-person-edit',
@@ -55,6 +56,12 @@ export class PersonEditPage implements OnInit {
     );
     this.person$.subscribe((person) => {
       this.personEdit = person;
+      if (!this.personEdit.birthPlace) {
+        this.personEdit.birthPlace = new LocationModel();
+      }
+      if (!this.personEdit.livingPlace) {
+        this.personEdit.livingPlace = new LocationModel();
+      }
     });
   }
 

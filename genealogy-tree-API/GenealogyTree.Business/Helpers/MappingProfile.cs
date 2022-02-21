@@ -37,7 +37,7 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<Gender, GenericNameModel>()
                .ReverseMap();
             CreateMap<Image, ImageFile>()
-                .ForMember(x => x.Name, y=> y.MapFrom(z=> Guid.Parse(Path.GetFileNameWithoutExtension(z.FileName))));
+                .ForMember(x => x.Name, y => y.MapFrom(z => Guid.Parse(Path.GetFileNameWithoutExtension(z.FileName))));
             CreateMap<ImageFile, Image>();
 
             CreateMap<Location, LocationModel>()
@@ -69,9 +69,9 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<ParentChild, ParentChildCreateUpdateModel>()
                .ReverseMap();
 
-            CreateMap<Person, BasePersonModel>()
+            CreateMap<Person, GenericPersonModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
-                .ForMember(x=> x.UserId, y => y.MapFrom(z=> z.SyncedUserToPerson.SyncedUserId))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId))
                 .ReverseMap();
             CreateMap<Person, PersonDetailsModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
@@ -79,6 +79,7 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
             CreateMap<Person, PersonCreateUpdateModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId))
                 .ReverseMap();
 
             CreateMap<Religion, GenericNameModel>()

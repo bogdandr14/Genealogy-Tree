@@ -4,14 +4,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { HttpInterceptorConfig } from '../../core/models/http-interceptor-config.model';
-import { HttpInterceptorParams } from '../../core/models/http-interceptor-params.model';
 import { DataService } from '../../core/services/data.service';
 import { ImageFile } from '../../shared/models/image-file';
 import { LocationModel } from '../../shared/models/location.model';
-import { PersonBaseModel } from '../models/person/person-base.model';
+import { GenericPersonModel } from '../models/person/generic-person.model';
 import { PersonDetailsModel } from '../models/person/person-details.model';
 import { PersonEditModel } from '../models/person/person-edit.model';
 import { PersonImageUpdateModel } from '../models/person/person-image-update.model';
@@ -32,12 +29,12 @@ export class PersonService extends DataService {
     );
   }
 
-  public getAllPeopleInTree(treeId: Guid): Observable<PersonBaseModel[]> {
-    return super.getMany<PersonBaseModel>(`tree/${treeId}`);
+  public getAllPeopleInTree(treeId: Guid): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(`tree/${treeId}`);
   }
 
-  public searchPeople(personName: number): Observable<PersonBaseModel[]> {
-    return super.getMany<PersonBaseModel>(`search/${personName}`);
+  public searchPeople(personName: number): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(`search/${personName}`);
   }
 
   public updatePerson(
