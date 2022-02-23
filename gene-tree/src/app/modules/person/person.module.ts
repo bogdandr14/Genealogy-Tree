@@ -25,7 +25,8 @@ import { FileMaxSizeDirective } from './directives/file-max-size.directive';
   ],
   imports: [SharedModule, PersonRoutingModule],
   exports:[
-    PhotoUploadComponent
+    PhotoUploadComponent,
+    PersonInfoComponent
   ]
 })
 export class PersonModule {}

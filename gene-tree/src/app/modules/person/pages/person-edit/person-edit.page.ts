@@ -62,6 +62,9 @@ export class PersonEditPage implements OnInit {
       if (!this.personEdit.livingPlace) {
         this.personEdit.livingPlace = new LocationModel();
       }
+      if(this.personEdit.birthDate){
+        this.personEdit.birthDate = this.formatDate(this.personEdit.birthDate.toString());
+      }
     });
   }
 
