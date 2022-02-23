@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HoverClassDirective } from './directives/hover-class.directive';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { IonicModule } from '@ionic/angular';
-import { DeleteConfirmationComponent } from './components/delete-confirmation/delete-confirmation.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
 import { ThemeSelectComponent } from './components/theme-select/theme-select.component';
@@ -20,7 +19,6 @@ import { RouterModule } from '@angular/router';
     PaginatorComponent,
     ThemeSelectComponent,
     LanguageSelectComponent,
-    DeleteConfirmationComponent,
     InputTemplateComponent,
     SelectTemplateComponent,
     ValidationErrorsComponent,
@@ -44,7 +42,6 @@ import { RouterModule } from '@angular/router';
     PaginatorComponent,
     ThemeSelectComponent,
     LanguageSelectComponent,
-    DeleteConfirmationComponent,
     InputTemplateComponent,
     SelectTemplateComponent,
     ValidationErrorsComponent,

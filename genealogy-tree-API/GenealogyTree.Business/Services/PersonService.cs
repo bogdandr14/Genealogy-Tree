@@ -101,6 +101,7 @@ namespace GenealogyTree.Business.Services
             personEntity.Religion = null;
             personEntity.BirthPlace = null;
             personEntity.LivingPlace = null;
+            personEntity.SyncedUserToPerson = null;
             return personEntity;
         }
         private async Task<Person> addLocations(PersonCreateUpdateModel person)
@@ -118,7 +119,6 @@ namespace GenealogyTree.Business.Services
                 personEntity.BirthPlace = new Location();
             }
             personEntity.BirthPlaceId = (await unitOfWork.Location.Create(personEntity.BirthPlace)).Id;
-            unitOfWork.Location.Dispose();
             return personEntity;
         }
 

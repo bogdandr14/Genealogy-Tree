@@ -46,10 +46,6 @@ export class PersonEditPage implements OnInit {
         } else {
           const personEdit = new PersonEditModel();
           personEdit.treeId = this.userService.getCurrentUser().treeId;
-          console.log(
-            '🚀 ~ file: person-edit.page.ts ~ line 53 ~ PersonEditPage ~ switchMap ~ personEdit.treeId',
-            personEdit.treeId
-          );
           return of(personEdit);
         }
       })
@@ -61,9 +57,6 @@ export class PersonEditPage implements OnInit {
       }
       if (!this.personEdit.livingPlace) {
         this.personEdit.livingPlace = new LocationModel();
-      }
-      if(this.personEdit.birthDate){
-        this.personEdit.birthDate = this.formatDate(this.personEdit.birthDate.toString());
       }
     });
   }
