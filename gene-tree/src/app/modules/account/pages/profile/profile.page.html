@@ -10,195 +10,16 @@
 <ion-content class="ion-padding-top ion-text-center">
   <ion-grid>
     <ion-row class="ion-align-item-center">
-      <ion-col size-sm="5" offset-sm="1">
-        <ion-avatar class="avatar">
+      <ion-col size-sm="4" offset-sm="0">
+        <!-- <ion-avatar class="avatar">
           <img [src]="imageUrl" alt="avatar" />
-        </ion-avatar>
-
-        <ion-list inset="true">
-          <ion-list-header>
-            <ion-label>
-              <h1>
-                {{ personalInfo?.firstName }} {{ personalInfo?.lastName }}
-              </h1>
-            </ion-label>
-          </ion-list-header>
-          <ion-item>
-            <ion-label>
-              <ion-label>{{ "_user.about" | translate }}:</ion-label>
-            </ion-label>
-            <ion-text> {{personalInfo?.about}} </ion-text>
-            <ion-button fill="clear" color="warning" slot="end">
-              <ion-icon name="create" slot="start"></ion-icon>
-              {{ "_common.edit" | translate }}
-            </ion-button>
-          </ion-item>
-          <ion-accordion-group>
-            <ion-accordion value="colors">
-              <ion-item slot="header">
-                <ion-label>{{ "_person.information" | translate }}</ion-label>
-              </ion-item>
-              <ion-list slot="content">
-                <ion-item>
-                  <ion-label> {{ "_person.gender" | translate }}: </ion-label>
-                  <span>
-                    {{ "_genders." + personalInfo?.gender?.name | lowercase |
-                    translate }}
-                  </span>
-                </ion-item>
-                <ion-item>
-                  <ion-label>
-                    {{ "_person.nationality" | translate }}:
-                  </ion-label>
-                  <span>
-                    {{ "_nationalities." + personalInfo?.nationality?.name |
-                    lowercase | translate }}
-                  </span>
-                </ion-item>
-                <ion-item>
-                  <ion-label>{{ "_person.religion" | translate }}:</ion-label>
-                  <span>
-                    {{ "_religions." + personalInfo?.religion?.name | lowercase
-                    | translate }}
-                  </span>
-                </ion-item>
-                <ion-item>
-                  <ion-label>{{ "_person.birthday" | translate }}:</ion-label>
-                  <span>
-                    {{ personalInfo?.birthDate | date: "dd/MM/yyyy" }}
-                  </span>
-                </ion-item>
-                <ion-button
-                  expand="block"
-                  fill="clear"
-                  color="warning"
-                  [routerLink]="['/person/edit/', personalInfo?.personId]"
-                >
-                  <ion-icon name="pencil" slot="start"></ion-icon>
-                  {{ "_edit.information" | translate }}
-                </ion-button>
-                <ion-button
-                  expand="block"
-                  fill="clear"
-                  color="secondary"
-                  [routerLink]="['/person/details/', personalInfo?.personId]"
-                >
-                  <ion-icon name="reader" slot="start"></ion-icon>
-                  {{ "_common.details" | translate }}
-                </ion-button>
-              </ion-list>
-            </ion-accordion>
-
-            <!-- <ion-accordion value="educations">
-              <ion-item slot="header">
-                <ion-label>{{ "_user.educations" | translate }}</ion-label>
-              </ion-item>
-              <ion-list slot="content">
-                <div *ngIf="personalInfo && personalInfo.educations">
-                  <ion-item *ngFor="let education of personalInfo.educations">
-                    <ion-label
-                      >{{ education.educationInstituteName }}</ion-label
-                    >
-                    <ion-button fill="clear" color="secondary">
-                      <ion-icon name="pencil" slot="start"></ion-icon>
-                      {{ "_common.edit" | translate }}
-                    </ion-button>
-                  </ion-item>
-                </div>
-                <ion-button
-                  id="open-create-education"
-                  expand="block"
-                  fill="clear"
-                  color="success"
-                >
-                  <ion-icon name="add" slot="start"></ion-icon>
-                  {{ "_add.education" | translate }}
-                </ion-button>
-              </ion-list>
-            </ion-accordion> -->
-
-            <!-- <ion-accordion value="occupations">
-              <ion-item slot="header">
-                <ion-label>{{ "_user.occupations" | translate }}</ion-label>
-              </ion-item>
-              <ion-list slot="content">
-                <div *ngIf="personalInfo && personalInfo.occupations">
-                  <ion-item *ngFor="let occupation of personalInfo.occupations">
-                    <ion-label>{{ occupation.occupationName }}</ion-label>
-                    <ion-button fill="clear" color="secondary">
-                      {{ "_common.edit" | translate }}
-                    </ion-button>
-                  </ion-item>
-                </div>
-                <ion-button
-                  id="open-create-occupation"
-                  expand="block"
-                  fill="clear"
-                  color="success"
-                >
-                  <ion-icon name="add" slot="start"></ion-icon>
-                  {{ "_add.occupation" | translate }}
-                </ion-button>
-              </ion-list>
-            </ion-accordion> -->
-
-            <ion-accordion value="cont">
-              <ion-item slot="header">
-                <ion-label>{{ "_user.contact" | translate }}</ion-label>
-              </ion-item>
-              <ion-list slot="content">
-                <ion-item>
-                  {{ "_user.email" | translate }}:
-                  <ion-chip color="secondary" (click)="copyMail('das@djisa')">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <ion-label>{{ personalInfo?.email }} </ion-label>
-                  </ion-chip>
-                </ion-item>
-                <ion-item class="ion-justify-content-start">
-                  {{ "_user.phone" | translate }}:
-                  <ion-chip color="secondary" (click)="copyPhone('0231789312')">
-                    <ion-icon name="call-outline"></ion-icon>
-                    <ion-label>{{ personalInfo?.phoneNumber }} </ion-label>
-                  </ion-chip>
-                </ion-item>
-                <ion-button expand="block" fill="clear" color="warning">
-                  <ion-icon name="pencil" slot="start"></ion-icon>
-                  {{ "_edit.contact" | translate }}
-                </ion-button>
-              </ion-list>
-            </ion-accordion>
-          </ion-accordion-group>
-          <ion-button
-            id="open-change-picture"
-            expand="block"
-            fill="clear"
-            color="warning"
-          >
-            <ion-icon name="image" slot="start"></ion-icon>
-            {{ "changePicture" | translate }}
-          </ion-button>
-          <ion-modal trigger="open-change-picture" [swipeToClose]="true">
-            <ng-template>
-              <app-photo-upload
-                (imageSave)="setImageFile($event)"
-                [personId]="personalInfo?.personId"
-              ></app-photo-upload>
-            </ng-template>
-          </ion-modal>
-          <ion-button
-            expand="block"
-            fill="clear"
-            color="secondary"
-            [routerLink]="['/account/settings']"
-          >
-            <ion-icon name="settings" slot="start"></ion-icon>
-            {{ "_pages.settings" | translate }}
-          </ion-button>
-        </ion-list>
-        <app-person-info [personInfo]="personalInfo"></app-person-info>
-
+        </ion-avatar> -->
+        <app-user-info [userInfo]="personalInfo"></app-user-info>
       </ion-col>
-      <ion-col size-sm="4" offset-sm="1">
+      <ion-col size-sm="4" offset-sm="0">
+        <app-person-info [personInfo]="personalInfo" [showHeader]="false"></app-person-info>
+      </ion-col>
+      <ion-col size-sm="4" offset-sm="0">
         <ion-card>
           <ion-card-header class="ion-text-center">
             <ion-card-title>
@@ -210,8 +31,11 @@
               <div *ngIf="personalInfo && personalInfo.occupations">
                 <ion-item *ngFor="let occupation of personalInfo.occupations">
                   <ion-label>{{ occupation.occupationName }}</ion-label>
-                  <ion-button fill="clear" color="secondary">
-                    {{ "_common.edit" | translate }}
+                  <ion-button fill="clear" color="warning">
+                    <ion-icon name="pencil" slot="start"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger">
+                    <ion-icon name="trash"></ion-icon>
                   </ion-button>
                 </ion-item>
               </div>
@@ -248,8 +72,11 @@
               <div *ngIf="personalInfo && personalInfo.educations">
                 <ion-item *ngFor="let education of personalInfo.educations">
                   <ion-label>{{ education.educationInstituteName }}</ion-label>
-                  <ion-button fill="clear" color="secondary">
-                    {{ "_common.edit" | translate }}
+                  <ion-button fill="clear" color="warning">
+                    <ion-icon name="pencil" slot="start"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" color="danger">
+                    <ion-icon name="trash"></ion-icon>
                   </ion-button>
                 </ion-item>
               </div>

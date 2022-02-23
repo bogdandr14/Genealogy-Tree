@@ -159,7 +159,8 @@
     "submit": "Submit",
     "confirm": "Confirm",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "unknown": "Unknown"
   },
   "_details": {
     "user": "User details",
@@ -174,6 +175,7 @@
     "marriage": "Add marriage"
   },
   "_edit": {
+    "person": "Edit person",
     "information": "Edit information",
     "locations": "Edit locations",
     "contact": "Edit contact"

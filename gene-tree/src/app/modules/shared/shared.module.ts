@@ -11,6 +11,8 @@ import { ThemeSelectComponent } from './components/theme-select/theme-select.com
 import { InputTemplateComponent } from './components/input-template/input-template.component';
 import { ValidationErrorsComponent } from './components/validation-errors/validation-errors.component';
 import { SelectTemplateComponent } from './components/select-template/select-template.component';
+import { LinkUserButtonsComponent } from './components/link-user-buttons/link-user-buttons.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SelectTemplateComponent } from './components/select-template/select-tem
     InputTemplateComponent,
     SelectTemplateComponent,
     ValidationErrorsComponent,
+    LinkUserButtonsComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ import { SelectTemplateComponent } from './components/select-template/select-tem
     ReactiveFormsModule,
     TranslateModule,
     IonicModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
@@ -43,7 +47,8 @@ import { SelectTemplateComponent } from './components/select-template/select-tem
     DeleteConfirmationComponent,
     InputTemplateComponent,
     SelectTemplateComponent,
-    ValidationErrorsComponent
+    ValidationErrorsComponent,
+    LinkUserButtonsComponent
   ],
 })
 export class SharedModule {}

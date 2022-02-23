@@ -2,6 +2,9 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageFile } from 'src/app/modules/shared/models/image-file';
 import { PersonEditModel } from '../../models/person/person-edit.model';
+import { LocationModel } from 'src/app/modules/shared/models/location.model';
+import { state } from '@angular/animations';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-person-info',
@@ -10,23 +13,35 @@ import { PersonEditModel } from '../../models/person/person-edit.model';
 })
 export class PersonInfoComponent implements OnInit {
   @Input() personInfo: PersonEditModel;
-  constructor(private userService: UserService) { }
+  @Input() showHeader = true;
+  constructor(private userService: UserService, private translateService: TranslateService) { }
 
-  ngOnInit() {}
-
-  get imageUrl() {
-    if (this.personInfo && this.personInfo.imageFile) {
-      return `data:${this.personInfo.imageFile.mimeType};base64,${this.personInfo.imageFile.fileInBytes}`;
-    } else {
-      return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-    }
-  }
-
-  setImageFile(image: ImageFile) {
-    this.personInfo.imageFile = image;
-  }
-
+  ngOnInit() { }
   public get canDelete() {
-    return !this.userService.isCurrentUser(this.personInfo.userId);
+    return !this.userService.isCurrentUser(this.personInfo?.userId);
+  }
+  getLocationText(location: LocationModel) {
+    let locationText = '';
+    if (location){
+      if (location.state != null && location.state.length > 0) {
+        locationText += location.state;
+      }
+      if (location.country != null && location.country.length > 0) {
+        if (locationText.length > 0) {
+          locationText += ',';
+        }
+        locationText += location.country;
+      }
+      if (location.city != null && location.city.length > 0) {
+        if (locationText.length > 0) {
+          locationText += ',';
+        }
+        locationText += location.city;
+      }
+    }
+    if(locationText.length == 0){
+      locationText = this.translateService.instant('_common.unknown');
+    }
+    return locationText;
   }
 }

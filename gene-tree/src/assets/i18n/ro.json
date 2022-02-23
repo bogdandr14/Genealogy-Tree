@@ -125,14 +125,14 @@
     "zoroastrianism": "Zoroastrianism",
     "null": "Necunoscută"
   },
-  "_education":{
-    "instituteName":"Numele instituţiei",
-    "enrollmentDay":"Data înscrierii",
-    "graduationDay":"Data absolvirii"
+  "_education": {
+    "instituteName": "Numele instituţiei",
+    "enrollmentDay": "Data înscrierii",
+    "graduationDay": "Data absolvirii"
   },
-  "_occupation":{
-    "occupationName":"Numele ocupaţiei",
-    "workingPlaceName":"Locul de muncă",
+  "_occupation": {
+    "occupationName": "Numele ocupaţiei",
+    "workingPlaceName": "Locul de muncă",
     "firstDay": "Prima zi ",
     "lastDay": "Ultima zi"
   },
@@ -159,7 +159,8 @@
     "submit": "Trimite",
     "confirm": "Confirmă",
     "cancel": "Anulează",
-    "back": "Înapoi"
+    "back": "Înapoi",
+    "unknown": "Necunoscut"
   },
   "_details": {
     "user": "Detalii utilizator",
@@ -174,13 +175,14 @@
     "marriage": "Adaugă căsnicie"
   },
   "_edit": {
+    "person": "Editează persoana",
     "information": "Editează informaţii",
     "locations": "Editează locaţii",
     "contact": "Editează contact"
   },
   "_delete": {
-    "warning":"Această acţiune e permanentă. Eşti sigur(ă) că vrei să ştergi",
-    "confirm":"Confirmă ştergerea",
+    "warning": "Această acţiune e permanentă. Eşti sigur(ă) că vrei să ştergi",
+    "confirm": "Confirmă ştergerea",
     "person": "Şterge persoana"
   },
   "changePicture": "Schimbă poza",

@@ -1,0 +1,16 @@
+.avatar {
+  margin: auto;
+  width: 100% !important;
+  height: 100% !important;
+  width: 150px !important;
+  height: 150px !important;
+  max-width: 150px !important; //any size
+  max-height: 150px !important; //any size
+  position: relative;
+}
+
+.inner {
+  position: absolute;
+  bottom: 0px;
+  right: -10px;
+}

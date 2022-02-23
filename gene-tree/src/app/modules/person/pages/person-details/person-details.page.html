@@ -9,14 +9,6 @@
 
 <ion-content>
   <ion-grid>
-    <ion-button
-      [routerLink]="['/person/list']"
-      expand="block"
-      color="secondary"
-    >
-      <ion-icon name="arrow-undo" slot="start"></ion-icon>
-      {{ "_links.goToRelatives" | translate }}
-    </ion-button>
     <ion-row class="ion-align-item-center">
       <ion-col size-sm="5" offset-sm="1">
         <app-person-info [personInfo]="personDetails"></app-person-info>

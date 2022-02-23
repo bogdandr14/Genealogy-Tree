@@ -87,16 +87,39 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
-            Person personEntity = _mapper.Map<Person>(person);
-            personEntity.Gender = null;
-            personEntity.Nationality = null;
-            personEntity.Religion = null;
-            personEntity.LivingPlace = new Location();
-            personEntity.BirthPlace = new Location();
+            Person personEntity = await addLocations(person);
+            personEntity = removeAttachedEntities(personEntity);
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
             return returnEvent;
+        }
+        private Person removeAttachedEntities(Person personEntity)
+        {
+            personEntity.Gender = null;
+            personEntity.Nationality = null;
+            personEntity.Religion = null;
+            personEntity.BirthPlace = null;
+            personEntity.LivingPlace = null;
+            return personEntity;
+        }
+        private async Task<Person> addLocations(PersonCreateUpdateModel person)
+        {
+            Person personEntity = _mapper.Map<Person>(person);
+
+            if (personEntity.LivingPlace == null)
+            {
+                personEntity.LivingPlace = new Location();
+            }
+            personEntity.LivingPlaceId = (await unitOfWork.Location.Create(personEntity.LivingPlace)).Id;
+
+            if (personEntity.BirthPlace == null)
+            {
+                personEntity.BirthPlace = new Location();
+            }
+            personEntity.BirthPlaceId = (await unitOfWork.Location.Create(personEntity.BirthPlace)).Id;
+            unitOfWork.Location.Dispose();
+            return personEntity;
         }
 
         public async Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person)
@@ -113,6 +136,7 @@ namespace GenealogyTree.Business.Services
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
             return returnEvent;
         }
+
         private async Task updateLocations(PersonCreateUpdateModel person)
         {
             if (person.LivingPlace != null)

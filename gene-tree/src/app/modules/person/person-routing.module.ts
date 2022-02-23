@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'list',
     component: RelativesListPage
   },
+  {
+    path: 'list/:id',
+    component: RelativesListPage
+  },
 ];
 
 @NgModule({

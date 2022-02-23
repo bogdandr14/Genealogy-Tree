@@ -26,17 +26,6 @@ export class RelativesListPage implements OnInit {
       });
   }
 
-  getImageUrl(person: GenericPersonModel): string {
-    if (person && person.imageFile) {
-      return `data:${person.imageFile.mimeType};base64,${person.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
-
-  isCurrentUser(userId) {
-    return this.currentUser.userId === userId;
-  }
-
   // TODO check who is the root of the tree
   isTreeRoot() {}
 }

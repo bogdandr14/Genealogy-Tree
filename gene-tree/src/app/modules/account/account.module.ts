@@ -14,6 +14,7 @@ import { ProfilePage } from './pages/profile/profile.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { PersonModule } from '../person/person.module';
+import { UserModule } from '../user/user.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { PersonModule } from '../person/person.module';
     EducationEditComponent,
     OccupationEditComponent
   ],
-  imports: [SharedModule, AccountRoutingModule, PersonModule],
+  imports: [SharedModule, AccountRoutingModule, PersonModule, UserModule],
   providers: [Clipboard],
 })
 export class AccountModule {}

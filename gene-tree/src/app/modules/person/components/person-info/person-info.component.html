@@ -1,27 +1,36 @@
 <ion-card>
   <ion-card-header class="ion-text-center">
-    <ion-avatar class="avatar">
-      <img [src]="imageUrl" alt="avatar" />
-      <ion-fab-button class="inner" id="open-change-picture" color="success">
-        <ion-icon name="image"></ion-icon>
-      </ion-fab-button>
-      <ion-modal trigger="open-change-picture" [swipeToClose]="true">
-        <ng-template>
-          <app-photo-upload
-            (imageSave)="setImageFile($event)"
-            [personId]="personInfo?.personId"
-          ></app-photo-upload>
-        </ng-template>
-      </ion-modal>
-    </ion-avatar>
-    <ion-item class="ion-text-center">
-      <ion-label text-wrap>
+    <ng-container *ngIf="showHeader; else showTitle">
+      <app-person-avatar
+        [imageFile]="personInfo?.imageFile"
+        [personId]="personInfo?.personId"
+      ></app-person-avatar>
+      <ion-card-title text-wrap>
         <h1>{{ personInfo?.firstName }} {{ personInfo?.lastName }}</h1>
-      </ion-label>
-      <app-link-user-buttons
-        [userId]="personInfo.userId"
-      ></app-link-user-buttons>
-    </ion-item>
+      </ion-card-title>
+      <ion-item lines="none">
+        <ion-buttons slot="start">
+          <ion-button
+            [routerLink]="['/person/list', personInfo?.treeId]"
+            expand="block"
+            color="secondary"
+            slot="start"
+          >
+            <ion-icon name="arrow-undo" slot="start"></ion-icon>
+            {{ "_pages.relatives" | translate }}
+          </ion-button>
+        </ion-buttons>
+        <app-link-user-buttons
+          slot="end"
+          [userId]="personInfo?.userId"
+        ></app-link-user-buttons>
+      </ion-item>
+    </ng-container>
+    <ng-template #showTitle>
+      <ion-card-title>
+        {{ "_person.information" | translate }}
+      </ion-card-title>
+    </ng-template>
   </ion-card-header>
   <ion-card-content>
     <ion-list>
@@ -63,25 +72,17 @@
 
         <ion-item>
           <ion-label text-wrap>{{ "_location.from" | translate }}:</ion-label>
-          <span
-            >{{ personInfo?.birthPlace?.state }},
-            {{ personInfo?.birthPlace?.country }},
-            {{ personInfo?.birthPlace?.city }}</span
-          >
+          <span>{{ getLocationText(personInfo?.birthPlace) }}</span>
         </ion-item>
         <ion-item>
           <ion-label text-wrap>{{ "_location.lives" | translate }}:</ion-label>
-          <span
-            >{{ personInfo?.livingPlace?.state }},
-            {{ personInfo?.livingPlace?.country }},
-            {{ personInfo?.livingPlace?.city }}</span
-          >
+          <span>{{ getLocationText(personInfo?.livingPlace) }}</span>
         </ion-item>
         <ion-button
           expand="block"
           fill="clear"
           color="warning"
-          [routerLink]="['/person/edit/', personInfo.personId]"
+          [routerLink]="['/person/edit/', personInfo?.personId]"
         >
           <ion-icon name="pencil" slot="start"></ion-icon>
           {{ "_edit.information" | translate }}

@@ -1,0 +1,65 @@
+<ion-card>
+  <ion-card-header class="ion-text-center">
+    <app-person-avatar
+      [imageFile]="userInfo?.imageFile"
+      [personId]="userInfo?.personId"
+    ></app-person-avatar>
+    <ion-card-title text-wrap>
+      <h1>{{ userInfo?.firstName }} {{ userInfo?.lastName }}</h1>
+    </ion-card-title>
+    <ion-item lines="none">
+      <ion-buttons slot="start">
+        <ion-button
+          [routerLink]="['/person/list', userInfo?.treeId]"
+          expand="block"
+          color="secondary"
+          slot="start"
+        >
+          <ion-icon name="people" slot="start"></ion-icon>
+          {{ "_pages.relatives" | translate }}
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button
+          [routerLink]="['/person/details', userInfo?.personId]"
+          expand="block"
+          color="secondary"
+          slot="start"
+        >
+          <ion-icon name="reader" slot="start"></ion-icon>
+          {{ "_common.details" | translate }}
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list slot="content">
+      <ion-item>
+        <ion-label>
+          <ion-label>{{ "_user.about" | translate }}:</ion-label>
+        </ion-label>
+        <ion-text> {{ userInfo?.about }} </ion-text>
+        <ion-button fill="clear" color="warning" slot="end">
+          <ion-icon name="pencil" slot="start"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        {{ "_user.email" | translate }}:
+        <ion-chip color="secondary" (click)="copyMail('das@djisa')">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-label>{{ userInfo?.email }} </ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item class="ion-justify-content-start">
+        {{ "_user.phone" | translate }}:
+        <ion-chip color="secondary" (click)="copyPhone('0231789312')">
+          <ion-icon name="call-outline"></ion-icon>
+          <ion-label>{{ userInfo?.phoneNumber }} </ion-label>
+        </ion-chip>
+        <ion-button expand="block" fill="clear" color="warning" slot="end">
+          <ion-icon name="pencil" slot="start"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
