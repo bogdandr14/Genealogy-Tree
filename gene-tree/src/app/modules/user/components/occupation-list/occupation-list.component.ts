@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Guid } from 'guid-typescript';
+import { OccupationService } from 'src/app/modules/shared/services/occupation.service';
 import { OccupationModel } from '../../models/occupation.model';
 
 @Component({
@@ -8,11 +10,19 @@ import { OccupationModel } from '../../models/occupation.model';
 })
 export class OccupationListComponent implements OnInit {
   @Input() occupations: OccupationModel[];
-  @Output() refreshRequested = new EventEmitter();
-  constructor() {}
+  @Input() userId: Guid;
+  @Input() canModify: boolean = false;
+  constructor(
+    private occupationService: OccupationService,
+  ) {}
 
   ngOnInit() {}
+
   refreshOccupation() {
-    this.refreshRequested.emit();
+    this.occupationService
+      .getOccupationsForUser(this.userId)
+      .subscribe((occupations) => {
+        this.occupations = occupations;
+      });
   }
 }

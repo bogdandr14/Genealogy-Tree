@@ -27,11 +27,29 @@
               </ion-label>
             </ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>
-            <ion-button fill="clear" color="warning" slot="start">
+          <ion-card-content *ngIf="canModify">
+            <ion-button
+              [id]="'open-edit-occupation' + occupation.id"
+              fill="clear"
+              color="warning"
+              slot="start"
+            >
               <ion-icon name="pencil" slot="start"></ion-icon>
               {{ "_common.edit" | translate }}
             </ion-button>
+            <ion-modal
+              [trigger]="'open-edit-occupation' + occupation.id"
+              [swipeToClose]="true"
+            >
+              <ng-template>
+                <app-occupation-edit
+                  [isUpdate]="true"
+                  [occupation]="occupation"
+                  (saveConfirmed)="refreshOccupation()"
+                >
+                </app-occupation-edit>
+              </ng-template>
+            </ion-modal>
             <ion-button fill="clear" color="danger" slot="end">
               <ion-icon name="trash" slot="start"></ion-icon>
               {{ "_common.delete" | translate }}
@@ -39,24 +57,26 @@
           </ion-card-content>
         </ion-card>
       </div>
-      <ion-button
-        id="open-create-occupation"
-        expand="block"
-        fill="clear"
-        color="success"
-      >
-        <ion-icon name="add" slot="start"></ion-icon>
-        {{ "_add.occupation" | translate }}
-      </ion-button>
-      <ion-modal trigger="open-create-occupation" [swipeToClose]="true">
-        <ng-template>
-          <app-occupation-edit
-            [isUpdate]="false"
-            (saveConfirmed)="refreshOccupation()"
-          >
-          </app-occupation-edit>
-        </ng-template>
-      </ion-modal>
+      <ng-container *ngIf="canModify">
+        <ion-button
+          id="open-create-occupation"
+          expand="block"
+          fill="clear"
+          color="success"
+        >
+          <ion-icon name="add" slot="start"></ion-icon>
+          {{ "_add.occupation" | translate }}
+        </ion-button>
+        <ion-modal trigger="open-create-occupation" [swipeToClose]="true">
+          <ng-template>
+            <app-occupation-edit
+              [isUpdate]="false"
+              (saveConfirmed)="refreshOccupation()"
+            >
+            </app-occupation-edit>
+          </ng-template>
+        </ion-modal>
+      </ng-container>
     </ion-list>
   </ion-card-content>
 </ion-card>

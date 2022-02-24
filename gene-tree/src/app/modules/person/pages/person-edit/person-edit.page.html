@@ -42,7 +42,7 @@
                         ></ion-input>
                       </ion-item>
                       <app-validation-errors
-                        [model]="bday"
+                        [model]="fname"
                       ></app-validation-errors>
                     </ion-item-group>
 
@@ -64,7 +64,7 @@
                         ></ion-input>
                       </ion-item>
                       <app-validation-errors
-                        [model]="bday"
+                        [model]="lname"
                       ></app-validation-errors>
                     </ion-item-group>
 
@@ -166,87 +166,22 @@
                     </ion-item-group>
 
                     <!-- BIRTHDAY -->
-                    <ion-item-group id="birthday">
-                      <ion-item
-                        color="transparent"
-                        button="true"
-                        id="open-birth-date-input"
-                      >
-                        <ion-label for="bday" position="floating">
-                          <b>
-                            {{ "_person.birthday" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          name="bday"
-                          #bday="ngModel"
-                          [(ngModel)]="selectedBirthDate"
-                          [readonly]="true"
-                          [value]="selectedBirthDate"
-                          placeholder="dd/mm/yyyy"
-                          slot="end"
-                          required
-                        >
-                        </ion-input>
-                        <ion-popover
-                          trigger="open-birth-date-input"
-                          side="top"
-                          alignment="center"
-                        >
-                          <ng-template>
-                            <ion-datetime
-                              #popoverDate
-                              showDefaultButtons
-                              (ionChange)="setBirthday(popoverDate.value)"
-                              presentation="date"
-                            >
-                            </ion-datetime>
-                          </ng-template>
-                        </ion-popover>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="bday"
-                      ></app-validation-errors>
-                    </ion-item-group>
+                    <app-date-select-template
+                      [isRequired]="true"
+                      name="_person.birthday"
+                      [(date)]="personEdit.birthDate"
+                      [id]="personEdit.personId"
+                    >
+                    </app-date-select-template>
 
                     <!-- DEATHDAY -->
-                    <ion-item-group id="deathday">
-                      <ion-item
-                        color="transparent"
-                        button="true"
-                        id="open-death-date-input"
-                      >
-                        <ion-label for="dday" position="floating">
-                          <b> {{ "_person.deathday" | translate }} </b>
-                        </ion-label>
-                        <ion-input
-                          name="dday"
-                          #dday="ngModel"
-                          [(ngModel)]="selectedDeathDate"
-                          [readonly]="true"
-                          [value]="selectedDeathDate"
-                          placeholder="dd/mm/yyyy"
-                          slot="end"
-                        ></ion-input>
-
-                        <ion-popover
-                          trigger="open-death-date-input"
-                          side="top"
-                          alignment="center"
-                        >
-                          <ng-template>
-                            <ion-datetime
-                              #popoverDate
-                              showDefaultButtons
-                              (ionChange)="setDeathday(popoverDate.value)"
-                              presentation="date"
-                            >
-                            </ion-datetime>
-                          </ng-template>
-                        </ion-popover>
-                      </ion-item>
-                    </ion-item-group>
+                    <app-date-select-template
+                      [isRequired]="false"
+                      name="_person.deathday"
+                      [(date)]="personEdit.deathDate"
+                      [id]="personEdit.personId"
+                    >
+                    </app-date-select-template>
                   </ion-card-content>
                 </ion-card>
               </ion-col>
@@ -305,7 +240,7 @@
               class="submit-button"
               color="success"
               expand="block"
-              [disabled]="form.invalid"
+              [disabled]="form.invalid || !personEdit.birthDate"
             >
               <ion-icon name="save" slot="start"></ion-icon>
               {{ "_common.save" | translate }}

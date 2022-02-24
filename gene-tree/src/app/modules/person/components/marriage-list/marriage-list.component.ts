@@ -7,9 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./marriage-list.component.scss'],
 })
 export class MarriageListComponent implements OnInit {
-  @Input() marriages : MarriedPersonModel[];
-  constructor() { }
+  @Input() marriages: MarriedPersonModel[];
+  @Input() canModify: boolean = false;
+  constructor() {}
 
   ngOnInit() {}
-
 }

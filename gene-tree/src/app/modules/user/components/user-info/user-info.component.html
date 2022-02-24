@@ -42,7 +42,7 @@
           readonly
           [rows]="userInfo?.about ? userInfo.about.length / 40 : 1"
           [value]="
-            userInfo?.about.length
+            userInfo?.about?.length
               ? userInfo.about
               : ('_user.noDescription' | translate)
           "
@@ -64,6 +64,7 @@
         </ion-chip>
       </ion-item>
       <ion-button
+        *ngIf="canModify"
         id="open-edit-user"
         expand="block"
         fill="clear"

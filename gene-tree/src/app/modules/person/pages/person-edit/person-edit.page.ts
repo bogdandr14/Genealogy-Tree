@@ -1,5 +1,5 @@
 import { CommonService } from './../../../shared/services/common.service';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, of, Subscription } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -8,7 +8,6 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonEditModel } from '../../models/person/person-edit.model';
 import { PersonService } from '../../services/person.service';
 import { LocationModel } from 'src/app/modules/shared/models/location.model';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-person-edit',
@@ -21,8 +20,6 @@ export class PersonEditPage implements OnInit {
   public genderOptions: CommonObject[] = [];
   public nationalityOptions: CommonObject[] = [];
   public religionOptions: CommonObject[] = [];
-  public selectedBirthDate: string | Date;
-  public selectedDeathDate: string | Date;
 
   private person$: Observable<PersonEditModel>;
   public isUpdate: boolean = false;
@@ -33,9 +30,8 @@ export class PersonEditPage implements OnInit {
     private router: Router,
     private personService: PersonService,
     private commonService: CommonService,
-    private userService: UserService,
-    @Inject(LOCALE_ID) private locale
-  ) { }
+    private userService: UserService
+  ) {}
 
   async ngOnInit() {
     this.initDropdowns();
@@ -60,10 +56,6 @@ export class PersonEditPage implements OnInit {
       if (!this.personEdit.livingPlace) {
         this.personEdit.livingPlace = new LocationModel();
       }
-      this.setBirthday(this.personEdit.birthDate);
-      if (this.personEdit.deathDate) {
-        this.setDeathday(this.personEdit.deathDate);
-      }
     });
   }
 
@@ -86,16 +78,6 @@ export class PersonEditPage implements OnInit {
       .subscribe((religions) => {
         this.religionOptions = religions;
       });
-  }
-
-  setBirthday(date: string | Date) {
-    this.personEdit.birthDate = new Date(date);
-    this.selectedBirthDate = formatDate(date, 'dd/MM/yyyy', this.locale);
-  }
-
-  setDeathday(date: string | Date) {
-    this.personEdit.deathDate = new Date(date);
-    this.selectedDeathDate = formatDate(date, 'dd/MM/yyyy', this.locale);
   }
 
   onSubmit() {

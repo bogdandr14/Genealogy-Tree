@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { DataService } from '../../core/services/data.service';
 import { UserService } from '../../user/services/user.service';
 import { Observable } from 'rxjs';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +15,18 @@ export class OccupationService extends DataService {
     super(httpClient, 'api/occupation', environment.baseApiUrl);
   }
 
-  getOccupationsForUser(userId: number): Observable<OccupationModel[]> {
-    return super.getMany<OccupationModel>(`forUser/${userId}`, DataService.noLoadingConfig);
+  getOccupationsForUser(userId: Guid): Observable<OccupationModel[]> {
+    return super.getMany<OccupationModel>(
+      `forUser/${userId}`,
+      DataService.noLoadingConfig
+    );
   }
 
   getOccupation(occupationId: number): Observable<OccupationModel> {
     return this.getOneById(occupationId, null, DataService.noLoadingConfig);
   }
 
-  updateOccupation(
-    occupation: OccupationModel
-  ): Observable<OccupationModel> {
+  updateOccupation(occupation: OccupationModel): Observable<OccupationModel> {
     return super.update<OccupationModel>(occupation);
   }
 

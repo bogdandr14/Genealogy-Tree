@@ -7,6 +7,7 @@ import { CommonObject } from '../models/common-object';
 import { Observable } from 'rxjs';
 import { EducationModel } from '../../user/models/education.model';
 import { UserService } from '../../user/services/user.service';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +17,9 @@ export class EducationService extends DataService {
     super(httpClient, 'api/education', environment.baseApiUrl);
   }
 
-  getEducationsForPerson(personId: number): Observable<EducationModel[]> {
+  getEducationsForUser(userId: Guid): Observable<EducationModel[]> {
     return super.getMany<EducationModel>(
-      `forPerson/${personId}`,
+      `forUser/${userId}`,
       DataService.noLoadingConfig
     );
   }
@@ -27,9 +28,7 @@ export class EducationService extends DataService {
     return this.getOneById(educationId, null, DataService.noLoadingConfig);
   }
 
-  updateEducation(
-    education: EducationModel
-  ): Observable<EducationModel> {
+  updateEducation(education: EducationModel): Observable<EducationModel> {
     return super.update<EducationModel>(education);
   }
 

@@ -8,6 +8,7 @@
 </ion-header>
 <ion-content>
   <ion-button
+    *ngIf="isUserTree"
     class="ion-margin"
     color="success"
     expand="block"
@@ -16,7 +17,7 @@
     {{ "_add.person" | translate }}
     <ion-icon name="person-add" slot="start"></ion-icon>
   </ion-button>
-  <ion-grid fixed>
+  <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="4" *ngFor="let person of relativesList">
         <app-person-card [person]="person"></app-person-card>

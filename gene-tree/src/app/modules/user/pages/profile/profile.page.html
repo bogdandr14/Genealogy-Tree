@@ -17,19 +17,22 @@
         <app-person-info
           [personInfo]="personalInfo"
           [showHeader]="false"
+          [canModify]="isCurrentUser"
         ></app-person-info>
       </ion-col>
-      <ion-col size-sm="4" offset-sm="1">
+      <ion-col size="12" size-sm="4" offset-sm="1">
         <app-occupation-list
           [occupations]="personalInfo?.occupations"
-          (refreshRequested)="setProfileInfo()"
+          [userId]="personalInfo?.userId"
+          [canModify]="isCurrentUser"
         >
         </app-occupation-list>
       </ion-col>
-      <ion-col size-sm="4" offset-sm="1">
+      <ion-col size="12" size-sm="4" offset-sm="1">
         <app-education-list
           [educations]="personalInfo?.educations"
-          (refreshRequested)="setProfileInfo()"
+          [userId]="personalInfo?.userId"
+          [canModify]="isCurrentUser"
         ></app-education-list>
       </ion-col>
     </ion-row>

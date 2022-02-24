@@ -13,15 +13,8 @@ import { ImageFile } from 'src/app/modules/shared/models/image-file';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  @ViewChild(IonAccordionGroup, { static: true })
-  accordionGroup: IonAccordionGroup;
   personalInfo: AccountProfileModel;
-  public image;
-  constructor(
-    private alertService: AlertService,
-    private userService: UserService,
-    private clipboard: Clipboard
-  ) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.setProfileInfo();
@@ -36,25 +29,7 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  get imageUrl() {
-    if (this.personalInfo && this.personalInfo.imageFile) {
-      return `data:${this.personalInfo.imageFile.mimeType};base64,${this.personalInfo.imageFile.fileInBytes}`;
-    } else {
-      return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-    }
-  }
-
-  setImageFile(image: ImageFile) {
-    this.personalInfo.imageFile = image;
-  }
-
-  copyPhone(info: string) {
-    this.clipboard.copy(info);
-    this.alertService.showInfo('_message._information.phoneCopied');
-  }
-
-  copyMail(info: string) {
-    this.clipboard.copy(info);
-    this.alertService.showInfo('_message._information.emailCopied');
+  get isCurrentUser() {
+    return this.userService.isCurrentUser(this.personalInfo?.userId);
   }
 }

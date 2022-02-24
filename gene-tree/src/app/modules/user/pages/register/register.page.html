@@ -112,49 +112,12 @@
                       [(field)]="registerModel.religionId"
                     ></app-select-template>
 
-                    <ion-item-group id="birthday">
-                      <ion-item
-                        color="transparent"
-                        button="true"
-                        id="open-date-input"
-                      >
-                        <ion-label for="bday" position="floating">
-                          <b>
-                            {{ "_person.birthday" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          name="bday"
-                          #bday="ngModel"
-                          [(ngModel)]="selectedDate"
-                          [readonly]="true"
-                          [value]="selectedDate"
-                          placeholder="dd/mm/yyyy"
-                          slot="end"
-                          required
-                        >
-                        </ion-input>
-                        <ion-popover
-                          trigger="open-date-input"
-                          side="top"
-                          alignment="center"
-                        >
-                          <ng-template>
-                            <ion-datetime
-                              #popoverDate
-                              showDefaultButtons
-                              (ionChange)="setBirthday(popoverDate.value)"
-                              presentation="date"
-                            >
-                            </ion-datetime>
-                          </ng-template>
-                        </ion-popover>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="bday"
-                      ></app-validation-errors>
-                    </ion-item-group>
+                    <app-date-select-template
+                      [isRequired]="true"
+                      name="_person.birthday"
+                      [(date)]="registerModel.birthDate"
+                    >
+                    </app-date-select-template>
                   </ion-card-content>
                 </ion-card>
               </ion-col>
@@ -269,7 +232,7 @@
               class="submit-button"
               color="success"
               expand="block"
-              [disabled]="form.invalid || form.pristine"
+              [disabled]="form.invalid || form.pristine || !registerModel.birthDate"
             >
               {{ "register" | translate }}
             </ion-button>

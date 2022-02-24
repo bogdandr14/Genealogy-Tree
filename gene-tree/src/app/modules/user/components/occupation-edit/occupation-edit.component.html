@@ -27,82 +27,30 @@
           [(field)]="occupation.workingPlaceName"
           name="_occupation.workingPlaceName"
         ></app-input-template>
+
         <!-- START DATE -->
-        <ion-item-group id="startDate">
-          <ion-item
-            color="transparent"
-            button="true"
-            id="open-start-date-input"
-          >
-            <ion-label for="startdate" position="floating">
-              <b>
-                {{ "_occupation.firstDay" | translate }}
-                <span class="required"> *</span>
-              </b>
-            </ion-label>
-            <ion-input
-              name="startdate"
-              #startdate="ngModel"
-              [(ngModel)]="occupation.startDate"
-              [readonly]="true"
-              [value]="selectedStartDate | date"
-              slot="end"
-              required
-            >
-            </ion-input>
-            <ion-popover
-              trigger="open-start-date-input"
-              side="top"
-              alignment="center"
-            >
-              <ng-template>
-                <ion-datetime
-                  #popoverDate
-                  showDefaultButtons
-                  (ionChange)="
-                    selectedStartDate = formatDate(popoverDate.value)
-                  "
-                  presentation="date"
-                >
-                </ion-datetime>
-              </ng-template>
-            </ion-popover>
-          </ion-item>
-        </ion-item-group>
+        <app-date-select-template
+          [isRequired]="true"
+          name="_occupation.firstDay"
+          [(date)]="occupation.startDate"
+          [id]="occupation.id"
+        ></app-date-select-template>
 
         <!-- END DATE -->
-        <ion-item-group id="endDate">
-          <ion-item color="transparent" button="true" id="open-end-date-input">
-            <ion-label for="enddate" position="floating">
-              <b> {{ "_occupation.lastDay" | translate }} </b>
-            </ion-label>
-            <ion-input
-              name="enddate"
-              #enddate="ngModel"
-              [(ngModel)]="occupation.endDate"
-              [readonly]="true"
-              [value]="selectedEndDate | date"
-              slot="end"
-            ></ion-input>
+        <app-date-select-template
+          [isRequired]="false"
+          name="_occupation.lastDay"
+          [(date)]="occupation.endDate"
+          [id]="occupation.id"
+        ></app-date-select-template>
 
-            <ion-popover
-              trigger="open-end-date-input"
-              side="top"
-              alignment="center"
-            >
-              <ng-template>
-                <ion-datetime
-                  #popoverDate
-                  showDefaultButtons
-                  (ionChange)="selectedEndDate = formatDate(popoverDate.value)"
-                  presentation="date"
-                >
-                </ion-datetime>
-              </ng-template>
-            </ion-popover>
-          </ion-item>
-        </ion-item-group>
-        <ion-button fill="solid" color="success" type="submit" expand="block">
+        <ion-button
+          color="success"
+          type="submit"
+          class="submit-button"
+          expand="block"
+          [disabled]="!occupation.startDate"
+        >
           {{ "_common.save" | translate }}
         </ion-button>
       </form>

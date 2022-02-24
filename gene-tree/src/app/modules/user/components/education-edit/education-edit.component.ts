@@ -13,9 +13,7 @@ export class EducationEditComponent implements OnInit {
   @Input() education = new EducationModel();
   @Input() isUpdate = false;
   @Output() saveConfirmed = new EventEmitter<boolean>();
-  public educationLevels: CommonObject[];
-  public selectedStartDate: Date;
-  public selectedEndDate: Date;
+  public educationLevels: CommonObject[] = [];
 
   constructor(
     private modalCtrl: ModalController,
@@ -28,9 +26,6 @@ export class EducationEditComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.education.endDate = new Date(this.education.endDate);
-    this.education.startDate = new Date(this.education.startDate);
-
     if (this.isUpdate) {
       this.educationService.updateEducation(this.education).subscribe(() => {
         this.saveConfirmed.emit(true);
@@ -41,10 +36,6 @@ export class EducationEditComponent implements OnInit {
       });
     }
     this.dismiss();
-  }
-
-  formatDate(date: string): Date {
-    return new Date(date);
   }
 
   dismiss() {

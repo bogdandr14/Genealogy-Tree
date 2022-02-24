@@ -1,5 +1,8 @@
+import { UserService } from 'src/app/modules/user/services/user.service';
+import { EducationService } from './../../../shared/services/education.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EducationModel } from '../../models/education.model';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-education-list',
@@ -8,12 +11,17 @@ import { EducationModel } from '../../models/education.model';
 })
 export class EducationListComponent implements OnInit {
   @Input() educations: EducationModel[];
-  @Output() refreshRequested = new EventEmitter();
-  constructor() {}
+  @Input() userId: Guid;
+  @Input() canModify: boolean = false;
+  constructor(private educationService: EducationService) {}
 
   ngOnInit() {}
 
   refreshEducation() {
-    this.refreshRequested.emit();
+    this.educationService
+      .getEducationsForUser(this.userId)
+      .subscribe((educations) => {
+        this.educations = educations;
+      });
   }
 }

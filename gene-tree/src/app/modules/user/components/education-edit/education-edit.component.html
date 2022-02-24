@@ -20,89 +20,39 @@
           [(field)]="education.educationInstituteName"
           name="_education.instituteName"
         ></app-input-template>
+
         <!-- EDUCATION LEVEL -->
-        <app-select-template *ngIf="educationLevels"
+        <app-select-template
+          *ngIf="educationLevels"
           name="_education.educationLevel"
           optionsPrefix="_educationLevels"
           [options]="educationLevels"
           [(field)]="education.level.id"
         ></app-select-template>
+
         <!-- START DATE -->
-        <ion-item-group id="startDate">
-          <ion-item
-            color="transparent"
-            button="true"
-            id="open-start-date-input"
-          >
-            <ion-label for="startdate" position="floating" stacked>
-              <b>
-                {{ "_education.enrollmentDay" | translate }}
-                <span class="required"> *</span>
-              </b>
-            </ion-label>
-            <ion-input
-              name="startdate"
-              #startdate="ngModel"
-              [(ngModel)]="education.startDate"
-              [readonly]="true"
-              [value]="selectedStartDate | date"
-              slot="end"
-              required
-            >
-            </ion-input>
-            <ion-popover
-              trigger="open-start-date-input"
-              side="top"
-              alignment="center"
-            >
-              <ng-template>
-                <ion-datetime
-                  #popoverDate
-                  showDefaultButtons
-                  (ionChange)="
-                    selectedStartDate = formatDate(popoverDate.value)
-                  "
-                  presentation="date"
-                >
-                </ion-datetime>
-              </ng-template>
-            </ion-popover>
-          </ion-item>
-        </ion-item-group>
+        <app-date-select-template
+          [isRequired]="true"
+          name="_education.enrollmentDay"
+          [(date)]="education.startDate"
+          [id]="education.id"
+        ></app-date-select-template>
 
         <!-- END DATE -->
-        <ion-item-group id="endDate">
-          <ion-item color="transparent" button="true" id="open-end-date-input">
-            <ion-label for="enddate" position="floating">
-              <b> {{ "_education.graduationDay" | translate }} </b>
-            </ion-label>
-            <ion-input
-              name="enddate"
-              #enddate="ngModel"
-              [(ngModel)]="education.endDate"
-              [readonly]="true"
-              [value]="selectedEndDate | date"
-              slot="end"
-            ></ion-input>
+        <app-date-select-template
+          [isRequired]="false"
+          name="_education.graduationDay"
+          [(date)]="education.endDate"
+          [id]="education.id"
+        ></app-date-select-template>
 
-            <ion-popover
-              trigger="open-end-date-input"
-              side="top"
-              alignment="center"
-            >
-              <ng-template>
-                <ion-datetime
-                  #popoverDate
-                  showDefaultButtons
-                  (ionChange)="selectedEndDate = formatDate(popoverDate.value)"
-                  presentation="date"
-                >
-                </ion-datetime>
-              </ng-template>
-            </ion-popover>
-          </ion-item>
-        </ion-item-group>
-        <ion-button fill="solid" color="success" type="submit" expand="block">
+        <ion-button
+          color="success"
+          type="submit"
+          class="submit-button"
+          expand="block"
+          [disabled]="!education.startDate"
+        >
           {{ "_common.save" | translate }}
         </ion-button>
       </form>

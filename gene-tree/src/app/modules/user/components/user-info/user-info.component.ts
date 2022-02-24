@@ -9,9 +9,12 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
   styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent implements OnInit {
- @Input() userInfo: UserDetailsModel;
-  constructor(private alertService: AlertService,
-    private clipboard: Clipboard) { }
+  @Input() userInfo: UserDetailsModel;
+  @Input() canModify: boolean = false;
+  constructor(
+    private alertService: AlertService,
+    private clipboard: Clipboard
+  ) {}
 
   ngOnInit() {}
 

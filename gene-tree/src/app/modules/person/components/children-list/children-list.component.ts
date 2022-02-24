@@ -8,8 +8,8 @@ import { ChildModel } from '../../models/child.model';
 })
 export class ChildrenListComponent implements OnInit {
   @Input() children: ChildModel[];
-  constructor() { }
+  @Input() canModify: boolean = false;
+  constructor() {}
 
   ngOnInit() {}
-
 }

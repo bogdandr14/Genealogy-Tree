@@ -8,8 +8,8 @@ import { ParentModel } from '../../models/parent.model';
 })
 export class ParentsListComponent implements OnInit {
   @Input() parents: ParentModel[];
-  constructor() { }
+  @Input() canModify: boolean = false;
+  constructor() {}
 
   ngOnInit() {}
-
 }

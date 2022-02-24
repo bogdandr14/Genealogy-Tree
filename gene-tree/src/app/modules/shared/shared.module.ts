@@ -12,6 +12,7 @@ import { ValidationErrorsComponent } from './components/validation-errors/valida
 import { SelectTemplateComponent } from './components/select-template/select-template.component';
 import { LinkUserButtonsComponent } from './components/link-user-buttons/link-user-buttons.component';
 import { RouterModule } from '@angular/router';
+import { DateSelectTemplateComponent } from './components/date-select-template/date-select-template.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     InputTemplateComponent,
     SelectTemplateComponent,
     ValidationErrorsComponent,
-    LinkUserButtonsComponent
+    LinkUserButtonsComponent,
+    DateSelectTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { RouterModule } from '@angular/router';
     InputTemplateComponent,
     SelectTemplateComponent,
     ValidationErrorsComponent,
-    LinkUserButtonsComponent
+    LinkUserButtonsComponent,
+    DateSelectTemplateComponent
   ],
 })
 export class SharedModule {}

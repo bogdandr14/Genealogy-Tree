@@ -79,6 +79,7 @@
           <span>{{ getLocationText(personInfo?.livingPlace) }}</span>
         </ion-item>
         <ion-button
+          *ngIf="canModify"
           expand="block"
           fill="clear"
           color="warning"

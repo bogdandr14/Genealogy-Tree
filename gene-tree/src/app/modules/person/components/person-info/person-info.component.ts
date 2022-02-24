@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class PersonInfoComponent implements OnInit {
   @Input() personInfo: PersonEditModel;
   @Input() showHeader = true;
+  @Input() canModify: boolean = false;
   constructor(
     private userService: UserService,
     private translateService: TranslateService
@@ -19,7 +20,9 @@ export class PersonInfoComponent implements OnInit {
 
   ngOnInit() {}
   public get canDelete() {
-    return !this.userService.isCurrentUser(this.personInfo?.userId);
+    return (
+      this.canModify && !this.userService.isCurrentUser(this.personInfo?.userId)
+    );
   }
   getLocationText(location: LocationModel) {
     let locationText = '';

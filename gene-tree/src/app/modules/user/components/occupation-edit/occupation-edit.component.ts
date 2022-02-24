@@ -12,17 +12,13 @@ export class OccupationEditComponent {
   @Input() occupation = new OccupationModel();
   @Input() isUpdate = false;
   @Output() saveConfirmed = new EventEmitter<boolean>();
-  public selectedStartDate: Date;
-  public selectedEndDate: Date;
+
   constructor(
     private modalCtrl: ModalController,
     private occupationService: OccupationService
   ) {}
 
   onSubmit() {
-    this.occupation.endDate = new Date(this.occupation.endDate);
-    this.occupation.startDate = new Date(this.occupation.startDate);
-
     if (this.isUpdate) {
       this.occupationService.updateOccupation(this.occupation).subscribe(() => {
         this.saveConfirmed.emit(true);
@@ -34,10 +30,6 @@ export class OccupationEditComponent {
         this.dismiss();
       });
     }
-  }
-
-  formatDate(date: string): Date {
-    return new Date(date);
   }
 
   dismiss() {

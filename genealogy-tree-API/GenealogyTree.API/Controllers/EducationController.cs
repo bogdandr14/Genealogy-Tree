@@ -22,12 +22,12 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("ForPerson/{personId:Guid}")]
-        public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(Guid personId)
+        [Route("ForUser/{userId:Guid}")]
+        public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(Guid userId)
         {
             try
             {
-                List<EducationModel> returnEvent = _educationService.GetAllEducationsForUser(personId);
+                List<EducationModel> returnEvent = _educationService.GetAllEducationsForUser(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();

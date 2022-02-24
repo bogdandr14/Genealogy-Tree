@@ -12,7 +12,7 @@
           {{ "_common.details" | translate }}
         </ion-button>
       </ion-item>
-      <ion-button expand="block" fill="clear" color="success">
+      <ion-button *ngIf="canModify" expand="block" fill="clear" color="success">
         <ion-icon name="add" slot="start"></ion-icon>
         {{ "_add.parent" | translate }}
       </ion-button>

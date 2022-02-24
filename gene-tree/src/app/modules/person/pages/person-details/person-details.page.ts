@@ -43,10 +43,11 @@ export class PersonDetailsPage implements OnInit {
     });
   }
 
-  public get canDelete() {
-    return !this.userService.isCurrentUser(this.personDetails.userId);
+  public get isUserTree() {
+    return (
+      this.userService.getCurrentUser().treeId === this.personDetails.treeId
+    );
   }
-
   refreshPerson() {
     this.person$.subscribe((person) => {
       this.personDetails = person;
