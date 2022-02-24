@@ -116,11 +116,8 @@ namespace GenealogyTree.Business.Helpers
                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
                .ReverseMap();
             CreateMap<User, UserUpdateModel>()
-                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
                 .ReverseMap();
-            CreateMap<Person, UserUpdateModel>()
-                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
-                .ReverseMap();
+
 
             CreateMap<User, RegisterModel>()
                .ReverseMap();

@@ -20,8 +20,10 @@
     "change": "Schimbă parola"
   },
   "account": "Cont",
+  "accountInfo": "Informații cont",
   "_user": {
-    "about": "Despre",
+    "noDescription": "Nicio descriere adăugată",
+    "description": "Descriere",
     "occupations": "Ocupaţii",
     "educations": "Educaţie",
     "educationLevel": "Nivelul educaţiei",
@@ -188,6 +190,7 @@
     "marriage": "Adaugă căsnicie"
   },
   "_edit": {
+    "user": "Editează profil",
     "person": "Editează persoana",
     "information": "Editează informaţii",
     "locations": "Editează locaţii",

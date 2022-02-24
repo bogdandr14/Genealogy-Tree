@@ -13,10 +13,10 @@
   <form #form="ngForm" (ngSubmit)="onSubmit()">
     <ion-grid>
       <ion-row>
-        <ion-col size="12" size-md="6" offset-sm="3">
+        <ion-col size-md="6" offset-sm="3">
           <ion-card>
             <ion-row>
-              <ion-col size="12" size-md="7" offset-sm="0">
+              <ion-col size-md="7" offset-sm="0">
                 <ion-card>
                   <ion-card-header class="ion-text-center">
                     <ion-card-title>
@@ -172,7 +172,7 @@
                         button="true"
                         id="open-birth-date-input"
                       >
-                        <ion-label for="bday" position="floating" text-wrap>
+                        <ion-label for="bday" position="floating">
                           <b>
                             {{ "_person.birthday" | translate }}
                             <span class="required"> *</span>
@@ -181,9 +181,10 @@
                         <ion-input
                           name="bday"
                           #bday="ngModel"
-                          [(ngModel)]="personEdit.birthDate"
+                          [(ngModel)]="selectedBirthDate"
                           [readonly]="true"
-                          [value]="(selectedBirthDate | date)"
+                          [value]="selectedBirthDate"
+                          placeholder="dd/mm/yyyy"
                           slot="end"
                           required
                         >
@@ -197,7 +198,7 @@
                             <ion-datetime
                               #popoverDate
                               showDefaultButtons
-                              (ionChange)="selectedBirthDate = formatDate(popoverDate.value)"
+                              (ionChange)="setBirthday(popoverDate.value)"
                               presentation="date"
                             >
                             </ion-datetime>
@@ -222,9 +223,10 @@
                         <ion-input
                           name="dday"
                           #dday="ngModel"
-                          [(ngModel)]="personEdit.deathDate"
+                          [(ngModel)]="selectedDeathDate"
                           [readonly]="true"
-                          [value]="(selectedDeathDate | date)"
+                          [value]="selectedDeathDate"
+                          placeholder="dd/mm/yyyy"
                           slot="end"
                         ></ion-input>
 
@@ -237,7 +239,7 @@
                             <ion-datetime
                               #popoverDate
                               showDefaultButtons
-                              (ionChange)="selectedDeathDate = formatDate(popoverDate.value)"
+                              (ionChange)="setDeathday(popoverDate.value)"
                               presentation="date"
                             >
                             </ion-datetime>

@@ -10,7 +10,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 })
 export class UserInfoComponent implements OnInit {
  @Input() userInfo: UserDetailsModel;
-  constructor(    private alertService: AlertService,
+  constructor(private alertService: AlertService,
     private clipboard: Clipboard) { }
 
   ngOnInit() {}

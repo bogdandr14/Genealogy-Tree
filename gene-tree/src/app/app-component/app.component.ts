@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
     public authService: AuthService,
     private storageService: StorageService,
     private translateService: TranslateService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+  ) { }
   ngOnInit(): void {
     this.storageService.darkTheme$.subscribe((theme) => {
       if (theme != null && this.dark != theme) {
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       }
     });
     this.storageService.language$.subscribe((language) => {
-      if(language!=null){
+      if (language != null) {
         this.translateService.use(language);
       }
     });

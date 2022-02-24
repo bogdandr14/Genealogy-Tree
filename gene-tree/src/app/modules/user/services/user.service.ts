@@ -1,3 +1,4 @@
+import { UserEditModel } from './../models/user-edit.model';
 /* eslint-disable no-debugger */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -58,7 +59,7 @@ export class UserService extends DataService {
   }
 
   public getPersonalInfo<UserProfileModel>(): Observable<UserProfileModel> {
-    const path = `info/${this.userState.getValue().username}`;
+    const path = `info/${this.userState.value.username}`;
     return super.getOneByPath<UserProfileModel>(path);
   }
 
@@ -81,6 +82,13 @@ export class UserService extends DataService {
       this.userState.value.userId,
       settings,
       'settings'
+    );
+  }
+
+  public updateUserInfo(userEdit: UserEditModel) {
+    return super.updateById<AccountSettingsModel>(
+      this.userState.value.userId,
+      userEdit
     );
   }
 }

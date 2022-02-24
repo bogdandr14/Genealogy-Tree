@@ -53,12 +53,11 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
-            User userEntity = _mapper.Map<User>(user);
-            userEntity.Id = userId;
-            userEntity.PersonId = userToUpdate.PersonId;
-            userEntity = await unitOfWork.User.Update(userEntity);
+            userToUpdate.About = user.About;
+            userToUpdate.Email = user.Email;
+            userToUpdate.PhoneNumber = user.PhoneNumber;
+            User userEntity = await unitOfWork.User.Update(userToUpdate);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
-            returnEvent.ImageFile = await _fileManagementService.GetFile(userEntity.Person.Image);
             return returnEvent;
         }
 

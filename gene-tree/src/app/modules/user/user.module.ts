@@ -18,6 +18,7 @@ import { SettingsPage } from './pages/settings/settings.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { OccupationListComponent } from './components/occupation-list/occupation-list.component';
 import { EducationListComponent } from './components/education-list/education-list.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EducationListComponent } from './components/education-list/education-li
     UserSearchComponent,
     UserInfoComponent,
     OccupationListComponent,
-    EducationListComponent
+    EducationListComponent,
+    UserEditComponent
   ],
   imports: [SharedModule, UserRoutingModule, PersonModule],
   exports: [UserInfoComponent],

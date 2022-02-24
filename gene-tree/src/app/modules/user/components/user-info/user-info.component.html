@@ -35,14 +35,19 @@
   <ion-card-content>
     <ion-list slot="content">
       <ion-item>
-        <ion-label>
-          <ion-label>{{ "_user.about" | translate }}:</ion-label>
-        </ion-label>
-        <ion-text> {{ userInfo?.about }} </ion-text>
-        <ion-button fill="clear" color="warning" slot="end">
-          <ion-icon name="pencil" slot="start"></ion-icon>
-          {{ "_common.edit" | translate }}
-        </ion-button>
+        <ion-label>{{ "_user.description" | translate }}:</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-textarea
+          readonly
+          [rows]="userInfo?.about ? userInfo.about.length / 40 : 1"
+          [value]="
+            userInfo?.about.length
+              ? userInfo.about
+              : ('_user.noDescription' | translate)
+          "
+        >
+        </ion-textarea>
       </ion-item>
       <ion-item>
         {{ "_user.email" | translate }}:
@@ -57,11 +62,21 @@
           <ion-icon name="call-outline"></ion-icon>
           <ion-label>{{ userInfo?.phoneNumber }} </ion-label>
         </ion-chip>
-        <ion-button expand="block" fill="clear" color="warning" slot="end">
-          <ion-icon name="pencil" slot="start"></ion-icon>
-          {{ "_common.edit" | translate }}
-        </ion-button>
       </ion-item>
+      <ion-button
+        id="open-edit-user"
+        expand="block"
+        fill="clear"
+        color="warning"
+      >
+        <ion-icon name="pencil" slot="start"></ion-icon>
+        {{ "_common.edit" | translate }}
+      </ion-button>
+      <ion-modal trigger="open-edit-user" [swipeToClose]="true">
+        <ng-template>
+          <app-user-edit [userEdit]="userInfo"> </app-user-edit>
+        </ng-template>
+      </ion-modal>
     </ion-list>
   </ion-card-content>
 </ion-card>

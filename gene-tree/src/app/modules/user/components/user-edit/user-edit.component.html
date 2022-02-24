@@ -1,0 +1,58 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{ "_edit.user" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">{{
+        "_common.cancel" | translate
+      }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form #form="ngForm" (ngSubmit)="submitInfo()">
+        <ion-item>
+          <ion-label for="about" position="floating">
+            {{ "_user.description" | translate }}
+          </ion-label>
+          <ion-textarea
+            rows="6"
+            cols="20"
+            name="about"
+            #about="ngModel"
+            [(ngModel)]="userEdit.about"
+          ></ion-textarea>
+        </ion-item>
+        <ion-item-group id="email">
+          <ion-item color="transparent">
+            <ion-label for="email" position="floating">
+              <b>
+                {{ "_user.emailAddress" | translate }}
+                <span class="required"> *</span>
+              </b>
+            </ion-label>
+            <ion-input
+              type="text"
+              name="email"
+              #email="ngModel"
+              [(ngModel)]="userEdit.email"
+              emailCheck
+              required
+            ></ion-input>
+          </ion-item>
+          <app-validation-errors [model]="email"></app-validation-errors>
+        </ion-item-group>
+
+        <app-input-template
+          id="phone"
+          [(field)]="userEdit.phoneNumber"
+          name="_user.phone"
+        ></app-input-template>
+        <ion-button fill="solid" color="success" type="submit" expand="block">
+          {{ "_common.save" | translate }}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -8,76 +8,78 @@
 </ion-header>
 
 <ion-content class="content">
-  <ion-row class="ion-align-item-center">
-    <ion-col size-sm="4" offset-sm="4">
-      <ion-card>
-        <ion-card-content>
-          <form #form="ngForm" (ngSubmit)="onLogin()">
-            <ion-item-group id="username">
-              <ion-item color="transparent">
-                <ion-label for="uname" position="floating">
-                  <b>
-                    {{ "username" | translate }}
-                    <span class="required"> *</span>
-                  </b>
-                </ion-label>
-                <ion-input
-                  type="text"
-                  name="username"
-                  #uname="ngModel"
-                  [(ngModel)]="loginModel.username"
-                  required
-                ></ion-input>
-              </ion-item>
-              <app-validation-errors [model]="uname"></app-validation-errors>
-            </ion-item-group>
+  <ion-grid>
+    <ion-row class="absolute-center">
+      <ion-col size-sm="4" offset-sm="4">
+        <ion-card>
+          <ion-card-content>
+            <form #form="ngForm" (ngSubmit)="onLogin()">
+              <ion-item-group id="username">
+                <ion-item color="transparent">
+                  <ion-label for="uname" position="floating">
+                    <b>
+                      {{ "username" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="username"
+                    #uname="ngModel"
+                    [(ngModel)]="loginModel.username"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <app-validation-errors [model]="uname"></app-validation-errors>
+              </ion-item-group>
 
-            <ion-item-group id="password">
-              <ion-item color="transparent">
-                <ion-label for="psw" position="floating">
-                  <b>
-                    {{ "password" | translate }}
-                    <span class="required"> *</span>
-                  </b>
-                </ion-label>
-                <ion-input
-                  type="password"
-                  name="psw"
-                  #psw="ngModel"
-                  [(ngModel)]="loginModel.password"
-                  minlength="8"
-                  required
-                ></ion-input>
-              </ion-item>
-              <app-validation-errors
-                [model]="psw"
-                [number]="8"
-              ></app-validation-errors>
-            </ion-item-group>
+              <ion-item-group id="password">
+                <ion-item color="transparent">
+                  <ion-label for="psw" position="floating">
+                    <b>
+                      {{ "password" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    type="password"
+                    name="psw"
+                    #psw="ngModel"
+                    [(ngModel)]="loginModel.password"
+                    minlength="8"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <app-validation-errors
+                  [model]="psw"
+                  [number]="8"
+                ></app-validation-errors>
+              </ion-item-group>
 
+              <ion-button
+                type="submit"
+                class="submit-button"
+                color="success"
+                expand="block"
+                [disabled]="form.invalid || form.pristine"
+              >
+                {{ "login" | translate }}
+              </ion-button>
+            </form>
             <ion-button
-              type="submit"
-              class="submit-button"
-              color="success"
+              type="button"
+              color="secondary"
+              fill="clear"
               expand="block"
-              [disabled]="form.invalid || form.pristine"
+              [routerLink]="['/user/register']"
+              routerLinkActive="selected"
+              routerDirection="root"
             >
-              {{ "login" | translate }}
+              {{ "_links.registerHere" | translate }}
             </ion-button>
-          </form>
-          <ion-button
-            type="button"
-            color="secondary"
-            fill="clear"
-            expand="block"
-            [routerLink]="['/user/register']"
-            routerLinkActive="selected"
-            routerDirection="root"
-          >
-            {{ "_links.registerHere" | translate }}
-          </ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -3,7 +3,7 @@ using System;
 
 namespace GenealogyTree.Domain.DTO.User
 {
-    public class UserUpdateModel : PersonCreateUpdateModel
+    public class UserUpdateModel
     {
         public string About { get; set; }
         public string Email { get; set; }

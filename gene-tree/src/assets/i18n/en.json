@@ -20,8 +20,10 @@
     "change": "Change password"
   },
   "account": "Account",
+  "accountInfo": "Account information",
   "_user": {
-    "about": "About",
+    "noDescription": "No description added",
+    "description": "Description",
     "occupations": "Ocupations",
     "educations": "Educations",
     "educationLevel": "Education level",
@@ -188,6 +190,7 @@
     "marriage": "Add marriage"
   },
   "_edit": {
+    "user": "Edit profile",
     "person": "Edit person",
     "information": "Edit information",
     "locations": "Edit locations",

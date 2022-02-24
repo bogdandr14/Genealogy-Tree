@@ -2,11 +2,12 @@ import { CommonService } from './../../../shared/services/common.service';
 import { AlertService } from './../../../core/services/alert.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { CommonObject } from './../../../shared/models/common-object';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { first, takeUntil } from 'rxjs/operators';
 import { RegisterModel } from '../../models/register.model';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { RegisterModel } from '../../models/register.model';
 export class RegisterPage implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   public registerModel = new RegisterModel();
-  public selectedDate: Date;
+  public selectedDate: string | Date;
   public genderOptions: CommonObject[] = [];
   public nationalityOptions: CommonObject[] = [];
   public religionOptions: CommonObject[] = [];
@@ -25,8 +26,9 @@ export class RegisterPage implements OnInit, OnDestroy {
     private authService: AuthService,
     private commonService: CommonService,
     private alertService: AlertService,
-    private router: Router
-  ) {}
+    private router: Router,
+    @Inject(LOCALE_ID) private locale
+  ) { }
 
   ngOnInit(): void {
 
@@ -47,8 +49,9 @@ export class RegisterPage implements OnInit, OnDestroy {
       });
   }
 
-  formatDate(date: string): Date {
-    return new Date(date);
+  setBirthday(date: string) {
+    this.registerModel.birthDate = new Date(date);
+    this.selectedDate = formatDate(date, 'dd/MM/yyyy', this.locale);
   }
 
   ngOnDestroy(): void {
@@ -65,7 +68,6 @@ export class RegisterPage implements OnInit, OnDestroy {
   }
 
   public onRegister(): void {
-    this.registerModel.birthDate = new Date(this.registerModel.birthDate);
     this.authService
       .register(this.registerModel)
       .pipe(first())
