@@ -128,7 +128,18 @@
   "_education": {
     "instituteName": "Numele instituţiei",
     "enrollmentDay": "Data înscrierii",
-    "graduationDay": "Data absolvirii"
+    "graduationDay": "Data absolvirii",
+    "educationLevel": "Nivelul educaţiei"
+  },
+  "_educationlevels": {
+    "kindergarten": "Grădiniţă",
+    "primary": "Primară",
+    "gymnasium": "Gimnaziu",
+    "highscool": "Liceu",
+    "postsecondary": "Postliceală",
+    "faculty": "Facultate",
+    "masters": "Master",
+    "doctorate": "Doctorat"
   },
   "_occupation": {
     "occupationName": "Numele ocupaţiei",
@@ -160,7 +171,9 @@
     "confirm": "Confirmă",
     "cancel": "Anulează",
     "back": "Înapoi",
-    "unknown": "Necunoscut"
+    "unknown": "Necunoscut",
+    "at": "la",
+    "present": "prezent"
   },
   "_details": {
     "user": "Detalii utilizator",

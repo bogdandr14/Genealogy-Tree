@@ -1,3 +1,6 @@
+import { ChildrenListComponent } from './components/children-list/children-list.component';
+import { ParentsListComponent } from './components/parents-list/parents-list.component';
+import { MarriageListComponent } from './components/marriage-list/marriage-list.component';
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonInfoComponent } from './components/person-info/person-info.component';
 import { PersonDeleteComponent } from './components/person-delete/person-delete.component';
@@ -23,7 +26,10 @@ import { PersonAvatarComponent } from './components/person-avatar/person-avatar.
     PersonDeleteComponent,
     PersonInfoComponent,
     PersonAvatarComponent,
-    PersonCardComponent
+    PersonCardComponent,
+    MarriageListComponent,
+    ParentsListComponent,
+    ChildrenListComponent
   ],
   imports: [SharedModule, PersonRoutingModule],
   exports:[

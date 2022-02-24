@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AccountSettingsModel } from '../../account/models/account-settings.model';
+import { AccountSettingsModel } from '../../user/models/account-settings.model';
 import { CurrentUserModel } from '../models/current-user.model';
 import { Storage } from '@ionic/storage-angular';
 

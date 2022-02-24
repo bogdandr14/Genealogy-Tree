@@ -130,7 +130,7 @@ namespace GenealogyTree.Business.Services
             }
             Person personEntity = _mapper.Map<Person>(person);
             await updateLocations(person);
-            personEntity.ImageId = person.ImageFile.Id;
+
             personEntity = await unitOfWork.Person.Update(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);

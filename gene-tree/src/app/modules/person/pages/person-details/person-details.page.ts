@@ -43,19 +43,8 @@ export class PersonDetailsPage implements OnInit {
     });
   }
 
-  get imageUrl() {
-    if (this.personDetails && this.personDetails.imageFile) {
-      return `data:${this.personDetails.imageFile.mimeType};base64,${this.personDetails.imageFile.fileInBytes}`;
-    } else {
-      return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-    }
-  }
   public get canDelete() {
     return !this.userService.isCurrentUser(this.personDetails.userId);
-  }
-
-  setImageFile(image: ImageFile) {
-    this.personDetails.imageFile = image;
   }
 
   refreshPerson() {

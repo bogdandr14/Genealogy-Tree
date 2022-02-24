@@ -15,87 +15,18 @@
       </ion-col>
 
       <ion-col size-sm="4" offset-sm="1">
-        <ion-card>
-          <ion-card-header class="ion-text-center">
-            <ion-card-title>
-              {{ "_person.parents" | translate }}
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list slot="content">
-              <ion-item *ngFor="let parent of personDetails.parents">
-                <ion-label>{{ parent.parent.firstName }}</ion-label>
-                <ion-button fill="clear" color="secondary">
-                  {{ "_common.details" | translate }}
-                </ion-button>
-              </ion-item>
-              <ion-button expand="block" fill="clear" color="success">
-                <ion-icon name="add" slot="start"></ion-icon>
-                {{ "_add.parent" | translate }}
-              </ion-button>
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
+        <app-parents-list [parents]="personDetails?.parents">
+        </app-parents-list>
 
-        <ion-card>
-          <ion-card-header class="ion-text-center">
-            <ion-card-title>
-              {{ "_person.children" | translate }}
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list slot="content">
-              <ion-item *ngFor="let child of personDetails.children">
-                <ion-label>{{ child.child.firstName }}</ion-label>
-                <ion-button fill="clear" color="secondary">
-                  {{ "_common.details" | translate }}
-                </ion-button>
-              </ion-item>
-              <ion-button expand="block" fill="clear" color="success">
-                <ion-icon name="add" slot="start"></ion-icon>
-                {{ "_add.child" | translate }}
-              </ion-button>
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
+        <app-children-list [children]="personDetails?.children">
+        </app-children-list>
 
-        <ion-card>
-          <ion-card-header class="ion-text-center">
-            <ion-card-title>
-              {{ "_person.marriages" | translate }}
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list slot="content">
-              <ion-item *ngFor="let marriages of personDetails.marriages">
-                <ion-label>{{ marriages.secondPerson.firstName }}</ion-label>
-                <ion-button fill="clear" color="secondary">
-                  {{ "_common.details" | translate }}
-                </ion-button>
-              </ion-item>
-              <ion-button expand="block" fill="clear" color="success">
-                <ion-icon name="add" slot="start"></ion-icon>
-                {{ "_add.marriage" | translate }}
-              </ion-button>
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
+        <app-marriage-list [marriages]="personDetails?.marriages">
+        </app-marriage-list>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-
-<!-- <ion-modal trigger="open-location-edit" [swipeToClose]="true">
-  <ng-template>
-    <app-location-edit
-      #editLocation
-      title="_location.from"
-      [(location)]="personDetails.birthPlace"
-    >
-    </app-location-edit>
-
-  </ng-template>
-</ion-modal> -->
 
 <ion-modal trigger="open-delete-person" [swipeToClose]="true">
   <ng-template>

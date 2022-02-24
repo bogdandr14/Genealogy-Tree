@@ -9,9 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PersonAvatarComponent implements OnInit {
   @Input() imageFile: ImageFile;
   @Input() personId: number;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
   get imageUrl() {
     if (this.imageFile) {
       return `data:${this.imageFile.mimeType};base64,${this.imageFile.fileInBytes}`;

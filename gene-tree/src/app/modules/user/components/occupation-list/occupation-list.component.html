@@ -1,0 +1,62 @@
+<ion-card>
+  <ion-card-header class="ion-text-center">
+    <ion-card-title>
+      {{ "_user.occupations" | translate }}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list slot="content">
+      <div *ngIf="occupations">
+        <ion-card *ngFor="let occupation of occupations">
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>
+              <ion-label>
+                {{ occupation.occupationName }}
+                {{ "_common.at" | translate }}
+                {{ occupation.workingPlaceName }}
+              </ion-label>
+            </ion-card-title>
+            <ion-card-subtitle>
+              <ion-label>
+                {{ occupation.startDate | date: "dd/MM/yyyy" }} -
+                {{
+                  occupation.endDate
+                    ? (occupation.endDate | date: "dd/MM/yyyy")
+                    : ("_common.present" | translate)
+                }}
+              </ion-label>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button fill="clear" color="warning" slot="start">
+              <ion-icon name="pencil" slot="start"></ion-icon>
+              {{ "_common.edit" | translate }}
+            </ion-button>
+            <ion-button fill="clear" color="danger" slot="end">
+              <ion-icon name="trash" slot="start"></ion-icon>
+              {{ "_common.delete" | translate }}
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <ion-button
+        id="open-create-occupation"
+        expand="block"
+        fill="clear"
+        color="success"
+      >
+        <ion-icon name="add" slot="start"></ion-icon>
+        {{ "_add.occupation" | translate }}
+      </ion-button>
+      <ion-modal trigger="open-create-occupation" [swipeToClose]="true">
+        <ng-template>
+          <app-occupation-edit
+            [isUpdate]="false"
+            (saveConfirmed)="refreshOccupation()"
+          >
+          </app-occupation-edit>
+        </ng-template>
+      </ion-modal>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

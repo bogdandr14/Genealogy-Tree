@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { ChangePasswordModel } from '../../account/models/change-password.model';
-import { LoginModel } from '../../account/models/login.model';
-import { RegisterModel } from '../../account/models/register.model';
+import { ChangePasswordModel } from '../../user/models/change-password.model';
+import { LoginModel } from '../../user/models/login.model';
+import { RegisterModel } from '../../user/models/register.model';
+
 import { LoginResponseModel } from '../models/login-response.model';
 import { DataService } from './data.service';
 import { StorageService } from './storage.service';
@@ -59,7 +60,7 @@ export class AuthService extends DataService {
     this.storageService.removeJWT();
     this.storageService.removeUser();
     this.storageService.removePreferences();
-    this.router.navigate(['account', 'login']);
+    this.router.navigate(['user', 'login']);
   }
 
   public isLoggedIn(): boolean {

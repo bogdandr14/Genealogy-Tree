@@ -11,6 +11,6 @@ namespace GenealogyTree.Domain.DTO.Person
 
         public LocationModel BirthPlace { get; set; }
         public LocationModel LivingPlace { get; set; }
-
+        public int? ImageId { get; set; }
     }
 }

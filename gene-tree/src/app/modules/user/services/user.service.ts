@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AccountSettingsModel } from '../../account/models/account-settings.model';
+import { AccountSettingsModel } from '../models/account-settings.model';
 import { CurrentUserModel } from '../../core/models/current-user.model';
 import { DataService } from '../../core/services/data.service';
 import { StorageService } from '../../core/services/storage.service';

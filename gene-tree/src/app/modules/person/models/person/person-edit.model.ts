@@ -12,4 +12,5 @@ export class PersonEditModel extends GenericPersonModel {
   religion: CommonObject;
   birthPlace: LocationModel;
   livingPlace: LocationModel;
+  imageId: number;
 }

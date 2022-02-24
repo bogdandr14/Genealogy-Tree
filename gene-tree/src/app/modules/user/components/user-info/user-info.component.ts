@@ -1,7 +1,6 @@
 import { UserDetailsModel } from './../../models/user-details.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
-import { UserService } from '../../services/user.service';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({

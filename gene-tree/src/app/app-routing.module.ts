@@ -5,7 +5,7 @@ import { AuthGuard } from './modules/core/guards/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    loadChildren: () => import('./modules/home/home.module').then( m => m.HomePageModule),
     canActivate:[AuthGuard]
   },
   {
@@ -14,15 +14,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'account',
-    loadChildren: () =>
-      import('./modules/account/account.module').then((m) => m.AccountModule),
-  },
-  {
     path: 'user',
     loadChildren: () =>
       import('./modules/user/user.module').then((m) => m.UserModule),
-    canActivate: [AuthGuard],
   },
   {
     path: 'person',

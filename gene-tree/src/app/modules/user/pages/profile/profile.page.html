@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'_pages.profile' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top ion-text-center">
+  <ion-grid>
+    <ion-row class="ion-align-item-center">
+      <ion-col size-sm="4" offset-sm="1">
+        <app-user-info [userInfo]="personalInfo"></app-user-info>
+      </ion-col>
+      <ion-col size-sm="4" offset-sm="1">
+        <app-person-info
+          [personInfo]="personalInfo"
+          [showHeader]="false"
+        ></app-person-info>
+      </ion-col>
+      <ion-col size-sm="4" offset-sm="1">
+        <app-occupation-list
+          [occupations]="personalInfo?.occupations"
+          (refreshRequested)="setProfileInfo()"
+        >
+        </app-occupation-list>
+      </ion-col>
+      <ion-col size-sm="4" offset-sm="1">
+        <app-education-list
+          [educations]="personalInfo?.educations"
+          (refreshRequested)="setProfileInfo()"
+        ></app-education-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

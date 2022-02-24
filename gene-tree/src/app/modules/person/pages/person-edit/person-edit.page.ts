@@ -91,6 +91,9 @@ export class PersonEditPage implements OnInit {
     if (this.personEdit.deathDate) {
       this.personEdit.deathDate = new Date(this.personEdit.deathDate);
     }
+    if(this.personEdit.imageFile){
+      this.personEdit.imageId = this.personEdit.imageFile.id;
+    }
 
     if (this.isUpdate) {
       personUpdated = this.personService

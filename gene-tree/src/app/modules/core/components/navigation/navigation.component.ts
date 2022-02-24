@@ -19,7 +19,7 @@ export class NavigationComponent {
       },
       {
         title: '_pages.profile',
-        path: '/account/profile',
+        path: '/user/profile',
         icon: 'person',
       },
       {
@@ -29,7 +29,7 @@ export class NavigationComponent {
       },
       {
         title: '_pages.settings',
-        path: '/account/settings',
+        path: '/user/settings',
         icon: 'settings',
       },
     ];

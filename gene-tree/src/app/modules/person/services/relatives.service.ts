@@ -1,4 +1,4 @@
-import { PersonBaseModel } from './../models/person/person-base.model';
+import { GenericPersonModel } from './../models/person/generic-person.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -30,8 +30,8 @@ export class RelativesService extends DataService {
   public getDescendants(personId: number): Observable<any> {
     return super.getMany<ChildModel[]>(`descendants/${personId}`);
   }
-  public getUnrelatedPeople(personId: number): Observable<PersonBaseModel[]> {
-    return super.getMany<PersonBaseModel>(
+  public getUnrelatedPeople(personId: number): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(
       `unrelated/${personId}`,
       DataService.noLoadingConfig
     );
