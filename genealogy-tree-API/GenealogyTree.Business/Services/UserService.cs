@@ -40,6 +40,7 @@ namespace GenealogyTree.Business.Services
                             .Include(u => u.Person.BirthPlace)
                             .Include(u => u.Person.Image)
                             .Include(u => u.Educations)
+                            .ThenInclude(e => e.EducationLevel)
                             .Include(u => u.Occupations).FirstOrDefault();
             UserDetailsModel userEntity = _mapper.Map<UserDetailsModel>(user);
             userEntity.ImageFile = await _fileManagementService.GetFile(user.Person.Image);

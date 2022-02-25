@@ -11,7 +11,10 @@
           <ion-card-header>
             <ion-card-title>
               <ion-label>
-                {{ education.level }}
+                {{
+                  "_educationlevels." +
+                    (education.educationLevel.name | lowercase) | translate
+                }}
                 {{ "_common.at" | translate }}
                 {{ education.educationInstituteName }}
               </ion-label>

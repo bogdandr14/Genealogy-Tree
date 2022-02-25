@@ -16,7 +16,7 @@ export class OccupationEditComponent {
   constructor(
     private modalCtrl: ModalController,
     private occupationService: OccupationService
-  ) {}
+  ) { }
 
   onSubmit() {
     if (this.isUpdate) {

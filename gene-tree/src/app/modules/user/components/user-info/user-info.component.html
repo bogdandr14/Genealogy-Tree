@@ -63,21 +63,22 @@
           <ion-label>{{ userInfo?.phoneNumber }} </ion-label>
         </ion-chip>
       </ion-item>
-      <ion-button
-        *ngIf="canModify"
-        id="open-edit-user"
-        expand="block"
-        fill="clear"
-        color="warning"
-      >
-        <ion-icon name="pencil" slot="start"></ion-icon>
-        {{ "_common.edit" | translate }}
-      </ion-button>
-      <ion-modal trigger="open-edit-user" [swipeToClose]="true">
-        <ng-template>
-          <app-user-edit [userEdit]="userInfo"> </app-user-edit>
-        </ng-template>
-      </ion-modal>
+      <ng-container *ngIf="canModify">
+        <ion-button
+          id="open-edit-user"
+          expand="block"
+          fill="clear"
+          color="warning"
+        >
+          <ion-icon name="pencil" slot="start"></ion-icon>
+          {{ "_common.edit" | translate }}
+        </ion-button>
+        <ion-modal trigger="open-edit-user" [swipeToClose]="true">
+          <ng-template>
+            <app-user-edit [userEdit]="userInfo"> </app-user-edit>
+          </ng-template>
+        </ion-modal>
+      </ng-container>
     </ion-list>
   </ion-card-content>
 </ion-card>

@@ -191,6 +191,8 @@
   },
   "_edit": {
     "user": "Edit profile",
+    "occupation": "Edit occupation",
+    "education": "Edit education",
     "person": "Edit person",
     "information": "Edit information",
     "locations": "Edit locations",

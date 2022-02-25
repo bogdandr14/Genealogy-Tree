@@ -23,11 +23,11 @@
 
         <!-- EDUCATION LEVEL -->
         <app-select-template
-          *ngIf="educationLevels"
+          *ngIf="education.educationLevel"
           name="_education.educationLevel"
           optionsPrefix="_educationLevels"
           [options]="educationLevels"
-          [(field)]="education.level.id"
+          [(field)]="education.educationLevel.id"
         ></app-select-template>
 
         <!-- START DATE -->

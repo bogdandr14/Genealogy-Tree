@@ -191,6 +191,8 @@
   },
   "_edit": {
     "user": "Editează profil",
+    "occupation": "Editează ocupație",
+    "education": "Editează educație",
     "person": "Editează persoana",
     "information": "Editează informaţii",
     "locations": "Editează locaţii",

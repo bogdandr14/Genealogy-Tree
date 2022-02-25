@@ -10,11 +10,20 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./education-edit.component.scss'],
 })
 export class EducationEditComponent implements OnInit {
-  @Input() education = new EducationModel();
+  @Input() set education(education: EducationModel){
+    this._education = education;
+    if(!this._education.educationLevel){
+      this._education.educationLevel = new CommonObject();
+    }
+  };
   @Input() isUpdate = false;
   @Output() saveConfirmed = new EventEmitter<boolean>();
-  public educationLevels: CommonObject[] = [];
+  public educationLevels: CommonObject[];
 
+  get education(){
+    return this._education;
+  }
+  private _education = new EducationModel();
   constructor(
     private modalCtrl: ModalController,
     private educationService: EducationService

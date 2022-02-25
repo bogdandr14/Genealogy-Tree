@@ -4,12 +4,12 @@ import { EducationLevelEnum } from "./education-level.enum";
 
 export class EducationModel {
   constructor(){
-    this.level = new CommonObject();
+    this.educationLevel = new CommonObject();
   }
   id: number;
   userId: Guid;
   educationInstituteName: string;
-  level: CommonObject;
+  educationLevel: CommonObject;
   startDate?: Date;
   endDate?: Date;
 }

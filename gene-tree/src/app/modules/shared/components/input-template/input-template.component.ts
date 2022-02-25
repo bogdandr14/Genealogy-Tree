@@ -6,11 +6,12 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   templateUrl: './input-template.component.html',
   styleUrls: ['./input-template.component.scss'],
   providers: [
-    {       provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputTemplateComponent),
-            multi: true
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputTemplateComponent),
+      multi: true
     }
-    ]
+  ]
 })
 export class InputTemplateComponent implements OnInit {
   @Input() name: string;
@@ -21,14 +22,13 @@ export class InputTemplateComponent implements OnInit {
   @Output() fieldChange = new EventEmitter();
   @Input() set field(val: any) {
     this.fieldChange.emit(val);
-    console.log("🚀 ~ file: input-template.component.ts ~ line 24 ~ InputTemplateComponent ~ @Input ~ val", val)
     this._field = val;
   }
   get field() {
     return this._field;
   }
   private _field: boolean;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

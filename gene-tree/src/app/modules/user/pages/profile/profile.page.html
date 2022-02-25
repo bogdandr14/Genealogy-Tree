@@ -11,7 +11,10 @@
   <ion-grid>
     <ion-row class="ion-align-item-center">
       <ion-col size-sm="4" offset-sm="1">
-        <app-user-info [userInfo]="personalInfo"></app-user-info>
+        <app-user-info
+          [userInfo]="personalInfo"
+          [canModify]="isCurrentUser"
+        ></app-user-info>
       </ion-col>
       <ion-col size-sm="4" offset-sm="1">
         <app-person-info
