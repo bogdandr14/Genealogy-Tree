@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AppError } from '../models/errors/app-error';
 
@@ -7,8 +7,33 @@ import { AppError } from '../models/errors/app-error';
 export class AlertService {
   constructor(
     private injector: Injector,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private alertController: AlertController
   ) {}
+
+  async presentAlert(
+    header: string,
+    message: string,
+    cancelButtonName: string,
+    confirmButtonName: string,
+    context: object,
+    confirmAction: () => {}
+  ) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: cancelButtonName,
+          role: 'cancel'
+        }, {
+          text: confirmButtonName,
+          handler: confirmAction.bind(context)
+        }
+      ]
+    });
+    await alert.present();
+  }
 
   public async showSuccess(success: any) {
     const toast = await this.createToast(

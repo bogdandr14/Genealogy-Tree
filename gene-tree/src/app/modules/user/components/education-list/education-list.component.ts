@@ -1,3 +1,5 @@
+import { TranslateService } from '@ngx-translate/core';
+import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { EducationService } from './../../../shared/services/education.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -13,7 +15,12 @@ export class EducationListComponent implements OnInit {
   @Input() educations: EducationModel[];
   @Input() userId: Guid;
   @Input() canModify: boolean = false;
-  constructor(private educationService: EducationService) {}
+  private educationToDelete: EducationModel;
+  constructor(
+    private educationService: EducationService,
+    private alertService: AlertService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit() {}
 
@@ -22,6 +29,30 @@ export class EducationListComponent implements OnInit {
       .getEducationsForUser(this.userId)
       .subscribe((educations) => {
         this.educations = educations;
+      });
+  }
+
+  async confirmDeleteEducation(education: EducationModel) {
+    this.educationToDelete = education;
+    await this.alertService.presentAlert(
+      this.translateService.instant('_delete.education'),
+      this.translateService.instant('_delete.educationMessage', {
+        instituteName: education.educationInstituteName,
+        educationLevel: this.translateService.instant(
+          '_educationlevels.' + education.educationLevel.name.toLowerCase()
+        ),
+      }),
+      this.translateService.instant('_common.cancel'),
+      this.translateService.instant('_common.confirm'),
+      this,
+      this.deleteEducation
+    );
+  }
+  deleteEducation() {
+    return this.educationService
+      .deleteEducation(this.educationToDelete.id)
+      .subscribe(() => {
+        this.refreshEducation();
       });
   }
 }

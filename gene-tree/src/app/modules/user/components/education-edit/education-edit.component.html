@@ -11,51 +11,57 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <!-- INSTITUTE NAME -->
-        <app-input-template
-          id="institute"
-          [(field)]="education.educationInstituteName"
-          name="_education.instituteName"
-        ></app-input-template>
+  <ion-grid>
+    <ion-row class="absolute-center">
+      <ion-col size="12" offset="0">
+        <ion-card>
+          <ion-card-content>
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+              <!-- INSTITUTE NAME -->
+              <app-input-template
+                id="institute"
+                [(field)]="education.educationInstituteName"
+                name="_education.instituteName"
+              ></app-input-template>
 
-        <!-- EDUCATION LEVEL -->
-        <app-select-template
-          *ngIf="education.educationLevel"
-          name="_education.educationLevel"
-          optionsPrefix="_educationLevels"
-          [options]="educationLevels"
-          [(field)]="education.educationLevel.id"
-        ></app-select-template>
+              <!-- EDUCATION LEVEL -->
+              <app-select-template
+                *ngIf="education.educationLevel"
+                name="_education.educationLevel"
+                optionsPrefix="_educationLevels"
+                [options]="educationLevels"
+                [(field)]="education.educationLevel.id"
+              ></app-select-template>
 
-        <!-- START DATE -->
-        <app-date-select-template
-          [isRequired]="true"
-          name="_education.enrollmentDay"
-          [(date)]="education.startDate"
-          [id]="education.id"
-        ></app-date-select-template>
+              <!-- START DATE -->
+              <app-date-select-template
+                [isRequired]="true"
+                name="_education.enrollmentDay"
+                [(date)]="education.startDate"
+                [id]="education.id"
+              ></app-date-select-template>
 
-        <!-- END DATE -->
-        <app-date-select-template
-          [isRequired]="false"
-          name="_education.graduationDay"
-          [(date)]="education.endDate"
-          [id]="education.id"
-        ></app-date-select-template>
+              <!-- END DATE -->
+              <app-date-select-template
+                [isRequired]="false"
+                name="_education.graduationDay"
+                [(date)]="education.endDate"
+                [id]="education.id"
+              ></app-date-select-template>
 
-        <ion-button
-          color="success"
-          type="submit"
-          class="submit-button"
-          expand="block"
-          [disabled]="!education.startDate"
-        >
-          {{ "_common.save" | translate }}
-        </ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
+              <ion-button
+                color="success"
+                type="submit"
+                class="submit-button"
+                expand="block"
+                [disabled]="!education.startDate"
+              >
+                {{ "_common.save" | translate }}
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

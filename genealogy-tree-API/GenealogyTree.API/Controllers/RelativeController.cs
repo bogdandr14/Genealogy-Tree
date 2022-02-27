@@ -22,11 +22,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("parents/{childId:int}")]
-        public async Task<ActionResult<List<ParentModel>>> GetAllParents(int childId)
+        public async Task<ActionResult<List<RelativeModel>>> GetAllParents(int childId)
         {
             try
             {
-                List<ParentModel> parents = await _parentChildService.GetAllParentsForPerson(childId);
+                List<RelativeModel> parents = await _parentChildService.GetAllParentsForPerson(childId);
                 if (parents == null)
                 {
                     return NotFound();
@@ -41,11 +41,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("children/{parentId:int}")]
-        public async Task<ActionResult<List<ChildModel>>> GetAllChildren(int parentId)
+        public async Task<ActionResult<List<RelativeModel>>> GetAllChildren(int parentId)
         {
             try
             {
-                List<ChildModel> children = await _parentChildService.GetAllChildrenForPerson(parentId);
+                List<RelativeModel> children = await _parentChildService.GetAllChildrenForPerson(parentId);
                 if (children == null)
                 {
                     return NotFound();
@@ -60,11 +60,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("ancestors/{personId:int}")]
-        public async Task<ActionResult<List<ParentModel>>> GetAncestors(int personId)
+        public async Task<ActionResult<List<RelativeModel>>> GetAncestors(int personId)
         {
             try
             {
-                List<ParentModel> parents = await _parentChildService.GetAllAncestors(personId);
+                List<RelativeModel> parents = await _parentChildService.GetAllAncestors(personId);
                 if (parents == null)
                 {
                     return NotFound();
@@ -79,11 +79,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("descendants/{personId:int}")]
-        public async Task<ActionResult<List<ChildModel>>> GetDescendants(int personId)
+        public async Task<ActionResult<List<RelativeModel>>> GetDescendants(int personId)
         {
             try
             {
-                List<ChildModel> parents = await _parentChildService.GetAllDescendants(personId);
+                List<RelativeModel> parents = await _parentChildService.GetAllDescendants(personId);
                 if (parents == null)
                 {
                     return NotFound();
@@ -95,7 +95,24 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
-
+        [HttpGet]
+        [Route("related/{personId:int}")]
+        public async Task<ActionResult<List<RelativeModel>>> GetRelatedPeople(int personId)
+        {
+            try
+            {
+                List<RelativeModel> parents = await _parentChildService.GetRelatedPeople(personId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
         [HttpGet]
         [Route("unrelated/{personId:int}")]
         public async Task<ActionResult<List<GenericPersonModel>>> GetUnrelatedPeople(int personId)
@@ -151,7 +168,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("")]
-        public async Task<ActionResult<ParentChildDetailsModel>> UpdateLocation(ParentChildCreateUpdateModel parentChild)
+        public async Task<ActionResult<ParentChildDetailsModel>> UpdateRelativeLink(ParentChildCreateUpdateModel parentChild)
         {
             try
             {
@@ -166,7 +183,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<ActionResult<ParentChildDetailsModel>> DeleteLocation(int id)
+        public async Task<ActionResult<ParentChildDetailsModel>> DeleteRelativeLink(int id)
         {
             try
             {

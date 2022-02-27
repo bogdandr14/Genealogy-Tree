@@ -7,8 +7,8 @@ namespace GenealogyTree.Domain.DTO.Person
 {
     public class PersonDetailsModel : PersonCreateUpdateModel
     {
-        public ICollection<ParentModel> Parents { get; set; }
-        public ICollection<ChildModel> Children { get; set; }
+        public ICollection<RelativeModel> Parents { get; set; }
+        public ICollection<RelativeModel> Children { get; set; }
         public ICollection<MarriedPersonModel> Marriages { get; set; }
     }
 }

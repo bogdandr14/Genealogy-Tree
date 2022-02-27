@@ -1,6 +1,7 @@
-import { RelativeBaseModel } from "./relative-base.model";
 
-export class RelativeEditModel extends RelativeBaseModel{
+export class RelativeEditModel {
+  id: number;
+  bloodRelatives: boolean;
   childId: number;
   parentId: number;
 }

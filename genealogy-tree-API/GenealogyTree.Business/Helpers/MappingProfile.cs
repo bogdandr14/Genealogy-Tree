@@ -60,10 +60,10 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<Occupation, OccupationModel>()
                .ReverseMap();
 
-            CreateMap<ParentChild, ChildModel>()
+/*            CreateMap<ParentChild, ChildModel>()
                .ReverseMap();
             CreateMap<ParentChild, ParentModel>()
-               .ReverseMap();
+               .ReverseMap();*/
             CreateMap<ParentChild, ParentChildDetailsModel>()
                .ReverseMap();
             CreateMap<ParentChild, ParentChildCreateUpdateModel>()

@@ -1,5 +1,5 @@
+import { RelativeModel } from './../../models/relative/relative.model';
 import { Component, Input, OnInit } from '@angular/core';
-import { ChildModel } from '../../models/child.model';
 
 @Component({
   selector: 'app-children-list',
@@ -7,7 +7,7 @@ import { ChildModel } from '../../models/child.model';
   styleUrls: ['./children-list.component.scss'],
 })
 export class ChildrenListComponent implements OnInit {
-  @Input() children: ChildModel[];
+  @Input() children: RelativeModel[];
   @Input() canModify: boolean = false;
   constructor() {}
 

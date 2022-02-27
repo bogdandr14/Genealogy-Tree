@@ -11,49 +11,55 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <!-- OCCUPATION NAME -->
-        <app-input-template
-          id="occupation-name"
-          [(field)]="occupation.occupationName"
-          name="_occupation.occupationName"
-        ></app-input-template>
+  <ion-grid>
+    <ion-row class="absolute-center">
+      <ion-col size="12" offset="0">
+        <ion-card>
+          <ion-card-content>
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+              <!-- OCCUPATION NAME -->
+              <app-input-template
+                id="occupation-name"
+                [(field)]="occupation.occupationName"
+                name="_occupation.occupationName"
+              ></app-input-template>
 
-        <!-- WORKING PLACE -->
-        <app-input-template
-          id="working-place-name"
-          [(field)]="occupation.workingPlaceName"
-          name="_occupation.workingPlaceName"
-        ></app-input-template>
+              <!-- WORKING PLACE -->
+              <app-input-template
+                id="working-place-name"
+                [(field)]="occupation.workingPlaceName"
+                name="_occupation.workingPlaceName"
+              ></app-input-template>
 
-        <!-- START DATE -->
-        <app-date-select-template
-          [isRequired]="true"
-          name="_occupation.firstDay"
-          [(date)]="occupation.startDate"
-          [id]="occupation.id"
-        ></app-date-select-template>
+              <!-- START DATE -->
+              <app-date-select-template
+                [isRequired]="true"
+                name="_occupation.firstDay"
+                [(date)]="occupation.startDate"
+                [id]="occupation.id"
+              ></app-date-select-template>
 
-        <!-- END DATE -->
-        <app-date-select-template
-          [isRequired]="false"
-          name="_occupation.lastDay"
-          [(date)]="occupation.endDate"
-          [id]="occupation.id"
-        ></app-date-select-template>
+              <!-- END DATE -->
+              <app-date-select-template
+                [isRequired]="false"
+                name="_occupation.lastDay"
+                [(date)]="occupation.endDate"
+                [id]="occupation.id"
+              ></app-date-select-template>
 
-        <ion-button
-          color="success"
-          type="submit"
-          class="submit-button"
-          expand="block"
-          [disabled]="!occupation.startDate"
-        >
-          {{ "_common.save" | translate }}
-        </ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
+              <ion-button
+                color="success"
+                type="submit"
+                class="submit-button"
+                expand="block"
+                [disabled]="!occupation.startDate"
+              >
+                {{ "_common.save" | translate }}
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -13,10 +13,10 @@
               <ion-label>
                 {{
                   "_educationlevels." +
-                    (education.educationLevel.name | lowercase) | translate
+                    (education.educationLevel?.name | lowercase) | translate
                 }}
                 {{ "_common.at" | translate }}
-                {{ education.educationInstituteName }}
+                {{ education?.educationInstituteName }}
               </ion-label>
             </ion-card-title>
             <ion-card-subtitle>
@@ -53,7 +53,12 @@
                 </app-education-edit>
               </ng-template>
             </ion-modal>
-            <ion-button fill="clear" color="danger" slot="end">
+            <ion-button
+              fill="clear"
+              color="danger"
+              slot="end"
+              (click)="confirmDeleteEducation(education)"
+            >
               <ion-icon name="trash" slot="start"></ion-icon>
               {{ "_common.delete" | translate }}
             </ion-button>

@@ -1,7 +1,8 @@
 import { PersonDetailsModel } from "../person/person-details.model";
-import { RelativeBaseModel } from "./relative-base.model";
 
-export class RelativeDetailsModel extends RelativeBaseModel{
+export class RelativeDetailsModel {
+  id: number;
+  bloodRelatives: boolean;
   child: PersonDetailsModel;
   parent: PersonDetailsModel
 }

@@ -50,7 +50,12 @@
                 </app-occupation-edit>
               </ng-template>
             </ion-modal>
-            <ion-button fill="clear" color="danger" slot="end">
+            <ion-button
+              fill="clear"
+              color="danger"
+              slot="end"
+              (click)="confirmDeleteOccupation(occupation)"
+            >
               <ion-icon name="trash" slot="start"></ion-icon>
               {{ "_common.delete" | translate }}
             </ion-button>
