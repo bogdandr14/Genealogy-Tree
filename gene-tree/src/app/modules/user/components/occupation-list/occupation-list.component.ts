@@ -19,9 +19,9 @@ export class OccupationListComponent implements OnInit {
     private occupationService: OccupationService,
     private alertService: AlertService,
     private translateService: TranslateService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   refreshOccupation() {
     this.occupationService
@@ -30,6 +30,7 @@ export class OccupationListComponent implements OnInit {
         this.occupations = occupations;
       });
   }
+
   async confirmDeleteOccupation(occupation: OccupationModel) {
     this.occupationToDelete = occupation;
     await this.alertService.presentAlert(
@@ -44,6 +45,7 @@ export class OccupationListComponent implements OnInit {
       this.deleteOccupation
     );
   }
+
   deleteOccupation() {
     return this.occupationService
       .deleteOccupation(this.occupationToDelete.id)

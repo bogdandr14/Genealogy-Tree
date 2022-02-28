@@ -18,17 +18,21 @@
       </ion-col>
 
       <ion-col size-sm="4" offset-sm="1">
-        <app-parents-list
-          [parents]="personDetails?.parents"
+        <app-linked-relatives-list
+          [relatives]="personDetails?.parents"
+          [personLinkedTo]="personDetails"
           [canModify]="isUserTree"
+          [isParentList]="true"
         >
-        </app-parents-list>
+        </app-linked-relatives-list>
 
-        <app-children-list
-          [children]="personDetails?.children"
+        <app-linked-relatives-list
+          [relatives]="personDetails?.children"
+          [personLinkedTo]="personDetails"
           [canModify]="isUserTree"
+          [isParentList]="false"
         >
-        </app-children-list>
+        </app-linked-relatives-list>
 
         <app-marriage-list
           [marriages]="personDetails?.marriages"
@@ -39,12 +43,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-
-<ion-modal trigger="open-delete-person" [swipeToClose]="true">
-  <ng-template>
-    <app-person-delete
-      [person]="personDetails"
-      (personDeleted)=" router.navigate(['/person/list'])"
-    ></app-person-delete>
-  </ng-template>
-</ion-modal>

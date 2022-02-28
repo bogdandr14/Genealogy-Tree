@@ -22,49 +22,18 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RelativeModel>> GetAllParentsForPerson(int childId)
         {
-            List<RelativeModel> parentRelatives = unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Select(parentChild => convertParentToRelative(parentChild)).ToList();
-
-            return parentRelatives;
-        }
-
-        private RelativeModel convertParentToRelative(ParentChild parentChild)
-        {
-            return new RelativeModel
-            {
-                BirthDate = parentChild.Parent.BirthDate,
-                DeathDate = parentChild.Parent.DeathDate,
-                FirstName = parentChild.Parent.FirstName,
-                LastName = parentChild.Parent.LastName,
-                PersonId = parentChild.Parent.Id,
-                TreeId = parentChild.Parent.TreeId,
-                UserId = parentChild.Parent.SyncedUserToPerson.SyncedUserId,
-                ImageId = parentChild.Parent.ImageId,
-                RelativeId = parentChild.Id,
-                isBloodRelative = parentChild.BloodRelatives,
-            };
+            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ChildId == childId).ToList();
+            List<ParentModel> parentRelatives = _mapper.Map<List<ParentModel>>(parentChildren);
+            List<RelativeModel> relatives = _mapper.Map<List<RelativeModel>>(parentRelatives);
+            return relatives;
         }
 
         public async Task<List<RelativeModel>> GetAllChildrenForPerson(int parentId)
         {
-            List<RelativeModel> childrenRelatives = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Select(parentChild => convertChildToRelative(parentChild)).ToList();
-            return childrenRelatives;
-        }
-
-        private RelativeModel convertChildToRelative(ParentChild parentChild)
-        {
-            return new RelativeModel
-            {
-                BirthDate = parentChild.Child.BirthDate,
-                DeathDate = parentChild.Child.DeathDate,
-                FirstName = parentChild.Child.FirstName,
-                LastName = parentChild.Child.LastName,
-                PersonId = parentChild.Child.Id,
-                TreeId = parentChild.Child.TreeId,
-                UserId = parentChild.Child.SyncedUserToPerson.SyncedUserId,
-                ImageId = parentChild.Child.ImageId,
-                RelativeId = parentChild.Id,
-                isBloodRelative = parentChild.BloodRelatives,
-            };
+            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).ToList();
+            List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
+            List<RelativeModel> relatives = _mapper.Map<List<RelativeModel>>(childRelatives);
+            return relatives;
         }
 
         public async Task<List<RelativeModel>> GetAllAncestors(int personId)
@@ -125,10 +94,13 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId)
         {
-            List<RelativeModel> relatedPeole = await GetRelatedPeople(personId);
+            List<RelativeModel> relatedPeople = await GetRelatedPeople(personId);
             Person person = await unitOfWork.Person.FindById(personId);
             IQueryable<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId);
-            List<Person> people = peopleInTree.Where(x => !relatedPeole.Exists(y => y.PersonId == x.Id)).ToList();
+            IEnumerable<Person> people1 = peopleInTree.ToList();
+            IEnumerable<Person> enumerable = people1.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id));
+            List<Person> people = enumerable.ToList();
+            people.RemoveAll(relative => person.Id == relative.Id);
             List<GenericPersonModel> returnEvent = _mapper.Map<List<GenericPersonModel>>(people);
             return returnEvent;
         }

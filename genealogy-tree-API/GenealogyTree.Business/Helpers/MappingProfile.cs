@@ -29,19 +29,19 @@ namespace GenealogyTree.Business.Helpers
         private void ConfigureMappings()
         {
             CreateMap<Education, EducationModel>()
-               .ReverseMap();
+                .ReverseMap();
 
             CreateMap<EducationLevel, GenericNameModel>()
-               .ReverseMap();
+                .ReverseMap();
 
             CreateMap<Gender, GenericNameModel>()
-               .ReverseMap();
+                .ReverseMap();
             CreateMap<Image, ImageFile>()
                 .ForMember(x => x.Name, y => y.MapFrom(z => Guid.Parse(Path.GetFileNameWithoutExtension(z.FileName))));
             CreateMap<ImageFile, Image>();
 
             CreateMap<Location, LocationModel>()
-               .ReverseMap();
+                .ReverseMap();
 
             CreateMap<Marriage, MarriedPersonModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
@@ -55,19 +55,42 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<Nationality, GenericNameModel>()
-               .ReverseMap();
+                .ReverseMap();
 
             CreateMap<Occupation, OccupationModel>()
-               .ReverseMap();
+                .ReverseMap();
 
-/*            CreateMap<ParentChild, ChildModel>()
-               .ReverseMap();
             CreateMap<ParentChild, ParentModel>()
-               .ReverseMap();*/
+                .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Parent.TreeId))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Parent.SyncedUserToPerson.Id))
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Parent.Id))
+                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Parent.FirstName))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Parent.LastName))
+                .ForMember(x => x.ImageId, y => y.MapFrom(z => z.Parent.ImageId))
+                .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Parent.BirthDate))
+                .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Parent.DeathDate))
+                .ReverseMap();
+            CreateMap<ParentModel, RelativeModel>()
+                .ReverseMap();
+
+            CreateMap<ParentChild, ChildModel>()
+                .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Child.TreeId))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Child.SyncedUserToPerson.Id))
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Child.Id))
+                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Child.FirstName))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Child.LastName))
+                .ForMember(x => x.ImageId, y => y.MapFrom(z => z.Child.ImageId))
+                .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Child.BirthDate))
+                .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Child.DeathDate))
+                .ReverseMap();
+            CreateMap<ChildModel, RelativeModel>()
+                .ReverseMap();
+
+
             CreateMap<ParentChild, ParentChildDetailsModel>()
-               .ReverseMap();
+                .ReverseMap();
             CreateMap<ParentChild, ParentChildCreateUpdateModel>()
-               .ReverseMap();
+                .ReverseMap();
 
             CreateMap<Person, GenericPersonModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
@@ -91,7 +114,7 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<SyncRequest, SyncRequestDetailsModel>()
-                 .ForMember(x => x.ReceiverUser, y => y.MapFrom(z => z.Receiver))
+                .ForMember(x => x.ReceiverUser, y => y.MapFrom(z => z.Receiver))
                 .ForMember(x => x.SenderUser, y => y.MapFrom(z => z.Sender))
                 .ReverseMap();
             CreateMap<SyncRequest, SyncRequestCreateUpdateModel>()
@@ -102,31 +125,31 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<User, UserSettingsModel>()
                 .ReverseMap();
             CreateMap<User, UserDetailsModel>()
-               .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
-               .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
-               .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Person.BirthDate))
-               .ForMember(x => x.Gender, y => y.MapFrom(z => z.Person.Gender))
-               .ForMember(x => x.Nationality, y => y.MapFrom(z => z.Person.Nationality))
-               .ForMember(x => x.Religion, y => y.MapFrom(z => z.Person.Religion))
-               .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.Person.BirthPlace))
-               .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.Person.LivingPlace))
-               .ForMember(x => x.Parents, y => y.MapFrom(z => z.Person.Parents))
-               .ForMember(x => x.Children, y => y.MapFrom(z => z.Person.Children))
-               .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
-               .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
-               .ReverseMap();
+                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
+                .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Person.BirthDate))
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Person.Gender))
+                .ForMember(x => x.Nationality, y => y.MapFrom(z => z.Person.Nationality))
+                .ForMember(x => x.Religion, y => y.MapFrom(z => z.Person.Religion))
+                .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.Person.BirthPlace))
+                .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.Person.LivingPlace))
+                .ForMember(x => x.Parents, y => y.MapFrom(z => z.Person.Parents))
+                .ForMember(x => x.Children, y => y.MapFrom(z => z.Person.Children))
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
+                .ReverseMap();
             CreateMap<User, UserUpdateModel>()
                 .ReverseMap();
 
 
             CreateMap<User, RegisterModel>()
-               .ReverseMap();
+                .ReverseMap();
             CreateMap<Person, RegisterModel>()
                 .ReverseMap();
 
             CreateMap<User, LoginResponseModel>()
-               .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Person.TreeId))
-               .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id));
+                .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Person.TreeId))
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id));
         }
     }
 }

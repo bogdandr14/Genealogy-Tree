@@ -1,9 +1,8 @@
-import { ChildrenListComponent } from './components/children-list/children-list.component';
-import { ParentsListComponent } from './components/parents-list/parents-list.component';
+import { LinkedRelativeAddComponent } from './components/linked-relative-add/linked-relative-add.component';
+import { LinkedRelativesListComponent } from './components/linked-relatives-list/linked-relatives-list.component';
 import { MarriageListComponent } from './components/marriage-list/marriage-list.component';
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonInfoComponent } from './components/person-info/person-info.component';
-import { PersonDeleteComponent } from './components/person-delete/person-delete.component';
 import { LocationEditComponent } from './components/location-edit/location-edit.component';
 import { PersonEditPage } from './pages/person-edit/person-edit.page';
 import { PersonDetailsPage } from './pages/person-details/person-details.page';
@@ -23,19 +22,18 @@ import { PersonAvatarComponent } from './components/person-avatar/person-avatar.
     PersonEditPage,
     FileMaxSizeDirective,
     LocationEditComponent,
-    PersonDeleteComponent,
     PersonInfoComponent,
     PersonAvatarComponent,
     PersonCardComponent,
     MarriageListComponent,
-    ParentsListComponent,
-    ChildrenListComponent
+    LinkedRelativesListComponent,
+    LinkedRelativeAddComponent
   ],
   imports: [SharedModule, PersonRoutingModule],
-  exports:[
+  exports: [
     PhotoUploadComponent,
     PersonInfoComponent,
     PersonAvatarComponent
   ]
 })
-export class PersonModule {}
+export class PersonModule { }

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PersonDeleteComponent } from './person-delete.component';
+import { LinkedRelativeAddComponent } from './linked-relative-add.component';
 
-describe('PersonDeleteComponent', () => {
-  let component: PersonDeleteComponent;
-  let fixture: ComponentFixture<PersonDeleteComponent>;
+describe('LinkedRelativeAddComponent', () => {
+  let component: LinkedRelativeAddComponent;
+  let fixture: ComponentFixture<LinkedRelativeAddComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonDeleteComponent ],
+      declarations: [ LinkedRelativeAddComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PersonDeleteComponent);
+    fixture = TestBed.createComponent(LinkedRelativeAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

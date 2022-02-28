@@ -1,0 +1,72 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      {{ (isParent ? "_add.parent" : "_add.child") | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        {{ "_common.cancel" | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="custom-padding-bottom">
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+              <app-person-card [person]="person"> </app-person-card>
+              <ion-item>
+                <ion-label> is blood relative</ion-label>
+                <ion-checkbox
+                  slot="start"
+                  [(ngModel)]="isBloodRelative"
+                ></ion-checkbox>
+              </ion-item>
+
+              Choose a person from the following list:
+              <ng-container *ngFor="let unrelatedPerson of unrelatedPeopleList">
+                <ng-container
+                  *ngIf="!selectedPerson || selectedPerson === unrelatedPerson"
+                >
+                  <app-person-card [person]="unrelatedPerson">
+                  </app-person-card>
+                  <ion-button
+                    *ngIf="unrelatedPerson !== selectedPerson"
+                    fill="clear"
+                    color="success"
+                    expand="block"
+                    (click)="selectPerson(unrelatedPerson)"
+                  >
+                    select
+                  </ion-button>
+                  <ion-button
+                    *ngIf="unrelatedPerson === selectedPerson"
+                    fill="clear"
+                    color="danger"
+                    expand="block"
+                    (click)="selectPerson()"
+                  >
+                    deselect
+                  </ion-button>
+                </ng-container>
+              </ng-container>
+
+              <ion-button
+                color="success"
+                type="submit"
+                class="submit-button"
+                expand="block"
+                [disabled]="!selectedPerson"
+              >
+                {{ "_common.save" | translate }}
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -95,7 +95,7 @@
         expand="block"
         fill="clear"
         color="danger"
-        id="open-delete-person"
+        (click)="confirmDeletePerson()"
       >
         <ion-icon name="person-remove" slot="start"></ion-icon>
         {{ "_delete.person" | translate }}

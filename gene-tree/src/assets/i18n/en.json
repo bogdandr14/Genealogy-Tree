@@ -204,8 +204,9 @@
     "educationMessage": "Are you sure you want to delete education { educationLevel } at { instituteName }?",
     "occupation": "Delete occupation",
     "occupationMessage": "Are you sure you want to delete occupation { occupationName } at { workingPlace }?",
-    "confirm": "Confirm delete",
-    "person": "Delete person"
+    "person": "Delete person",
+    "personMessage": "Are you sure you want to delete person { firstName } { lastName }?",
+    "confirm": "Confirm delete"
   },
   "changePicture": "Change picture",
   "_image": {

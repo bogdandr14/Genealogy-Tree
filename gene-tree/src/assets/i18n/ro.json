@@ -204,8 +204,9 @@
     "educationMessage": "Eşti sigur(ă) că vrei să ştergi educaţia { educationLevel } la { instituteName }?",
     "occupation": "Şterge ocupaţia",
     "occupationMessage": "Eşti sigur(ă) că vrei să ştergi ocupaţia { occupationName } la { workingPlace }?",
-    "confirm": "Confirmă ştergerea",
-    "person": "Şterge persoana"
+    "person": "Şterge persoana",
+    "personMessage": "Eşti sigur(ă) că vrei să ştergi persoana { firstName } { lastName }?",
+    "confirm": "Confirmă ştergerea"
   },
   "changePicture": "Schimbă poza",
   "_image": {

@@ -55,12 +55,12 @@
 .submit-button {
   margin-top: 15px;
 }
+
 .lds-dual-ring {
   --backdrop-opacity: 40%;
   --spinner-color: var(--ion-color-success);
 }
-.custom-height-popover
-{
+.custom-height-popover {
   --max-height: 30%;
 }
 
@@ -76,4 +76,16 @@
   right: 0;
   align-content: center !important;
   align-items: center !important;
+}
+
+.custom-padding-top {
+  padding-top: 70px !important;
+}
+
+.custom-padding-bottom {
+  bottom: 70px !important;
+}
+
+.color-selected.card {
+  --background-color: var(--ion-color-success) !important;
 }

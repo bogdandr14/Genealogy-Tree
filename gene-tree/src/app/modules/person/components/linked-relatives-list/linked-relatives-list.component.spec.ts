@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ChildrenListComponent } from './children-list.component';
+import { LinkedRelativesListComponent } from './linked-relatives-list.component';
 
-describe('ChildrenListComponent', () => {
-  let component: ChildrenListComponent;
-  let fixture: ComponentFixture<ChildrenListComponent>;
+describe('LinkedRelativesListComponent', () => {
+  let component: LinkedRelativesListComponent;
+  let fixture: ComponentFixture<LinkedRelativesListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChildrenListComponent ],
+      declarations: [ LinkedRelativesListComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChildrenListComponent);
+    fixture = TestBed.createComponent(LinkedRelativesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

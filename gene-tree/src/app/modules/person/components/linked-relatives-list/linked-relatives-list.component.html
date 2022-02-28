@@ -1,0 +1,41 @@
+<ion-card>
+  <ion-card-header class="ion-text-center">
+    <ion-card-title>
+      {{ (isParentList ? "_person.parents" : "_person.children") | translate }}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list slot="content">
+      <ion-item *ngFor="let relative of relatives">
+        <ion-label>{{ relative.firstName }}</ion-label>
+        <ion-button fill="clear" color="secondary">
+          {{ "_common.details" | translate }}
+        </ion-button>
+      </ion-item>
+      <ng-container *ngIf="canModify">
+        <ion-button
+          [id]="'open-add-link' + personLinkedTo.personId + isParentList"
+          expand="block"
+          fill="clear"
+          color="success"
+        >
+          <ion-icon name="add" slot="start"></ion-icon>
+          {{ (isParentList ? "_add.parent" : "_add.child") | translate }}
+        </ion-button>
+        <ion-modal
+          [trigger]="'open-add-link' + personLinkedTo.personId + isParentList"
+          [swipeToClose]="true"
+        >
+          <ng-template>
+            <app-linked-relative-add
+              [person]="personLinkedTo"
+              [isParent]="isParentList"
+              (saveConfirmed)="refreshRelatives()"
+            >
+            </app-linked-relative-add>
+          </ng-template>
+        </ion-modal>
+      </ng-container>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
