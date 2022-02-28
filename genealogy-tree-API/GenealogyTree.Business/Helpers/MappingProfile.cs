@@ -10,6 +10,7 @@ using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace GenealogyTree.Business.Helpers
 {
@@ -62,7 +63,6 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<ParentChild, ParentModel>()
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Parent.TreeId))
-                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Parent.SyncedUserToPerson.Id))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Parent.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Parent.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Parent.LastName))
@@ -75,7 +75,6 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<ParentChild, ChildModel>()
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Child.TreeId))
-                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Child.SyncedUserToPerson.Id))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Child.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Child.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Child.LastName))
@@ -94,16 +93,27 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<Person, GenericPersonModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.UserId, y => y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId))
+                .ForMember(x => x.UserId, y =>
+                {
+                    y.PreCondition(src => (src.SyncedUserToPerson != null));
+                    y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId);
+                })
                 .ReverseMap();
             CreateMap<Person, PersonDetailsModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.UserId, y => y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId))
-                .ReverseMap();
+                .ForMember(x => x.UserId, y =>
+                {
+                    y.PreCondition(src => (src.SyncedUserToPerson != null));
+                    y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId);
+                })
+                ;
             CreateMap<Person, PersonCreateUpdateModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.UserId, y => y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId))
-                .ReverseMap();
+                .ForMember(x => x.UserId, y =>
+                {
+                    y.PreCondition(src => (src.SyncedUserToPerson != null));
+                    y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId);
+                }).ReverseMap();
 
             CreateMap<Religion, GenericNameModel>()
                 .ReverseMap();
@@ -133,8 +143,8 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.Religion, y => y.MapFrom(z => z.Person.Religion))
                 .ForMember(x => x.BirthPlace, y => y.MapFrom(z => z.Person.BirthPlace))
                 .ForMember(x => x.LivingPlace, y => y.MapFrom(z => z.Person.LivingPlace))
-                .ForMember(x => x.Parents, y => y.MapFrom(z => z.Person.Parents))
-                .ForMember(x => x.Children, y => y.MapFrom(z => z.Person.Children))
+                .ForMember(x => x.Parents, y => y.MapFrom(z => z.Person.Parents.ToList()))
+                .ForMember(x => x.Children, y => y.MapFrom(z => z.Person.Children.ToList()))
                 .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
                 .ReverseMap();

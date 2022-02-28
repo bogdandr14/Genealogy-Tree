@@ -4,6 +4,7 @@ using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RelativeModel>> GetAllParentsForPerson(int childId)
         {
-            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ChildId == childId).ToList();
+            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Include(pc => pc.Parent).ToList();
             List<ParentModel> parentRelatives = _mapper.Map<List<ParentModel>>(parentChildren);
             List<RelativeModel> relatives = _mapper.Map<List<RelativeModel>>(parentRelatives);
             return relatives;
@@ -30,7 +31,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RelativeModel>> GetAllChildrenForPerson(int parentId)
         {
-            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).ToList();
+            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc=> pc.Child).ToList();
             List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
             List<RelativeModel> relatives = _mapper.Map<List<RelativeModel>>(childRelatives);
             return relatives;
@@ -96,12 +97,16 @@ namespace GenealogyTree.Business.Services
         {
             List<RelativeModel> relatedPeople = await GetRelatedPeople(personId);
             Person person = await unitOfWork.Person.FindById(personId);
-            IQueryable<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId);
-            IEnumerable<Person> people1 = peopleInTree.ToList();
-            IEnumerable<Person> enumerable = people1.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id));
-            List<Person> people = enumerable.ToList();
-            people.RemoveAll(relative => person.Id == relative.Id);
-            List<GenericPersonModel> returnEvent = _mapper.Map<List<GenericPersonModel>>(people);
+            List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
+            List<Person> unrelatedPeople = peopleInTree.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id)).ToList();
+            unrelatedPeople.RemoveAll(relative => person.Id == relative.Id);
+            List<GenericPersonModel> returnEvent = new List<GenericPersonModel>();
+            foreach (var unrelatedPerson in unrelatedPeople)
+            {
+                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(unrelatedPerson);
+                returnPerson.ImageFile = await _fileManagementService.GetFile(unrelatedPerson.Image);
+                returnEvent.Add(returnPerson);
+            }
             return returnEvent;
         }
 

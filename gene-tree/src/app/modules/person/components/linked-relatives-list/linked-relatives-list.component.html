@@ -6,12 +6,10 @@
   </ion-card-header>
   <ion-card-content>
     <ion-list slot="content">
-      <ion-item *ngFor="let relative of relatives">
-        <ion-label>{{ relative.firstName }}</ion-label>
-        <ion-button fill="clear" color="secondary">
-          {{ "_common.details" | translate }}
-        </ion-button>
-      </ion-item>
+      <app-person-card
+        *ngFor="let relative of relatives"
+        [person]="relative"
+      ></app-person-card>
       <ng-container *ngIf="canModify">
         <ion-button
           [id]="'open-add-link' + personLinkedTo.personId + isParentList"
@@ -29,7 +27,7 @@
           <ng-template>
             <app-linked-relative-add
               [person]="personLinkedTo"
-              [isParent]="isParentList"
+              [addParent]="isParentList"
               (saveConfirmed)="refreshRelatives()"
             >
             </app-linked-relative-add>

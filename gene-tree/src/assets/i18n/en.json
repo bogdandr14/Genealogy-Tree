@@ -48,6 +48,11 @@
     "children": "Children",
     "marriages": "Marriages"
   },
+  "_relative": {
+    "blood": "Blood relative",
+    "chooseChild": "Choose a person from the following list to add to children:",
+    "chooseParent": "Choose a person from the following list to add to parents:"
+  },
   "_location": {
     "from": "From",
     "lives": "Lives in",
@@ -175,7 +180,9 @@
     "back": "Back",
     "unknown": "Unknown",
     "at": "at",
-    "present": "present"
+    "present": "present",
+    "select": "Select",
+    "deselect": "Deselect"
   },
   "_details": {
     "user": "User details",

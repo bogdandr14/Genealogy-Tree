@@ -1,3 +1,4 @@
+import { RelativeOptionCardComponent } from './components/relative-option-card/relative-option-card.component';
 import { LinkedRelativeAddComponent } from './components/linked-relative-add/linked-relative-add.component';
 import { LinkedRelativesListComponent } from './components/linked-relatives-list/linked-relatives-list.component';
 import { MarriageListComponent } from './components/marriage-list/marriage-list.component';
@@ -27,7 +28,8 @@ import { PersonAvatarComponent } from './components/person-avatar/person-avatar.
     PersonCardComponent,
     MarriageListComponent,
     LinkedRelativesListComponent,
-    LinkedRelativeAddComponent
+    LinkedRelativeAddComponent,
+    RelativeOptionCardComponent
   ],
   imports: [SharedModule, PersonRoutingModule],
   exports: [

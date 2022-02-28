@@ -11,39 +11,44 @@ import { ModalController } from '@ionic/angular';
 })
 export class LinkedRelativeAddComponent implements OnInit {
   @Input() person: GenericPersonModel;
-  @Input() isParent: boolean = true;
+  @Input() addParent: boolean = true;
   @Output() saveConfirmed = new EventEmitter<boolean>();
 
   public unrelatedPeopleList: GenericPersonModel[];
 
   public selectedPerson: GenericPersonModel;
-  public isBloodRelative
-  constructor(private modalCtrl: ModalController,
-    private relativesService: RelativesService) { }
+  public isBloodRelative = true;
+  constructor(
+    private modalCtrl: ModalController,
+    private relativesService: RelativesService
+  ) {}
 
   ngOnInit() {
-    this.relativesService.getUnrelatedPeople(this.person.personId).subscribe((unrelatedPeople) => this.unrelatedPeopleList = unrelatedPeople);
+    this.relativesService
+      .getUnrelatedPeople(this.person.personId)
+      .subscribe(
+        (unrelatedPeople) => (this.unrelatedPeopleList = unrelatedPeople)
+      );
   }
 
   selectPerson(person?: GenericPersonModel) {
     this.selectedPerson = person;
   }
 
-  onSubmit() {
+  addRelative() {
     const relativeLink = new RelativeEditModel();
     relativeLink.bloodRelatives = this.isBloodRelative;
-    if (this.isParent) {
-      relativeLink.parentId = this.person.personId;
-      relativeLink.childId = this.selectedPerson.personId;
-    } else {
+    if (this.addParent) {
       relativeLink.parentId = this.selectedPerson.personId;
       relativeLink.childId = this.person.personId;
+    } else {
+      relativeLink.parentId = this.person.personId;
+      relativeLink.childId = this.selectedPerson.personId;
     }
     this.relativesService.addRelative(relativeLink).subscribe(() => {
       this.saveConfirmed.emit(true);
       this.dismiss();
-
-    })
+    });
   }
   dismiss() {
     this.modalCtrl.dismiss();

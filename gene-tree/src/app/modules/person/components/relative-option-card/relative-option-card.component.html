@@ -1,0 +1,38 @@
+<ion-card [class.selected]="selected">
+  <ion-card-header>
+    <ion-item>
+      <ion-avatar class="avatar" slot="start">
+        <img
+          [src]="imageUrl"
+          [alt]="person?.firstName + person?.lastName + 'profile picture'"
+        />
+      </ion-avatar>
+      <ion-label class="ion-padding-start" text-wrap>
+        <h1>{{ person?.firstName }}</h1>
+        <h1>{{ person?.lastName }}</h1>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content>
+    <ng-container *ngIf="!selected; else deselect">
+      <ion-button
+        color="success"
+        expand="block"
+        slot="start"
+        (click)="selectionChange.emit(person)"
+      >
+        {{ "_common.select" | translate }}
+      </ion-button>
+    </ng-container>
+    <ng-template #deselect>
+      <ion-button
+        color="danger"
+        expand="block"
+        slot="start"
+        (click)="selectionChange.emit(null)"
+      >
+        {{ "_common.deselect" | translate }}
+      </ion-button>
+    </ng-template>
+  </ion-card-content>
+</ion-card>

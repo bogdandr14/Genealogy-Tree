@@ -6,7 +6,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IImageService
     {
-        Task<Image> GetImageAsync(int imageId);
+        Task<Image> GetImageAsync(int? imageId);
         Task<Image> AddImageAsync(ImageFile file);
         Task<bool> DeleteImageAsync(int imageId);
     }

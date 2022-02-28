@@ -17,10 +17,14 @@ namespace GenealogyTree.Business.Services
             _fileManagementService = fileManagementService;
         }
 
-        public async Task<Image> GetImageAsync(int imageId)
+        public async Task<Image> GetImageAsync(int? imageId)
         {
-            Image image = await this.unitOfWork.Image.FindById(imageId);
-            return image;
+            if (imageId != null)
+            {
+                Image image = await this.unitOfWork.Image.FindById(imageId);
+                return image;
+            }
+            return null;
         }
 
         public async Task<Image> AddImageAsync(ImageFile file)

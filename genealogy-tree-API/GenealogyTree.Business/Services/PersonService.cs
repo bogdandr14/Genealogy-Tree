@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -16,12 +17,14 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly IImageService _imageService;
         private readonly IFileManagementService _fileManagementService;
+        private readonly IParentChildService _parentChildService;
 
-        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService) : base(unitOfWork)
+        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService) : base(unitOfWork)
         {
             _mapper = mapper;
             _imageService = imageService;
             _fileManagementService = fileManagementService;
+            _parentChildService = parentChildService;
         }
 
         public async Task<List<PersonDetailsModel>> FindPeople(string name)
@@ -42,6 +45,17 @@ namespace GenealogyTree.Business.Services
         {
             Person person = await unitOfWork.Person.FindById(personId);
             PersonDetailsModel personEntity = _mapper.Map<PersonDetailsModel>(person);
+            personEntity.Children = await _parentChildService.GetAllChildrenForPerson(personId);
+            foreach(var child in personEntity.Children)
+            {
+                child.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(child.ImageId));
+            }
+            personEntity.Parents = await _parentChildService.GetAllParentsForPerson(personId);
+
+            foreach (var parent in personEntity.Parents)
+            {
+                parent.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(parent.ImageId));
+            }
             personEntity.ImageFile = await _fileManagementService.GetFile(person.Image);
             if (person.SyncedUserToPerson != null)
             {

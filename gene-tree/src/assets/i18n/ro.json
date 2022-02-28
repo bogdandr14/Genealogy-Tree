@@ -48,6 +48,11 @@
     "children": "Copii",
     "marriages": "Căsătorii"
   },
+  "_relative": {
+    "blood": "Rudă de sânge",
+    "chooseChild": "Alege o persoană din lista următoare să fie adăugată la copii:",
+    "chooseParent": "Alege o persoană din lista următoare să fie adăugată la părinţi:"
+  },
   "_location": {
     "from": "Născut în",
     "lives": "Locuieşte în",
@@ -175,7 +180,9 @@
     "back": "Înapoi",
     "unknown": "Necunoscut",
     "at": "la",
-    "present": "prezent"
+    "present": "prezent",
+    "select": "Selectează",
+    "deselect": "Deselectează"
   },
   "_details": {
     "user": "Detalii utilizator",
