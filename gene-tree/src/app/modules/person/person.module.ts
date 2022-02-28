@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PhotoUploadComponent } from './components/photo-upload/photo-upload.component';
 import { FileMaxSizeDirective } from './directives/file-max-size.directive';
 import { PersonAvatarComponent } from './components/person-avatar/person-avatar.component';
+import { RemovableRelativeChipComponent } from './components/removable-relative-chip/removable-relative-chip.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PersonAvatarComponent } from './components/person-avatar/person-avatar.
     MarriageListComponent,
     LinkedRelativesListComponent,
     LinkedRelativeAddComponent,
-    RelativeOptionCardComponent
+    RelativeOptionCardComponent,
+    RemovableRelativeChipComponent
   ],
   imports: [SharedModule, PersonRoutingModule],
   exports: [

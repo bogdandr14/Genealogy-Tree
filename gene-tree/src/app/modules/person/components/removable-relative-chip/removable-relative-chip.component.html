@@ -1,0 +1,14 @@
+<ion-chip #chip3>
+  <ion-avatar>
+    <img [src]="imageUrl" />
+  </ion-avatar>
+  <ion-label>{{ relative.firstName + " " + relative.lastName }}</ion-label>
+  <button
+    ion-button
+    clear
+    color="dark"
+    (click)="confirmDeleteRelative()"
+  >
+    <ion-icon name="close-circle" color="danger" slot="end"></ion-icon>
+  </button>
+</ion-chip>
