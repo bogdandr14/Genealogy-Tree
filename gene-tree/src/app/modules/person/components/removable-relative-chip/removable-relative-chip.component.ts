@@ -30,7 +30,7 @@ export class RemovableRelativeChipComponent implements OnInit {
   async confirmDeleteRelative() {
     await this.alertService.presentAlert(
       this.translateService.instant(
-        this.isParent ? '_delete.parent' : 'delete.child'
+        this.isParent ? '_delete.parent' : '_delete.child'
       ),
       this.translateService.instant(this.isParent ?'_delete.parentMessage':'_delete.childMessage', {
         firstName: this.relative.firstName,

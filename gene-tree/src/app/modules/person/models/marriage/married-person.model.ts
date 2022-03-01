@@ -1,8 +1,8 @@
-import { PersonDetailsModel } from "../person/person-details.model";
+import { GenericPersonModel } from "../person/generic-person.model";
 
 export class MarriedPersonModel {
   id: number;
   marriageStarted: Date;
   marriageEnded: Date;
-  secondPerson: PersonDetailsModel;
+  secondPerson: GenericPersonModel;
 }

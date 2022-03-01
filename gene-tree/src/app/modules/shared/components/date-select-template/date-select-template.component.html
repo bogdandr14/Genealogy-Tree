@@ -5,7 +5,7 @@
     [id]="'open-date-input' + name + id"
   >
     <ion-label for="date" position="floating">
-      <b>
+      <b text-wrap>
         {{ name | translate }}
         <span *ngIf="isRequired" class="required"> *</span>
       </b>

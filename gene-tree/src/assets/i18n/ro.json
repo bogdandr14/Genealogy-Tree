@@ -53,6 +53,11 @@
     "chooseChild": "Alege o persoană din lista următoare să fie adăugată la copii:",
     "chooseParent": "Alege o persoană din lista următoare să fie adăugată la părinţi:"
   },
+  "_marriage": {
+    "startDate": "Începutul căsătoriei",
+    "endDate": "Finalul căsătoriei",
+    "chooseSpouce": "Alege mirele/mireasa să fie adăugată la căsniciile persoanei"
+  },
   "_location": {
     "from": "Născut în",
     "lives": "Locuieşte în",
@@ -213,6 +218,12 @@
     "occupationMessage": "Eşti sigur(ă) că vrei să ştergi ocupaţia { occupationName } la { workingPlace }?",
     "person": "Şterge persoana",
     "personMessage": "Eşti sigur(ă) că vrei să ştergi persoana { firstName } { lastName }?",
+    "parent": "Şterge părinte",
+    "parentMessage": "Eşti sigur(ă) că vrei să scoţi pe { firstName } { lastName } din lista de părinţi a persoanei?",
+    "child": "Şterge copil",
+    "childMessage": "Eşti sigur(ă) că vrei să scoţi pe { firstName } { lastName }  din lista de copii a persoanei?",
+    "marriage": "Şterge cununie",
+    "marriageMessage": "Eşti sigur(ă) că vrei să ştergi cununia cu { firstName } { lastName }?",
     "confirm": "Confirmă ştergerea"
   },
   "changePicture": "Schimbă poza",

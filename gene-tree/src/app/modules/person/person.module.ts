@@ -1,3 +1,4 @@
+import { MarriageAddComponent } from './components/marriage-add/marriage-add.component';
 import { RelativeOptionCardComponent } from './components/relative-option-card/relative-option-card.component';
 import { LinkedRelativeAddComponent } from './components/linked-relative-add/linked-relative-add.component';
 import { LinkedRelativesListComponent } from './components/linked-relatives-list/linked-relatives-list.component';
@@ -31,7 +32,8 @@ import { RemovableRelativeChipComponent } from './components/removable-relative-
     LinkedRelativesListComponent,
     LinkedRelativeAddComponent,
     RelativeOptionCardComponent,
-    RemovableRelativeChipComponent
+    RemovableRelativeChipComponent,
+    MarriageAddComponent
   ],
   imports: [SharedModule, PersonRoutingModule],
   exports: [

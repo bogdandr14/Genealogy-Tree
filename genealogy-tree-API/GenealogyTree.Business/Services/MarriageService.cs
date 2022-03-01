@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<MarriedPersonModel>> GetAllMarriagesForPerson(int personId)
         {
-            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId || x.SecondPersonId == personId).ToList();
+            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId || x.SecondPersonId == personId).Include(m => m.FirstPerson).Include(m => m.SecondPerson).ToList();
             List<MarriedPersonModel> returnEvent = _mapper.Map<List<MarriedPersonModel>>(marriages);
             return returnEvent;
         }

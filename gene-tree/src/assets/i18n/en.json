@@ -53,6 +53,11 @@
     "chooseChild": "Choose a person from the following list to add to children:",
     "chooseParent": "Choose a person from the following list to add to parents:"
   },
+  "_marriage": {
+    "startDate": "Start of marriage",
+    "endDate": "End of marriage",
+    "chooseSpouce": "Choose the groom/bride to be added in the person's marriages:"
+  },
   "_location": {
     "from": "From",
     "lives": "Lives in",
@@ -213,6 +218,12 @@
     "occupationMessage": "Are you sure you want to delete occupation { occupationName } at { workingPlace }?",
     "person": "Delete person",
     "personMessage": "Are you sure you want to delete person { firstName } { lastName }?",
+    "parent": "Remove parent",
+    "parentMessage": "Are you sure you want to remove { firstName } { lastName } from this person's parents list?",
+    "child": "Remove child",
+    "childMessage": "Are you sure you want to remove { firstName } { lastName } from this person's children list?",
+    "marriage": "Remove marriage",
+    "marriageMessage": "Are you sure you want to remove the marriage with { firstName } { lastName }?",
     "confirm": "Confirm delete"
   },
   "changePicture": "Change picture",
