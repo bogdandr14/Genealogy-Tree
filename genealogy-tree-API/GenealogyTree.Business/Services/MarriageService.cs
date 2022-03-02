@@ -14,15 +14,24 @@ namespace GenealogyTree.Business.Services
     public class MarriageService : BaseService, IMarriageService
     {
         private readonly IMapper _mapper;
-        public MarriageService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        private readonly IFileManagementService _fileManagementService;
+        public MarriageService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
         {
             _mapper = mapper;
+            _fileManagementService = fileManagementService;
         }
 
         public async Task<List<MarriedPersonModel>> GetAllMarriagesForPerson(int personId)
         {
-            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId || x.SecondPersonId == personId).Include(m => m.FirstPerson).Include(m => m.SecondPerson).ToList();
-            List<MarriedPersonModel> returnEvent = _mapper.Map<List<MarriedPersonModel>>(marriages);
+            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.SecondPersonId == personId).Include(m => m.FirstPerson).ToList();
+            marriages.AddRange(unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId).Include(m => m.SecondPerson).ToList());
+            List < MarriedPersonModel> returnEvent =new List<MarriedPersonModel>();
+            foreach(var marriage in marriages)
+            {
+                MarriedPersonModel returnMarriage = _mapper.Map<MarriedPersonModel>(marriage);
+                returnMarriage.PersonMarriedTo.ImageFile = await _fileManagementService.GetFile(marriage.FirstPerson != null ? marriage.FirstPerson.Image : marriage.SecondPerson.Image);
+                returnEvent.Add(returnMarriage);
+            }
             return returnEvent;
         }
 

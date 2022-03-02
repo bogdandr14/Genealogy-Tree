@@ -47,7 +47,8 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<Marriage, MarriedPersonModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
                 .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))
-                .ReverseMap();
+                .ForMember(x => x.PersonMarriedTo, y => y.MapFrom(z => (z.FirstPerson != null) ? z.FirstPerson : (z.SecondPerson != null ? z.SecondPerson : null)));
+
             CreateMap<Marriage, MarriageDetailsModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
                 .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))

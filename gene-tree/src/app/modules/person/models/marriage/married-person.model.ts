@@ -4,5 +4,5 @@ export class MarriedPersonModel {
   id: number;
   marriageStarted: Date;
   marriageEnded: Date;
-  secondPerson: GenericPersonModel;
+  personMarriedTo: GenericPersonModel;
 }

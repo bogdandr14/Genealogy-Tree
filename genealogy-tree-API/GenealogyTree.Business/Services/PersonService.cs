@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -18,13 +17,14 @@ namespace GenealogyTree.Business.Services
         private readonly IImageService _imageService;
         private readonly IFileManagementService _fileManagementService;
         private readonly IParentChildService _parentChildService;
-
-        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService) : base(unitOfWork)
+        private readonly IMarriageService _marriageService;
+        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService) : base(unitOfWork)
         {
             _mapper = mapper;
             _imageService = imageService;
             _fileManagementService = fileManagementService;
             _parentChildService = parentChildService;
+            _marriageService = marriageService;
         }
 
         public async Task<List<PersonDetailsModel>> FindPeople(string name)
@@ -45,6 +45,8 @@ namespace GenealogyTree.Business.Services
         {
             Person person = await unitOfWork.Person.FindById(personId);
             PersonDetailsModel personEntity = _mapper.Map<PersonDetailsModel>(person);
+            personEntity.Marriages = await _marriageService.GetAllMarriagesForPerson(personId);
+
             personEntity.Children = await _parentChildService.GetAllChildrenForPerson(personId);
             foreach(var child in personEntity.Children)
             {

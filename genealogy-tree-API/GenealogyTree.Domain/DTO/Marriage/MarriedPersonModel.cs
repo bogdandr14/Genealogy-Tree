@@ -8,6 +8,6 @@ namespace GenealogyTree.Domain.DTO.Marriage
         public int Id { get; set; }
         public DateTime MarriageStarted { get; set; }
         public DateTime? MarriageEnded { get; set; }
-        public PersonDetailsModel SecondPerson { get; set; }
+        public GenericPersonModel PersonMarriedTo { get; set; }
     }
 }

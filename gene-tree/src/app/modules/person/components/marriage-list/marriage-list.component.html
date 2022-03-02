@@ -7,7 +7,7 @@
   <ion-card-content>
     <ion-list slot="content">
       <ion-item *ngFor="let marriage of marriages">
-        <ion-label>{{ marriage.secondPerson.firstName }}</ion-label>
+        <ion-label>{{ marriage.personMarriedTo.firstName }}</ion-label>
         <ion-button fill="clear" color="secondary">
           {{ "_common.details" | translate }}
         </ion-button>
@@ -16,8 +16,8 @@
         <ion-card-header class="ion-text-center">
           <ion-card-title>
             <ion-label>
-              {{ marriage.secondPerson.firstName }}
-              {{ marriage.secondPerson.lastName}}
+              {{ marriage.personMarriedTo.firstName }}
+              {{ marriage.personMarriedTo.lastName}}
             </ion-label>
           </ion-card-title>
           <ion-card-subtitle>
@@ -53,7 +53,7 @@
             fill="clear"
             color="danger"
             slot="end"
-            (click)="confirmDeleteMarriage(occupation)"
+            (click)="confirmDeleteMarriage()"
           >
             <ion-icon name="trash" slot="start"></ion-icon>
             {{ "_common.delete" | translate }}
