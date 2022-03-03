@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-date-select-template',
@@ -22,7 +22,7 @@ export class DateSelectTemplateComponent implements OnInit {
     return this._date;
   }
   public selectedDate: string | Date;
-  constructor(@Inject(LOCALE_ID) private locale) {}
+  constructor(@Inject(LOCALE_ID) private locale, private cdr :ChangeDetectorRef) {}
 
   ngOnInit() {}
 
@@ -30,5 +30,6 @@ export class DateSelectTemplateComponent implements OnInit {
     this._date = new Date(date);
     this.selectedDate = formatDate(date, 'dd/MM/yyyy', this.locale);
     this.dateChange.emit(this._date);
+    this.cdr.detectChanges();
   }
 }

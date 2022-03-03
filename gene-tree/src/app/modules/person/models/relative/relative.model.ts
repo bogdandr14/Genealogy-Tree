@@ -1,5 +1,5 @@
 import { GenericPersonModel } from './../person/generic-person.model';
 export class RelativeModel extends GenericPersonModel{
-  id: number;
+  relativeId: number;
   bloodRelatives: boolean;
 }

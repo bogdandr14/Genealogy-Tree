@@ -25,8 +25,8 @@ namespace GenealogyTree.Business.Services
         {
             List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.SecondPersonId == personId).Include(m => m.FirstPerson).ToList();
             marriages.AddRange(unitOfWork.Marriage.Filter(x => x.FirstPersonId == personId).Include(m => m.SecondPerson).ToList());
-            List < MarriedPersonModel> returnEvent =new List<MarriedPersonModel>();
-            foreach(var marriage in marriages)
+            List<MarriedPersonModel> returnEvent = new List<MarriedPersonModel>();
+            foreach (var marriage in marriages)
             {
                 MarriedPersonModel returnMarriage = _mapper.Map<MarriedPersonModel>(marriage);
                 returnMarriage.PersonMarriedTo.ImageFile = await _fileManagementService.GetFile(marriage.FirstPerson != null ? marriage.FirstPerson.Image : marriage.SecondPerson.Image);
@@ -44,8 +44,13 @@ namespace GenealogyTree.Business.Services
 
         public async Task<MarriageDetailsModel> GetMarriageAsync(int marriageId)
         {
-            Task<Marriage> marriage = unitOfWork.Marriage.FindById(marriageId);
+            Marriage marriage = await unitOfWork.Marriage.FindById(marriageId);
+            marriage.FirstPerson = await unitOfWork.Person.FindById(marriage.FirstPersonId);
+            marriage.SecondPerson = await unitOfWork.Person.FindById(marriage.SecondPersonId);
             MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriage);
+            returnEvent.FirstPerson.ImageFile = await _fileManagementService.GetFile(marriage.FirstPerson.Image);
+            returnEvent.PersonMarriedTo.ImageFile = await _fileManagementService.GetFile(marriage.SecondPerson.Image);
+
             return returnEvent;
         }
 

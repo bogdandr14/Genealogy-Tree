@@ -21,7 +21,7 @@ export class PersonInfoComponent implements OnInit {
     public router: Router,
     private translateService: TranslateService,
     private alertService: AlertService,
-    private PersonService: PersonService
+    private personService: PersonService
   ) { }
 
   ngOnInit() { }
@@ -71,7 +71,7 @@ export class PersonInfoComponent implements OnInit {
   }
 
   deletePerson() {
-    return this.PersonService.deletePerson(this.personInfo.personId)
+    return this.personService.deletePerson(this.personInfo.personId)
       .subscribe(() => {
         this.router.navigate(['/person/list'])
       });

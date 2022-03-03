@@ -1,7 +1,7 @@
-import { MarriageService } from './../../services/marriage.service';
-import { MarriedPersonModel } from './../../models/marriage/married-person.model';
 import { Component, Input, OnInit } from '@angular/core';
-import { GenericPersonModel } from '../../models/person/generic-person.model';
+import { MarriedPersonModel } from '../../../models/marriage/married-person.model';
+import { GenericPersonModel } from '../../../models/person/generic-person.model';
+import { MarriageService } from '../../../services/marriage.service';
 
 @Component({
   selector: 'app-marriage-list',
@@ -23,6 +23,4 @@ export class MarriageListComponent implements OnInit {
         this.marriages = marriages;
       });
   }
-
-  confirmDeleteMarriage() {}
 }

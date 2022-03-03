@@ -1,0 +1,43 @@
+<ion-card>
+  <ion-card-header class="ion-text-center">
+    <ion-card-title>
+      {{ "_person.marriages" | translate }}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list slot="content">
+      <div *ngIf="marriages">
+        <app-marriage-card
+          *ngFor="let marriage of marriages"
+          [canModify]="canModify"
+          [marriage]="marriage"
+          (saveConfirmed)="refreshMarriages()"
+        >
+        </app-marriage-card>
+      </div>
+      <ng-container *ngIf="canModify">
+        <ion-button
+          [id]="'open-add-marriage' + personLinkedTo.personId"
+          expand="block"
+          fill="clear"
+          color="success"
+        >
+          <ion-icon name="add" slot="start"></ion-icon>
+          {{ "_add.marriage" | translate }}
+        </ion-button>
+        <ion-modal
+          [trigger]="'open-add-marriage' + personLinkedTo.personId"
+          [swipeToClose]="true"
+        >
+          <ng-template>
+            <app-marriage-add
+              [person]="personLinkedTo"
+              (saveConfirmed)="refreshMarriages()"
+            >
+            </app-marriage-add>
+          </ng-template>
+        </ion-modal>
+      </ng-container>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

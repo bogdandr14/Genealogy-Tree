@@ -56,7 +56,8 @@
   "_marriage": {
     "startDate": "Începutul căsătoriei",
     "endDate": "Finalul căsătoriei",
-    "chooseSpouce": "Alege mirele/mireasa să fie adăugată la căsniciile persoanei"
+    "chooseSpouce": "Alege mirele/mireasa să fie adăugată la căsniciile persoanei",
+    "editDates": "Editează zilele de început şi final pentru căsătoria selectată"
   },
   "_location": {
     "from": "Născut în",

@@ -6,12 +6,13 @@
   </ion-card-header>
   <ion-card-content>
     <ion-list slot="content">
-      <app-removable-relative-chip
+      <app-relative-card
         *ngFor="let relative of relatives"
         [relative]="relative"
         [isParent]="isParentList"
+        [canModify]="canModify"
         (deleteConfirmed)="refreshRelatives()"
-      ></app-removable-relative-chip>
+      ></app-relative-card>
       <ng-container *ngIf="canModify">
         <ion-button
           [id]="'open-add-link' + personLinkedTo.personId + isParentList"

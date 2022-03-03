@@ -106,5 +106,20 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<ActionResult<MarriageDetailsModel>> DeleteMarriage(int id)
+        {
+            try
+            {
+                MarriageDetailsModel returnEvent = await _marriageService.DeleteMarriageAsync(id);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
     }
 }

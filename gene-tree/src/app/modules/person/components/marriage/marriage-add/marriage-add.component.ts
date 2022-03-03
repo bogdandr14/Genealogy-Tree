@@ -1,10 +1,9 @@
-import { MarriageService } from './../../services/marriage.service';
-import { MarriageEditModel } from './../../models/marriage/marriage-edit.model';
+import { MarriageService } from '../../../services/marriage.service';
+import { MarriageEditModel } from '../../../models/marriage/marriage-edit.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { GenericPersonModel } from '../../models/person/generic-person.model';
-import { RelativeEditModel } from '../../models/relative/relative-edit.model';
-import { RelativesService } from '../../services/relatives.service';
+import { GenericPersonModel } from '../../../models/person/generic-person.model';
+import { RelativesService } from '../../../services/relatives.service';
 
 @Component({
   selector: 'app-marriage-add',

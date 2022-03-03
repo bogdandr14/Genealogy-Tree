@@ -8,6 +8,7 @@ import { GenericPersonModel } from '../../models/person/generic-person.model';
 })
 export class PersonCardComponent implements OnInit {
   @Input() person: GenericPersonModel;
+  @Input() showContent = true;
   constructor() {}
 
   ngOnInit() {}

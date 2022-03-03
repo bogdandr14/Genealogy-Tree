@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Entities;
@@ -15,10 +16,12 @@ namespace GenealogyTree.Business.Services
     {
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
-        public ParentChildService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
+        private readonly IMarriageService _marriageService;
+        public ParentChildService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IMarriageService marriageService) : base(unitOfWork)
         {
             _mapper = mapper;
             _fileManagementService = fileManagementService;
+            _marriageService = marriageService;
         }
 
         public async Task<List<RelativeModel>> GetAllParentsForPerson(int childId)
@@ -96,9 +99,10 @@ namespace GenealogyTree.Business.Services
         public async Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId)
         {
             List<RelativeModel> relatedPeople = await GetRelatedPeople(personId);
+            List<MarriedPersonModel> marriedPersonModels = await _marriageService.GetAllMarriagesForPerson(personId);
             Person person = await unitOfWork.Person.FindById(personId);
             List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
-            List<Person> unrelatedPeople = peopleInTree.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id)).ToList();
+            List<Person> unrelatedPeople = peopleInTree.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id) && !marriedPersonModels.Exists(y=> y.PersonMarriedTo.PersonId == x.Id)).ToList();
             unrelatedPeople.RemoveAll(relative => person.Id == relative.Id);
             List<GenericPersonModel> returnEvent = new List<GenericPersonModel>();
             foreach (var unrelatedPerson in unrelatedPeople)

@@ -1,7 +1,7 @@
-import { RelativesService } from './../../services/relatives.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { RelativeModel } from '../../models/relative/relative.model';
-import { GenericPersonModel } from '../../models/person/generic-person.model';
+import { GenericPersonModel } from '../../../models/person/generic-person.model';
+import { RelativeModel } from '../../../models/relative/relative.model';
+import { RelativesService } from '../../../services/relatives.service';
 
 @Component({
   selector: 'app-linked-relatives-list',
@@ -18,6 +18,7 @@ export class LinkedRelativesListComponent implements OnInit {
   ngOnInit() { }
 
   refreshRelatives() {
+    debugger;
     if (this.isParentList) {
       this.relativesService.getParents(this.personLinkedTo.personId)
         .subscribe((parents) => {

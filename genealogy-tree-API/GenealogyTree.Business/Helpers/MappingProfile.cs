@@ -52,6 +52,7 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<Marriage, MarriageDetailsModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
                 .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))
+                .ForMember(x => x.PersonMarriedTo, y => y.MapFrom(z => z.SecondPerson))
                 .ReverseMap();
             CreateMap<Marriage, MarriageCreateUpdateModel>()
                 .ReverseMap();
@@ -63,6 +64,7 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<ParentChild, ParentModel>()
+                .ForMember(x => x.RelativeId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Parent.TreeId))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Parent.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Parent.FirstName))
@@ -75,6 +77,7 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<ParentChild, ChildModel>()
+                .ForMember(x => x.RelativeId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Child.TreeId))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Child.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Child.FirstName))

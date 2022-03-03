@@ -5,7 +5,7 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { GenericPersonModel } from '../../models/person/generic-person.model';
+import { GenericPersonModel } from '../../../models/person/generic-person.model';
 
 @Component({
   selector: 'app-relative-option-card',

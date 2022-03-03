@@ -1,0 +1,63 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      {{ "_add.marriage" | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        {{ "_common.cancel" | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="custom-padding-bottom absolute-center">
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-list-header>
+                <h2>
+                  {{ "_marriage.editDates" | translate }}
+                </h2>
+              </ion-list-header>
+              <app-person-card
+                [person]="marriageDetails.firstPerson"
+                [showContent]="false"
+              >
+              </app-person-card>
+              <app-person-card
+                [person]="marriageDetails.personMarriedTo"
+                [showContent]="false"
+              >
+              </app-person-card>
+              <app-date-select-template
+                [isRequired]="true"
+                name="_marriage.startDate"
+                [(date)]="marriageUpdate.startDate"
+              >
+              </app-date-select-template>
+              <app-date-select-template
+                [isRequired]="false"
+                name="_marriage.endDate"
+                [(date)]="marriageUpdate.endDate"
+              >
+              </app-date-select-template>
+              <ion-button
+                color="success"
+                type="submit"
+                class="submit-button"
+                expand="block"
+                [disabled]="!marriageUpdate.startDate"
+                (click)="editMarriage()"
+              >
+                {{ "_common.save" | translate }}
+              </ion-button>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

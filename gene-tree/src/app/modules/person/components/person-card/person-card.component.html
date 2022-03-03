@@ -1,6 +1,6 @@
 <ion-card *ngIf="person">
-  <ion-card-header>
-    <ion-item>
+  <ion-card-header [routerLink]="['/person/details', person?.personId]">
+    <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
         <img
           [src]="imageUrl"
@@ -13,7 +13,7 @@
       </ion-label>
     </ion-item>
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content *ngIf="showContent">
     <ion-list lines="none">
       <ion-item>
         <ion-label> {{ "_person.birthday" | translate }}:</ion-label>

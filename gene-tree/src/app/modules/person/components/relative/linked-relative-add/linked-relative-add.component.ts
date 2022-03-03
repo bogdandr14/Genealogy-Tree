@@ -1,7 +1,7 @@
-import { GenericPersonModel } from './../../models/person/generic-person.model';
-import { RelativesService } from './../../services/relatives.service';
+import { GenericPersonModel } from '../../../models/person/generic-person.model';
+import { RelativesService } from '../../../services/relatives.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RelativeEditModel } from '../../models/relative/relative-edit.model';
+import { RelativeEditModel } from '../../../models/relative/relative-edit.model';
 import { ModalController } from '@ionic/angular';
 
 @Component({

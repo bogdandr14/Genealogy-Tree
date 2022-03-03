@@ -1,21 +1,23 @@
-import { RelativeModel } from './../../models/relative/relative.model';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RelativesService } from './../../../services/relatives.service';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
-import { RelativesService } from '../../services/relatives.service';
+import { RelativeModel } from './../../../models/relative/relative.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-removable-relative-chip',
-  templateUrl: './removable-relative-chip.component.html',
-  styleUrls: ['./removable-relative-chip.component.scss'],
+  selector: 'app-relative-card',
+  templateUrl: './relative-card.component.html',
+  styleUrls: ['./relative-card.component.scss'],
 })
-export class RemovableRelativeChipComponent implements OnInit {
+export class RelativeCardComponent implements OnInit {
   @Input() relative: RelativeModel;
   @Input() isParent: boolean = true;
+  @Input() canModify: boolean = false;
   @Output() deleteConfirmed = new EventEmitter<boolean>();
+
   constructor(
-    private alertService: AlertService,
     private translateService: TranslateService,
+    private alertService: AlertService,
     private relativesService: RelativesService
   ) {}
 
@@ -32,10 +34,13 @@ export class RemovableRelativeChipComponent implements OnInit {
       this.translateService.instant(
         this.isParent ? '_delete.parent' : '_delete.child'
       ),
-      this.translateService.instant(this.isParent ?'_delete.parentMessage':'_delete.childMessage', {
-        firstName: this.relative.firstName,
-        lastName: this.relative.lastName,
-      }),
+      this.translateService.instant(
+        this.isParent ? '_delete.parentMessage' : '_delete.childMessage',
+        {
+          firstName: this.relative.firstName,
+          lastName: this.relative.lastName,
+        }
+      ),
       this.translateService.instant('_common.cancel'),
       this.translateService.instant('_common.confirm'),
       this,
@@ -45,9 +50,9 @@ export class RemovableRelativeChipComponent implements OnInit {
 
   deleteRelative() {
     return this.relativesService
-      .deleteRelative(this.relative.id)
+      .deleteRelative(this.relative.relativeId)
       .subscribe(() => {
-        this.deleteConfirmed.emit(true);
+        this.deleteConfirmed.emit();
       });
   }
 }
