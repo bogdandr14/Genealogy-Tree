@@ -1,6 +1,6 @@
 
 export class RelativeEditModel {
-  id: number;
+  relativeId: number;
   bloodRelatives: boolean;
   childId: number;
   parentId: number;

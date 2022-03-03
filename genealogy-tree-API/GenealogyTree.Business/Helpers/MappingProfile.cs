@@ -89,10 +89,11 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<ChildModel, RelativeModel>()
                 .ReverseMap();
 
-
             CreateMap<ParentChild, ParentChildDetailsModel>()
+                .ForMember(x => x.RelativeId, y => y.MapFrom(z => z.Id))
                 .ReverseMap();
             CreateMap<ParentChild, ParentChildCreateUpdateModel>()
+                .ForMember(x => x.RelativeId, y => y.MapFrom(z => z.Id))
                 .ReverseMap();
 
             CreateMap<Person, GenericPersonModel>()

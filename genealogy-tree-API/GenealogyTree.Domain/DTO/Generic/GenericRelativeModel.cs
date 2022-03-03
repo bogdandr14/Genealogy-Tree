@@ -2,7 +2,7 @@
 {
     public class GenericRelativeModel
     {
-        public int Id { get; set; }
+        public int RelativeId { get; set; }
         public bool BloodRelatives { get; set; }
     }
 }

@@ -18,7 +18,6 @@ export class LinkedRelativesListComponent implements OnInit {
   ngOnInit() { }
 
   refreshRelatives() {
-    debugger;
     if (this.isParentList) {
       this.relativesService.getParents(this.personLinkedTo.personId)
         .subscribe((parents) => {
