@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/modules/user/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
@@ -13,15 +14,22 @@ import { ChangePasswordModel } from '../../models/change-password.model';
 export class ChangePasswordComponent implements OnInit {
   public changePassword = new ChangePasswordModel();
   public InputType = ImputTypeEnum;
-  constructor(public modalCtrl: ModalController, private authService: AuthService, private alertService: AlertService) { }
+  constructor(
+    public modalCtrl: ModalController,
+    private authService: AuthService,
+    private userService: UserService,
+    private alertService: AlertService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   async confirmChangePassword() {
     console.log(this.changePassword);
-    (await this.authService.changePassword(this.changePassword))
-      .subscribe(() => {
-        this.alertService.showSuccess("_message._success.changePassword");this.dismiss()});
+    this.changePassword.username = this.userService.getCurrentUser().username;
+    this.authService.changePassword(this.changePassword).subscribe(() => {
+      this.alertService.showSuccess('_message._success.changePassword');
+      this.dismiss();
+    });
   }
   dismiss() {
     this.modalCtrl.dismiss();

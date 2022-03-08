@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DataService } from '../../core/services/data.service';
+import { BaseService } from '../../core/services/base.service';
 import { ImageFile } from '../../shared/models/image-file';
 import { LocationModel } from '../../shared/models/location.model';
 import { GenericPersonModel } from '../models/person/generic-person.model';
@@ -16,7 +16,7 @@ import { PersonImageUpdateModel } from '../models/person/person-image-update.mod
 @Injectable({
   providedIn: 'root',
 })
-export class PersonService extends DataService {
+export class PersonService extends BaseService {
   constructor(private httpClient: HttpClient, private router: Router) {
     super(httpClient, 'api/person', environment.baseApiUrl);
   }
@@ -25,7 +25,7 @@ export class PersonService extends DataService {
     return super.getOneById<PersonEditModel>(
       personId,
       null,
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 

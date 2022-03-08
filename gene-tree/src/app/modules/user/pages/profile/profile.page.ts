@@ -23,7 +23,6 @@ export class ProfilePage implements OnInit {
   setProfileInfo() {
     this.userService
       .getPersonalInfo<AccountProfileModel>()
-      .pipe(first())
       .subscribe((res) => {
         this.personalInfo = res;
       });

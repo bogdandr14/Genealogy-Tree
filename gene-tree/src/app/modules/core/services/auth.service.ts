@@ -9,26 +9,36 @@ import { LoginModel } from '../../user/models/login.model';
 import { RegisterModel } from '../../user/models/register.model';
 
 import { LoginResponseModel } from '../models/login-response.model';
+import { BaseService } from './base.service';
 import { DataService } from './data.service';
-import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService extends DataService {
+export class AuthService extends BaseService {
   private timerSubscription = new Subscription();
-  private authState = new BehaviorSubject(false);
+  public isLoggedIn = new BehaviorSubject<boolean>(null);
 
   constructor(
     public http: HttpClient,
     private router: Router,
-    private storageService: StorageService
+    private dataService: DataService
   ) {
     super(http, 'api/auth');
-    this.checkLoggedIn();
+    this.loadToken();
   }
 
-  checkLoggedIn() {
-    this.storageService.token$.subscribe((token) => {
-      this.authState.next(!!token);
+  private loadToken() {
+    this.dataService.getJWT().subscribe((token) => {
+      this.isLoggedIn.next(!!token);
+      if (token) {
+        this.setExpirationCounter(token);
+      }
+      this.initTokenSubscriber();
+    });
+  }
+
+  private initTokenSubscriber() {
+    this.dataService.token$.subscribe((token) => {
+      this.isLoggedIn.next(!!token);
       if (token) {
         this.setExpirationCounter(token);
       }
@@ -38,7 +48,7 @@ export class AuthService extends DataService {
   public login(userCredentials: LoginModel): Observable<LoginResponseModel> {
     return super.add<LoginResponseModel>(userCredentials, 'login').pipe(
       tap((login) => {
-        this.storageService.setJWT(login.token);
+        this.dataService.setJWT(login.token);
         this.setUserInfo(login);
         this.router.navigate(['home']);
       })
@@ -49,27 +59,21 @@ export class AuthService extends DataService {
     return super.add<void>(registerDetails, 'register');
   }
 
-  public async changePassword(changePassword: ChangePasswordModel) {
-    const user = await this.storageService.getCurrentUser();
-    changePassword.username = user.username;
+  public changePassword(changePassword: ChangePasswordModel) {
     return super.update<void>(changePassword, 'changePassword');
   }
 
   public logout(): void {
     this.timerSubscription.unsubscribe();
-    this.storageService.removeJWT();
-    this.storageService.removeUser();
-    this.storageService.removePreferences();
+    this.dataService.removeJWT();
+    this.dataService.removeUser();
+    debugger;
     this.router.navigate(['user', 'login']);
-  }
-
-  public isLoggedIn(): boolean {
-    return this.authState.value;
   }
 
   private setUserInfo(loginResponse: LoginResponseModel) {
     const tokenInfo = JSON.parse(atob(loginResponse.token.split('.')[1]));
-    this.storageService.setCurrentUser({
+    this.dataService.setCurrentUser({
       personId: loginResponse.personId,
       userId: tokenInfo.jti,
       treeId: loginResponse.treeId,

@@ -7,19 +7,28 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../models/account-settings.model';
 import { CurrentUserModel } from '../../core/models/current-user.model';
+import { BaseService } from '../../core/services/base.service';
 import { DataService } from '../../core/services/data.service';
-import { StorageService } from '../../core/services/storage.service';
 
 @Injectable({ providedIn: 'root' })
-export class UserService extends DataService {
+export class UserService extends BaseService {
   private userState = new BehaviorSubject<CurrentUserModel>(null);
 
-  constructor(httpClient: HttpClient, private storageService: StorageService) {
+  constructor(httpClient: HttpClient, private dataService: DataService) {
     super(httpClient, 'api/user', environment.baseApiUrl);
-    this.init();
+    this.loadUser();
   }
-  init() {
-    this.storageService.user$.subscribe((user) => {
+  loadUser() {
+    this.dataService.getCurrentUser().subscribe((user) => {
+      this.userState.next(user);
+      if (user && user.userId) {
+        this.setPreferences();
+      }
+      this.initUserSubscriber();
+    });
+  }
+  private initUserSubscriber() {
+    this.dataService.user$.subscribe((user) => {
       this.userState.next(user);
       if (user && user.userId) {
         this.setPreferences();
@@ -28,11 +37,9 @@ export class UserService extends DataService {
   }
 
   public setPreferences() {
-    this.getUserSettings()
-      .pipe()
-      .subscribe((userSettings) => {
-        this.storageService.setPreferences(userSettings);
-      });
+    this.getUserSettings().subscribe((userSettings) => {
+      this.dataService.setPreferences(userSettings);
+    });
   }
 
   public isCurrentUser(userId: Guid) {
@@ -47,14 +54,14 @@ export class UserService extends DataService {
   public checkUsernameTaken(username: string): Observable<boolean> {
     return super.getOneByPath<boolean>(
       `usernameAvailable/${username}`,
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 
   public checkEmailTaken(email: string): Observable<boolean> {
     return super.getOneByPath<boolean>(
       `emailAvailable/${email}`,
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 
@@ -73,7 +80,7 @@ export class UserService extends DataService {
     return super.getOneById<AccountSettingsModel>(
       this.userState.value.userId,
       'settings',
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 

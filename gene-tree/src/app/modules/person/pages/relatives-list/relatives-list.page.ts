@@ -1,5 +1,4 @@
 import { UserService } from 'src/app/modules/user/services/user.service';
-import { StorageService } from 'src/app/modules/core/services/storage.service';
 import { CurrentUserModel } from './../../../core/models/current-user.model';
 import { PersonService } from './../../services/person.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -14,13 +13,12 @@ export class RelativesListPage implements OnInit {
   public relativesList: GenericPersonModel[] = [];
   private currentUser: CurrentUserModel;
   constructor(
-    private storageService: StorageService,
     private personService: PersonService,
     private userService: UserService
   ) {}
 
   async ngOnInit() {
-    this.currentUser = await this.storageService.getCurrentUser();
+    this.currentUser = this.userService.getCurrentUser();
     this.personService
       .getAllPeopleInTree(this.currentUser.treeId)
       .subscribe((relatives) => {
@@ -30,6 +28,8 @@ export class RelativesListPage implements OnInit {
 
   // TODO check who is the root of the tree
   get isUserTree() {
-    return this.userService.getCurrentUser().treeId === this.currentUser?.treeId;
+    return (
+      this.userService.getCurrentUser().treeId === this.currentUser?.treeId
+    );
   }
 }

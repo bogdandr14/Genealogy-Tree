@@ -1,182 +1,125 @@
-import { Guid } from 'guid-typescript';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
+/* eslint-disable no-debugger */
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpInterceptorParams } from 'src/app/modules/core/models/http-interceptor-params.model';
-import { PaginatedResultModel } from '../models/paginated-result.model';
-import { HttpInterceptorConfig } from '../models/http-interceptor-config.model';
+import { AccountSettingsModel } from '../../user/models/account-settings.model';
+import { CurrentUserModel } from '../models/current-user.model';
+import { Storage } from '@ionic/storage-angular';
+import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
-export abstract class DataService {
-  protected url: string;
-  protected static noLoadingConfig: HttpInterceptorConfig = {
-    hideLoading: true,
-  };
-  constructor(
-    public http: HttpClient,
-    private urlString: string,
-    private baseUrl?: string
-  ) {
-    if (!baseUrl) {
-      this.url =
-        this.urlString === ''
-          ? environment.baseApiUrl
-          : `${environment.baseApiUrl}/${urlString}`;
+@Injectable({
+  providedIn: 'root',
+})
+export class DataService {
+  private token = new BehaviorSubject<string>('');
+  public token$ = this.token.asObservable();
+
+  private user = new BehaviorSubject<CurrentUserModel>(new CurrentUserModel());
+  public user$ = this.user.asObservable();
+
+  private darkTheme = new BehaviorSubject<boolean>(false);
+  public darkTheme$ = this.darkTheme.asObservable();
+
+  private language = new BehaviorSubject<string>(environment.defaultLanguage);
+  public language$ = this.language.asObservable();
+
+  private storageReady = new BehaviorSubject(false);
+  constructor(private storage: Storage) {
+    this.initData();
+  }
+
+  async initData() {
+    await this.storage.defineDriver(CordovaSQLiteDriver);
+    await this.storage.create();
+    this.getJWT().subscribe((value) => this.token.next(value));
+    this.getCurrentUser().subscribe((value) => this.user.next(value));
+    this.getPreferences().subscribe((value) => this.checkPreferences(value));
+    this.storageReady.next(true);
+  }
+
+  checkPreferences(preferences: AccountSettingsModel) {
+    if (preferences) {
+      this.darkTheme.next(preferences.themePreference);
+      this.language.next(preferences.languagePreference);
     } else {
-      this.url =
-        this.urlString === '' ? this.baseUrl! : `${this.baseUrl}/${urlString}`;
+      this.darkTheme.next(false);
+      this.language.next(environment.defaultLanguage);
     }
   }
 
-  private getOne<T>(
-    url: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-    return this.http.get<T>(url, options);
+  setTheme(theme: boolean) {
+    this.darkTheme.next(theme);
   }
 
-  public getOneById<T>(
-    id: number | Guid,
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const url = path ? `${this.url}/${path}/${id}` : `${this.url}/${id}`;
-    return this.getOne<T>(url, params);
+  setLanguage(language: string) {
+    this.language.next(language);
   }
 
-  public getOneByPath<T>(
-    path: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const url = `${this.url}/${path}`;
-    return this.getOne<T>(url, params);
+  setJWT(token: string | null) {
+    this.set('jwt', token);
+    debugger;
+    this.token.next(token);
   }
 
-  public getMany<T>(
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T[]> {
-    const url = path ? `${this.url}/${path}` : `${this.url}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-
-    return this.http.get<T[]>(url, options);
+  getJWT(): Observable<string | null> {
+    const jwt = this.get<string>('jwt');
+    return jwt;
   }
 
-  public getAll<T>(params?: HttpInterceptorConfig): Observable<T[]> {
-    return this.getMany<T>('', params);
+  removeJWT() {
+    this.remove('jwt');
+    this.token.next(null);
   }
 
-  public update<T>(
-    data: any,
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const body = data ? JSON.stringify(data) : {};
-    const url = path ? `${this.url}/${path}` : `${this.url}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-    return this.http.put<T>(url, body, options);
+  setCurrentUser(user: CurrentUserModel) {
+    this.set('user', user);
+    this.user.next(user);
   }
 
-  public updateById<T>(
-    id: number | Guid,
-    data: any,
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const url = path ? `${path}/${id}` : `${id}`;
-    return this.update<T>(data, url, params);
+  getCurrentUser(): Observable<CurrentUserModel | null> {
+    const user = this.get<CurrentUserModel>('user');
+    return user;
   }
 
-  public updateMultiple<T>(
-    array: any[],
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const body = JSON.stringify(array);
-    const url = path ? `${this.url}/${path}` : `${this.url}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-
-    return this.http.put<T>(url, body, options);
+  removeUser() {
+    this.remove('user');
+    this.user.next(null);
   }
 
-  public add<T>(
-    data: any,
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<T> {
-    const body = data ? JSON.stringify(data) : {};
-    const url = path ? `${this.url}/${path}` : `${this.url}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-
-    return this.http.post<T>(url, body, options);
+  setPreferences(preferences: AccountSettingsModel) {
+    this.set('preferences', preferences);
+    this.checkPreferences(preferences);
   }
 
-  public remove(
-    id: number | Guid,
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<any> {
-    const url = path ? `${this.url}/${path}/${id}` : `${this.url}/${id}`;
-    const options = {
-      params: new HttpInterceptorParams(params),
-    };
-    return this.http.delete<any>(url, options);
+  getPreferences(): Observable<AccountSettingsModel> {
+    const preferences = this.get<AccountSettingsModel>('preferences');
+    return preferences;
   }
 
-  public removeMultiple(
-    ids: number[],
-    path?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<any> {
-    const body = JSON.stringify(ids);
-    const url = path ? `${this.url}/${path}` : `${this.url}`;
-    const options = { params: new HttpInterceptorParams(params), body };
-    return this.http.delete<any>(url, options);
+  removePreferences() {
+    this.remove('preferences');
+    this.darkTheme.next(false);
+    this.language.next(environment.defaultLanguage);
   }
 
-  public getPaginated<T>(
-    pageIndex: number,
-    itemsNumber: number,
-    searchKey: string,
-    apiPath?: string,
-    params?: HttpInterceptorConfig
-  ): Observable<PaginatedResultModel<T>> {
-    let path = apiPath ? `paginated/${apiPath}` : 'paginated';
-    path = `${path}?pageIndex=${pageIndex}&itemsNumber=${itemsNumber}&key=${searchKey}`;
-
-    return this.add<PaginatedResultModel<T>>({}, path, params);
+  set(key: string, value: any) {
+    this.storage.set(key, JSON.stringify(value));
   }
 
-  /*
-  This method is not REST-compliant as it sends the filter in the body of a POST request.
-  However, in practice this is a viable solution when the filter is larger than the limit specified by the browser or web server.
-  */
-  public getPaginatedWithFilter<T, V>(
-    pageIndex: number,
-    itemsNumber: number,
-    sortField: string,
-    sortDirection?: string,
-    filter?: V,
-    params?: HttpInterceptorConfig
-  ): Observable<PaginatedResultModel<T>> {
-    if (!sortField) {
-      sortField = '';
-    }
-    if (!sortDirection) {
-      sortDirection = '';
-    }
-    const path = `paginated?pageIndex=${pageIndex}&itemsNumber=${itemsNumber}&sortField=${sortField}&sortDirection=${sortDirection}`;
+  get<T>(key: string): Observable<T | null> {
+    return this.storageReady.pipe(
+      filter((ready) => ready),
+      switchMap(() => {
+        return (
+          from(this.storage.get(key).then((value) => <T>JSON.parse(value))) ||
+          of(null)
+        );
+      })
+    );
+  }
 
-    return this.add<PaginatedResultModel<T>>(filter, path, params);
+  remove(key: string) {
+    this.storage.remove(key);
   }
 }

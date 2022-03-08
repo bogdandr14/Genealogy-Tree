@@ -1,12 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/modules/core/services/storage.service';
+import { DataService } from 'src/app/modules/core/services/data.service';
 import { environment } from 'src/environments/environment';
 import { LanguageModel } from '../../../core/models/language.model';
 
@@ -23,22 +18,36 @@ export class LanguageSelectComponent implements OnInit {
 
   constructor(
     private translateService: TranslateService,
-    private storageService: StorageService
+    private dataService: DataService
   ) {
     this.selectedLaguage = new FormControl();
     this.languageOptions = environment.appSettings.languages;
   }
 
   ngOnInit(): void {
-    this.selectedLaguage.setValue(this.translateService.currentLang);
-    this.storageService.language$.subscribe((language) => {
+    this.dataService.getPreferences().subscribe((preferences) => {
+      if (
+        preferences &&
+        this.selectedLaguage.value != preferences.languagePreference
+      ) {
+        this.selectedLaguage.setValue(preferences.languagePreference);
+      } else {
+        this.selectedLaguage.setValue(this.translateService.currentLang);
+      }
+      this.setLanguageSubscriber();
+    });
+  }
+
+  setLanguageSubscriber() {
+    this.dataService.language$.subscribe((language) => {
       if (language != null && this.selectedLaguage.value != language) {
         this.selectedLaguage.setValue(language);
       }
     });
   }
+
   onLanguageChange(language: string) {
-    this.storageService.setLanguage(language);
+    this.dataService.setLanguage(language);
     this.languageChanged.emit(language);
   }
 }

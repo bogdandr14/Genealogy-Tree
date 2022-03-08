@@ -5,7 +5,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { StorageService } from 'src/app/modules/core/services/storage.service';
+import { DataService } from 'src/app/modules/core/services/data.service';
 
 @Component({
   selector: 'app-theme-select',
@@ -18,13 +18,17 @@ export class ThemeSelectComponent implements OnInit {
   public themeCtrl: FormControl;
 
   constructor(
-    private storageService: StorageService
+    private dataService: DataService
   ) {
     this.themeCtrl = new FormControl();
   }
 
   ngOnInit() {
-    this.storageService.darkTheme$.subscribe((theme) => {
+    this.initThemeSubscriber();
+  }
+
+  initThemeSubscriber(){
+    this.dataService.darkTheme$.subscribe((theme) => {
       if (this.themeCtrl.value != theme) {
         this.themeCtrl.setValue(theme);
       }
@@ -32,7 +36,7 @@ export class ThemeSelectComponent implements OnInit {
   }
 
   toggleColorTheme(theme: boolean) {
-    this.storageService.setTheme(theme);
+    this.dataService.setTheme(theme);
     this.themeChanged.emit(theme);
   }
 }

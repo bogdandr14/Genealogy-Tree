@@ -2,7 +2,7 @@ import { HttpInterceptorConfig } from './../../core/models/http-interceptor-conf
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService } from '../../core/services/data.service';
+import { BaseService } from '../../core/services/base.service';
 import { CommonObject } from '../models/common-object';
 import { Observable } from 'rxjs';
 import { EducationModel } from '../../user/models/education.model';
@@ -12,7 +12,7 @@ import { Guid } from 'guid-typescript';
 @Injectable({
   providedIn: 'root',
 })
-export class EducationService extends DataService {
+export class EducationService extends BaseService {
   constructor(httpClient: HttpClient, private userService: UserService) {
     super(httpClient, 'api/education', environment.baseApiUrl);
   }
@@ -20,12 +20,12 @@ export class EducationService extends DataService {
   getEducationsForUser(userId: Guid): Observable<EducationModel[]> {
     return super.getMany<EducationModel>(
       `forUser/${userId}`,
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 
   getEducation(educationId: number): Observable<EducationModel> {
-    return this.getOneById(educationId, null, DataService.noLoadingConfig);
+    return this.getOneById(educationId, null, BaseService.noLoadingConfig);
   }
 
   updateEducation(education: EducationModel): Observable<EducationModel> {
@@ -42,7 +42,7 @@ export class EducationService extends DataService {
   }
 
   getEducationLevels(): Observable<CommonObject[]> {
-    return super.getMany<CommonObject>('levels', DataService.noLoadingConfig);
+    return super.getMany<CommonObject>('levels', BaseService.noLoadingConfig);
   }
 
   addEducationLevel(educationLevelName: string): Observable<EducationModel> {

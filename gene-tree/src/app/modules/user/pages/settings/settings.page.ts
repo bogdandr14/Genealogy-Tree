@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/core/services/auth.service';
-import { StorageService } from 'src/app/modules/core/services/storage.service';
+import { DataService } from 'src/app/modules/core/services/data.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { AccountSettingsModel } from '../../models/account-settings.model';
 
@@ -17,12 +17,12 @@ export class SettingsPage implements OnInit {
     private router: Router,
     private userService: UserService,
     public authService: AuthService,
-    public storageService: StorageService
+    public dataService: DataService
   ) {}
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.storageService.getPreferences().then((settings) => {
+    if (this.authService.isLoggedIn) {
+      this.dataService.getPreferences().subscribe((settings) => {
         this.userSettings = settings;
       });
     }
@@ -31,7 +31,7 @@ export class SettingsPage implements OnInit {
   saveSettings() {
     this.userService
       .saveUserSettings(this.userSettings)
-      .subscribe((settings) => this.storageService.setPreferences(settings));
+      .subscribe((settings) => this.dataService.setPreferences(settings));
   }
 
   onLanguageChange(language: string) {

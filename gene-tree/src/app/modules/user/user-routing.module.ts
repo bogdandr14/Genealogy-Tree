@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
-import { LoginGuard } from '../core/guards/login.guard';
+import { AutoLoginGuard } from '../core/guards/auto-login.guard';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
@@ -18,22 +18,22 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPage,
-    canActivate: [LoginGuard],
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'register',
     component: RegisterPage,
-    canActivate: [LoginGuard],
+    canLoad: [AutoLoginGuard],
   },
   {
     path: 'profile',
     component: ProfilePage,
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard]
   },
   {
     path: 'settings',
     component: SettingsPage,
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard]
   },
   {
     path: 'search',

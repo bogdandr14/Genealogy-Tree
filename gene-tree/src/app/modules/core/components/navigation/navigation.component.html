@@ -1,4 +1,4 @@
-<ion-list *ngIf="authService.isLoggedIn()" lines="none">
+<ion-list *ngIf="authService.isLoggedIn.value" lines="none">
   <ion-list-header> GeneTree </ion-list-header>
   <ion-menu-toggle
     autoHide="false"
@@ -18,7 +18,7 @@
     </ion-item>
   </ion-menu-toggle>
 </ion-list>
-<!-- <ion-list *ngIf="authService.isLoggedIn()" lines="none">
+<!-- <ion-list *ngIf="authService.isLoggedIn.value" lines="none">
   <ion-list-header> {{ "Account" | translate }} </ion-list-header>
   <ion-menu-toggle autoHide="false">
     <ion-item
@@ -40,7 +40,7 @@
   </ion-menu-toggle>
 </ion-list> -->
 
-<ion-list *ngIf="!authService.isLoggedIn()" lines="none">
+<ion-list *ngIf="!authService.isLoggedIn.value" lines="none">
   <ion-list-header> {{ "account" | translate }} </ion-list-header>
   <ion-menu-toggle autoHide="false">
     <ion-item

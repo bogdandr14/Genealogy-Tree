@@ -2,14 +2,14 @@ import { UserService } from 'src/app/modules/user/services/user.service';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService } from '../../core/services/data.service';
+import { BaseService } from '../../core/services/base.service';
 import { Observable } from 'rxjs';
 import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SyncService extends DataService {
+export class SyncService extends BaseService {
   constructor(httpClient: HttpClient, private userService: UserService) {
     super(httpClient, 'api/sync', environment.baseApiUrl);
   }
@@ -17,7 +17,7 @@ export class SyncService extends DataService {
   getAllSyncedUsers(): Observable<any[]> {
     return super.getMany<any>(
       `users/${this.userService.getCurrentUser().userId}`,
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 

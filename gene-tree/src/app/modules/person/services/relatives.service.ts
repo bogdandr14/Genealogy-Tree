@@ -5,14 +5,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DataService } from '../../core/services/data.service';
+import { BaseService } from '../../core/services/base.service';
 import { RelativeDetailsModel } from '../models/relative/relative-details.model';
 import { RelativeEditModel } from '../models/relative/relative-edit.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RelativesService extends DataService {
+export class RelativesService extends BaseService {
   constructor(httpClient: HttpClient, private router: Router) {
     super(httpClient, 'api/relative', environment.baseApiUrl);
   }
@@ -32,7 +32,7 @@ export class RelativesService extends DataService {
   public getUnrelatedPeople(personId: number): Observable<GenericPersonModel[]> {
     return super.getMany<GenericPersonModel>(
       `unrelated/${personId}`,
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 

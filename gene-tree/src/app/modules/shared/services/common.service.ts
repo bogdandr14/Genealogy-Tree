@@ -2,29 +2,29 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
-import { DataService } from '../../core/services/data.service';
+import { BaseService } from '../../core/services/base.service';
 import { CommonObject } from '../models/common-object';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CommonService extends DataService {
+export class CommonService extends BaseService {
   constructor(httpClient: HttpClient) {
     super(httpClient, 'api/common', environment.baseApiUrl);
   }
 
   public getReligions(): Observable<CommonObject[]> {
-    return this.getMany<CommonObject>('religion', DataService.noLoadingConfig);
+    return this.getMany<CommonObject>('religion', BaseService.noLoadingConfig);
   }
 
   public getGenders(): Observable<CommonObject[]> {
-    return this.getMany<CommonObject>('gender', DataService.noLoadingConfig);
+    return this.getMany<CommonObject>('gender', BaseService.noLoadingConfig);
   }
 
   public getNationalities(): Observable<CommonObject[]> {
     return this.getMany<CommonObject>(
       'nationality',
-      DataService.noLoadingConfig
+      BaseService.noLoadingConfig
     );
   }
 

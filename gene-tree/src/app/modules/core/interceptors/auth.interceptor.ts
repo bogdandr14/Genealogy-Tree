@@ -1,4 +1,3 @@
-import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -7,30 +6,27 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { StorageService } from '../services/storage.service';
-
+import { DataService } from '../services/data.service';
+import { mergeMap } from 'rxjs/operators';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private tokenState = new BehaviorSubject<string>(null);
-
-  constructor(private storageService: StorageService) {
-    this.storageService.token$.subscribe((token) => {
-      this.tokenState.next(token);
-    });
-  }
+  constructor(private dataService: DataService) {}
 
   public intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.tokenState.value) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.tokenState.value}`,
-        },
-      });
-    }
-
-    return next.handle(request);
+    return this.dataService.getJWT().pipe(
+      mergeMap((token) => {
+        if (token) {
+          request = request.clone({
+            setHeaders: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        }
+        return next.handle(request);
+      })
+    );
   }
 }

@@ -10,6 +10,8 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppComponent } from './app-component/app.component';
 import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { Drivers } from '@ionic/storage';
+import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,9 +20,16 @@ import { SharedModule } from './modules/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: 'gene-tree-database',
+      driverOrder: [
+        CordovaSQLiteDriver._driver,
+        Drivers.IndexedDB,
+        Drivers.LocalStorage,
+      ],
+    }),
     CoreModule,
-    SharedModule // DO NOT TOUCH
+    SharedModule, // DO NOT TOUCH
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

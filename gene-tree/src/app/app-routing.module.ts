@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './modules/core/guards/auth.guard';
+import { IntroGuard } from './modules/core/guards/intro.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then( m => m.HomePageModule),
-    canActivate:[AuthGuard]
+    canLoad:[IntroGuard]
   },
   {
     path: '',
@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'person',
     loadChildren: () =>
       import('./modules/person/person.module').then((m) => m.PersonModule),
+  },
+  {
+    path: 'intro',
+    loadChildren: () => import('./modules/intro/intro.module').then( m => m.IntroPageModule)
   }
 ];
 
