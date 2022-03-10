@@ -3,6 +3,8 @@ import { CurrentUserModel } from './../../../core/models/current-user.model';
 import { PersonService } from './../../services/person.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GenericPersonModel } from '../../models/person/generic-person.model';
+import { DataService } from 'src/app/modules/core/services/data.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-relatives-list',
@@ -14,22 +16,25 @@ export class RelativesListPage implements OnInit {
   private currentUser: CurrentUserModel;
   constructor(
     private personService: PersonService,
-    private userService: UserService
+    private userService: UserService,
+    private dataService: DataService
   ) {}
 
   async ngOnInit() {
-    this.currentUser = this.userService.getCurrentUser();
-    this.personService
-      .getAllPeopleInTree(this.currentUser.treeId)
-      .subscribe((relatives) => {
-        this.relativesList = relatives;
-      });
+    this.dataService.getCurrentUser().pipe(first()).subscribe((currentUser) => {
+      this.currentUser = currentUser;
+      this.personService
+        .getAllPeopleInTree(this.currentUser.treeId).pipe(first())
+        .subscribe((relatives) => {
+          this.relativesList = relatives;
+        });
+    });
   }
 
   // TODO check who is the root of the tree
   get isUserTree() {
     return (
-      this.userService.getCurrentUser().treeId === this.currentUser?.treeId
+      this.userService.getLoggedInUser().treeId === this.currentUser?.treeId
     );
   }
 }

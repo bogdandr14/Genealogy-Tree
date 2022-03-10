@@ -33,7 +33,7 @@ export class EducationService extends BaseService {
   }
 
   addEducation(education: EducationModel): Observable<EducationModel> {
-    education.userId = this.userService.getCurrentUser().userId;
+    education.userId = this.userService.getLoggedInUser().userId;
     return super.add<EducationModel>(education);
   }
 

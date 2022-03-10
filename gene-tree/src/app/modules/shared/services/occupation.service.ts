@@ -31,7 +31,7 @@ export class OccupationService extends BaseService {
   }
 
   addOccupation(occupation: OccupationModel): Observable<OccupationModel> {
-    occupation.userId = this.userService.getCurrentUser().userId;
+    occupation.userId = this.userService.getLoggedInUser().userId;
     return super.add<OccupationModel>(occupation);
   }
 

@@ -2,13 +2,13 @@
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button color="primary" (click)="startApp()" [hidden]="!showSkip">
-        Skip
+        {{ "_common.skip" | translate }}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="menu">
   <swiper
     (swiper)="setSwiperInstance($event)"
     (slideChangeTransitionStart)="onSlideChangeStart()"
@@ -16,74 +16,57 @@
     <ng-template swiperSlide>
       <ion-grid>
         <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
-        <h2 class="slide-title">
-          Welcome to
-          <b>Gene-Tree</b>
-        </h2>
-        <p>
-          The
-          <b>Gene-Tree app</b> is a practical app for managing your personal
-          genealogical tree by keeping trace of your relatives and also finding
-          new ones.
-        </p>
-        <ion-button (click)="next()" fill="clear" color="primary"
-          >Next</ion-button
-        >
+        <h2 class="slide-title">{{"_slides._welcome.title" | translate}}</h2>
+        <h3>{{"_slides._welcome.content" |translate}}</h3>
+        <ion-button (click)="next()" color="primary">
+          {{ "_common.next" | translate }}
+        </ion-button>
       </ion-grid>
     </ng-template>
 
     <ng-template swiperSlide>
       <ion-grid>
         <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
-        <h2 class="slide-title">What is Gene-Tree?</h2>
-        <p>
-          <b>Gene-Tree</b> is an app that allows you, the user, to create your
-          own genealogical tree and also extend it with how many relatives you
-          have.
-        </p>
-        <ion-button (click)="next()" fill="clear" color="primary"
-          >Next</ion-button
-        >
+        <h2 class="slide-title">{{"_slides._whatIs.title" | translate}}</h2>
+        <h3>{{"_slides._whatIs.content" | translate}}</h3>
+        <ion-button (click)="next()" color="primary">
+          {{ "_common.next" | translate }}
+        </ion-button>
       </ion-grid>
     </ng-template>
 
     <ng-template swiperSlide>
       <ion-grid>
         <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
-        <h2 class="slide-title">Your information is safe</h2>
-        <p>
-          <b>Gene-Tree</b> does not, and <b> will never </b> use or show the
-          information about your genalogy tree to anyone, beside your relatives
-          that you added.
-        </p>
-        <ion-button (click)="next()" fill="clear" color="primary"
-          >Next</ion-button
-        >
+        <h2 class="slide-title">
+          {{"_slides._securedInfo.title" | translate}}
+        </h2>
+        <h3>{{"_slides._securedInfo.content" |translate}}</h3>
+        <ion-button (click)="next()" color="primary">
+          {{ "_common.next" | translate }}
+        </ion-button>
       </ion-grid>
     </ng-template>
 
     <ng-template swiperSlide>
       <ion-grid>
         <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
-        <h2 class="slide-title">More and more relatives!</h2>
-        <p>
-          <b>Gene-Tree</b> also offers the possibility of connecting with other
-          relatives that use the app. This way you will have access to their in
-          genealogy tree where you can find even more relatives that you never
-          knew!
-        </p>
-        <ion-button (click)="next()" fill="clear" color="primary"
-          >Next</ion-button
-        >
+        <h2 class="slide-title">{{"_slides._relatives.title" |translate}}</h2>
+        <h3>{{"_slides._relatives.content" | translate}}</h3>
+        <ion-button (click)="next()" color="primary">
+          {{ "_common.next" | translate }}
+        </ion-button>
       </ion-grid>
     </ng-template>
 
     <ng-template swiperSlide>
       <ion-grid>
         <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-        <h2 class="slide-title">Ready to create your <b>Gene-Tree</b>?</h2>
-        <ion-button fill="clear" (click)="startApp()">
-          Continue
+        <h3 class="slide-title">
+          {{"_slides.ready" |translate}} <b>GeneTree?</b>
+        </h3>
+        <ion-button (click)="startApp()">
+          {{"_common.continue" | translate }}
           <ion-icon slot="start" name="arrow-forward"></ion-icon>
         </ion-button>
       </ion-grid>

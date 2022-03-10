@@ -27,8 +27,8 @@ export class IntroPage implements OnInit {
 
   startApp() {
     this.router
-      .navigate(['/user/login'])
-      .then(() => this.dataService.set('ion_did_tutorial', true));
+      .navigate(['/home'])
+      .then(() => this.dataService.set('has-seen-intro', true));
   }
 
   setSwiperInstance(swiper: Swiper) {
@@ -42,7 +42,9 @@ export class IntroPage implements OnInit {
 
   ionViewWillEnter() {
     this.menu.enable(false);
+    this.slides.slideTo(0);
   }
+
 
   ionViewDidLeave() {
     // enable the root left menu when leaving the tutorial page

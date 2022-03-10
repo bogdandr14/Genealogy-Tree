@@ -90,8 +90,6 @@ namespace GenealogyTree.Business.Services
             userToUpdate.NotifyUpdates = userSettings.NotifyUpdates;
             userToUpdate.NotifyBirthdays = userSettings.NotifyBirthdays;
             userToUpdate.SharePersonalInfo = userSettings.SharePersonalInfo;
-            userToUpdate.ThemePreference = userSettings.ThemePreference;
-            userToUpdate.LanguagePreference = userSettings.LanguagePreference;
             User userEntity = await unitOfWork.User.Update(userToUpdate);
             UserSettingsModel returnEvent = _mapper.Map<UserSettingsModel>(userEntity);
             return returnEvent;

@@ -22,11 +22,7 @@ export class PersonService extends BaseService {
   }
 
   public getPerson(personId: number): Observable<any> {
-    return super.getOneById<PersonEditModel>(
-      personId,
-      null,
-      BaseService.noLoadingConfig
-    );
+    return super.getOneById<PersonEditModel>(personId, null);
   }
 
   public getAllPeopleInTree(treeId: Guid): Observable<GenericPersonModel[]> {
@@ -60,10 +56,7 @@ export class PersonService extends BaseService {
   public updateLocation(
     locationUpdate: LocationModel
   ): Observable<LocationModel> {
-    return super.update<LocationModel>(
-      locationUpdate,
-      'location'
-    );
+    return super.update<LocationModel>(locationUpdate, 'location');
   }
 
   public uploadPhoto(personId: number, image: File): Observable<ImageFile> {

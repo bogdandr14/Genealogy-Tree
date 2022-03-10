@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { mergeMap } from 'rxjs/operators';
 @Injectable()

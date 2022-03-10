@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../modules/core/services/auth.service';
@@ -22,25 +23,20 @@ export class AppComponent {
   }
 
   loadData() {
-    this.dataService.getPreferences().subscribe((preferences) => {
-      if (preferences != null) {
-        if(preferences.languagePreference != null){
-          this.translateService.use(preferences.languagePreference);
-        }
-        if(preferences.themePreference!=null){
-          this.dark = preferences.themePreference;
-        }
-      }
-      this.setSubscribers();
-    });
+    this.translateService.use(environment.defaultLanguage);
+    this.setThemeSubscriber();
+    this.setLangSubscriber();
   }
 
-  private setSubscribers() {
+  private setThemeSubscriber() {
     this.dataService.darkTheme$.subscribe((theme) => {
       if (theme != null && this.dark != theme) {
         this.dark = theme;
       }
     });
+  }
+
+  private setLangSubscriber() {
     this.dataService.language$.subscribe((language) => {
       if (language != null) {
         this.translateService.use(language);

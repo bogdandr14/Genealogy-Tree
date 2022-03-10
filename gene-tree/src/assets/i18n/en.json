@@ -1,5 +1,6 @@
 {
   "welcomeText": "Welcome to GeneTree version { key }",
+  "intro": "Show intro",
   "darkMode": "Dark mode",
   "language": "Language",
   "_languages": {
@@ -188,7 +189,29 @@
     "at": "at",
     "present": "present",
     "select": "Select",
-    "deselect": "Deselect"
+    "deselect": "Deselect",
+    "skip": "Skip",
+    "continue": "Continue",
+    "next": "Next"
+  },
+  "_slides": {
+    "_welcome": {
+      "title": "Welcome to GeneTree!",
+      "content": "Here you can manage your personal genealogical tree and much more!"
+    },
+    "_whatIs": {
+      "title": "What is GeneTree?",
+      "content": "It is an app that allows you to create your own genealogical tree and also extend it with any relatives you have."
+    },
+    "_securedInfo": {
+      "title": "Your information is safe",
+      "content": "GeneTree does not, and will never use or show the information about your genalogy tree to anyone, beside your relatives that you added."
+    },
+    "_relatives": {
+      "title": "More and more relatives!",
+      "content": "GeneTree also offers the possibility of connecting with other relatives that use the app. This way you will have access to their in genealogy tree where you can find even more relatives that you never knew!"
+    },
+    "ready": "Ready to create your "
   },
   "_details": {
     "user": "User details",

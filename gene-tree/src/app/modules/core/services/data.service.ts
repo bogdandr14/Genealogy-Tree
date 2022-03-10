@@ -12,13 +12,10 @@ import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
   providedIn: 'root',
 })
 export class DataService {
-  private token = new BehaviorSubject<string>('');
-  public token$ = this.token.asObservable();
-
   private user = new BehaviorSubject<CurrentUserModel>(new CurrentUserModel());
   public user$ = this.user.asObservable();
 
-  private darkTheme = new BehaviorSubject<boolean>(false);
+  private darkTheme = new BehaviorSubject<boolean>(null);
   public darkTheme$ = this.darkTheme.asObservable();
 
   private language = new BehaviorSubject<string>(environment.defaultLanguage);
@@ -32,75 +29,10 @@ export class DataService {
   async initData() {
     await this.storage.defineDriver(CordovaSQLiteDriver);
     await this.storage.create();
-    this.getJWT().subscribe((value) => this.token.next(value));
-    this.getCurrentUser().subscribe((value) => this.user.next(value));
-    this.getPreferences().subscribe((value) => this.checkPreferences(value));
+    this.getCurrentUser().subscribe((value)=>this.user.next(value));
+    this.getTheme().subscribe((value)=>this.darkTheme.next(value));
+    this.getLanguage().subscribe((value)=>this.language.next(value));
     this.storageReady.next(true);
-  }
-
-  checkPreferences(preferences: AccountSettingsModel) {
-    if (preferences) {
-      this.darkTheme.next(preferences.themePreference);
-      this.language.next(preferences.languagePreference);
-    } else {
-      this.darkTheme.next(false);
-      this.language.next(environment.defaultLanguage);
-    }
-  }
-
-  setTheme(theme: boolean) {
-    this.darkTheme.next(theme);
-  }
-
-  setLanguage(language: string) {
-    this.language.next(language);
-  }
-
-  setJWT(token: string | null) {
-    this.set('jwt', token);
-    debugger;
-    this.token.next(token);
-  }
-
-  getJWT(): Observable<string | null> {
-    const jwt = this.get<string>('jwt');
-    return jwt;
-  }
-
-  removeJWT() {
-    this.remove('jwt');
-    this.token.next(null);
-  }
-
-  setCurrentUser(user: CurrentUserModel) {
-    this.set('user', user);
-    this.user.next(user);
-  }
-
-  getCurrentUser(): Observable<CurrentUserModel | null> {
-    const user = this.get<CurrentUserModel>('user');
-    return user;
-  }
-
-  removeUser() {
-    this.remove('user');
-    this.user.next(null);
-  }
-
-  setPreferences(preferences: AccountSettingsModel) {
-    this.set('preferences', preferences);
-    this.checkPreferences(preferences);
-  }
-
-  getPreferences(): Observable<AccountSettingsModel> {
-    const preferences = this.get<AccountSettingsModel>('preferences');
-    return preferences;
-  }
-
-  removePreferences() {
-    this.remove('preferences');
-    this.darkTheme.next(false);
-    this.language.next(environment.defaultLanguage);
   }
 
   set(key: string, value: any) {
@@ -121,5 +53,66 @@ export class DataService {
 
   remove(key: string) {
     this.storage.remove(key);
+  }
+
+  setTheme(theme: boolean) {
+    this.set('dark-theme', theme);
+    this.darkTheme.next(theme);
+  }
+
+  getTheme(): Observable<boolean | null> {
+    const theme = this.get<boolean>('dark-theme');
+    return theme;
+  }
+
+  setLanguage(language: string) {
+    this.set('lang', language);
+    this.language.next(language);
+  }
+
+  getLanguage(): Observable<string | null> {
+    const lang = this.get<string>('lang');
+    return lang;
+  }
+
+  setJWT(token: string | null) {
+    this.set('jwt', token);
+  }
+
+  getJWT(): Observable<string | null> {
+    const jwt = this.get<string>('jwt');
+    return jwt;
+  }
+
+  removeJWT() {
+    this.remove('jwt');
+  }
+
+  setCurrentUser(user: CurrentUserModel) {
+    this.set('current-user', user);
+    this.user.next(user);
+  }
+
+  getCurrentUser(): Observable<CurrentUserModel | null> {
+    const user = this.get<CurrentUserModel>('current-user');
+    return user;
+  }
+
+  removeCurrentUser() {
+    this.remove('current-user');
+    this.user.next(null);
+  }
+
+  setPreferences(preferences: AccountSettingsModel) {
+    this.set('preferences', preferences);
+  }
+
+  getPreferences(): Observable<AccountSettingsModel> {
+    const preferences = this.get<AccountSettingsModel>('preferences');
+    return preferences;
+  }
+
+  removePreferences() {
+    this.remove('preferences');
   }
 }

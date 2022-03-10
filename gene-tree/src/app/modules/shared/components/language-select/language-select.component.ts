@@ -11,13 +11,11 @@ import { LanguageModel } from '../../../core/models/language.model';
   styleUrls: ['./language-select.component.scss'],
 })
 export class LanguageSelectComponent implements OnInit {
-  @Output() languageChanged = new EventEmitter<string>();
 
   public selectedLaguage: FormControl;
   public languageOptions: LanguageModel[];
 
   constructor(
-    private translateService: TranslateService,
     private dataService: DataService
   ) {
     this.selectedLaguage = new FormControl();
@@ -25,14 +23,9 @@ export class LanguageSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getPreferences().subscribe((preferences) => {
-      if (
-        preferences &&
-        this.selectedLaguage.value != preferences.languagePreference
-      ) {
-        this.selectedLaguage.setValue(preferences.languagePreference);
-      } else {
-        this.selectedLaguage.setValue(this.translateService.currentLang);
+    this.dataService.getLanguage().subscribe((language) => {
+      if (language && this.selectedLaguage.value != language) {
+        this.selectedLaguage.setValue(language);
       }
       this.setLanguageSubscriber();
     });
@@ -48,6 +41,5 @@ export class LanguageSelectComponent implements OnInit {
 
   onLanguageChange(language: string) {
     this.dataService.setLanguage(language);
-    this.languageChanged.emit(language);
   }
 }

@@ -9,6 +9,7 @@ import { AccountSettingsModel } from '../models/account-settings.model';
 import { CurrentUserModel } from '../../core/models/current-user.model';
 import { BaseService } from '../../core/services/base.service';
 import { DataService } from '../../core/services/data.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends BaseService {
@@ -16,29 +17,12 @@ export class UserService extends BaseService {
 
   constructor(httpClient: HttpClient, private dataService: DataService) {
     super(httpClient, 'api/user', environment.baseApiUrl);
-    this.loadUser();
+    this.initUserSubscriber();
   }
-  loadUser() {
-    this.dataService.getCurrentUser().subscribe((user) => {
-      this.userState.next(user);
-      if (user && user.userId) {
-        this.setPreferences();
-      }
-      this.initUserSubscriber();
-    });
-  }
+
   private initUserSubscriber() {
     this.dataService.user$.subscribe((user) => {
       this.userState.next(user);
-      if (user && user.userId) {
-        this.setPreferences();
-      }
-    });
-  }
-
-  public setPreferences() {
-    this.getUserSettings().subscribe((userSettings) => {
-      this.dataService.setPreferences(userSettings);
     });
   }
 
@@ -47,7 +31,7 @@ export class UserService extends BaseService {
     return l;
   }
 
-  public getCurrentUser() {
+  public getLoggedInUser() {
     return this.userState.value;
   }
 
@@ -66,8 +50,12 @@ export class UserService extends BaseService {
   }
 
   public getPersonalInfo<UserProfileModel>(): Observable<UserProfileModel> {
-    const path = `info/${this.userState.value.username}`;
-    return super.getOneByPath<UserProfileModel>(path);
+    return this.dataService.getCurrentUser().pipe(
+      mergeMap((user) => {
+        const path = `info/${user.username}`;
+        return super.getOneByPath<UserProfileModel>(path);
+      })
+    );
   }
 
   public getUser<UserProfileModel>(

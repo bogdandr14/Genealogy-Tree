@@ -20,12 +20,16 @@
         <ion-list lines="none">
           <ion-list-header> {{ "others" | translate }} </ion-list-header>
 
-          <app-theme-select (themeChanged)="(dark)"></app-theme-select>
+          <app-theme-select></app-theme-select>
           <app-language-select></app-language-select>
           <ion-menu-toggle autoHide="false">
-            <ion-item button detail="false">
-              <ion-icon slot="start" name="hammer"></ion-icon>
-              <ion-label>Show Tutorial</ion-label>
+            <ion-item
+              [routerLink]="['intro']"
+              routerLinkActive="selected"
+              detail="false"
+            >
+              <ion-icon slot="start" name="color-wand"></ion-icon>
+              <ion-label>{{ "intro" | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

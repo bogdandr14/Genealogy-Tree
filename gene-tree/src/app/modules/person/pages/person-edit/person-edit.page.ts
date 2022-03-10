@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/modules/core/services/data.service';
 import { CommonService } from './../../../shared/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,32 +31,34 @@ export class PersonEditPage implements OnInit {
     private router: Router,
     private personService: PersonService,
     private commonService: CommonService,
-    private userService: UserService
+    private dataService: DataService
   ) {}
 
   async ngOnInit() {
     this.initDropdowns();
-    this.person$ = this.route.paramMap.pipe(
-      switchMap((params) => {
-        this.personId = Number(params.get('id'));
-        if (this.personId) {
-          this.isUpdate = true;
-          return this.personService.getPerson(this.personId);
-        } else {
-          const personEdit = new PersonEditModel();
-          personEdit.treeId = this.userService.getCurrentUser().treeId;
-          return of(personEdit);
+    this.dataService.getCurrentUser().subscribe((currentUser) => {
+      this.person$ = this.route.paramMap.pipe(
+        switchMap((params) => {
+          this.personId = Number(params.get('id'));
+          if (this.personId) {
+            this.isUpdate = true;
+            return this.personService.getPerson(this.personId);
+          } else {
+            const personEdit = new PersonEditModel();
+            personEdit.treeId = currentUser.treeId;
+            return of(personEdit);
+          }
+        })
+      );
+      this.person$.subscribe((person) => {
+        this.personEdit = person;
+        if (!this.personEdit.birthPlace) {
+          this.personEdit.birthPlace = new LocationModel();
         }
-      })
-    );
-    this.person$.subscribe((person) => {
-      this.personEdit = person;
-      if (!this.personEdit.birthPlace) {
-        this.personEdit.birthPlace = new LocationModel();
-      }
-      if (!this.personEdit.livingPlace) {
-        this.personEdit.livingPlace = new LocationModel();
-      }
+        if (!this.personEdit.livingPlace) {
+          this.personEdit.livingPlace = new LocationModel();
+        }
+      });
     });
   }
 

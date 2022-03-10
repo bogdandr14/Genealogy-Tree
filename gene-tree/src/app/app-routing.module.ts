@@ -1,3 +1,4 @@
+import { AuthGuard } from './modules/core/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IntroGuard } from './modules/core/guards/intro.guard';
@@ -22,6 +23,7 @@ const routes: Routes = [
     path: 'person',
     loadChildren: () =>
       import('./modules/person/person.module').then((m) => m.PersonModule),
+      canLoad:[AuthGuard]
   },
   {
     path: 'intro',

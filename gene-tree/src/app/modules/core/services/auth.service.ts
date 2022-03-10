@@ -32,16 +32,6 @@ export class AuthService extends BaseService {
       if (token) {
         this.setExpirationCounter(token);
       }
-      this.initTokenSubscriber();
-    });
-  }
-
-  private initTokenSubscriber() {
-    this.dataService.token$.subscribe((token) => {
-      this.isLoggedIn.next(!!token);
-      if (token) {
-        this.setExpirationCounter(token);
-      }
     });
   }
 
@@ -50,6 +40,7 @@ export class AuthService extends BaseService {
       tap((login) => {
         this.dataService.setJWT(login.token);
         this.setUserInfo(login);
+        this.isLoggedIn.next(true);
         this.router.navigate(['home']);
       })
     );
@@ -66,8 +57,8 @@ export class AuthService extends BaseService {
   public logout(): void {
     this.timerSubscription.unsubscribe();
     this.dataService.removeJWT();
-    this.dataService.removeUser();
-    debugger;
+    this.dataService.removeCurrentUser();
+    this.isLoggedIn.next(false);
     this.router.navigate(['user', 'login']);
   }
 

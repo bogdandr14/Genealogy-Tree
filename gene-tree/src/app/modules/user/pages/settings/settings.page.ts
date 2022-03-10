@@ -34,13 +34,6 @@ export class SettingsPage implements OnInit {
       .subscribe((settings) => this.dataService.setPreferences(settings));
   }
 
-  onLanguageChange(language: string) {
-    this.userSettings.languagePreference = language;
-  }
-  onThemeChange(theme: boolean) {
-    this.userSettings.themePreference = theme;
-  }
-
   onLogout() {
     this.authService.logout();
     this.router.navigateByUrl('/user');

@@ -16,7 +16,7 @@ export class SyncService extends BaseService {
 
   getAllSyncedUsers(): Observable<any[]> {
     return super.getMany<any>(
-      `users/${this.userService.getCurrentUser().userId}`,
+      `users/${this.userService.getLoggedInUser().userId}`,
       BaseService.noLoadingConfig
     );
   }
@@ -31,19 +31,19 @@ export class SyncService extends BaseService {
 
   getRequestsSent(): Observable<any[]> {
     return super.getMany<any>(
-      `requests/sent/${this.userService.getCurrentUser().userId}`
+      `requests/sent/${this.userService.getLoggedInUser().userId}`
     );
   }
 
   getRequestsReceived(): Observable<any[]> {
     return super.getMany<any>(
-      `requests/received/${this.userService.getCurrentUser().userId}`
+      `requests/received/${this.userService.getLoggedInUser().userId}`
     );
   }
 
   getRequestsResponded(): Observable<any[]> {
     return super.getMany<any>(
-      `requests/responded/${this.userService.getCurrentUser().userId}`
+      `requests/responded/${this.userService.getLoggedInUser().userId}`
     );
   }
 

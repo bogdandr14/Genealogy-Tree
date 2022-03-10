@@ -1,5 +1,6 @@
 {
   "welcomeText": "Bine ai venit la GeneTree versiunea { key }",
+  "intro": "Vezi intro",
   "darkMode": "Mod întunecat",
   "language": "Limba",
   "_languages": {
@@ -188,7 +189,29 @@
     "at": "la",
     "present": "prezent",
     "select": "Selectează",
-    "deselect": "Deselectează"
+    "deselect": "Deselectează",
+    "skip": "Sari peste",
+    "continue": "Continuă",
+    "next": "Următorul"
+  },
+  "_slides": {
+    "_welcome": {
+      "title": "Bine ai venit la GeneTree!",
+      "content": "Aici poţi să administrezi arborele tău genealogic personal şi multe altele!"
+    },
+    "_whatIs": {
+      "title": "Ce este GeneTree?",
+      "content": "Este o aplicaţie care îţi permite să îţi creezi propriul arbore genealogic şi să îl extinzi cu câte rude vrei."
+    },
+    "_securedInfo": {
+      "title": "Informaţiile tale sunt în siguranţă",
+      "content": "GeneTree nu va divulga niciodată informaţii despre arborele tău genealogic la oricine altcineva înafară de rudele pe care le-ai adăugat."
+    },
+    "_relatives": {
+      "title": "Şi mai multe rude!",
+      "content": "GeneTree oferă posibilitatea de conectare cu alte rude care folosesc aplicaţia. În acest fel vei putea avea acces la arborele lor genealogic unde vei putea găsi şi mai multe rude despre care nici nu ştiai!"
+    },
+    "ready": "Eşti gata să îţi creezi propriul "
   },
   "_details": {
     "user": "Detalii utilizator",

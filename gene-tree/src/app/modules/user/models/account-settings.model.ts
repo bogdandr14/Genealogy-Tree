@@ -3,6 +3,4 @@ export class AccountSettingsModel{
   notifyUpdates: boolean;
   notifyBirthdays: boolean;
   sharePersonalInfo: boolean;
-  themePreference: boolean;
-  languagePreference: string;
 }
