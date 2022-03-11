@@ -3,7 +3,6 @@ import { CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-
 @Injectable({
   providedIn: 'root',
 })

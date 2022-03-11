@@ -2,15 +2,15 @@ import { Injectable, Injector } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AppError } from '../models/errors/app-error';
-
 @Injectable({ providedIn: 'root' })
 export class AlertService {
   constructor(
     private injector: Injector,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
   ) {}
 
+  //https://artlist.io/sfx/?term=whoosh,success,message,pop,in
   async presentAlert(
     header: string,
     message: string,

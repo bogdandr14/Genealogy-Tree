@@ -9,6 +9,10 @@ import { IntroPageRoutingModule } from './intro-routing.module';
 
 import { IntroPage } from './intro.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     IntroPageRoutingModule,
     TranslateModule,
-    SwiperModule
+    SwiperModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
   ],
   declarations: [IntroPage]
 })
