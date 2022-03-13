@@ -1,67 +1,28 @@
 <ion-list *ngIf="authService.isLoggedIn.value" lines="none">
   <ion-list-header> GeneTree </ion-list-header>
-  <ion-menu-toggle
-    autoHide="false"
-    *ngFor="let link of navLinks; let i = index"
+  <app-navigation-link
+    *ngFor="let link of connectedUserLinks; let i = index"
+    [link]="link"
   >
-    <ion-item
-      [routerLink]="link.path"
-      [queryParams]="link.queryParams"
-      routerLinkActive="selected"
-      routerDirection="root"
-      detail="false"
-    >
-      <ion-icon slot="start" [name]="link.icon"></ion-icon>
-      <ion-label>
-        {{ link.title | translate }}
-      </ion-label>
-    </ion-item>
-  </ion-menu-toggle>
+  </app-navigation-link>
 </ion-list>
-<!-- <ion-list *ngIf="authService.isLoggedIn.value" lines="none">
-  <ion-list-header> {{ "Account" | translate }} </ion-list-header>
-  <ion-menu-toggle autoHide="false">
-    <ion-item
-      routerLink="/user"
-      routerLinkActive="selected"
-      routerDirection="root"
-      detail="false"
-    >
-      <ion-icon slot="start" name="person"></ion-icon>
-      <ion-label> {{ "_pages.profile" | translate }} </ion-label>
-    </ion-item>
-  </ion-menu-toggle>
-
-  <ion-menu-toggle autoHide="false">
-    <ion-item button (click)="authService.logout()" detail="false">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      <ion-label> {{ "logout" | translate }} </ion-label>
-    </ion-item>
-  </ion-menu-toggle>
-</ion-list> -->
 
 <ion-list *ngIf="!authService.isLoggedIn.value" lines="none">
   <ion-list-header> {{ "account" | translate }} </ion-list-header>
-  <ion-menu-toggle autoHide="false">
-    <ion-item
-      routerLink="/user/login"
-      routerLinkActive="selected"
-      routerDirection="root"
-      detail="false"
-    >
-      <ion-icon slot="start" name="log-in"></ion-icon>
-      <ion-label> {{ "_pages.login" | translate }} </ion-label>
-    </ion-item>
-  </ion-menu-toggle>
-  <ion-menu-toggle autoHide="false">
-    <ion-item
-      routerLink="/user/register"
-      routerLinkActive="selected"
-      routerDirection="root"
-      detail="false"
-    >
-      <ion-icon slot="start" name="person-add"></ion-icon>
-      <ion-label> {{ "_pages.register" | translate }} </ion-label>
-    </ion-item>
-  </ion-menu-toggle>
+  <app-navigation-link
+    *ngFor="let link of freeUserLinks; let i = index"
+    [link]="link"
+  >
+  </app-navigation-link>
+</ion-list>
+
+<ion-list lines="none">
+  <ion-list-header> {{ "others" | translate }} </ion-list-header>
+  <app-theme-select></app-theme-select>
+  <app-language-select></app-language-select>
+  <app-navigation-link
+    *ngFor="let link of otherLinks; let i = index"
+    [link]="link"
+  >
+  </app-navigation-link>
 </ion-list>

@@ -71,6 +71,7 @@ export class AuthService extends BaseService {
       firstName: tokenInfo.given_name,
       lastName: tokenInfo.family_name,
       username: tokenInfo.unique_name,
+      email: tokenInfo.email,
     });
   }
 

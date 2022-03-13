@@ -1,3 +1,4 @@
+import { SocialMediaChipsComponent } from './components/social-media-chips/social-media-chips.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { SelectTemplateComponent } from './components/select-template/select-tem
 import { LinkUserButtonsComponent } from './components/link-user-buttons/link-user-buttons.component';
 import { RouterModule } from '@angular/router';
 import { DateSelectTemplateComponent } from './components/date-select-template/date-select-template.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { DateSelectTemplateComponent } from './components/date-select-template/d
     SelectTemplateComponent,
     ValidationErrorsComponent,
     LinkUserButtonsComponent,
-    DateSelectTemplateComponent
+    DateSelectTemplateComponent,
+    SocialMediaChipsComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,7 @@ import { DateSelectTemplateComponent } from './components/date-select-template/d
     ReactiveFormsModule,
     TranslateModule,
     IonicModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -48,7 +51,9 @@ import { DateSelectTemplateComponent } from './components/date-select-template/d
     SelectTemplateComponent,
     ValidationErrorsComponent,
     LinkUserButtonsComponent,
-    DateSelectTemplateComponent
+    DateSelectTemplateComponent,
+    SocialMediaChipsComponent,
   ],
+  providers: [InAppBrowser],
 })
 export class SharedModule {}

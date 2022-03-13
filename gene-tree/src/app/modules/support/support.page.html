@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'_pages.support' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="absolute-center">
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-card>
+          <form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
+            <ion-list lines="none">
+              <ion-item-group id="supportType">
+                <ion-item color="transparent">
+                  <ion-label for="stype" position="floating">
+                    <b>
+                      {{ "_support.type" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-select
+                    name="stype"
+                    #stype="ngModel"
+                    [(ngModel)]="supportForm.type"
+                    interface="popover"
+                    [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
+                    required
+                  >
+                    <ion-select-option
+                      *ngFor="let supportType of supportTypes"
+                      [value]="supportType"
+                    >
+                      {{ "_support._types." + supportType | lowercase |
+                      translate }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <app-validation-errors [model]="stype"></app-validation-errors>
+              </ion-item-group>
+
+              <ion-item-group id="subject">
+                <ion-item color="transparent">
+                  <ion-label for="ssubject" position="floating">
+                    <b>
+                      {{ "_support.subject" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    type="text"
+                    name="ssubject"
+                    #ssubject="ngModel"
+                    [(ngModel)]="supportForm.subject"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <app-validation-errors [model]="ssubject"></app-validation-errors>
+              </ion-item-group>
+
+              <ion-item-group id="description">
+                <ion-item color="transparent">
+                  <ion-label for="sdescrip" position="floating">
+                    <b>
+                      {{ "_support.description" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-textarea
+                    rows="8"
+                    cols="20"
+                    name="about"
+                    #sdescrip="ngModel"
+                    [(ngModel)]="supportForm.description"
+                    required
+                  ></ion-textarea>
+                </ion-item>
+                <app-validation-errors
+                  [model]="sdescrip"
+                ></app-validation-errors>
+              </ion-item-group>
+
+              <ion-item-group *ngIf="!authService.isLoggedIn.value" id="email">
+                <ion-item color="transparent">
+                  <ion-label for="email" position="floating">
+                    <b>
+                      {{ "_support.email" | translate }}
+                      <span class="required"> *</span>
+                    </b>
+                  </ion-label>
+                  <ion-input
+                    type="email"
+                    name="email"
+                    #email="ngModel"
+                    [(ngModel)]="supportForm.emailContact"
+                    pattern="^[a-z0-9]+@[a-z]+.[a-z]{2,3}$"
+                    required
+                  ></ion-input>
+                </ion-item>
+                <app-validation-errors [model]="email"></app-validation-errors>
+              </ion-item-group>
+            </ion-list>
+
+            <div class="ion-padding">
+              <ion-button expand="block" type="submit">
+                {{'_common.submit' | translate}}
+              </ion-button>
+            </div>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer no-border transparent class="ion-text-center">
+  <ion-toolbar>
+    <app-social-media-chips></app-social-media-chips>
+  </ion-toolbar>
+</ion-footer>

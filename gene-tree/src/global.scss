@@ -33,6 +33,7 @@
  */
 @import '~swiper/scss';
 @import "~@ionic/angular/css/ionic-swiper";
+@import '~leaflet/dist/leaflet.css';
 
 // placed here instead of tutorial.scss due to slide els not getting ng scoping attribute
 .swiper-slide {

@@ -1,3 +1,4 @@
+import { NavigationLinkComponent } from './components/navigation-link/navigation-link.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import {
@@ -30,9 +31,7 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
 }
 
 @NgModule({
-  declarations: [
-    NavigationComponent,
-  ],
+  declarations: [NavigationComponent, NavigationLinkComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -51,19 +50,15 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
       useDefaultLang: true,
     }),
     RouterModule,
-    SharedModule
+    SharedModule,
   ],
-  exports: [
-    TranslateModule,
-    ReactiveFormsModule,
-    NavigationComponent,
-  ],
+  exports: [TranslateModule, ReactiveFormsModule, NavigationComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
-    Clipboard
+    Clipboard,
   ],
 })
 export class CoreModule {

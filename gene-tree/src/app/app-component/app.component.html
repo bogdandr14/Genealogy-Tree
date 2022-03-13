@@ -8,31 +8,15 @@
               <img
                 width="24"
                 alt="GeneTree Logo"
-                src="../../../../../assets/icon/favicon-32x32.png"
+                src="../../../../../assets/icon/logo-38x32.png"
               />
             </ion-label>
-            {{ "menu" | translate }}</ion-title
-          >
+            {{ "menu" | translate }}
+          </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="menu">
         <app-navigation></app-navigation>
-        <ion-list lines="none">
-          <ion-list-header> {{ "others" | translate }} </ion-list-header>
-
-          <app-theme-select></app-theme-select>
-          <app-language-select></app-language-select>
-          <ion-menu-toggle autoHide="false">
-            <ion-item
-              [routerLink]="['intro']"
-              routerLinkActive="selected"
-              detail="false"
-            >
-              <ion-icon slot="start" name="color-wand"></ion-icon>
-              <ion-label>{{ "intro" | translate }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content" class="content"></ion-router-outlet>

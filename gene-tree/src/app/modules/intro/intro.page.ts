@@ -12,15 +12,24 @@ import { MenuController } from '@ionic/angular';
 export class IntroPage implements OnInit {
   showSkip = true;
   private slides: Swiper;
+  dark = false;
+
   constructor(
     public menu: MenuController,
     public router: Router,
     public dataService: DataService,
     private cd: ChangeDetectorRef
-  ) {}
+  ) {    this.setThemeSubscriber();
+  }
 
   ngOnInit() {}
-
+  private setThemeSubscriber() {
+    this.dataService.darkTheme$.subscribe((theme) => {
+      if (theme != null && this.dark != theme) {
+        this.dark = theme;
+      }
+    });
+  }
   next() {
     this.slides.slideNext();
   }

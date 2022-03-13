@@ -29,19 +29,22 @@ p {
     margin-left: 20%;
   }
 }
-
-ion-content {
-  --background: rgb(50, 175, 112);
+ion-content{
+  --background: #fff;
+}
+ion-content.dark-theme {
+  --background: #1e1e1e;// rgb(50, 175, 148);
 }
 @media (min-width: 768px) {
   vg-player {
-    margin-top: 2%;
     max-width: 60%;
     margin-left: 20%;
   }
 }
-@media (max-width: 768px) {
-  vg-player {
-    margin-top: 60%;
-  }
+img{
+  max-height: 300px !important;
 }
+// .next-button{
+//   position:fixed;
+//   bottom: 0px;
+// }

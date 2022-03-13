@@ -6,7 +6,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-text-center">
   <ion-button
     *ngIf="isUserTree"
     class="ion-margin"
@@ -25,23 +25,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-<ion-footer collapse="fade" translucent>
-  <ion-toolbar>
-    <ion-chip [routerLink]="">
-      <ion-icon name="logo-twitter"></ion-icon>
-      <ion-label>Twitter</ion-label>
-    </ion-chip>
-    <ion-chip routerLink="https://www.youtube.com/watch?v=Gd5z_9yU97U">
-      <ion-icon name="logo-youtube"></ion-icon>
-      <ion-label>Youtube</ion-label>
-    </ion-chip>
-    <ion-chip>
-      <ion-icon name="logo-facebook"></ion-icon>
-      <ion-label>Facebook</ion-label>
-    </ion-chip>
-    <ion-chip>
-      <ion-icon name="logo-instagram"></ion-icon>
-      <ion-label>Instagram</ion-label>
-    </ion-chip>
-  </ion-toolbar>
-</ion-footer>

@@ -8,18 +8,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="menu">
+<ion-content [class.dark-theme]="dark" [fullscreen]="true" class="menu">
   <swiper
+    class="absolute-center"
     (swiper)="setSwiperInstance($event)"
     (slideChangeTransitionStart)="onSlideChangeStart()"
   >
     <ng-template swiperSlide>
       <ion-grid>
-        <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
+        <img
+          [src]="dark? 'assets/img/text-logo-dark-img.png' : 'assets/img/text-logo-img.png'"
+          class="slide-image"
+        />
         <h2 class="slide-title">{{"_slides._welcome.title" | translate}}</h2>
-
         <h3>{{"_slides._welcome.content" |translate}}</h3>
-        <ion-button (click)="next()" color="primary">
+        <ion-button class="next-button" (click)="next()" color="primary">
           {{ "_common.next" | translate }}
         </ion-button>
       </ion-grid>
@@ -27,10 +30,10 @@
 
     <ng-template swiperSlide>
       <ion-grid>
-        <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
+        <img src="assets/img/app-description-img.png" class="slide-image" />
         <h2 class="slide-title">{{"_slides._whatIs.title" | translate}}</h2>
         <h3>{{"_slides._whatIs.content" | translate}}</h3>
-        <ion-button (click)="next()" color="primary">
+        <ion-button class="next-button" (click)="next()" color="primary">
           {{ "_common.next" | translate }}
         </ion-button>
       </ion-grid>
@@ -38,12 +41,12 @@
 
     <ng-template swiperSlide>
       <ion-grid>
-        <img src="assets/img/ica-slidebox-img-3.png" class="slide-image" />
+        <img src="assets/img/secure-info-img.png" class="slide-image" />
         <h2 class="slide-title">
           {{"_slides._securedInfo.title" | translate}}
         </h2>
         <h3>{{"_slides._securedInfo.content" |translate}}</h3>
-        <ion-button (click)="next()" color="primary">
+        <ion-button class="next-button" (click)="next()" color="primary">
           {{ "_common.next" | translate }}
         </ion-button>
       </ion-grid>
@@ -51,10 +54,10 @@
 
     <ng-template swiperSlide>
       <ion-grid>
-        <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
+        <img src="assets/img/more-relatives-img.png" class="slide-image" />
         <h2 class="slide-title">{{"_slides._relatives.title" |translate}}</h2>
         <h3>{{"_slides._relatives.content" | translate}}</h3>
-        <ion-button (click)="next()" color="primary">
+        <ion-button class="next-button" (click)="next()" color="primary">
           {{ "_common.next" | translate }}
         </ion-button>
       </ion-grid>

@@ -1,4 +1,4 @@
-import { Guid } from "guid-typescript";
+import { Guid } from 'guid-typescript';
 
 export class CurrentUserModel {
   public personId!: number;
@@ -7,4 +7,5 @@ export class CurrentUserModel {
   public firstName!: string;
   public lastName!: string;
   public username!: string;
+  public email!: string;
 }

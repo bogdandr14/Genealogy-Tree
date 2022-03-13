@@ -1,6 +1,5 @@
 {
   "welcomeText": "Bine ai venit la GeneTree versiunea { key }",
-  "intro": "Vezi intro",
   "darkMode": "Mod întunecat",
   "language": "Limba",
   "_languages": {
@@ -167,7 +166,10 @@
     "relatives": "Rude",
     "settings": "Setări",
     "login": "Logare",
-    "register": "Înregistrare"
+    "register": "Înregistrare",
+    "intro": "Vezi intro",
+    "location": "Locaţie",
+    "support": "Suport"
   },
   "_links": {
     "goToRelatives": "Mergi la rude",
@@ -256,12 +258,25 @@
     "choose": "Alege imaginea",
     "change": "Schimbă imaginea"
   },
+  "_support": {
+    "description": "Scrie descrierea ticketului mai jos",
+    "subject": "Despre ce este cererea ta?",
+    "type": "Tipul cererii",
+    "email": "E-mail pentru contactare",
+    "_types": {
+      "bug_report": "Raportare problemă",
+      "feature_request": "Cerere funcţionalitate",
+      "how_to": "Cum fac",
+      "network_issue": "Problemă reţea"
+    }
+  },
   "_validation": {
     "required": "Câmpul este obligatoriu",
     "minlength": "Câmpul trebuie să aibă cel puțin { number } caractere.",
     "maxlength": "Câmpul trebuie să aibă cel mult { number } caractere.",
     "minValue": "Trebuie să fie cel puţin { number }.",
     "maxValue": "Trebuie să fie cel mult { number }.",
+    "pattern": "Format invalid",
     "invalidEmail": "Format de email invalid.",
     "emailTaken": "E-mailul este deja folosit.",
     "usernameTaken": "Utilizatorul este deja folosit.",

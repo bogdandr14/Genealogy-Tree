@@ -1,0 +1,14 @@
+<ion-menu-toggle autoHide="false">
+  <ion-item
+    [routerLink]="link.path"
+    [queryParams]="link.queryParams"
+    routerLinkActive="selected"
+    routerDirection="root"
+    detail="false"
+  >
+    <ion-icon slot="start" [name]="link.icon"></ion-icon>
+    <ion-label>
+      {{ link.title | translate }}
+    </ion-label>
+  </ion-item>
+</ion-menu-toggle>

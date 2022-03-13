@@ -22,6 +22,7 @@ namespace GenealogyTree.Business.Auth
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.Person.FirstName),
                 new Claim(JwtRegisteredClaimNames.FamilyName, user.Person.LastName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
                 new Claim(UserRole, ((int)userRole).ToString())
             };

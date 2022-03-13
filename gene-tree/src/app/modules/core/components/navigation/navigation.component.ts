@@ -8,10 +8,17 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
-  public navLinks: Array<RouteDescriptor> = [];
+  public connectedUserLinks: Array<RouteDescriptor> = [];
+  public freeUserLinks: Array<RouteDescriptor> = [];
+  public otherLinks: Array<RouteDescriptor> = [];
 
   constructor(public authService: AuthService) {
-    this.navLinks = [
+    this.setupConnectedUserLinks();
+    this.setupFreeUserLinks();
+    this.setupOtherLinks();
+  }
+  setupConnectedUserLinks() {
+    this.connectedUserLinks = [
       {
         title: '_pages.home',
         path: '/home',
@@ -28,9 +35,44 @@ export class NavigationComponent {
         icon: 'people',
       },
       {
+        title: '_pages.location',
+        path: '/map',
+        icon: 'location',
+      },
+      {
         title: '_pages.settings',
         path: '/user/settings',
         icon: 'settings',
+      },
+    ];
+  }
+
+  setupFreeUserLinks() {
+    this.freeUserLinks = [
+      {
+        title: '_pages.login',
+        path: '/user/login',
+        icon: 'log-in',
+      },
+      {
+        title: '_pages.register',
+        path: '/user/register',
+        icon: 'person-add',
+      },
+    ];
+  }
+
+  setupOtherLinks() {
+    this.otherLinks = [
+      {
+        title: '_pages.intro',
+        path: '/intro',
+        icon: 'color-wand',
+      },
+      {
+        title: '_pages.support',
+        path: '/support',
+        icon: 'help',
       },
     ];
   }
