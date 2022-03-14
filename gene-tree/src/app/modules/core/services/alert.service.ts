@@ -4,12 +4,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppError } from '../models/errors/app-error';
 @Injectable({ providedIn: 'root' })
 export class AlertService {
+  private nofiticationSound: HTMLAudioElement;
   constructor(
     private injector: Injector,
     private toastController: ToastController,
     private alertController: AlertController,
-  ) {}
+  ) {
+    this.setAudio();
+  }
 
+  setAudio(){
+    this.nofiticationSound = new Audio();
+    this.nofiticationSound.src = '../../../../assets/audio/mixkit-software-interface.wav';
+    this.nofiticationSound.load();
+  }
   //https://artlist.io/sfx/?term=whoosh,success,message,pop,in
   async presentAlert(
     header: string,
@@ -33,6 +41,7 @@ export class AlertService {
       ]
     });
     await alert.present();
+    this.nofiticationSound.play();
   }
 
   public async showSuccess(success: any) {
@@ -42,7 +51,10 @@ export class AlertService {
       'success',
       'checkmark-circle'
     );
+
     toast.present();
+    this.nofiticationSound.play();
+
   }
 
   public async showError(error: any) {
@@ -59,6 +71,7 @@ export class AlertService {
       toast = await this.createToast('_message.error', error, 'danger', 'close-circle');
     }
     toast.present();
+    this.nofiticationSound.play();
   }
 
   public async showInfo(info: any) {
@@ -69,6 +82,7 @@ export class AlertService {
       'information-circle'
     );
     toast.present();
+    this.nofiticationSound.play();
   }
 
   public async showWarning(warning: any) {
@@ -79,6 +93,7 @@ export class AlertService {
       'alert-circle'
     );
     toast.present();
+    this.nofiticationSound.play();
   }
 
   public showConfirmation(message: string): boolean {

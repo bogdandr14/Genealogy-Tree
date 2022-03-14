@@ -44,6 +44,7 @@
     "leaflet": "^1.7.1",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "messageformat": "^2.3.0",
+    "ngx-image-compress": "^13.1.9",
     "ngx-toastr": "^14.2.1",
     "ngx-translate-messageformat-compiler": "^4.11.0",
     "npm": "^7.24.2",

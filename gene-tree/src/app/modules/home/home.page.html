@@ -9,13 +9,34 @@
 
 <ion-content>
   <div id="container">
-    <button (click)="showToasterSuccess()">Success Toaster</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <iframe
+            id="vp1i9Clh"
+            title="Video Player"
+            width="864"
+            height="486"
+            frameborder="0"
+            src="https://s3.amazonaws.com/embed.animoto.com/play.html?w=swf/production/vp1&e=1647292646&f=i9ClhhLWMTbRWo0y7WBzyQ&d=0&m=p&r=360p&volume=100&start_res=720p&i=m&asset_domain=s3-p.animoto.com&animoto_domain=animoto.com&options="
+            allowfullscreen
+          ></iframe>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- https://www.positronx.io/angular-video-player-using-ngx-videogular-with-customized-controls-example/ -->
 
-    <button (click)="showToasterError()">Error Toaster</button>
+          <button (click)="showToasterSuccess()">Success Toaster</button>
 
-    <button (click)="showToasterInfo()">Info Toaster</button>
+          <button (click)="showToasterError()">Error Toaster</button>
 
-    <button (click)="showToasterWarning()">Warning Toaster</button>
+          <button (click)="showToasterInfo()">Info Toaster</button>
+
+          <button (click)="showToasterWarning()">Warning Toaster</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
 <ion-footer no-border transparent class="ion-text-center">

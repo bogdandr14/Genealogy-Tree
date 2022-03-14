@@ -19,7 +19,7 @@ import { LinkedRelativesListComponent } from './components/relative/linked-relat
 import { RelativeOptionCardComponent } from './components/relative/relative-option-card/relative-option-card.component';
 import { RemovableRelativeChipComponent } from './components/relative/removable-relative-chip/removable-relative-chip.component';
 import { RelativeCardComponent } from './components/relative/relative-card/relative-card.component';
-
+import { NgxImageCompressService } from 'ngx-image-compress';
 @NgModule({
   declarations: [
     PhotoUploadComponent,
@@ -39,13 +39,10 @@ import { RelativeCardComponent } from './components/relative/relative-card/relat
     MarriageAddComponent,
     MarriageCardComponent,
     RelativeCardComponent,
-    MarriageEditComponent
+    MarriageEditComponent,
   ],
   imports: [SharedModule, PersonRoutingModule],
-  exports: [
-    PhotoUploadComponent,
-    PersonInfoComponent,
-    PersonAvatarComponent
-  ]
+  exports: [PhotoUploadComponent, PersonInfoComponent, PersonAvatarComponent],
+  providers: [NgxImageCompressService],
 })
-export class PersonModule { }
+export class PersonModule {}

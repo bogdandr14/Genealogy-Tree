@@ -92,16 +92,17 @@ namespace GenealogyTree.Business.Email
         {
             StreamReader reader = File.OpenText(path);
             string body = reader.ReadToEnd();
-            PropertyInfo[] fi = supportTicket.GetType().GetProperties();
-            foreach (PropertyInfo f in fi)
+            PropertyInfo[] st = supportTicket.GetType().GetProperties();
+            foreach (PropertyInfo f in st)
             {
                 body = body.Replace("{" + f.Name + "}", f.GetValue(supportTicket).ToString());
             }
-            if(supportTicket.Language == "en")
-            {
 
-            }
-            else { 
+            EmailDescription emailDescription = EmailLanguageHelper.GetEmailDescription(supportTicket.Language);
+            PropertyInfo[] ed = emailDescription.GetType().GetProperties();
+            foreach (PropertyInfo f in ed)
+            {
+                body = body.Replace("{" + f.Name + "}", f.GetValue(emailDescription).ToString());
             }
             return body;
         }

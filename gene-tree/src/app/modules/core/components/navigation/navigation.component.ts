@@ -50,6 +50,11 @@ export class NavigationComponent {
   setupFreeUserLinks() {
     this.freeUserLinks = [
       {
+        title: '_pages.home',
+        path: '/home',
+        icon: 'home',
+      },
+      {
         title: '_pages.login',
         path: '/user/login',
         icon: 'log-in',

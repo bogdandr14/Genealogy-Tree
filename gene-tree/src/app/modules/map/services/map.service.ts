@@ -5,42 +5,104 @@ import * as L from 'leaflet';
 })
 export class MapService {
   private navigationId: number;
-  private currentUserMarker: any;
+  private currentUserIcon: L.icon;
+  private currentUserMarker: any = null;
   private currentUserCoords: number[] = [0, 0];
+  private myMap: L.map = null;
 
-  constructor() {}
-
-  watchPosition(myMap: L.map) {
+  constructor() {
+    this.setUserIcon();
     if (!navigator.geolocation) {
       console.log('location is not supported');
     } else {
-      this.navigationId = navigator.geolocation.watchPosition(
-        (position) => {
-          if (
-            this.currentUserCoords[0] != position.coords.latitude ||
-            this.currentUserCoords[1] != position.coords.longitude
-          ) {
-            console.log(
-              `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`
-            );
-            this.currentUserCoords[0] = position.coords.latitude;
-            this.currentUserCoords[1] = position.coords.longitude;
-            this.currentUserMarker = L.marker([
-              position.coords.latitude,
-              position.coords.longitude,
-            ]).addTo(myMap);
-          }
-        },
-        (err) => {
-          console.log(err);
-        },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
-      );
+      this.setWatcherForCurrentUser();
     }
   }
 
-  removeWatch() {
+  public getMap(): L.Map {
+    return this.myMap;
+  }
+
+  public initMap() {
+    this.myMap = L.map('map').setView([46.0, 25.0], 7);
+    const tiles = L.tileLayer(
+      'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+      {
+        measureControl: true,
+        maxZoom: 20,
+        minZoom: 1,
+        attribution: 'edupala.com © ionic LeafLet',
+      }
+    );
+    tiles.addTo(this.myMap);
+    setTimeout(() => {
+      this.myMap.invalidateSize();
+      this.updateCurrentUserOnMap();
+    }, 500);
+  }
+
+  private setUserIcon() {
+    this.currentUserIcon = L.icon({
+      iconUrl: '../../../assets/icon/marker-icon.png',
+      shadowUrl: '../../../assets/icon/marker-shadow.png',
+      iconRetinaUrl: '../../../assets/icon/marker-icon-2x.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      tooltipAnchor: [16, -28],
+      shadowSize: [41, 41],
+    });
+  }
+
+  private setWatcherForCurrentUser() {
+    this.navigationId = navigator.geolocation.watchPosition(
+      (position) => {
+        if (
+          this.currentUserCoords[0] != position.coords.latitude ||
+          this.currentUserCoords[1] != position.coords.longitude
+        ) {
+          this.onUserPositionChange([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
+        }
+      },
+      (err) => {
+        console.log(err);
+      },
+      { enableHighAccuracy: false, timeout: 5000, maximumAge: 50000 }
+    );
+  }
+
+  private onUserPositionChange(position: number[]) {
+    this.currentUserCoords = position;
+    if (this.myMap) {
+      this.updateCurrentUserOnMap();
+    }
+  }
+
+  private updateCurrentUserOnMap() {
+    if (this.currentUserMarker) {
+      this.myMap.removeLayer(this.currentUserMarker.getPane());
+    }
+    this.currentUserMarker = L.marker(this.currentUserCoords, {
+      icon: this.currentUserIcon,
+    });
+    this.currentUserMarker.addTo(this.myMap);
+  }
+
+  removeWatcher() {
     console.log('ngOnDestroy: cleaning up...');
     navigator.geolocation.clearWatch(this.navigationId);
+  }
+
+  destroyMap() {
+    if (this.currentUserMarker) {
+      this.myMap.removeLayer(this.currentUserMarker.getPane());
+      this.currentUserMarker = null;
+    }
+    this.myMap.off();
+    this.myMap.remove();
+    this.myMap = null;
   }
 }
