@@ -10,6 +10,7 @@ import { CurrentUserModel } from '../../core/models/current-user.model';
 import { BaseService } from '../../core/services/base.service';
 import { DataService } from '../../core/services/data.service';
 import { mergeMap } from 'rxjs/operators';
+import { SupportTicketModel } from '../../support/models/support-ticket.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends BaseService {
@@ -47,6 +48,10 @@ export class UserService extends BaseService {
       `emailAvailable/${email}`,
       BaseService.noLoadingConfig
     );
+  }
+
+  public sendSupportTicket(supportTicket: SupportTicketModel): Observable<null>{
+    return super.add(supportTicket, 'support');
   }
 
   public getPersonalInfo<UserProfileModel>(): Observable<UserProfileModel> {

@@ -1,4 +1,4 @@
-﻿namespace GenealogyTree.Domain.DTO
+﻿namespace GenealogyTree.Domain.DTO.User
 {
     public class SettingsModel
     {

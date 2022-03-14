@@ -36,6 +36,7 @@ export class MapPage implements OnInit, OnDestroy, AfterViewInit {
     }, 500);
   }
   ngOnDestroy(): void {
+    this.map.destroy
     this.mapService.removeWatch();
   }
 }

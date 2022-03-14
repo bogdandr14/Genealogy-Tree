@@ -266,7 +266,7 @@
     "_types": {
       "bug_report": "Raportare problemă",
       "feature_request": "Cerere funcţionalitate",
-      "how_to": "Cum fac",
+      "technical_help": "Ajutor tehnic",
       "network_issue": "Problemă reţea"
     }
   },
@@ -299,7 +299,8 @@
     "information": "Informare",
     "_information": {
       "phoneCopied": "Numărul de telefon a fost copiat în clipboard",
-      "emailCopied": "Adresa de e-mail a fost copiată în clipboard"
+      "emailCopied": "Adresa de e-mail a fost copiată în clipboard",
+      "supportRequestSent": "Cererea ta de suport a fost înregistrată"
     },
     "success": "Succes",
     "_success": {
@@ -308,7 +309,9 @@
       "changePassword": "Parola a fost schimbată cu succes!"
     },
     "warning": "Avertisment",
-    "_warning": {},
+    "_warning": {
+      "languageForSupport": "Vei primi răspuns la cerere pe mail în limba selectată din aplicație"
+    },
     "error": "Eroare",
     "_error": {
       "wrongCredentials": "Credențialele sunt invalide, te rog incearcă din nou",

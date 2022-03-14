@@ -1,38 +1,48 @@
+import { DataService } from 'src/app/modules/core/services/data.service';
 import { UserService } from './../user/services/user.service';
 import { ToastController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { SupportModel } from './models/support.model';
+import { SupportTicketModel } from './models/support-ticket.model';
 import { AuthService } from '../core/services/auth.service';
 import { SupportTypeEnum } from './models/support-type.enum';
+import { take } from 'rxjs/operators';
+import { AlertService } from '../core/services/alert.service';
 
 @Component({
   selector: 'app-support',
   templateUrl: './support.page.html',
   styleUrls: ['./support.page.scss'],
 })
-export class SupportPage implements OnInit {
-  supportForm = new SupportModel();
+export class SupportPage implements AfterViewInit {
+  @ViewChild('form') form: NgForm;
+  supportForm = new SupportTicketModel();
   supportTypes = Object.values(SupportTypeEnum);
   constructor(
-    private toastCtrl: ToastController,
     public authService: AuthService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private alertService: AlertService,
+    private dataService: DataService
+  ) { }
 
-  ngOnInit() {}
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.alertService.showWarning('_message._warning.languageForSupport');
+    }, 1000)
+  }
 
-  async submit(form: NgForm) {
-
-    if(this.authService.isLoggedIn.value){
+  submit() {
+    if (this.authService.isLoggedIn.value) {
       this.supportForm.emailContact = this.userService.getLoggedInUser().email;
     }
-    if (form.valid) {
-      const toast = await this.toastCtrl.create({
-        message: 'Your support request has been sent.',
-        duration: 3000,
-      });
-      await toast.present();
-    }
+    this.dataService.getLanguage().subscribe((lang) => {
+      this.supportForm.language = lang;
+      this.userService.sendSupportTicket(this.supportForm).pipe(take(1)).subscribe(() => {
+        this.alertService.showInfo('_message._information.supportRequestSent');
+        this.supportForm = new SupportTicketModel();
+        this.form.form.markAsPristine();
+      },
+        (error) => this.alertService.showError(error))
+    })
   }
 }

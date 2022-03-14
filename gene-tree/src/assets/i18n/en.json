@@ -266,7 +266,7 @@
     "_types": {
       "bug_report": "Bug report",
       "feature_request": "Feature Request",
-      "how_to": "How to",
+      "technical_help": "Technical help",
       "network_issue": "Network problems"
     }
   },
@@ -299,7 +299,8 @@
     "information": "Information",
     "_information": {
       "phoneCopied": "Phone number copied to clipboard",
-      "emailCopied": "Email address copied to clipboard"
+      "emailCopied": "Email address copied to clipboard",
+      "supportRequestSent": "Your support request has been sent"
     },
     "success": "Success",
     "_success": {
@@ -308,7 +309,9 @@
       "changePassword": "Password changed successfuly!"
     },
     "warning": "Warning",
-    "_warning": {},
+    "_warning": {
+      "languageForSupport": "You will receive an answer to the request by mail in the language selected in app"
+    },
     "error": "Error",
     "_error": {
       "wrongCredentials": "Invalid credentials, please try again",

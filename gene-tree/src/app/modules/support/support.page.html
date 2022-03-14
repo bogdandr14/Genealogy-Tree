@@ -12,7 +12,7 @@
     <ion-row class="absolute-center">
       <ion-col size-sm="6" offset-sm="3">
         <ion-card>
-          <form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
+          <form #form="ngForm" novalidate (ngSubmit)="submit()">
             <ion-list lines="none">
               <ion-item-group id="supportType">
                 <ion-item color="transparent">
@@ -55,6 +55,7 @@
                     name="ssubject"
                     #ssubject="ngModel"
                     [(ngModel)]="supportForm.subject"
+                    maxlength="40"
                     required
                   ></ion-input>
                 </ion-item>
@@ -105,7 +106,8 @@
             </ion-list>
 
             <div class="ion-padding">
-              <ion-button expand="block" type="submit">
+              <ion-button expand="block" type="submit" class="submit-button"
+              [disabled]="form.invalid || form.pristine">
                 {{'_common.submit' | translate}}
               </ion-button>
             </div>

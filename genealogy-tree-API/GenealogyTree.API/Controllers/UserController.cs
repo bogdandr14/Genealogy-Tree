@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain.DTO.Email;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace GenealogyTree.API.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IEmailService _emailService;
+        public UserController(IUserService userService, IEmailService emailService)
         {
             _userService = userService;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -40,6 +43,21 @@ namespace GenealogyTree.API.Controllers
             {
                 bool isAvailable = await _userService.CheckEmailAvailable(email);
                 return Ok(isAvailable);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPost]
+        [Route("support")]
+        public async Task<ActionResult<bool>> SendSupportTicket(SupportTicket supportTicket)
+        {
+            try
+            {
+                await _emailService.SendSupportTicket(supportTicket);
+                return Ok(true);
             }
             catch (Exception e)
             {
