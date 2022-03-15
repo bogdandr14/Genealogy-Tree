@@ -39,9 +39,12 @@
             "styles": [
               "src/theme/variables.scss",
               "src/global.scss",
-              "./node_modules/@videogular/ngx-videogular/fonts/videogular.css"
+              "./node_modules/@videogular/ngx-videogular/fonts/videogular.css",
+              "src/assets/css/leaflet.extra-markers.min.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/leaflet.extra-markers.min.js"
+            ],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

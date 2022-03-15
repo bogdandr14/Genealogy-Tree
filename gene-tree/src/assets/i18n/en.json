@@ -258,6 +258,9 @@
     "choose": "Choose image",
     "change": "Change image"
   },
+  "_map":{
+    "currentLocation":"Here are you"
+  },
   "_support": {
     "description": "Enter the description of the ticket below",
     "subject": "About what is your request?",

@@ -50,7 +50,7 @@
             >
               <ion-avatar class="img-thumbnail">
                 <img
-                  [src]="imageBlobUrl"
+                  [src]="imgResultAfterCompress"
                   alt="uploaded-img"
                   class="align-self-start"
                 />
@@ -62,7 +62,14 @@
               </p>
               <p class="small">
                 {{ file.type }}
-                <span>{{ file.size / 1024 | number }}&nbsp;kb</span>
+                <span>{{ file.size / 1024 / 1024 | number }}&nbsp;MB</span>
+              </p>
+              <p class="small">
+                <br />
+                Original: Size: {{ sizeOfOriginalImage | number: "1.2-2" }}MB
+                <br />
+                Compressed: Size:
+                {{ sizeOFCompressedImage | number: "1.2-2" }}MB<br />
               </p>
             </div>
           </ion-item>
@@ -83,6 +90,7 @@
           <ion-icon name="save" slot="start"></ion-icon>
           {{ "_common.confirm" | translate }}
         </ion-button>
+        <!-- https://stackoverflow.com/questions/50566385/how-to-get-the-height-and-width-of-an-image-in-angular-2or-above-from-input-ta -->
         <!-- https://www.positronx.io/angular-image-upload-preview-crop-zoom-and-scale-example/ -->
         <!-- https://www.npmjs.com/package/ngx-image-compress -->
         <!-- https://medium.com/swlh/compress-image-and-send-it-to-an-api-in-angular-bc48e6ed3835 -->

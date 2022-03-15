@@ -258,6 +258,9 @@
     "choose": "Alege imaginea",
     "change": "Schimbă imaginea"
   },
+  "_map":{
+    "currentLocation":"Aici ești tu"
+  },
   "_support": {
     "description": "Scrie descrierea ticketului mai jos",
     "subject": "Despre ce este cererea ta?",

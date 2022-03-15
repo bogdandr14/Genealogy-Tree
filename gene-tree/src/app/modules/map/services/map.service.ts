@@ -1,5 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
+import * as L_EXTRA from '../../../../assets/js/leaflet.extra-markers.min.js';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,7 +12,7 @@ export class MapService {
   private currentUserCoords: number[] = [0, 0];
   private myMap: L.map = null;
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
     this.setUserIcon();
     if (!navigator.geolocation) {
       console.log('location is not supported');
@@ -29,7 +31,7 @@ export class MapService {
       'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
       {
         measureControl: true,
-        maxZoom: 20,
+        maxZoom: 19,
         minZoom: 1,
         attribution: 'edupala.com © ionic LeafLet',
       }
@@ -41,16 +43,16 @@ export class MapService {
     }, 500);
   }
 
+  //for setting the icon and using ion-icons, consult the following:
+  //https://ionic.io/ionicons/v4/usage
+  //https://github.com/coryasilva/Leaflet.ExtraMarkers
   private setUserIcon() {
-    this.currentUserIcon = L.icon({
-      iconUrl: '../../../assets/icon/marker-icon.png',
-      shadowUrl: '../../../assets/icon/marker-shadow.png',
-      iconRetinaUrl: '../../../assets/icon/marker-icon-2x.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      tooltipAnchor: [16, -28],
-      shadowSize: [41, 41],
+
+    this.currentUserIcon = L_EXTRA.ExtraMarkers.icon({
+      icon: 'ion-md-person',
+      markerColor: 'green',
+      shape: 'star',
+      prefix: 'icon'
     });
   }
 
@@ -88,6 +90,7 @@ export class MapService {
     this.currentUserMarker = L.marker(this.currentUserCoords, {
       icon: this.currentUserIcon,
     });
+    this.currentUserMarker.bindPopup(`<b>${this.translateService.instant('_map.currentLocation')}</b>`);
     this.currentUserMarker.addTo(this.myMap);
   }
 
