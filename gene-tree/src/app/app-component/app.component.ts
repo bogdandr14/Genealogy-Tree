@@ -35,6 +35,9 @@ export class AppComponent {
       }
     });
   }
+  //https://ionicframework.com/docs/v3/native/mobile-accessibility/
+  //https://www.a11yproject.com/
+  //https://blog.angular.io/build-more-accessible-angular-apps-1aca4fc39aff
 
   private setLangSubscriber() {
     this.dataService.language$.subscribe((language) => {

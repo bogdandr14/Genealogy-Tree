@@ -48,28 +48,36 @@
               *ngIf="photo.control.value"
               class="file-info align-items-center"
             >
+              <p class="small">
+                {{ file.name }}
+                {{ file.type }}
+              </p>
               <ion-avatar class="img-thumbnail">
                 <img
-                  [src]="imgResultAfterCompress"
-                  alt="uploaded-img"
+                  [src]="originalImgUrl"
+                  alt="uploaded-img-original"
                   class="align-self-start"
                 />
               </ion-avatar>
 
-              <br />
               <p class="small">
-                {{ file.name }}
+                Uploaded file size:
+                <span> {{ file.size / 1024 | number: "1.2-2" }}&nbsp;kB </span>
               </p>
               <p class="small">
-                {{ file.type }}
-                <span>{{ file.size / 1024 / 1024 | number }}&nbsp;MB</span>
+                Original reconstructed file size:
+                <span> {{ originalImgSize | number: "1.2-2" }}&nbsp;kB </span>
               </p>
-              <p class="small">
-                <br />
-                Original: Size: {{ sizeOfOriginalImage | number: "1.2-2" }}MB
-                <br />
-                Compressed: Size:
-                {{ sizeOFCompressedImage | number: "1.2-2" }}MB<br />
+              <ion-avatar class="img-thumbnail">
+                <img
+                  [src]="compressedImgUrl"
+                  alt="uploaded-img-compressed"
+                  class="align-self-start"
+                />
+              </ion-avatar>
+              <p>
+                Compressed file size:
+                <span> {{ compressedImgSize | number: "1.2-2" }}&nbsp;kB </span>
               </p>
             </div>
           </ion-item>

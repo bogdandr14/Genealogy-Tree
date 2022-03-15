@@ -4,20 +4,35 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppError } from '../models/errors/app-error';
 @Injectable({ providedIn: 'root' })
 export class AlertService {
-  private nofiticationSound: HTMLAudioElement;
+  private successSound = new Audio(
+    '../../../../assets/audio/mixkit-software-interface.wav'
+  );
+  private infoSound = new Audio(
+    '../../../../assets/audio/mixkit-game-balloon-or-bubble-pop.wav'
+  );
+
+  private warnSound = new Audio(
+    '../../../../assets/audio/mixkit-on-or-off-light-switch-tap.wav'
+  );
+  private errorSound = new Audio(
+    '../../../../assets/audio/mixkit-tech-break-fail.wav'
+  );
+
   constructor(
     private injector: Injector,
     private toastController: ToastController,
-    private alertController: AlertController,
+    private alertController: AlertController
   ) {
     this.setAudio();
   }
 
-  setAudio(){
-    this.nofiticationSound = new Audio();
-    this.nofiticationSound.src = '../../../../assets/audio/mixkit-software-interface.wav';
-    this.nofiticationSound.load();
+  setAudio() {
+    this.successSound.load();
+    this.infoSound.load();
+    this.warnSound.load();
+    this.errorSound.load();
   }
+
   //https://artlist.io/sfx/?term=whoosh,success,message,pop,in
   async presentAlert(
     header: string,
@@ -33,15 +48,16 @@ export class AlertService {
       buttons: [
         {
           text: cancelButtonName,
-          role: 'cancel'
-        }, {
+          role: 'cancel',
+        },
+        {
           text: confirmButtonName,
-          handler: confirmAction.bind(context)
-        }
-      ]
+          handler: confirmAction.bind(context),
+        },
+      ],
     });
     await alert.present();
-    this.nofiticationSound.play();
+    this.infoSound.play();
   }
 
   public async showSuccess(success: any) {
@@ -53,8 +69,7 @@ export class AlertService {
     );
 
     toast.present();
-    this.nofiticationSound.play();
-
+    this.successSound.play();
   }
 
   public async showError(error: any) {
@@ -68,10 +83,15 @@ export class AlertService {
         error.status
       );
     } else {
-      toast = await this.createToast('_message.error', error, 'danger', 'close-circle');
+      toast = await this.createToast(
+        '_message.error',
+        error,
+        'danger',
+        'close-circle'
+      );
     }
     toast.present();
-    this.nofiticationSound.play();
+    this.errorSound.play();
   }
 
   public async showInfo(info: any) {
@@ -82,7 +102,7 @@ export class AlertService {
       'information-circle'
     );
     toast.present();
-    this.nofiticationSound.play();
+    this.infoSound.play();
   }
 
   public async showWarning(warning: any) {
@@ -93,7 +113,7 @@ export class AlertService {
       'alert-circle'
     );
     toast.present();
-    this.nofiticationSound.play();
+    this.warnSound.play();
   }
 
   public showConfirmation(message: string): boolean {
