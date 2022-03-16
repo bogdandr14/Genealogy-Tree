@@ -62,6 +62,7 @@ export class PersonService extends BaseService {
   public uploadPhoto(personId: number, image: File): Observable<ImageFile> {
     let path = `${this.url}/photo/${personId}`;
     const formData = new FormData();
+    debugger;
     formData.append('image', image, image.name);
     return this.httpClient.post<ImageFile>(path, formData);
   }

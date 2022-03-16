@@ -1,6 +1,10 @@
 {
   "welcomeText": "Welcome to GeneTree version { key }",
+  "appearance": "Appearance",
   "darkMode": "Dark mode",
+  "invertColors": "Invert colors",
+  "grayscale": "Grayscale",
+  "linkHighlight": "Highlight links",
   "language": "Language",
   "_languages": {
     "languageEN": "English",
@@ -258,8 +262,8 @@
     "choose": "Choose image",
     "change": "Change image"
   },
-  "_map":{
-    "currentLocation":"Here are you"
+  "_map": {
+    "currentLocation": "Here are you"
   },
   "_support": {
     "description": "Enter the description of the ticket below",

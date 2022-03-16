@@ -7,7 +7,6 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
-import { ThemeSelectComponent } from './components/theme-select/theme-select.component';
 import { InputTemplateComponent } from './components/input-template/input-template.component';
 import { ValidationErrorsComponent } from './components/validation-errors/validation-errors.component';
 import { SelectTemplateComponent } from './components/select-template/select-template.component';
@@ -20,7 +19,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   declarations: [
     HoverClassDirective,
     PaginatorComponent,
-    ThemeSelectComponent,
     LanguageSelectComponent,
     InputTemplateComponent,
     SelectTemplateComponent,
@@ -45,7 +43,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     IonicModule,
     HoverClassDirective,
     PaginatorComponent,
-    ThemeSelectComponent,
     LanguageSelectComponent,
     InputTemplateComponent,
     SelectTemplateComponent,

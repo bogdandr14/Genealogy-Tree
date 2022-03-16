@@ -1,3 +1,4 @@
+import { AccessibilitySettingsComponent } from './components/accessibility-settings/accessibility-settings.component';
 import { NavigationLinkComponent } from './components/navigation-link/navigation-link.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
@@ -31,7 +32,7 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
 }
 
 @NgModule({
-  declarations: [NavigationComponent, NavigationLinkComponent],
+  declarations: [NavigationComponent, NavigationLinkComponent, AccessibilitySettingsComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -52,7 +53,7 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
     RouterModule,
     SharedModule,
   ],
-  exports: [TranslateModule, ReactiveFormsModule, NavigationComponent],
+  exports: [TranslateModule, ReactiveFormsModule, NavigationComponent, AccessibilitySettingsComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

@@ -70,14 +70,14 @@ export class NavigationComponent {
   setupOtherLinks() {
     this.otherLinks = [
       {
-        title: '_pages.intro',
-        path: '/intro',
-        icon: 'color-wand',
-      },
-      {
         title: '_pages.support',
         path: '/support',
         icon: 'help',
+      },
+      {
+        title: '_pages.intro',
+        path: '/intro',
+        icon: 'color-wand',
       },
     ];
   }

@@ -6,7 +6,8 @@ import { MapPage } from './map.page';
 const routes: Routes = [
   {
     path: '',
-    component: MapPage
+    component: MapPage,
+    data: { title: '_pages.location' }
   }
 ];
 
@@ -14,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MapPageRoutingModule {}
+export class MapPageRoutingModule { }

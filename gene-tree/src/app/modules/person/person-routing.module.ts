@@ -9,31 +9,39 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'details',
-    pathMatch:'full'
+    pathMatch: 'full'
   },
   {
     path: 'details',
     component: PersonDetailsPage,
+    data: { title: '_details.person' }
+
   },
   {
     path: 'details/:id',
     component: PersonDetailsPage,
+    data: { title: '_details.person' }
   },
   {
     path: 'edit/:id',
     component: PersonEditPage,
+    data: { title: '_edit.person' }
+
   },
   {
     path: 'create',
     component: PersonEditPage,
+    data: { title: '_add.person' }
   },
   {
     path: 'list',
-    component: RelativesListPage
+    component: RelativesListPage,
+    data: { title: '_pages.relatives' }
   },
   {
     path: 'list/:id',
-    component: RelativesListPage
+    component: RelativesListPage,
+    data: { title: '_pages.relatives' }
   },
 ];
 
@@ -41,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PersonRoutingModule {}
+export class PersonRoutingModule { }

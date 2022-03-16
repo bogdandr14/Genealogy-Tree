@@ -1,4 +1,10 @@
-<ion-app [class.dark-theme]="dark">
+<ion-app
+  [class.dark-theme]="dark"
+  [class.invert-colors]="invert"
+  [class.grayscale]="gray"
+  [class.highlight-links]="highlight"
+  [ngClass]="fontSize"
+>
   <ion-split-pane contentId="main-content">
     <ion-menu side="end" contentId="main-content">
       <ion-header>
@@ -17,6 +23,7 @@
       </ion-header>
       <ion-content class="menu">
         <app-navigation></app-navigation>
+        <app-accessibility-settings></app-accessibility-settings>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content" class="content"></ion-router-outlet>

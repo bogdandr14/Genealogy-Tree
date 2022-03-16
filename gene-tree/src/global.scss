@@ -31,9 +31,9 @@
  * Imports a file that can contain Sass/CSS that should be used throughout
  * the entire app.
  */
-@import '~swiper/scss';
+@import "~swiper/scss";
 @import "~@ionic/angular/css/ionic-swiper";
-@import '~leaflet/dist/leaflet.css';
+@import "~leaflet/dist/leaflet.css";
 
 // placed here instead of tutorial.scss due to slide els not getting ng scoping attribute
 .swiper-slide {
@@ -79,15 +79,55 @@
   align-items: center !important;
 }
 
-.custom-padding-top {
-  padding-top: 70px !important;
+.custom-margin-top {
+  margin-top: 70px !important;
 }
 
-.custom-padding-bottom {
-  bottom: 70px !important;
+.custom-margin-bottom {
+  margin-bottom: 70px !important;
 }
 
 ion-card.selected,
 ion-card.selected > * {
   background: var(--ion-color-success) !important;
 }
+
+.highlight-links * {
+  ion-chip,
+  ion-button,
+  ion-menu-toggle,
+  a {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    font-style: bold;
+  }
+}
+
+.font-size-1 * {
+  font-size: 98%;
+}
+.font-size-2 * {
+  font-size: 99%;
+}
+.font-size-3 * {
+  font-size: 100%;
+}
+.font-size-4 * {
+  font-size: 101%;
+}
+.font-size-5 * {
+  font-size: 102%;
+}
+.font-size-6 * {
+  font-size: 103%;
+}
+.font-size-7 * {
+  font-size: 104%;
+}
+.font-size-8 * {
+  font-size: 105%;
+}
+.font-size-9 * {
+  font-size: 106%;
+}
+

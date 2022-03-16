@@ -86,6 +86,7 @@ export class PhotoUploadComponent implements OnInit {
         // call method that creates a blob from dataUri
         const imageBlob = this.dataURItoBlob(result.split(',')[1]);
         //imageFile created below is the new compressed file which can be send to API in form data
+       debugger;
         this.compressedImgFile = new File([result], this.file.name, {
           type: this.file.type,
         });
@@ -108,7 +109,7 @@ export class PhotoUploadComponent implements OnInit {
     this.personService
       .uploadPhoto(
         this.personId,
-        this.compressedImgSize < this.originalImgSize
+        this.compressedImgSize > this.originalImgSize
           ? this.compressedImgFile
           : this.file
       )

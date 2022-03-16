@@ -6,8 +6,9 @@ import { IntroGuard } from './modules/core/guards/intro.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then( m => m.HomePageModule),
-    canLoad:[IntroGuard]
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomePageModule),
+    canLoad: [IntroGuard],
+    data: { title: '_pages.home' }
   },
   {
     path: '',
@@ -23,19 +24,19 @@ const routes: Routes = [
     path: 'person',
     loadChildren: () =>
       import('./modules/person/person.module').then((m) => m.PersonModule),
-      canLoad:[AuthGuard]
+    canLoad: [AuthGuard]
   },
   {
     path: 'intro',
-    loadChildren: () => import('./modules/intro/intro.module').then( m => m.IntroPageModule)
+    loadChildren: () => import('./modules/intro/intro.module').then(m => m.IntroPageModule)
   },
   {
     path: 'support',
-    loadChildren: () => import('./modules/support/support.module').then( m => m.SupportPageModule)
+    loadChildren: () => import('./modules/support/support.module').then(m => m.SupportPageModule)
   },
   {
     path: 'map',
-    loadChildren: () => import('./modules/map/map.module').then( m => m.MapPageModule)
+    loadChildren: () => import('./modules/map/map.module').then(m => m.MapPageModule)
   }
 ];
 

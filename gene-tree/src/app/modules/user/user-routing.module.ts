@@ -18,27 +18,32 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPage,
-    canLoad: [AutoLoginGuard]
+    canLoad: [AutoLoginGuard],
+    data: { title: '_pages.login' }
   },
   {
     path: 'register',
     component: RegisterPage,
     canLoad: [AutoLoginGuard],
+    data: { title: '_pages.register' }
   },
   {
     path: 'profile',
     component: ProfilePage,
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    data: { title: '_pages.profile' }
   },
   {
     path: 'settings',
     component: SettingsPage,
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    data: { title: '_pages.settings' }
   },
   {
     path: 'search',
     component: UserSearchComponent,
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    data: { title: '_pages.search' }
   },
 ];
 
@@ -46,4 +51,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }

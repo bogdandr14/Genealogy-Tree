@@ -6,7 +6,8 @@ import { IntroPage } from './intro.page';
 const routes: Routes = [
   {
     path: '',
-    component: IntroPage
+    component: IntroPage,
+    data: { title: '_pages.intro' }
   }
 ];
 
@@ -14,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class IntroPageRoutingModule {}
+export class IntroPageRoutingModule { }

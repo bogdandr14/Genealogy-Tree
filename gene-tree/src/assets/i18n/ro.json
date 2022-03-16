@@ -1,6 +1,10 @@
 {
   "welcomeText": "Bine ai venit la GeneTree versiunea { key }",
+  "appearance": "Aspect",
   "darkMode": "Mod întunecat",
+  "invertColors": "Inversează culorile",
+  "grayscale": "Alb-negru",
+  "linkHighlight": "Evidențiază acțiuni",
   "language": "Limba",
   "_languages": {
     "languageEN": "Engleză",
@@ -258,8 +262,8 @@
     "choose": "Alege imaginea",
     "change": "Schimbă imaginea"
   },
-  "_map":{
-    "currentLocation":"Aici ești tu"
+  "_map": {
+    "currentLocation": "Aici ești tu"
   },
   "_support": {
     "description": "Scrie descrierea ticketului mai jos",

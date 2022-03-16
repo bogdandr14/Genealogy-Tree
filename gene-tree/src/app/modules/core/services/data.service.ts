@@ -18,6 +18,18 @@ export class DataService {
   private darkTheme = new BehaviorSubject<boolean>(null);
   public darkTheme$ = this.darkTheme.asObservable();
 
+  private invertColor = new BehaviorSubject<boolean>(null);
+  public invertColor$ = this.invertColor.asObservable();
+
+  private grayscale = new BehaviorSubject<boolean>(null);
+  public grayscale$ = this.grayscale.asObservable();
+
+  private linkHighlight = new BehaviorSubject<boolean>(null);
+  public linkHighlight$ = this.linkHighlight.asObservable();
+
+  private fontSize = new BehaviorSubject<string>('font-size-3');
+  public fontSize$ = this.fontSize.asObservable();
+
   private language = new BehaviorSubject<string>(environment.defaultLanguage);
   public language$ = this.language.asObservable();
 
@@ -29,9 +41,9 @@ export class DataService {
   async initData() {
     await this.storage.defineDriver(CordovaSQLiteDriver);
     await this.storage.create();
-    this.getCurrentUser().subscribe((value)=>this.user.next(value));
-    this.getTheme().subscribe((value)=>this.darkTheme.next(value));
-    this.getLanguage().subscribe((value)=>this.language.next(value));
+    this.getCurrentUser().subscribe((value) => this.user.next(value));
+    this.getTheme().subscribe((value) => this.darkTheme.next(value));
+    this.getLanguage().subscribe((value) => this.language.next(value));
     this.storageReady.next(true);
   }
 
@@ -55,6 +67,21 @@ export class DataService {
     this.storage.remove(key);
   }
 
+  setInvert(invert: boolean) {
+    this.invertColor.next(invert);
+  }
+
+  setGrayscale(grayscale: boolean) {
+    this.grayscale.next(grayscale);
+  }
+
+  setLinkHighlight(highlight: boolean) {
+    this.linkHighlight.next(highlight);
+  }
+
+  setFontSize(fontSize: string) {
+    this.fontSize.next(fontSize);
+  }
   setTheme(theme: boolean) {
     this.set('dark-theme', theme);
     this.darkTheme.next(theme);

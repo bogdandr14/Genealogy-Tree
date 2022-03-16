@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ThemeSelectComponent } from './theme-select.component';
+import { AccessibilitySettingsComponent } from './accessibility-settings.component';
 
-describe('ThemeSelectComponent', () => {
-  let component: ThemeSelectComponent;
-  let fixture: ComponentFixture<ThemeSelectComponent>;
+describe('AccessibilitySettingsComponent', () => {
+  let component: AccessibilitySettingsComponent;
+  let fixture: ComponentFixture<AccessibilitySettingsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThemeSelectComponent ],
+      declarations: [ AccessibilitySettingsComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ThemeSelectComponent);
+    fixture = TestBed.createComponent(AccessibilitySettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
