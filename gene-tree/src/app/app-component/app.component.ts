@@ -33,31 +33,31 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(() => {
-        let child = this.activatedRoute.firstChild;
-        while (child.firstChild) {
-          child = child.firstChild;
-        }
-        if (child.snapshot.data['title']) {
-          return child.snapshot.data['title'];
-        }
-        return DEFAULT_TITLE;
-      })
-    ).subscribe((title: string) => {
-      this.setDocTitle(title);
-    });
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        map(() => {
+          let child = this.activatedRoute.firstChild;
+          while (child.firstChild) {
+            child = child.firstChild;
+          }
+          if (child.snapshot.data['title']) {
+            return child.snapshot.data['title'];
+          }
+          return DEFAULT_TITLE;
+        })
+      )
+      .subscribe((title: string) => {
+        this.setDocTitle(title);
+      });
   }
 
   setDocTitle(title: string) {
     if (title) {
-      this.titleService.setTitle('GeneTree - ' + this.translateService.instant(title));
-    }
-    else {
+      this.titleService.setTitle(this.translateService.instant(title));
+    } else {
       this.titleService.setTitle(DEFAULT_TITLE);
     }
-
   }
 
   //https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
@@ -75,7 +75,6 @@ export class AppComponent implements OnInit {
     this.dataService.language$.subscribe((language) => {
       if (language != null) {
         this.translateService.use(language);
-        this.setDocTitle
       }
     });
   }

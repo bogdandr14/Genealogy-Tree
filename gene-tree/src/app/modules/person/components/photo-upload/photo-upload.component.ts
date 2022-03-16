@@ -16,19 +16,14 @@ export const COMPRESS_QUALITY = 90;
 export class PhotoUploadComponent implements OnInit {
   @Output() imageSave = new EventEmitter<ImageFile>();
   @Input() maxSizeMb = 2;
-  public file: File;
-  public imgHeight: number;
-  public imgWidth: number;
-
-  public originalImgUrl: string;
-  public originalImgSize: number;
-  public originalImgFile: File;
-
-  public compressedImgUrl: string;
-  public compressedImgSize: number;
-  private compressedImgFile: File;
-
   @Input() personId: number;
+
+  public originalImgFile: File;
+  public originalImgUrl: string;
+
+  public compressedImgFile: File;
+  public compressedImgUrl: string;
+
   constructor(
     public modalCtrl: ModalController,
     private personService: PersonService,
@@ -38,8 +33,8 @@ export class PhotoUploadComponent implements OnInit {
   ngOnInit() {}
 
   onFileChange(event) {
-    this.file = event.target.files[0];
-    if (this.file) {
+    this.originalImgFile = event.target.files[0];
+    if (this.originalImgFile) {
       this.convertBlobToDataURI();
     }
   }
@@ -49,69 +44,62 @@ export class PhotoUploadComponent implements OnInit {
     reader.onload = (e: any) => {
       const img = new Image();
       img.onload = (rs) => {
-        this.imgHeight = rs.currentTarget['height'];
-        this.imgWidth = rs.currentTarget['width'];
-        this.compressFile();
+        const imgHeight = rs.currentTarget['height'];
+        const imgWidth = rs.currentTarget['width'];
+        const minDim = imgHeight < imgWidth ? imgHeight : imgWidth;
+        this.compressFile(minDim);
       };
       img.src = reader.result as string;
       this.originalImgUrl = reader.result as string;
-      this.originalImgFile = new File([this.originalImgUrl], this.file.name, {
-        type: this.file.type,
-      });
     };
-    reader.readAsDataURL(this.file);
+    reader.readAsDataURL(this.originalImgFile);
   }
 
-  compressFile() {
-    this.originalImgSize =
-      this.imgCompressService.byteCount(this.originalImgUrl) / 1024;
-    let minDim = this.imgHeight;
-    if (this.imgWidth < this.imgHeight) {
-      minDim = this.imgWidth;
-    }
-    const ratio = (MAX_IMG_DIM * 100) / minDim;
+  compressFile(originalImgMinDim: number) {
+    const RATIO = (MAX_IMG_DIM * 100) / originalImgMinDim;
     this.imgCompressService
       .compressFile(
         this.originalImgUrl,
         DOC_ORIENTATION.Up,
-        ratio,
-        COMPRESS_QUALITY,
-        MAX_IMG_DIM,
-        MAX_IMG_DIM
+        RATIO,
+        COMPRESS_QUALITY
       )
       .then((result) => {
         this.compressedImgUrl = result;
-        this.compressedImgSize =
-          this.imgCompressService.byteCount(result) / 1024;
         // call method that creates a blob from dataUri
-        const imageBlob = this.dataURItoBlob(result.split(',')[1]);
+        const compressedImgBlob = this.dataURItoBlob(result.split(',')[1]);
         //imageFile created below is the new compressed file which can be send to API in form data
-       debugger;
-        this.compressedImgFile = new File([result], this.file.name, {
-          type: this.file.type,
-        });
+        this.compressedImgFile = new File(
+          [compressedImgBlob],
+          this.originalImgFile.name,
+          {
+            type: this.originalImgFile.type,
+          }
+        );
+        window.open(window.URL.createObjectURL(this.originalImgFile));
+        window.open(window.URL.createObjectURL(this.compressedImgFile));
       });
   }
 
-  dataURItoBlob(dataURI) {
+  dataURItoBlob(dataURI: string) {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);
     for (let i = 0; i < byteString.length; i++) {
       int8Array[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([int8Array], { type: this.file.type });
+    const blob = new Blob([int8Array], { type: this.originalImgFile.type });
     return blob;
   }
-
+  //https://www.udemy.com/course/how-to-program-your-own-breakout-game-using-visual-csharp/
   submitPhoto() {
-    console.log(this.file);
+    console.log(this.originalImgFile);
     this.personService
       .uploadPhoto(
         this.personId,
-        this.compressedImgSize > this.originalImgSize
+        this.compressedImgFile.size < this.originalImgFile.size
           ? this.compressedImgFile
-          : this.file
+          : this.originalImgFile
       )
       .subscribe((imageFile) => {
         this.imageSave.emit(imageFile);

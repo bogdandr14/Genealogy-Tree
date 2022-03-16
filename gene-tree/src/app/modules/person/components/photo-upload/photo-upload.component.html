@@ -36,12 +36,15 @@
             />
             <ion-button
               name="photoButton"
-              [color]="file ? 'warning' : 'success'"
+              [color]="originalImgFile ? 'warning' : 'success'"
               fill="clear"
               expand="block"
               (click)="fileUpload.click()"
             >
-              {{ (file ? "_image.change" : "_image.choose") | translate }}
+              {{
+                (originalImgFile ? "_image.change" : "_image.choose")
+                  | translate
+              }}
               <ion-icon name="image" slot="end"></ion-icon>
             </ion-button>
             <div
@@ -49,8 +52,8 @@
               class="file-info align-items-center"
             >
               <p class="small">
-                {{ file.name }}
-                {{ file.type }}
+                {{ originalImgFile?.name }}
+                {{ originalImgFile?.type }}
               </p>
               <ion-avatar class="img-thumbnail">
                 <img
@@ -59,14 +62,11 @@
                   class="align-self-start"
                 />
               </ion-avatar>
-
               <p class="small">
-                Uploaded file size:
-                <span> {{ file.size / 1024 | number: "1.2-2" }}&nbsp;kB </span>
-              </p>
-              <p class="small">
-                Original reconstructed file size:
-                <span> {{ originalImgSize | number: "1.2-2" }}&nbsp;kB </span>
+                Original file size:
+                <span>
+                  {{ originalImgFile?.size / 1024 | number: "1.2-2" }}&nbsp;kB
+                </span>
               </p>
               <ion-avatar class="img-thumbnail">
                 <img
@@ -77,7 +77,9 @@
               </ion-avatar>
               <p>
                 Compressed file size:
-                <span> {{ compressedImgSize | number: "1.2-2" }}&nbsp;kB </span>
+                <span>
+                  {{ compressedImgFile?.size / 1024 | number: "1.2-2" }}&nbsp;kB
+                </span>
               </p>
             </div>
           </ion-item>
