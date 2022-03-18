@@ -15,6 +15,7 @@ export const DEFAULT_TITLE = 'GeneTree';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
+  //https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development
   dark = false;
   invert = false;
   gray = false;
