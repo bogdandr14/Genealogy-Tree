@@ -24,6 +24,7 @@
     "@angular/router": "~13.1.1",
     "@angular/service-worker": "~13.1.1",
     "@auth0/angular-jwt": "^5.0.2",
+    "@balkangraph/familytree.js": "^1.2.17",
     "@ionic-native/clipboard": "^5.36.0",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/in-app-browser": "^5.36.0",
