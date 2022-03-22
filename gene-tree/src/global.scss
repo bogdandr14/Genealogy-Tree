@@ -45,7 +45,9 @@
   color: #eb445a;
   font-size: 0.8em;
 }
-
+ion-modal ion-content {
+  height: 2000%;
+}
 .error {
   margin: 2px !important;
 }
@@ -129,4 +131,3 @@ ion-card.selected > * {
 .font-size-9 * {
   font-size: 106%;
 }
-
