@@ -1,4 +1,4 @@
-svg.hugo g.node.male rect {
+svg.hugo>g.node.male>rect {
   fill:  linear-gradient(red, yellow, blue, orange);
   background: linear-gradient(hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%)) !important;
 
@@ -11,3 +11,8 @@ svg.hugo g.node.male rect {
   background: linear-gradient(hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%)) !important;
 
 }
+//https://stackoverflow.com/questions/61638956/can-i-change-whats-inside-the-fill-tag-of-an-svg-element-with-javascript
+//https://stackoverflow.com/questions/14051351/svg-gradient-using-css
+//https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Gradients
+//https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient
+//https://htmldog.com/guides/css/advanced/gradients/
