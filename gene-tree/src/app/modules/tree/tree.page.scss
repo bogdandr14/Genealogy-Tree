@@ -1,0 +1,13 @@
+svg.hugo g.node.male rect {
+  fill:  linear-gradient(red, yellow, blue, orange);
+  background: linear-gradient(hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%)) !important;
+
+}
+
+#tree > svg {
+  background-color: #ff0000;
+}
+#hugo-grad-male{
+  background: linear-gradient(hsl(0,100%,50%),hsl(60,100%,50%),hsl(120,100%,50%),hsl(180,100%,50%),hsl(240,100%,50%),hsl(300,100%,50%)) !important;
+
+}

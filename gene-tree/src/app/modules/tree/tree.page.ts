@@ -72,12 +72,12 @@ export class TreePage implements OnInit {
       nodeMenu: {
         edit: {
           text: 'Edit',
-          icon: FamilyTree.icon.edit(18, 18, '#039BE5'),
+          icon: FamilyTree.icon.edit(18, 18, '#ffd534'),
           onClick: this.personEditHandler,
         },
         details: {
           text: 'Details',
-          icon: FamilyTree.icon.details(18, 18, '#039BE5'),
+          icon: FamilyTree.icon.details(18, 18, '#50c8ff'),
           onClick: this.personDetailHandler,
         },
       },

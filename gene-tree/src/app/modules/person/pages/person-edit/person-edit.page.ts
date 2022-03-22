@@ -3,7 +3,7 @@ import { CommonService } from './../../../shared/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, of, Subscription } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { first, switchMap, takeUntil } from 'rxjs/operators';
 import { CommonObject } from 'src/app/modules/shared/models/common-object';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonEditModel } from '../../models/person/person-edit.model';
@@ -50,7 +50,7 @@ export class PersonEditPage implements OnInit {
           }
         })
       );
-      this.person$.subscribe((person) => {
+      this.person$.pipe(first()).subscribe((person) => {
         this.personEdit = person;
         if (!this.personEdit.birthPlace) {
           this.personEdit.birthPlace = new LocationModel();
