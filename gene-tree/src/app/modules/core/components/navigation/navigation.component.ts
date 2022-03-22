@@ -35,6 +35,11 @@ export class NavigationComponent {
         icon: 'people',
       },
       {
+        title: '_pages.tree',
+        path: '/tree',
+        icon: 'leaf',
+      },
+      {
         title: '_pages.location',
         path: '/map',
         icon: 'location',

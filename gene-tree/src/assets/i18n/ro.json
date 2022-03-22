@@ -173,7 +173,8 @@
     "register": "Înregistrare",
     "intro": "Vezi intro",
     "location": "Locaţie",
-    "support": "Suport"
+    "support": "Suport",
+    "tree": "Arbore genealogic"
   },
   "_links": {
     "goToRelatives": "Mergi la rude",

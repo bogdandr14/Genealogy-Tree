@@ -173,7 +173,8 @@
     "register": "Register",
     "intro": "Show intro",
     "location": "Location",
-    "support": "Support"
+    "support": "Support",
+    "tree": "Genealogy tree"
   },
   "_links": {
     "goToRelatives": "Go to relatives",
