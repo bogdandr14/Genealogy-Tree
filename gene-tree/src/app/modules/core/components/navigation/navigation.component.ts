@@ -44,11 +44,6 @@ export class NavigationComponent {
         path: '/map',
         icon: 'location',
       },
-      {
-        title: '_pages.settings',
-        path: '/user/settings',
-        icon: 'settings',
-      },
     ];
   }
 
@@ -74,6 +69,11 @@ export class NavigationComponent {
 
   setupOtherLinks() {
     this.otherLinks = [
+      {
+        title: '_pages.settings',
+        path: '/settings',
+        icon: 'settings',
+      },
       {
         title: '_pages.support',
         path: '/support',

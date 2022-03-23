@@ -7,5 +7,6 @@ namespace GenealogyTree.Domain.DTO.User
         public bool NotifyUpdates { get; set; }
         public bool NotifyBirthdays { get; set; }
         public bool SharePersonalInfo { get; set; }
+        public bool ShareLocation { get; set; }
     }
 }

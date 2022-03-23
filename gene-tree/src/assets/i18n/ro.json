@@ -297,10 +297,11 @@
     "itemsPerPage": "Articole pe pagină",
     "currentPage": "Pagina { currentPage } din { numberOfPages }"
   },
-  "_notify": {
-    "updates": "Notifică-mă când au loc actualizări",
-    "birthdays": "Notifică-mă când sunt zile de naştere",
-    "shareContact": "Împărtăşeşte e-mail-ul şi numărul de telefon cu alţi utilizatori"
+  "_settings": {
+    "notifyUpdates": "Notifică-mă când au loc actualizări",
+    "notifyBirthdays": "Notifică-mă când sunt zile de naştere",
+    "shareContact": "Împărtăşeşte e-mail-ul şi numărul de telefon cu alţi utilizatori",
+    "shareLocation": "Împărtășește locația la rude când folosesc aplicația"
   },
   "_message": {
     "loading": "Se încarcă...",
@@ -314,11 +315,13 @@
     "_success": {
       "register": "Contul a fost creat cu success! Logează-te pentru a accesa contul",
       "login": "Bine ai revenit, { firstName }!",
-      "changePassword": "Parola a fost schimbată cu succes!"
+      "changePassword": "Parola a fost schimbată cu succes!",
+      "preferencesSaved": "Preferințele au fost salvate cu succes!"
     },
     "warning": "Avertisment",
     "_warning": {
-      "languageForSupport": "Vei primi răspuns la cerere pe mail în limba selectată din aplicație"
+      "languageForSupport": "Vei primi răspuns la cerere pe mail în limba selectată din aplicație",
+      "unsavedPreferences": "Nu ți-ai salvat preferințele!"
     },
     "error": "Eroare",
     "_error": {

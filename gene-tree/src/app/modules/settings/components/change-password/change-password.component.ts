@@ -1,5 +1,4 @@
 import { DataService } from 'src/app/modules/core/services/data.service';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from 'src/app/modules/core/services/alert.service';

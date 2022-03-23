@@ -297,10 +297,11 @@
     "itemsPerPage": "Items per page",
     "currentPage": "Page { currentPage } of { numberOfPages }"
   },
-  "_notify": {
-    "updates": "Notify me when there are updates",
-    "birthdays": "Notify me about birthdays",
-    "shareContact": "Share my e-mail and phone number with other users"
+  "_settings":{
+    "notifyUpdates": "Notify me when there are updates",
+    "notifyBirthdays": "Notify me about birthdays",
+    "shareContact": "Share my e-mail and phone number with other users",
+    "shareLocation": "Share my location to relatives when using the app"
   },
   "_message": {
     "loading": "Loading...",
@@ -314,11 +315,14 @@
     "_success": {
       "register": "The account was successfuly created! Please login to enter the account",
       "login": "Welcome back!",
-      "changePassword": "Password changed successfuly!"
+      "changePassword": "Password changed successfuly!",
+      "preferencesSaved": "Preferences saved successfully!"
     },
     "warning": "Warning",
     "_warning": {
-      "languageForSupport": "You will receive an answer to the request by mail in the language selected in app"
+      "languageForSupport": "You will receive an answer to the request by mail in the language selected in app",
+      "preferencesSaved": "You did not save your preferences!"
+
     },
     "error": "Error",
     "_error": {

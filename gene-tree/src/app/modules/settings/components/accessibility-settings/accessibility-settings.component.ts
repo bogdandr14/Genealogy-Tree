@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DataService } from '../../services/data.service';
+import { DataService } from '../../../core/services/data.service';
 
 @Component({
   selector: 'app-accessibility-settings',
@@ -24,9 +24,24 @@ export class AccessibilitySettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.darkTheme$.subscribe((theme) => {
-      if (this.darkCtrl.value != theme) {
-        this.darkCtrl.setValue(theme);
+    this.dataService.darkTheme$.subscribe((value) => {
+      if (this.darkCtrl.value != value) {
+        this.darkCtrl.setValue(value);
+      }
+    });
+    this.dataService.invertColor$.subscribe((value) => {
+      if (this.invertCtrl.value != value) {
+        this.invertCtrl.setValue(value);
+      }
+    });
+    this.dataService.grayscale$.subscribe((value) => {
+      if (this.grayCtrl.value != value) {
+        this.grayCtrl.setValue(value);
+      }
+    });
+    this.dataService.linkHighlight$.subscribe((value) => {
+      if (this.highlightCtrl.value != value) {
+        this.highlightCtrl.setValue(value);
       }
     });
   }

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { ChangePasswordModel } from '../../user/models/change-password.model';
+import { ChangePasswordModel } from '../../settings/models/change-password.model';
 import { LoginModel } from '../../user/models/login.model';
 import { RegisterModel } from '../../user/models/register.model';
 

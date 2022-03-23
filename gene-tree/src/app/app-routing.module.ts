@@ -17,31 +17,38 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () =>
-      import('./modules/user/user.module').then((m) => m.UserModule),
+    loadChildren: () => import('./modules/user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'person',
-    loadChildren: () =>
-      import('./modules/person/person.module').then((m) => m.PersonModule),
+    loadChildren: () => import('./modules/person/person.module').then((m) => m.PersonModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'intro',
-    loadChildren: () => import('./modules/intro/intro.module').then(m => m.IntroPageModule)
+    loadChildren: () => import('./modules/intro/intro.module').then(m => m.IntroPageModule),
+    data: { title: '_pages.intro' }
   },
   {
     path: 'support',
-    loadChildren: () => import('./modules/support/support.module').then(m => m.SupportPageModule)
+    loadChildren: () => import('./modules/support/support.module').then(m => m.SupportPageModule),
+    data: { title: '_pages.support' }
   },
   {
     path: 'map',
-    loadChildren: () => import('./modules/map/map.module').then(m => m.MapPageModule)
-  },  {
+    loadChildren: () => import('./modules/map/map.module').then(m => m.MapPageModule),
+    data: { title: '_pages.map' }
+  },
+  {
     path: 'tree',
-    loadChildren: () => import('./modules/tree/tree.module').then( m => m.TreePageModule)
+    loadChildren: () => import('./modules/tree/tree.module').then(m => m.TreePageModule),
+    data: { title: '_pages.tree' }
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsPageModule),
+    data: { title: '_pages.settings' }
   }
-
 ];
 
 @NgModule({

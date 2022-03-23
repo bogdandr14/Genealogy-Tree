@@ -6,8 +6,6 @@ import { UserSearchComponent } from './components/user-search/user-search.compon
 import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { RegisterPage } from './pages/register/register.page';
-import { SettingsPage } from './pages/settings/settings.page';
-
 
 const routes: Routes = [
   {
@@ -32,12 +30,6 @@ const routes: Routes = [
     component: ProfilePage,
     canLoad: [AuthGuard],
     data: { title: '_pages.profile' }
-  },
-  {
-    path: 'settings',
-    component: SettingsPage,
-    canLoad: [AuthGuard],
-    data: { title: '_pages.settings' }
   },
   {
     path: 'search',

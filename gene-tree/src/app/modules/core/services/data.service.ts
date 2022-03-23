@@ -3,7 +3,7 @@ import { filter, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AccountSettingsModel } from '../../user/models/account-settings.model';
+import { AccountSettingsModel } from '../../settings/models/account-settings.model';
 import { CurrentUserModel } from '../models/current-user.model';
 import { Storage } from '@ionic/storage-angular';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
@@ -42,7 +42,10 @@ export class DataService {
     await this.storage.defineDriver(CordovaSQLiteDriver);
     await this.storage.create();
     this.getCurrentUser().subscribe((value) => this.user.next(value));
-    this.getTheme().subscribe((value) => this.darkTheme.next(value));
+    this.get<boolean>('dark-theme').subscribe((value) => this.darkTheme.next(value));
+    this.get<boolean>('invert-color').subscribe((value) => this.invertColor.next(value));
+    this.get<boolean>('grayscale').subscribe((value) => this.grayscale.next(value));
+    this.get<boolean>('link-highlight').subscribe((value) => this.linkHighlight.next(value));
     this.getLanguage().subscribe((value) => this.language.next(value));
     this.storageReady.next(true);
   }
@@ -68,28 +71,27 @@ export class DataService {
   }
 
   setInvert(invert: boolean) {
+    this.set('invert-color', invert);
     this.invertColor.next(invert);
   }
 
   setGrayscale(grayscale: boolean) {
+    this.set('grayscale', grayscale);
     this.grayscale.next(grayscale);
   }
 
   setLinkHighlight(highlight: boolean) {
+    this.set('link-highlight', highlight);
     this.linkHighlight.next(highlight);
   }
 
   setFontSize(fontSize: string) {
     this.fontSize.next(fontSize);
   }
+
   setTheme(theme: boolean) {
     this.set('dark-theme', theme);
     this.darkTheme.next(theme);
-  }
-
-  getTheme(): Observable<boolean | null> {
-    const theme = this.get<boolean>('dark-theme');
-    return theme;
   }
 
   setLanguage(language: string) {

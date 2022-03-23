@@ -27,8 +27,7 @@ namespace GenealogyTree.Domain.Entities
         public bool NotifyBirthdays { get; set; }
         public bool NotifyUpdates { get; set; }
         public bool SharePersonalInfo { get; set; }
-        public bool ThemePreference { get; set; }
-        public string LanguagePreference { get; set; }
+        public bool ShareLocation { get; set; }
 
         public DateTime? LastSyncCheck { get; set; }
 
