@@ -28,8 +28,7 @@ export class UserService extends BaseService {
   }
 
   public isCurrentUser(userId: Guid) {
-    const l = this.userState.value.userId == userId;
-    return l;
+    return this.userState.value.userId == userId;
   }
 
   public getLoggedInUser() {

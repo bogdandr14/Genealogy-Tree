@@ -25,6 +25,11 @@ export class NavigationComponent {
         icon: 'home',
       },
       {
+        title: '_pages.notifications',
+        path: '/notifications',
+        icon: 'notifications',
+      },
+      {
         title: '_pages.profile',
         path: '/user/profile',
         icon: 'person',

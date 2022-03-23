@@ -174,7 +174,8 @@
     "intro": "Show intro",
     "location": "Location",
     "support": "Support",
-    "tree": "Genealogy tree"
+    "tree": "Genealogy tree",
+    "notifications": "Notifications"
   },
   "_links": {
     "goToRelatives": "Go to relatives",

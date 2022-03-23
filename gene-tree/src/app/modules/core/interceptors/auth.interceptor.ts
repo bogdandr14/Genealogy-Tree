@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return this.dataService.getJWT().pipe(
+    return this.dataService.getToken().pipe(
       mergeMap((token) => {
         if (token) {
           request = request.clone({

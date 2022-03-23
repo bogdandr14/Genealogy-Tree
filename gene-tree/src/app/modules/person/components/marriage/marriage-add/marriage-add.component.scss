@@ -1,5 +1,8 @@
 .selection-list-height{
-  max-height: 500px;
+  @media (min-width: 768px) {
+    max-height: 240px;
+  }
+  max-height: 480px;
   overflow: auto;
 }
 ion-card{

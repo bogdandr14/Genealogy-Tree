@@ -174,7 +174,8 @@
     "intro": "Vezi intro",
     "location": "Locaţie",
     "support": "Suport",
-    "tree": "Arbore genealogic"
+    "tree": "Arbore genealogic",
+    "notifications": "Notificări"
   },
   "_links": {
     "goToRelatives": "Mergi la rude",
@@ -314,7 +315,7 @@
     "success": "Succes",
     "_success": {
       "register": "Contul a fost creat cu success! Logează-te pentru a accesa contul",
-      "login": "Bine ai revenit, { firstName }!",
+      "login": "Bine ai revenit!",
       "changePassword": "Parola a fost schimbată cu succes!",
       "preferencesSaved": "Preferințele au fost salvate cu succes!"
     },

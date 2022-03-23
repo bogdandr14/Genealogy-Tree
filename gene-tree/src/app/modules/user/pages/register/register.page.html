@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-text-center">
+<ion-content class="content">
   <ion-grid>
-    <ion-row class-md="custom-margin-top">
-      <ion-col size-sm="6" offset-sm="3">
+    <ion-row class-sm="absolute-center">
+      <ion-col size-sm="8" offset-sm="2">
         <ion-card>
           <form
             #form="ngForm"
@@ -18,213 +18,206 @@
             (ngSubmit)="onRegister()"
           >
             <ion-row>
-              <ion-col size-md="6" offset-sm="0">
-                <ion-card>
-                  <ion-card-header class="ion-text-center">
-                    <ion-card-title>
-                      {{ "_person.information" | translate }}
-                    </ion-card-title>
-                  </ion-card-header>
-                  <ion-card-content>
-                    <ion-item-group id="firstName">
-                      <ion-item color="transparent">
-                        <ion-label for="fname" position="floating">
-                          <b>
-                            {{ "_person.firstName" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          type="text"
-                          name="fname"
-                          #fname="ngModel"
-                          [(ngModel)]="registerModel.firstName"
-                          required
-                        ></ion-input>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="fname"
-                      ></app-validation-errors>
-                    </ion-item-group>
+              <ion-col size-md="5" offset-sm="1">
+                <ion-list class="ion-text-center">
+                  <ion-list-header>
+                    <h1>{{ "_person.information" | translate }}</h1>
+                  </ion-list-header>
+                  <ion-item-group id="firstName">
+                    <ion-item color="transparent">
+                      <ion-label for="fname" position="floating">
+                        <b>
+                          {{ "_person.firstName" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-input
+                        type="text"
+                        name="fname"
+                        #fname="ngModel"
+                        [(ngModel)]="registerModel.firstName"
+                        required
+                      ></ion-input>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="fname"
+                    ></app-validation-errors>
+                  </ion-item-group>
 
-                    <ion-item-group id="lastName">
-                      <ion-item color="transparent">
-                        <ion-label for="lname" position="floating">
-                          <b>
-                            {{ "_person.lastName" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          type="text"
-                          name="lname"
-                          #lname="ngModel"
-                          [(ngModel)]="registerModel.lastName"
-                          required
-                        ></ion-input>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="lname"
-                      ></app-validation-errors>
-                    </ion-item-group>
+                  <ion-item-group id="lastName">
+                    <ion-item color="transparent">
+                      <ion-label for="lname" position="floating">
+                        <b>
+                          {{ "_person.lastName" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-input
+                        type="text"
+                        name="lname"
+                        #lname="ngModel"
+                        [(ngModel)]="registerModel.lastName"
+                        required
+                      ></ion-input>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="lname"
+                    ></app-validation-errors>
+                  </ion-item-group>
 
-                    <ion-item-group id="gender">
-                      <ion-item color="transparent">
-                        <ion-label for="gender" position="floating">
-                          <b>
-                            {{ "_person.gender" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-select
-                          name="gender"
-                          #gender="ngModel"
-                          [(ngModel)]="registerModel.genderId"
-                          interface="popover"
-                          [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
-                          required
+                  <ion-item-group id="gender">
+                    <ion-item color="transparent">
+                      <ion-label for="gender" position="floating">
+                        <b>
+                          {{ "_person.gender" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-select
+                        name="gender"
+                        #gender="ngModel"
+                        [(ngModel)]="registerModel.genderId"
+                        interface="popover"
+                        [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
+                        required
+                      >
+                        <ion-select-option
+                          *ngFor="let gender of genderOptions"
+                          [value]="gender.id"
                         >
-                          <ion-select-option
-                            *ngFor="let gender of genderOptions"
-                            [value]="gender.id"
-                          >
-                            {{ "_genders." + gender.name | lowercase | translate
-                            }}
-                          </ion-select-option>
-                        </ion-select>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="gender"
-                      ></app-validation-errors>
-                    </ion-item-group>
+                          {{ "_genders." + gender.name | lowercase | translate
+                          }}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="gender"
+                    ></app-validation-errors>
+                  </ion-item-group>
 
-                    <app-select-template
-                      name="_person.nationality"
-                      optionsPrefix="_nationalities"
-                      [options]="nationalityOptions"
-                      [(field)]="registerModel.nationalityId"
-                    ></app-select-template>
+                  <app-select-template
+                    name="_person.nationality"
+                    optionsPrefix="_nationalities"
+                    [options]="nationalityOptions"
+                    [(field)]="registerModel.nationalityId"
+                  ></app-select-template>
 
-                    <app-select-template
-                      name="_person.religion"
-                      optionsPrefix="_religions"
-                      [options]="religionOptions"
-                      [(field)]="registerModel.religionId"
-                    ></app-select-template>
+                  <app-select-template
+                    name="_person.religion"
+                    optionsPrefix="_religions"
+                    [options]="religionOptions"
+                    [(field)]="registerModel.religionId"
+                  ></app-select-template>
 
-                    <app-date-select-template
-                      [isRequired]="true"
-                      name="_person.birthday"
-                      [(date)]="registerModel.birthDate"
-                    >
-                    </app-date-select-template>
-                  </ion-card-content>
-                </ion-card>
+                  <app-date-select-template
+                    [isRequired]="true"
+                    name="_person.birthday"
+                    [(date)]="registerModel.birthDate"
+                  >
+                  </app-date-select-template>
+                </ion-list>
               </ion-col>
-              <ion-col size="12" size-md="6" offset-sm="0">
-                <ion-card>
-                  <ion-card-header class="ion-text-center">
-                    <ion-card-title>
-                      {{ "accountInfo" | translate }}
-                    </ion-card-title>
-                  </ion-card-header>
-                  <ion-card-content>
-                    <ion-item-group id="email">
-                      <ion-item color="transparent">
-                        <ion-label for="email" position="floating">
-                          <b>
-                            {{ "_user.emailAddress" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          type="text"
-                          name="email"
-                          #email="ngModel"
-                          [(ngModel)]="registerModel.email"
-                          emailCheck
-                          required
-                        ></ion-input>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="email"
-                      ></app-validation-errors>
-                    </ion-item-group>
+              <ion-col size-md="4" offset-sm="1">
+                <ion-list class="ion-text-center">
+                  <ion-list-header>
+                    <h1>{{ "accountInfo" | translate }}</h1>
+                  </ion-list-header>
 
-                    <app-input-template
-                      id="phone"
-                      [(field)]="registerModel.phoneNumber"
-                      name="_user.phone"
-                    ></app-input-template>
+                  <ion-item-group id="email">
+                    <ion-item color="transparent">
+                      <ion-label for="email" position="floating">
+                        <b>
+                          {{ "_user.emailAddress" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-input
+                        type="text"
+                        name="email"
+                        #email="ngModel"
+                        [(ngModel)]="registerModel.email"
+                        emailCheck
+                        required
+                      ></ion-input>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="email"
+                    ></app-validation-errors>
+                  </ion-item-group>
 
-                    <ion-item-group id="username">
-                      <ion-item color="transparent">
-                        <ion-label for="uname" position="floating">
-                          <b>
-                            {{ "username" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          type="text"
-                          name="uname"
-                          #uname="ngModel"
-                          [(ngModel)]="registerModel.username"
-                          usernameCheck
-                          minlength="6"
-                          required
-                        ></ion-input>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="uname"
-                        [number]="6"
-                      ></app-validation-errors>
-                    </ion-item-group>
+                  <app-input-template
+                    id="phone"
+                    [(field)]="registerModel.phoneNumber"
+                    name="_user.phone"
+                  ></app-input-template>
 
-                    <ion-item-group id="password">
-                      <ion-item color="transparent">
-                        <ion-label for="psw" position="floating">
-                          <b>
-                            {{ "password" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          type="password"
-                          name="psw"
-                          #psw="ngModel"
-                          [(ngModel)]="registerModel.password"
-                          required
-                          passwordPattern
-                        ></ion-input>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="psw"
-                      ></app-validation-errors>
-                    </ion-item-group>
+                  <ion-item-group id="username">
+                    <ion-item color="transparent">
+                      <ion-label for="uname" position="floating">
+                        <b>
+                          {{ "username" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-input
+                        type="text"
+                        name="uname"
+                        #uname="ngModel"
+                        [(ngModel)]="registerModel.username"
+                        usernameCheck
+                        minlength="6"
+                        required
+                      ></ion-input>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="uname"
+                      [number]="6"
+                    ></app-validation-errors>
+                  </ion-item-group>
 
-                    <ion-item-group id="confirmPassword">
-                      <ion-item color="transparent">
-                        <ion-label for="cpsw" position="floating">
-                          <b
-                            >{{ "_password.confirm" | translate }}
-                            <span class="required"> *</span>
-                          </b>
-                        </ion-label>
-                        <ion-input
-                          type="password"
-                          name="cpsw"
-                          #cpsw="ngModel"
-                          [(ngModel)]="registerModel.confirmPassword"
-                          required
-                        ></ion-input>
-                      </ion-item>
-                      <app-validation-errors
-                        [model]="cpsw"
-                      ></app-validation-errors>
-                    </ion-item-group>
-                  </ion-card-content>
-                </ion-card>
+                  <ion-item-group id="password">
+                    <ion-item color="transparent">
+                      <ion-label for="psw" position="floating">
+                        <b>
+                          {{ "password" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-input
+                        type="password"
+                        name="psw"
+                        #psw="ngModel"
+                        [(ngModel)]="registerModel.password"
+                        required
+                        passwordPattern
+                      ></ion-input>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="psw"
+                    ></app-validation-errors>
+                  </ion-item-group>
+
+                  <ion-item-group id="confirmPassword">
+                    <ion-item color="transparent">
+                      <ion-label for="cpsw" position="floating">
+                        <b
+                          >{{ "_password.confirm" | translate }}
+                          <span class="required"> *</span>
+                        </b>
+                      </ion-label>
+                      <ion-input
+                        type="password"
+                        name="cpsw"
+                        #cpsw="ngModel"
+                        [(ngModel)]="registerModel.confirmPassword"
+                        required
+                      ></ion-input>
+                    </ion-item>
+                    <app-validation-errors
+                      [model]="cpsw"
+                    ></app-validation-errors>
+                  </ion-item-group>
+                </ion-list>
               </ion-col>
             </ion-row>
             <ion-button

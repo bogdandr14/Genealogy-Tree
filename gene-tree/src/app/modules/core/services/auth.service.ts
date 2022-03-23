@@ -27,7 +27,7 @@ export class AuthService extends BaseService {
   }
 
   private loadToken() {
-    this.dataService.getJWT().subscribe((token) => {
+    this.dataService.getToken().subscribe((token) => {
       this.isLoggedIn.next(!!token);
       if (token) {
         this.setExpirationCounter(token);
@@ -38,7 +38,7 @@ export class AuthService extends BaseService {
   public login(userCredentials: LoginModel): Observable<LoginResponseModel> {
     return super.add<LoginResponseModel>(userCredentials, 'login').pipe(
       tap((login) => {
-        this.dataService.setJWT(login.token);
+        this.dataService.setToken(login.token);
         this.setUserInfo(login);
         this.isLoggedIn.next(true);
         this.router.navigate(['home']);
@@ -56,7 +56,7 @@ export class AuthService extends BaseService {
 
   public logout(): void {
     this.timerSubscription.unsubscribe();
-    this.dataService.removeJWT();
+    this.dataService.removeToken();
     this.dataService.removeCurrentUser();
     this.isLoggedIn.next(false);
     this.router.navigate(['user', 'login']);

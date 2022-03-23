@@ -7,6 +7,7 @@ import { AccountSettingsModel } from '../../settings/models/account-settings.mod
 import { CurrentUserModel } from '../models/current-user.model';
 import { Storage } from '@ionic/storage-angular';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { DARK_THEME_KEY, GRAYSCALE_KEY, HIGHLIGHT_KEY, INVERT_COLOR_KEY, LANG_KEY, PREFERENCES_KEY, TOKEN_KEY, USER_KEY } from '../models/data-keys.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class DataService {
   private linkHighlight = new BehaviorSubject<boolean>(null);
   public linkHighlight$ = this.linkHighlight.asObservable();
 
-  private fontSize = new BehaviorSubject<string>('font-size-3');
+  private fontSize = new BehaviorSubject<string>('font-size-5');
   public fontSize$ = this.fontSize.asObservable();
 
   private language = new BehaviorSubject<string>(environment.defaultLanguage);
@@ -42,10 +43,10 @@ export class DataService {
     await this.storage.defineDriver(CordovaSQLiteDriver);
     await this.storage.create();
     this.getCurrentUser().subscribe((value) => this.user.next(value));
-    this.get<boolean>('dark-theme').subscribe((value) => this.darkTheme.next(value));
-    this.get<boolean>('invert-color').subscribe((value) => this.invertColor.next(value));
-    this.get<boolean>('grayscale').subscribe((value) => this.grayscale.next(value));
-    this.get<boolean>('link-highlight').subscribe((value) => this.linkHighlight.next(value));
+    this.get<boolean>(DARK_THEME_KEY).subscribe((value) => this.darkTheme.next(value));
+    this.get<boolean>(INVERT_COLOR_KEY).subscribe((value) => this.invertColor.next(value));
+    this.get<boolean>(GRAYSCALE_KEY).subscribe((value) => this.grayscale.next(value));
+    this.get<boolean>(HIGHLIGHT_KEY).subscribe((value) => this.linkHighlight.next(value));
     this.getLanguage().subscribe((value) => this.language.next(value));
     this.storageReady.next(true);
   }
@@ -71,17 +72,17 @@ export class DataService {
   }
 
   setInvert(invert: boolean) {
-    this.set('invert-color', invert);
+    this.set(INVERT_COLOR_KEY, invert);
     this.invertColor.next(invert);
   }
 
   setGrayscale(grayscale: boolean) {
-    this.set('grayscale', grayscale);
+    this.set(GRAYSCALE_KEY, grayscale);
     this.grayscale.next(grayscale);
   }
 
   setLinkHighlight(highlight: boolean) {
-    this.set('link-highlight', highlight);
+    this.set(HIGHLIGHT_KEY, highlight);
     this.linkHighlight.next(highlight);
   }
 
@@ -90,58 +91,58 @@ export class DataService {
   }
 
   setTheme(theme: boolean) {
-    this.set('dark-theme', theme);
+    this.set(DARK_THEME_KEY, theme);
     this.darkTheme.next(theme);
   }
 
   setLanguage(language: string) {
-    this.set('lang', language);
+    this.set(LANG_KEY, language);
     this.language.next(language);
   }
 
   getLanguage(): Observable<string | null> {
-    const lang = this.get<string>('lang');
+    const lang = this.get<string>(LANG_KEY);
     return lang;
   }
 
-  setJWT(token: string | null) {
-    this.set('jwt', token);
+  setToken(token: string | null) {
+    this.set(TOKEN_KEY, token);
   }
 
-  getJWT(): Observable<string | null> {
-    const jwt = this.get<string>('jwt');
+  getToken(): Observable<string | null> {
+    const jwt = this.get<string>(TOKEN_KEY);
     return jwt;
   }
 
-  removeJWT() {
-    this.remove('jwt');
+  removeToken() {
+    this.remove(TOKEN_KEY);
   }
 
   setCurrentUser(user: CurrentUserModel) {
-    this.set('current-user', user);
+    this.set(USER_KEY, user);
     this.user.next(user);
   }
 
   getCurrentUser(): Observable<CurrentUserModel | null> {
-    const user = this.get<CurrentUserModel>('current-user');
+    const user = this.get<CurrentUserModel>(USER_KEY);
     return user;
   }
 
   removeCurrentUser() {
-    this.remove('current-user');
+    this.remove(USER_KEY);
     this.user.next(null);
   }
 
   setPreferences(preferences: AccountSettingsModel) {
-    this.set('preferences', preferences);
+    this.set(PREFERENCES_KEY, preferences);
   }
 
   getPreferences(): Observable<AccountSettingsModel> {
-    const preferences = this.get<AccountSettingsModel>('preferences');
+    const preferences = this.get<AccountSettingsModel>(PREFERENCES_KEY);
     return preferences;
   }
 
   removePreferences() {
-    this.remove('preferences');
+    this.remove(PREFERENCES_KEY);
   }
 }

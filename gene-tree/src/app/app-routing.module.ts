@@ -37,18 +37,27 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./modules/map/map.module').then(m => m.MapPageModule),
+    canLoad: [AuthGuard],
     data: { title: '_pages.map' }
   },
   {
     path: 'tree',
     loadChildren: () => import('./modules/tree/tree.module').then(m => m.TreePageModule),
+    canLoad: [AuthGuard],
     data: { title: '_pages.tree' }
   },
   {
     path: 'settings',
     loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsPageModule),
     data: { title: '_pages.settings' }
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./modules/notifications/notifications.module').then( m => m.NotificationsPageModule),
+    canLoad: [AuthGuard],
+    data: { title: '_pages.notifications' }
   }
+
 ];
 
 @NgModule({
