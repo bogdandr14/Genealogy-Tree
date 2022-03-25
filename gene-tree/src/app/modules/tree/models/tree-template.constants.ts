@@ -10,8 +10,8 @@ export class TreeTemplateConstants {
       <stop offset="100%" style="stop-color:#00A7D4;stop-opacity:1" />
   </linearGradient>
   <linearGradient id="gene_grad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#4A4A4A;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#D0D0D0;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#505050;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#101010;stop-opacity:1" />
   </linearGradient>
   <linearGradient id="gene_grad_other" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:red;stop-opacity:1" />

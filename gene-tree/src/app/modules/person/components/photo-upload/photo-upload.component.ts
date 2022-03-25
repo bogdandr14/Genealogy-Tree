@@ -76,8 +76,8 @@ export class PhotoUploadComponent implements OnInit {
             type: this.originalImgFile.type,
           }
         );
-        window.open(window.URL.createObjectURL(this.originalImgFile));
-        window.open(window.URL.createObjectURL(this.compressedImgFile));
+        // window.open(window.URL.createObjectURL(this.originalImgFile));
+        // window.open(window.URL.createObjectURL(this.compressedImgFile));
       });
   }
 
