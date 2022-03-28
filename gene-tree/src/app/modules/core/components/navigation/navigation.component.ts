@@ -36,7 +36,7 @@ export class NavigationComponent {
       },
       {
         title: '_pages.relatives',
-        path: '/sync/list',
+        path: '/sync',
         icon: 'people',
       },
       {
