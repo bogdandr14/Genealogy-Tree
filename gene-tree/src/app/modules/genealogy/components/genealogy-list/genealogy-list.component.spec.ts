@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { UserSearchComponent } from './user-search.component';
+import { GenealogyListComponent } from './genealogy-list.component';
 
-describe('UserSearchComponent', () => {
-  let component: UserSearchComponent;
-  let fixture: ComponentFixture<UserSearchComponent>;
+describe('GenealogyListComponent', () => {
+  let component: GenealogyListComponent;
+  let fixture: ComponentFixture<GenealogyListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserSearchComponent ],
+      declarations: [ GenealogyListComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UserSearchComponent);
+    fixture = TestBed.createComponent(GenealogyListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

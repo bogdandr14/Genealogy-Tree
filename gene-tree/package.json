@@ -40,6 +40,7 @@
     "leaflet": "^1.7.1",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "messageformat": "^2.3.0",
+    "ng2-search-filter": "^0.5.1",
     "ngx-image-compress": "^13.1.1",
     "ngx-translate-messageformat-compiler": "^4.11.0",
     "npm": "^8.5.5",

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { RelativesListPage } from './relatives-list.page';
+import { GenealogyTreeComponent } from './genealogy-tree.component';
 
-describe('RelativesListPage', () => {
-  let component: RelativesListPage;
-  let fixture: ComponentFixture<RelativesListPage>;
+describe('GenealogyTreeComponent', () => {
+  let component: GenealogyTreeComponent;
+  let fixture: ComponentFixture<GenealogyTreeComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RelativesListPage ],
+      declarations: [ GenealogyTreeComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RelativesListPage);
+    fixture = TestBed.createComponent(GenealogyTreeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

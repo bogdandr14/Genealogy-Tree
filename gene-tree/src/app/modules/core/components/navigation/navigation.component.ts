@@ -36,12 +36,12 @@ export class NavigationComponent {
       },
       {
         title: '_pages.relatives',
-        path: '/person/list',
+        path: '/sync/list',
         icon: 'people',
       },
       {
-        title: '_pages.tree',
-        path: '/tree',
+        title: '_pages.genealogy',
+        path: '/genealogy',
         icon: 'leaf',
       },
       {

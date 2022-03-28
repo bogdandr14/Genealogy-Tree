@@ -174,7 +174,9 @@
     "intro": "Show intro",
     "location": "Location",
     "support": "Support",
-    "tree": "Genealogy tree",
+    "genealogy": "Genealogy",
+    "genealogyTree": "Genealogy tree",
+    "genealogyList": "Genealogy list",
     "notifications": "Notifications"
   },
   "_links": {
@@ -200,7 +202,10 @@
     "deselect": "Deselect",
     "skip": "Skip",
     "continue": "Continue",
-    "next": "Next"
+    "next": "Next",
+    "list": "List",
+    "tree": "Tree",
+    "search": "Search"
   },
   "_slides": {
     "_welcome": {

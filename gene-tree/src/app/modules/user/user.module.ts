@@ -2,7 +2,6 @@ import { PersonModule } from './../person/person.module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
-import { UserSearchComponent } from './components/user-search/user-search.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { EducationEditComponent } from './components/education-edit/education-edit.component';
 import { OccupationEditComponent } from './components/occupation-edit/occupation-edit.component';
@@ -30,7 +29,6 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     ProfilePage,
     EducationEditComponent,
     OccupationEditComponent,
-    UserSearchComponent,
     UserInfoComponent,
     OccupationListComponent,
     EducationListComponent,

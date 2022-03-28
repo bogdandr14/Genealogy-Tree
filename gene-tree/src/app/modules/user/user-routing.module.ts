@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { AutoLoginGuard } from '../core/guards/auto-login.guard';
-import { UserSearchComponent } from './components/user-search/user-search.component';
 import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { RegisterPage } from './pages/register/register.page';
@@ -30,13 +29,7 @@ const routes: Routes = [
     component: ProfilePage,
     canLoad: [AuthGuard],
     data: { title: '_pages.profile' }
-  },
-  {
-    path: 'search',
-    component: UserSearchComponent,
-    canLoad: [AuthGuard],
-    data: { title: '_pages.search' }
-  },
+  }
 ];
 
 @NgModule({

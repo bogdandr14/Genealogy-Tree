@@ -1,12 +1,12 @@
-import { TreeService } from './services/tree.service';
 import { Component, OnInit } from '@angular/core';
+import { TreeService } from '../../services/tree.service';
 
 @Component({
-  selector: 'app-tree',
-  templateUrl: './tree.page.html',
-  styleUrls: ['./tree.page.scss'],
+  selector: 'app-genealogy-tree',
+  templateUrl: './genealogy-tree.component.html',
+  styleUrls: ['./genealogy-tree.component.scss'],
 })
-export class TreePage implements OnInit {
+export class GenealogyTreeComponent implements OnInit {
   constructor(private treeService: TreeService) {}
 
   //href="tel://{val}

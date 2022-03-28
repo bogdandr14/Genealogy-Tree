@@ -174,7 +174,9 @@
     "intro": "Vezi intro",
     "location": "Locaţie",
     "support": "Suport",
-    "tree": "Arbore genealogic",
+    "genealogy": "Genealogie",
+    "genealogyTree": "Arbore genealogic",
+    "genealogyList": "Listă genealogie",
     "notifications": "Notificări"
   },
   "_links": {
@@ -200,7 +202,10 @@
     "deselect": "Deselectează",
     "skip": "Sari peste",
     "continue": "Continuă",
-    "next": "Următorul"
+    "next": "Următorul",
+    "list": "Listă",
+    "tree": "Arbore",
+    "search": "Caută"
   },
   "_slides": {
     "_welcome": {
