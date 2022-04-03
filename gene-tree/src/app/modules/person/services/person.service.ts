@@ -26,8 +26,12 @@ export class PersonService extends BaseService {
     return super.getOneById<PersonEditModel>(personId, null);
   }
 
-  public getAllPeopleInTree(treeId: Guid): Observable<PersonTreeInfoModel[]> {
-    return super.getMany<PersonTreeInfoModel>(`tree/${treeId}`);
+  public getPeopleListInTree(treeId: Guid): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(`treeList/${treeId}`);
+  }
+
+  public getPeopleTreeDataInTree(treeId: Guid): Observable<PersonTreeInfoModel[]> {
+    return super.getMany<PersonTreeInfoModel>(`treeData/${treeId}`);
   }
 
   public searchPeople(personName: number): Observable<GenericPersonModel[]> {

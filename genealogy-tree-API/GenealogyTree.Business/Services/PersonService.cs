@@ -75,35 +75,14 @@ namespace GenealogyTree.Business.Services
             return personEntity;
         }
 
-        public async Task<List<PersonTreeInfoModel>> GetAllPeopleInTree(Guid treeId)
+        public async Task<List<GenericPersonModel>> GetPeopleListInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).Include(p => p.Parents).ThenInclude(p => p.Parent).Include(p => p.FirstPersonMarriages).Include(p => p.SecondPersonMarriages).ToList();
-            List<PersonTreeInfoModel> returnPeopleList = new List<PersonTreeInfoModel>();
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
+            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
-
             foreach (var person in poepleList)
             {
-                PersonTreeInfoModel returnPerson = _mapper.Map<PersonTreeInfoModel>(person);
-                foreach (var parent in person.Parents)
-                {
-                    if (parent.Parent.Gender == 'm')
-                    {
-                        returnPerson.FatherId = parent.ParentId;
-                    }
-                    if (parent.Parent.Gender == 'f')
-                    {
-                        returnPerson.MotherId = parent.ParentId;
-                    }
-                }
-                returnPerson.PartnersIds = new List<int>();
-                foreach (var marriage in person.FirstPersonMarriages)
-                {
-                    returnPerson.PartnersIds.Add(marriage.SecondPersonId);
-                }
-                foreach (var marriage in person.SecondPersonMarriages)
-                {
-                    returnPerson.PartnersIds.Add(marriage.FirstPersonId);
-                }
+                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
                 if (person.SyncedUserToPerson != null)
                 {
@@ -116,6 +95,104 @@ namespace GenealogyTree.Business.Services
                 returnPeopleList.Add(returnPerson);
             }
             return returnPeopleList;
+        }
+
+        public async Task<List<PersonTreeInfoModel>> GetPeopleTreeDataInTree(Guid treeId)
+        {
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).Include(p => p.Parents).ThenInclude(p => p.Parent).Include(p => p.FirstPersonMarriages).Include(p => p.SecondPersonMarriages).ToList();
+            List<PersonTreeInfoModel> returnPeopleTreeData = new List<PersonTreeInfoModel>();
+            User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+
+            foreach (var person in poepleList)
+            {
+                PersonTreeInfoModel returnPerson = MapPersonInfo(person);
+                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
+                if (person.SyncedUserToPerson != null)
+                {
+                    returnPerson.UserId = person.SyncedUserToPerson.SyncedUserId;
+                }
+                if (person.Id == user.PersonId)
+                {
+                    returnPerson.UserId = user.Id;
+                }
+                returnPeopleTreeData.Add(returnPerson);
+            }
+            returnPeopleTreeData = AddPartnersToPeopleList(returnPeopleTreeData);
+            return returnPeopleTreeData;
+        }
+
+        private PersonTreeInfoModel MapPersonInfo(Person person)
+        {
+            PersonTreeInfoModel returnPerson = _mapper.Map<PersonTreeInfoModel>(person);
+            foreach (var parent in person.Parents)
+            {
+                if (parent.Parent.Gender == 'm')
+                {
+                    returnPerson.FatherId = parent.ParentId;
+                }
+                if (parent.Parent.Gender == 'f')
+                {
+                    returnPerson.MotherId = parent.ParentId;
+                }
+            }
+            returnPerson.PartnersIds = new List<int>();
+            foreach (var marriage in person.FirstPersonMarriages)
+            {
+                returnPerson.PartnersIds.Add(marriage.SecondPersonId);
+            }
+            foreach (var marriage in person.SecondPersonMarriages)
+            {
+                returnPerson.PartnersIds.Add(marriage.FirstPersonId);
+            }
+            return returnPerson;
+        }
+
+        private List<PersonTreeInfoModel> AddPartnersToPeopleList(List<PersonTreeInfoModel> peopleList)
+        {
+            List<PersonTreeInfoModel> updatedList = new List<PersonTreeInfoModel>();
+
+            foreach (var person in peopleList)
+            {
+                if (updatedList.FindIndex(x => x.PersonId == person.PersonId) == -1)
+                {
+                    updatedList.Add(person);
+                }
+
+                if (person.FatherId != 0 && person.MotherId != 0)
+                {
+                    PersonTreeInfoModel mother = updatedList.Find(x => x.PersonId == person.MotherId);
+                    if (mother != default(PersonTreeInfoModel))
+                    {
+                        updatedList.Remove(mother);
+                    }
+                    else
+                    {
+                        mother = peopleList.Find(x => x.PersonId == person.MotherId);
+                    }
+                    if (mother.PartnersIds.FirstOrDefault(id => id == person.FatherId) == default(int))
+                    {
+                        mother.PartnersIds.Add(person.FatherId);
+                    }
+                    updatedList.Add(mother);
+
+                    PersonTreeInfoModel father = updatedList.Find(x => x.PersonId == person.FatherId);
+                    if (father != default(PersonTreeInfoModel))
+                    {
+                        updatedList.Remove(father);
+                    }
+                    else
+                    {
+                        father = peopleList.Find(x => x.PersonId == person.FatherId);
+                    }
+                    if (father.PartnersIds.FirstOrDefault(id => id == person.MotherId) == default(int))
+                    {
+                        father.PartnersIds.Add(person.MotherId);
+                    }
+                    updatedList.Add(father);
+                }
+
+            }
+            return updatedList;
         }
 
         public async Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person)

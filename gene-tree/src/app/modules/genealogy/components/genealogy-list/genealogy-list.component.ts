@@ -25,7 +25,7 @@ export class GenealogyListComponent implements OnInit {
     this.dataService.getCurrentUser().pipe(first()).subscribe((currentUser) => {
       this.currentUser = currentUser;
       this.personService
-        .getAllPeopleInTree(this.currentUser.treeId).pipe(first())
+        .getPeopleListInTree(this.currentUser.treeId).pipe(first())
         .subscribe((people) => {
           this.peopleList = people;
         });

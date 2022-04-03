@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 import { MarriedPersonModel } from '../../../models/marriage/married-person.model';
 import { GenericPersonModel } from '../../../models/person/generic-person.model';
 import { MarriageService } from '../../../services/marriage.service';
@@ -19,6 +20,7 @@ export class MarriageListComponent implements OnInit {
   refreshMarriages() {
     this.marriageService
       .getMarriagesForPerson(this.personLinkedTo.personId)
+      .pipe(first())
       .subscribe((marriages) => {
         this.marriages = marriages;
       });

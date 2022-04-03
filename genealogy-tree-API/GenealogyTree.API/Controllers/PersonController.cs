@@ -30,12 +30,31 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("tree/{treeId:Guid}")]
-        public async Task<ActionResult<PersonTreeInfoModel>> GetPeopleInTree(Guid treeId)
+        [Route("treeList/{treeId:Guid}")]
+        public async Task<ActionResult<GenericPersonModel>> GetPeopleListInTree(Guid treeId)
         {
             try
             {
-                List<PersonTreeInfoModel> returnEvent = await _personService.GetAllPeopleInTree(treeId);
+                List<GenericPersonModel> returnEvent = await _personService.GetPeopleListInTree(treeId);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("treeData/{treeId:Guid}")]
+        public async Task<ActionResult<PersonTreeInfoModel>> GetPeopleTreeDataInTree(Guid treeId)
+        {
+            try
+            {
+                List<PersonTreeInfoModel> returnEvent = await _personService.GetPeopleTreeDataInTree(treeId);
                 if (returnEvent == null)
                 {
                     return NotFound();

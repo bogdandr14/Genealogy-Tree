@@ -29,7 +29,7 @@ export class GenealogyTreeComponent implements OnInit {
       .subscribe((currentUser) => {
         this.treeService.createFamilyTree(currentUser.personId);
         this.personService
-          .getAllPeopleInTree(currentUser.treeId)
+          .getPeopleTreeDataInTree(currentUser.treeId)
           .pipe(first())
           .subscribe((people) => {
             this.peopleInTree = this.mapTreeData(people);
