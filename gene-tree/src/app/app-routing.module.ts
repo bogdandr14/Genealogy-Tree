@@ -35,12 +35,6 @@ const routes: Routes = [
     data: { title: '_pages.support' }
   },
   {
-    path: 'map',
-    loadChildren: () => import('./modules/map/map.module').then(m => m.MapPageModule),
-    canLoad: [AuthGuard],
-    data: { title: '_pages.map' }
-  },
-  {
     path: 'settings',
     loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsPageModule),
     data: { title: '_pages.settings' }

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SyncedListPage } from './synced-list.page';
+import { SyncedListComponent } from './synced-list.component';
 
-describe('SyncedListPage', () => {
-  let component: SyncedListPage;
-  let fixture: ComponentFixture<SyncedListPage>;
+describe('SyncedListComponent', () => {
+  let component: SyncedListComponent;
+  let fixture: ComponentFixture<SyncedListComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SyncedListPage ],
+      declarations: [ SyncedListComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SyncedListPage);
+    fixture = TestBed.createComponent(SyncedListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

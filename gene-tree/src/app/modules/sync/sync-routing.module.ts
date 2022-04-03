@@ -1,8 +1,9 @@
-import { SyncedListPage } from './pages/synced-list/synced-list.page';
+import { LocationsComponent } from './components/locations/locations.component';
+import { UserSearchComponent } from './components/user-search/user-search.component';
+import { SyncedListComponent } from './components/synced-list/synced-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserSearchPage } from './pages/user-search/user-search.page';
-import { SyncPage } from './pages/sync/sync.page';
+import { SyncPage } from './pages/sync.page';
 
 const routes: Routes = [
   {
@@ -16,14 +17,19 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: SyncedListPage,
+        component: SyncedListComponent,
         data: { title: '_pages.relatives' },
       },
       {
         path: 'search',
-        component: UserSearchPage,
+        component: UserSearchComponent,
         data: { title: '_pages.findRelatives' },
       },
+      {
+        path: 'location',
+        component: LocationsComponent,
+        data: { title: '_pages.location' }
+      }
     ],
   },
 ];

@@ -44,11 +44,6 @@ export class NavigationComponent {
         path: '/genealogy',
         icon: 'leaf',
       },
-      {
-        title: '_pages.location',
-        path: '/map',
-        icon: 'location',
-      },
     ];
   }
 

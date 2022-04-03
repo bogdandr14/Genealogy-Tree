@@ -1,19 +1,18 @@
-import { SyncPage } from './pages/sync/sync.page';
+import { SyncedListComponent } from './components/synced-list/synced-list.component';
+import { UserSearchComponent } from './components/user-search/user-search.component';
+import { SyncPage } from './pages/sync.page';
 import { SharedModule } from './../shared/shared.module';
-import { SyncedListPage } from './pages/synced-list/synced-list.page';
 import { NgModule } from '@angular/core';
-
-
-
 import { SyncRoutingModule } from './sync-routing.module';
-import { UserSearchPage } from './pages/user-search/user-search.page';
+import { LocationsComponent } from './components/locations/locations.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    SyncRoutingModule,
+  imports: [SharedModule, SyncRoutingModule],
+  declarations: [
+    LocationsComponent,
+    SyncedListComponent,
+    UserSearchComponent,
+    SyncPage,
   ],
-  declarations: [SyncedListPage, UserSearchPage, SyncPage
-  ]
 })
-export class SyncModule { }
+export class SyncModule {}
