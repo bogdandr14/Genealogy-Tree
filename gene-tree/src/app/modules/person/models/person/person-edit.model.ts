@@ -7,7 +7,6 @@ export class PersonEditModel extends GenericPersonModel {
     this.birthPlace = new LocationModel();
     this.livingPlace = new LocationModel();
   }
-  gender: CommonObject;
   nationality: CommonObject;
   religion: CommonObject;
   birthPlace: LocationModel;

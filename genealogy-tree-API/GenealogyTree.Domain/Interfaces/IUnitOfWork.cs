@@ -6,7 +6,6 @@ namespace GenealogyTree.Domain.Interfaces
     {
         IEducationLevelRepository EducationLevel { get; }
         IEducationRepository Education { get; }
-        IGenderRepository Gender { get; }
         IImageRepository Image { get; }
         ILocationRepository Location { get; }
         IMarriageRepository Marriage { get; }

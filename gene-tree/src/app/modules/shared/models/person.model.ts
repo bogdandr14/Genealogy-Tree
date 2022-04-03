@@ -4,7 +4,7 @@ export class PersonModel {
   id: number;
   firstName: string;
   lastName: string;
-  genderName: string;
+  gender: string;
   nationality: string;
   religion: string;
   livingPlace?: LocationModel;

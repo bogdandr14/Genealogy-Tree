@@ -31,11 +31,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("tree/{treeId:Guid}")]
-        public async Task<ActionResult<GenericPersonModel>> GetPeopleInTree(Guid treeId)
+        public async Task<ActionResult<PersonTreeInfoModel>> GetPeopleInTree(Guid treeId)
         {
             try
             {
-                List<GenericPersonModel> returnEvent = await _personService.GetAllPeopleInTree(treeId);
+                List<PersonTreeInfoModel> returnEvent = await _personService.GetAllPeopleInTree(treeId);
                 if (returnEvent == null)
                 {
                     return NotFound();

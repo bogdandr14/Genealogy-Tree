@@ -35,21 +35,6 @@ namespace GenealogyTree.Data
                 context.AddRange(educationLevels);
             }
 
-            if (!context.Genders.Any())
-            {
-                var genders = new Gender[]
-                {
-                new Gender {
-                    Name = "MALE" },
-                new Gender {
-                    Name = "FEMALE" },
-                new Gender {
-                    Name = "OTHER" },
-                };
-
-                context.AddRange(genders);
-            }
-
             if (!context.Religions.Any())
             {
                 var religions = new Religion[]

@@ -35,8 +35,6 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<EducationLevel, GenericNameModel>()
                 .ReverseMap();
 
-            CreateMap<Gender, GenericNameModel>()
-                .ReverseMap();
             CreateMap<Image, ImageFile>()
                 .ForMember(x => x.Name, y => y.MapFrom(z => Guid.Parse(Path.GetFileNameWithoutExtension(z.FileName))));
             CreateMap<ImageFile, Image>();
@@ -69,6 +67,7 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Parent.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Parent.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Parent.LastName))
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Parent.Gender))
                 .ForMember(x => x.ImageId, y => y.MapFrom(z => z.Parent.ImageId))
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Parent.BirthDate))
                 .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Parent.DeathDate))
@@ -104,6 +103,16 @@ namespace GenealogyTree.Business.Helpers
                     y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId);
                 })
                 .ReverseMap();
+
+            CreateMap<Person, PersonTreeInfoModel>()
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.UserId, y =>
+                {
+                    y.PreCondition(src => (src.SyncedUserToPerson != null));
+                    y.MapFrom(z => z.SyncedUserToPerson.SyncedUserId);
+                })
+                .ReverseMap();
+
             CreateMap<Person, PersonDetailsModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.UserId, y =>

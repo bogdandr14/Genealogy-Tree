@@ -12,46 +12,13 @@ namespace GenealogyTree.API.Controllers
     [Route("api/[controller]")]
     public class CommonController : Controller
     {
-        private readonly IGenderService _genderService;
         private readonly INationalityService _nationalityService;
         private readonly IReligionService _religionService;
 
-        public CommonController(IGenderService genderService, INationalityService nationalityService, IReligionService religionService)
+        public CommonController(INationalityService nationalityService, IReligionService religionService)
         {
-            _genderService = genderService;
             _nationalityService = nationalityService;
             _religionService = religionService;
-        }
-
-        [HttpGet]
-        [Route("Gender")]
-        public async Task<ActionResult<List<GenericNameModel>>> GetAllGenders()
-        {
-            try
-            {
-                List<GenericNameModel> returnEvent = await _genderService.GetAllGendersAsync();
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [GeneTreeAuthorize(UserRoleEnum.Admin)]
-        [HttpPost]
-        [Route("Gender")]
-        public async Task<ActionResult<GenericNameModel>> AddGender(string genderName)
-        {
-            try
-            {
-                GenericNameModel returnEvent = await _genderService.AddGenderAsync(genderName);
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
         }
 
         [HttpGet]

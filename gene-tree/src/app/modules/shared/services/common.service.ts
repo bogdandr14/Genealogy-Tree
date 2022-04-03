@@ -17,10 +17,6 @@ export class CommonService extends BaseService {
     return this.getMany<CommonObject>('religion', BaseService.noLoadingConfig);
   }
 
-  public getGenders(): Observable<CommonObject[]> {
-    return this.getMany<CommonObject>('gender', BaseService.noLoadingConfig);
-  }
-
   public getNationalities(): Observable<CommonObject[]> {
     return this.getMany<CommonObject>(
       'nationality',
@@ -30,10 +26,6 @@ export class CommonService extends BaseService {
 
   public addReligion(religionName: string): Observable<CommonObject> {
     return this.add<CommonObject>('religion', religionName);
-  }
-
-  public addGender(genderName: string): Observable<CommonObject> {
-    return this.add<CommonObject>('gender', genderName);
   }
 
   public addNationality(nationalityName: string): Observable<CommonObject> {

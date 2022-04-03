@@ -13,7 +13,6 @@ namespace GenealogyTree.Data
 
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<EducationLevel> EducationLevels { get; set; }
-        public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Marriage> Marriages { get; set; }
@@ -35,13 +34,6 @@ namespace GenealogyTree.Data
                .HasMany<Education>(el => el.Educations)
                .WithOne(e => e.EducationLevel)
                .HasForeignKey(e => e.EducationLevelId)
-               .OnDelete(DeleteBehavior.NoAction);
-
-            //One to many Gender - People
-            modelBuilder.Entity<Gender>()
-               .HasMany<Person>(g => g.People)
-               .WithOne(p => p.Gender)
-               .HasForeignKey(p => p.GenderId)
                .OnDelete(DeleteBehavior.NoAction);
 
             //One to many Image - People
@@ -170,7 +162,6 @@ namespace GenealogyTree.Data
                .HasForeignKey(p => p.ReceiverId)
                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Person>().Navigation(p => p.Gender).AutoInclude();
             modelBuilder.Entity<Person>().Navigation(p => p.Image).AutoInclude();
             modelBuilder.Entity<Person>().Navigation(p => p.Nationality).AutoInclude();
             modelBuilder.Entity<Person>().Navigation(p => p.Religion).AutoInclude();

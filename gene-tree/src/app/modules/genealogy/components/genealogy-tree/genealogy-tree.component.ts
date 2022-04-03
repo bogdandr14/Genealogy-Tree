@@ -1,4 +1,10 @@
+import { PersonTreeInfoModel } from './../../models/person-tree-info.model';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { DataService } from 'src/app/modules/core/services/data.service';
+import { PersonService } from 'src/app/modules/person/services/person.service';
+import { TreeDataModel } from '../../models/tree-data.model';
 import { TreeService } from '../../services/tree.service';
 
 @Component({
@@ -7,15 +13,128 @@ import { TreeService } from '../../services/tree.service';
   styleUrls: ['./genealogy-tree.component.scss'],
 })
 export class GenealogyTreeComponent implements OnInit {
-  constructor(private treeService: TreeService) {}
+  private peopleInTree: TreeDataModel[];
+  constructor(
+    private treeService: TreeService,
+    private personService: PersonService,
+    private dataService: DataService,
+    public datepipe: DatePipe
+  ) {}
 
   //href="tel://{val}
   ngOnInit() {
-    this.treeService.createFamilyTree();
-    this.loadFamilyTree();
+    this.dataService
+      .getCurrentUser()
+      .pipe(first())
+      .subscribe((currentUser) => {
+        this.treeService.createFamilyTree(currentUser.personId);
+        this.personService
+          .getAllPeopleInTree(currentUser.treeId)
+          .pipe(first())
+          .subscribe((people) => {
+            this.peopleInTree = this.mapTreeData(people);
+            console.log(
+              '🚀 ~ file: genealogy-tree.component.ts ~ line 36 ~ GenealogyTreeComponent ~ .subscribe ~ this.peopleInTree ',
+              this.peopleInTree
+            );
+            //this.loadFamilyTreeMockup();
+            //this.loadGeneTreeMockup();
+            this.treeService.loadFamilyTree(this.peopleInTree);
+          });
+      });
   }
 
-  loadFamilyTree() {
+  mapTreeData(people: PersonTreeInfoModel[]) {
+    return people.map<TreeDataModel>((person) => {
+      return {
+        id: person.personId,
+        fid: person.motherId ? person.motherId : null,
+        mid: person.fatherId ? person.fatherId : null,
+        pids: person.partnersIds,
+        gender: person.gender === 'm' ? 'male' : 'female',
+        photo: person.imageFile
+          ? `data:${person.imageFile.mimeType};base64,${person.imageFile.fileInBytes}`
+          : 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        name: `${person.firstName} ${person.lastName}`,
+        born: this.datepipe.transform(person.birthDate, 'yyyy-MM-dd'),
+        userId: person.userId ? person.userId : null,
+      };
+    });
+  }
+  loadGeneTreeMockup(){
+    this.treeService.loadFamilyTree([
+      {
+        id: 1,
+        mid: -2,
+        fid: -3,
+        pids: [4],
+        name: 'Gustav Alfonzoj',
+        gender: 'male',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '1983-09-26',
+      },
+      {
+        id: 3,
+        mid: 1,
+        fid: 4,
+        name: 'Deiq Toe',
+        gender: 'female',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '1999-07-12',
+      },
+      {
+        id: 4,
+        fid: 34,
+        mid: 33,
+        pids: [1],
+        name: 'Valeria Umof',
+        gender: 'female',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '1980-10-25',
+      },
+      {
+        id: 33,
+        pids: [34],
+
+        name: 'qwe asd',
+        gender: 'male',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '2022-02-04',
+      },
+      {
+        id: 34,
+        name: 'Tilkova Asmeradis',
+        gender: 'female',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '2003-10-03',
+      },
+
+      {
+        id: -2,
+        pids: [-3],
+        name: 'Unknown',
+        gender: 'male',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '1983-09-26',
+      },
+      {
+        id: -3,
+        pids: [-2],
+        name: 'Unknown',
+        gender: 'female',
+        photo:
+          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
+        born: '1983-09-26',
+      },
+    ])
+  }
+  loadFamilyTreeMockup() {
     this.treeService.loadFamilyTree([
       {
         id: 1,

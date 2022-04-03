@@ -3,6 +3,7 @@ import { AlertService } from 'src/app/modules/core/services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { RelativeModel } from './../../../models/relative/relative.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-relative-card',
@@ -51,6 +52,7 @@ export class RelativeCardComponent implements OnInit {
   deleteRelative() {
     return this.relativesService
       .deleteRelative(this.relative.relativeId)
+      .pipe(first())
       .subscribe(() => {
         this.deleteConfirmed.emit();
       });

@@ -72,9 +72,8 @@
   },
   "_genders": {
     "null": "Necunoscut",
-    "male": "Bărbat",
-    "female": "Femeie",
-    "other": "Altceva"
+    "m": "Bărbat",
+    "f": "Femeie"
   },
   "_nationalities": {
     "null": "Necunoscută",
@@ -235,6 +234,8 @@
     "education": "Adaugă educaţie",
     "person": "Adaugă persoană",
     "parent": "Adaugă părinte",
+    "mother": "Adaugă mamă",
+    "father": "Adaugă tată",
     "child": "Adaugă copil",
     "marriage": "Adaugă căsnicie"
   },

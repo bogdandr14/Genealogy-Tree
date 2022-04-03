@@ -29,6 +29,12 @@ const routes: Routes = [
     component: ProfilePage,
     canLoad: [AuthGuard],
     data: { title: '_pages.profile' }
+  },
+  {
+    path: 'profile/:id',
+    component: ProfilePage,
+    canLoad: [AuthGuard],
+    data: { title: '_pages.profile' }
   }
 ];
 

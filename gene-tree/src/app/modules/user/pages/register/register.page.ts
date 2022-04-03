@@ -16,7 +16,6 @@ import { RegisterModel } from '../../models/register.model';
 export class RegisterPage implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   public registerModel = new RegisterModel();
-  public genderOptions: CommonObject[] = [];
   public nationalityOptions: CommonObject[] = [];
   public religionOptions: CommonObject[] = [];
 
@@ -28,12 +27,6 @@ export class RegisterPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.commonService
-      .getGenders()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((genders) => {
-        this.genderOptions = genders;
-      });
     this.commonService
       .getNationalities()
       .pipe(takeUntil(this.destroy$))

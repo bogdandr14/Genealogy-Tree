@@ -22,7 +22,7 @@ namespace GenealogyTree.Domain.Entities
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        public char Gender { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
         public DateTime LastUpdate { get; set; }
@@ -34,10 +34,6 @@ namespace GenealogyTree.Domain.Entities
         public Guid TreeId { get; set; }
         [ForeignKey("TreeId")]
         public virtual Tree Tree { get; set; }
-
-        public int? GenderId { get; set; }
-        [ForeignKey("GenderId")]
-        public virtual Gender Gender { get; set; }
 
         public int? BirthPlaceId { get; set; }
         [ForeignKey("BirthPlaceId")]

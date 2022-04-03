@@ -4,6 +4,7 @@ using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace GenealogyTree.Business.Services
             personEntity.Marriages = await _marriageService.GetAllMarriagesForPerson(personId);
 
             personEntity.Children = await _parentChildService.GetAllChildrenForPerson(personId);
-            foreach(var child in personEntity.Children)
+            foreach (var child in personEntity.Children)
             {
                 child.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(child.ImageId));
             }
@@ -74,15 +75,35 @@ namespace GenealogyTree.Business.Services
             return personEntity;
         }
 
-        public async Task<List<GenericPersonModel>> GetAllPeopleInTree(Guid treeId)
+        public async Task<List<PersonTreeInfoModel>> GetAllPeopleInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
-            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).Include(p => p.Parents).ThenInclude(p => p.Parent).Include(p => p.FirstPersonMarriages).Include(p => p.SecondPersonMarriages).ToList();
+            List<PersonTreeInfoModel> returnPeopleList = new List<PersonTreeInfoModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
 
             foreach (var person in poepleList)
             {
-                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
+                PersonTreeInfoModel returnPerson = _mapper.Map<PersonTreeInfoModel>(person);
+                foreach (var parent in person.Parents)
+                {
+                    if (parent.Parent.Gender == 'm')
+                    {
+                        returnPerson.FatherId = parent.ParentId;
+                    }
+                    if (parent.Parent.Gender == 'f')
+                    {
+                        returnPerson.MotherId = parent.ParentId;
+                    }
+                }
+                returnPerson.PartnersIds = new List<int>();
+                foreach (var marriage in person.FirstPersonMarriages)
+                {
+                    returnPerson.PartnersIds.Add(marriage.SecondPersonId);
+                }
+                foreach (var marriage in person.SecondPersonMarriages)
+                {
+                    returnPerson.PartnersIds.Add(marriage.FirstPersonId);
+                }
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
                 if (person.SyncedUserToPerson != null)
                 {
@@ -112,7 +133,6 @@ namespace GenealogyTree.Business.Services
         }
         private Person removeAttachedEntities(Person personEntity)
         {
-            personEntity.Gender = null;
             personEntity.Nationality = null;
             personEntity.Religion = null;
             personEntity.BirthPlace = null;
@@ -146,6 +166,14 @@ namespace GenealogyTree.Business.Services
             }
             Person personEntity = _mapper.Map<Person>(person);
             await updateLocations(person);
+            if (person.LivingPlace.Id == 0)
+            {
+                person.LivingPlace = null;
+            }
+            if (person.BirthPlace.Id == 0)
+            {
+                person.BirthPlace = null;
+            }
 
             personEntity = await unitOfWork.Person.Update(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
@@ -155,12 +183,12 @@ namespace GenealogyTree.Business.Services
 
         private async Task updateLocations(PersonCreateUpdateModel person)
         {
-            if (person.LivingPlace != null)
+            if (person.LivingPlace != null && person.LivingPlace.Id != 0)
             {
                 Location locationEntity = _mapper.Map<Location>(person.LivingPlace);
                 await unitOfWork.Location.Update(locationEntity);
             }
-            if (person.BirthPlace != null)
+            if (person.BirthPlace != null && person.BirthPlace.Id != 0)
             {
                 Location locationEntity = _mapper.Map<Location>(person.BirthPlace);
                 await unitOfWork.Location.Update(locationEntity);

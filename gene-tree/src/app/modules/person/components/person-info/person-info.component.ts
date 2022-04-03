@@ -73,7 +73,7 @@ export class PersonInfoComponent implements OnInit {
   deletePerson() {
     return this.personService.deletePerson(this.personInfo.personId)
       .subscribe(() => {
-        this.router.navigate(['/person/list'])
+        this.router.navigate(['/genealogy/list'])
       });
   }
 }

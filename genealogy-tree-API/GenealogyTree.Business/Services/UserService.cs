@@ -33,7 +33,6 @@ namespace GenealogyTree.Business.Services
         {
             User user = unitOfWork.User.Filter(x => x.Username == username)
                             .Include(u => u.Person)
-                            .ThenInclude(p => p.Gender)
                             .Include(u => u.Person.Nationality)
                             .Include(u => u.Person.Religion)
                             .Include(u => u.Person.LivingPlace)

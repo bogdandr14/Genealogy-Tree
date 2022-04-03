@@ -1,7 +1,7 @@
 import { SocialMediaChipsComponent } from './components/social-media-chips/social-media-chips.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HoverClassDirective } from './directives/hover-class.directive';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { IonicModule } from '@ionic/angular';
@@ -51,6 +51,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     DateSelectTemplateComponent,
     SocialMediaChipsComponent,
   ],
-  providers: [InAppBrowser],
+  providers: [InAppBrowser, DatePipe],
 })
 export class SharedModule {}

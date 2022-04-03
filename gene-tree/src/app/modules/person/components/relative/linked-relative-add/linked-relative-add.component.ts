@@ -3,6 +3,7 @@ import { RelativesService } from '../../../services/relatives.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RelativeEditModel } from '../../../models/relative/relative-edit.model';
 import { ModalController } from '@ionic/angular';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-linked-relative-add',
@@ -11,6 +12,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class LinkedRelativeAddComponent implements OnInit {
   @Input() person: GenericPersonModel;
+  @Input() parentType: string;
   @Input() addParent: boolean = true;
   @Output() saveConfirmed = new EventEmitter<boolean>();
 
@@ -26,9 +28,15 @@ export class LinkedRelativeAddComponent implements OnInit {
   ngOnInit() {
     this.relativesService
       .getUnrelatedPeople(this.person.personId)
-      .subscribe(
-        (unrelatedPeople) => (this.unrelatedPeopleList = unrelatedPeople)
-      );
+      .subscribe((unrelatedPeople) => {
+        if (this.addParent) {
+          this.unrelatedPeopleList = unrelatedPeople.filter(
+            (person) => person.gender == this.parentType
+          );
+        } else {
+          this.unrelatedPeopleList = unrelatedPeople;
+        }
+      });
   }
 
   selectPerson(person?: GenericPersonModel) {
@@ -45,10 +53,13 @@ export class LinkedRelativeAddComponent implements OnInit {
       relativeLink.parentId = this.person.personId;
       relativeLink.childId = this.selectedPerson.personId;
     }
-    this.relativesService.addRelative(relativeLink).subscribe(() => {
-      this.saveConfirmed.emit(true);
-      this.dismiss();
-    });
+    this.relativesService
+      .addRelative(relativeLink)
+      .pipe(first())
+      .subscribe(() => {
+        this.saveConfirmed.emit(true);
+        this.dismiss();
+      });
   }
   dismiss() {
     this.modalCtrl.dismiss();

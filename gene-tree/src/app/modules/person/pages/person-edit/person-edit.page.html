@@ -69,34 +69,52 @@
                     </ion-item-group>
 
                     <!-- GENDER -->
-                    <ion-item-group id="gender">
-                      <ion-item color="transparent">
-                        <ion-label for="gender" position="floating">
-                          <b> {{ "_person.gender" | translate }} </b>
-                        </ion-label>
-                        <ion-select
-                          name="gender"
-                          #gender="ngModel"
-                          [(ngModel)]="personEdit.gender"
-                          [selectedText]="
-                      personEdit.gender?.id
-                        ? ('_genders.' + personEdit.gender?.name
-                          | lowercase
-                          | translate)
-                        : ''
-                    "
-                          interface="popover"
-                          [interfaceOptions]="{ cssClass: 'custom-height-popover' }"
-                        >
-                          <ion-select-option
-                            *ngFor="let gender of genderOptions"
-                            [value]="gender"
-                          >
-                            {{ "_genders." + gender.name | lowercase | translate
-                            }}
-                          </ion-select-option>
-                        </ion-select>
-                      </ion-item>
+                    <ion-item-group>
+                      <ion-radio-group
+                        name="gender"
+                        #gender="ngModel"
+                        [(ngModel)]="personEdit.gender"
+                      >
+                        <ion-row>
+                          <ion-col>
+                            <ion-item color="transparent" class="ion-no-padding">
+                              <ion-label text-wrap>
+                                <b>
+                                  {{ "_person.gender" | translate }}
+                                  <span class="required"> *</span>
+                                </b>
+                              </ion-label>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col>
+                            <ion-item class="ion-no-padding ion-no-margin">
+                              <ion-label text-wrap>
+                                {{ "_genders.m" | translate }}
+                              </ion-label>
+                              <ion-radio class="ion-no-margin"
+                                slot="start"
+                                value="m"
+                                color="success"
+                              ></ion-radio>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col>
+                            <ion-item class="ion-no-padding ion-no-margin">
+                              <ion-label text-wrap>
+                                {{ "_genders.f" | translate }}
+                              </ion-label>
+                              <ion-radio class="ion-no-margin"
+                                slot="start"
+                                value="f"
+                                color="success"
+                              ></ion-radio>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-radio-group>
+                      <app-validation-errors
+                        [model]="gender"
+                      ></app-validation-errors>
                     </ion-item-group>
 
                     <!-- NATIONALITY -->
@@ -250,7 +268,7 @@
               color="danger"
               fill="clear"
               expand="block"
-              [routerLink]="['/person/list']"
+              [routerLink]="['/genealogy/list']"
             >
               <ion-icon name="close" slot="start"></ion-icon>
               {{ "_common.cancel" | translate }}

@@ -6,6 +6,7 @@ import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BaseService } from '../../core/services/base.service';
+import { PersonTreeInfoModel } from '../../genealogy/models/person-tree-info.model';
 import { ImageFile } from '../../shared/models/image-file';
 import { LocationModel } from '../../shared/models/location.model';
 import { GenericPersonModel } from '../models/person/generic-person.model';
@@ -25,8 +26,8 @@ export class PersonService extends BaseService {
     return super.getOneById<PersonEditModel>(personId, null);
   }
 
-  public getAllPeopleInTree(treeId: Guid): Observable<GenericPersonModel[]> {
-    return super.getMany<GenericPersonModel>(`tree/${treeId}`);
+  public getAllPeopleInTree(treeId: Guid): Observable<PersonTreeInfoModel[]> {
+    return super.getMany<PersonTreeInfoModel>(`tree/${treeId}`);
   }
 
   public searchPeople(personName: number): Observable<GenericPersonModel[]> {

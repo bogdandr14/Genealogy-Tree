@@ -11,7 +11,7 @@
       <ion-item lines="none">
         <ion-buttons slot="start">
           <ion-button
-            [routerLink]="['/person/list', personInfo?.treeId]"
+            [routerLink]="['/genealogy/list', personInfo?.treeId]"
             expand="block"
             color="secondary"
             slot="start"
@@ -39,7 +39,7 @@
           <ion-label> {{ "_person.gender" | translate }}:</ion-label>
           <span>
             {{
-              "_genders." + personInfo?.gender?.name | lowercase | translate
+              "_genders." + personInfo?.gender | lowercase | translate
             }}</span
           >
         </ion-item>

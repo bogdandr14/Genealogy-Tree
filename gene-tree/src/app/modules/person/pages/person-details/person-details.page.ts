@@ -1,8 +1,7 @@
-import { ImageFile } from './../../../shared/models/image-file';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize, first, switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonDetailsModel } from '../../models/person/person-details.model';
 import { PersonService } from '../../services/person.service';
@@ -12,7 +11,7 @@ import { LoadingService } from 'src/app/modules/core/services/loading.service';
 @Component({
   selector: 'app-person-details',
   templateUrl: './person-details.page.html',
-  styleUrls: ['./person-details.page.scss'],
+styleUrls: ['./person-details.page.scss'],
 })
 export class PersonDetailsPage implements OnInit {
   public personId: number;

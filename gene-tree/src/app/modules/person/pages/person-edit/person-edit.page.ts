@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, of, Subscription } from 'rxjs';
 import { first, switchMap, takeUntil } from 'rxjs/operators';
 import { CommonObject } from 'src/app/modules/shared/models/common-object';
-import { UserService } from 'src/app/modules/user/services/user.service';
 import { PersonEditModel } from '../../models/person/person-edit.model';
 import { PersonService } from '../../services/person.service';
 import { LocationModel } from 'src/app/modules/shared/models/location.model';
@@ -18,7 +17,6 @@ import { LocationModel } from 'src/app/modules/shared/models/location.model';
 export class PersonEditPage implements OnInit {
   public personId: number;
   public personEdit: PersonEditModel = new PersonEditModel();
-  public genderOptions: CommonObject[] = [];
   public nationalityOptions: CommonObject[] = [];
   public religionOptions: CommonObject[] = [];
 
@@ -64,12 +62,6 @@ export class PersonEditPage implements OnInit {
 
   private initDropdowns() {
     this.commonService
-      .getGenders()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((genders) => {
-        this.genderOptions = genders;
-      });
-    this.commonService
       .getNationalities()
       .pipe(takeUntil(this.destroy$))
       .subscribe((nationalities) => {
@@ -92,12 +84,14 @@ export class PersonEditPage implements OnInit {
     if (this.isUpdate) {
       personUpdated = this.personService
         .updatePerson(this.personEdit)
+        .pipe(first())
         .subscribe((person) => {
           this.router.navigate(['/person/details', person.personId]);
         });
     } else {
       personUpdated = this.personService
         .createPerson(this.personEdit)
+        .pipe(first())
         .subscribe((person) => {
           this.router.navigate(['/person/details', person.personId]);
         });

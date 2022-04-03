@@ -23,14 +23,14 @@ export class TreeService {
 
   private personDetailHandler = (nodeId) => {
     var nodeData = this.familyTree.get(nodeId);
-    var person = nodeData['personId'];
-    this.router.navigate(['/person/details', 1]);
+    var personId = nodeData['id'];
+    this.router.navigate(['/person/details', personId]);
   };
 
   private personEditHandler = (nodeId) => {
     var nodeData = this.familyTree.get(nodeId);
-    var person = nodeData['personId'];
-    this.router.navigate(['/person/edit', 1]);
+    var personId = nodeData['id'];
+    this.router.navigate(['/person/edit', personId]);
   };
 
   private initCustomTemplate() {
@@ -62,7 +62,7 @@ export class TreeService {
     FamilyTree.templates.gene_female.node = TreeTemplateConstants.femaleNode;
   }
 
-  public createFamilyTree() {
+  public createFamilyTree(rootId: number) {
     this.familyTree = new FamilyTree(document.getElementById('tree'), {
       nodeMouseClick: FamilyTree.action.none,
       mouseScrool: FamilyTree.action.zoom,
@@ -77,7 +77,7 @@ export class TreeService {
         expandAll: false,
         fullScreen: false,
       },
-      roots: [3],
+      roots: [],
       nodeMenu: {
         edit: {
           text: this.translateService.instant('_common.edit'),

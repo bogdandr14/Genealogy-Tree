@@ -72,9 +72,8 @@
   },
   "_genders": {
     "null": "Unknown",
-    "male": "Male",
-    "female": "Female",
-    "other": "Other"
+    "m": "Male",
+    "f": "Female"
   },
   "_nationalities": {
     "null": "Unknown",
@@ -235,6 +234,8 @@
     "education": "Add education",
     "person": "Add person",
     "parent": "Add parent",
+    "mother": "Add mother",
+    "father": "Add father",
     "child": "Add child",
     "marriage": "Add marriage"
   },

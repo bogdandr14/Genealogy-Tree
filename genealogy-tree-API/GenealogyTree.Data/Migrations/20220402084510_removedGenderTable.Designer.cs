@@ -4,14 +4,16 @@ using GenealogyTree.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GenealogyTree.Data.Migrations
 {
     [DbContext(typeof(GenealogyTreeDbContext))]
-    partial class GenealogyTreeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220402084510_removedGenderTable")]
+    partial class removedGenderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
