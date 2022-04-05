@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { MarriedPersonModel } from '../../../models/marriage/married-person.model';
 import { MarriageService } from '../../../services/marriage.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-marriage-card',
@@ -46,6 +47,7 @@ export class MarriageCardComponent implements OnInit {
 
   deleteMarriage() {
     return this.marriageService.deleteMarriage(this.marriage.id)
+      .pipe(first())
       .subscribe(() => {
         this.saveConfirmed.emit();
       });

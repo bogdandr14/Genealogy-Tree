@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { DOC_ORIENTATION } from 'ngx-image-compress';
+import { first } from 'rxjs/internal/operators/first';
 import { ImageFile } from 'src/app/modules/shared/models/image-file';
 import { PersonService } from '../../services/person.service';
 
@@ -100,7 +101,7 @@ export class PhotoUploadComponent implements OnInit {
         this.compressedImgFile.size < this.originalImgFile.size
           ? this.compressedImgFile
           : this.originalImgFile
-      )
+      ).pipe(first())
       .subscribe((imageFile) => {
         this.imageSave.emit(imageFile);
         this.dismiss();

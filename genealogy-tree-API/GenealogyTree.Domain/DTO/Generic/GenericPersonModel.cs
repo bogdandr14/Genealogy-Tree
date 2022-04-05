@@ -9,7 +9,7 @@ namespace GenealogyTree.Domain.DTO.Person
         public int PersonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public char Gender { get; set; }
+        public string Gender { get; set; }
         public int? ImageId { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }

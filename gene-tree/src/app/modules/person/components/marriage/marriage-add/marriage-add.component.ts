@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GenericPersonModel } from '../../../models/person/generic-person.model';
 import { RelativesService } from '../../../services/relatives.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-marriage-add',
@@ -13,9 +14,11 @@ import { RelativesService } from '../../../services/relatives.service';
 export class MarriageAddComponent implements OnInit {
   @Input() set person(person: GenericPersonModel) {
     this.marriage.firstPersonId = person.personId;
+    this.personGender = person.gender;
   }
   @Output() saveConfirmed = new EventEmitter<boolean>();
 
+  public personGender: string;
   public unrelatedPeopleList: GenericPersonModel[];
 
   public marriage = new MarriageEditModel();
@@ -23,13 +26,17 @@ export class MarriageAddComponent implements OnInit {
     private modalCtrl: ModalController,
     private relativesService: RelativesService,
     private marriageService: MarriageService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.relativesService
       .getUnrelatedPeople(this.marriage.firstPersonId)
       .subscribe(
-        (unrelatedPeople) => (this.unrelatedPeopleList = unrelatedPeople)
+        (unrelatedPeople) => (
+          this.unrelatedPeopleList = unrelatedPeople.filter((unrelatedPerson) =>
+            unrelatedPerson.gender != this.personGender
+          )
+        )
       );
   }
 
@@ -38,7 +45,8 @@ export class MarriageAddComponent implements OnInit {
   }
 
   addMarriage() {
-    this.marriageService.addMarriage(this.marriage).subscribe(() => {
+    this.marriageService.addMarriage(this.marriage)
+    .pipe(first()).subscribe(() => {
       this.saveConfirmed.emit(true);
       this.dismiss();
     });

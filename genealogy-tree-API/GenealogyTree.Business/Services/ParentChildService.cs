@@ -34,7 +34,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RelativeModel>> GetAllChildrenForPerson(int parentId)
         {
-            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc=> pc.Child).ToList();
+            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc => pc.Child).ToList();
             List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
             List<RelativeModel> relatives = _mapper.Map<List<RelativeModel>>(childRelatives);
             return relatives;
@@ -83,7 +83,8 @@ namespace GenealogyTree.Business.Services
             while (foundRelatives.Any())
             {
                 relatives.AddRange(foundRelatives);
-                List<RelativeModel> searchRelatives = foundRelatives;
+                List<RelativeModel> searchRelatives = new List<RelativeModel>();
+                searchRelatives.AddRange(foundRelatives);
                 foundRelatives.Clear();
                 foreach (RelativeModel relative in searchRelatives)
                 {
@@ -100,15 +101,47 @@ namespace GenealogyTree.Business.Services
         {
             List<RelativeModel> relatedPeople = await GetRelatedPeople(personId);
             List<MarriedPersonModel> marriedPersonModels = await _marriageService.GetAllMarriagesForPerson(personId);
+            foreach (var marriage in marriedPersonModels)
+            {
+                relatedPeople.AddRange(await GetRelatedPeople(marriage.PersonMarriedTo.PersonId));
+            }
             Person person = await unitOfWork.Person.FindById(personId);
             List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
-            List<Person> unrelatedPeople = peopleInTree.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id) && !marriedPersonModels.Exists(y=> y.PersonMarriedTo.PersonId == x.Id)).ToList();
+            List<Person> unrelatedPeople = peopleInTree.Where(x => !relatedPeople.Exists(y => y.PersonId == x.Id) && !marriedPersonModels.Exists(y => y.PersonMarriedTo.PersonId == x.Id)).ToList();
             unrelatedPeople.RemoveAll(relative => person.Id == relative.Id);
-            List<GenericPersonModel> returnEvent = new List<GenericPersonModel>();
-            foreach (var unrelatedPerson in unrelatedPeople)
+            return await MapToGenericPersonModel(unrelatedPeople);
+        }
+
+        public async Task<List<RelativeModel>> GetBloodRelatedPeople(int personId)
+        {
+            List<RelativeModel> foundRelatives = await GetAllAncestors(personId);
+            List<RelativeModel> relatives = new List<RelativeModel>();
+            relatives.AddRange(foundRelatives);
+            foreach(var bloodRelative in foundRelatives)
             {
-                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(unrelatedPerson);
-                returnPerson.ImageFile = await _fileManagementService.GetFile(unrelatedPerson.Image);
+                relatives.AddRange(await GetAllDescendants(bloodRelative.PersonId));
+            }
+            relatives = relatives.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
+            return relatives;
+        }
+
+        public async Task<List<GenericPersonModel>> GetNotBloodRelatedPeople(int personId)
+        {
+            List<RelativeModel> bloodRelatedPeople = await GetBloodRelatedPeople(personId);
+            Person person = await unitOfWork.Person.FindById(personId);
+            List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
+            List<Person> notBloodRelatedPeople = peopleInTree.Where(x => !bloodRelatedPeople.Exists(y => y.PersonId == x.Id)).ToList();
+            notBloodRelatedPeople.RemoveAll(relative => person.Id == relative.Id);
+            return await MapToGenericPersonModel(notBloodRelatedPeople);
+        }
+
+        private async Task<List<GenericPersonModel>> MapToGenericPersonModel(List<Person> people)
+        {
+            List<GenericPersonModel> returnEvent = new List<GenericPersonModel>();
+            foreach (var person in people)
+            {
+                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
+                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
                 returnEvent.Add(returnPerson);
             }
             return returnEvent;

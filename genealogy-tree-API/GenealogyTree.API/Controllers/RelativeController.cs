@@ -133,6 +133,43 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
+        [Route("bloodRelated/{personId:int}")]
+        public async Task<ActionResult<List<RelativeModel>>> GetBloodRelatedPeople(int personId)
+        {
+            try
+            {
+                List<RelativeModel> parents = await _parentChildService.GetBloodRelatedPeople(personId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+        [HttpGet]
+        [Route("notBloodRelated/{personId:int}")]
+        public async Task<ActionResult<List<GenericPersonModel>>> GetNotBLoodRelated(int personId)
+        {
+            try
+            {
+                List<GenericPersonModel> parents = await _parentChildService.GetNotBloodRelatedPeople(personId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<ParentChildDetailsModel>> GetParentChild(int id)
         {

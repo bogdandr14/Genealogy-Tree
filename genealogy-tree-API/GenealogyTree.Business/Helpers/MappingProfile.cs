@@ -115,6 +115,7 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<Person, PersonDetailsModel>()
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Gender == 'm' ? "m" : "f"))
                 .ForMember(x => x.UserId, y =>
                 {
                     y.PreCondition(src => (src.SyncedUserToPerson != null));
