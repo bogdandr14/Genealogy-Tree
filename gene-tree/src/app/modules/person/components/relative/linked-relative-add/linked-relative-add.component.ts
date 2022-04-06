@@ -23,20 +23,24 @@ export class LinkedRelativeAddComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private relativesService: RelativesService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.relativesService
-      .getUnrelatedPeople(this.person.personId)
-      .subscribe((unrelatedPeople) => {
-        if (this.addParent) {
+    if (this.addParent) {
+      this.relativesService
+        .getUnrelatedPeople(this.person.personId)
+        .subscribe((unrelatedPeople) => {
           this.unrelatedPeopleList = unrelatedPeople.filter(
             (person) => person.gender == this.parentType
           );
-        } else {
+        });
+    } else {
+      this.relativesService
+        .getChildrenOptions(this.person.personId)
+        .subscribe((unrelatedPeople) => {
           this.unrelatedPeopleList = unrelatedPeople;
-        }
-      });
+        });
+    }
   }
 
   selectPerson(person?: GenericPersonModel) {

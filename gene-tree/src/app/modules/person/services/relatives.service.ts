@@ -35,7 +35,13 @@ export class RelativesService extends BaseService {
       BaseService.noLoadingConfig
     );
   }
+  public getNotBloodRelatedPeople(personId: number): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(`notBloodRelated/${personId}`, BaseService.noLoadingConfig);
+  }
 
+  public getChildrenOptions(personId: number): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(`childrenOptions/${personId}`, BaseService.noLoadingConfig);
+  }
   public getRelative(relativeId: number): Observable<RelativeDetailsModel> {
     return super.getOneById<RelativeDetailsModel>(relativeId);
   }

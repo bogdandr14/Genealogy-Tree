@@ -101,7 +101,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                List<RelativeModel> parents = await _parentChildService.GetRelatedPeople(personId);
+                List<RelativeModel> parents = await _parentChildService.GetAllRelatedPeople(personId);
                 if (parents == null)
                 {
                     return NotFound();
@@ -138,7 +138,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                List<RelativeModel> parents = await _parentChildService.GetBloodRelatedPeople(personId);
+                List<RelativeModel> parents = await _parentChildService.GetRelatedByAncestors(personId);
                 if (parents == null)
                 {
                     return NotFound();
@@ -150,13 +150,33 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
+
         [HttpGet]
         [Route("notBloodRelated/{personId:int}")]
         public async Task<ActionResult<List<GenericPersonModel>>> GetNotBLoodRelated(int personId)
         {
             try
             {
-                List<GenericPersonModel> parents = await _parentChildService.GetNotBloodRelatedPeople(personId);
+                List<GenericPersonModel> parents = await _parentChildService.GetNotRelatedByAncestors(personId);
+                if (parents == null)
+                {
+                    return NotFound();
+                }
+                return Ok(parents);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("childrenOptions/{personId:int}")]
+        public async Task<ActionResult<List<GenericPersonModel>>> GetChildrenOptions(int personId)
+        {
+            try
+            {
+                List<GenericPersonModel> parents = await _parentChildService.GetNotRelatedByDescendants(personId);
                 if (parents == null)
                 {
                     return NotFound();

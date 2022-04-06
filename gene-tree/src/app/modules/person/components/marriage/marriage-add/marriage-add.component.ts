@@ -29,15 +29,17 @@ export class MarriageAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.relativesService
-      .getUnrelatedPeople(this.marriage.firstPersonId)
-      .subscribe(
-        (unrelatedPeople) => (
-          this.unrelatedPeopleList = unrelatedPeople.filter((unrelatedPerson) =>
-            unrelatedPerson.gender != this.personGender
+    this.marriageService.getMarriagesForPerson(this.marriage.firstPersonId).subscribe((marriages) => {
+      this.relativesService
+        .getNotBloodRelatedPeople(this.marriage.firstPersonId)
+        .subscribe(
+          (unrelatedPeople) => (
+            this.unrelatedPeopleList = unrelatedPeople.filter((unrelatedPerson) =>
+              unrelatedPerson.gender != this.personGender && (marriages.findIndex((marriage) => (marriage.personMarriedTo.personId === unrelatedPerson.personId)) === -1)
+            )
           )
-        )
-      );
+        );
+    })
   }
 
   selectPerson(person?: GenericPersonModel) {
@@ -46,10 +48,10 @@ export class MarriageAddComponent implements OnInit {
 
   addMarriage() {
     this.marriageService.addMarriage(this.marriage)
-    .pipe(first()).subscribe(() => {
-      this.saveConfirmed.emit(true);
-      this.dismiss();
-    });
+      .pipe(first()).subscribe(() => {
+        this.saveConfirmed.emit(true);
+        this.dismiss();
+      });
   }
 
   dismiss() {
