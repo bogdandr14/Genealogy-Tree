@@ -6,7 +6,7 @@
   </ion-card-header>
   <ion-card-content>
     <ion-list slot="content">
-      <div *ngIf="occupations">
+      <div *ngIf="occupations?.length > 0; else noOccupations">
         <ion-card *ngFor="let occupation of occupations">
           <ion-card-header class="ion-text-center">
             <ion-card-title>
@@ -62,6 +62,9 @@
           </ion-card-content>
         </ion-card>
       </div>
+      <ng-template #noOccupations>
+        {{ "_occupation.none" | translate }}
+      </ng-template>
       <ng-container *ngIf="canModify">
         <ion-button
           id="open-create-occupation"

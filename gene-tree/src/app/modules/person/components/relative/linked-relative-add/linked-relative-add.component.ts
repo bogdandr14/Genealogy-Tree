@@ -1,3 +1,4 @@
+import { MarriageService } from './../../../services/marriage.service';
 import { GenericPersonModel } from '../../../models/person/generic-person.model';
 import { RelativesService } from '../../../services/relatives.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -22,25 +23,30 @@ export class LinkedRelativeAddComponent implements OnInit {
   public isBloodRelative = true;
   constructor(
     private modalCtrl: ModalController,
-    private relativesService: RelativesService
+    private relativesService: RelativesService,
+    private marriageService: MarriageService
   ) { }
 
   ngOnInit() {
-    if (this.addParent) {
-      this.relativesService
-        .getUnrelatedPeople(this.person.personId)
-        .subscribe((unrelatedPeople) => {
-          this.unrelatedPeopleList = unrelatedPeople.filter(
-            (person) => person.gender == this.parentType
-          );
-        });
-    } else {
-      this.relativesService
-        .getChildrenOptions(this.person.personId)
-        .subscribe((unrelatedPeople) => {
-          this.unrelatedPeopleList = unrelatedPeople;
-        });
-    }
+    this.marriageService.getMarriagesForPerson(this.person.personId).pipe(first()).subscribe((marriages) => {
+
+      if (this.addParent) {
+        this.relativesService
+          .getNotBloodRelatedPeople(this.person.personId)
+          .subscribe((unrelatedPeople) => {
+            this.unrelatedPeopleList = unrelatedPeople.filter(
+              (person) => person.gender == this.parentType && (marriages.findIndex((marriage) => (marriage.personMarriedTo.personId === person.personId)) === -1)
+            );
+          });
+      } else {
+        this.relativesService
+          .getChildrenOptions(this.person.personId)
+          .subscribe((unrelatedPeople) => {
+            this.unrelatedPeopleList = unrelatedPeople.filter(
+              (person) => (marriages.findIndex((marriage) => (marriage.personMarriedTo.personId === person.personId)) === -1))
+          });
+      }
+    });
   }
 
   selectPerson(person?: GenericPersonModel) {

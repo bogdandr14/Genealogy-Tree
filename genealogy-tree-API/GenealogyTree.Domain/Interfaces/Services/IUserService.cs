@@ -6,6 +6,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IUserService
     {
+        Task<UsersFound> FindUsers(InfiniteScrollFilter filter);
         Task<UserDetailsModel> GetUserByIdAsync(Guid userId);
         Task<UserDetailsModel> GetUser(string username);
         Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user);

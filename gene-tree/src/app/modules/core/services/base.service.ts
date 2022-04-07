@@ -27,6 +27,17 @@ export abstract class BaseService {
     }
   }
 
+  protected turnFilterIntoUrl(filter: any) {
+    let urlFilter = '';
+    if (filter && Object.entries(filter).length) {
+      Object.entries(filter).forEach(([key, value], index) => {
+        urlFilter += index === 0 ? '?' : '&';
+        urlFilter += `${key}=${value}`;
+      })
+    }
+    return urlFilter;
+  }
+
   private getOne<T>(
     url: string,
     params?: HttpInterceptorConfig

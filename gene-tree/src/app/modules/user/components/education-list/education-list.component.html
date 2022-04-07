@@ -6,7 +6,7 @@
   </ion-card-header>
   <ion-card-content>
     <ion-list slot="content">
-      <div *ngIf="educations">
+      <div *ngIf="educations?.length > 0; else noEducations">
         <ion-card *ngFor="let education of educations">
           <ion-card-header>
             <ion-card-title>
@@ -65,6 +65,9 @@
           </ion-card-content>
         </ion-card>
       </div>
+      <ng-template #noEducations>
+        {{ "_education.none" | translate }}
+      </ng-template>
       <ng-container *ngIf="canModify">
         <ion-button
           id="open-create-education"

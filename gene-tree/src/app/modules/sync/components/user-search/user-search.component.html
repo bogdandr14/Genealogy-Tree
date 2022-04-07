@@ -7,6 +7,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true" class="ion-text-center">
+  <ion-searchbar
+    placeholder="{{ '_common.search' | translate }}"
+    debounce="1000"
+    animated
+    (ionChange)="findUsers($event)"
+  ></ion-searchbar>
+  <ion-grid *ngIf="usersFound">
+    <ion-row>
+      <ion-col
+      size="12"
+      size-md="4"
+      *ngFor="let person of users"
+    >
+      <app-person-card [person]="person"></app-person-card>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll threshold="100px" #infiniteScroll (ionInfinite)="loadMoreUsers()">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-grid>
 </ion-content>

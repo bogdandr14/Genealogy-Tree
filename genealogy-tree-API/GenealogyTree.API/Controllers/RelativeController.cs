@@ -176,7 +176,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                List<GenericPersonModel> parents = await _parentChildService.GetNotRelatedByDescendants(personId);
+                List<GenericPersonModel> parents = await _parentChildService.GetChildrenOptions(personId);
                 if (parents == null)
                 {
                     return NotFound();

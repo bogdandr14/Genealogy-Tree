@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,9 +24,47 @@ namespace GenealogyTree.Business.Services
             _fileManagementService = fileManagementService;
         }
 
+        public async Task<UsersFound> FindUsers(InfiniteScrollFilter filter)
+        {
+            if (filter.Name == null)
+            {
+                filter.Name = "";
+            }
+            List<string> names = filter.Name.Split(" ").ToList();
+            IEnumerable<User> filteredUsers = unitOfWork.User.GetAll()
+                .Include(user => user.Person)
+                .ThenInclude(person => person.Image).ToList();
+            filteredUsers = filteredUsers.Where((user) => names.All(name => user.Person.FirstName.Contains(name) || user.Person.LastName.Contains(name))).ToList();
+
+
+            UsersFound usersFound = new UsersFound();
+            List<User> foundUsers = filteredUsers.Skip(filter.Skip).Take(filter.Take).ToList();
+            usersFound.totalUsers = filteredUsers.Count();
+            usersFound.skippedUsers = filter.Skip;
+            usersFound.takenUsers = filter.Take;
+            usersFound.areLast = usersFound.totalUsers <= filter.Skip + filter.Take;
+            foreach (var user in foundUsers)
+            {
+                GenericPersonModel personToReturn = _mapper.Map<GenericPersonModel>(user);
+                personToReturn.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
+                usersFound.users.Add(personToReturn);
+            }
+            return usersFound;
+        }
+
         public async Task<UserDetailsModel> GetUserByIdAsync(Guid userId)
         {
-            User user = await unitOfWork.User.FindById(userId);
+            User user = unitOfWork.User.Filter(user => user.Id == userId)
+                            .Include(u => u.Person)
+                            .Include(u => u.Person.Nationality)
+                            .Include(u => u.Person.Religion)
+                            .Include(u => u.Person.LivingPlace)
+                            .Include(u => u.Person.BirthPlace)
+                            .Include(u => u.Person.Image)
+                            .Include(u => u.Educations)
+                            .ThenInclude(e => e.EducationLevel)
+                            .Include(u => u.Occupations)
+                            .FirstOrDefault();
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
             returnEvent.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
             return returnEvent;

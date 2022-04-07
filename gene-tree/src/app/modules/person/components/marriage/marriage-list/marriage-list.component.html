@@ -6,7 +6,7 @@
   </ion-card-header>
   <ion-card-content>
     <ion-list slot="content">
-      <div *ngIf="marriages">
+      <div *ngIf="marriages?.length > 0; else noMarriages">
         <app-marriage-card
           *ngFor="let marriage of marriages"
           [canModify]="canModify"
@@ -15,6 +15,9 @@
         >
         </app-marriage-card>
       </div>
+      <ng-template #noMarriages>
+        {{ "_marriage.none" | translate }}
+      </ng-template>
       <ng-container *ngIf="canModify">
         <ion-button
           [id]="'open-add-marriage' + personLinkedTo.personId"

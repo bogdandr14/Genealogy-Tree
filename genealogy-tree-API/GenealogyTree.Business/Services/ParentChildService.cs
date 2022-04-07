@@ -108,6 +108,7 @@ namespace GenealogyTree.Business.Services
             {
                 relatedByAncestors.AddRange(await GetAllDescendants(ancestor.PersonId));
             }
+            relatedByAncestors.AddRange(await GetAllDescendants(personId));
             relatedByAncestors = relatedByAncestors.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
             return relatedByAncestors;
         }
@@ -121,34 +122,16 @@ namespace GenealogyTree.Business.Services
             {
                 relatedByDescendants.AddRange(await GetAllAncestors(descendant.PersonId));
             }
+            relatedByDescendants.AddRange(await GetAllAncestors(personId));
             relatedByDescendants = relatedByDescendants.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
             return relatedByDescendants;
         }
 
         public async Task<List<GenericPersonModel>> GetChildrenOptions(int personId)
         {
-            List<RelativeModel> bloodRelatedPeople = await GetRelatedByAncestors(personId);
-            List<int> notBloodRelatedRelatives = new List<int>();
-            foreach (var person in bloodRelatedPeople)
-            {
-                List<MarriedPersonModel> personMarriages = await _marriageService.GetAllMarriagesForPerson(person.PersonId);
-                notBloodRelatedRelatives.AddRange(personMarriages.Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList());
-                if (person.PersonId != personId)
-                {
-                    foreach(var marriage in personMarriages)
-                    {
-                        List<RelativeModel> bloodRelatedToMarriage = await GetRelatedByAncestors(marriage.PersonMarriedTo.PersonId);
-                        notBloodRelatedRelatives.AddRange(bloodRelatedToMarriage.Select((person) => person.PersonId).ToList());
-                    }
-                }
-            }
-            List<MarriedPersonModel> personMarriages1 = await _marriageService.GetAllMarriagesForPerson(personId);
-            notBloodRelatedRelatives.AddRange(personMarriages1.Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList());
-            notBloodRelatedRelatives = notBloodRelatedRelatives.GroupBy(x => x).Select(x => x.First()).ToList();
-            Person person1 = await unitOfWork.Person.FindById(personId);
-            List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person1.TreeId).ToList();
-            List<Person> childrenOptions = peopleInTree.Where(x => !bloodRelatedPeople.Exists(y => y.PersonId == x.Id) && !notBloodRelatedRelatives.Exists(z=> z== x.Id)).ToList();
-            return await MapToGenericPersonModel(childrenOptions);
+            List<GenericPersonModel> notRelatedByDescendants = await GetNotRelatedByDescendants(personId);
+            List<int> peopleWithoutParent = await GetPeopleWithoutParent(personId);
+            return notRelatedByDescendants.Where((person) => peopleWithoutParent.Any((personId) => person.PersonId == personId)).ToList();
         }
     
         public async Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId)
@@ -174,6 +157,14 @@ namespace GenealogyTree.Business.Services
         {
             List<int> relatedByDescendantsIds = (await GetRelatedByDescendants(personId)).Select((relatedPerson)=> relatedPerson.PersonId).ToList();
             return await GetExcludedPeople(relatedByDescendantsIds, personId);
+        }
+
+        private async Task<List<int>> GetPeopleWithoutParent(int personId)
+        {
+            Person personToCheck = await unitOfWork.Person.FindById(personId);
+            List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == personToCheck.TreeId).ToList();
+            List<int> childrenWithoutParent = unitOfWork.Person.Filter((person) => !person.Parents.Any((parent) => parent.Parent.Gender == personToCheck.Gender)).Include(p => p.Parents).Select((person) => person.Id).ToList();
+            return childrenWithoutParent;
         }
 
         private async Task<List<GenericPersonModel>> GetExcludedPeople(List<int> includedPeopleIds, int personId)

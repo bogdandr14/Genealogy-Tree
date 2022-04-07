@@ -54,10 +54,13 @@
   },
   "_relative": {
     "blood": "Rudă de sânge",
+    "noChild": "Această persoană nu are niciun copil",
     "chooseChild": "Alege o persoană din lista următoare să fie adăugată la copii:",
+    "noParent": "Acestă persoană nu are niciun părinte adăugat",
     "chooseParent": "Alege o persoană din lista următoare să fie adăugată la părinţi:"
   },
   "_marriage": {
+    "none": "Această persoana nu are nicio căsătorie adăugată",
     "startDate": "Începutul căsătoriei",
     "endDate": "Finalul căsătoriei",
     "chooseSpouce": "Alege mirele/mireasa să fie adăugată la căsniciile persoanei",
@@ -142,6 +145,7 @@
     "null": "Necunoscută"
   },
   "_education": {
+    "none": "Acestă persoană nu are nicio educație adăugată",
     "instituteName": "Numele instituţiei",
     "enrollmentDay": "Data înscrierii",
     "graduationDay": "Data absolvirii",
@@ -158,6 +162,7 @@
     "doctorate": "Doctorat"
   },
   "_occupation": {
+    "none": "Acestă persoană nu are nicio ocupație adăugată",
     "occupationName": "Numele ocupaţiei",
     "workingPlaceName": "Locul de muncă",
     "firstDay": "Prima zi ",
@@ -167,7 +172,7 @@
     "home": "Acasă",
     "profile": "Profil",
     "relatives": "Rude",
-    "findRelatives":"Caută rude",
+    "findRelatives": "Caută rude",
     "settings": "Setări",
     "login": "Logare",
     "register": "Înregistrare",

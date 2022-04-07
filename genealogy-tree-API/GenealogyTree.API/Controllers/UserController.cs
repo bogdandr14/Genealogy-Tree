@@ -1,4 +1,5 @@
 ﻿using GenealogyTree.API.Attributes;
+using GenealogyTree.Domain;
 using GenealogyTree.Domain.DTO.Email;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -20,6 +21,21 @@ namespace GenealogyTree.API.Controllers
             _emailService = emailService;
         }
 
+        [HttpGet]
+        [Route("findUsers")]
+        public async Task<ActionResult<bool>> CheckUsername([FromQuery] InfiniteScrollFilter filter)
+        {
+            try
+            {
+                UsersFound usersFound = await _userService.FindUsers(filter);
+                return Ok(usersFound);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
         [HttpGet]
         [Route("usernameAvailable/{username}")]
         public async Task<ActionResult<bool>> CheckUsername(string username)

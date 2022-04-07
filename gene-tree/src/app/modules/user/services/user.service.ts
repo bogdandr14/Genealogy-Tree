@@ -11,6 +11,8 @@ import { BaseService } from '../../core/services/base.service';
 import { DataService } from '../../core/services/data.service';
 import { mergeMap } from 'rxjs/operators';
 import { SupportTicketModel } from '../../support/models/support-ticket.model';
+import { InfiniteScrollFilter } from '../../shared/models/infinite-scroll.filter';
+import { FoundUsersModel } from '../models/found-users.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends BaseService {
@@ -35,6 +37,10 @@ export class UserService extends BaseService {
     return this.userState.value;
   }
 
+  public findUsers(filter:InfiniteScrollFilter){
+    return super.getOneByPath<FoundUsersModel>(`findUsers/${this.turnFilterIntoUrl(filter)}`);
+  }
+
   public checkUsernameTaken(username: string): Observable<boolean> {
     return super.getOneByPath<boolean>(
       `usernameAvailable/${username}`,
@@ -53,19 +59,19 @@ export class UserService extends BaseService {
     return super.add(supportTicket, 'support');
   }
 
-  public getPersonalInfo<UserProfileModel>(): Observable<UserProfileModel> {
+  public getPersonalInfo<AccountProfileModel>(): Observable<AccountProfileModel> {
     return this.dataService.getCurrentUser().pipe(
       mergeMap((user) => {
         const path = `info/${user.username}`;
-        return super.getOneByPath<UserProfileModel>(path);
+        return super.getOneByPath<AccountProfileModel>(path);
       })
     );
   }
 
-  public getUser<UserProfileModel>(
-    userId: number
-  ): Observable<UserProfileModel> {
-    return super.getOneById<UserProfileModel>(userId);
+  public getUser<AccountProfileModel>(
+    userId: Guid
+  ): Observable<AccountProfileModel> {
+    return super.getOneById<AccountProfileModel>(userId);
   }
 
   public getUserSettings() {
