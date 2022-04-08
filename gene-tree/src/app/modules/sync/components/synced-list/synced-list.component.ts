@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SyncService } from '../../services/sync.service';
 
 @Component({
   selector: 'app-synced-list',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SyncedListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private syncService: SyncService) { }
 
   ngOnInit() {}
 
