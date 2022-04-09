@@ -24,7 +24,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Users/{userId}")]
+        [Route("Users/{userId:Guid}")]
         public async Task<ActionResult<List<SyncedUserModel>>> GetSynchedUsersForCurrentUser(Guid userId)
         {
             try
@@ -73,7 +73,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Requests/sent")]
+        [Route("Requests/sent/{userId:Guid}")]
         public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsSent(Guid userId)
         {
             try
@@ -92,7 +92,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Requests/received")]
+        [Route("Requests/received/{userId:Guid}")]
         public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsReceived(Guid userId)
         {
             try
@@ -111,7 +111,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Requests/responded")]
+        [Route("Requests/responded/{userId:Guid}")]
         public async Task<ActionResult<List<SyncRequestCreateUpdateModel>>> SyncRequestsResponded(Guid userId)
         {
             try
