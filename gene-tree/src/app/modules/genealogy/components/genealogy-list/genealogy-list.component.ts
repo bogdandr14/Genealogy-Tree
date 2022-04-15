@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { CurrentUserModel } from 'src/app/modules/core/models/current-user.model';
 import { DataService } from 'src/app/modules/core/services/data.service';
 import { GenericPersonModel } from 'src/app/modules/person/models/person/generic-person.model';
@@ -19,17 +19,18 @@ export class GenealogyListComponent implements OnInit {
     private personService: PersonService,
     private userService: UserService,
     private dataService: DataService
-  ) {}
+  ) { }
 
   async ngOnInit() {
-    this.dataService.getCurrentUser().pipe(first()).subscribe((currentUser) => {
-      this.currentUser = currentUser;
-      this.personService
-        .getPeopleListInTree(this.currentUser.treeId).pipe(first())
-        .subscribe((people) => {
-          this.peopleList = people;
-        });
-    });
+    this.dataService.getCurrentUser().pipe(first(),
+      switchMap((currentUser) => {
+        this.currentUser = currentUser;
+        return this.personService
+          .getPeopleListInTree(this.currentUser.treeId).pipe(first())
+      })).subscribe((people) => {
+        this.peopleList = people;
+      });
+
   }
 
   // TODO check who is the root of the tree

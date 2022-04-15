@@ -121,4 +121,8 @@ export class AppComponent implements OnInit {
   //https://ionicframework.com/docs/v3/native/mobile-accessibility/
   //https://www.a11yproject.com/
   //https://blog.angular.io/build-more-accessible-angular-apps-1aca4fc39aff
+  //https://www.youtube.com/watch?v=-g2Dat7z2WQ
+  //https://www.youtube.com/watch?v=ewcoEYS85Co
+  //https://www.youtube.com/watch?v=2ZFgcTOcnUg
+  //https://www.youtube.com/watch?v=B-nFj2o03i8
 }

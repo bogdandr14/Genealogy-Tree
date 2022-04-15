@@ -7,6 +7,7 @@ import {
   HttpRequest,
   HttpErrorResponse,
   HttpStatusCode,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
@@ -24,7 +25,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
   constructor(
     private alertService: AlertService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -36,11 +37,13 @@ export class AppHttpInterceptor implements HttpInterceptor {
     const request = req.clone(
       (req.url.includes('photo/') || req.url.includes('.png'))
         ? {
-            headers: req.headers.delete('Content-Type'),
-          }
+          ...req,
+          headers: req.headers.delete('Content-Type'),
+        }
         : {
-            headers: req.headers.set('Content-Type', 'application/json'),
-          }
+          ...req,
+          headers: req.headers.set('Content-Type', 'application/json'),//this.resolveHttpHeaders(config?.httpHeaders, req)
+        }
     );
 
     return next.handle(request).pipe(
@@ -86,5 +89,9 @@ export class AppHttpInterceptor implements HttpInterceptor {
     }
     this.alertService.showError(error);
     throw error;
+  }
+
+  private resolveHttpHeaders(providedHttpHeaders: HttpHeaders | undefined, request: HttpRequest<any>): HttpHeaders {
+    return providedHttpHeaders ? providedHttpHeaders : request.headers.set('Content-Type', 'application/json');
   }
 }

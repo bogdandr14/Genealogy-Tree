@@ -33,7 +33,6 @@ export class AlertService {
     this.errorSound.load();
   }
 
-  //https://artlist.io/sfx/?term=whoosh,success,message,pop,in
   async presentAlert(
     header: string,
     message: string,
@@ -120,7 +119,7 @@ export class AlertService {
     return confirm(message);
   }
 
-  public async createToast(
+  private async createToast(
     title: string,
     message: string,
     color: string,

@@ -2,7 +2,6 @@ export class AppError {
   public message: string;
   public status: number;
   constructor(public originalErr?: any) {
-    debugger;
     if (originalErr?.message) {
       this.message = originalErr?.message;
     } else if (originalErr?.errors) {
