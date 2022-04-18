@@ -22,7 +22,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Nationality")]
+        [Route("nationality")]
         public async Task<ActionResult<List<GenericNameModel>>> GetAllNationalities()
         {
             try
@@ -42,7 +42,7 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
-        [Route("Nationality")]
+        [Route("nationality")]
         public async Task<ActionResult<GenericNameModel>> AddNationality(string nationalityName)
         {
             try
@@ -57,7 +57,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("Religion")]
+        [Route("religion")]
         public async Task<ActionResult<List<GenericNameModel>>> GetAllReligions()
         {
             try
@@ -77,7 +77,7 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize(UserRoleEnum.Admin)]
         [HttpPost]
-        [Route("Religion")]
+        [Route("religion")]
         public async Task<ActionResult<GenericNameModel>> AddReligion(string religionName)
         {
             try

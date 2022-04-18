@@ -8,7 +8,6 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IPersonService
     {
-        Task<List<PersonDetailsModel>> FindPeople(string name);
         Task<PersonDetailsModel> GetPersonAsync(int personId);
         Task<List<GenericPersonModel>> GetPeopleListInTree(Guid treeId);
         Task<List<PersonTreeInfoModel>> GetPeopleTreeDataInTree(Guid treeId);

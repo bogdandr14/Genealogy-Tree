@@ -42,6 +42,11 @@ export class RelativesService extends BaseService {
   public getChildrenOptions(personId: number): Observable<GenericPersonModel[]> {
     return super.getMany<GenericPersonModel>(`childrenOptions/${personId}`, BaseService.noLoadingConfig);
   }
+
+  public getParentSpouceOptions(personId: number): Observable<GenericPersonModel[]> {
+    return super.getMany<GenericPersonModel>(`parentSpouceOptions/${personId}`, BaseService.noLoadingConfig);
+  }
+
   public getRelative(relativeId: number): Observable<RelativeDetailsModel> {
     return super.getOneById<RelativeDetailsModel>(relativeId);
   }

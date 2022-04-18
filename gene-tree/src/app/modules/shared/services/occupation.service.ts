@@ -17,7 +17,7 @@ export class OccupationService extends BaseService {
 
   getOccupationsForUser(userId: Guid): Observable<OccupationModel[]> {
     return super.getMany<OccupationModel>(
-      `forUser/${userId}`,
+      `user/${userId}`,
       BaseService.noLoadingConfig
     );
   }
@@ -31,7 +31,7 @@ export class OccupationService extends BaseService {
   }
 
   addOccupation(occupation: OccupationModel): Observable<OccupationModel> {
-    occupation.userId = this.userService.getLoggedInUser().userId;
+    occupation.userId = this.userService.getUserId();
     return super.add<OccupationModel>(occupation);
   }
 

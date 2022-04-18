@@ -20,7 +20,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("ForPerson/{personId:int}")]
+        [Route("person/{personId:int}")]
         public async Task<ActionResult<List<MarriedPersonModel>>> GetPersonMarriages(int personId)
         {
             try
@@ -39,7 +39,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("ForPerson/{personId:int}/current")]
+        [Route("person/{personId:int}/current")]
         public async Task<ActionResult<MarriedPersonModel>> GetPersonCurrentMarriage(int personId)
         {
             try

@@ -25,7 +25,7 @@ import { UserService } from '../services/user.service';
   ],
 })
 export class UsernameCheckDirective implements AsyncValidator {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   validate(
     control: AbstractControl

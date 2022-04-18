@@ -28,20 +28,6 @@ namespace GenealogyTree.Business.Services
             _marriageService = marriageService;
         }
 
-        public async Task<List<PersonDetailsModel>> FindPeople(string name)
-        {
-            List<Person> people = unitOfWork.Person.Filter(x => string.Format("{0} {1}", x.FirstName, x.LastName).Contains(name))
-                                    .OrderBy(x => x.FirstName).ToList();
-            List<PersonDetailsModel> returnPoepleList = new List<PersonDetailsModel>();
-            foreach (var person in people)
-            {
-                PersonDetailsModel returnPerson = _mapper.Map<PersonDetailsModel>(person);
-                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
-                returnPoepleList.Add(returnPerson);
-            }
-            return _mapper.Map<List<PersonDetailsModel>>(people);
-        }
-
         public async Task<PersonDetailsModel> GetPersonAsync(int personId)
         {
             Person person = await unitOfWork.Person.FindById(personId);

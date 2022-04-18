@@ -15,6 +15,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<List<RelativeModel>> GetRelatedByAncestors(int personId);
         Task<List<RelativeModel>> GetRelatedByDescendants(int personId);
         Task<List<GenericPersonModel>> GetChildrenOptions(int personId);
+        Task<List<GenericPersonModel>> GetParentSpouceOptions(int personId);
         Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId);
         Task<List<GenericPersonModel>> GetNotRelatedByAncestors(int personId);
         Task<List<GenericPersonModel>> GetNotRelatedByDescendants(int personId);

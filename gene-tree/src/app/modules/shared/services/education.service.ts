@@ -19,7 +19,7 @@ export class EducationService extends BaseService {
 
   getEducationsForUser(userId: Guid): Observable<EducationModel[]> {
     return super.getMany<EducationModel>(
-      `forUser/${userId}`,
+      `user/${userId}`,
       BaseService.noLoadingConfig
     );
   }
@@ -33,7 +33,7 @@ export class EducationService extends BaseService {
   }
 
   addEducation(education: EducationModel): Observable<EducationModel> {
-    education.userId = this.userService.getLoggedInUser().userId;
+    education.userId = this.userService.getUserId();
     return super.add<EducationModel>(education);
   }
 

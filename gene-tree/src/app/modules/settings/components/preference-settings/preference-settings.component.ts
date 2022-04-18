@@ -4,7 +4,7 @@ import { AlertService } from './../../../core/services/alert.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 import { AccountSettingsModel } from '../../models/account-settings.model';
 
@@ -25,11 +25,12 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn) {
-      this.userService.getUserSettings().subscribe((settings) => {
-        this.userSettings = settings;
-      });
-    }
+    this.authService.isLoggedIn$.pipe(filter((isLoggedIn) => isLoggedIn),
+      take(1),
+      switchMap(() => this.userService.getUserSettings())
+    ).subscribe((settings) => {
+      this.userSettings = settings;
+    });
   }
 
 
@@ -44,7 +45,7 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.ngForm.dirty){
+    if (this.ngForm.dirty) {
       this.alertService.showWarning('_message._warning.unsavedPreferences');
     }
   }

@@ -1,7 +1,7 @@
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 /* eslint-disable no-debugger */
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { BehaviorSubject, forkJoin, from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../../settings/models/account-settings.model';
 import { CurrentUserModel } from '../models/current-user.model';
@@ -17,39 +17,56 @@ export class DataService {
   public user$ = this.user.asObservable();
 
   private darkTheme = new BehaviorSubject<boolean>(null);
-  public darkTheme$ = this.darkTheme.asObservable();
+  public darkTheme$ = this.darkTheme.asObservable().pipe(filter((value) => value != null));
 
   private invertColor = new BehaviorSubject<boolean>(null);
-  public invertColor$ = this.invertColor.asObservable();
+  public invertColor$ = this.invertColor.asObservable().pipe(filter((value) => value != null));
 
   private grayscale = new BehaviorSubject<boolean>(null);
-  public grayscale$ = this.grayscale.asObservable();
+  public grayscale$ = this.grayscale.asObservable().pipe(filter((value) => value != null));
 
   private linkHighlight = new BehaviorSubject<boolean>(null);
-  public linkHighlight$ = this.linkHighlight.asObservable();
+  public linkHighlight$ = this.linkHighlight.asObservable().pipe(filter((value) => value != null));
 
   private fontSize = new BehaviorSubject<string>('font-size-5');
   public fontSize$ = this.fontSize.asObservable();
 
   private language = new BehaviorSubject<string>(environment.defaultLanguage);
-  public language$ = this.language.asObservable();
+  public language$ = this.language.asObservable().pipe(filter((value) => value != null));
 
   private storageReady = new BehaviorSubject(false);
   constructor(private storage: Storage) {
+    this.initStorage();
+  }
+
+  async initStorage() {
+    await this.storage.defineDriver(CordovaSQLiteDriver);
+    await this.storage.create();
+    this.storageReady.next(true);
     this.initData();
   }
 
-  async initData() {
-    await this.storage.defineDriver(CordovaSQLiteDriver);
-    await this.storage.create();
-    this.getCurrentUser().subscribe((value) => this.user.next(value));
-    this.get<boolean>(DARK_THEME_KEY).subscribe((value) => this.darkTheme.next(value));
-    this.get<boolean>(INVERT_COLOR_KEY).subscribe((value) => this.invertColor.next(value));
-    this.get<boolean>(GRAYSCALE_KEY).subscribe((value) => this.grayscale.next(value));
-    this.get<boolean>(HIGHLIGHT_KEY).subscribe((value) => this.linkHighlight.next(value));
-    this.getLanguage().subscribe((value) => this.language.next(value));
-    this.storageReady.next(true);
+  initData() {
+    forkJoin([
+      this.getCurrentUser(),
+      this.get<boolean>(DARK_THEME_KEY),
+      this.get<boolean>(INVERT_COLOR_KEY),
+      this.get<boolean>(GRAYSCALE_KEY),
+      this.get<boolean>(HIGHLIGHT_KEY),
+      this.getLanguage()
+    ]).subscribe(
+      ([user, dark, invert, gray, highlight, lang]) => {
+        this.user.next(user);
+        this.darkTheme.next(dark);
+        this.invertColor.next(invert);
+        this.grayscale.next(gray);
+        this.linkHighlight.next(highlight);
+        this.language.next(lang);
+      }
+    )
   }
+
+
 
   set(key: string, value: any) {
     this.storage.set(key, JSON.stringify(value));
@@ -63,7 +80,8 @@ export class DataService {
           from(this.storage.get(key).then((value) => <T>JSON.parse(value))) ||
           of(null)
         );
-      })
+      }),
+      take(1)
     );
   }
 

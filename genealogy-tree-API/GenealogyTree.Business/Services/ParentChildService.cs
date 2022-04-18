@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.Entities;
@@ -131,9 +130,19 @@ namespace GenealogyTree.Business.Services
         {
             List<GenericPersonModel> notRelatedByDescendants = await GetNotRelatedByDescendants(personId);
             List<int> peopleWithoutParent = await GetPeopleWithoutParent(personId);
-            return notRelatedByDescendants.Where((person) => peopleWithoutParent.Any((personId) => person.PersonId == personId)).ToList();
+            List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
+            return notRelatedByDescendants.Where((person) => 
+                                        peopleWithoutParent.Exists((personId) => person.PersonId == personId) && 
+                                        !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
         }
-    
+
+        public async Task<List<GenericPersonModel>> GetParentSpouceOptions(int personId)
+        {
+            List<GenericPersonModel> notRelatedByAncestors = await GetNotRelatedByAncestors(personId);
+            List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
+            return notRelatedByAncestors.Where((person) => !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
+        }
+
         public async Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId)
         {
             List<int> relatedPeopleIds = (await GetAllRelatedPeople(personId)).Select((relative) => relative.PersonId).ToList();
@@ -155,7 +164,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericPersonModel>> GetNotRelatedByDescendants(int personId)
         {
-            List<int> relatedByDescendantsIds = (await GetRelatedByDescendants(personId)).Select((relatedPerson)=> relatedPerson.PersonId).ToList();
+            List<int> relatedByDescendantsIds = (await GetRelatedByDescendants(personId)).Select((relatedPerson) => relatedPerson.PersonId).ToList();
             return await GetExcludedPeople(relatedByDescendantsIds, personId);
         }
 

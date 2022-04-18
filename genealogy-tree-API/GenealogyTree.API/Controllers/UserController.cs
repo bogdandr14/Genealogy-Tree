@@ -22,7 +22,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("findUsers")]
+        [Route("find")]
         public async Task<ActionResult<bool>> CheckUsername([FromQuery] InfiniteScrollFilter filter)
         {
             try

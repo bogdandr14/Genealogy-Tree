@@ -22,7 +22,7 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpGet]
-        [Route("ForUser/{userId:Guid}")]
+        [Route("user/{userId:Guid}")]
         public async Task<ActionResult<List<EducationModel>>> GetPersonEducations(Guid userId)
         {
             try

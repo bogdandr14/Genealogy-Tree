@@ -1,4 +1,4 @@
-<ion-list *ngIf="authService.isLoggedIn.value" lines="none">
+<ion-list *ngIf="authService.isLoggedIn$ | async" lines="none">
   <ion-list-header> GeneTree </ion-list-header>
   <app-navigation-link
     *ngFor="let link of connectedUserLinks; let i = index"
@@ -12,7 +12,7 @@
   </app-navigation-link>
 </ion-list>
 
-<ion-list *ngIf="!authService.isLoggedIn.value" lines="none">
+<ion-list *ngIf="(authService.isLoggedIn$ | async) === false" lines="none">
   <ion-list-header> {{ "account" | translate }} </ion-list-header>
   <app-navigation-link
     *ngFor="let link of freeUserLinks; let i = index"

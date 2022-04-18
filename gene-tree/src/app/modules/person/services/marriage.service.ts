@@ -18,13 +18,13 @@ export class MarriageService extends BaseService {
 
   getMarriagesForPerson(personId: number): Observable<MarriedPersonModel[]> {
     return super.getMany<MarriedPersonModel>(
-      `forPerson/${personId}`,
+      `person/${personId}`,
       BaseService.noLoadingConfig
     );
   }
   getCurrentMarriageForPerson(personId: number): Observable<MarriedPersonModel[]> {
     return super.getMany<MarriedPersonModel>(
-      `forPerson/${personId}/current`,
+      `person/${personId}/current`,
       BaseService.noLoadingConfig
     );
   }

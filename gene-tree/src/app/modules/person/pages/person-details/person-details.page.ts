@@ -41,10 +41,9 @@ export class PersonDetailsPage implements OnInit {
   }
 
   public get isUserTree() {
-    return (
-      this.userService.getLoggedInUser().treeId === this.personDetails.treeId
-    );
+    return this.userService.isUserTree(this.personDetails.treeId);
   }
+
   refreshPerson() {
     this.person$.subscribe((person) => {
       this.personDetails = person;

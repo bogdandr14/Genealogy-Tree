@@ -7,7 +7,7 @@ import { GenericPersonModel } from '../../person/models/person/generic-person.mo
 import { SyncRequestCreateUpdateModel } from '../models/sync-request-create-update.model';
 import { SyncRequestResponseModel } from '../models/sync-request-response.model';
 import { UsersToSyncModel } from '../models/synced-users.model';
-import { mergeMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -19,49 +19,49 @@ export class SyncService extends BaseService {
 
   public getSyncedUsers() {
     return this.dataService.getCurrentUser().pipe(
-      mergeMap((user) => {
-        return super.getMany<GenericPersonModel>(`users/${user.userId}`);
+      switchMap((user) => {
+        return super.getMany<GenericPersonModel>(`user/${user.userId}`);
       })
     );
   }
 
   public addSyncedUser(usersToSync: UsersToSyncModel) {
-    return super.add(usersToSync, 'users');
+    return super.add(usersToSync, 'user');
   }
 
   public getRequestsSent() {
     return this.dataService.getCurrentUser().pipe(
-      mergeMap((user) => {
-        return super.getMany(`requests/sent/${user.userId}`);
+      switchMap((user) => {
+        return super.getMany(`request/sent/${user.userId}`);
       })
     );
   }
 
   public getRequestsReceived() {
     return this.dataService.getCurrentUser().pipe(
-      mergeMap((user) => {
-        return super.getMany(`requests/received/${user.userId}`);
+      switchMap((user) => {
+        return super.getMany(`request/received/${user.userId}`);
       })
     );
   }
 
   public getRequestsResponded() {
     return this.dataService.getCurrentUser().pipe(
-      mergeMap((user) => {
-        return super.getMany(`requests/responded/${user.userId}`);
+      switchMap((user) => {
+        return super.getMany(`request/responded/${user.userId}`);
       })
     );
   }
 
   public sendSyncRequest(syncRequest: SyncRequestCreateUpdateModel) {
-    return super.add(syncRequest, 'requests/send');
+    return super.add(syncRequest, 'request');
   }
 
   public respondToSyncRequest(syncRequest: SyncRequestResponseModel) {
-    return super.updateById(syncRequest.id, syncRequest, 'requests/respond');
+    return super.updateById(syncRequest.id, syncRequest, 'request');
   }
 
   public removeSyncRequest(syncRequestId: number) {
-    return super.remove(syncRequestId, 'requests');
+    return super.remove(syncRequestId, 'request');
   }
 }

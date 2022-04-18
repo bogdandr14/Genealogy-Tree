@@ -9,15 +9,15 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row [ngClass]="authService.isLoggedIn.value? '' : 'absolute-center'">
+    <ion-row [ngClass]="(authService.isLoggedIn$ | async) ? '' : 'absolute-center'">
       <ion-col size-sm="8" offset-sm="2">
         <ion-card>
           <ion-card-content>
             <app-accessibility-settings> </app-accessibility-settings>
             <app-preference-settings
-              *ngIf="authService.isLoggedIn.value"
+              *ngIf="authService.isLoggedIn$ | async"
             ></app-preference-settings>
-            <ion-list *ngIf="authService.isLoggedIn.value">
+            <ion-list *ngIf="authService.isLoggedIn$ | async">
               <ion-list-header>
                 <h1>{{'account' | translate}}</h1>
               </ion-list-header>
@@ -36,7 +36,7 @@
                 </ng-template>
               </ion-modal>
               <ion-button
-                *ngIf="authService.isLoggedIn.value"
+                *ngIf="authService.isLoggedIn$ | async"
                 expand="block"
                 fill="clear"
                 color="danger"

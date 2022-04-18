@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class IntroGuard implements CanLoad {
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(private router: Router, private dataService: DataService) { }
   canLoad(): Observable<boolean> {
     return this.dataService.get<boolean>('has-seen-intro').pipe(
       tap((hasSeenIntro) => {

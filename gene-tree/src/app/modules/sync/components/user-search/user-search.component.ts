@@ -2,7 +2,7 @@ import { FoundUsersModel } from './../../../user/models/found-users.model';
 import { InfiniteScrollFilter } from './../../../shared/models/infinite-scroll.filter';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/modules/user/services/user.service';
-import { first } from 'rxjs/operators';
+import { first, take, tap } from 'rxjs/operators';
 import { GenericPersonModel } from 'src/app/modules/person/models/person/generic-person.model';
 import { IonInfiniteScroll } from '@ionic/angular';
 
@@ -15,13 +15,12 @@ export class UserSearchComponent implements OnInit {
   @ViewChild('infiniteScroll') infiniteScroll: IonInfiniteScroll;
 
   public usersFound = new FoundUsersModel();
-  public users : GenericPersonModel[];
+  public users: GenericPersonModel[];
   private filter: InfiniteScrollFilter;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-
-   }
+  }
 
   findUsers($event) {
     console.log($event);
@@ -32,9 +31,14 @@ export class UserSearchComponent implements OnInit {
     })
   }
 
+  setUserSubscription(searchTerm: string) {
+    this.filter = { skip: 0, take: 15, name: searchTerm };
+    this.userService.findUsers(this.filter).pipe(take(1), tap((foundUsers) => this.usersFound = foundUsers));
+  }
+
   loadMoreUsers() {
     this.filter.skip = this.usersFound.skippedUsers;
-    this.userService.findUsers(this.filter).pipe(first()).subscribe((foundUsers)=>{
+    this.userService.findUsers(this.filter).pipe(first()).subscribe((foundUsers) => {
       this.usersFound = foundUsers;
       this.users = this.users.concat(foundUsers.users);
       this.infiniteScroll.complete();

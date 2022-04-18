@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { GenericPersonModel } from '../../../models/person/generic-person.model';
 import { RelativesService } from '../../../services/relatives.service';
-import { first } from 'rxjs/operators';
+import { first, map, switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-marriage-add',
@@ -22,6 +22,7 @@ export class MarriageAddComponent implements OnInit {
   public unrelatedPeopleList: GenericPersonModel[];
 
   public marriage = new MarriageEditModel();
+
   constructor(
     private modalCtrl: ModalController,
     private relativesService: RelativesService,
@@ -29,17 +30,13 @@ export class MarriageAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.marriageService.getMarriagesForPerson(this.marriage.firstPersonId).subscribe((marriages) => {
-      this.relativesService
-        .getNotBloodRelatedPeople(this.marriage.firstPersonId)
-        .subscribe(
-          (unrelatedPeople) => (
-            this.unrelatedPeopleList = unrelatedPeople.filter((unrelatedPerson) =>
-              unrelatedPerson.gender != this.personGender && (marriages.findIndex((marriage) => (marriage.personMarriedTo.personId === unrelatedPerson.personId)) === -1)
-            )
-          )
-        );
-    })
+    this.relativesService.getParentSpouceOptions(this.marriage.firstPersonId).pipe(
+      take(1),
+      map((unrelatedPeople) => {
+        return unrelatedPeople.filter((person) =>
+        person.gender != this.personGender)
+      })
+    ).subscribe((unrelatedPeople) => (this.unrelatedPeopleList = unrelatedPeople));
   }
 
   selectPerson(person?: GenericPersonModel) {

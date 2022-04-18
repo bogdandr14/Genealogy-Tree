@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay, filter, tap } from 'rxjs/operators';
 import { ChangePasswordModel } from '../../settings/models/change-password.model';
 import { LoginModel } from '../../user/models/login.model';
 import { RegisterModel } from '../../user/models/register.model';
@@ -15,7 +15,8 @@ import { DataService } from './data.service';
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
   private timerSubscription = new Subscription();
-  public isLoggedIn = new BehaviorSubject<boolean>(null);
+  private isLoggedIn = new BehaviorSubject<boolean>(null);
+  public isLoggedIn$ = this.isLoggedIn.asObservable().pipe(filter((val) => val !== null));
 
   constructor(
     public http: HttpClient,
@@ -84,7 +85,7 @@ export class AuthService extends BaseService {
       this.timerSubscription.unsubscribe();
       this.timerSubscription = of(null)
         .pipe(delay(timeout))
-        .subscribe((expired) => {
+        .subscribe(() => {
           console.log('TOKEN EXPIRED!!');
           this.logout();
         });

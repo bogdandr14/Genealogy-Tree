@@ -9,9 +9,10 @@ import { Guid } from 'guid-typescript';
 })
 export class LinkUserButtonsComponent implements OnInit {
   @Input() userId: Guid;
-  constructor(private userService:UserService) {}
+  constructor(private userService: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
   public get isCurrentUser() {
     return this.userService.isCurrentUser(this.userId);
   }

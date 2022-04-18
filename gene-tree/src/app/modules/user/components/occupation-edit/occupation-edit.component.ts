@@ -1,7 +1,9 @@
 import { OccupationService } from './../../../shared/services/occupation.service';
 import { OccupationModel } from './../../../user/models/occupation.model';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { take } from 'rxjs/operators';
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-occupation-edit',
@@ -19,17 +21,13 @@ export class OccupationEditComponent {
   ) { }
 
   onSubmit() {
-    if (this.isUpdate) {
-      this.occupationService.updateOccupation(this.occupation).subscribe(() => {
-        this.saveConfirmed.emit(true);
-        this.dismiss();
-      });
-    } else {
-      this.occupationService.addOccupation(this.occupation).subscribe(() => {
-        this.saveConfirmed.emit(true);
-        this.dismiss();
-      });
-    }
+    iif(() => this.isUpdate,
+      this.occupationService.updateOccupation(this.occupation),
+      this.occupationService.addOccupation(this.occupation)
+    ).pipe(take(1)).subscribe(() => {
+      this.saveConfirmed.emit(true);
+      this.dismiss();
+    });
   }
 
   dismiss() {

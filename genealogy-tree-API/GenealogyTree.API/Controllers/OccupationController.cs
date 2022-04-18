@@ -20,7 +20,7 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("ForUser/{userId}")]
+        [Route("user/{userId}")]
         public async Task<ActionResult<List<OccupationModel>>> GetUserOccupations(Guid userId)
         {
             try

@@ -59,7 +59,9 @@
                     required
                   ></ion-input>
                 </ion-item>
-                <app-validation-errors [model]="ssubject"></app-validation-errors>
+                <app-validation-errors
+                  [model]="ssubject"
+                ></app-validation-errors>
               </ion-item-group>
 
               <ion-item-group id="description">
@@ -84,7 +86,10 @@
                 ></app-validation-errors>
               </ion-item-group>
 
-              <ion-item-group *ngIf="!authService.isLoggedIn.value" id="email">
+              <ion-item-group
+                *ngIf="(authService.isLoggedIn$ | async) === false"
+                id="email"
+              >
                 <ion-item color="transparent">
                   <ion-label for="email" position="floating">
                     <b>
@@ -106,8 +111,12 @@
             </ion-list>
 
             <div class="ion-padding">
-              <ion-button expand="block" type="submit" class="submit-button"
-              [disabled]="form.invalid || form.pristine">
+              <ion-button
+                expand="block"
+                type="submit"
+                class="submit-button"
+                [disabled]="form.invalid || form.pristine"
+              >
                 {{'_common.submit' | translate}}
               </ion-button>
             </div>

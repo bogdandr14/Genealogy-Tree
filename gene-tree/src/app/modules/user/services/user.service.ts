@@ -1,5 +1,4 @@
 import { UserEditModel } from './../models/user-edit.model';
-/* eslint-disable no-debugger */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
@@ -9,7 +8,7 @@ import { AccountSettingsModel } from '../../settings/models/account-settings.mod
 import { CurrentUserModel } from '../../core/models/current-user.model';
 import { BaseService } from '../../core/services/base.service';
 import { DataService } from '../../core/services/data.service';
-import { mergeMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { SupportTicketModel } from '../../support/models/support-ticket.model';
 import { InfiniteScrollFilter } from '../../shared/models/infinite-scroll.filter';
 import { FoundUsersModel } from '../models/found-users.model';
@@ -30,15 +29,24 @@ export class UserService extends BaseService {
   }
 
   public isCurrentUser(userId: Guid) {
-    return this.userState.value.userId == userId;
+    return userId === this.userState.value.userId;
   }
 
-  public getLoggedInUser() {
-    return this.userState.value;
+  public isUserTree(treeId: Guid) {
+    return treeId === this.userState.value.treeId;
   }
 
-  public findUsers(filter:InfiniteScrollFilter){
-    return super.getOneByPath<FoundUsersModel>(`findUsers/${this.turnFilterIntoUrl(filter)}`);
+
+  public getUserId() {
+    return this.userState.value.userId;
+  }
+
+  public getUserEmail() {
+    return this.userState.value.email;
+  }
+
+  public findUsers(filter: InfiniteScrollFilter) {
+    return super.getOneByPath<FoundUsersModel>(`find/${this.turnFilterIntoUrl(filter)}`);
   }
 
   public checkUsernameTaken(username: string): Observable<boolean> {
@@ -55,13 +63,13 @@ export class UserService extends BaseService {
     );
   }
 
-  public sendSupportTicket(supportTicket: SupportTicketModel): Observable<null>{
+  public sendSupportTicket(supportTicket: SupportTicketModel): Observable<null> {
     return super.add(supportTicket, 'support');
   }
 
   public getPersonalInfo<AccountProfileModel>(): Observable<AccountProfileModel> {
     return this.dataService.getCurrentUser().pipe(
-      mergeMap((user) => {
+      switchMap((user) => {
         const path = `info/${user.username}`;
         return super.getOneByPath<AccountProfileModel>(path);
       })

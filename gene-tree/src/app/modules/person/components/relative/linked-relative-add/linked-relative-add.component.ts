@@ -4,7 +4,8 @@ import { RelativesService } from '../../../services/relatives.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RelativeEditModel } from '../../../models/relative/relative-edit.model';
 import { ModalController } from '@ionic/angular';
-import { first } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-linked-relative-add',
@@ -21,32 +22,22 @@ export class LinkedRelativeAddComponent implements OnInit {
 
   public selectedPerson: GenericPersonModel;
   public isBloodRelative = true;
+
   constructor(
     private modalCtrl: ModalController,
     private relativesService: RelativesService,
-    private marriageService: MarriageService
   ) { }
 
   ngOnInit() {
-    this.marriageService.getMarriagesForPerson(this.person.personId).pipe(first()).subscribe((marriages) => {
-
-      if (this.addParent) {
-        this.relativesService
-          .getNotBloodRelatedPeople(this.person.personId)
-          .subscribe((unrelatedPeople) => {
-            this.unrelatedPeopleList = unrelatedPeople.filter(
-              (person) => person.gender == this.parentType && (marriages.findIndex((marriage) => (marriage.personMarriedTo.personId === person.personId)) === -1)
-            );
-          });
-      } else {
-        this.relativesService
-          .getChildrenOptions(this.person.personId)
-          .subscribe((unrelatedPeople) => {
-            this.unrelatedPeopleList = unrelatedPeople.filter(
-              (person) => (marriages.findIndex((marriage) => (marriage.personMarriedTo.personId === person.personId)) === -1))
-          });
-      }
-    });
+    iif(() => this.addParent,
+      this.relativesService.getParentSpouceOptions(this.person.personId).pipe(
+        map((unrelatedPeople) => {
+          return unrelatedPeople.filter((person) => person.gender == this.parentType)
+        })),
+      this.relativesService.getChildrenOptions(this.person.personId)
+    ).pipe(take(1)).subscribe((unrelatedPeople) => {
+      this.unrelatedPeopleList = unrelatedPeople;
+    })
   }
 
   selectPerson(person?: GenericPersonModel) {
@@ -65,7 +56,7 @@ export class LinkedRelativeAddComponent implements OnInit {
     }
     this.relativesService
       .addRelative(relativeLink)
-      .pipe(first())
+      .pipe(take(1))
       .subscribe(() => {
         this.saveConfirmed.emit(true);
         this.dismiss();
