@@ -19,7 +19,7 @@ export class GenealogyListComponent implements OnInit {
     private personService: PersonService,
     private userService: UserService,
     private dataService: DataService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.dataService.getCurrentUser().pipe(take(1),
@@ -30,7 +30,6 @@ export class GenealogyListComponent implements OnInit {
       })).subscribe((people) => {
         this.peopleList = people;
       });
-
   }
 
   // TODO check who is the root of the tree

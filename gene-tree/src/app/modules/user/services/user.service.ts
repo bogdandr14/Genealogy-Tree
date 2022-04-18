@@ -36,7 +36,6 @@ export class UserService extends BaseService {
     return treeId === this.userState.value.treeId;
   }
 
-
   public getUserId() {
     return this.userState.value.userId;
   }
@@ -67,7 +66,9 @@ export class UserService extends BaseService {
     return super.add(supportTicket, 'support');
   }
 
-  public getPersonalInfo<AccountProfileModel>(): Observable<AccountProfileModel> {
+  public getPersonalInfo<
+    AccountProfileModel
+  >(): Observable<AccountProfileModel> {
     return this.dataService.getCurrentUser().pipe(
       switchMap((user) => {
         const path = `info/${user.username}`;

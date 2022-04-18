@@ -23,19 +23,27 @@ export class PersonDetailsPage implements OnInit {
     private userService: UserService,
     private dataService: DataService,
     private personService: PersonService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap((params) => {
-        return iif<PersonDetailsModel, PersonDetailsModel>(() => !!params.get('id'),
-          this.personService.getPerson(+params.get('id')),
-          this.dataService.getCurrentUser()
-            .pipe(
-              switchMap((currentUser) => this.personService.getPerson(currentUser.personId)))
-        )
-      }
-      )).pipe(take(1)).subscribe((personDetails) => {
+    this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          return iif<PersonDetailsModel, PersonDetailsModel>(
+            () => !!params.get('id'),
+            this.personService.getPerson(+params.get('id')),
+            this.dataService
+              .getCurrentUser()
+              .pipe(
+                switchMap((currentUser) =>
+                  this.personService.getPerson(currentUser.personId)
+                )
+              )
+          );
+        })
+      )
+      .pipe(take(1))
+      .subscribe((personDetails) => {
         this.personDetails = personDetails;
       });
   }

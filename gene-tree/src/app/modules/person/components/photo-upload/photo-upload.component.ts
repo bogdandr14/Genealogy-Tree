@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -92,7 +91,7 @@ export class PhotoUploadComponent implements OnInit {
     const blob = new Blob([int8Array], { type: this.originalImgFile.type });
     return blob;
   }
-  //https://www.udemy.com/course/how-to-program-your-own-breakout-game-using-visual-csharp/
+
   submitPhoto() {
     console.log(this.originalImgFile);
     this.personService

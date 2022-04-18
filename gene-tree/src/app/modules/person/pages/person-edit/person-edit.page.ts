@@ -1,9 +1,9 @@
 import { DataService } from 'src/app/modules/core/services/data.service';
 import { CommonService } from './../../../shared/services/common.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, of, Subscription } from 'rxjs';
-import { first, switchMap, takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Subject, of, iif } from 'rxjs';
+import { map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { CommonObject } from 'src/app/modules/shared/models/common-object';
 import { PersonEditModel } from '../../models/person/person-edit.model';
 import { PersonService } from '../../services/person.service';
@@ -15,12 +15,10 @@ import { LocationModel } from 'src/app/modules/shared/models/location.model';
   styleUrls: ['./person-edit.page.scss'],
 })
 export class PersonEditPage implements OnInit {
-  public personId: number;
   public personEdit: PersonEditModel = new PersonEditModel();
   public nationalityOptions: CommonObject[] = [];
   public religionOptions: CommonObject[] = [];
 
-  private person$: Observable<PersonEditModel>;
   public isUpdate: boolean = false;
   private destroy$: Subject<boolean> = new Subject();
 
@@ -32,32 +30,54 @@ export class PersonEditPage implements OnInit {
     private dataService: DataService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.initDropdowns();
-    this.dataService.getCurrentUser().subscribe((currentUser) => {
-      this.person$ = this.route.paramMap.pipe(
+    this.route.paramMap
+      .pipe(
         switchMap((params) => {
-          this.personId = Number(params.get('id'));
-          if (this.personId) {
-            this.isUpdate = true;
-            return this.personService.getPerson(this.personId);
-          } else {
-            const personEdit = new PersonEditModel();
-            personEdit.treeId = currentUser.treeId;
-            return of(personEdit);
-          }
+          return iif<PersonEditModel, PersonEditModel>(
+            () => this.setUpdate(params),
+            this.getPersonToEdit(params),
+            this.createPerson()
+          );
         })
-      );
-      this.person$.pipe(first()).subscribe((person) => {
+      )
+      .pipe(take(1))
+      .subscribe((person) => {
         this.personEdit = person;
-        if (!this.personEdit.birthPlace) {
-          this.personEdit.birthPlace = new LocationModel();
-        }
-        if (!this.personEdit.livingPlace) {
-          this.personEdit.livingPlace = new LocationModel();
-        }
       });
-    });
+  }
+
+  private setUpdate(params: ParamMap) {
+    this.isUpdate = !!params.get('id');
+    return this.isUpdate;
+  }
+
+  private getPersonToEdit(params: ParamMap) {
+    return this.personService.getPerson(+params.get('id')).pipe(
+      map((person) => {
+        if (!person.birthPlace) {
+          person.birthPlace = new LocationModel();
+        }
+        if (!person.livingPlace) {
+          person.livingPlace = new LocationModel();
+        }
+        if (person.imageFile) {
+          person.imageId = person.imageFile.id;
+        }
+        return person;
+      })
+    );
+  }
+
+  private createPerson() {
+    return this.dataService.getCurrentUser().pipe(
+      switchMap((currentUser) => {
+        const personEdit = new PersonEditModel();
+        personEdit.treeId = currentUser.treeId;
+        return of(personEdit);
+      })
+    );
   }
 
   private initDropdowns() {
@@ -76,25 +96,17 @@ export class PersonEditPage implements OnInit {
   }
 
   onSubmit() {
-    let personUpdated: Subscription;
-    if (this.personEdit.imageFile) {
-      this.personEdit.imageId = this.personEdit.imageFile.id;
-    }
-
-    if (this.isUpdate) {
-      personUpdated = this.personService
-        .updatePerson(this.personEdit)
-        .pipe(first())
-        .subscribe((person) => {
-          this.router.navigate(['/person/details', person.personId]);
-        });
-    } else {
-      personUpdated = this.personService
-        .createPerson(this.personEdit)
-        .pipe(first())
-        .subscribe((person) => {
-          this.router.navigate(['/person/details', person.personId]);
-        });
-    }
+    iif(
+      () => this.isUpdate,
+      this.personService.updatePerson(this.personEdit),
+      this.personService.createPerson(this.personEdit)
+    )
+      .pipe(
+        take(1),
+        tap((person) =>
+          this.router.navigate(['/person/details', person.personId])
+        )
+      )
+      .subscribe();
   }
 }

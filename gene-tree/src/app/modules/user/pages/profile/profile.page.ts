@@ -1,12 +1,11 @@
-import { LoadingService } from './../../../core/services/loading.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AccountProfileModel } from '../../models/profile.model';
-import { first, switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Guid } from 'guid-typescript';
-import { Observable } from 'rxjs';
+import { iif } from 'rxjs';
 import { DataService } from 'src/app/modules/core/services/data.service';
 
 @Component({
@@ -15,29 +14,35 @@ import { DataService } from 'src/app/modules/core/services/data.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  public userId: any;
-  personalInfo: AccountProfileModel;
-  private personalInfo$: Observable<AccountProfileModel>;
+  public personalInfo: AccountProfileModel;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private dataService: DataService, private loadingService: LoadingService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private dataService: DataService
+  ) {}
 
-  async ngOnInit() {
-    this.dataService.getCurrentUser().subscribe((currentUser) => {
-      this.personalInfo$ = this.route.paramMap.pipe(
+  ngOnInit() {
+    this.route.paramMap
+      .pipe(
         switchMap((params) => {
-          const userId = (params.get('id'));
-          if (userId) {
-            this.userId = Guid.parse(userId);
-            return this.userService.getUser<AccountProfileModel>(this.userId);
-          } else {
-            return this.userService.getPersonalInfo<AccountProfileModel>();
-          }
-        })
-      );
-      this.personalInfo$.pipe(first()).subscribe((res) => {
+          return iif<AccountProfileModel, AccountProfileModel>(
+            () => !!params.get('id'),
+            this.userService.getUser(this.getGuid(params.get('id'))),
+            this.dataService
+              .getCurrentUser()
+              .pipe(switchMap(() => this.userService.getPersonalInfo()))
+          );
+        }),
+        take(1)
+      )
+      .subscribe((res) => {
         this.personalInfo = res;
-      })
-    });
+      });
+  }
+
+  getGuid(id) {
+    return id ? Guid.parse(id) : Guid.createEmpty();
   }
 
   get isCurrentUser() {

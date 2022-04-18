@@ -152,13 +152,6 @@
 }
 //https://blog.logrocket.com/advanced-effects-with-css-background-blend-modes-4b750198522a/
 //https://www.youtube.com/watch?v=qimopjP6YoM
-.invert-colors {
-  filter: invert(100%);
-}
-
-.grayscale {
-  filter: grayscale(100%);
-}
 
 .ion-color-favorite {
   --ion-color-base: var(--ion-color-favorite);

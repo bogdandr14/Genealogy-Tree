@@ -1,7 +1,7 @@
 import { PersonTreeInfoModel } from './../../models/person-tree-info.model';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { switchMap, take, tap } from 'rxjs/operators';
 import { DataService } from 'src/app/modules/core/services/data.service';
 import { PersonService } from 'src/app/modules/person/services/person.service';
 import { TreeDataModel } from '../../models/tree-data.model';
@@ -13,7 +13,6 @@ import { TreeService } from '../../services/tree.service';
   styleUrls: ['./genealogy-tree.component.scss'],
 })
 export class GenealogyTreeComponent implements OnInit {
-  private peopleInTree: TreeDataModel[];
   constructor(
     private treeService: TreeService,
     private personService: PersonService,
@@ -25,22 +24,19 @@ export class GenealogyTreeComponent implements OnInit {
   ngOnInit() {
     this.dataService
       .getCurrentUser()
-      .pipe(first())
-      .subscribe((currentUser) => {
-        this.treeService.createFamilyTree(currentUser.personId);
-        this.personService
-          .getPeopleTreeDataInTree(currentUser.treeId)
-          .pipe(first())
-          .subscribe((people) => {
-            this.peopleInTree = this.mapTreeData(people);
-            console.log(
-              '🚀 ~ file: genealogy-tree.component.ts ~ line 36 ~ GenealogyTreeComponent ~ .subscribe ~ this.peopleInTree ',
-              this.peopleInTree
-            );
-            //this.loadFamilyTreeMockup();
-            //this.loadGeneTreeMockup();
-            this.treeService.loadFamilyTree(this.peopleInTree);
-          });
+      .pipe(
+        tap((currentUser) =>
+          this.treeService.createFamilyTree(currentUser.personId)
+        ),
+        switchMap((currentUser) => {
+          return this.personService.getPeopleTreeDataInTree(currentUser.treeId);
+        }),
+        take(1)
+      )
+      .subscribe((people) => {
+        //this.loadFamilyTreeMockup();
+        //this.loadGeneTreeMockup();
+        this.treeService.loadFamilyTree(this.mapTreeData(people));
       });
   }
 
@@ -61,7 +57,8 @@ export class GenealogyTreeComponent implements OnInit {
       };
     });
   }
-  loadGeneTreeMockup(){
+
+  loadGeneTreeMockup() {
     this.treeService.loadFamilyTree([
       {
         id: 1,
@@ -132,7 +129,7 @@ export class GenealogyTreeComponent implements OnInit {
           'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
         born: '1983-09-26',
       },
-    ])
+    ]);
   }
   loadFamilyTreeMockup() {
     this.treeService.loadFamilyTree([
