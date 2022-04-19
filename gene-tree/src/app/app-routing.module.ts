@@ -52,8 +52,8 @@ const routes: Routes = [
     data: { title: '_pages.genealogy' }
   },
   {
-    path: 'sync',
-    loadChildren: () => import('./modules/sync/sync.module').then(m => m.SyncModule),
+    path: 'relative',
+    loadChildren: () => import('./modules/relative/relative.module').then( m => m.RelativePageModule),
     canLoad: [AuthGuard],
     data: { title: '_pages.relatives' }
   }

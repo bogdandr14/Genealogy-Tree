@@ -19,16 +19,14 @@ export class EducationListComponent implements OnInit {
     private educationService: EducationService,
     private alertService: AlertService,
     private translateService: TranslateService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   refreshEducation() {
     this.educationService
       .getEducationsForUser(this.userId)
-      .subscribe((educations) => {
-        this.educations = educations;
-      });
+      .subscribe((educations) => this.educations = educations);
   }
 
   async confirmDeleteEducation(education: EducationModel) {

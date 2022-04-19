@@ -1,17 +1,17 @@
-import { FoundUsersModel } from './../../../user/models/found-users.model';
-import { InfiniteScrollFilter } from './../../../shared/models/infinite-scroll.filter';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from 'src/app/modules/user/service/user.service';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { first, take, tap } from 'rxjs/operators';
 import { GenericPersonModel } from 'src/app/modules/person/models/generic-person.model';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { InfiniteScrollFilter } from 'src/app/modules/shared/models/infinite-scroll.filter';
+import { FoundUsersModel } from 'src/app/modules/user/models/found-users.model';
+import { UserService } from 'src/app/modules/user/service/user.service';
 
 @Component({
-  selector: 'app-user-search',
-  templateUrl: './user-search.component.html',
-  styleUrls: ['./user-search.component.scss'],
+  selector: 'app-relative-search',
+  templateUrl: './relative-search.component.html',
+  styleUrls: ['./relative-search.component.scss'],
 })
-export class UserSearchComponent implements OnInit {
+export class RelativeSearchComponent implements OnInit {
   @ViewChild('infiniteScroll') infiniteScroll: IonInfiniteScroll;
 
   public usersFound = new FoundUsersModel();

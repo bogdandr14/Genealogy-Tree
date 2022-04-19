@@ -47,7 +47,7 @@ export class ParentChildService extends BaseService {
     return super.getMany<GenericPersonModel>(`parentSpouceOptions/${personId}`, BaseService.noLoadingConfig);
   }
 
-  public getRelative(parentChildId: number): Observable<ParentChildDetailsModel> {
+  public getPersonChild(parentChildId: number): Observable<ParentChildDetailsModel> {
     return super.getOneById<ParentChildDetailsModel>(parentChildId);
   }
 

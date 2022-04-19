@@ -23,22 +23,12 @@ export class LanguageSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getLanguage().subscribe((language) => {
-      if (language && this.selectedLaguage.value != language) {
-        this.selectedLaguage.setValue(language);
-      }
-      this.setLanguageSubscriber();
-    });
-  }
-
-  setLanguageSubscriber() {
     this.dataService.language$.subscribe((language) => {
-      if (language != null && this.selectedLaguage.value != language) {
+      if (this.selectedLaguage.value != language) {
         this.selectedLaguage.setValue(language);
       }
     });
   }
-
   onLanguageChange(language: string) {
     this.dataService.setLanguage(language);
   }

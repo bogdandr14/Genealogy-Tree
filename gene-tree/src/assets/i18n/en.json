@@ -52,7 +52,7 @@
     "children": "Children",
     "marriages": "Marriages"
   },
-  "_relative": {
+  "_parentChild": {
     "blood": "Blood relative",
     "noChild":"This person does not have any children",
     "chooseChild": "Choose a person from the following list to add to children:",

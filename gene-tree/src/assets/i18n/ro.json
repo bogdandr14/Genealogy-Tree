@@ -52,7 +52,7 @@
     "children": "Copii",
     "marriages": "Căsătorii"
   },
-  "_relative": {
+  "_parentChild": {
     "blood": "Rudă de sânge",
     "noChild": "Această persoană nu are niciun copil",
     "chooseChild": "Alege o persoană din lista următoare să fie adăugată la copii:",

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { UserSearchComponent } from './user-search.component';
+import { RelativeMapComponent } from './relative-map.component';
 
-describe('UserSearchComponent', () => {
-  let component: UserSearchComponent;
-  let fixture: ComponentFixture<UserSearchComponent>;
+describe('RelativeMapComponent', () => {
+  let component: RelativeMapComponent;
+  let fixture: ComponentFixture<RelativeMapComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserSearchComponent ],
+      declarations: [ RelativeMapComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UserSearchComponent);
+    fixture = TestBed.createComponent(RelativeMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

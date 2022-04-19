@@ -24,16 +24,16 @@ export class ParentChildAddComponent implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private relativesService: ParentChildService,
+    private parentChildService: ParentChildService,
   ) { }
 
   ngOnInit() {
     iif(() => this.addParent,
-      this.relativesService.getParentSpouceOptions(this.person.personId).pipe(
+      this.parentChildService.getParentSpouceOptions(this.person.personId).pipe(
         map((unrelatedPeople) => {
           return unrelatedPeople.filter((person) => person.gender == this.parentType)
         })),
-      this.relativesService.getChildrenOptions(this.person.personId)
+      this.parentChildService.getChildrenOptions(this.person.personId)
     ).pipe(take(1)).subscribe((unrelatedPeople) => {
       this.unrelatedPeopleList = unrelatedPeople;
     })
@@ -43,24 +43,25 @@ export class ParentChildAddComponent implements OnInit {
     this.selectedPerson = person;
   }
 
-  addRelative() {
-    const relativeLink = new ParentChildEditModel();
-    relativeLink.bloodRelatives = this.isBloodRelative;
-    if (this.addParent) {
-      relativeLink.parentId = this.selectedPerson.personId;
-      relativeLink.childId = this.person.personId;
-    } else {
-      relativeLink.parentId = this.person.personId;
-      relativeLink.childId = this.selectedPerson.personId;
-    }
-    this.relativesService
-      .addParentChild(relativeLink)
-      .pipe(take(1))
+  addParentChild() {
+    iif(() => this.addParent,
+      this.parentChildService.addParentChild(this.createParentChild(this.selectedPerson.personId, this.person.personId)),
+      this.parentChildService.addParentChild(this.createParentChild(this.person.personId, this.selectedPerson.personId)),
+    ).pipe(take(1))
       .subscribe(() => {
         this.saveConfirmed.emit(true);
         this.dismiss();
       });
   }
+
+  private createParentChild(parentId: number, childId: number) {
+    const parentChild = new ParentChildEditModel();
+    parentChild.bloodRelatives = this.isBloodRelative;
+    parentChild.parentId = parentId;
+    parentChild.childId = childId;
+    return parentChild;
+  }
+
   dismiss() {
     this.modalCtrl.dismiss();
   }

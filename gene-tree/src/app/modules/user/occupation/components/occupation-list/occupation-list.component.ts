@@ -26,9 +26,7 @@ export class OccupationListComponent implements OnInit {
   refreshOccupation() {
     this.occupationService
       .getOccupationsForUser(this.userId)
-      .subscribe((occupations) => {
-        this.occupations = occupations;
-      });
+      .subscribe((occupations) => this.occupations = occupations);
   }
 
   async confirmDeleteOccupation(occupation: OccupationModel) {

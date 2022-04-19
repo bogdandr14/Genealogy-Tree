@@ -1,23 +1,23 @@
-import { environment } from './../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService } from '../../core/services/data.service';
-import { BaseService } from '../../core/services/base.service';
-import { GenericPersonModel } from '../../person/models/generic-person.model';
-import { SyncRequestCreateUpdateModel } from '../models/sync-request-create-update.model';
-import { SyncRequestResponseModel } from '../models/sync-request-response.model';
-import { UsersToSyncModel } from '../models/synced-users.model';
 import { switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { BaseService } from '../../core/services/base.service';
+import { DataService } from '../../core/services/data.service';
+import { GenericPersonModel } from '../../person/models/generic-person.model';
+import { RequestCreateUpdateModel } from '../models/request-create-update.model';
+import { RequestResponseModel } from '../models/request-response.model';
+import { RelativeModel } from '../models/relative.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class SyncService extends BaseService {
-  constructor(HttpClient: HttpClient, private dataService: DataService) {
-    super(HttpClient, 'api/sync', environment.baseApiUrl);
+export class RelativeService extends BaseService {
+  constructor(httpClient: HttpClient, private dataService: DataService) {
+    super(httpClient, 'api/sync', environment.baseApiUrl);
   }
 
-  public getSyncedUsers() {
+  public getRelatives() {
     return this.dataService.getCurrentUser().pipe(
       switchMap((user) => {
         return super.getMany<GenericPersonModel>(`user/${user.userId}`);
@@ -25,7 +25,7 @@ export class SyncService extends BaseService {
     );
   }
 
-  public addSyncedUser(usersToSync: UsersToSyncModel) {
+  public addRelative(usersToSync: RelativeModel) {
     return super.add(usersToSync, 'user');
   }
 
@@ -53,15 +53,15 @@ export class SyncService extends BaseService {
     );
   }
 
-  public sendSyncRequest(syncRequest: SyncRequestCreateUpdateModel) {
+  public sendRequest(syncRequest: RequestCreateUpdateModel) {
     return super.add(syncRequest, 'request');
   }
 
-  public respondToSyncRequest(syncRequest: SyncRequestResponseModel) {
+  public respondToRequest(syncRequest: RequestResponseModel) {
     return super.updateById(syncRequest.id, syncRequest, 'request');
   }
 
-  public removeSyncRequest(syncRequestId: number) {
+  public removeRequest(syncRequestId: number) {
     return super.remove(syncRequestId, 'request');
   }
 }

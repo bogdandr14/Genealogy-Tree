@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { MarriedPersonModel } from '../../models/married-person.model';
 import { GenericPersonModel } from '../../../models/generic-person.model';
 import { MarriageService } from '../../service/marriage.service';
@@ -13,16 +13,14 @@ export class MarriageListComponent implements OnInit {
   @Input() marriages: MarriedPersonModel[];
   @Input() canModify: boolean = false;
   @Input() personLinkedTo: GenericPersonModel;
-  constructor(private marriageService: MarriageService) {}
+  constructor(private marriageService: MarriageService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   refreshMarriages() {
     this.marriageService
       .getMarriagesForPerson(this.personLinkedTo.personId)
-      .pipe(first())
-      .subscribe((marriages) => {
-        this.marriages = marriages;
-      });
+      .pipe(take(1))
+      .subscribe((marriages) => this.marriages = marriages);
   }
 }

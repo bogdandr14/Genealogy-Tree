@@ -2,13 +2,13 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
 
 @Component({
-  selector: 'app-locations',
-  templateUrl: './locations.component.html',
-  styleUrls: ['./locations.component.scss'],
+  selector: 'app-relative-map',
+  templateUrl: './relative-map.component.html',
+  styleUrls: ['./relative-map.component.scss'],
 })
-export class LocationsComponent  implements OnInit, OnDestroy, AfterViewInit {
+export class RelativeMapComponent implements OnInit, OnDestroy, AfterViewInit {
   private map;
-  constructor(private mapService: MapService) {}
+  constructor(private mapService: MapService) { }
 
   ngAfterViewInit(): void {
     this.map = this.mapService.initMap();
@@ -17,7 +17,7 @@ export class LocationsComponent  implements OnInit, OnDestroy, AfterViewInit {
     }, 1000);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ngOnDestroy(): void {
     this.mapService.destroyMap();
   }

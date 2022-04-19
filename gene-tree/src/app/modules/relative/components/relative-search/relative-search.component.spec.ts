@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SyncPage } from './sync.page';
+import { RelativeSearchComponent } from './relative-search.component';
 
-describe('SyncPage', () => {
-  let component: SyncPage;
-  let fixture: ComponentFixture<SyncPage>;
+describe('RelativeSearchComponent', () => {
+  let component: RelativeSearchComponent;
+  let fixture: ComponentFixture<RelativeSearchComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SyncPage ],
+      declarations: [ RelativeSearchComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SyncPage);
+    fixture = TestBed.createComponent(RelativeSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

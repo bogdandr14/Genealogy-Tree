@@ -21,20 +21,20 @@
                 <h2>
                   {{
                     (addParent
-                      ? "_relative.chooseParent"
-                      : "_relative.chooseChild"
+                      ? "_parentChild.chooseParent"
+                      : "_parentChild.chooseChild"
                     ) | translate
                   }}
                 </h2>
               </ion-list-header>
 
               <div class="selection-list-height">
-                <app-relative-option-card
+                <app-parent-child-option-card
                   *ngFor="let unrelatedPerson of unrelatedPeopleList"
                   [person]="unrelatedPerson"
                   [selected]="unrelatedPerson === selectedPerson"
                   (selectionChange)="selectPerson($event)"
-                ></app-relative-option-card>
+                ></app-parent-child-option-card>
               </div>
             </ion-list>
             <ion-button
@@ -43,7 +43,7 @@
               class="submit-button"
               expand="block"
               [disabled]="!selectedPerson"
-              (click)="addRelative()"
+              (click)="addParentChild()"
             >
               {{ "_common.save" | translate }}
             </ion-button>

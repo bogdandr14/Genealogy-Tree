@@ -1,6 +1,6 @@
 import { Guid } from 'guid-typescript';
 
-export class UsersToSyncModel {
+export class RelativeModel {
   primaryUserId: Guid;
   synchedUserId: Guid;
   synchedPersonInPrimaryTreeId: number;

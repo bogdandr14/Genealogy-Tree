@@ -16,7 +16,7 @@
         ></app-parent-child-card>
       </ng-container>
       <ng-template #noRelatives>
-        {{ (isParentList ? "_relative.noParent" : "_relative.noChild") | translate }}
+        {{ (isParentList ? "_parentChild.noParent" : "_parentChild.noChild") | translate }}
       </ng-template>
       <ng-container *ngIf="canModify">
         <!-- ADD CHILD -->

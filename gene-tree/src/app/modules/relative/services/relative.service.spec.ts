@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SyncService } from './sync.service';
+import { RelativeService } from './relative.service';
 
-describe('SyncService', () => {
-  let service: SyncService;
+describe('RelativeService', () => {
+  let service: RelativeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SyncService);
+    service = TestBed.inject(RelativeService);
   });
 
   it('should be created', () => {

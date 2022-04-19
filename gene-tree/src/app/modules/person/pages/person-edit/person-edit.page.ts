@@ -28,7 +28,7 @@ export class PersonEditPage implements OnInit {
     private personService: PersonService,
     private commonService: CommonService,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initDropdowns();
@@ -56,12 +56,8 @@ export class PersonEditPage implements OnInit {
   private getPersonToEdit(params: ParamMap) {
     return this.personService.getPerson(+params.get('id')).pipe(
       map((person) => {
-        if (!person.birthPlace) {
-          person.birthPlace = new LocationModel();
-        }
-        if (!person.livingPlace) {
-          person.livingPlace = new LocationModel();
-        }
+        person.birthPlace = person.birthPlace ?? new LocationModel();
+        person.livingPlace = person.livingPlace ?? new LocationModel();
         if (person.imageFile) {
           person.imageId = person.imageFile.id;
         }
