@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { UserInfoComponent } from './components/user-info/user-info.component';
-import { EducationEditComponent } from './components/education-edit/education-edit.component';
-import { OccupationEditComponent } from './components/occupation-edit/occupation-edit.component';
 import { EmailCheckDirective } from './directives/emailCheck.directive';
 import { MatchPasswordDirective } from './directives/matchPassword.directive';
 import { PasswordPatternDirective } from './directives/passwordPattern.directive';
@@ -13,10 +11,9 @@ import { LoginPage } from './pages/login/login.page';
 import { ProfilePage } from './pages/profile/profile.page';
 import { RegisterPage } from './pages/register/register.page';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
-import { OccupationListComponent } from './components/occupation-list/occupation-list.component';
-import { EducationListComponent } from './components/education-list/education-list.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
-
+import { EducationModule } from './education/education.module';
+import { OccupationModule } from './occupation/occupation.module';
 
 @NgModule({
   declarations: [
@@ -27,14 +24,10 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     RegisterPage,
     LoginPage,
     ProfilePage,
-    EducationEditComponent,
-    OccupationEditComponent,
     UserInfoComponent,
-    OccupationListComponent,
-    EducationListComponent,
     UserEditComponent
   ],
-  imports: [SharedModule, UserRoutingModule, PersonModule],
+  imports: [SharedModule, UserRoutingModule, PersonModule, EducationModule, OccupationModule],
   exports: [UserInfoComponent, MatchPasswordDirective, PasswordPatternDirective],
   providers: [Clipboard],
 })

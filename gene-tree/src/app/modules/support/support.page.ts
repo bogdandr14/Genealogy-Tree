@@ -1,5 +1,5 @@
 import { DataService } from 'src/app/modules/core/services/data.service';
-import { UserService } from './../user/services/user.service';
+import { UserService } from '../user/service/user.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SupportTicketModel } from './models/support-ticket.model';

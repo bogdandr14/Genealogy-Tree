@@ -1,0 +1,11 @@
+<ion-chip>
+  <ion-avatar>
+    <img [src]="imageUrl" />
+  </ion-avatar>
+  <ion-label [routerLink]="['/person/details', parentChild?.personId]">{{
+    parentChild.firstName + " " + parentChild.lastName
+  }}</ion-label>
+  <button ion-button clear color="dark" (click)="confirmDeleteParentChild()">
+    <ion-icon name="close-circle" color="danger" slot="end"></ion-icon>
+  </button>
+</ion-chip>

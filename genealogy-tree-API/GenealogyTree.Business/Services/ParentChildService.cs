@@ -23,33 +23,33 @@ namespace GenealogyTree.Business.Services
             _marriageService = marriageService;
         }
 
-        public async Task<List<RelativeModel>> GetAllParentsForPerson(int childId)
+        public async Task<List<ParentChildModel>> GetAllParentsForPerson(int childId)
         {
             List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Include(pc => pc.Parent).ToList();
             List<ParentModel> parentRelatives = _mapper.Map<List<ParentModel>>(parentChildren);
-            List<RelativeModel> parents = _mapper.Map<List<RelativeModel>>(parentRelatives);
+            List<ParentChildModel> parents = _mapper.Map<List<ParentChildModel>>(parentRelatives);
             return parents;
         }
 
-        public async Task<List<RelativeModel>> GetAllChildrenForPerson(int parentId)
+        public async Task<List<ParentChildModel>> GetAllChildrenForPerson(int parentId)
         {
             List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc => pc.Child).ToList();
             List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
-            List<RelativeModel> children = _mapper.Map<List<RelativeModel>>(childRelatives);
+            List<ParentChildModel> children = _mapper.Map<List<ParentChildModel>>(childRelatives);
             return children;
         }
 
-        public async Task<List<RelativeModel>> GetAllAncestors(int personId)
+        public async Task<List<ParentChildModel>> GetAllAncestors(int personId)
         {
-            List<RelativeModel> foundParents = await GetAllParentsForPerson(personId);
-            List<RelativeModel> ancestors = new List<RelativeModel>();
+            List<ParentChildModel> foundParents = await GetAllParentsForPerson(personId);
+            List<ParentChildModel> ancestors = new List<ParentChildModel>();
             while (foundParents.Any())
             {
                 ancestors.AddRange(foundParents);
-                List<RelativeModel> searchParents = new List<RelativeModel>();
+                List<ParentChildModel> searchParents = new List<ParentChildModel>();
                 searchParents.AddRange(foundParents);
                 foundParents.Clear();
-                foreach (RelativeModel parent in searchParents)
+                foreach (ParentChildModel parent in searchParents)
                 {
                     foundParents.AddRange(await GetAllParentsForPerson(parent.PersonId));
                 }
@@ -57,17 +57,17 @@ namespace GenealogyTree.Business.Services
             return ancestors;
         }
 
-        public async Task<List<RelativeModel>> GetAllDescendants(int personId)
+        public async Task<List<ParentChildModel>> GetAllDescendants(int personId)
         {
-            List<RelativeModel> foundChildren = await GetAllChildrenForPerson(personId);
-            List<RelativeModel> descendants = new List<RelativeModel>();
+            List<ParentChildModel> foundChildren = await GetAllChildrenForPerson(personId);
+            List<ParentChildModel> descendants = new List<ParentChildModel>();
             while (foundChildren.Any())
             {
                 descendants.AddRange(foundChildren);
-                List<RelativeModel> searchChildren = new List<RelativeModel>();
+                List<ParentChildModel> searchChildren = new List<ParentChildModel>();
                 searchChildren.AddRange(foundChildren);
                 foundChildren.Clear();
-                foreach (RelativeModel child in searchChildren)
+                foreach (ParentChildModel child in searchChildren)
                 {
                     foundChildren.AddRange(await GetAllChildrenForPerson(child.PersonId));
                 }
@@ -75,19 +75,19 @@ namespace GenealogyTree.Business.Services
             return descendants;
         }
 
-        public async Task<List<RelativeModel>> GetAllRelatedPeople(int personId)
+        public async Task<List<ParentChildModel>> GetAllRelatedPeople(int personId)
         {
-            List<RelativeModel> foundRelatives = new List<RelativeModel>();
+            List<ParentChildModel> foundRelatives = new List<ParentChildModel>();
             foundRelatives.AddRange(await GetAllParentsForPerson(personId));
             foundRelatives.AddRange(await GetAllChildrenForPerson(personId));
-            List<RelativeModel> relatedPeople = new List<RelativeModel>();
+            List<ParentChildModel> relatedPeople = new List<ParentChildModel>();
             while (foundRelatives.Any())
             {
                 relatedPeople.AddRange(foundRelatives);
-                List<RelativeModel> searchRelatives = new List<RelativeModel>();
+                List<ParentChildModel> searchRelatives = new List<ParentChildModel>();
                 searchRelatives.AddRange(foundRelatives);
                 foundRelatives.Clear();
-                foreach (RelativeModel relative in searchRelatives)
+                foreach (ParentChildModel relative in searchRelatives)
                 {
                     foundRelatives.AddRange(await GetAllParentsForPerson(relative.PersonId));
                     foundRelatives.AddRange(await GetAllChildrenForPerson(relative.PersonId));
@@ -98,10 +98,10 @@ namespace GenealogyTree.Business.Services
             return relatedPeople;
         }
 
-        public async Task<List<RelativeModel>> GetRelatedByAncestors(int personId)
+        public async Task<List<ParentChildModel>> GetRelatedByAncestors(int personId)
         {
-            List<RelativeModel> allAncestors = await GetAllAncestors(personId);
-            List<RelativeModel> relatedByAncestors = new List<RelativeModel>();
+            List<ParentChildModel> allAncestors = await GetAllAncestors(personId);
+            List<ParentChildModel> relatedByAncestors = new List<ParentChildModel>();
             relatedByAncestors.AddRange(allAncestors);
             foreach (var ancestor in allAncestors)
             {
@@ -112,10 +112,10 @@ namespace GenealogyTree.Business.Services
             return relatedByAncestors;
         }
 
-        public async Task<List<RelativeModel>> GetRelatedByDescendants(int personId)
+        public async Task<List<ParentChildModel>> GetRelatedByDescendants(int personId)
         {
-            List<RelativeModel> allDescendants = await GetAllDescendants(personId);
-            List<RelativeModel> relatedByDescendants = new List<RelativeModel>();
+            List<ParentChildModel> allDescendants = await GetAllDescendants(personId);
+            List<ParentChildModel> relatedByDescendants = new List<ParentChildModel>();
             relatedByDescendants.AddRange(allDescendants);
             foreach (var descendant in allDescendants)
             {

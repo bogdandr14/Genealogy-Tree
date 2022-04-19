@@ -1,4 +1,4 @@
-import { GenericPersonModel } from '../../person/models/person/generic-person.model';
+import { GenericPersonModel } from '../../person/models/generic-person.model';
 
 export class PersonTreeInfoModel extends GenericPersonModel {
   motherId: number;

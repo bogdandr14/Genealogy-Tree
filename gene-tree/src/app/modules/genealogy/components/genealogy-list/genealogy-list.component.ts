@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { switchMap, take } from 'rxjs/operators';
 import { CurrentUserModel } from 'src/app/modules/core/models/current-user.model';
 import { DataService } from 'src/app/modules/core/services/data.service';
-import { GenericPersonModel } from 'src/app/modules/person/models/person/generic-person.model';
-import { PersonService } from 'src/app/modules/person/services/person.service';
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { GenericPersonModel } from 'src/app/modules/person/models/generic-person.model';
+import { PersonService } from 'src/app/modules/person/service/person.service';
+import { UserService } from 'src/app/modules/user/service/user.service';
 
 @Component({
   selector: 'app-genealogy-list',

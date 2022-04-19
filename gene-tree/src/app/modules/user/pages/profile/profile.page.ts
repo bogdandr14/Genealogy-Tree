@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { UserService } from 'src/app/modules/user/service/user.service';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AccountProfileModel } from '../../models/profile.model';
 import { switchMap, take } from 'rxjs/operators';

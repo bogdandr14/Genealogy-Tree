@@ -1,0 +1,64 @@
+<ion-card>
+  <ion-card-header [routerLink]="['/person/details', marriage?.personMarriedTo?.personId]">
+    <ion-card-title>
+      <ion-item lines="none">
+        <ion-avatar class="avatar" slot="start">
+          <img
+            [src]="imageUrl"
+            [alt]="
+              marriage.personMarriedTo?.firstName +
+              marriage.personMarriedTo?.lastName +
+              'profile picture'
+            "
+          />
+        </ion-avatar>
+        <ion-label class="ion-padding-start" text-wrap>
+          <h1>{{ marriage.personMarriedTo?.firstName }}</h1>
+          <h1>{{ marriage.personMarriedTo?.lastName }}</h1>
+        </ion-label>
+      </ion-item>
+    </ion-card-title>
+    <ion-card-subtitle class="ion-text-center">
+      <ion-label>
+        {{ marriage.marriageStarted | date: "dd/MM/yyyy" }} -
+        {{
+          marriage.marriageEnded
+            ? (marriage.marriageEnded | date: "dd/MM/yyyy")
+            : ("_common.present" | translate)
+        }}
+      </ion-label>
+    </ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content *ngIf="canModify" class="ion-text-center">
+    <ion-button
+      [id]="'open-edit-marriage' + marriage.id"
+      fill="clear"
+      color="warning"
+      slot="start"
+    >
+      <ion-icon name="pencil" slot="start"></ion-icon>
+      {{ "_common.edit" | translate }}
+    </ion-button>
+    <ion-modal
+      [trigger]="'open-edit-marriage' + marriage.id"
+      [swipeToClose]="true"
+    >
+      <ng-template>
+        <app-marriage-edit
+          [marriageId]="marriage.id"
+          (saveConfirmed)="saveConfirmed.emit()"
+        ></app-marriage-edit>
+      </ng-template>
+    </ion-modal>
+
+    <ion-button
+      fill="clear"
+      color="danger"
+      slot="end"
+      (click)="confirmDeleteMarriage()"
+    >
+      <ion-icon name="trash" slot="start"></ion-icon>
+      {{ "_common.delete" | translate }}
+    </ion-button>
+  </ion-card-content>
+</ion-card>

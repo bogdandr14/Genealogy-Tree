@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataService } from '../../core/services/data.service';
 import { BaseService } from '../../core/services/base.service';
-import { GenericPersonModel } from '../../person/models/person/generic-person.model';
+import { GenericPersonModel } from '../../person/models/generic-person.model';
 import { SyncRequestCreateUpdateModel } from '../models/sync-request-create-update.model';
 import { SyncRequestResponseModel } from '../models/sync-request-response.model';
 import { UsersToSyncModel } from '../models/synced-users.model';

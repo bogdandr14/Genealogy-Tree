@@ -12,7 +12,7 @@ import {
   distinctUntilChanged,
   map,
 } from 'rxjs/operators';
-import { UserService } from '../services/user.service';
+import { UserService } from '../service/user.service';
 
 @Directive({
   selector: '[usernameCheck]',

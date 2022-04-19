@@ -1,0 +1,64 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      {{ "_add.marriage" | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        {{ "_common.cancel" | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="custom-margin-bottom">
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <app-date-select-template
+              [isRequired]="true"
+              name="_marriage.startDate"
+              [(date)]="marriage.startDate"
+            >
+            </app-date-select-template>
+            <app-date-select-template
+              [isRequired]="false"
+              name="_marriage.endDate"
+              [(date)]="marriage.endDate"
+            >
+            </app-date-select-template>
+            <ion-list>
+              <ion-list-header>
+                <h2>
+                  {{ "_marriage.chooseSpouce" | translate }}
+                </h2>
+              </ion-list-header>
+
+              <div class="selection-list-height">
+                <app-parent-child-option-card
+                  *ngFor="let unrelatedPerson of unrelatedPeopleList"
+                  [person]="unrelatedPerson"
+                  [selected]="
+                    unrelatedPerson.personId === marriage?.secondPersonId
+                  "
+                  (selectionChange)="selectPerson($event)"
+                ></app-parent-child-option-card>
+              </div>
+            </ion-list>
+            <ion-button
+              color="success"
+              type="submit"
+              class="submit-button"
+              expand="block"
+              [disabled]="!marriage?.secondPersonId || !marriage.startDate"
+              (click)="addMarriage()"
+            >
+              {{ "_common.save" | translate }}
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

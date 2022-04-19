@@ -1,4 +1,4 @@
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { UserService } from 'src/app/modules/user/service/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Guid } from 'guid-typescript';
 

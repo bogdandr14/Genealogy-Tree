@@ -3,9 +3,9 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { DataService } from 'src/app/modules/core/services/data.service';
-import { PersonService } from 'src/app/modules/person/services/person.service';
+import { PersonService } from 'src/app/modules/person/service/person.service';
 import { TreeDataModel } from '../../models/tree-data.model';
-import { TreeService } from '../../services/tree.service';
+import { TreeService } from '../../service/tree.service';
 
 @Component({
   selector: 'app-genealogy-tree',

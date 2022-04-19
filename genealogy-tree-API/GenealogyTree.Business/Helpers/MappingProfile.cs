@@ -62,7 +62,7 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<ParentChild, ParentModel>()
-                .ForMember(x => x.RelativeId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.ParentChildId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Parent.TreeId))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Parent.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Parent.FirstName))
@@ -72,11 +72,11 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Parent.BirthDate))
                 .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Parent.DeathDate))
                 .ReverseMap();
-            CreateMap<ParentModel, RelativeModel>()
+            CreateMap<ParentModel, ParentChildModel>()
                 .ReverseMap();
 
             CreateMap<ParentChild, ChildModel>()
-                .ForMember(x => x.RelativeId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.ParentChildId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Child.TreeId))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Child.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Child.FirstName))
@@ -85,7 +85,7 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Child.BirthDate))
                 .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Child.DeathDate))
                 .ReverseMap();
-            CreateMap<ChildModel, RelativeModel>()
+            CreateMap<ChildModel, ParentChildModel>()
                 .ReverseMap();
 
             CreateMap<ParentChild, ParentChildDetailsModel>()

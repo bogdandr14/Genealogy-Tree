@@ -1,4 +1,4 @@
-import { UserService } from './../../../user/services/user.service';
+import { UserService } from '../../../user/service/user.service';
 import { DataService } from './../../../core/services/data.service';
 import { AlertService } from './../../../core/services/alert.service';
 import { AuthService } from './../../../core/services/auth.service';

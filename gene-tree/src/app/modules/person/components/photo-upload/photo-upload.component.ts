@@ -4,7 +4,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { DOC_ORIENTATION } from 'ngx-image-compress';
 import { first } from 'rxjs/internal/operators/first';
 import { ImageFile } from 'src/app/modules/shared/models/image-file';
-import { PersonService } from '../../services/person.service';
+import { PersonService } from '../../service/person.service';
 
 export const MAX_IMG_DIM = 400;
 export const COMPRESS_QUALITY = 90;

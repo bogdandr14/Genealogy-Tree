@@ -1,8 +1,8 @@
-import { PersonService } from './../../services/person.service';
+import { PersonService } from '../../service/person.service';
 import { AlertService } from 'src/app/modules/core/services/alert.service';
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { UserService } from 'src/app/modules/user/service/user.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { PersonEditModel } from '../../models/person/person-edit.model';
+import { PersonEditModel } from '../../models/person-edit.model';
 import { LocationModel } from 'src/app/modules/shared/models/location.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';

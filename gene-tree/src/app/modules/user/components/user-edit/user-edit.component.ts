@@ -1,4 +1,4 @@
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { UserService } from 'src/app/modules/user/service/user.service';
 import { UserEditModel } from './../../models/user-edit.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';

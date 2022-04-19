@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { iif, Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
-import { UserService } from 'src/app/modules/user/services/user.service';
-import { PersonDetailsModel } from '../../models/person/person-details.model';
-import { PersonService } from '../../services/person.service';
+import { UserService } from 'src/app/modules/user/service/user.service';
+import { PersonDetailsModel } from '../../models/person-details.model';
+import { PersonService } from '../../service/person.service';
 import { DataService } from 'src/app/modules/core/services/data.service';
 
 @Component({

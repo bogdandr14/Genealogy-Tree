@@ -18,21 +18,21 @@
       </ion-col>
 
       <ion-col size-sm="4" offset-sm="1">
-        <app-linked-relatives-list
-          [relatives]="personDetails?.parents"
+        <app-parent-child-list
+          [parentsChildren]="personDetails?.parents"
           [personLinkedTo]="personDetails"
           [canModify]="isUserTree"
           [isParentList]="true"
         >
-        </app-linked-relatives-list>
+        </app-parent-child-list>
 
-        <app-linked-relatives-list
-          [relatives]="personDetails?.children"
+        <app-parent-child-list
+          [parentsChildren]="personDetails?.children"
           [personLinkedTo]="personDetails"
           [canModify]="isUserTree"
           [isParentList]="false"
         >
-        </app-linked-relatives-list>
+        </app-parent-child-list>
 
         <app-marriage-list
           [marriages]="personDetails?.marriages"

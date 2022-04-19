@@ -5,8 +5,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subject, of, iif } from 'rxjs';
 import { map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { CommonObject } from 'src/app/modules/shared/models/common-object';
-import { PersonEditModel } from '../../models/person/person-edit.model';
-import { PersonService } from '../../services/person.service';
+import { PersonEditModel } from '../../models/person-edit.model';
+import { PersonService } from '../../service/person.service';
 import { LocationModel } from 'src/app/modules/shared/models/location.model';
 
 @Component({

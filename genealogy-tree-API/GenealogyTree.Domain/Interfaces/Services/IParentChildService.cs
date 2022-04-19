@@ -7,13 +7,13 @@ namespace GenealogyTree.Domain.Interfaces.Services
 {
     public interface IParentChildService
     {
-        Task<List<RelativeModel>> GetAllParentsForPerson(int childId);
-        Task<List<RelativeModel>> GetAllChildrenForPerson(int parentId);
-        Task<List<RelativeModel>> GetAllAncestors(int personId);
-        Task<List<RelativeModel>> GetAllDescendants(int personId);
-        Task<List<RelativeModel>> GetAllRelatedPeople(int personId);
-        Task<List<RelativeModel>> GetRelatedByAncestors(int personId);
-        Task<List<RelativeModel>> GetRelatedByDescendants(int personId);
+        Task<List<ParentChildModel>> GetAllParentsForPerson(int childId);
+        Task<List<ParentChildModel>> GetAllChildrenForPerson(int parentId);
+        Task<List<ParentChildModel>> GetAllAncestors(int personId);
+        Task<List<ParentChildModel>> GetAllDescendants(int personId);
+        Task<List<ParentChildModel>> GetAllRelatedPeople(int personId);
+        Task<List<ParentChildModel>> GetRelatedByAncestors(int personId);
+        Task<List<ParentChildModel>> GetRelatedByDescendants(int personId);
         Task<List<GenericPersonModel>> GetChildrenOptions(int personId);
         Task<List<GenericPersonModel>> GetParentSpouceOptions(int personId);
         Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId);

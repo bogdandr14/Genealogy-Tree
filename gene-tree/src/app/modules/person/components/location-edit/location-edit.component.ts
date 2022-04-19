@@ -1,7 +1,7 @@
 import { LocationModel } from './../../../shared/models/location.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { PersonService } from '../../services/person.service';
+import { PersonService } from '../../service/person.service';
 
 @Component({
   selector: 'app-location-edit',
