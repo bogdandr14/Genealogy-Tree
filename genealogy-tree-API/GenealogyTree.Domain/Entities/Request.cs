@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
-    public class SyncRequest
+    public class Request
     {
         public int Id { get; set; }
         public bool ReceiverResponded { get; set; }

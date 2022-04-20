@@ -1,5 +1,5 @@
 ﻿using GenealogyTree.Domain.DTO.Marriage;
-using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.ParentChild;
 using System;
 using System.Collections.Generic;
 

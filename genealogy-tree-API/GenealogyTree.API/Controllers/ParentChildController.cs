@@ -1,6 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
 using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.ParentChild;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;

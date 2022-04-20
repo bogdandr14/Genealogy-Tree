@@ -14,8 +14,8 @@ namespace GenealogyTree.Domain.Interfaces
         IParentChildRepository ParentChild { get; }
         IPersonRepository Person { get; }
         IReligionRepository Religion { get; }
-        ISyncedUsersRepository SynchedUsers { get; }
-        ISyncRequestRepository SyncRequest { get; }
+        IRelativeRepository Relatives { get; }
+        IRequestRepository Requests { get; }
         ITreeRepository Tree { get; }
         IUserRepository User { get; }
     }

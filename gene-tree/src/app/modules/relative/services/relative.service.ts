@@ -14,19 +14,19 @@ import { RelativeModel } from '../models/relative.model';
 })
 export class RelativeService extends BaseService {
   constructor(httpClient: HttpClient, private dataService: DataService) {
-    super(httpClient, 'api/sync', environment.baseApiUrl);
+    super(httpClient, 'api/relative', environment.baseApiUrl);
   }
 
   public getRelatives() {
     return this.dataService.getCurrentUser().pipe(
       switchMap((user) => {
-        return super.getMany<GenericPersonModel>(`user/${user.userId}`);
+        return super.getMany<GenericPersonModel>(`${user.userId}`);
       })
     );
   }
 
   public addRelative(usersToSync: RelativeModel) {
-    return super.add(usersToSync, 'user');
+    return super.add(usersToSync);
   }
 
   public getRequestsSent() {

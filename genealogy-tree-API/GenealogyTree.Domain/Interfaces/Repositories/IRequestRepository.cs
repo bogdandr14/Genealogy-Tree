@@ -2,7 +2,7 @@
 
 namespace GenealogyTree.Domain.Interfaces.Repositories
 {
-    public interface ISyncedUsersRepository : IRepositoryBase<Sync>
+    public interface IRequestRepository : IRepositoryBase<Request>
     {
     }
 }

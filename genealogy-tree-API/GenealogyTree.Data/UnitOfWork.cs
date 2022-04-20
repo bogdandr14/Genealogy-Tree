@@ -17,8 +17,8 @@ namespace GenealogyTree.Data
         private IParentChildRepository _parentChild;
         private IPersonRepository _person;
         private IReligionRepository _religion;
-        private ISyncedUsersRepository _synchedUsers;
-        private ISyncRequestRepository _syncRequest;
+        private IRelativeRepository _relative;
+        private IRequestRepository _request;
         private ITreeRepository _tree;
         private IUserRepository _user;
 
@@ -37,8 +37,8 @@ namespace GenealogyTree.Data
         public IParentChildRepository ParentChild => _parentChild ??= new ParentChildRepository(_repoContext);
         public IPersonRepository Person => _person ??= new PersonRepository(_repoContext);
         public IReligionRepository Religion => _religion ??= new ReligionRepository(_repoContext);
-        public ISyncedUsersRepository SynchedUsers => _synchedUsers ??= new SynchedUsersRepository(_repoContext);
-        public ISyncRequestRepository SyncRequest => _syncRequest ??= new SyncRequestRepository(_repoContext);
+        public IRelativeRepository Relatives => _relative ??= new RelativeRepository(_repoContext);
+        public IRequestRepository Requests => _request ??= new RequestRepository(_repoContext);
         public ITreeRepository Tree => _tree ??= new TreeRepository(_repoContext);
         public IUserRepository User => _user ??= new UserRepository(_repoContext);
     }

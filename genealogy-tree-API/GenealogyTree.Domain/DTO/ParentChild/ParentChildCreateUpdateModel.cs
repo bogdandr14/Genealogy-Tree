@@ -1,6 +1,6 @@
 ﻿using GenealogyTree.Domain.DTO.Generic;
 
-namespace GenealogyTree.Domain.DTO.Relative
+namespace GenealogyTree.Domain.DTO.ParentChild
 {
     public class ParentChildCreateUpdateModel : GenericRelativeModel
     {

@@ -1,6 +1,6 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
 
-namespace GenealogyTree.Domain.DTO.Relative
+namespace GenealogyTree.Domain.DTO.ParentChild
 {
     public class ParentChildModel: GenericPersonModel
     {

@@ -1,6 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
-using GenealogyTree.Domain.DTO.Sync;
-using GenealogyTree.Domain.DTO.SyncRequest;
+using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.Request;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,24 +12,24 @@ namespace GenealogyTree.API.Controllers
     [GeneTreeAuthorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SyncController : Controller
+    public class RelativeController : Controller
     {
-        private readonly ISynchedUsersService _synchedUsersService;
-        private readonly ISyncRequestService _syncRequestService;
+        private readonly IRelativeService _relativeService;
+        private readonly IRequestService _requestService;
 
-        public SyncController(ISynchedUsersService synchedUsersService, ISyncRequestService syncRequestService)
+        public RelativeController(IRelativeService relativeService, IRequestService requestService)
         {
-            _synchedUsersService = synchedUsersService;
-            _syncRequestService = syncRequestService;
+            _relativeService = relativeService;
+            _requestService = requestService;
         }
 
         [HttpGet]
-        [Route("user/{userId:Guid}")]
-        public async Task<ActionResult<List<SyncedUserModel>>> GetSynchedUsersForCurrentUser(Guid userId)
+        [Route("{userId:Guid}")]
+        public async Task<ActionResult<List<RelativeModel>>> GetRelativesForUser(Guid userId)
         {
             try
             {
-                List<SyncedUserModel> returnEvent = await _synchedUsersService.GetAllSynchedUsersForUser(userId);
+                List<RelativeModel> returnEvent = await _relativeService.GetAllRelativesForUser(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -43,12 +43,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpPost]
-        [Route("user")]
-        public async Task<ActionResult<UsersToSyncModel>> SynchedUsersResponded(UsersToSyncModel usersToSync)
+        [Route("")]
+        public async Task<ActionResult<UsersToLinkModel>> UserResponded(UsersToLinkModel usersToLink)
         {
             try
             {
-                SyncedUserModel returnEvent = await _synchedUsersService.AddSynchedUser(usersToSync);
+                RelativeModel returnEvent = await _relativeService.AddRelativeUser(usersToLink);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -58,12 +58,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpDelete]
-        [Route("user/{id:int}")]
-        public async Task<ActionResult<SyncedUserModel>> RemoveSynchedUser(int id)
+        [Route("{id:int}")]
+        public async Task<ActionResult<RelativeModel>> RemoveRelative(int id)
         {
             try
             {
-                SyncedUserModel returnEvent = await _synchedUsersService.DeleteSynchedUser(id);
+                RelativeModel returnEvent = await _relativeService.DeleteRelative(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -74,11 +74,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("request/sent/{userId:Guid}")]
-        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsSent(Guid userId)
+        public async Task<ActionResult<List<RequestDetailsModel>>> RequestsSent(Guid userId)
         {
             try
             {
-                List<SyncRequestDetailsModel> returnEvent = await _syncRequestService.GetSyncRequestsSent(userId);
+                List<RequestDetailsModel> returnEvent = await _requestService.GetRequestsSent(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -93,11 +93,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("request/received/{userId:Guid}")]
-        public async Task<ActionResult<List<SyncRequestDetailsModel>>> SyncRequestsReceived(Guid userId)
+        public async Task<ActionResult<List<RequestDetailsModel>>> RequestsReceived(Guid userId)
         {
             try
             {
-                List<SyncRequestDetailsModel> returnEvent = await _syncRequestService.GetSyncRequestsReceived(userId);
+                List<RequestDetailsModel> returnEvent = await _requestService.GetRequestsReceived(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -112,11 +112,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("request/responded/{userId:Guid}")]
-        public async Task<ActionResult<List<SyncRequestCreateUpdateModel>>> SyncRequestsResponded(Guid userId)
+        public async Task<ActionResult<List<RequestCreateUpdateModel>>> RequestsResponded(Guid userId)
         {
             try
             {
-                List<SyncRequestCreateUpdateModel> returnEvent = await _syncRequestService.GetRespondedSyncRequests(userId);
+                List<RequestCreateUpdateModel> returnEvent = await _requestService.GetRequestsResponded(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -131,11 +131,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("request")]
-        public async Task<ActionResult<SyncRequestCreateUpdateModel>> SendSyncRequest(SyncRequestCreateUpdateModel syncRequest)
+        public async Task<ActionResult<RequestCreateUpdateModel>> SendRequest(RequestCreateUpdateModel request)
         {
             try
             {
-                SyncRequestCreateUpdateModel returnEvent = await _syncRequestService.AddSyncRequest(syncRequest);
+                RequestCreateUpdateModel returnEvent = await _requestService.AddRequest(request);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -150,11 +150,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("request/{id:int}")]
-        public async Task<ActionResult<UsersToSyncModel>> RespondToSyncRequest(int id, SyncRequestResponseModel syncRequest)
+        public async Task<ActionResult<UsersToLinkModel>> RespondToRequest(int id, RequestResponseModel request)
         {
             try
             {
-                UsersToSyncModel returnEvent = await _syncRequestService.RespondToSyncRequest(id, syncRequest);
+                UsersToLinkModel returnEvent = await _requestService.RespondToRequest(id, request);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -169,11 +169,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpDelete]
         [Route("request/{id:int}")]
-        public async Task<ActionResult<SyncRequestDetailsModel>> RemoveSyncRequest(int id)
+        public async Task<ActionResult<RequestDetailsModel>> RemoveRequest(int id)
         {
             try
             {
-                SyncRequestDetailsModel returnEvent = await _syncRequestService.DeleteSyncRequest(id);
+                RequestDetailsModel returnEvent = await _requestService.DeleteRequest(id);
                 return Ok(returnEvent);
             }
             catch (Exception e)

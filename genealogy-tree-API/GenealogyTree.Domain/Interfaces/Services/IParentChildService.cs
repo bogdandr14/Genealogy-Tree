@@ -1,5 +1,5 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.ParentChild;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,4 +1,4 @@
-﻿namespace GenealogyTree.Domain.DTO.Relative
+﻿namespace GenealogyTree.Domain.DTO.ParentChild
 {
     public class ChildModel : ParentChildModel
     {

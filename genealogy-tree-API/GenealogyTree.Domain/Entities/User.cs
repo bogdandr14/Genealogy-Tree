@@ -11,10 +11,10 @@ namespace GenealogyTree.Domain.Entities
             this.Id = Guid.NewGuid();
             this.Educations = new HashSet<Education>();
             this.Occupations = new HashSet<Occupation>();
-            this.SyncedToUsers = new HashSet<Sync>();
-            this.SyncedByUsers = new HashSet<Sync>();
-            this.SentRequests = new HashSet<SyncRequest>();
-            this.ReceivedRequests = new HashSet<SyncRequest>();
+            this.UserRelatives = new HashSet<Relative>();
+            this.RelativesWithUser = new HashSet<Relative>();
+            this.SentRequests = new HashSet<Request>();
+            this.ReceivedRequests = new HashSet<Request>();
         }
 
         public Guid Id { get; set; }
@@ -34,14 +34,17 @@ namespace GenealogyTree.Domain.Entities
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }
+        public int? PositionId { get; set; }
+        [ForeignKey("PositionId")]
+        public virtual Position Position { get; set; }
 
         public virtual ICollection<Education> Educations { get; set; }
         public virtual ICollection<Occupation> Occupations { get; set; }
 
-        public virtual ICollection<Sync> SyncedToUsers { get; set; }
-        public virtual ICollection<Sync> SyncedByUsers { get; set; }
+        public virtual ICollection<Relative> UserRelatives { get; set; }
+        public virtual ICollection<Relative> RelativesWithUser { get; set; }
 
-        public virtual ICollection<SyncRequest> SentRequests { get; set; }
-        public virtual ICollection<SyncRequest> ReceivedRequests { get; set; }
+        public virtual ICollection<Request> SentRequests { get; set; }
+        public virtual ICollection<Request> ReceivedRequests { get; set; }
     }
 }

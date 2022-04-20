@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.ParentChild;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;

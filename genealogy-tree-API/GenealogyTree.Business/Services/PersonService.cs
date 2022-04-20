@@ -46,9 +46,9 @@ namespace GenealogyTree.Business.Services
                 parent.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(parent.ImageId));
             }
             personEntity.ImageFile = await _fileManagementService.GetFile(person.Image);
-            if (person.SyncedUserToPerson != null)
+            if (person.RelativeForPerson != null)
             {
-                personEntity.UserId = person.SyncedUserToPerson.SyncedUserId;
+                personEntity.UserId = person.RelativeForPerson.RelativeUserId;
             }
             else
             {
@@ -70,9 +70,9 @@ namespace GenealogyTree.Business.Services
             {
                 GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
-                if (person.SyncedUserToPerson != null)
+                if (person.RelativeForPerson != null)
                 {
-                    returnPerson.UserId = person.SyncedUserToPerson.SyncedUserId;
+                    returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
                 }
                 if (person.Id == user.PersonId)
                 {
@@ -93,9 +93,9 @@ namespace GenealogyTree.Business.Services
             {
                 PersonTreeInfoModel returnPerson = MapPersonInfo(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
-                if (person.SyncedUserToPerson != null)
+                if (person.RelativeForPerson != null)
                 {
-                    returnPerson.UserId = person.SyncedUserToPerson.SyncedUserId;
+                    returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
                 }
                 if (person.Id == user.PersonId)
                 {
@@ -200,7 +200,7 @@ namespace GenealogyTree.Business.Services
             personEntity.Religion = null;
             personEntity.BirthPlace = null;
             personEntity.LivingPlace = null;
-            personEntity.SyncedUserToPerson = null;
+            personEntity.RelativeForPerson = null;
             return personEntity;
         }
         private async Task<Person> addLocations(PersonCreateUpdateModel person)

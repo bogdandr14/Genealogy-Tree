@@ -21,8 +21,8 @@ namespace GenealogyTree.Data
         public virtual DbSet<ParentChild> ParentsChildren { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
-        public virtual DbSet<Sync> Syncs { get; set; }
-        public virtual DbSet<SyncRequest> SyncRequests { get; set; }
+        public virtual DbSet<Relative> Relatives { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Tree> Trees { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -92,16 +92,16 @@ namespace GenealogyTree.Data
                 .HasForeignKey(pc => pc.ParentId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            //One to one Person - Synced user's reference in primary tree
+            //One to one Person - Relatives's reference in primary tree
             modelBuilder.Entity<Person>()
-               .HasOne<Sync>(p => p.SyncedUserToPerson)
-               .WithOne(su => su.SyncedPersonInPrimaryTree)
-               .HasForeignKey<Sync>(su => su.SyncedPersonInPrimaryTreeId)
+               .HasOne<Relative>(p => p.RelativeForPerson)
+               .WithOne(su => su.RelativePersonInPrimaryTree)
+               .HasForeignKey<Relative>(su => su.RelativePersonInPrimaryTreeId)
                .OnDelete(DeleteBehavior.NoAction);
 
             //One to many Person - Possible receivers reference in sender tree
             modelBuilder.Entity<Person>()
-               .HasMany<SyncRequest>(p => p.SenderSyncRequestsForPerson)
+               .HasMany<Request>(p => p.SenderRequestsForPerson)
                .WithOne(sr => sr.ReceiverReferenceInSenderTree)
                .HasForeignKey(sr => sr.ReceiverReferenceInSenderTreeId)
                .OnDelete(DeleteBehavior.NoAction);
@@ -136,28 +136,28 @@ namespace GenealogyTree.Data
 
             //One to many User - User synchronizations with other users
             modelBuilder.Entity<User>()
-               .HasMany<Sync>(u => u.SyncedToUsers)
+               .HasMany<Relative>(u => u.UserRelatives)
                .WithOne(p => p.PrimaryUser)
                .HasForeignKey(p => p.PrimaryUserId)
                .OnDelete(DeleteBehavior.NoAction);
 
             //One to many User - Other users synchronizations to this user
             modelBuilder.Entity<User>()
-               .HasMany<Sync>(u => u.SyncedByUsers)
-               .WithOne(p => p.SyncedUser)
-               .HasForeignKey(p => p.SyncedUserId)
+               .HasMany<Relative>(u => u.RelativesWithUser)
+               .WithOne(p => p.RelativeUser)
+               .HasForeignKey(p => p.RelativeUserId)
                .OnDelete(DeleteBehavior.NoAction);
 
             //One to many User - SentRequests
             modelBuilder.Entity<User>()
-               .HasMany<SyncRequest>(u => u.SentRequests)
+               .HasMany<Request>(u => u.SentRequests)
                .WithOne(p => p.Sender)
                .HasForeignKey(p => p.SenderId)
                .OnDelete(DeleteBehavior.NoAction);
 
             //One to many User - SentRequests
             modelBuilder.Entity<User>()
-               .HasMany<SyncRequest>(u => u.ReceivedRequests)
+               .HasMany<Request>(u => u.ReceivedRequests)
                .WithOne(p => p.Receiver)
                .HasForeignKey(p => p.ReceiverId)
                .OnDelete(DeleteBehavior.NoAction);

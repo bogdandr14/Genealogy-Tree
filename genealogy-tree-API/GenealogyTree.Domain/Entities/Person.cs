@@ -15,7 +15,7 @@ namespace GenealogyTree.Domain.Entities
             Parents = new HashSet<ParentChild>();
             Children = new HashSet<ParentChild>();
 
-            SenderSyncRequestsForPerson = new HashSet<SyncRequest>();
+            SenderRequestsForPerson = new HashSet<Request>();
         }
 
         [Key]
@@ -57,9 +57,9 @@ namespace GenealogyTree.Domain.Entities
         public virtual ICollection<ParentChild> Parents { get; set; }
         public virtual ICollection<ParentChild> Children { get; set; }
 
-        //Referene to synched user's person in primary user's tree (let this person be the reference for synched user)
-        public virtual Sync SyncedUserToPerson { get; set; }
+        //Referene to relatives's person in primary user's tree (let this person be the reference for relative)
+        public virtual Relative RelativeForPerson { get; set; }
         //Request receivers' possible person reference to sender user's tree (let this person be the possible reference for receiver user)
-        public virtual ICollection<SyncRequest> SenderSyncRequestsForPerson { get; set; }
+        public virtual ICollection<Request> SenderRequestsForPerson { get; set; }
     }
 }

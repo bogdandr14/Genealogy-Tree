@@ -1,9 +1,9 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.User;
 
-namespace GenealogyTree.Domain.DTO.SyncRequest
+namespace GenealogyTree.Domain.DTO.Request
 {
-    public class SyncRequestResponseModel
+    public class RequestResponseModel
     {
         public int Id { get; set; }
         public PersonDetailsModel SenderReferenceInReceiverTree { get; set; }
