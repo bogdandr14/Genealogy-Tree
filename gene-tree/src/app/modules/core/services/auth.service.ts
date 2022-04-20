@@ -1,9 +1,8 @@
-/* eslint-disable no-debugger */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { delay, filter, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 import { ChangePasswordModel } from '../../settings/models/change-password.model';
 import { LoginModel } from '../../user/models/login.model';
 import { RegisterModel } from '../../user/models/register.model';
@@ -78,17 +77,13 @@ export class AuthService extends BaseService {
 
   private setExpirationCounter(token: string) {
     const expiration = <number>JSON.parse(atob(token.split('.')[1])).exp * 1000; //expiration in milliseconds
-    const timeout = expiration - new Date().valueOf();
-    if (timeout < 0) {
+    if (expiration < Date.now()) {
       this.logout();
     } else {
       this.timerSubscription.unsubscribe();
-      this.timerSubscription = of(null)
-        .pipe(delay(timeout))
-        .subscribe(() => {
-          console.log('TOKEN EXPIRED!!');
-          this.logout();
-        });
+      this.timerSubscription = timer(new Date(expiration))
+        .pipe(tap(() => console.log('TOKEN EXPIRED!!')))
+        .subscribe(() => this.logout());
     }
   }
 }
