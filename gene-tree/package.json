@@ -37,6 +37,7 @@
     "core-js": "^3.21.1",
     "guid-typescript": "^1.0.9",
     "install": "^0.13.0",
+    "ionic2-calendar": "^0.6.9",
     "leaflet": "^1.7.1",
     "localforage-cordovasqlitedriver": "^1.8.0",
     "messageformat": "^2.3.0",

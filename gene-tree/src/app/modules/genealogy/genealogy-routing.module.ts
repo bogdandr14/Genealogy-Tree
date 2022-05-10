@@ -1,3 +1,4 @@
+import { GenealogyEventsComponent } from './components/genealogy-events/genealogy-events.component';
 import { GenealogyListComponent } from './components/genealogy-list/genealogy-list.component';
 import { GenealogyTreeComponent } from './components/genealogy-tree/genealogy-tree.component';
 import { NgModule } from '@angular/core';
@@ -36,6 +37,20 @@ const routes: Routes = [
           }
         ],
         data: { title: '_pages.genealogyList' }
+      },
+      {
+        path: 'events',
+        children: [
+          {
+            path: '',
+            component: GenealogyEventsComponent
+          },
+          {
+            path: ':id',
+            component: GenealogyEventsComponent
+          }
+        ],
+        data: { title: '_pages.genealogyEvents' }
       },
       {
         path: '',
