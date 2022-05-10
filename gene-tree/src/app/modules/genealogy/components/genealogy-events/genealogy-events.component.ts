@@ -27,6 +27,13 @@ export class GenealogyEventsComponent implements OnInit {
     this.events = this.createRandomEvents();
   }
 
+  public next() {
+    this.myCalendar.slideNext();
+  }
+
+  public back() {
+    this.myCalendar.slidePrev();
+  }
   private createRandomEvents() {
     var events = [];
     for (var i = 0; i < 50; i += 1) {
@@ -63,6 +70,11 @@ export class GenealogyEventsComponent implements OnInit {
     }
     return events;
   }
+
+  public onViewTitleChanged(title) {
+    this.viewTitle = title;
+  }
+
   onEventSelected(event) {
     console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
   }

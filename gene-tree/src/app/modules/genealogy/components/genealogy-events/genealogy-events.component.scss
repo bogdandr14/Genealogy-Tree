@@ -1,0 +1,40 @@
+.indicator-container {
+  padding-left: 0.5rem;
+  padding-bottom: 0.4rem;
+  padding-right: 0.5rem;
+}
+
+.event-indicator {
+  background: var(--ion-color-success);
+  width: 4vw;
+  height: 2vh;
+  border-radius: 5px;
+  margin: 0.5rem;
+
+  display: table-cell;
+}
+
+.with-event {
+  background-color: var(--ion-color-primary);
+  border-radius: 15px;
+}
+
+:host ::ng-deep {
+  .monthview-current {
+    background-color: var(--ion-color-danger) !important;
+  }
+
+  .monthview-primary-with-event {
+    background-color: inherit !important;
+  }
+
+  .text-muted {
+    background-color: grey !important;
+  }
+  .monthview-selected {
+    background-color: var(--ion-color-warning) !important;
+  }
+}
+//https://www.youtube.com/watch?v=_hVdPEmbwA0
+//https://stackblitz.com/edit/ionic-calendar-demo?file=pages%2Fhome%2Fhome.html
+//https://github.com/twinssbc/Ionic2-Calendar
