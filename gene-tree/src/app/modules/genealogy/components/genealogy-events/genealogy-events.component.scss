@@ -8,7 +8,7 @@
   background: var(--ion-color-success);
   width: 4vw;
   height: 2vh;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   margin: 0.5rem;
 
   display: table-cell;
@@ -16,16 +16,16 @@
 
 .with-event {
   background-color: var(--ion-color-primary);
-  border-radius: 15px;
+  border-radius: 0.8rem;
 }
 
 :host ::ng-deep {
-  .monthview-current {
-    background-color: var(--ion-color-danger) !important;
-  }
-
   .monthview-primary-with-event {
     background-color: inherit !important;
+  }
+
+  .monthview-current {
+    background-color: var(--ion-color-success) !important;
   }
 
   .text-muted {

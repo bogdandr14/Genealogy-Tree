@@ -14,6 +14,5 @@ namespace GenealogyTree.Domain.DTO.Person
         public DateTime? BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
         public ImageFile? ImageFile { get; set; }
-
     }
 }

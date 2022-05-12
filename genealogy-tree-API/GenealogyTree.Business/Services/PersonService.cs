@@ -107,6 +107,44 @@ namespace GenealogyTree.Business.Services
             return returnPeopleTreeData;
         }
 
+        public async Task<List<PersonEventInTreeModel>> GetPeopleEventsInTree(Guid treeId)
+        {
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
+            List<PersonEventInTreeModel> returnPeopleList = new List<PersonEventInTreeModel>();
+            foreach (var person in poepleList)
+            {
+                if (person.BirthDate.HasValue)
+                {
+                    returnPeopleList.Add(new PersonEventInTreeModel()
+                    {
+                        Date = (DateTime)person.BirthDate,
+                        EventType = "BIRTHDAY",
+                        AffectedPeople = await MapAffectedPersonBirthdayEvent(person)
+                    }) ;
+                }
+            }
+            return returnPeopleList;
+        }
+
+        private async Task<List<PersonBaseModel>> MapAffectedPersonBirthdayEvent(Person person)
+        {
+            List<PersonBaseModel> personList = new List<PersonBaseModel>();
+            personList.Add(await MapToPersonBaseModel(person));
+            return personList;
+        }
+
+        private async Task<PersonBaseModel> MapToPersonBaseModel(Person person)
+        {
+            return new PersonBaseModel()
+            {
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                PersonId = person.Id,
+                ImageFile = person.ImageId != null ? await _fileManagementService.GetFile(await _imageService.GetImageAsync(person.ImageId)) : null
+            };
+        }
+
+
         private PersonTreeInfoModel MapPersonInfo(Person person)
         {
             PersonTreeInfoModel returnPerson = _mapper.Map<PersonTreeInfoModel>(person);
