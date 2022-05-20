@@ -4,7 +4,6 @@
     <ion-buttons slot="end">
       <ion-buttons end>
         <ion-button [disabled]="isToday" (click)="today()">Today</ion-button>
-        <ion-button (click)="loadEvents()">Load Events</ion-button>
       </ion-buttons>
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -27,13 +26,15 @@
       </ion-col>
     </ion-row>
     <calendar
-      [eventSource]="events"
+      #eventCalendar
+      [eventSource]="calendarEvents"
       [calendarMode]="calendar.mode"
       [currentDate]="calendar.currentDate"
       (onCurrentDateChanged)="onCurrentDateChanged($event)"
       (onEventSelected)="onEventSelected($event)"
       (onTitleChanged)="onViewTitleChanged($event)"
       [monthviewDisplayEventTemplate]="monthDate"
+      [monthviewEventDetailTemplate]="eventDetails"
     ></calendar>
     <ng-template #monthDate let-view="view" let-row="row" let-col="col">
       <div [class.with-event]="view.dates[row * 7 + col].events.length">
@@ -46,5 +47,82 @@
         </div>
       </div>
     </ng-template>
+    <ng-template
+      #eventDetails
+      let-showEventDetail="showEventDetail"
+      let-selectedDate="selectedDate"
+      let-noEventsLabel="noEventsLabel"
+    >
+      <ion-list
+        class="event-detail-container"
+        has-bouncing="false"
+        *ngIf="showEventDetail"
+        overflow-scroll="false"
+      >
+        <ion-item *ngFor="let event of selectedDate?.events">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                {{ event.title }}
+              </ion-col>
+              <ion-col>
+                <ion-row class="ion-align-items-center">
+                  <ng-container *ngIf="event.eventType === 'BIRTHDAY'">
+                    <ion-icon
+                      color="warning"
+                      name="gift"
+                      size="large"
+                    ></ion-icon>
+                    <ng-container
+                      *ngTemplateOutlet="
+                        calendarAvatar;
+                        context: { person: event.affectedPeople[0] }
+                      "
+                    ></ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="event.eventType === 'MARRIAGE'">
+                    <ng-container
+                      *ngTemplateOutlet="
+                        calendarAvatar;
+                        context: { person: event.affectedPeople[0] }
+                      "
+                    ></ng-container>
+                    <ion-icon
+                      color="danger"
+                      name="heart"
+                      size="large"
+                    ></ion-icon>
+                    <ng-container
+                      *ngTemplateOutlet="
+                        calendarAvatar;
+                        context: { person: event.affectedPeople[1] }
+                      "
+                    ></ng-container>
+                  </ng-container>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item *ngIf="selectedDate?.events.length === 0">
+          <div class="no-events-label">{{ noEventsLabel }}</div>
+        </ion-item>
+      </ion-list>
+    </ng-template>
   </ion-card>
 </ion-content>
+
+<ng-template #calendarAvatar let-person="person">
+  <span>
+    <ion-avatar
+      class="avatar"
+      slot="start"
+      [routerLink]="['/person/details', person.personId]"
+    >
+      <img
+        [src]="getImageUrl(person.imageFile)"
+        [alt]="person.firstName + ' ' + person.lastName"
+      />
+    </ion-avatar>
+  </span>
+</ng-template>

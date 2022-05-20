@@ -54,9 +54,9 @@
   },
   "_parentChild": {
     "blood": "Blood relative",
-    "noChild":"This person does not have any children",
+    "noChild": "This person does not have any children",
     "chooseChild": "Choose a person from the following list to add to children:",
-    "noParent":"This person does not have any parents added",
+    "noParent": "This person does not have any parents added",
     "chooseParent": "Choose a person from the following list to add to parents:"
   },
   "_marriage": {
@@ -168,6 +168,10 @@
     "firstDay": "First day",
     "lastDay": "Last day"
   },
+  "events": {
+    "birthDayAnniversary": "{ name }'s { years } years anniversary",
+    "marriageAnniversary": "Marriage anniversary of { years } years between { firstPerson } and { secondPerson }"
+  },
   "_pages": {
     "home": "Home",
     "profile": "Profile",
@@ -180,6 +184,7 @@
     "location": "Location",
     "support": "Support",
     "genealogy": "Genealogy",
+    "genealogyEvents": "Anniversaries",
     "genealogyTree": "Genealogy tree",
     "genealogyList": "Genealogy list",
     "notifications": "Notifications"
@@ -210,6 +215,7 @@
     "next": "Next",
     "list": "List",
     "tree": "Tree",
+    "events": "Anniversaries",
     "search": "Search"
   },
   "_slides": {

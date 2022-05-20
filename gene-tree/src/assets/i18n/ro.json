@@ -168,6 +168,10 @@
     "firstDay": "Prima zi ",
     "lastDay": "Ultima zi"
   },
+  "events": {
+    "birthDayAnniversary": "Aniversarea de { years } de ani a lui { name }",
+    "marriageAnniversary": "Aniversarea de { years } de ani a căsătoriei dintre { firstPerson } și { secondPerson }"
+  },
   "_pages": {
     "home": "Acasă",
     "profile": "Profil",
@@ -180,6 +184,7 @@
     "location": "Locaţie",
     "support": "Suport",
     "genealogy": "Genealogie",
+    "genealogyEvents": "Aniversări",
     "genealogyTree": "Arbore genealogic",
     "genealogyList": "Listă genealogie",
     "notifications": "Notificări"
@@ -210,6 +215,7 @@
     "next": "Următorul",
     "list": "Listă",
     "tree": "Arbore",
+    "events": "Aniversări",
     "search": "Caută"
   },
   "_slides": {

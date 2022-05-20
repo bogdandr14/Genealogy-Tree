@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
@@ -107,30 +108,53 @@ namespace GenealogyTree.Business.Services
             return returnPeopleTreeData;
         }
 
-        public async Task<List<PersonEventInTreeModel>> GetPeopleEventsInTree(Guid treeId)
+        public async Task<List<EventInTreeModel>> GetEventsInTree(Guid treeId)
         {
             List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
-            List<PersonEventInTreeModel> returnPeopleList = new List<PersonEventInTreeModel>();
+            List<EventInTreeModel> returnEventsList = new List<EventInTreeModel>();
             foreach (var person in poepleList)
             {
                 if (person.BirthDate.HasValue)
                 {
-                    returnPeopleList.Add(new PersonEventInTreeModel()
+                    returnEventsList.Add(new EventInTreeModel()
                     {
                         Date = (DateTime)person.BirthDate,
                         EventType = "BIRTHDAY",
                         AffectedPeople = await MapAffectedPersonBirthdayEvent(person)
-                    }) ;
+                    });
                 }
             }
-            return returnPeopleList;
+            List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPerson.TreeId == treeId && x.SecondPerson.TreeId == treeId && x.EndDate == null)
+                .Include(x => x.FirstPerson)
+                .Include(x => x.SecondPerson)
+                .ToList();
+            foreach (var marriage in marriages)
+            {
+                MarriageDetailsModel returnMarriage = _mapper.Map<MarriageDetailsModel>(marriage);
+                returnMarriage.PersonMarriedTo.ImageFile = await _fileManagementService.GetFile(marriage.FirstPerson != null ? marriage.FirstPerson.Image : marriage.SecondPerson.Image);
+                returnEventsList.Add(new EventInTreeModel()
+                {
+                    Date = marriage.StartDate,
+                    EventType = "MARRIAGE",
+                    AffectedPeople = await MapAffectedMarriageAnniversaryEvent(marriage)
+                });
+            }
+            return returnEventsList;
+        }
+
+        private async Task<List<PersonBaseModel>> MapAffectedMarriageAnniversaryEvent(Marriage marriage)
+        {
+            List<PersonBaseModel> peopleList = new List<PersonBaseModel>();
+            peopleList.Add(await MapToPersonBaseModel(marriage.FirstPerson));
+            peopleList.Add(await MapToPersonBaseModel(marriage.SecondPerson));
+            return peopleList;
         }
 
         private async Task<List<PersonBaseModel>> MapAffectedPersonBirthdayEvent(Person person)
         {
-            List<PersonBaseModel> personList = new List<PersonBaseModel>();
-            personList.Add(await MapToPersonBaseModel(person));
-            return personList;
+            List<PersonBaseModel> peopleList = new List<PersonBaseModel>();
+            peopleList.Add(await MapToPersonBaseModel(person));
+            return peopleList;
         }
 
         private async Task<PersonBaseModel> MapToPersonBaseModel(Person person)

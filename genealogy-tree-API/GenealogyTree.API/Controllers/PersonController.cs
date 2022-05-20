@@ -69,11 +69,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("events/{treeId:Guid}")]
-        public async Task<ActionResult<PersonEventInTreeModel>> GetEventsInTree(Guid treeId)
+        public async Task<ActionResult<EventInTreeModel>> GetEventsInTree(Guid treeId)
         {
             try
             {
-                List<PersonEventInTreeModel> returnEvent = await _personService.GetPeopleEventsInTree(treeId);
+                List<EventInTreeModel> returnEvent = await _personService.GetEventsInTree(treeId);
                 if (returnEvent == null)
                 {
                     return NotFound();
