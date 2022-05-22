@@ -110,7 +110,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<EventInTreeModel>> GetEventsInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId && p.DeathDate == null).ToList();
             List<EventInTreeModel> returnEventsList = new List<EventInTreeModel>();
             foreach (var person in poepleList)
             {

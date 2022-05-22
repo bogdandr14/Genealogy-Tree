@@ -134,5 +134,20 @@ namespace GenealogyTree.Business.Services
             UserSettingsModel returnEvent = _mapper.Map<UserSettingsModel>(userEntity);
             return returnEvent;
         }
+
+        public async Task<PositionModel> UpdatePosition(Guid userId,PositionModel position)
+        {
+            Position positionToUpdate= unitOfWork.User.Filter(user=>user.Id == userId).Include(user=> user.Position).FirstOrDefault().Position;
+            if(positionToUpdate == null || position == null)
+            {
+                return null;
+            }
+            positionToUpdate.LastVerified = DateTime.Now;
+            positionToUpdate.Latitude = position.Latitude;
+            positionToUpdate.Longitude = position.Longitude;
+            Position positionEntity = await unitOfWork.Position.Update(positionToUpdate);
+            PositionModel returnEvent = _mapper.Map<PositionModel>(positionEntity);
+            return returnEvent;
+        }
     }
 }

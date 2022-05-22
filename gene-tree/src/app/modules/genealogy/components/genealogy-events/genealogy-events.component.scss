@@ -4,6 +4,18 @@
   padding-right: 0.5rem;
 }
 
+.avatar {
+  margin: auto;
+  width: 100% !important;
+  height: 100% !important;
+  @media (min-width: 768px) {
+    width: 10vh !important; //any size
+    height: 10vh !important; //any size
+  }
+  width: 12vw !important; //any size
+  height: 12vw !important; //any size
+}
+
 .event-indicator {
   background: var(--ion-color-success);
   width: 4vw;

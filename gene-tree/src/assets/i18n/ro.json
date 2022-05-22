@@ -169,8 +169,8 @@
     "lastDay": "Ultima zi"
   },
   "events": {
-    "birthDayAnniversary": "Aniversarea de { years } de ani a lui { name }",
-    "marriageAnniversary": "Aniversarea de { years } de ani a căsătoriei dintre { firstPerson } și { secondPerson }"
+    "birthdayAnniversary": "Aniversarea de { years } ani a lui { name }",
+    "marriageAnniversary": "Aniversarea de { years } ani a căsătoriei dintre { firstPerson } și { secondPerson }"
   },
   "_pages": {
     "home": "Acasă",

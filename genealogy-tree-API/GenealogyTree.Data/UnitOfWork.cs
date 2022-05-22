@@ -16,6 +16,7 @@ namespace GenealogyTree.Data
         private IOccupationRepository _occupation;
         private IParentChildRepository _parentChild;
         private IPersonRepository _person;
+        private IPositionRepository _position;
         private IReligionRepository _religion;
         private IRelativeRepository _relative;
         private IRequestRepository _request;
@@ -36,6 +37,7 @@ namespace GenealogyTree.Data
         public IOccupationRepository Occupation => _occupation ??= new OccupationRepository(_repoContext);
         public IParentChildRepository ParentChild => _parentChild ??= new ParentChildRepository(_repoContext);
         public IPersonRepository Person => _person ??= new PersonRepository(_repoContext);
+        public IPositionRepository Position => _position ??= new PositionRepository(_repoContext);
         public IReligionRepository Religion => _religion ??= new ReligionRepository(_repoContext);
         public IRelativeRepository Relatives => _relative ??= new RelativeRepository(_repoContext);
         public IRequestRepository Requests => _request ??= new RequestRepository(_repoContext);

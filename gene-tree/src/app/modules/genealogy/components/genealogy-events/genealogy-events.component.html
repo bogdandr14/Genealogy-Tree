@@ -61,9 +61,31 @@
       >
         <ion-item *ngFor="let event of selectedDate?.events">
           <ion-grid>
-            <ion-row>
-              <ion-col>
-                {{ event.title }}
+            <ion-row class="ion-align-items-center">
+              <ion-col *ngIf="event.eventType === 'BIRTHDAY'">
+                {{
+                  "events.birthdayAnniversary"
+                    | translate
+                      : {
+                          name: event.affectedPeople[0].firstName,
+                          years:
+                            event.startTime.getFullYear() -
+                            event.date.getFullYear()
+                        }
+                }}
+              </ion-col>
+              <ion-col *ngIf="event.eventType === 'MARRIAGE'">
+                {{
+                  "events.marriageAnniversary"
+                    | translate
+                      : {
+                          firstPerson: event.affectedPeople[0].firstName,
+                          secondPerson: event.affectedPeople[1].firstName,
+                          years:
+                            event.startTime.getFullYear() -
+                            event.date.getFullYear()
+                        }
+                }}
               </ion-col>
               <ion-col>
                 <ion-row class="ion-align-items-center">
@@ -115,7 +137,7 @@
 <ng-template #calendarAvatar let-person="person">
   <span>
     <ion-avatar
-      class="avatar"
+      class="avatar ion-margin"
       slot="start"
       [routerLink]="['/person/details', person.personId]"
     >

@@ -169,7 +169,7 @@
     "lastDay": "Last day"
   },
   "events": {
-    "birthDayAnniversary": "{ name }'s { years } years anniversary",
+    "birthdayAnniversary": "{ name }'s { years } years anniversary",
     "marriageAnniversary": "Marriage anniversary of { years } years between { firstPerson } and { secondPerson }"
   },
   "_pages": {

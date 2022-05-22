@@ -65,5 +65,9 @@ namespace GenealogyTree.Business.Services
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
             return returnEvent;
         }
+        public async Task<RelativePositionModel> GetRelativesPosition(Guid userId)
+        {
+
+        }
     }
 }

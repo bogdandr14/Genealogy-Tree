@@ -5,7 +5,6 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { DataService } from '../../../core/services/data.service';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { EventInTreeModel } from '../../models/event-in-tree.model';
-import { TranslateService } from '@ngx-translate/core';
 import { ImageFile } from 'src/app/modules/shared/models/image-file';
 import { CalendarMode } from 'ionic2-calendar/calendar';
 
@@ -25,8 +24,7 @@ export class GenealogyEventsComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private personService: PersonService,
-    private translateService: TranslateService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.dataService
@@ -43,8 +41,6 @@ export class GenealogyEventsComponent implements OnInit {
       });
   }
 
-
-
   public onCurrentDateChanged(event: Date) {
     var today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -56,7 +52,14 @@ export class GenealogyEventsComponent implements OnInit {
   }
 
   onEventSelected(event) {
-    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
+    console.log(
+      'Event selected:' +
+        event.startTime +
+        '-' +
+        event.endTime +
+        ',' +
+        event.title
+    );
   }
 
   today() {
@@ -75,7 +78,7 @@ export class GenealogyEventsComponent implements OnInit {
     this.myCalendar.slidePrev();
   }
 
-  public getImageUrl(imageFile:ImageFile){
+  public getImageUrl(imageFile: ImageFile) {
     if (imageFile) {
       return `data:${imageFile.mimeType};base64,${imageFile.fileInBytes}`;
     }
@@ -83,31 +86,19 @@ export class GenealogyEventsComponent implements OnInit {
   }
 
   private setOriginalEvents(events: EventInTreeModel[]) {
-    this.originalEvents = events.map(event => {
-      let title: string;
-      switch (event.eventType) {
-        case 'BIRTHDAY':
-          title = this.translateService.instant('birthday',
-            { name: `${event.affectedPeople[0].firstName} ${event.affectedPeople[0].lastName}` })
-          break;
-        case 'MARRIAGE':
-          title = this.translateService.instant('marriage',
-            {
-              firstPerson: `${event.affectedPeople[0].firstName} ${event.affectedPeople[0].lastName}`,
-              secondPerson: `${event.affectedPeople[1].firstName} ${event.affectedPeople[1].lastName}`
-            })
-          break;
-      }
-      return new CalendarEventModel(event, title);
+    this.originalEvents = events.map((event) => {
+      return new CalendarEventModel(event);
     });
   }
 
   private setCalendarEvents(year: number) {
-    this.calendarEvents = this.originalEvents.map(event => {
-      event.startTime = this.getEventDate(event.startTime, year);
-      event.endTime = this.getEventDate(event.endTime, year);
-      return event;
-    }).filter(event => event.date <= event.startTime);
+    this.calendarEvents = this.originalEvents
+      .map((event) => {
+        event.startTime = this.getEventDate(event.startTime, year);
+        event.endTime = this.getEventDate(event.endTime, year);
+        return event;
+      })
+      .filter((event) => event.date <= event.startTime);
   }
 
   private getEventDate(date: any, year: number) {
@@ -126,27 +117,51 @@ export class GenealogyEventsComponent implements OnInit {
       var startTime;
       var endTime;
       if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
+        startTime = new Date(
+          Date.UTC(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate() + startDay
+          )
+        );
         if (endDay === startDay) {
           endDay += 1;
         }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
+        endTime = new Date(
+          Date.UTC(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate() + endDay
+          )
+        );
         events.push({
           title: 'All Day - ' + i,
           startTime: startTime,
           endTime: endTime,
-          allDay: true
+          allDay: true,
         });
       } else {
         var startMinute = Math.floor(Math.random() * 24 * 60);
         var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+        startTime = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate() + startDay,
+          0,
+          date.getMinutes() + startMinute
+        );
+        endTime = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate() + endDay,
+          0,
+          date.getMinutes() + endMinute
+        );
         events.push({
           title: 'Event - ' + i,
           startTime: startTime,
           endTime: endTime,
-          allDay: false
+          allDay: false,
         });
       }
     }

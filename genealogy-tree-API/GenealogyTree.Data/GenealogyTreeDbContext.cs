@@ -20,6 +20,7 @@ namespace GenealogyTree.Data
         public virtual DbSet<Occupation> Occupations { get; set; }
         public virtual DbSet<ParentChild> ParentsChildren { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
         public virtual DbSet<Relative> Relatives { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
