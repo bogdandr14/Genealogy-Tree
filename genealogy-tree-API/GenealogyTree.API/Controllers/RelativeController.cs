@@ -1,6 +1,7 @@
 ﻿using GenealogyTree.API.Attributes;
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.DTO.Request;
+using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -174,6 +175,26 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 RequestDetailsModel returnEvent = await _requestService.DeleteRequest(id);
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+        [HttpGet]
+        [Route("position/{userId:Guid}")]
+        public async Task<ActionResult<List<UserPositionModel>>> RelativesPosition(Guid userId)
+        {
+            try
+            {
+                List<UserPositionModel> returnEvent = await _relativeService.GetRelativesPosition(userId);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
                 return Ok(returnEvent);
             }
             catch (Exception e)

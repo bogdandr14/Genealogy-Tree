@@ -168,8 +168,11 @@
     "firstDay": "Prima zi ",
     "lastDay": "Ultima zi"
   },
-  "events": {
-    "birthdayAnniversary": "Aniversarea de { years } ani a lui { name }",
+  "_calendar": {
+    "noEvents": "Niciun eveniment",
+    "birthday": "Ziua de naștere a lui { name }",
+    "marriage": "Ziua nunții dintre { firstPerson } și { secondPerson }",
+    "birthdayAnniversary": "Aniversarea zilei de naștere de { years } ani a lui { name }",
     "marriageAnniversary": "Aniversarea de { years } ani a căsătoriei dintre { firstPerson } și { secondPerson }"
   },
   "_pages": {

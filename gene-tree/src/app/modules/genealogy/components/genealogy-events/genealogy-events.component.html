@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ "_pages.genealogyList" | translate }}</ion-title>
+    <ion-title>{{ "_pages.genealogyEvents" | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-buttons end>
         <ion-button [disabled]="isToday" (click)="today()">Today</ion-button>
@@ -30,6 +30,7 @@
       [eventSource]="calendarEvents"
       [calendarMode]="calendar.mode"
       [currentDate]="calendar.currentDate"
+      [noEventsLabel]="'_calendar.noEvents' | translate"
       (onCurrentDateChanged)="onCurrentDateChanged($event)"
       (onEventSelected)="onEventSelected($event)"
       (onTitleChanged)="onViewTitleChanged($event)"
@@ -64,27 +65,37 @@
             <ion-row class="ion-align-items-center">
               <ion-col *ngIf="event.eventType === 'BIRTHDAY'">
                 {{
-                  "events.birthdayAnniversary"
-                    | translate
-                      : {
-                          name: event.affectedPeople[0].firstName,
-                          years:
-                            event.startTime.getFullYear() -
-                            event.date.getFullYear()
-                        }
+                  event.startTime.getFullYear() - event.date.getFullYear() > 0
+                    ? ("_calendar.birthdayAnniversary"
+                      | translate
+                        : {
+                            name: event.affectedPeople[0].firstName,
+                            years:
+                              event.startTime.getFullYear() -
+                              event.date.getFullYear()
+                          })
+                    : ("_calendar.birthday"
+                      | translate: { name: event.affectedPeople[0].firstName })
                 }}
               </ion-col>
               <ion-col *ngIf="event.eventType === 'MARRIAGE'">
                 {{
-                  "events.marriageAnniversary"
-                    | translate
-                      : {
-                          firstPerson: event.affectedPeople[0].firstName,
-                          secondPerson: event.affectedPeople[1].firstName,
-                          years:
-                            event.startTime.getFullYear() -
-                            event.date.getFullYear()
-                        }
+                  event.startTime.getFullYear() - event.date.getFullYear() > 0
+                    ? ("_calendar.marriageAnniversary"
+                      | translate
+                        : {
+                            firstPerson: event.affectedPeople[0].firstName,
+                            secondPerson: event.affectedPeople[1].firstName,
+                            years:
+                              event.startTime.getFullYear() -
+                              event.date.getFullYear()
+                          })
+                    : ("_calendar.marriage"
+                      | translate
+                        : {
+                            firstPerson: event.affectedPeople[0].firstName,
+                            secondPerson: event.affectedPeople[1].firstName
+                          })
                 }}
               </ion-col>
               <ion-col>

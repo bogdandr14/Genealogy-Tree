@@ -1,3 +1,5 @@
+import { UserPositionModel } from './../../genealogy/models/user-position.model';
+import { PositionModel } from './../../genealogy/models/position.model';
 import { UserEditModel } from '../models/user-edit.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -50,15 +52,13 @@ export class UserService extends BaseService {
 
   public checkUsernameTaken(username: string): Observable<boolean> {
     return super.getOneByPath<boolean>(
-      `usernameAvailable/${username}`,
-      BaseService.noLoadingConfig
+      `usernameAvailable/${username}`, BaseService.noLoadingConfig
     );
   }
 
   public checkEmailTaken(email: string): Observable<boolean> {
     return super.getOneByPath<boolean>(
-      `emailAvailable/${email}`,
-      BaseService.noLoadingConfig
+      `emailAvailable/${email}`, BaseService.noLoadingConfig
     );
   }
 
@@ -66,43 +66,36 @@ export class UserService extends BaseService {
     return super.add(supportTicket, 'support');
   }
 
-  public getPersonalInfo<
-    AccountProfileModel
-  >(): Observable<AccountProfileModel> {
-    return this.dataService.getCurrentUser().pipe(
-      switchMap((user) => {
-        const path = `info/${user.username}`;
-        return super.getOneByPath<AccountProfileModel>(path);
-      })
-    );
+  public getPersonalInfo<AccountProfileModel>(): Observable<AccountProfileModel> {
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getOneByPath<AccountProfileModel>(`info/${user.username}`)
+    ));
   }
 
-  public getUser<AccountProfileModel>(
-    userId: Guid
-  ): Observable<AccountProfileModel> {
+  public getUser<AccountProfileModel>(userId: Guid): Observable<AccountProfileModel> {
     return super.getOneById<AccountProfileModel>(userId);
   }
 
   public getUserSettings() {
-    return super.getOneById<AccountSettingsModel>(
-      this.userState.value.userId,
-      'settings',
-      BaseService.noLoadingConfig
-    );
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getOneById<AccountSettingsModel>(user.userId, 'settings', BaseService.noLoadingConfig)
+    ));
   }
 
   public saveUserSettings(settings: AccountSettingsModel) {
-    return super.updateById<AccountSettingsModel>(
-      this.userState.value.userId,
-      settings,
-      'settings'
-    );
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.updateById<AccountSettingsModel>(user.userId, settings, 'settings')
+    ));
   }
 
   public updateUserInfo(userEdit: UserEditModel) {
-    return super.updateById<AccountSettingsModel>(
-      this.userState.value.userId,
-      userEdit
-    );
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.updateById<AccountSettingsModel>(user.userId, userEdit)
+    ));
+  }
+  public updateUserPosition(position: PositionModel) {
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.updateById<UserPositionModel>(user.userId, position, 'position')
+    ));
   }
 }

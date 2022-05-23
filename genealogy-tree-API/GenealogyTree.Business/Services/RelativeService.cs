@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,13 @@ namespace GenealogyTree.Business.Services
     public class RelativeService : BaseService, IRelativeService
     {
         private readonly IMapper _mapper;
+        private readonly IFileManagementService _fileManagementService;
 
-        public RelativeService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+
+        public RelativeService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
         {
             _mapper = mapper;
+            _fileManagementService = fileManagementService;
         }
 
         public async Task<List<RelativeModel>> GetAllRelativesForUser(Guid userId)
@@ -65,9 +70,24 @@ namespace GenealogyTree.Business.Services
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
             return returnEvent;
         }
-        public async Task<RelativePositionModel> GetRelativesPosition(Guid userId)
-        {
 
+        public async Task<List<UserPositionModel>> GetRelativesPosition(Guid userId)
+        {
+            List<User> relativeUsers = unitOfWork.Relatives.Filter(relative => relative.PrimaryUserId == userId)
+                                                    .Include(r => r.RelativeUser)
+                                                        .ThenInclude(ru => ru.Position)
+                                                    .Include(r => r.RelativeUser)
+                                                        .ThenInclude(ru => ru.Person)
+                                                    .Select(relative => relative.RelativeUser).ToList();
+
+            List<UserPositionModel> returnEvent = new List<UserPositionModel>();
+            foreach (var relative in relativeUsers)
+            {
+                UserPositionModel userPositionToReturn = _mapper.Map<UserPositionModel>(relative);
+                userPositionToReturn.ImageFile = await _fileManagementService.GetFile(relative.Person.Image);
+                returnEvent.Add(userPositionToReturn);
+            }
+            return returnEvent;
         }
     }
 }

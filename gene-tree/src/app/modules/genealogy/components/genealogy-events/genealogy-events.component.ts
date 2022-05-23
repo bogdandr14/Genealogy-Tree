@@ -24,7 +24,7 @@ export class GenealogyEventsComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private personService: PersonService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.dataService
@@ -54,11 +54,11 @@ export class GenealogyEventsComponent implements OnInit {
   onEventSelected(event) {
     console.log(
       'Event selected:' +
-        event.startTime +
-        '-' +
-        event.endTime +
-        ',' +
-        event.title
+      event.startTime +
+      '-' +
+      event.endTime +
+      ',' +
+      event.title
     );
   }
 

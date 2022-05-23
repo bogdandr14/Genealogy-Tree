@@ -168,8 +168,11 @@
     "firstDay": "First day",
     "lastDay": "Last day"
   },
-  "events": {
-    "birthdayAnniversary": "{ name }'s { years } years anniversary",
+  "_calendar": {
+    "noEvents": "No events",
+    "birthday": "{ name }'s birthday",
+    "marriage": "Marriage of { firstPerson } and { secondPerson }",
+    "birthdayAnniversary": "{ name }'s { years } years birthday anniversary",
     "marriageAnniversary": "Marriage anniversary of { years } years between { firstPerson } and { secondPerson }"
   },
   "_pages": {

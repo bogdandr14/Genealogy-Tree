@@ -180,5 +180,25 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
+
+        [GeneTreeAuthorize]
+        [HttpPut]
+        [Route("position/{id:int}")]
+        public async Task<ActionResult<UserPositionModel>> UpdateUserPosition(int id, UserPositionModel position)
+        {
+            try
+            {
+                UserPositionModel updatedPosition = await _userService.UpdateUserPosition(id, position);
+                if (updatedPosition == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedPosition);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
     }
 }

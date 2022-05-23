@@ -1,3 +1,4 @@
+import { UserPositionModel } from './../../genealogy/models/user-position.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
@@ -18,11 +19,9 @@ export class RelativeService extends BaseService {
   }
 
   public getRelatives() {
-    return this.dataService.getCurrentUser().pipe(
-      switchMap((user) => {
-        return super.getMany<GenericPersonModel>(`${user.userId}`);
-      })
-    );
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getMany<GenericPersonModel>(`${user.userId}`)
+    ));
   }
 
   public addRelative(usersToSync: RelativeModel) {
@@ -30,26 +29,20 @@ export class RelativeService extends BaseService {
   }
 
   public getRequestsSent() {
-    return this.dataService.getCurrentUser().pipe(
-      switchMap((user) => {
-        return super.getMany(`request/sent/${user.userId}`);
-      })
-    );
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getMany(`request/sent/${user.userId}`)
+    ));
   }
 
   public getRequestsReceived() {
-    return this.dataService.getCurrentUser().pipe(
-      switchMap((user) => {
-        return super.getMany(`request/received/${user.userId}`);
-      })
-    );
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getMany(`request/received/${user.userId}`)
+    ));
   }
 
   public getRequestsResponded() {
     return this.dataService.getCurrentUser().pipe(
-      switchMap((user) => {
-        return super.getMany(`request/responded/${user.userId}`);
-      })
+      switchMap((user) => super.getMany(`request/responded/${user.userId}`))
     );
   }
 
@@ -63,5 +56,11 @@ export class RelativeService extends BaseService {
 
   public removeRequest(syncRequestId: number) {
     return super.remove(syncRequestId, 'request');
+  }
+
+  public getRelativesPosition() {
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getMany<UserPositionModel>(`position/${user.userId}`)
+    ));
   }
 }

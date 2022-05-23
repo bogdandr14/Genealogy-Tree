@@ -2,8 +2,8 @@
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.DTO.Marriage;
-using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.ParentChild;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.DTO.Request;
 using GenealogyTree.Domain.DTO.User;
@@ -167,7 +167,7 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<User, GenericPersonModel>()
                 .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
-                .ForMember(x => x.TreeId, y=> y.MapFrom(z => z.Person.TreeId))
+                .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Person.TreeId))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Person.BirthDate))
@@ -179,6 +179,11 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<User, UserUpdateModel>()
                 .ReverseMap();
 
+            CreateMap<User, UserPositionModel>()
+                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
+                .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
+                .ForMember(x => x.Latitude, y => y.MapFrom(z => z.Position.Latitude))
+                .ForMember(x => x.Longitude, y => y.MapFrom(z => z.Position.Longitude));
 
             CreateMap<User, RegisterModel>()
                 .ReverseMap();

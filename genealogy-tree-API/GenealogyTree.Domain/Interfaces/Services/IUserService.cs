@@ -1,4 +1,5 @@
-﻿using GenealogyTree.Domain.DTO.User;
+﻿using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.User;
 using System;
 using System.Threading.Tasks;
 
@@ -14,5 +15,6 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<bool> CheckEmailAvailable(string email);
         Task<UserSettingsModel> GetUserSettings(Guid userId);
         Task<UserSettingsModel> UpdateUserSettings(Guid userId, UserSettingsModel userSettings);
+        Task<UserPositionModel> UpdateUserPosition(int positionId, PositionModel position);
     }
 }

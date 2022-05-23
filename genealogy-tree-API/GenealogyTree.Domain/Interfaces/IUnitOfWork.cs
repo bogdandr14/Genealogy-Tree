@@ -13,7 +13,7 @@ namespace GenealogyTree.Domain.Interfaces
         IOccupationRepository Occupation { get; }
         IParentChildRepository ParentChild { get; }
         IPersonRepository Person { get; }
-        IPositionRepository Position { get; set; }
+        IPositionRepository Position { get; }
         IReligionRepository Religion { get; }
         IRelativeRepository Relatives { get; }
         IRequestRepository Requests { get; }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
@@ -135,10 +136,10 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<PositionModel> UpdatePosition(Guid userId,PositionModel position)
+        public async Task<UserPositionModel> UpdateUserPosition(int positionId, PositionModel position)
         {
-            Position positionToUpdate= unitOfWork.User.Filter(user=>user.Id == userId).Include(user=> user.Position).FirstOrDefault().Position;
-            if(positionToUpdate == null || position == null)
+            Position positionToUpdate = await unitOfWork.Position.FindById(positionId);
+            if (positionToUpdate == null || position == null)
             {
                 return null;
             }
@@ -146,7 +147,7 @@ namespace GenealogyTree.Business.Services
             positionToUpdate.Latitude = position.Latitude;
             positionToUpdate.Longitude = position.Longitude;
             Position positionEntity = await unitOfWork.Position.Update(positionToUpdate);
-            PositionModel returnEvent = _mapper.Map<PositionModel>(positionEntity);
+            UserPositionModel returnEvent = _mapper.Map<UserPositionModel>(positionEntity);
             return returnEvent;
         }
     }

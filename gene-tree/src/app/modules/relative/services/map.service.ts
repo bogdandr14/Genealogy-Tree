@@ -1,7 +1,12 @@
+import { RelativeService } from './relative.service';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as Leaflet from 'leaflet';
 import * as L_EXTRA from '../../../../assets/js/leaflet.extra-markers.min.js';
+import { UserMarker } from '../models/user-marker.model';
+import { UserPositionModel } from '../../genealogy/models/user-position.model';
+import { DatePipe } from '@angular/common';
+import { ImageFile } from '../../shared/models/image-file';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,12 +17,17 @@ export class MapService {
   private currentUserCoords: number[] = [0, 0];
 
   private otherUsersIcon: Leaflet.icon;
-  private otherUsersMarkers = [];
+  private relativesMarkers: UserMarker[] = [];
 
   private myMap: Leaflet.map = null;
+  private datePipe: DatePipe;
 
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService,
+    private relativeService: RelativeService
+  ) {
     this.setUsersIcons();
+    this.datePipe = new DatePipe('ro-RO');
     if (!navigator.geolocation) {
       console.log('location is not supported');
     } else {
@@ -102,26 +112,42 @@ export class MapService {
     this.currentUserMarker = Leaflet.marker(this.currentUserCoords, {
       icon: this.currentUserIcon,
     });
-    this.currentUserMarker.bindPopup(`<b>${this.translateService.instant('_map.currentLocation')}</b>`);
+    this.currentUserMarker.bindPopup(`<h2><b>${this.translateService.instant('_map.currentLocation')}</b></h2>
+                                      <p>Updated on: ${this.datePipe.transform(new Date(), 'dd MMM yyy, HH:mm')}</p>`);
     this.currentUserMarker.addTo(this.myMap);
   }
 
-
   private updateOtherUsersOnMap() {
-    // fetch('./assets/data.json')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     const propertyList = data.properties;
-    //     for (const property of propertyList) {
-    //       const otherUserMarker = Leaflet.marker([property.lat, property.long], {
-    //         icon: this.otherUsersIcon,
-    //       })
-    //       otherUserMarker.bindPopup(property.city);
-    //       otherUserMarker.addTo(this.myMap);
-    //       this.otherUsersMarkers.push(otherUserMarker);
-    //     }
-    //   })
-    //   .catch(err => console.error(err));
+    this.relativeService.getRelativesPosition().subscribe((userPositions) => {
+      userPositions.forEach(userPosition => {
+        const existingMarkerIndex = this.relativesMarkers.findIndex(marker => marker.userId === userPosition.userId);
+        if (existingMarkerIndex === -1) {
+          this.addRelativeMarker(userPosition);
+        } else if (this.relativesMarkers[existingMarkerIndex].lastVerified < userPosition.lastVerified) {
+          this.myMap.removeLayer(this.relativesMarkers[existingMarkerIndex].icon.getPane());
+          this.relativesMarkers.splice(existingMarkerIndex, 1);
+          this.addRelativeMarker(userPosition);
+        }
+      })
+    })
+  }
+
+  private getImageUrl(imageFile: ImageFile) {
+    if (!!imageFile) {
+      return `data:${imageFile.mimeType};base64,${imageFile.fileInBytes}`;
+    }
+    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
+  }
+
+  private addRelativeMarker(userPosition: UserPositionModel) {
+    const leafletIcon = Leaflet.marker([userPosition.latitude, userPosition.longitude], { icon: this.otherUsersIcon });
+    const newMarker = new UserMarker(leafletIcon, userPosition.userId, userPosition.lastVerified);
+    newMarker.icon.bindPopup(`<h1><b>${userPosition.firstName} ${userPosition.lastName}</b>
+                                <img src="${this.getImageUrl(userPosition.imageFile)}" width="50" height="50"/>
+                              </h1>
+                              <p>Updated on: ${this.datePipe.transform(userPosition.lastVerified, 'dd MMM yyy, HH:mm')}</p>`, { maxWidth: 560 });
+    newMarker.icon.addTo(this.myMap);
+    this.relativesMarkers.push(newMarker);
   }
 
   removeWatcher() {
