@@ -286,7 +286,8 @@
     "change": "Schimbă imaginea"
   },
   "_map": {
-    "currentLocation": "Aici ești tu"
+    "currentLocation": "Aici ești tu",
+    "updatedOn": "Actualizat la"
   },
   "_support": {
     "description": "Scrie descrierea ticketului mai jos",

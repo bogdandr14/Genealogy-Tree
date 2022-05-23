@@ -286,7 +286,8 @@
     "change": "Change image"
   },
   "_map": {
-    "currentLocation": "Here are you"
+    "currentLocation": "Here are you",
+    "updatedOn": "Updated on"
   },
   "_support": {
     "description": "Enter the description of the ticket below",
