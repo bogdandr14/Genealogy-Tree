@@ -1,3 +1,4 @@
+import { UserCardComponent } from './components/user-card/user-card.component';
 import { PersonModule } from './../person/person.module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
@@ -25,10 +26,11 @@ import { OccupationModule } from './occupation/occupation.module';
     LoginPage,
     ProfilePage,
     UserInfoComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserCardComponent
   ],
   imports: [SharedModule, UserRoutingModule, PersonModule, EducationModule, OccupationModule],
-  exports: [UserInfoComponent, MatchPasswordDirective, PasswordPatternDirective],
+  exports: [UserInfoComponent, MatchPasswordDirective, PasswordPatternDirective, UserCardComponent],
   providers: [Clipboard],
 })
 export class UserModule { }

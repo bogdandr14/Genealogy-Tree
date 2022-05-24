@@ -170,8 +170,8 @@ export class MapService {
           ${userPosition.firstName} ${userPosition.lastName}
         </b>
         <ion-avatar>
-          <img src="${this.getImageUrl(null)}"/><
-        /ion-avatar>
+          <img src="${this.getImageUrl(null)}"/>
+        </ion-avatar>
       </h2>
       <p>
       ${this.translateService.instant(

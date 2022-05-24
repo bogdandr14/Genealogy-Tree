@@ -1,3 +1,4 @@
+import { LocaleService } from './../../../core/services/locale.service';
 import { CalendarEventModel } from './../../models/calendar-event.model';
 import { PersonService } from '../../../person/service/person.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -5,7 +6,7 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { DataService } from '../../../core/services/data.service';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { EventInTreeModel } from '../../models/event-in-tree.model';
-import { ImageFile } from 'src/app/modules/shared/models/image-file';
+import { ImageFile } from '../../../shared/models/image-file';
 import { CalendarMode } from 'ionic2-calendar/calendar';
 
 @Component({
@@ -24,6 +25,7 @@ export class GenealogyEventsComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private personService: PersonService,
+    public localeService: LocaleService
   ) { }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class GenealogyEventsComponent implements OnInit {
     today.setHours(0, 0, 0, 0);
     event.setHours(0, 0, 0, 0);
     this.isToday = today.getTime() === event.getTime();
-    if (event.getFullYear() != this.calendarEvents[0].startTime.getFullYear()) {
+    if (!this.calendarEvents.length || event.getFullYear() != this.calendarEvents[0].startTime.getFullYear()) {
       this.setCalendarEvents(event.getFullYear());
     }
   }

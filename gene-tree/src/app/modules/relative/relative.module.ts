@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { RelativePage } from './page/relative.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RelativePageRoutingModule } from './relative-routing.module';
+import { UserModule } from '../user/user.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RelativePageRoutingModule } from './relative-routing.module';
     SharedModule,
     RelativePageRoutingModule,
     PersonModule,
+    UserModule,
     Ng2SearchPipeModule
   ],
 })

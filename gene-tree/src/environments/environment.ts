@@ -9,8 +9,8 @@ export const environment = {
   appSettings: {
     version: '',
     languages: [
-      { translationKey: "languageEN", iso: "en-us", languageKey: "en" },
-      { translationKey: "languageRO", iso: "ro-ro", languageKey: "ro" }
+      { translationKey: "languageEN", iso: "en-US", languageKey: "en" },
+      { translationKey: "languageRO", iso: "ro-RO", languageKey: "ro" }
     ]
   },
 };

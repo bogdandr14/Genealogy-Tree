@@ -9,9 +9,20 @@ import { GenericPersonModel } from '../../models/generic-person.model';
 export class PersonCardComponent implements OnInit {
   @Input() person: GenericPersonModel;
   @Input() showContent = true;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  get cardColor() {
+    if (this.person.deathDate != null) {
+      return 'dead';
+    } else if (this.person.gender === 'm') {
+      return 'male';
+    } else {
+      return 'female';
+    }
+  }
+
   get imageUrl(): string {
     if (this.person && this.person.imageFile) {
       return `data:${this.person.imageFile.mimeType};base64,${this.person.imageFile.fileInBytes}`;

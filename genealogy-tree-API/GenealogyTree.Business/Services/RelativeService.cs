@@ -17,7 +17,6 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
 
-
         public RelativeService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
         {
             _mapper = mapper;

@@ -28,6 +28,7 @@
     >
       <ng-template>
         <ion-datetime
+          [locale]="localeService.currentLocale"
           #popoverDate
           showDefaultButtons
           (ionChange)="setDate(popoverDate.value)"

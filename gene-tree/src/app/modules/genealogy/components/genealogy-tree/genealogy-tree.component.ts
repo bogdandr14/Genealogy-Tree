@@ -47,7 +47,7 @@ export class GenealogyTreeComponent implements OnInit {
         fid: person.motherId ? person.motherId : null,
         mid: person.fatherId ? person.fatherId : null,
         pids: person.partnersIds,
-        gender: person.gender === 'm' ? 'male' : 'female',
+        gender: person.deathDate == null ? person.gender === 'm' ? 'male' : 'female' : '',
         photo: person.imageFile
           ? `data:${person.imageFile.mimeType};base64,${person.imageFile.fileInBytes}`
           : 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',

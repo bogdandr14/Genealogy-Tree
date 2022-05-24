@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { LocaleProvider } from './locale.provider';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
@@ -59,6 +60,7 @@ export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
     Clipboard,
+    LocaleProvider
   ],
 })
 export class CoreModule {

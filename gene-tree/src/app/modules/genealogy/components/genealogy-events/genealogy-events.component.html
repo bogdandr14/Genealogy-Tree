@@ -3,7 +3,9 @@
     <ion-title>{{ "_pages.genealogyEvents" | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-buttons end>
-        <ion-button [disabled]="isToday" (click)="today()">Today</ion-button>
+        <ion-button [disabled]="isToday" (click)="today()">
+          {{ "_common.today" | translate }}
+        </ion-button>
       </ion-buttons>
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -30,6 +32,7 @@
       [eventSource]="calendarEvents"
       [calendarMode]="calendar.mode"
       [currentDate]="calendar.currentDate"
+      [locale]="localeService.currentLocale"
       [noEventsLabel]="'_calendar.noEvents' | translate"
       (onCurrentDateChanged)="onCurrentDateChanged($event)"
       (onEventSelected)="onEventSelected($event)"

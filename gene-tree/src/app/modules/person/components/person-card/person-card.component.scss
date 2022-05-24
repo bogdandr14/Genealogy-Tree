@@ -5,4 +5,31 @@
   width: 80px !important; //any size
   height: 80px !important; //any size
 }
+.box {
+  transition-delay: -1s;
+  border-radius: 5px;
+}
+ion-item {
+  border-radius: 5px;
+}
 
+.box:hover {
+  background-color: var(--ion-color-warning);
+}
+
+.uni {
+  transition-duration: 3s;
+  transition-property: background-color;
+  border-radius: 5px;
+}
+
+.female::ng-deep {
+  background-image: linear-gradient(#ff8024, #ff46a3) !important;
+}
+
+.male {
+  background-image: linear-gradient(#00d3a5, #00a7d4) !important;
+}
+.dead::ng-deep {
+  background-image: linear-gradient(#2a1a34, #36664f) !important;
+}

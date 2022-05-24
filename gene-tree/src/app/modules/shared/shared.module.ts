@@ -1,6 +1,6 @@
 import { SocialMediaChipsComponent } from './components/social-media-chips/social-media-chips.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import { HoverClassDirective } from './directives/hover-class.directive';
 import { PaginatorComponent } from './components/paginator/paginator.component';
@@ -14,9 +14,6 @@ import { LinkUserButtonsComponent } from './components/link-user-buttons/link-us
 import { RouterModule } from '@angular/router';
 import { DateSelectTemplateComponent } from './components/date-select-template/date-select-template.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import localeRo from '@angular/common/locales/ro';
-import localeEn from '@angular/common/locales/en-GB';
-registerLocaleData(localeRo);
 @NgModule({
   declarations: [
     HoverClassDirective,
@@ -53,8 +50,6 @@ registerLocaleData(localeRo);
     DateSelectTemplateComponent,
     SocialMediaChipsComponent,
   ],
-  providers: [InAppBrowser, DatePipe,
-    { provide: LOCALE_ID, useValue: 'ro-RO' },
-    { provide: LOCALE_ID, useValue: 'en-GB' }],
+  providers: [InAppBrowser, DatePipe],
 })
 export class SharedModule { }

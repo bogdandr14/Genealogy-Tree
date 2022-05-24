@@ -20,10 +20,12 @@
             {{ "_pages.relatives" | translate }}
           </ion-button>
         </ion-buttons>
-        <app-link-user-buttons
-          slot="end"
-          [userId]="personInfo?.userId"
-        ></app-link-user-buttons>
+        <ion-buttons slot="end">
+          <app-link-user-buttons
+            slot="end"
+            [userId]="personInfo?.userId"
+          ></app-link-user-buttons>
+        </ion-buttons>
       </ion-item>
     </ng-container>
     <ng-template #showTitle>
@@ -38,9 +40,7 @@
         <ion-item>
           <ion-label> {{ "_person.gender" | translate }}:</ion-label>
           <span>
-            {{
-              "_genders." + personInfo?.gender | lowercase | translate
-            }}</span
+            {{ "_genders." + personInfo?.gender | lowercase | translate }}</span
           >
         </ion-item>
         <ion-item>

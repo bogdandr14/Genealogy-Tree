@@ -198,7 +198,7 @@
     "registerHere": "Register here"
   },
   "_common": {
-    "you": "You",
+    "you": "Your profile",
     "details": "Details",
     "add": "Add",
     "edit": "Edit",
@@ -219,7 +219,8 @@
     "list": "List",
     "tree": "Tree",
     "events": "Anniversaries",
-    "search": "Search"
+    "search": "Search",
+    "today": "Today"
   },
   "_slides": {
     "_welcome": {

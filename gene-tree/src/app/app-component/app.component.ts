@@ -7,7 +7,9 @@ import { DataService } from '../modules/core/services/data.service';
 import { Title } from '@angular/platform-browser';
 import { filter, map, tap } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { LocaleService } from '../modules/core/services/locale.service';
 export const DEFAULT_TITLE = 'GeneTree';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit {
     public authService: AuthService,
     public dataService: DataService,
     private translateService: TranslateService,
+    private localeService: LocaleService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private titleService: Title
@@ -33,11 +36,13 @@ export class AppComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd),
       map(() => {
         let child = this.activatedRoute.firstChild;
-        while (child.firstChild) {
-          child = child.firstChild;
-        }
-        if (child.snapshot.data['title']) {
-          return child.snapshot.data['title'];
+        if (child) {
+          while (child.firstChild) {
+            child = child.firstChild;
+          }
+          if (child.snapshot.data['title']) {
+            return child.snapshot.data['title'];
+          }
         }
         return DEFAULT_TITLE;
       })
@@ -56,8 +61,10 @@ export class AppComponent implements OnInit {
   //https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
   private loadData() {
     this.translateService.use(environment.defaultLanguage);
+    this.localeService.initLocale();
     this.dataService.language$.subscribe((language) => {
       this.translateService.use(language);
+
     });
   }
   //https://ionicframework.com/docs/v3/native/mobile-accessibility/

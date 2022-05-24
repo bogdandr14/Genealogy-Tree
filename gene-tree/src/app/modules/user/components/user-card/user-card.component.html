@@ -1,0 +1,28 @@
+<ion-card *ngIf="user" [routerLink]="['/user/profile', user?.userId]">
+  <ion-card-header>
+    <ion-item lines="none">
+      <ion-avatar class="avatar" slot="start">
+        <img
+          [src]="imageUrl"
+          [alt]="user?.firstName + user?.lastName + 'profile picture'"
+        />
+      </ion-avatar>
+      <ion-label class="ion-padding-start" text-wrap>
+        <h1>{{ user?.firstName }}</h1>
+        <h1>{{ user?.lastName }}</h1>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label> {{ "_person.birthday" | translate }}:</ion-label>
+        <span> {{ user?.birthDate | date: "dd/MM/yyyy" }}</span>
+      </ion-item>
+      <ion-item *ngIf="user?.deathDate">
+        <ion-label> {{ "_person.deathday" | translate }}:</ion-label>
+        <span> {{ user?.deathDate | date: "dd/MM/yyyy" }}</span>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

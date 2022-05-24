@@ -13,6 +13,10 @@ export class TreeTemplateConstants {
       <stop offset="0%" style="stop-color:#505050;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#101010;stop-opacity:1" />
   </linearGradient>
+  <linearGradient id="gene_grad_dead" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2a1a34;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#36664f;stop-opacity:1" />
+  </linearGradient>
   <linearGradient id="gene_grad_other" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:red;stop-opacity:1" />
       <stop offset="20%" style="stop-color:orange;stop-opacity:1" />
@@ -80,7 +84,7 @@ export class TreeTemplateConstants {
   </clipPath>
   <use xlink:href="#gene_person_img_stroke" />
   <image preserveAspectRatio="xMidYMid slice" stroke="white" clip-path="url(#person_img)" xlink:href="{val}" x="85" y="-20" width="80" height="80"></image>`;
-  static readonly personNode = `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" fill=url(#gene_grad_other) stroke="#aeaeae" rx="7" ry="7"></rect>`;
+  static readonly personNode = `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" fill=url(#gene_grad_dead) stroke="#aeaeae" rx="7" ry="7"></rect>`;
   static readonly expandNodesBtn = `<use x="20" y="8" xlink:href="#gene_up"/>`;
   static readonly menuBtn = `<use x="225" y="10" data-ctrl-n-menu-id="{id}" xlink:href="#gene_node_menu" />`;
   static readonly maleNode = `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" fill=url(#gene_grad_male) stroke="#aeaeae" rx="7" ry="7"></rect>`;

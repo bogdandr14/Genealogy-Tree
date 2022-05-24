@@ -1,5 +1,8 @@
-<ion-card *ngIf="person">
-  <ion-card-header [routerLink]="['/person/details', person?.personId]">
+<ion-card *ngIf="person" [ngClass]="cardColor">
+  <ion-card-header
+    class="box uni"
+    [routerLink]="['/person/details', person?.personId]"
+  >
     <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
         <img
@@ -13,34 +16,10 @@
       </ion-label>
     </ion-item>
   </ion-card-header>
-  <ion-card-content *ngIf="showContent">
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label> {{ "_person.birthday" | translate }}:</ion-label>
-        <span> {{ person?.birthDate | date: "dd/MM/yyyy" }}</span>
-      </ion-item>
-      <ion-item *ngIf="person?.deathDate">
-        <ion-label> {{ "_person.deathday" | translate }}:</ion-label>
-        <span> {{ person?.deathDate | date: "dd/MM/yyyy" }}</span>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-buttons slot="start">
-          <ion-button
-            [routerLink]="['/person/details', person?.personId]"
-            fill="clear"
-            color="secondary"
-            expand="block"
-            slot="start"
-          >
-            <ion-icon name="reader" slot="start"></ion-icon>
-            {{ "_common.details" | translate }}
-          </ion-button>
-        </ion-buttons>
-        <app-link-user-buttons
-          slot="end"
-          [userId]="person?.userId"
-        ></app-link-user-buttons>
-      </ion-item>
-    </ion-list>
+  <ion-card-content *ngIf="showContent && person.userId">
+    <app-link-user-buttons
+      slot="end"
+      [userId]="person?.userId"
+    ></app-link-user-buttons>
   </ion-card-content>
 </ion-card>

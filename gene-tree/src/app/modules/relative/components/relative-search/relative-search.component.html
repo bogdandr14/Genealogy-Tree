@@ -19,9 +19,9 @@
       <ion-col
       size="12"
       size-md="4"
-      *ngFor="let person of users"
+      *ngFor="let user of users"
     >
-      <app-person-card [person]="person"></app-person-card>
+      <app-user-card [user]="user"></app-user-card>
     </ion-col>
   </ion-row>
   <ion-infinite-scroll threshold="100px" #infiniteScroll (ionInfinite)="loadMoreUsers()">
