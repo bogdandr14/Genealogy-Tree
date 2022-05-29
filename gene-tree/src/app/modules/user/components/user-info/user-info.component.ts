@@ -11,6 +11,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 export class UserInfoComponent implements OnInit {
   @Input() userInfo: UserDetailsModel;
   @Input() canModify: boolean = false;
+  @Input() canAccessDetails: boolean = false;
   constructor(
     private alertService: AlertService,
     private clipboard: Clipboard

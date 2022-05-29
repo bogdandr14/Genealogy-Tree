@@ -1,6 +1,6 @@
 <ion-avatar class="avatar">
   <img [src]="imageUrl" alt="avatar" />
-  <ion-fab-button
+  <ion-fab-button *ngIf="canEdit"
     class="inner"
     [id]="'open-change-picture-' + personId"
     color="success"

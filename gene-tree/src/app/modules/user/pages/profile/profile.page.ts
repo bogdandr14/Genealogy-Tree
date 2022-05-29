@@ -48,4 +48,7 @@ export class ProfilePage implements OnInit {
   get isCurrentUser() {
     return this.userService.isCurrentUser(this.personalInfo?.userId);
   }
+  get isRelative(){
+    return false;
+  }
 }

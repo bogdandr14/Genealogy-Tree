@@ -9,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PersonAvatarComponent implements OnInit {
   @Input() imageFile: ImageFile;
   @Input() personId: number;
+  @Input() canEdit: boolean = false;
   constructor() {}
 
   ngOnInit() {}

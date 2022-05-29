@@ -8,12 +8,29 @@
 </ion-header>
 
 <ion-content class="ion-padding-top ion-text-center">
+  <ng-container *ngIf="!isRelative && !isCurrentUser">
+    <ion-button
+      id="open-add-relative"
+      class="ion-margin"
+      expand="block"
+      color="success"
+    >
+      <ion-icon name="add" slot="start"></ion-icon>
+      {{ "_add.relative" | translate }}
+    </ion-button>
+    <ion-modal trigger="open-add-relative" [swipeToClose]="true">
+      <ng-template>
+        <app-occupation-edit> </app-occupation-edit>
+      </ng-template>
+    </ion-modal>
+  </ng-container>
   <ion-grid>
     <ion-row class="ion-align-item-center">
       <ion-col size-sm="4" offset-sm="1">
         <app-user-info
           [userInfo]="personalInfo"
           [canModify]="isCurrentUser"
+          [canAccessDetails]="isRelative || isCurrentUser"
         ></app-user-info>
       </ion-col>
       <ion-col size-sm="4" offset-sm="1">

@@ -3,11 +3,12 @@
     <app-person-avatar
       [imageFile]="userInfo?.imageFile"
       [personId]="userInfo?.personId"
+      [canEdit]="canModify"
     ></app-person-avatar>
     <ion-card-title text-wrap>
       <h1>{{ userInfo?.firstName }} {{ userInfo?.lastName }}</h1>
     </ion-card-title>
-    <ion-item lines="none">
+    <ion-item *ngIf="canAccessDetails" lines="none">
       <ion-buttons slot="start">
         <ion-button
           [routerLink]="['/genealogy/list', userInfo?.treeId]"
@@ -38,7 +39,8 @@
         <ion-label>{{ "_user.description" | translate }}:</ion-label>
       </ion-item>
       <ion-item>
-        <ion-textarea class="custom-textarea"
+        <ion-textarea
+          class="custom-textarea"
           readonly
           disabled
           [rows]="userInfo?.about ? userInfo.about.length / 40 : 1"
@@ -50,14 +52,14 @@
         >
         </ion-textarea>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="canAccessDetails">
         {{ "_user.email" | translate }}:
         <ion-chip color="secondary" (click)="copyMail('das@djisa')">
           <ion-icon name="mail-outline"></ion-icon>
           <ion-label>{{ userInfo?.email }} </ion-label>
         </ion-chip>
       </ion-item>
-      <ion-item class="ion-justify-content-start">
+      <ion-item *ngIf="canAccessDetails" class="ion-justify-content-start">
         {{ "_user.phone" | translate }}:
         <ion-chip color="secondary" (click)="copyPhone('0231789312')">
           <ion-icon name="call-outline"></ion-icon>
