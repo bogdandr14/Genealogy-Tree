@@ -15,6 +15,7 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { EducationModule } from './education/education.module';
 import { OccupationModule } from './occupation/occupation.module';
+import { RelativeRequestComponent } from '../relative/components/relative-request/relative-request.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { OccupationModule } from './occupation/occupation.module';
     ProfilePage,
     UserInfoComponent,
     UserEditComponent,
-    UserCardComponent
+    UserCardComponent,
+    RelativeRequestComponent
   ],
   imports: [SharedModule, UserRoutingModule, PersonModule, EducationModule, OccupationModule],
   exports: [UserInfoComponent, MatchPasswordDirective, PasswordPatternDirective, UserCardComponent],

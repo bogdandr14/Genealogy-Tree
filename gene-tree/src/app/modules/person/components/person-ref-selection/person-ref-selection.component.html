@@ -1,0 +1,19 @@
+<ion-card *ngIf="person" [ngClass]="cardColor" [class.selected]="selected">
+  <ion-card-header
+    class="box uni"
+    (click)="selectPerson.emit(person)"
+  >
+    <ion-item lines="none">
+      <ion-avatar class="avatar" slot="start">
+        <img
+          [src]="imageUrl"
+          [alt]="person?.firstName + person?.lastName + 'profile picture'"
+        />
+      </ion-avatar>
+      <ion-label class="ion-padding-start" text-wrap>
+        <h1>{{ person?.firstName }}</h1>
+        <h1>{{ person?.lastName }}</h1>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+</ion-card>

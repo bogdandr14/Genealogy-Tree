@@ -1,12 +1,13 @@
+import { RelativeService } from './../../../relative/services/relative.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/modules/user/service/user.service';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AccountProfileModel } from '../../models/profile.model';
-import { switchMap, take } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { switchMap, take, tap } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Guid } from 'guid-typescript';
-import { iif } from 'rxjs';
-import { DataService } from 'src/app/modules/core/services/data.service';
+import { iif, Observable } from 'rxjs';
+import { DataService } from '../../../core/services/data.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +16,11 @@ import { DataService } from 'src/app/modules/core/services/data.service';
 })
 export class ProfilePage implements OnInit {
   public personalInfo: AccountProfileModel;
-
+  public canSync = false;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private relativeService: RelativeService,
     private dataService: DataService
   ) {}
 
@@ -28,7 +30,7 @@ export class ProfilePage implements OnInit {
         switchMap((params) => {
           return iif<AccountProfileModel, AccountProfileModel>(
             () => !!params.get('id'),
-            this.userService.getUser(this.getGuid(params.get('id'))),
+            this.getUserInfo(params),
             this.dataService
               .getCurrentUser()
               .pipe(switchMap(() => this.userService.getPersonalInfo()))
@@ -41,6 +43,20 @@ export class ProfilePage implements OnInit {
       });
   }
 
+  getUserInfo(params: ParamMap): Observable<AccountProfileModel> {
+    const relativeId = this.getGuid(params.get('id'));
+    if (!this.userService.isCurrentUser(relativeId)) {
+      this.relativeService
+        .canAddRelative(relativeId)
+        .pipe(
+          tap((canAdd) => (this.canSync = canAdd)),
+          take(1)
+        )
+        .subscribe();
+    }
+    return this.userService.getUser(relativeId);
+  }
+
   getGuid(id) {
     return id ? Guid.parse(id) : Guid.createEmpty();
   }
@@ -48,7 +64,8 @@ export class ProfilePage implements OnInit {
   get isCurrentUser() {
     return this.userService.isCurrentUser(this.personalInfo?.userId);
   }
-  get isRelative(){
+
+  get isRelative() {
     return false;
   }
 }

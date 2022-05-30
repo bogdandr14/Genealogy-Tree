@@ -22,6 +22,21 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
+        [Route("notificationsCount/{userId:Guid}")]
+        public async Task<ActionResult<bool>> GetNotificationsCount(Guid userId)
+        {
+            try
+            {
+                int notificationsCount = await _userService.GetNotificationsCount(userId);
+                return Ok(notificationsCount);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
         [Route("find")]
         public async Task<ActionResult<bool>> CheckUsername([FromQuery] InfiniteScrollFilter filter)
         {

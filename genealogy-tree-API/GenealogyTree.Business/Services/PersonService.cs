@@ -142,6 +142,23 @@ namespace GenealogyTree.Business.Services
             return returnEventsList;
         }
 
+        public async Task<List<GenericPersonModel>> GetPeopleWithoutRelative(Guid treeId)
+        {
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId && p.RelativeForPerson == null).Include(p => p.RelativeForPerson).ToList();
+            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
+            User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+            foreach (var person in poepleList)
+            {
+                if (person.Id != user.PersonId)
+                {
+                    GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
+                    returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
+                    returnPeopleList.Add(returnPerson);
+                }
+            }
+            return returnPeopleList;
+        }
+
         private async Task<List<PersonBaseModel>> MapAffectedMarriageAnniversaryEvent(Marriage marriage)
         {
             List<PersonBaseModel> peopleList = new List<PersonBaseModel>();

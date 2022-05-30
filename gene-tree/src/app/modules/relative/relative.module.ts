@@ -1,3 +1,4 @@
+import { RelativeRequestComponent } from './components/relative-request/relative-request.component';
 import { PersonModule } from './../person/person.module';
 import { RelativeMapComponent } from './components/relative-map/relative-map.component';
 import { RelativeSearchComponent } from './components/relative-search/relative-search.component';
@@ -14,14 +15,14 @@ import { UserModule } from '../user/user.module';
     RelativePage,
     RelativeListComponent,
     RelativeSearchComponent,
-    RelativeMapComponent
+    RelativeMapComponent,
   ],
   imports: [
     SharedModule,
     RelativePageRoutingModule,
     PersonModule,
     UserModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
 })
-export class RelativePageModule { }
+export class RelativePageModule {}

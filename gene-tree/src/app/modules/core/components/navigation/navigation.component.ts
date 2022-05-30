@@ -1,4 +1,6 @@
+import { UserService } from 'src/app/modules/user/service/user.service';
 import { Component } from '@angular/core';
+import { interval } from 'rxjs';
 import { RouteDescriptor } from '../../models/route-descriptor';
 import { AuthService } from '../../services/auth.service';
 

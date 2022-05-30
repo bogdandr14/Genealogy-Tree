@@ -1,0 +1,52 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      {{ "_add.relative" | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        {{ "_common.cancel" | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-list-header>
+                <h2>
+                  {{ "_relative.chooseReference" | translate }}
+                </h2>
+              </ion-list-header>
+
+              <div class="selection-list-height">
+                <app-person-ref-selection
+                  *ngFor="let unrelatedPerson of peopleWithoutUserList"
+                  [person]="unrelatedPerson"
+                  [selected]=" request?.receiverReferenceInSenderTree &&
+                    unrelatedPerson.personId === request?.receiverReferenceInSenderTree?.personId
+                  "
+                  (selectPerson)="selectPerson($event)"
+                ></app-person-ref-selection>
+              </div>
+            </ion-list>
+            <ion-button
+              color="success"
+              type="submit"
+              class="submit-button"
+              expand="block"
+              [disabled]="!request.receiverReferenceInSenderTree"
+              (click)="addMarriage()"
+            >
+              {{ "_common.save" | translate }}
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

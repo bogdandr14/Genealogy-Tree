@@ -43,6 +43,25 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("canAdd/{userId:Guid}")]
+        public async Task<ActionResult<List<RelativeModel>>> CanAddRelativeForUser(Guid userId, [FromQuery] Guid relativeId)
+        {
+            try
+            {
+                bool canAdd = await _relativeService.CanAddRelative(userId, relativeId);
+                if (canAdd == null)
+                {
+                    return NotFound();
+                }
+                return Ok(canAdd);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<UsersToLinkModel>> UserResponded(UsersToLinkModel usersToLink)

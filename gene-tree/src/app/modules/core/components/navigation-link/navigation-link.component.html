@@ -6,9 +6,11 @@
     routerDirection="root"
     detail="false"
   >
-    <ion-icon slot="start" [name]="link.icon"></ion-icon>
+    <ion-icon slot="start" [name]="link.icon">
+    </ion-icon>
     <ion-label>
       {{ link.title | translate }}
+      <ion-badge *ngIf="link.icon==='notifications'">{{userService.notificationCount$ | async}}</ion-badge>
     </ion-label>
   </ion-item>
 </ion-menu-toggle>

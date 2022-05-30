@@ -9,6 +9,7 @@ import { GenericPersonModel } from '../../person/models/generic-person.model';
 import { RequestCreateUpdateModel } from '../models/request-create-update.model';
 import { RequestResponseModel } from '../models/request-response.model';
 import { RelativeModel } from '../models/relative.model';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,13 @@ export class RelativeService extends BaseService {
     super(httpClient, 'api/relative', environment.baseApiUrl);
   }
 
+  public canAddRelative(relativeId: Guid){
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+    super.getOneByPath<boolean>(
+      `canAdd/${user.userId}?relativeId=${relativeId}`, BaseService.noLoadingConfig
+      )
+    ));
+  }
   public getRelatives() {
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
       super.getMany<GenericPersonModel>(`${user.userId}`)
@@ -47,7 +55,12 @@ export class RelativeService extends BaseService {
   }
 
   public sendRequest(syncRequest: RequestCreateUpdateModel) {
-    return super.add(syncRequest, 'request');
+    return this.dataService.getCurrentUser().pipe(
+      switchMap((user)=> {
+        syncRequest.senderUserId = user.userId;
+        return super.add(syncRequest, 'request');
+      })
+    )
   }
 
   public respondToRequest(syncRequest: RequestResponseModel) {

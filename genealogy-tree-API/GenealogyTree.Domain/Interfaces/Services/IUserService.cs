@@ -10,6 +10,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<UsersFound> FindUsers(InfiniteScrollFilter filter);
         Task<UserDetailsModel> GetUserByIdAsync(Guid userId);
         Task<UserDetailsModel> GetUser(string username);
+        Task<int> GetNotificationsCount(Guid userId);
         Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user);
         Task<bool> CheckUsernameAvailable(string username);
         Task<bool> CheckEmailAvailable(string email);

@@ -1,3 +1,4 @@
+import { ParentChildModule } from './../parent-child/parent-child.module';
 import { MarriageEditComponent } from './components/marriage-edit/marriage-edit.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
@@ -15,7 +16,7 @@ import { RouterModule } from '@angular/router';
     MarriageListComponent
   ],
   imports: [
-    SharedModule, RouterModule
+    SharedModule, RouterModule, ParentChildModule
   ],
   exports: [MarriageAddComponent,
     MarriageCardComponent,

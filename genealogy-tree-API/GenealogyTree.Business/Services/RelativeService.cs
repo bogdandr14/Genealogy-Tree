@@ -37,6 +37,17 @@ namespace GenealogyTree.Business.Services
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relative);
             return returnEvent;
         }
+        public async  Task<bool> CanAddRelative(Guid userId, Guid relativeId)
+        {
+            bool isAlreadyRelative = unitOfWork.Relatives.Filter(r => (r.PrimaryUserId == userId && r.RelativeUserId == relativeId)).Any();
+            if (isAlreadyRelative)
+            {
+                return false;
+            }
+            bool requestAlreadySent = unitOfWork.Requests.Filter(r => r.SenderId == userId && r.ReceiverId == relativeId && r.ReceiverResponded == false).Any();
+            return !requestAlreadySent;
+        }
+
 
         public async Task<RelativeModel> AddRelativeUser(UsersToLinkModel usersToLink)
         {

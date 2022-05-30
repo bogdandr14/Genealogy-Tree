@@ -87,6 +87,25 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
+        [Route("withoutRelative/{treeId:Guid}")]
+        public async Task<ActionResult<PersonTreeInfoModel>> GetPeopleWithoutRelative(Guid treeId)
+        {
+            try
+            {
+                List<GenericPersonModel> returnEvent = await _personService.GetPeopleWithoutRelative(treeId);
+                if (returnEvent == null)
+                {
+                    return NotFound();
+                }
+                return Ok(returnEvent);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<PersonDetailsModel>> GetPersonDetails(int id)
         {

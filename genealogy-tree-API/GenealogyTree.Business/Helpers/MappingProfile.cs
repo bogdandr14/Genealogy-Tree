@@ -144,8 +144,13 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
             CreateMap<Request, RequestCreateUpdateModel>()
                 .ForMember(x => x.ReceiverUser, y => y.MapFrom(z => z.Receiver))
-                .ForMember(x => x.SenderUserId, y => y.MapFrom(z => z.SenderId))
-                .ReverseMap();
+                .ForMember(x => x.SenderUserId, y => y.MapFrom(z => z.SenderId));
+
+            CreateMap<RequestCreateUpdateModel, Request>()
+                .ForMember(x => x.ReceiverId, y => y.MapFrom(z => z.ReceiverUser.UserId))
+                .ForMember(x => x.SenderId, y => y.MapFrom(z => z.SenderUserId))
+                .ForMember(x => x.ReceiverReferenceInSenderTreeId, y => y.MapFrom(z => z.ReceiverReferenceInSenderTree.PersonId));
+
 
             CreateMap<User, UserSettingsModel>()
                 .ReverseMap();

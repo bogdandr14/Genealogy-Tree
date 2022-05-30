@@ -10,6 +10,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<List<RelativeModel>> GetAllRelativesForUser(Guid userId);
         Task<RelativeModel> GetRelative(int relativeId);
+        Task<bool> CanAddRelative(Guid userId, Guid relativeId);
         Task<RelativeModel> AddRelativeUser(UsersToLinkModel usersToLink);
         Task<RelativeModel> DeleteRelative(int relativeId);
         Task<List<UserPositionModel>> GetRelativesPosition(Guid userId);

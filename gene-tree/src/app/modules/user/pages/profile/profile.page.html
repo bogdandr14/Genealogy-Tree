@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding-top ion-text-center">
-  <ng-container *ngIf="!isRelative && !isCurrentUser">
+  <ng-container *ngIf="canSync">
     <ion-button
       id="open-add-relative"
       class="ion-margin"
@@ -20,7 +20,9 @@
     </ion-button>
     <ion-modal trigger="open-add-relative" [swipeToClose]="true">
       <ng-template>
-        <app-occupation-edit> </app-occupation-edit>
+        <app-relative-request
+        [receiverUser]="personalInfo"
+        (saveConfirmed)="canSync=false"> </app-relative-request>
       </ng-template>
     </ion-modal>
   </ng-container>

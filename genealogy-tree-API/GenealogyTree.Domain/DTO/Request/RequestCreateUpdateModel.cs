@@ -1,13 +1,13 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.User;
+using System;
 
 namespace GenealogyTree.Domain.DTO.Request
 {
     public class RequestCreateUpdateModel
     {
         public int? Id { get; set; }
-        public int SenderUserId { get; set; }
-        public UserDetailsModel ReceiverUser { get; set; }
+        public Guid SenderUserId { get; set; }
+        public GenericPersonModel ReceiverUser { get; set; }
         public PersonDetailsModel ReceiverReferenceInSenderTree { get; set; }
     }
 }

@@ -4,13 +4,13 @@ import { UserEditModel } from '../models/user-edit.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../../settings/models/account-settings.model';
 import { CurrentUserModel } from '../../core/models/current-user.model';
 import { BaseService } from '../../core/services/base.service';
 import { DataService } from '../../core/services/data.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { SupportTicketModel } from '../../support/models/support-ticket.model';
 import { InfiniteScrollFilter } from '../../shared/models/infinite-scroll.filter';
 import { FoundUsersModel } from '../models/found-users.model';
@@ -18,6 +18,9 @@ import { FoundUsersModel } from '../models/found-users.model';
 @Injectable({ providedIn: 'root' })
 export class UserService extends BaseService {
   private userState = new BehaviorSubject<CurrentUserModel>(null);
+  private notificationCount = new BehaviorSubject<number>(0);
+  public notificationCount$ = this.notificationCount.asObservable();
+  private notificationSubscription: Subscription;
 
   constructor(httpClient: HttpClient, private dataService: DataService) {
     super(httpClient, 'api/user', environment.baseApiUrl);
@@ -27,6 +30,16 @@ export class UserService extends BaseService {
   private initUserSubscriber() {
     this.dataService.user$.subscribe((user) => {
       this.userState.next(user);
+      if (user && Object.keys(user).length > 0) {
+        this.notificationSubscription = timer(100, 60000)
+          .pipe(
+            switchMap(() => this.getNotificationsCount()),
+            tap((count) => this.notificationCount.next(count))
+          )
+          .subscribe();
+      } else if (this.notificationSubscription) {
+        this.notificationSubscription.unsubscribe();
+      }
     });
   }
 
@@ -46,6 +59,11 @@ export class UserService extends BaseService {
     return this.userState.value.email;
   }
 
+  public getNotificationsCount(){
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getOneByPath<number>(`notificationsCount/${user.userId}`,BaseService.noLoadingConfig)
+    ));
+  }
   public findUsers(filter: InfiniteScrollFilter) {
     return super.getOneByPath<FoundUsersModel>(`find/${this.turnFilterIntoUrl(filter)}`);
   }

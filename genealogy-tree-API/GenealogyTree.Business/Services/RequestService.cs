@@ -48,6 +48,7 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Request requestEntity = _mapper.Map<Request>(request);
+            requestEntity.ReceiverReferenceInSenderTree = null;
             Request createdRequest = await unitOfWork.Requests.Create(requestEntity);
             RequestCreateUpdateModel returnEvent = _mapper.Map<RequestCreateUpdateModel>(createdRequest);
             return returnEvent;

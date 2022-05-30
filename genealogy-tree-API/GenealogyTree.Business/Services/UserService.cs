@@ -88,6 +88,15 @@ namespace GenealogyTree.Business.Services
             return userEntity;
         }
 
+        public async Task<int> GetNotificationsCount(Guid userId)
+        {
+            User user = unitOfWork.User.Filter(u => u.Id == userId).Include(u => u.Person).Include(u => u.ReceivedRequests).FirstOrDefault();
+            int requestsCount = user.ReceivedRequests.Count();
+            int birthdayCount = unitOfWork.Person.Filter(p => p.TreeId == user.Person.TreeId && p.BirthDate.HasValue && p.BirthDate.Value.DayOfYear == DateTime.Now.DayOfYear).Count();
+            int marriageCount = unitOfWork.Marriage.Filter(m => m.FirstPerson.TreeId == user.Person.TreeId && m.StartDate.DayOfYear == DateTime.Now.DayOfYear).Count();
+            return requestsCount + birthdayCount + marriageCount;
+        }
+
         public async Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user)
         {
             User userToUpdate = await unitOfWork.User.FindById(userId);
