@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PersonModule } from '../person/person.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgCalendarModule } from 'ionic2-calendar';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
     GenealogyPageRoutingModule,
     PersonModule,
     Ng2SearchPipeModule,
-    NgCalendarModule
+    NgCalendarModule,
+    RouterModule
   ],
   declarations: [GenealogyPage, GenealogyTreeComponent, GenealogyListComponent, GenealogyEventsComponent]
 })

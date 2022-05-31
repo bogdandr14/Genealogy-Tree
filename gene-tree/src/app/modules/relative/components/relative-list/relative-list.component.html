@@ -1,12 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>synced-list</ion-title>
+    <ion-title>{{ "_pages.relativesList" | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  sadadsd
-  relatives list works!
+  <ion-grid>
+    <ion-row>
+      <ng-container
+        *ngIf="!!relativesList && !!relativesList.length; else noRelatives"
+      >
+        <ion-col size="12" size-md="4" *ngFor="let person of relativesList">
+          <app-person-card [person]="person"></app-person-card>
+        </ion-col>
+      </ng-container>
+      <ng-template #noRelatives>
+        <ion-col size="12" size-md="4" offset-md="4">
+          {{ "_relative.noRelativeFound" | translate }}
+        </ion-col>
+      </ng-template>
+    </ion-row>
+  </ion-grid>
 </ion-content>

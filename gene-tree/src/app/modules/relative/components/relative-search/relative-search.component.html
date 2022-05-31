@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>user-search</ion-title>
+    <ion-title>{{ "_pages.findRelatives" | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -16,20 +16,27 @@
   ></ion-searchbar>
   <ion-grid *ngIf="usersFound">
     <ion-row>
-      <ion-col
-      size="12"
-      size-md="4"
-      *ngFor="let user of users"
+      <ng-container *ngIf="!users || !!users.length; else noUsersFound">
+        <ion-col size="12" size-md="4" *ngFor="let user of users">
+          <app-user-card [user]="user"></app-user-card>
+        </ion-col>
+      </ng-container>
+      <ng-template #noUsersFound>
+        <ion-col size="12" size-md="4" offset-md="4">
+          {{ "_relative.noUserFound" | translate }}
+        </ion-col>
+      </ng-template>
+    </ion-row>
+    <ion-infinite-scroll
+      threshold="100px"
+      #infiniteScroll
+      (ionInfinite)="loadMoreUsers()"
     >
-      <app-user-card [user]="user"></app-user-card>
-    </ion-col>
-  </ion-row>
-  <ion-infinite-scroll threshold="100px" #infiniteScroll (ionInfinite)="loadMoreUsers()">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data..."
-    >
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-grid>
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-grid>
 </ion-content>

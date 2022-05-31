@@ -175,10 +175,17 @@
     "birthdayAnniversary": "{ name }'s { years } years birthday anniversary",
     "marriageAnniversary": "Marriage anniversary of { years } years between { firstPerson } and { secondPerson }"
   },
+  "_relative": {
+    "chooseReference": "Choose which person from you genealogy tree represents this user",
+    "noUserFound": "No user was found",
+    "noRelativeFound": "Currently, you have no relatives added"
+  },
   "_pages": {
     "home": "Home",
     "profile": "Profile",
+    "otherProfile": "{ name }'s profile",
     "relatives": "Relatives",
+    "relativesList": "Your relatives",
     "findRelatives": "Find relatives",
     "settings": "Settings",
     "login": "Login",
@@ -253,7 +260,8 @@
     "mother": "Add mother",
     "father": "Add father",
     "child": "Add child",
-    "marriage": "Add marriage"
+    "marriage": "Add marriage",
+    "relative": "Add relative"
   },
   "_edit": {
     "user": "Edit profile",

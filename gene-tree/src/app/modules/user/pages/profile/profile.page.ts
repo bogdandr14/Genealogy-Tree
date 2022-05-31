@@ -1,7 +1,6 @@
 import { RelativeService } from './../../../relative/services/relative.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/modules/user/service/user.service';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { AccountProfileModel } from '../../models/profile.model';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -45,7 +44,7 @@ export class ProfilePage implements OnInit {
 
   getUserInfo(params: ParamMap): Observable<AccountProfileModel> {
     const relativeId = this.getGuid(params.get('id'));
-    if (!this.userService.isCurrentUser(relativeId)) {
+    if (!relativeId.equals(Guid.createEmpty()) && !this.userService.isCurrentUser(relativeId)) {
       this.relativeService
         .canAddRelative(relativeId)
         .pipe(

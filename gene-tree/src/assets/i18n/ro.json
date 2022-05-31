@@ -175,10 +175,17 @@
     "birthdayAnniversary": "Aniversarea zilei de naștere de { years } ani a lui { name }",
     "marriageAnniversary": "Aniversarea de { years } ani a căsătoriei dintre { firstPerson } și { secondPerson }"
   },
+  "_relative": {
+    "chooseReference": "Alege ce persoană din arborele tău genealogic reprezintă acest utilizator",
+    "noUserFound": "Nu a fost găsit niciun utilizator",
+    "noRelativeFound": "Momentan, nu ai nicio rudă adăugată"
+  },
   "_pages": {
     "home": "Acasă",
     "profile": "Profil",
+    "otherProfile": "Profilul lui { name }",
     "relatives": "Rude",
+    "relativesList": "Rudele tale",
     "findRelatives": "Caută rude",
     "settings": "Setări",
     "login": "Logare",
@@ -253,7 +260,8 @@
     "mother": "Adaugă mamă",
     "father": "Adaugă tată",
     "child": "Adaugă copil",
-    "marriage": "Adaugă căsnicie"
+    "marriage": "Adaugă căsnicie",
+    "relative": "Adaugă rudă"
   },
   "_edit": {
     "user": "Editează profil",

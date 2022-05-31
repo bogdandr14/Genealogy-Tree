@@ -12,30 +12,22 @@ const routes: Routes = [
     children: [
       {
         path: 'tree',
-        children: [
-          {
-            path: '',
-            component: GenealogyTreeComponent
-          },
-          {
-            path: ':id',
-            component: GenealogyTreeComponent
-          }
-        ],
+        component: GenealogyTreeComponent,
+        data: { title: '_pages.genealogyTree' }
+      },
+      {
+        path: 'tree/:id',
+        component: GenealogyTreeComponent,
         data: { title: '_pages.genealogyTree' }
       },
       {
         path: 'list',
-        children: [
-          {
-            path: '',
-            component: GenealogyListComponent
-          },
-          {
-            path: ':id',
-            component: GenealogyListComponent
-          }
-        ],
+        component: GenealogyListComponent,
+        data: { title: '_pages.genealogyList' }
+      },
+      {
+        path: 'list/:id',
+        component: GenealogyListComponent,
         data: { title: '_pages.genealogyList' }
       },
       {

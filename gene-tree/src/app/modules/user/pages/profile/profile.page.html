@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'_pages.profile' | translate}}</ion-title>
+    <ion-title>
+      {{ isCurrentUser ? ('_pages.profile' | translate ) :
+      ('_pages.otherProfile' | translate: {name: personalInfo?.firstName + " " +
+      personalInfo?.lastName} )}}
+    </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -21,8 +25,10 @@
     <ion-modal trigger="open-add-relative" [swipeToClose]="true">
       <ng-template>
         <app-relative-request
-        [receiverUser]="personalInfo"
-        (saveConfirmed)="canSync=false"> </app-relative-request>
+          [receiverUser]="personalInfo"
+          (saveConfirmed)="canSync=false"
+        >
+        </app-relative-request>
       </ng-template>
     </ion-modal>
   </ng-container>

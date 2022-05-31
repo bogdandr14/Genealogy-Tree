@@ -25,7 +25,6 @@ export class LocaleService {
   }
 
   constructor(
-    private router: Router,
     private translateService: TranslateService,
     @Optional()
     @SkipSelf()
@@ -35,24 +34,8 @@ export class LocaleService {
     this.initLocale();
   }
 
-  private setRouteReuse(reuse: ShouldReuseRoute) {
-    this.router.routeReuseStrategy.shouldReuseRoute = reuse;
-  }
-
-  private subscribeToLangChange() {
-    this.translateService.onLangChange.subscribe(async (event) => {
-      const { shouldReuseRoute } = this.router.routeReuseStrategy;
-
-      this.setRouteReuse(() => false);
-      this.router.navigated = false;
-      await this.router.navigateByUrl(this.router.url).catch(noop);
-      this.setRouteReuse(shouldReuseRoute);
-    });
-  }
-
   initLocale() {
     if (this.initialized) return;
-    this.subscribeToLangChange();
     this.initialized = true;
   }
 }

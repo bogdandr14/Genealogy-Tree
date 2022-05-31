@@ -13,7 +13,6 @@ const routes: Routes = [
     path: 'details',
     component: PersonDetailsPage,
     data: { title: '_details.person' }
-
   },
   {
     path: 'details/:id',
