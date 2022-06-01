@@ -1,6 +1,7 @@
+import { RelativeStateEnum } from './../../../relative/models/relative-state.enum';
 import { RelativeService } from './../../../relative/services/relative.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/modules/user/service/user.service';
+import { UserService } from '../../../user/service/user.service';
 import { AccountProfileModel } from '../../models/profile.model';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -15,7 +16,7 @@ import { DataService } from '../../../core/services/data.service';
 })
 export class ProfilePage implements OnInit {
   public personalInfo: AccountProfileModel;
-  public canSync = false;
+  private relativeState: RelativeStateEnum;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -46,9 +47,9 @@ export class ProfilePage implements OnInit {
     const relativeId = this.getGuid(params.get('id'));
     if (!relativeId.equals(Guid.createEmpty()) && !this.userService.isCurrentUser(relativeId)) {
       this.relativeService
-        .canAddRelative(relativeId)
+        .CheckForRelative(relativeId)
         .pipe(
-          tap((canAdd) => (this.canSync = canAdd)),
+          tap((relativeState) => (this.relativeState = relativeState)),
           take(1)
         )
         .subscribe();
@@ -56,15 +57,21 @@ export class ProfilePage implements OnInit {
     return this.userService.getUser(relativeId);
   }
 
+  public requestSent(){
+    this.relativeState = RelativeStateEnum.Requested;
+  }
   getGuid(id) {
     return id ? Guid.parse(id) : Guid.createEmpty();
   }
 
+  get canSync(){
+    return this.relativeState === RelativeStateEnum.Unrelated;
+  }
   get isCurrentUser() {
     return this.userService.isCurrentUser(this.personalInfo?.userId);
   }
 
   get isRelative() {
-    return false;
+    return this.relativeState === RelativeStateEnum.Related;
   }
 }

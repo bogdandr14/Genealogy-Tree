@@ -27,8 +27,9 @@
                 <app-person-ref-selection
                   *ngFor="let unrelatedPerson of peopleWithoutUserList"
                   [person]="unrelatedPerson"
-                  [selected]=" request?.receiverReferenceInSenderTree &&
-                    unrelatedPerson.personId === request?.receiverReferenceInSenderTree?.personId
+                  [selected]="
+                    personInTreeReferenceId &&
+                    unrelatedPerson.personId === personInTreeReferenceId
                   "
                   (selectPerson)="selectPerson($event)"
                 ></app-person-ref-selection>
@@ -39,8 +40,8 @@
               type="submit"
               class="submit-button"
               expand="block"
-              [disabled]="!request.receiverReferenceInSenderTree"
-              (click)="addMarriage()"
+              [disabled]="!personInTreeReferenceId"
+              (click)="saveRequest()"
             >
               {{ "_common.save" | translate }}
             </ion-button>

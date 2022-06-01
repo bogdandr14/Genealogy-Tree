@@ -1,14 +1,11 @@
-import { DataService } from 'src/app/modules/core/services/data.service';
-import { AccountProfileModel } from './../../../user/models/profile.model';
 import { Component, OnInit } from '@angular/core';
 import { switchMap, take, tap } from 'rxjs/operators';
 import { GenericPersonModel } from '../../../person/models/generic-person.model';
 import { PersonService } from '../../../person/service/person.service';
 import { UserService } from '../../../user/service/user.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Guid } from 'guid-typescript';
+import { ActivatedRoute } from '@angular/router';
 import { iif } from 'rxjs';
-import { CurrentUserModel } from 'src/app/modules/core/models/current-user.model';
+import { TreeService } from '../../service/tree.service';
 
 @Component({
   selector: 'app-genealogy-list',
@@ -18,52 +15,38 @@ import { CurrentUserModel } from 'src/app/modules/core/models/current-user.model
 export class GenealogyListComponent implements OnInit {
   public peopleList: GenericPersonModel[] = [];
   public searchPerson: string;
-  private userForList: AccountProfileModel;
-  private currentUser: CurrentUserModel;
+  private userForList: GenericPersonModel;
+  get personName(){
+    return `${this.userForList?.firstName} ${this.userForList?.lastName}`;
+  }
   constructor(
     private route: ActivatedRoute,
     private personService: PersonService,
     private userService: UserService,
-    private dataService: DataService
+    private treeService: TreeService
   ) {}
 
   ngOnInit() {
-    this.dataService.getCurrentUser().pipe(take(1),
-      switchMap((currentUser) => {
-        this.currentUser = currentUser;
-        return this.personService
-          .getPeopleListInTree(this.currentUser.treeId).pipe(take(1))
-      })).subscribe((people) => {
-        this.peopleList = people;
-      });
-
-      // this.route.paramMap
-      // .pipe(
-      //   switchMap((params) => {
-      //     debugger;
-      //     return iif<AccountProfileModel, AccountProfileModel>(
-      //       () => this.isId(params),
-      //       this.getUserInfo(params),
-      //       this.userService.getPersonalInfo()
-      //     )
-      //   }),
-
-      // ).pipe(take(1),
-      //   tap(user => this.userForList = user),
-      //   switchMap(user => this.personService.getPeopleListInTree(user.treeId)),
-      // ).subscribe(people => this.peopleList = people);
+    this.route.paramMap
+      .pipe(
+        switchMap((params) =>
+          iif<GenericPersonModel, GenericPersonModel>(
+            () => !!params.get('id'),
+            this.userService.getTreeRoot(params.get('id')),
+            this.userService.getPersonalInfo()
+          )
+        ),
+        take(1),
+        tap((user) => {
+          this.treeService.treeId = user.treeId;
+          this.userForList = user}
+          ),
+        switchMap((user) => this.personService.getPeopleListInTree(user.treeId))
+      )
+      .subscribe((people) => (this.peopleList = people));
   }
 
-  getGuid(id) {
-    return id ? Guid.parse(id) : Guid.createEmpty();
-  }
-
-  getUserInfo(params: ParamMap) {
-    const userId = this.getGuid(params.get('id'));
-    return this.userService.getUser(userId);
-  }
-  // TODO check who is the root of the tree
   get isUserTree() {
-    return this.userService.isUserTree(this.userForList?.treeId);;
+    return this.userService.isUserTree(this.userForList?.treeId);
   }
 }

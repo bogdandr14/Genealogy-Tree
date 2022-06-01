@@ -6,8 +6,8 @@ namespace GenealogyTree.Domain.DTO.Request
     public class RequestDetailsModel
     {
         public int Id { get; set; }
-        public UserDetailsModel ReceiverUser { get; set; }
-        public UserDetailsModel SenderUser { get; set; }
-        public PersonDetailsModel ReceiverReferenceInSenderTree { get; set; }
+        public GenericPersonModel ReceiverUser { get; set; }
+        public GenericPersonModel SenderUser { get; set; }
+        public int ReceiverReferenceInSenderTreeId { get; set; }
     }
 }

@@ -64,7 +64,8 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericPersonModel>> GetPeopleListInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).ToList();
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId)
+                .Include(p => p.RelativeForPerson).ToList();
             List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
             foreach (var person in poepleList)
@@ -86,7 +87,12 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<PersonTreeInfoModel>> GetPeopleTreeDataInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId).Include(p => p.Parents).ThenInclude(p => p.Parent).Include(p => p.FirstPersonMarriages).Include(p => p.SecondPersonMarriages).ToList();
+            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId)
+                .Include(p => p.Parents)
+                .ThenInclude(p => p.Parent)
+                .Include(p => p.FirstPersonMarriages)
+                .Include(p => p.SecondPersonMarriages)
+                .Include(p => p.RelativeForPerson).ToList();
             List<PersonTreeInfoModel> returnPeopleTreeData = new List<PersonTreeInfoModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
 

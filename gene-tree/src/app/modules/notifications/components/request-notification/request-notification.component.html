@@ -1,0 +1,43 @@
+<ion-card *ngIf="request">
+  <ion-card-header
+    class="box uni"
+    [routerLink]="['/user/profile', request?.senderUser.userId]"
+  >
+    <ion-item lines="none">
+      <ion-avatar class="avatar" slot="start">
+        <img [src]="imageUrl" [alt]="senderName + 'profile picture'" />
+      </ion-avatar>
+      <ion-label class="ion-padding-start" text-wrap>
+        <h1>
+          {{ "_relative.requestReceive" | translate: { name: senderName } }}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-button
+      [id]="'open-select-request' + request.id"
+      color="success"
+      slot="start"
+    >
+      <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+      {{ "_common.accept" | translate }}
+    </ion-button>
+    <ion-modal
+      [trigger]="'open-select-request' + request.id"
+      [swipeToClose]="true"
+    >
+      <ng-template>
+        <app-relative-request
+          [requestToRespond]="request.id"
+          (saveConfirmed)="refreshNotifications.emit(true)"
+        >
+        </app-relative-request>
+      </ng-template>
+    </ion-modal>
+    <ion-button color="danger" slot="end" (click)="confirmRejectRequest()">
+      <ion-icon name="trash" slot="start"></ion-icon>
+      {{ "_common.decline" | translate }}
+    </ion-button>
+  </ion-card-content>
+</ion-card>

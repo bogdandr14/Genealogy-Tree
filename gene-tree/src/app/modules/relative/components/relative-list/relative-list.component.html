@@ -12,8 +12,8 @@
       <ng-container
         *ngIf="!!relativesList && !!relativesList.length; else noRelatives"
       >
-        <ion-col size="12" size-md="4" *ngFor="let person of relativesList">
-          <app-person-card [person]="person"></app-person-card>
+        <ion-col size="12" size-md="4" *ngFor="let relative of relativesList">
+          <app-person-card [person]="relative.relativeUser"></app-person-card>
         </ion-col>
       </ng-container>
       <ng-template #noRelatives>

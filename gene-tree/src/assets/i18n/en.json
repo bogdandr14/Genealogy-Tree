@@ -178,7 +178,12 @@
   "_relative": {
     "chooseReference": "Choose which person from you genealogy tree represents this user",
     "noUserFound": "No user was found",
-    "noRelativeFound": "Currently, you have no relatives added"
+    "noRelativeFound": "Currently, you have no relatives added",
+    "requestReceive": "{ name } sent you a relative request",
+    "decline": "Decline the request",
+    "declineMessage": "Are you sure you want to decline the relative request from { name }?",
+    "requestAccepted":"{ name } accepted your relative request",
+    "requestDeclined":"{ name } declined your relative request"
   },
   "_pages": {
     "home": "Home",
@@ -195,8 +200,10 @@
     "support": "Support",
     "genealogy": "Genealogy",
     "genealogyEvents": "Anniversaries",
-    "genealogyTree": "Genealogy tree",
-    "genealogyList": "Genealogy list",
+    "genealogyTree": "Your genealogy tree",
+    "otherGenealogyTree": "{ name }'s genealogy tree",
+    "genealogyList": "Your genealogy list",
+    "otherGenealogyList": "{ name }'s genealogy list",
     "notifications": "Notifications"
   },
   "_links": {
@@ -227,7 +234,10 @@
     "tree": "Tree",
     "events": "Anniversaries",
     "search": "Search",
-    "today": "Today"
+    "today": "Today",
+    "accept": "Accept",
+    "decline": "Decline",
+    "understood": "Understood"
   },
   "_slides": {
     "_welcome": {

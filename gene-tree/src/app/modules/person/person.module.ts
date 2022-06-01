@@ -1,4 +1,3 @@
-import { PersonRefSelectionComponent } from './components/person-ref-selection/person-ref-selection.component';
 import { ParentChildModule } from './parent-child/parent-child.module';
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonInfoComponent } from './components/person-info/person-info.component';
@@ -23,11 +22,10 @@ import { RouterModule } from '@angular/router';
     LocationEditComponent,
     PersonInfoComponent,
     PersonAvatarComponent,
-    PersonCardComponent,
-    PersonRefSelectionComponent
+    PersonCardComponent
   ],
   imports: [SharedModule, MarriageModule, ParentChildModule, PersonRoutingModule, RouterModule],
-  exports: [PhotoUploadComponent, PersonInfoComponent, PersonAvatarComponent, PersonCardComponent, PersonRefSelectionComponent],
+  exports: [PhotoUploadComponent, PersonInfoComponent, PersonAvatarComponent, PersonCardComponent],
   providers: [NgxImageCompressService],
 })
 export class PersonModule { }

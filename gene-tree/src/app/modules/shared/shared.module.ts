@@ -1,3 +1,5 @@
+import { PersonRefSelectionComponent } from './components/person-ref-selection/person-ref-selection.component';
+import { RelativeRequestComponent } from './components/relative-request/relative-request.component';
 import { SocialMediaChipsComponent } from './components/social-media-chips/social-media-chips.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -25,6 +27,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     LinkUserButtonsComponent,
     DateSelectTemplateComponent,
     SocialMediaChipsComponent,
+    RelativeRequestComponent,
+    PersonRefSelectionComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +53,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     LinkUserButtonsComponent,
     DateSelectTemplateComponent,
     SocialMediaChipsComponent,
+    RelativeRequestComponent,
+    PersonRefSelectionComponent
   ],
   providers: [InAppBrowser, DatePipe],
 })

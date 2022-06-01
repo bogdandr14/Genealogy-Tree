@@ -10,7 +10,7 @@
     </ion-icon>
     <ion-label>
       {{ link.title | translate }}
-      <ion-badge *ngIf="link.icon==='notifications'">{{userService.notificationCount$ | async}}</ion-badge>
+      <ion-badge *ngIf="link.icon==='notifications'" color="danger">{{userService.notificationCount$ | async}}</ion-badge>
     </ion-label>
   </ion-item>
 </ion-menu-toggle>

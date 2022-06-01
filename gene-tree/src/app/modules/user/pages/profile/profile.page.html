@@ -26,7 +26,7 @@
       <ng-template>
         <app-relative-request
           [receiverUser]="personalInfo"
-          (saveConfirmed)="canSync=false"
+          (saveConfirmed)="requestSent()"
         >
         </app-relative-request>
       </ng-template>

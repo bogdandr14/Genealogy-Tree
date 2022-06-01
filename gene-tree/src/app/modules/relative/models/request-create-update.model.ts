@@ -6,5 +6,5 @@ export class RequestCreateUpdateModel {
   id?: number;
   senderUserId: Guid;
   receiverUser: GenericPersonModel;
-  receiverReferenceInSenderTree: GenericPersonModel;
+  receiverReferenceInSenderTreeId: number;
 }

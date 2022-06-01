@@ -1,8 +1,7 @@
-import { Guid } from 'guid-typescript';
+import { GenericPersonModel } from './../../person/models/generic-person.model';
 
 export class RelativeModel {
-  primaryUserId: Guid;
-  synchedUserId: Guid;
-  synchedPersonInPrimaryTreeId: number;
-  primaryPersonInSynchedTreeId: number;
+  id: number;
+  relativeUser: GenericPersonModel;
+  relativePersonInTreeId: number;
 }

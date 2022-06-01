@@ -10,7 +10,7 @@ namespace GenealogyTree.Domain.Interfaces.Services
     {
         Task<List<RequestDetailsModel>> GetRequestsSent(Guid senderId);
         Task<List<RequestDetailsModel>> GetRequestsReceived(Guid receiverId);
-        Task<List<RequestCreateUpdateModel>> GetRequestsResponded(Guid senderId);
+        Task<List<RequestResponseModel>> GetRequestsResponded(Guid senderId);
         Task<RequestCreateUpdateModel> AddRequest(RequestCreateUpdateModel request);
         Task<UsersToLinkModel> RespondToRequest(int requestId, RequestResponseModel respondedRequest);
         Task<RequestDetailsModel> DeleteRequest(int requestId);

@@ -1,0 +1,12 @@
+.avatar {
+  margin: auto;
+  width: 100% !important;
+  height: 100% !important;
+  @media (min-width: 768px) {
+    width: 80px !important; //any size
+    height: 80px !important; //any size
+  }
+  width: 50px !important; //any size
+  height: 50px !important; //any size
+  cursor: pointer;
+}

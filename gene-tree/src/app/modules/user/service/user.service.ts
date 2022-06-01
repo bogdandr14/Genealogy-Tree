@@ -1,3 +1,5 @@
+import { AccountProfileModel } from './../models/profile.model';
+import { NotificationsBundle } from './../../notifications/models/nofitications-bundle.model';
 import { UserPositionModel } from './../../genealogy/models/user-position.model';
 import { PositionModel } from './../../genealogy/models/position.model';
 import { UserEditModel } from '../models/user-edit.model';
@@ -64,6 +66,13 @@ export class UserService extends BaseService {
       super.getOneByPath<number>(`notificationsCount/${user.userId}`,BaseService.noLoadingConfig)
     ));
   }
+
+  public getNotifications(){
+    return this.dataService.getCurrentUser().pipe(switchMap((user) =>
+      super.getOneByPath<NotificationsBundle>(`notifications/${user.userId}`)
+    ));
+  }
+
   public findUsers(filter: InfiniteScrollFilter) {
     return super.getOneByPath<FoundUsersModel>(`find/${this.turnFilterIntoUrl(filter)}`);
   }
@@ -90,8 +99,12 @@ export class UserService extends BaseService {
     ));
   }
 
-  public getUser<AccountProfileModel>(userId: Guid): Observable<AccountProfileModel> {
+  public getUser<AccountProfileModel>(userId: Guid | string): Observable<AccountProfileModel> {
     return super.getOneById<AccountProfileModel>(userId);
+  }
+
+  public getTreeRoot<AccountProfileModel>(treeId: Guid|string):Observable<AccountProfileModel>{
+    return super.getOneById<AccountProfileModel>(treeId, 'treeRoot');
   }
 
   public getUserSettings() {

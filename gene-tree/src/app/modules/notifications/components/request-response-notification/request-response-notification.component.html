@@ -1,0 +1,36 @@
+<ion-card *ngIf="requestResponse">
+  <ion-card-header
+    class="box uni"
+    [routerLink]="['/user/profile', requestResponse?.receiverUser.userId]"
+  >
+    <ion-item lines="none">
+      <ion-avatar class="avatar" slot="start">
+        <img [src]="imageUrl" [alt]="receiverName + 'profile picture'" />
+      </ion-avatar>
+      <ion-label class="ion-padding-start" text-wrap>
+        <h1>
+          {{
+            (requestResponse.response
+              ? "_relative.requestAccepted"
+              : "_relative.requestDeclined"
+            ) | translate: { name: receiverName }
+          }}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-button
+      *ngIf="requestResponse.response"
+      [routerLink]="['/genealogy/tree', requestResponse.receiverUser.userId]"
+      color="success"
+      slot="start"
+    >
+      <ion-icon name="git-network" slot="start"></ion-icon>
+      {{ "_common.tree" | translate }}
+    </ion-button>
+    <ion-button color="primary" slot="end" (click)="removeResponse()">
+      {{ "_common.understood" | translate }}
+    </ion-button>
+  </ion-card-content>
+</ion-card>

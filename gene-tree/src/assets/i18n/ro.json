@@ -178,7 +178,12 @@
   "_relative": {
     "chooseReference": "Alege ce persoană din arborele tău genealogic reprezintă acest utilizator",
     "noUserFound": "Nu a fost găsit niciun utilizator",
-    "noRelativeFound": "Momentan, nu ai nicio rudă adăugată"
+    "noRelativeFound": "Momentan, nu ai nicio rudă adăugată",
+    "requestReceive": "{ name } ţi-a trimis o cerere de rudenie",
+    "decline": "Refuză cererea de rudenie",
+    "declineMessage": "Eşti sigur(ă) că vrei să refuzi cererea de rudenie de la { name }?",
+    "requestAccepted": "{ name } ţi-a acceptat cererea de rudenie",
+    "requestDeclined": "{ name } ţi-a refuzat cererea de rudenie"
   },
   "_pages": {
     "home": "Acasă",
@@ -195,8 +200,10 @@
     "support": "Suport",
     "genealogy": "Genealogie",
     "genealogyEvents": "Aniversări",
-    "genealogyTree": "Arbore genealogic",
-    "genealogyList": "Listă genealogie",
+    "genealogyTree": "Arborele tău genealogic",
+    "otherGenealogyTree": "Arborele genealogic al lui { name }",
+    "genealogyList": "Lista ta genealogică",
+    "otherGenealogyList": "Lista genealogică al lui { name}",
     "notifications": "Notificări"
   },
   "_links": {
@@ -227,7 +234,10 @@
     "tree": "Arbore",
     "events": "Aniversări",
     "search": "Caută",
-    "today": "Azi"
+    "today": "Azi",
+    "accept": "Acceptă",
+    "decline": "Refuză",
+    "understood": "Am înţeles"
   },
   "_slides": {
     "_welcome": {

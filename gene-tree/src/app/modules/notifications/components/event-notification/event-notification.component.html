@@ -1,0 +1,71 @@
+<ion-card *ngIf="event">
+  <ion-card-header>
+    <h2>
+      <ng-container *ngIf="event.eventType === 'BIRTHDAY'">
+        {{
+          "_calendar.birthdayAnniversary"
+            | translate
+              : {
+                  name: event.affectedPeople[0].firstName,
+                  years: currentDate.getFullYear() - event.date.getFullYear()
+                }
+        }}
+      </ng-container>
+      <ng-container *ngIf="event.eventType === 'MARRIAGE'">
+        {{
+          "_calendar.marriageAnniversary"
+            | translate
+              : {
+                  firstPerson: event.affectedPeople[0].firstName,
+                  secondPerson: event.affectedPeople[1].firstName,
+                  years: currentDate.getFullYear() - event.date.getFullYear()
+                }
+        }}
+      </ng-container>
+    </h2>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item class="ion-align-items-center" lines="none">
+      <ion-row class="ion-align-items-center">
+        <ng-container *ngIf="event.eventType === 'BIRTHDAY'">
+          <ion-icon color="warning" name="gift" size="large"></ion-icon>
+          <ng-container
+            *ngTemplateOutlet="
+              calendarAvatar;
+              context: { person: event.affectedPeople[0] }
+            "
+          ></ng-container>
+        </ng-container>
+        <ng-container *ngIf="event.eventType === 'MARRIAGE'">
+          <ng-container
+            *ngTemplateOutlet="
+              calendarAvatar;
+              context: { person: event.affectedPeople[0] }
+            "
+          ></ng-container>
+          <ion-icon color="danger" name="heart" size="large"></ion-icon>
+          <ng-container
+            *ngTemplateOutlet="
+              calendarAvatar;
+              context: { person: event.affectedPeople[1] }
+            "
+          ></ng-container>
+        </ng-container>
+      </ion-row>
+    </ion-item>
+  </ion-card-content>
+  <ng-template #calendarAvatar let-person="person">
+    <span>
+      <ion-avatar
+        class="avatar ion-margin"
+        slot="start"
+        [routerLink]="['/person/details', person.personId]"
+      >
+        <img
+          [src]="getImageUrl(person.imageFile)"
+          [alt]="person.firstName + ' ' + person.lastName"
+        />
+      </ion-avatar>
+    </span>
+  </ng-template>
+</ion-card>

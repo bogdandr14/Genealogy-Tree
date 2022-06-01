@@ -9,6 +9,7 @@ import { TreeTemplateConstants } from '../models/tree-template.constants';
   providedIn: 'root',
 })
 export class TreeService {
+  public treeId;
   private familyTree: FamilyTree;
   private themeString;
   constructor(
@@ -37,7 +38,8 @@ export class TreeService {
     FamilyTree.templates.gene = Object.assign({}, FamilyTree.templates.base);
     FamilyTree.templates.gene.defs = TreeTemplateConstants.treeDefs;
     FamilyTree.templates.gene['field_0'] = TreeTemplateConstants.personName;
-    FamilyTree.templates.gene['field_1'] = TreeTemplateConstants.personBirthDate;
+    FamilyTree.templates.gene['field_1'] =
+      TreeTemplateConstants.personBirthDate;
     FamilyTree.templates.gene['field_2'] = TreeTemplateConstants.userBtn;
     FamilyTree.templates.gene['img_0'] = TreeTemplateConstants.personImg;
     FamilyTree.templates.gene['up'] = TreeTemplateConstants.expandNodesBtn;
@@ -62,7 +64,7 @@ export class TreeService {
     FamilyTree.templates.gene_female.node = TreeTemplateConstants.femaleNode;
   }
 
-  public createFamilyTree(rootId: number) {
+  public createFamilyTree(canEdit: boolean) {
     this.familyTree = new FamilyTree(document.getElementById('tree'), {
       nodeMouseClick: FamilyTree.action.none,
       mouseScrool: FamilyTree.action.zoom,

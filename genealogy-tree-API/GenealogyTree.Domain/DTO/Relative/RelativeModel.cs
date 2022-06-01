@@ -1,12 +1,11 @@
 ﻿using GenealogyTree.Domain.DTO.Person;
-using GenealogyTree.Domain.DTO.User;
 
 namespace GenealogyTree.Domain.DTO.Relative
 {
     public class RelativeModel
     {
         public int Id { get; set; }
-        public UserDetailsModel SyncedUser { get; set; }
-        public PersonDetailsModel SyncedPersonInTree { get; set; }
+        public GenericPersonModel RelativeUser { get; set; }
+        public int RelativePersonInTreeId { get; set; }
     }
 }

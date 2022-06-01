@@ -19,10 +19,14 @@ namespace GenealogyTree.Business.Services
 
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
+        private readonly IRequestService _requestService;
+        private readonly IPersonService _personService;
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRequestService requestService, IPersonService personService) : base(unitOfWork)
         {
             _mapper = mapper;
             _fileManagementService = fileManagementService;
+            _requestService = requestService;
+            _personService = personService;
         }
 
         public async Task<UsersFound> FindUsers(InfiniteScrollFilter filter)
@@ -87,14 +91,34 @@ namespace GenealogyTree.Business.Services
             userEntity.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
             return userEntity;
         }
+        public async Task<GenericPersonModel> GetTreeRoot(Guid treeId)
+        {
+            User user = unitOfWork.User.Filter(x => x.Person.TreeId == treeId)
+                        .Include(u => u.Person)
+                        .FirstOrDefault();
+            GenericPersonModel userEntity = _mapper.Map<GenericPersonModel>(user);
+            return userEntity;
+        }
 
         public async Task<int> GetNotificationsCount(Guid userId)
         {
-            User user = unitOfWork.User.Filter(u => u.Id == userId).Include(u => u.Person).Include(u => u.ReceivedRequests).FirstOrDefault();
-            int requestsCount = user.ReceivedRequests.Count();
+            User user = unitOfWork.User.Filter(u => u.Id == userId).Include(u => u.Person).Include(u => u.ReceivedRequests).Include(u => u.SentRequests).FirstOrDefault();
+            int requestsReceivedCount = user.ReceivedRequests.Where(x => !x.ReceiverResponded).Count();
+            int requestsSentCount = user.SentRequests.Where(x => x.ReceiverResponded).Count();
             int birthdayCount = unitOfWork.Person.Filter(p => p.TreeId == user.Person.TreeId && p.BirthDate.HasValue && p.BirthDate.Value.DayOfYear == DateTime.Now.DayOfYear).Count();
             int marriageCount = unitOfWork.Marriage.Filter(m => m.FirstPerson.TreeId == user.Person.TreeId && m.StartDate.DayOfYear == DateTime.Now.DayOfYear).Count();
-            return requestsCount + birthdayCount + marriageCount;
+            return requestsReceivedCount + requestsSentCount + birthdayCount + marriageCount;
+        }
+
+        public async Task<NotificationsBundle> GetNotifications(Guid userId)
+        {
+            User user = unitOfWork.User.Filter(user => user.Id == userId).Include(u => u.Person).FirstOrDefault();
+            NotificationsBundle notifications = new NotificationsBundle();
+            notifications.RequestsReceived = await _requestService.GetRequestsReceived(userId);
+            notifications.RequestsResponded = await _requestService.GetRequestsResponded(userId);
+            notifications.EventsToday = (await _personService.GetEventsInTree(user.Person.TreeId)).Where(e => e.Date.Date.CompareTo(DateTime.Today.Date) == 0).ToList();
+            notifications.UserUpdates = null; //TODO
+            return notifications;
         }
 
         public async Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user)

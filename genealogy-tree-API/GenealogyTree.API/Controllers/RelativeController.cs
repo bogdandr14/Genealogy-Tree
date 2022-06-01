@@ -2,6 +2,7 @@
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.DTO.Request;
 using GenealogyTree.Domain.DTO.User;
+using GenealogyTree.Domain.Enums;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,12 +45,12 @@ namespace GenealogyTree.API.Controllers
         }
 
         [HttpGet]
-        [Route("canAdd/{userId:Guid}")]
-        public async Task<ActionResult<List<RelativeModel>>> CanAddRelativeForUser(Guid userId, [FromQuery] Guid relativeId)
+        [Route("check/{userId:Guid}")]
+        public async Task<ActionResult<RelativeStateEnum>> CanAddRelativeForUser(Guid userId, [FromQuery] Guid relativeId)
         {
             try
             {
-                bool canAdd = await _relativeService.CanAddRelative(userId, relativeId);
+                RelativeStateEnum canAdd = await _relativeService.CheckRelative(userId, relativeId);
                 if (canAdd == null)
                 {
                     return NotFound();
@@ -132,11 +133,11 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("request/responded/{userId:Guid}")]
-        public async Task<ActionResult<List<RequestCreateUpdateModel>>> RequestsResponded(Guid userId)
+        public async Task<ActionResult<List<RequestResponseModel>>> RequestsResponded(Guid userId)
         {
             try
             {
-                List<RequestCreateUpdateModel> returnEvent = await _requestService.GetRequestsResponded(userId);
+                List<RequestResponseModel> returnEvent = await _requestService.GetRequestsResponded(userId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -175,10 +176,6 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UsersToLinkModel returnEvent = await _requestService.RespondToRequest(id, request);
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
                 return Ok(returnEvent);
             }
             catch (Exception e)

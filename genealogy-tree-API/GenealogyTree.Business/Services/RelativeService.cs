@@ -2,6 +2,7 @@
 using GenealogyTree.Domain.DTO.Relative;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
+using GenealogyTree.Domain.Enums;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RelativeModel>> GetAllRelativesForUser(Guid userId)
         {
-            List<Relative> relatives = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == userId).ToList();
+            List<Relative> relatives = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == userId).Include(r => r.RelativeUser).ThenInclude(u => u.Person).ToList();
 
             List<RelativeModel> returnEvent = _mapper.Map<List<RelativeModel>>(relatives);
             return returnEvent;
@@ -37,15 +38,19 @@ namespace GenealogyTree.Business.Services
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relative);
             return returnEvent;
         }
-        public async  Task<bool> CanAddRelative(Guid userId, Guid relativeId)
+        public async Task<RelativeStateEnum> CheckRelative(Guid userId, Guid relativeId)
         {
             bool isAlreadyRelative = unitOfWork.Relatives.Filter(r => (r.PrimaryUserId == userId && r.RelativeUserId == relativeId)).Any();
             if (isAlreadyRelative)
             {
-                return false;
+                return RelativeStateEnum.Related;
             }
-            bool requestAlreadySent = unitOfWork.Requests.Filter(r => r.SenderId == userId && r.ReceiverId == relativeId && r.ReceiverResponded == false).Any();
-            return !requestAlreadySent;
+            bool requestAlreadySent = unitOfWork.Requests.Filter(r => (r.SenderId == userId && r.ReceiverId == relativeId) || (r.SenderId == relativeId && r.ReceiverId == userId)).Any();
+            if (requestAlreadySent)
+            {
+                return RelativeStateEnum.Requested;
+            }
+            return RelativeStateEnum.Unrelated;
         }
 
 

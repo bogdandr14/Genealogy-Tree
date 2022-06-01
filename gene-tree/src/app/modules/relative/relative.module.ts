@@ -1,4 +1,3 @@
-import { RelativeRequestComponent } from './components/relative-request/relative-request.component';
 import { PersonModule } from './../person/person.module';
 import { RelativeMapComponent } from './components/relative-map/relative-map.component';
 import { RelativeSearchComponent } from './components/relative-search/relative-search.component';

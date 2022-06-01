@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'_pages.genealogyList'| translate }}</ion-title>
+    <ion-title>
+      {{ isUserTree ? ('_pages.genealogyList' | translate ) :
+      ('_pages.otherGenealogyList' | translate: {name: personName} )}}
+    </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>

@@ -1,6 +1,8 @@
 ﻿using GenealogyTree.API.Attributes;
 using GenealogyTree.Domain;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Email;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +23,7 @@ namespace GenealogyTree.API.Controllers
             _emailService = emailService;
         }
 
+        [GeneTreeAuthorize]
         [HttpGet]
         [Route("notificationsCount/{userId:Guid}")]
         public async Task<ActionResult<bool>> GetNotificationsCount(Guid userId)
@@ -29,6 +32,22 @@ namespace GenealogyTree.API.Controllers
             {
                 int notificationsCount = await _userService.GetNotificationsCount(userId);
                 return Ok(notificationsCount);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+        
+        [GeneTreeAuthorize]
+        [HttpGet]
+        [Route("notifications/{userId:Guid}")]
+        public async Task<ActionResult> GetNotifications(Guid userId)
+        {
+            try
+            {
+                NotificationsBundle notifications = await _userService.GetNotifications(userId);
+                return Ok(notifications);
             }
             catch (Exception e)
             {
@@ -124,6 +143,26 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserDetailsModel userDetails = await _userService.GetUserByIdAsync(id);
+                if (userDetails == null)
+                {
+                    return NotFound();
+                }
+                return Ok(userDetails);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [GeneTreeAuthorize]
+        [HttpGet]
+        [Route("treeRoot/{treeId:Guid}")]
+        public async Task<ActionResult<GenericPersonModel>> GetTreeRoot(Guid treeId)
+        {
+            try
+            {
+                GenericPersonModel userDetails = await _userService.GetTreeRoot(treeId);
                 if (userDetails == null)
                 {
                     return NotFound();

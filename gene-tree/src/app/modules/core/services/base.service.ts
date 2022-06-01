@@ -49,7 +49,7 @@ export abstract class BaseService {
   }
 
   public getOneById<T>(
-    id: number | Guid,
+    id: number | Guid | string,
     path?: string,
     params?: HttpInterceptorConfig
   ): Observable<T> {

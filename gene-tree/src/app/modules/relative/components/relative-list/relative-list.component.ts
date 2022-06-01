@@ -1,8 +1,8 @@
-import { GenericPersonModel } from './../../../person/models/generic-person.model';
 import { DataService } from './../../../core/services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { RelativeService } from '../../services/relative.service';
 import { take } from 'rxjs/operators';
+import { RelativeModel } from '../../models/relative.model';
 
 @Component({
   selector: 'app-relative-list',
@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 })
 export class RelativeListComponent implements OnInit {
 
-  public relativesList: GenericPersonModel[];
+  public relativesList: RelativeModel[];
   constructor(private relativeService: RelativeService, private dataService: DataService) { }
 
   ngOnInit() {

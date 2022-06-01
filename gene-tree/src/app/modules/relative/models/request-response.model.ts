@@ -1,7 +1,8 @@
-import { PersonDetailsModel } from '../../person/models/person-details.model';
+import { GenericPersonModel } from "../../person/models/generic-person.model";
+
 export class RequestResponseModel {
   id: number;
-  senderReferenceInReceiverTree: PersonDetailsModel;
+  receiverUser: GenericPersonModel
+  senderReferenceInReceiverTreeId: number;
   response: boolean;
-  syncBack: boolean;
 }
