@@ -29,8 +29,6 @@ namespace GenealogyTree.Domain.Entities
         public bool SharePersonalInfo { get; set; }
         public bool ShareLocation { get; set; }
 
-        public DateTime? LastSyncCheck { get; set; }
-
         public int PersonId { get; set; }
         [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }

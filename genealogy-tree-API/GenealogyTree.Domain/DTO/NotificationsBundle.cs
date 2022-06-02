@@ -8,7 +8,7 @@ namespace GenealogyTree.Domain.DTO
     {
         public List<RequestDetailsModel> RequestsReceived { get; set; }
         public List<RequestResponseModel> RequestsResponded { get; set; }
-        public List<GenericPersonModel> UserUpdates { get; set; }
+        public List<RelativeUpdates> RelativeUpdates { get; set; }
         public List<EventInTreeModel> EventsToday { get; set; }
     }
 }

@@ -18,5 +18,6 @@ namespace GenealogyTree.Domain.Entities
         public int RelativePersonInPrimaryTreeId { get; set; }
         [ForeignKey("RelativePersonInPrimaryTreeId")]
         public virtual Person RelativePersonInPrimaryTree { get; set; }
+        public DateTime LastSyncCheck { get; set; }
     }
 }

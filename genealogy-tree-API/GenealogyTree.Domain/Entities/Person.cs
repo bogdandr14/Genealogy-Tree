@@ -25,7 +25,9 @@ namespace GenealogyTree.Domain.Entities
         public char Gender { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
-        public DateTime LastUpdate { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
 
         public int? ImageId { get; set; }
         [ForeignKey("ImageId")]

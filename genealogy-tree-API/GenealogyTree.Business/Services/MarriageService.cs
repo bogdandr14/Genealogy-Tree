@@ -61,6 +61,7 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Marriage marriageEntity = _mapper.Map<Marriage>(marriage);
+            marriageEntity.CreatedOn = DateTime.UtcNow;
             Marriage marriageCreated = await unitOfWork.Marriage.Create(marriageEntity);
             MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageCreated);
             return returnEvent;
@@ -68,12 +69,18 @@ namespace GenealogyTree.Business.Services
 
         public async Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageCreateUpdateModel marriage)
         {
-            if (marriage == null)
+            Marriage marriageInDb = await unitOfWork.Marriage.FindById(marriage.Id);
+            if (marriage == null || marriageInDb == null)
             {
                 return null;
             }
-            Marriage marriageEntity = _mapper.Map<Marriage>(marriage);
-            Marriage marriageUpdated = await unitOfWork.Marriage.Update(marriageEntity);
+            marriageInDb.FirstPersonId = marriage.FirstPersonId;
+            marriageInDb.SecondPersonId = marriage.SecondPersonId;
+            marriageInDb.StartDate = marriage.StartDate;
+            marriageInDb.EndDate = marriage.EndDate;
+            marriageInDb.ModifiedOn = DateTime.UtcNow;
+
+            Marriage marriageUpdated = await unitOfWork.Marriage.Update(marriageInDb);
             MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriageUpdated);
             return returnEvent;
         }

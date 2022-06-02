@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GenealogyTree.Domain.Entities
 {
@@ -14,5 +15,8 @@ namespace GenealogyTree.Domain.Entities
         public int ChildId { get; set; }
         [ForeignKey("ChildId")]
         public virtual Person Child { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
     }
 }

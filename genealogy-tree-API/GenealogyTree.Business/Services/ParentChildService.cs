@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.ParentChild;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -131,8 +132,8 @@ namespace GenealogyTree.Business.Services
             List<GenericPersonModel> notRelatedByDescendants = await GetNotRelatedByDescendants(personId);
             List<int> peopleWithoutParent = await GetPeopleWithoutParent(personId);
             List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
-            return notRelatedByDescendants.Where((person) => 
-                                        peopleWithoutParent.Exists((personId) => person.PersonId == personId) && 
+            return notRelatedByDescendants.Where((person) =>
+                                        peopleWithoutParent.Exists((personId) => person.PersonId == personId) &&
                                         !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
         }
 
@@ -211,6 +212,7 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             ParentChild parentChildEntity = _mapper.Map<ParentChild>(parentChild);
+            parentChildEntity.CreatedOn = DateTime.UtcNow;
             parentChildEntity = await unitOfWork.ParentChild.Create(parentChildEntity);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
             return returnEvent;
@@ -218,12 +220,18 @@ namespace GenealogyTree.Business.Services
 
         public async Task<ParentChildDetailsModel> UpdateParentChildAsync(ParentChildCreateUpdateModel parentChild)
         {
-            if (parentChild == null)
+            ParentChild parentChildInDb = await unitOfWork.ParentChild.FindById(parentChild.RelativeId);
+            if (parentChild == null || parentChildInDb == null)
             {
                 return null;
             }
-            ParentChild parentChildEntity = _mapper.Map<ParentChild>(parentChild);
-            parentChildEntity = await unitOfWork.ParentChild.Update(parentChildEntity);
+
+            parentChildInDb.ChildId = parentChild.ChildId;
+            parentChildInDb.ParentId = parentChild.ParentId;
+            parentChildInDb.BloodRelatives = parentChild.BloodRelatives;
+            parentChildInDb.ModifiedOn = DateTime.UtcNow;
+
+            ParentChild parentChildEntity = await unitOfWork.ParentChild.Update(parentChildInDb);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
             return returnEvent;
         }

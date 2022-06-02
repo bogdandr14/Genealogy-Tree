@@ -60,7 +60,8 @@ namespace GenealogyTree.Business.Services
             {
                 PrimaryUserId = usersToLink.PrimaryUserId,
                 RelativeUserId = usersToLink.LinkedUserId,
-                RelativePersonInPrimaryTreeId = usersToLink.LinkedPersonInPrimaryTreeId
+                RelativePersonInPrimaryTreeId = usersToLink.LinkedPersonInPrimaryTreeId,
+                LastSyncCheck = DateTime.UtcNow
             };
             Relative createdSenderRelative = await unitOfWork.Relatives.Create(senderRelative);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(createdSenderRelative);
@@ -71,7 +72,8 @@ namespace GenealogyTree.Business.Services
                 {
                     PrimaryUserId = usersToLink.LinkedUserId,
                     RelativeUserId = usersToLink.PrimaryUserId,
-                    RelativePersonInPrimaryTreeId = usersToLink.PrimaryPersonInRelativeTreeId
+                    RelativePersonInPrimaryTreeId = usersToLink.PrimaryPersonInRelativeTreeId,
+                    LastSyncCheck = DateTime.UtcNow
                 };
                 Relative createdReceiverRelative = await unitOfWork.Relatives.Create(receiverRelative);
                 returnEvent = _mapper.Map<RelativeModel>(createdReceiverRelative);

@@ -6,7 +6,7 @@ namespace GenealogyTree.Domain.DTO.User
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime LastVerified { get; set; }
+        public DateTime UpdatedOn { get; set; }
         public ImageFile? ImageFile { get; set; }
     }
 }

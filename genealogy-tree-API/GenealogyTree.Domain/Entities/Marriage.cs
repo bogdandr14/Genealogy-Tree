@@ -16,5 +16,7 @@ namespace GenealogyTree.Domain.Entities
         public int SecondPersonId { get; set; }
         [ForeignKey("SecondPersonId")]
         public virtual Person SecondPerson { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
     }
 }

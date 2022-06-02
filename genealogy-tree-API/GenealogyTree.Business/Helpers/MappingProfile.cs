@@ -188,10 +188,12 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<User, UserPositionModel>()
+                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
                 .ForMember(x => x.Latitude, y => y.MapFrom(z => z.Position.Latitude))
-                .ForMember(x => x.Longitude, y => y.MapFrom(z => z.Position.Longitude));
+                .ForMember(x => x.Longitude, y => y.MapFrom(z => z.Position.Longitude))
+                .ForMember(x => x.UpdatedOn, y => y.MapFrom(z => z.Position.UpdatedOn));
 
             CreateMap<User, RegisterModel>()
                 .ReverseMap();

@@ -171,6 +171,9 @@ namespace GenealogyTree.Data
 
             modelBuilder.Entity<User>().Navigation(u => u.Occupations).AutoInclude();
             modelBuilder.Entity<User>().Navigation(u => u.Educations).AutoInclude();
+            modelBuilder.Entity<User>().Navigation(u => u.Person).AutoInclude();
+
+            modelBuilder.Entity<Relative>().Navigation(u => u.RelativeUser).AutoInclude();
         }
 
         public DbSet<T> DbSet<T>() where T : class

@@ -274,6 +274,7 @@ namespace GenealogyTree.Business.Services
             }
             Person personEntity = await addLocations(person);
             personEntity = removeAttachedEntities(personEntity);
+            personEntity.CreatedOn = DateTime.UtcNow;
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
@@ -308,7 +309,8 @@ namespace GenealogyTree.Business.Services
 
         public async Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person)
         {
-            if (person == null)
+            Person personInDb = await unitOfWork.Person.FindById(person.PersonId);
+            if (person == null || personInDb == null)
             {
                 return null;
             }
@@ -323,7 +325,16 @@ namespace GenealogyTree.Business.Services
                 person.BirthPlace = null;
             }
 
-            personEntity = await unitOfWork.Person.Update(personEntity);
+            personInDb.FirstName = person.FirstName;
+            personInDb.LastName = person.LastName;
+            personInDb.Gender = person.Gender[0];
+            personInDb.BirthDate = person.BirthDate;
+            personInDb.DeathDate = person.DeathDate;
+            personInDb.ModifiedOn = DateTime.UtcNow;
+            personInDb.NationalityId = person.Nationality.Id;
+            personInDb.ReligionId = person.Religion.Id;
+
+            personEntity = await unitOfWork.Person.Update(personInDb);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
             return returnEvent;

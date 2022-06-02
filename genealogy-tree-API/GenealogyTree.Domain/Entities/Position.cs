@@ -9,6 +9,6 @@ namespace GenealogyTree.Domain.Entities
         public int Id { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
-        public DateTime LastVerified { get; set; }
+        public DateTime? UpdatedOn { get; set; }
     }
 }

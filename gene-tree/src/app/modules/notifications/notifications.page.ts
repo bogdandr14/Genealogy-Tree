@@ -11,25 +11,31 @@ import { map, take } from 'rxjs/operators';
 })
 export class NotificationsPage implements OnInit {
   private notificationsBundle = new NotificationsBundle();
+
   constructor(
-    private relativeService: RelativeService,
     private userService: UserService
-  ) {}
+  ) { }
+
   get requestsReceived() {
     return this.notificationsBundle.requestsReceived;
   }
+
   get requestsResponded() {
     return this.notificationsBundle.requestsResponded;
   }
+
   get eventsToday() {
     return this.notificationsBundle.eventsToday;
   }
+
+  get userUpdates() {
+    return this.notificationsBundle.userUpdates;
+  }
+
   ngOnInit() {
-    // this.relativeService
-    //   .getRequestsReceived()
-    //   .subscribe((requests) => (this.requestsReceived = requests));
     this.refreshNotifications();
   }
+
   public refreshNotifications() {
     this.userService
       .getNotifications()

@@ -4,6 +4,7 @@ using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
+using GenealogyTree.Domain.Enums;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
@@ -112,13 +113,68 @@ namespace GenealogyTree.Business.Services
 
         public async Task<NotificationsBundle> GetNotifications(Guid userId)
         {
-            User user = unitOfWork.User.Filter(user => user.Id == userId).Include(u => u.Person).FirstOrDefault();
+            User user = unitOfWork.User.Filter(user => user.Id == userId).Include(u => u.UserRelatives).FirstOrDefault();
             NotificationsBundle notifications = new NotificationsBundle();
             notifications.RequestsReceived = await _requestService.GetRequestsReceived(userId);
             notifications.RequestsResponded = await _requestService.GetRequestsResponded(userId);
             notifications.EventsToday = (await _personService.GetEventsInTree(user.Person.TreeId)).Where(e => e.Date.Date.CompareTo(DateTime.Today.Date) == 0).ToList();
-            notifications.UserUpdates = null; //TODO
+            notifications.RelativeUpdates = new List<RelativeUpdates>(); //TODO
+            foreach (var relative in user.UserRelatives)
+            {
+                RelativeUpdates relativeUpdates = new RelativeUpdates();
+                relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.CreatedOn) < 0)
+                                            .Select(person => new UpdateInfoModel()
+                                            {
+                                                ReferenceId = person.Id,
+                                                UpdateType = UpdateTypeEnum.PersonCreated,
+                                                AffectedPeopleNames = GetAffectedPersonNames(person, null)
+                                            }).ToList());
+                relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.ModifiedOn) < 0)
+                     .Select(person => new UpdateInfoModel()
+                     {
+                         ReferenceId = person.Id,
+                         UpdateType = UpdateTypeEnum.PersonModified,
+                         AffectedPeopleNames = GetAffectedPersonNames(person, null)
+                     }).ToList());
+                relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.CreatedOn) < 0)
+                    .Select(marriage => new UpdateInfoModel()
+                    {
+                        ReferenceId = marriage.FirstPersonId,
+                        UpdateType = UpdateTypeEnum.MarriageCreated,
+                        AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
+                    }).ToList());
+                relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn) < 0)
+                    .Select(marriage => new UpdateInfoModel()
+                    {
+                        ReferenceId = marriage.FirstPersonId,
+                        UpdateType = UpdateTypeEnum.MarriageModified,
+                        AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
+                    }).ToList());
+                relativeUpdates.Updates.AddRange(unitOfWork.ParentChild.Filter(parentChild => parentChild.Parent.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(parentChild.CreatedOn) < 0)
+                      .Select(parentChild => new UpdateInfoModel()
+                      {
+                          ReferenceId = parentChild.ParentId,
+                          UpdateType = UpdateTypeEnum.ParentChildAdded,
+                          AffectedPeopleNames = GetAffectedPersonNames(parentChild.Parent, parentChild.Child)
+                      }).ToList());
+                if (relativeUpdates.Updates.Any())
+                {
+                    relativeUpdates.Relative = _mapper.Map<GenericPersonModel>(relative.RelativeUser);
+                    notifications.RelativeUpdates.Add(relativeUpdates);
+                }
+            }
             return notifications;
+        }
+
+        private List<string> GetAffectedPersonNames(Person firstPerson, Person secondPerson)
+        {
+            List<string> affectedNames = new List<string>();
+            affectedNames.Add(firstPerson.FirstName + " " + firstPerson.LastName);
+            if (secondPerson != null)
+            {
+                affectedNames.Add(secondPerson.FirstName + " " + secondPerson.LastName);
+            }
+            return affectedNames;
         }
 
         public async Task<UserDetailsModel> UpdateUser(Guid userId, UserUpdateModel user)
@@ -171,15 +227,15 @@ namespace GenealogyTree.Business.Services
 
         public async Task<UserPositionModel> UpdateUserPosition(int positionId, PositionModel position)
         {
-            Position positionToUpdate = await unitOfWork.Position.FindById(positionId);
-            if (positionToUpdate == null || position == null)
+            Position positionInDb = await unitOfWork.Position.FindById(positionId);
+            if (positionInDb == null || position == null)
             {
                 return null;
             }
-            positionToUpdate.LastVerified = DateTime.Now;
-            positionToUpdate.Latitude = position.Latitude;
-            positionToUpdate.Longitude = position.Longitude;
-            Position positionEntity = await unitOfWork.Position.Update(positionToUpdate);
+            positionInDb.UpdatedOn = DateTime.Now;
+            positionInDb.Latitude = position.Latitude;
+            positionInDb.Longitude = position.Longitude;
+            Position positionEntity = await unitOfWork.Position.Update(positionInDb);
             UserPositionModel returnEvent = _mapper.Map<UserPositionModel>(positionEntity);
             return returnEvent;
         }
