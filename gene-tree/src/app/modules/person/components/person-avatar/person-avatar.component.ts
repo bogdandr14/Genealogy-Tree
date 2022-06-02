@@ -1,3 +1,5 @@
+import { PhotoUploadComponent } from './../photo-upload/photo-upload.component';
+import { ModalController } from '@ionic/angular';
 import { ImageFile } from './../../../shared/models/image-file';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -10,9 +12,11 @@ export class PersonAvatarComponent implements OnInit {
   @Input() imageFile: ImageFile;
   @Input() personId: number;
   @Input() canEdit: boolean = false;
-  constructor() {}
+  constructor(private modalCtrl:ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.modalCtrl.create({ component: PhotoUploadComponent });
+  }
   get imageUrl() {
     if (this.imageFile) {
       return `data:${this.imageFile.mimeType};base64,${this.imageFile.fileInBytes}`;

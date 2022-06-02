@@ -22,7 +22,7 @@
   <ion-card-content class="ion-text-center">
     <ion-button
       *ngIf="requestResponse.response"
-      [routerLink]="['/genealogy/tree', requestResponse.receiverUser.userId]"
+      [routerLink]="['/genealogy/tree', requestResponse.receiverUser.treeId]"
       color="success"
       slot="start"
     >

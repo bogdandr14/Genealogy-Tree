@@ -66,8 +66,12 @@ export class RelativeService extends BaseService {
     return super.updateById(syncRequest.id, syncRequest, 'request');
   }
 
-  public removeRequest(syncRequestId: number) {
-    return super.remove(syncRequestId, 'request');
+  public markChangesAsChecked(relativeId:number){
+    return super.update(relativeId, 'markChanges');
+  }
+
+  public removeRequest(relativeRequestId: number) {
+    return super.remove(relativeRequestId, 'request');
   }
 
   public getRelativesPosition() {

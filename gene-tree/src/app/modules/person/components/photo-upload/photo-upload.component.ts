@@ -93,7 +93,6 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   submitPhoto() {
-    console.log(this.originalImgFile);
     this.personService
       .uploadPhoto(
         this.personId,

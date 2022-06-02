@@ -1,3 +1,4 @@
+import { RelativeUpdatesNotificationComponent } from './components/relative-updates-notification/relative-updates-notification.component';
 import { EventNotificationComponent } from './components/event-notification/event-notification.component';
 import { RequestResponseNotificationComponent } from './components/request-response-notification/request-response-notification.component';
 import { RequestNotificationComponent } from './components/request-notification/request-notification.component';
@@ -14,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
     RequestNotificationComponent,
     RequestResponseNotificationComponent,
     EventNotificationComponent,
+    RelativeUpdatesNotificationComponent
   ],
 })
 export class NotificationsPageModule {}

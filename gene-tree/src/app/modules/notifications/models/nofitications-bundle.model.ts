@@ -6,6 +6,6 @@ import { EventInTreeModel } from '../../genealogy/models/event-in-tree.model';
 export class NotificationsBundle {
   requestsReceived: RequestDetailsModel[];
   requestsResponded: RequestResponseModel[];
-  userUpdates: RelativeUpdatesModel[];
+  relativeUpdates: RelativeUpdatesModel[];
   eventsToday: EventInTreeModel[];
 }

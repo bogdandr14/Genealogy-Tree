@@ -185,6 +185,15 @@
     "requestAccepted":"{ name } accepted your relative request",
     "requestDeclined":"{ name } declined your relative request"
   },
+  "_updates":{
+    "relativeChanges": "{ name } made changes in his/her genealogy tree",
+    "markAsChecked": "Mark as checked",
+    "personCreated": "A new person was created: { name }",
+    "personModified": "The person { name } was modified",
+    "marriageCreated": "A new marriage was added between { firstPerson } and { secondPerson }",
+    "marriageModified": "The marriage bewteen { firstPerson } and { secondPerson } was modified ",
+    "parentChildAdded": "{ firstPerson } was added as the parent of { secondPerson }"
+  },
   "_pages": {
     "home": "Home",
     "profile": "Profile",
@@ -259,7 +268,7 @@
     "ready": "Ready to create your "
   },
   "_details": {
-    "user": "User details",
+    "user": "User",
     "person": "Person details"
   },
   "_add": {

@@ -28,8 +28,8 @@ export class NotificationsPage implements OnInit {
     return this.notificationsBundle.eventsToday;
   }
 
-  get userUpdates() {
-    return this.notificationsBundle.userUpdates;
+  get relativeUpdates() {
+    return this.notificationsBundle.relativeUpdates;
   }
 
   ngOnInit() {

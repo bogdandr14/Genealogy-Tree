@@ -1,0 +1,33 @@
+<ion-card *ngIf="relativeUpdate">
+  <ion-card-header
+    class="box uni"
+    [routerLink]="['/user/profile', relativeUpdate?.relative.userId]"
+  >
+    <ion-item lines="none">
+      <ion-avatar class="avatar" slot="start">
+        <img [src]="imageUrl" [alt]="relativeName + 'profile picture'" />
+      </ion-avatar>
+      <ion-label class="ion-padding-start" text-wrap>
+        <h1>
+          {{ "_updates.relativeChanges" | translate: { name: relativeName } }}
+        </h1>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-card *ngFor="let update of relativeUpdate.updates">
+      <ion-card-header
+        class="box uni"
+        [routerLink]="['/person/details', update.referenceId]"
+      >
+        <ion-label>
+          {{ getTranslatedMessage(update) }}
+        </ion-label>
+      </ion-card-header>
+    </ion-card>
+    <ion-button color="danger" slot="end" (click)="markAsChecked()">
+      <ion-icon name="trash" slot="start"></ion-icon>
+      {{ "_updates.markAsChecked" | translate }}
+    </ion-button>
+  </ion-card-content>
+</ion-card>

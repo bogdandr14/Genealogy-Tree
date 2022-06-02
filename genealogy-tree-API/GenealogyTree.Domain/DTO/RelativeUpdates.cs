@@ -9,6 +9,7 @@ namespace GenealogyTree.Domain.DTO
         {
             this.Updates = new List<UpdateInfoModel>();
         }
+        public int RelativeId { get; set; }
         public GenericPersonModel Relative { get; set; }
         public List<UpdateInfoModel> Updates { get; set; }
     }

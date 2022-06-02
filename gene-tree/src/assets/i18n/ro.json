@@ -185,6 +185,15 @@
     "requestAccepted": "{ name } ţi-a acceptat cererea de rudenie",
     "requestDeclined": "{ name } ţi-a refuzat cererea de rudenie"
   },
+  "_updates": {
+    "relativeChanges": "{ name } a făcut modificări în arborele lui/ei genealogic",
+    "markAsChecked": "Marchează ca văzut",
+    "personCreated": "A fost creată o nouă persoană: { name }",
+    "personModified": "Persoana { name } a fost modificată",
+    "marriageCreated": "O nouă căsătorie a fost adăugată între { firstPerson } şi { secondPerson }",
+    "marriageModified": "Căsătoria dintre { firstPerson } şi { secondPerson } a fost modificată",
+    "parentChildAdded": "{ firstPerson } a fost adăugat ca părinte pentru { secondPerson }"
+  },
   "_pages": {
     "home": "Acasă",
     "profile": "Profil",
@@ -259,7 +268,7 @@
     "ready": "Eşti gata să îţi creezi propriul "
   },
   "_details": {
-    "user": "Detalii utilizator",
+    "user": "Utilizator",
     "person": "Detalii persoana"
   },
   "_add": {

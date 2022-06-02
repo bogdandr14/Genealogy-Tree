@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { UpdateNotificationComponent } from './update-notification.component';
+import { RelativeUpdatesNotificationComponent } from './relative-updates-notification.component';
 
-describe('UpdateNotificationComponent', () => {
-  let component: UpdateNotificationComponent;
-  let fixture: ComponentFixture<UpdateNotificationComponent>;
+describe('RelativeUpdatesNotificationComponent', () => {
+  let component: RelativeUpdatesNotificationComponent;
+  let fixture: ComponentFixture<RelativeUpdatesNotificationComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UpdateNotificationComponent ],
+      declarations: [ RelativeUpdatesNotificationComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UpdateNotificationComponent);
+    fixture = TestBed.createComponent(RelativeUpdatesNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -123,19 +123,19 @@ namespace GenealogyTree.Business.Services
             {
                 RelativeUpdates relativeUpdates = new RelativeUpdates();
                 relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.CreatedOn) < 0)
-                                            .Select(person => new UpdateInfoModel()
-                                            {
-                                                ReferenceId = person.Id,
-                                                UpdateType = UpdateTypeEnum.PersonCreated,
-                                                AffectedPeopleNames = GetAffectedPersonNames(person, null)
-                                            }).ToList());
-                relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.ModifiedOn) < 0)
-                     .Select(person => new UpdateInfoModel()
-                     {
-                         ReferenceId = person.Id,
-                         UpdateType = UpdateTypeEnum.PersonModified,
-                         AffectedPeopleNames = GetAffectedPersonNames(person, null)
-                     }).ToList());
+                    .Select(person => new UpdateInfoModel()
+                    {
+                        ReferenceId = person.Id,
+                        UpdateType = UpdateTypeEnum.PersonCreated,
+                        AffectedPeopleNames = GetAffectedPersonNames(person, null)
+                    }).ToList());
+                relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && person.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(person.ModifiedOn.Value) < 0)
+                    .Select(person => new UpdateInfoModel()
+                    {
+                        ReferenceId = person.Id,
+                        UpdateType = UpdateTypeEnum.PersonModified,
+                        AffectedPeopleNames = GetAffectedPersonNames(person, null)
+                    }).ToList());
                 relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.CreatedOn) < 0)
                     .Select(marriage => new UpdateInfoModel()
                     {
@@ -143,7 +143,7 @@ namespace GenealogyTree.Business.Services
                         UpdateType = UpdateTypeEnum.MarriageCreated,
                         AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
                     }).ToList());
-                relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn) < 0)
+                relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && marriage.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn.Value) < 0)
                     .Select(marriage => new UpdateInfoModel()
                     {
                         ReferenceId = marriage.FirstPersonId,
@@ -151,14 +151,15 @@ namespace GenealogyTree.Business.Services
                         AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
                     }).ToList());
                 relativeUpdates.Updates.AddRange(unitOfWork.ParentChild.Filter(parentChild => parentChild.Parent.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(parentChild.CreatedOn) < 0)
-                      .Select(parentChild => new UpdateInfoModel()
-                      {
-                          ReferenceId = parentChild.ParentId,
-                          UpdateType = UpdateTypeEnum.ParentChildAdded,
-                          AffectedPeopleNames = GetAffectedPersonNames(parentChild.Parent, parentChild.Child)
-                      }).ToList());
+                    .Select(parentChild => new UpdateInfoModel()
+                    {
+                        ReferenceId = parentChild.ParentId,
+                        UpdateType = UpdateTypeEnum.ParentChildAdded,
+                        AffectedPeopleNames = GetAffectedPersonNames(parentChild.Parent, parentChild.Child)
+                    }).ToList());
                 if (relativeUpdates.Updates.Any())
                 {
+                    relativeUpdates.RelativeId = relative.Id;
                     relativeUpdates.Relative = _mapper.Map<GenericPersonModel>(relative.RelativeUser);
                     notifications.RelativeUpdates.Add(relativeUpdates);
                 }
@@ -166,7 +167,7 @@ namespace GenealogyTree.Business.Services
             return notifications;
         }
 
-        private List<string> GetAffectedPersonNames(Person firstPerson, Person secondPerson)
+        private static List<string> GetAffectedPersonNames(Person firstPerson, Person secondPerson)
         {
             List<string> affectedNames = new List<string>();
             affectedNames.Add(firstPerson.FirstName + " " + firstPerson.LastName);

@@ -12,7 +12,7 @@
     [swipeToClose]="true"
   >
     <ng-template>
-      <app-photo-upload
+      <app-photo-upload *ngIf="!!personId"
         (imageSave)="setImageFile($event)"
         [personId]="personId"
       ></app-photo-upload>
