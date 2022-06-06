@@ -1,18 +1,20 @@
-<ion-avatar class="avatar">
+<ion-avatar class="avatar" *ngIf="personId">
   <img [src]="imageUrl" alt="avatar" />
-  <ion-fab-button *ngIf="canEdit"
+  <ion-fab-button
+    *ngIf="canEdit"
     class="inner"
-    [id]="'open-change-picture-' + personId"
+    [id]="'open-change-' + type + '-picture-' + personId"
     color="success"
   >
     <ion-icon name="image"></ion-icon>
   </ion-fab-button>
   <ion-modal
-    [trigger]="'open-change-picture-' + personId"
+    [trigger]="'open-change-' + type + '-picture-' + personId"
     [swipeToClose]="true"
   >
     <ng-template>
-      <app-photo-upload *ngIf="!!personId"
+      <app-photo-upload
+        *ngIf="!!personId"
         (imageSave)="setImageFile($event)"
         [personId]="personId"
       ></app-photo-upload>

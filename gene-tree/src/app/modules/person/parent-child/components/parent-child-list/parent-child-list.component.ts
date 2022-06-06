@@ -14,7 +14,7 @@ export class ParentChildListComponent implements OnInit {
   @Input() parentsChildren: ParentChildBaseModel[];
   @Input() canModify: boolean = false;
   @Input() personLinkedTo: GenericPersonModel;
-  @Input() isParentList: boolean = false;
+  @Input() isParentList;
   constructor(private parentChildService: ParentChildService) { }
 
   get noFather() {

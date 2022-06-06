@@ -25,4 +25,23 @@ export class ParentChildOptionCardComponent implements OnInit {
     }
     return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
   }
+
+  get cardColor() {
+    if (this.person.deathDate != null) {
+      return 'dead';
+    } else if (this.person.gender === 'm') {
+      return 'male';
+    } else {
+      return 'female';
+    }
+  }
+
+  changeSelection(){
+    if(this.selected){
+      this.selectionChange.emit(null);
+    }
+    else{
+      this.selectionChange.emit(this.person);
+    }
+  }
 }

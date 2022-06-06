@@ -63,6 +63,25 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("markChanges/{relativeId:int}")]
+        public async Task<ActionResult<RelativeStateEnum>> MarkChangesForRelative(int relativeId)
+        {
+            try
+            {
+                RelativeModel relative = await _relativeService.MarkChanges(relativeId);
+                if (relative == null)
+                {
+                    return NotFound();
+                }
+                return Ok(relative);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<UsersToLinkModel>> UserResponded(UsersToLinkModel usersToLink)

@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card *ngIf="isParentList !== null && personLinkedTo?.personId !== null">
   <ion-card-header class="ion-text-center">
     <ion-card-title>
       {{ (isParentList ? "_person.parents" : "_person.children") | translate }}

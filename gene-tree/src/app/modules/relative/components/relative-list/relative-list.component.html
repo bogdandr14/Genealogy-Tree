@@ -18,7 +18,13 @@
       </ng-container>
       <ng-template #noRelatives>
         <ion-col size="12" size-md="4" offset-md="4">
-          {{ "_relative.noRelativeFound" | translate }}
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                {{ "_relative.noRelativeFound" | translate }}
+              </ion-card-title>
+            </ion-card-header>
+          </ion-card>
         </ion-col>
       </ng-template>
     </ion-row>

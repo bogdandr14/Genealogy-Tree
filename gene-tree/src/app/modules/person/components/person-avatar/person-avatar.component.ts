@@ -9,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./person-avatar.component.scss'],
 })
 export class PersonAvatarComponent implements OnInit {
+  @Input() type = 'person';
   @Input() imageFile: ImageFile;
   @Input() personId: number;
   @Input() canEdit: boolean = false;

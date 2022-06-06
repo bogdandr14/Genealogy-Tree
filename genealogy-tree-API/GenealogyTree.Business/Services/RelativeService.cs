@@ -53,6 +53,15 @@ namespace GenealogyTree.Business.Services
             return RelativeStateEnum.Unrelated;
         }
 
+        public async Task<RelativeModel> MarkChanges(int relativeId)
+        {
+            Relative relativeToUpdate = await unitOfWork.Relatives.FindById(relativeId);
+            relativeToUpdate.LastSyncCheck = DateTime.Now;
+            Relative relativeEntity = await unitOfWork.Relatives.Update(relativeToUpdate);
+            RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
+            return returnEvent;
+        }
+
 
         public async Task<RelativeModel> AddRelativeUser(UsersToLinkModel usersToLink)
         {
