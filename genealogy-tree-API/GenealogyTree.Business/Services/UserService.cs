@@ -72,6 +72,11 @@ namespace GenealogyTree.Business.Services
                             .Include(u => u.Occupations)
                             .FirstOrDefault();
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
+            if (!user.SharePersonalInfo)
+            {
+                returnEvent.Email = null;
+                returnEvent.PhoneNumber = null;
+            }
             returnEvent.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
             return returnEvent;
         }
@@ -103,12 +108,27 @@ namespace GenealogyTree.Business.Services
 
         public async Task<int> GetNotificationsCount(Guid userId)
         {
-            User user = unitOfWork.User.Filter(u => u.Id == userId).Include(u => u.Person).Include(u => u.ReceivedRequests).Include(u => u.SentRequests).FirstOrDefault();
-            int requestsReceivedCount = user.ReceivedRequests.Where(x => !x.ReceiverResponded).Count();
-            int requestsSentCount = user.SentRequests.Where(x => x.ReceiverResponded).Count();
-            int birthdayCount = unitOfWork.Person.Filter(p => p.TreeId == user.Person.TreeId && p.BirthDate.HasValue && p.BirthDate.Value.DayOfYear == DateTime.Now.DayOfYear).Count();
-            int marriageCount = unitOfWork.Marriage.Filter(m => m.FirstPerson.TreeId == user.Person.TreeId && m.StartDate.DayOfYear == DateTime.Now.DayOfYear).Count();
-            return requestsReceivedCount + requestsSentCount + birthdayCount + marriageCount;
+            User user = unitOfWork.User.Filter(u => u.Id == userId).Include(u => u.Person).Include(u => u.ReceivedRequests).Include(u => u.SentRequests).Include(u => u.UserRelatives).FirstOrDefault();
+            int totalNotifications = 0;
+            totalNotifications += user.ReceivedRequests.Where(x => !x.ReceiverResponded).Count();
+            totalNotifications += user.SentRequests.Where(x => x.ReceiverResponded).Count();
+            if (user.NotifyBirthdays)
+            {
+                totalNotifications += unitOfWork.Person.Filter(p => p.TreeId == user.Person.TreeId && p.BirthDate.HasValue && p.BirthDate.Value.DayOfYear == DateTime.Now.DayOfYear).Count();
+                totalNotifications += unitOfWork.Marriage.Filter(m => m.FirstPerson.TreeId == user.Person.TreeId && m.StartDate.DayOfYear == DateTime.Now.DayOfYear).Count();
+            }
+            if (user.NotifyUpdates)
+            {
+                foreach (var relative in user.UserRelatives)
+                {
+                    totalNotifications += unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.CreatedOn) < 0).Count();
+                    totalNotifications += unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && person.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(person.ModifiedOn.Value) < 0).Count();
+                    totalNotifications += unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.CreatedOn) < 0).Count();
+                    totalNotifications += unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && marriage.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn.Value) < 0).Count();
+                    totalNotifications += unitOfWork.ParentChild.Filter(parentChild => parentChild.Parent.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(parentChild.CreatedOn) < 0).Count();
+                }
+            }
+            return totalNotifications;
         }
 
         public async Task<NotificationsBundle> GetNotifications(Guid userId)
@@ -117,51 +137,61 @@ namespace GenealogyTree.Business.Services
             NotificationsBundle notifications = new NotificationsBundle();
             notifications.RequestsReceived = await _requestService.GetRequestsReceived(userId);
             notifications.RequestsResponded = await _requestService.GetRequestsResponded(userId);
-            notifications.EventsToday = (await _personService.GetEventsInTree(user.Person.TreeId)).Where(e => e.Date.Date.CompareTo(DateTime.Today.Date) == 0).ToList();
-            notifications.RelativeUpdates = new List<RelativeUpdates>(); //TODO
-            foreach (var relative in user.UserRelatives)
+            if (user.NotifyBirthdays)
             {
-                RelativeUpdates relativeUpdates = new RelativeUpdates();
-                relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.CreatedOn) < 0)
-                    .Select(person => new UpdateInfoModel()
-                    {
-                        ReferenceId = person.Id,
-                        UpdateType = UpdateTypeEnum.PersonCreated,
-                        AffectedPeopleNames = GetAffectedPersonNames(person, null)
-                    }).ToList());
-                relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && person.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(person.ModifiedOn.Value) < 0)
-                    .Select(person => new UpdateInfoModel()
-                    {
-                        ReferenceId = person.Id,
-                        UpdateType = UpdateTypeEnum.PersonModified,
-                        AffectedPeopleNames = GetAffectedPersonNames(person, null)
-                    }).ToList());
-                relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.CreatedOn) < 0)
-                    .Select(marriage => new UpdateInfoModel()
-                    {
-                        ReferenceId = marriage.FirstPersonId,
-                        UpdateType = UpdateTypeEnum.MarriageCreated,
-                        AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
-                    }).ToList());
-                relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && marriage.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn.Value) < 0)
-                    .Select(marriage => new UpdateInfoModel()
-                    {
-                        ReferenceId = marriage.FirstPersonId,
-                        UpdateType = UpdateTypeEnum.MarriageModified,
-                        AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
-                    }).ToList());
-                relativeUpdates.Updates.AddRange(unitOfWork.ParentChild.Filter(parentChild => parentChild.Parent.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(parentChild.CreatedOn) < 0)
-                    .Select(parentChild => new UpdateInfoModel()
-                    {
-                        ReferenceId = parentChild.ParentId,
-                        UpdateType = UpdateTypeEnum.ParentChildAdded,
-                        AffectedPeopleNames = GetAffectedPersonNames(parentChild.Parent, parentChild.Child)
-                    }).ToList());
-                if (relativeUpdates.Updates.Any())
+                notifications.EventsToday = (await _personService.GetEventsInTree(user.Person.TreeId)).Where(e => e.Date.Date.CompareTo(DateTime.Today.Date) == 0).ToList();
+            }
+            else
+            {
+                notifications.EventsToday = new List<EventInTreeModel>();
+            }
+            notifications.RelativeUpdates = new List<RelativeUpdates>(); //TODO
+            if (user.NotifyUpdates)
+            {
+                foreach (var relative in user.UserRelatives)
                 {
-                    relativeUpdates.RelativeId = relative.Id;
-                    relativeUpdates.Relative = _mapper.Map<GenericPersonModel>(relative.RelativeUser);
-                    notifications.RelativeUpdates.Add(relativeUpdates);
+                    RelativeUpdates relativeUpdates = new RelativeUpdates();
+                    relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(person.CreatedOn) < 0)
+                        .Select(person => new UpdateInfoModel()
+                        {
+                            ReferenceId = person.Id,
+                            UpdateType = UpdateTypeEnum.PersonCreated,
+                            AffectedPeopleNames = GetAffectedPersonNames(person, null)
+                        }).ToList());
+                    relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && person.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(person.ModifiedOn.Value) < 0)
+                        .Select(person => new UpdateInfoModel()
+                        {
+                            ReferenceId = person.Id,
+                            UpdateType = UpdateTypeEnum.PersonModified,
+                            AffectedPeopleNames = GetAffectedPersonNames(person, null)
+                        }).ToList());
+                    relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.CreatedOn) < 0)
+                        .Select(marriage => new UpdateInfoModel()
+                        {
+                            ReferenceId = marriage.FirstPersonId,
+                            UpdateType = UpdateTypeEnum.MarriageCreated,
+                            AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
+                        }).ToList());
+                    relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && marriage.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn.Value) < 0)
+                        .Select(marriage => new UpdateInfoModel()
+                        {
+                            ReferenceId = marriage.FirstPersonId,
+                            UpdateType = UpdateTypeEnum.MarriageModified,
+                            AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
+                        }).ToList());
+                    relativeUpdates.Updates.AddRange(unitOfWork.ParentChild.Filter(parentChild => parentChild.Parent.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(parentChild.CreatedOn) < 0)
+                        .Select(parentChild => new UpdateInfoModel()
+                        {
+                            ReferenceId = parentChild.ParentId,
+                            UpdateType = UpdateTypeEnum.ParentChildAdded,
+                            AffectedPeopleNames = GetAffectedPersonNames(parentChild.Parent, parentChild.Child)
+                        }).ToList());
+                    if (relativeUpdates.Updates.Any())
+                    {
+                        relativeUpdates.RelativeId = relative.Id;
+                        relativeUpdates.Relative = _mapper.Map<GenericPersonModel>(relative.RelativeUser);
+                        notifications.RelativeUpdates.Add(relativeUpdates);
+                    }
                 }
             }
             return notifications;
@@ -221,6 +251,7 @@ namespace GenealogyTree.Business.Services
             userToUpdate.NotifyUpdates = userSettings.NotifyUpdates;
             userToUpdate.NotifyBirthdays = userSettings.NotifyBirthdays;
             userToUpdate.SharePersonalInfo = userSettings.SharePersonalInfo;
+            userToUpdate.ShareLocation = userSettings.ShareLocation;
             User userEntity = await unitOfWork.User.Update(userToUpdate);
             UserSettingsModel returnEvent = _mapper.Map<UserSettingsModel>(userEntity);
             return returnEvent;

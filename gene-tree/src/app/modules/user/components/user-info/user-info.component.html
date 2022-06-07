@@ -52,14 +52,14 @@
         >
         </ion-textarea>
       </ion-item>
-      <ion-item *ngIf="canAccessDetails">
+      <ion-item *ngIf="canAccessDetails && !!userInfo?.email">
         {{ "_user.email" | translate }}:
         <ion-chip color="secondary" (click)="copyMail('das@djisa')">
           <ion-icon name="mail-outline"></ion-icon>
           <ion-label>{{ userInfo?.email }} </ion-label>
         </ion-chip>
       </ion-item>
-      <ion-item *ngIf="canAccessDetails" class="ion-justify-content-start">
+      <ion-item *ngIf="canAccessDetails && !!userInfo?.phoneNumber" class="ion-justify-content-start">
         {{ "_user.phone" | translate }}:
         <ion-chip color="secondary" (click)="copyPhone('0231789312')">
           <ion-icon name="call-outline"></ion-icon>

@@ -99,7 +99,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<UserPositionModel>> GetRelativesPosition(Guid userId)
         {
-            List<User> relativeUsers = unitOfWork.Relatives.Filter(relative => relative.PrimaryUserId == userId)
+            List<User> relativeUsers = unitOfWork.Relatives.Filter(relative => relative.PrimaryUserId == userId && relative.RelativeUser.ShareLocation && relative.RelativeUser.Position.UpdatedOn != null)
                                                     .Include(r => r.RelativeUser)
                                                         .ThenInclude(ru => ru.Position)
                                                     .Include(r => r.RelativeUser)
