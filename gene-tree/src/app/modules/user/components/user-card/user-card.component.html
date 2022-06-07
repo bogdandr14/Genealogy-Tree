@@ -1,9 +1,13 @@
-<ion-card *ngIf="user" [routerLink]="['/user/profile', user?.userId]">
-  <ion-card-header>
+<ion-card
+  *ngIf="user"
+  [ngClass]="utilsService.cardColor(user)"
+  [routerLink]="['/user/profile', user?.userId]"
+>
+  <ion-card-header class="person-box">
     <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
         <img
-          [src]="imageUrl"
+          [src]="utilsService.imageUrl(user.imageFile)"
           [alt]="user?.firstName + user?.lastName + 'profile picture'"
         />
       </ion-avatar>

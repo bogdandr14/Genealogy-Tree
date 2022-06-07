@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import Swiper from 'swiper';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-intro',
@@ -18,11 +19,13 @@ export class IntroPage implements OnInit {
     public menu: MenuController,
     public router: Router,
     public dataService: DataService,
+    private authService: AuthService,
     private cd: ChangeDetectorRef
-  ) {    this.setThemeSubscriber();
+  ) {
+    this.setThemeSubscriber();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
   private setThemeSubscriber() {
     this.dataService.darkTheme$.subscribe((theme) => {
       if (theme != null && this.dark != theme) {
@@ -35,9 +38,11 @@ export class IntroPage implements OnInit {
   }
 
   startApp() {
-    this.router
-      .navigate(['/home'])
-      .then(() => this.dataService.set('has-seen-intro', true));
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.router
+        .navigate([isLoggedIn ? '/genealogy/tree' : '/user/login'])
+        .then(() => this.dataService.set('has-seen-intro', true));
+    })
   }
 
   setSwiperInstance(swiper: Swiper) {

@@ -22,14 +22,14 @@ export class RelativeService extends BaseService {
     super(httpClient, 'api/relative', environment.baseApiUrl);
   }
 
-  public CheckForRelative(relativeId: Guid){
+  public CheckForRelative(relativeId: Guid) {
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
-    super.getOneByPath<RelativeStateEnum>(
-      `check/${user.userId}?relativeId=${relativeId}`, BaseService.noLoadingConfig
+      super.getOneByPath<RelativeStateEnum>(
+        `check/${user.userId}?relativeId=${relativeId}`, BaseService.noLoadingConfig
       )
     ));
   }
-  public getRelatives():Observable<RelativeModel[]> {
+  public getRelatives(): Observable<RelativeModel[]> {
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
       super.getMany<RelativeModel>(`${user.userId}`)
     ));
@@ -41,13 +41,13 @@ export class RelativeService extends BaseService {
     ));
   }
 
-  public getRequestsReceived():Observable<RequestDetailsModel[]> {
+  public getRequestsReceived(): Observable<RequestDetailsModel[]> {
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
       super.getMany<RequestDetailsModel>(`request/received/${user.userId}`)
     ));
   }
 
-  public getRequestsResponded():Observable<RequestResponseModel[]> {
+  public getRequestsResponded(): Observable<RequestResponseModel[]> {
     return this.dataService.getCurrentUser().pipe(
       switchMap((user) => super.getMany<RequestResponseModel>(`request/responded/${user.userId}`))
     );
@@ -55,7 +55,7 @@ export class RelativeService extends BaseService {
 
   public sendRequest(syncRequest: RequestCreateUpdateModel) {
     return this.dataService.getCurrentUser().pipe(
-      switchMap((user)=> {
+      switchMap((user) => {
         syncRequest.senderUserId = user.userId;
         return super.add(syncRequest, 'request');
       })
@@ -66,7 +66,7 @@ export class RelativeService extends BaseService {
     return super.updateById(syncRequest.id, syncRequest, 'request');
   }
 
-  public markChangesAsChecked(relativeId:number){
+  public markChangesAsChecked(relativeId: number) {
     return super.update(relativeId, 'markChanges');
   }
 

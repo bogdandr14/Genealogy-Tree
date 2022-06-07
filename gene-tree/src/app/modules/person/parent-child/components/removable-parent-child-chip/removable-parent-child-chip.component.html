@@ -1,6 +1,6 @@
 <ion-chip>
   <ion-avatar>
-    <img [src]="imageUrl" />
+    <img [src]="utilsService.imageUrl(parentChild?.imageFile)" />
   </ion-avatar>
   <ion-label [routerLink]="['/person/details', parentChild?.personId]">{{
     parentChild.firstName + " " + parentChild.lastName

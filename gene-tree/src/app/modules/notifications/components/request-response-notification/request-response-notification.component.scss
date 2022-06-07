@@ -5,21 +5,3 @@
   width: 80px !important; //any size
   height: 80px !important; //any size
 }
-.box {
-  transition-delay: -1s;
-  border-radius: 5px;
-}
-ion-item {
-  border-radius: 5px;
-}
-
-.box:hover {
-  background-color: var(--ion-color-warning);
-  cursor: pointer;
-}
-
-.uni {
-  transition-duration: 3s;
-  transition-property: background-color;
-  border-radius: 5px;
-}

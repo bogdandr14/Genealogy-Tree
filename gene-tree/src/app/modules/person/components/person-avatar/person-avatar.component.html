@@ -1,5 +1,5 @@
 <ion-avatar class="avatar" *ngIf="personId">
-  <img [src]="imageUrl" alt="avatar" />
+  <img [src]="utilsService.imageUrl(imageFile)" alt="avatar" />
   <ion-fab-button
     *ngIf="canEdit"
     class="inner"

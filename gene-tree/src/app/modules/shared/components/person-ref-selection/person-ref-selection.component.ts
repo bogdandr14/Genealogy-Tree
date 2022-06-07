@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GenericPersonModel } from '../../../person/models/generic-person.model';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-person-ref-selection',
@@ -11,24 +12,7 @@ export class PersonRefSelectionComponent implements OnInit {
   @Input() selected: boolean;
   @Output() selectPerson = new EventEmitter<GenericPersonModel>();
 
-  constructor() { }
+  constructor(public utilsService: UtilsService) { }
 
   ngOnInit() { }
-
-  get cardColor() {
-    if (this.person.deathDate != null) {
-      return 'dead';
-    } else if (this.person.gender === 'm') {
-      return 'male';
-    } else {
-      return 'female';
-    }
-  }
-
-  get imageUrl(): string {
-    if (this.person && this.person.imageFile) {
-      return `data:${this.person.imageFile.mimeType};base64,${this.person.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
 }

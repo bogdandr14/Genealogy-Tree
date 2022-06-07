@@ -1,5 +1,6 @@
+import { UtilsService } from '../../../../shared/services/utils.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AlertService } from 'src/app/modules/core/services/alert.service';
+import { AlertService } from '../../../../core/services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ParentChildBaseModel } from '../../models/parent-child-base.model';
 import { ParentChildService } from '../../service/parent-child.service';
@@ -16,23 +17,18 @@ export class RemovableParentChildChipComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private translateService: TranslateService,
-    private parentChildService: ParentChildService
-  ) {}
+    private parentChildService: ParentChildService,
+    public utilsService: UtilsService
+  ) { }
 
-  ngOnInit() {}
-  get imageUrl(): string {
-    if (this.parentChild && this.parentChild.imageFile) {
-      return `data:${this.parentChild.imageFile.mimeType};base64,${this.parentChild.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
+  ngOnInit() { }
 
   async confirmDeleteParentChild() {
     await this.alertService.presentAlert(
       this.translateService.instant(
         this.isParent ? '_delete.parent' : '_delete.child'
       ),
-      this.translateService.instant(this.isParent ?'_delete.parentMessage':'_delete.childMessage', {
+      this.translateService.instant(this.isParent ? '_delete.parentMessage' : '_delete.childMessage', {
         firstName: this.parentChild.firstName,
         lastName: this.parentChild.lastName,
       }),

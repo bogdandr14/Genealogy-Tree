@@ -41,7 +41,7 @@ export class AuthService extends BaseService {
         this.dataService.setToken(login.token);
         this.setUserInfo(login);
         this.isLoggedIn.next(true);
-        this.router.navigate(['home']);
+        this.router.navigate(['genealogy', 'tree']);
       })
     );
   }

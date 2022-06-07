@@ -1,7 +1,6 @@
 import { NotificationsBundle } from './models/nofitications-bundle.model';
 import { UserService } from './../user/service/user.service';
 import { Component, OnInit } from '@angular/core';
-import { RelativeService } from '../relative/services/relative.service';
 import { map, take } from 'rxjs/operators';
 
 @Component({
@@ -37,6 +36,7 @@ export class NotificationsPage implements OnInit {
   }
 
   public refreshNotifications() {
+    this.userService.notificationsModified.next(true);
     this.userService
       .getNotifications()
       .pipe(

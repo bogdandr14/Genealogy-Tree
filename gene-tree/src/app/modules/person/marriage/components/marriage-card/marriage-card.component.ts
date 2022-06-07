@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MarriedPersonModel } from '../../models/married-person.model';
 import { MarriageService } from '../../service/marriage.service';
 import { first } from 'rxjs/operators';
+import { UtilsService } from '../../../../shared/services/utils.service';
 
 @Component({
   selector: 'app-marriage-card',
@@ -21,15 +22,10 @@ export class MarriageCardComponent implements OnInit {
     private translateService: TranslateService,
     private alertService: AlertService,
     public router: Router,
-  ) {}
+    public utilsService: UtilsService
+  ) { }
 
-  ngOnInit() {}
-  get imageUrl(): string {
-    if (this.marriage && this.marriage.personMarriedTo.imageFile) {
-      return `data:${this.marriage.personMarriedTo.imageFile.mimeType};base64,${this.marriage.personMarriedTo.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
+  ngOnInit() { }
 
   async confirmDeleteMarriage() {
     await this.alertService.presentAlert(

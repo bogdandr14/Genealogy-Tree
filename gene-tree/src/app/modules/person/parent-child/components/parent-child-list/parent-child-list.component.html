@@ -1,4 +1,4 @@
-<ion-card *ngIf="isParentList !== null && personLinkedTo?.personId !== null">
+<ion-card *ngIf="isParentList !== null && !!personLinkedTo?.personId">
   <ion-card-header class="ion-text-center">
     <ion-card-title>
       {{ (isParentList ? "_person.parents" : "_person.children") | translate }}
@@ -16,34 +16,38 @@
         ></app-parent-child-card>
       </ng-container>
       <ng-template #noRelatives>
-        {{ (isParentList ? "_parentChild.noParent" : "_parentChild.noChild") | translate }}
+        {{
+          (isParentList ? "_parentChild.noParent" : "_parentChild.noChild")
+            | translate
+        }}
       </ng-template>
       <ng-container *ngIf="canModify">
         <!-- ADD CHILD -->
-        <ion-button
-          *ngIf="!isParentList; else parentsButtons"
-          [id]="'open-add-child' + personLinkedTo.personId"
-          expand="block"
-          fill="clear"
-          color="success"
-        >
-          <ion-icon name="add" slot="start"></ion-icon>
-          {{ "_add.child" | translate }}
-        </ion-button>
+        <ng-container *ngIf="isParentList === false; else parentsButtons">
+          <ion-button
+            [id]="'open-add-child' + personLinkedTo.personId"
+            expand="block"
+            fill="clear"
+            color="success"
+          >
+            <ion-icon name="add" slot="start"></ion-icon>
+            {{ "_add.child" | translate }}
+          </ion-button>
 
-        <ion-modal
-          [trigger]="'open-add-child' + personLinkedTo.personId"
-          [swipeToClose]="true"
-        >
-          <ng-template>
-            <app-parent-child-add
-              [person]="personLinkedTo"
-              [addParent]="false"
-              (saveConfirmed)="refreshParentChild()"
-            >
-            </app-parent-child-add>
-          </ng-template>
-        </ion-modal>
+          <ion-modal
+            [trigger]="'open-add-child' + personLinkedTo.personId"
+            [swipeToClose]="true"
+          >
+            <ng-template>
+              <app-parent-child-add
+                [person]="personLinkedTo"
+                [addParent]="false"
+                (saveConfirmed)="refreshParentChild()"
+              >
+              </app-parent-child-add>
+            </ng-template>
+          </ion-modal>
+        </ng-container>
 
         <!-- ADD PARENT -->
         <ng-template #parentsButtons>

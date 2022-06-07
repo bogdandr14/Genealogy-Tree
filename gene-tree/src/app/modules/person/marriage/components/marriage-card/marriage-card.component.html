@@ -1,10 +1,13 @@
-<ion-card>
-  <ion-card-header [routerLink]="['/person/details', marriage?.personMarriedTo?.personId]">
+<ion-card [ngClass]="utilsService.cardColor(marriage?.personMarriedTo)">
+  <ion-card-header
+    class="person-box"
+    [routerLink]="['/person/details', marriage?.personMarriedTo?.personId]"
+  >
     <ion-card-title>
       <ion-item lines="none">
         <ion-avatar class="avatar" slot="start">
           <img
-            [src]="imageUrl"
+            [src]="utilsService.imageUrl(marriage.personMarriedTo?.imageFile)"
             [alt]="
               marriage.personMarriedTo?.firstName +
               marriage.personMarriedTo?.lastName +
@@ -32,7 +35,6 @@
   <ion-card-content *ngIf="canModify" class="ion-text-center">
     <ion-button
       [id]="'open-edit-marriage' + marriage.id"
-      fill="clear"
       color="warning"
       slot="start"
     >
@@ -51,12 +53,7 @@
       </ng-template>
     </ion-modal>
 
-    <ion-button
-      fill="clear"
-      color="danger"
-      slot="end"
-      (click)="confirmDeleteMarriage()"
-    >
+    <ion-button color="danger" slot="end" (click)="confirmDeleteMarriage()">
       <ion-icon name="trash" slot="start"></ion-icon>
       {{ "_common.delete" | translate }}
     </ion-button>

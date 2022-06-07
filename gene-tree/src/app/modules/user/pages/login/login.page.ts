@@ -19,7 +19,7 @@ export class LoginPage implements OnDestroy {
     private authService: AuthService,
     private router: Router,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);

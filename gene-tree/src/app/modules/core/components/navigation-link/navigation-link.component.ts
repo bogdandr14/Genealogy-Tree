@@ -9,7 +9,7 @@ import { RouteDescriptor } from '../../models/route-descriptor';
 })
 export class NavigationLinkComponent implements OnInit {
   @Input() link: RouteDescriptor;
-  constructor( public userService: UserService) {}
+  constructor(public userService: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

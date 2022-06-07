@@ -9,7 +9,9 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row [ngClass]="(authService.isLoggedIn$ | async) ? '' : 'absolute-center'">
+    <ion-row
+      [ngClass]="(authService.isLoggedIn$ | async) ? '' : 'absolute-center'"
+    >
       <ion-col size-sm="8" offset-sm="2">
         <ion-card>
           <ion-card-content>
@@ -53,7 +55,7 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-<ion-footer no-border transparent class="ion-text-center">
+<ion-footer no-border transparent class="ion-text-center" hidden>
   <ion-toolbar>
     <app-social-media-chips></app-social-media-chips>
   </ion-toolbar>

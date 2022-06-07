@@ -1,11 +1,14 @@
 <ion-card *ngIf="relativeUpdate">
   <ion-card-header
-    class="box uni"
+    class="person-box"
     [routerLink]="['/user/profile', relativeUpdate?.relative.userId]"
   >
     <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
-        <img [src]="imageUrl" [alt]="relativeName + 'profile picture'" />
+        <img
+          [src]="utilsService.imageUrl(relativeUpdate.relative?.imageFile)"
+          [alt]="relativeName + 'profile picture'"
+        />
       </ion-avatar>
       <ion-label class="ion-padding-start" text-wrap>
         <h1>
@@ -17,7 +20,7 @@
   <ion-card-content class="ion-text-center">
     <ion-card *ngFor="let update of relativeUpdate.updates">
       <ion-card-header
-        class="box uni"
+        class="person-box"
         [routerLink]="['/person/details', update.referenceId]"
       >
         <ion-label>

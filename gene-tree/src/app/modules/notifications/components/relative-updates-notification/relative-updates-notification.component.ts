@@ -1,3 +1,4 @@
+import { UtilsService } from './../../../shared/services/utils.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UpdateInfoModel } from './../../models/update-info.model';
 import { RelativeService } from './../../../relative/services/relative.service';
@@ -15,22 +16,14 @@ export class RelativeUpdatesNotificationComponent implements OnInit {
   @Output() refreshNotifications = new EventEmitter<boolean>();
   constructor(
     private relativeService: RelativeService,
-    private translateService: TranslateService
-  ) {}
+    private translateService: TranslateService,
+    public utilsService: UtilsService
+  ) { }
 
   get relativeName() {
     return `${this.relativeUpdate.relative.firstName} ${this.relativeUpdate.relative.lastName}`;
   }
-  get imageUrl(): string {
-    if (
-      this.relativeUpdate.relative &&
-      this.relativeUpdate.relative.imageFile
-    ) {
-      return `data:${this.relativeUpdate.relative.imageFile.mimeType};base64,${this.relativeUpdate.relative.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
-  ngOnInit() {}
+  ngOnInit() { }
 
   public getTranslatedMessage(update: UpdateInfoModel) {
     switch (update.updateType) {

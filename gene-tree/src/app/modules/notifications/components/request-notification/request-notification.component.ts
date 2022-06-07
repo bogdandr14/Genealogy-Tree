@@ -1,3 +1,4 @@
+import { UtilsService } from './../../../shared/services/utils.service';
 import { RequestResponseModel } from './../../../relative/models/request-response.model';
 import { RelativeService } from './../../../relative/services/relative.service';
 import { RequestDetailsModel } from './../../../relative/models/request-details.model';
@@ -18,19 +19,14 @@ export class RequestNotificationComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private translateService: TranslateService,
-    private relativeService: RelativeService
-  ) {}
+    private relativeService: RelativeService,
+    public utilsService: UtilsService
+  ) { }
 
   get senderName() {
     return `${this.request.senderUser.firstName} ${this.request.senderUser.lastName}`;
   }
-  ngOnInit() {}
-  get imageUrl(): string {
-    if (this.request.senderUser && this.request.senderUser.imageFile) {
-      return `data:${this.request.senderUser.imageFile.mimeType};base64,${this.request.senderUser.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
+  ngOnInit() { }
 
   async confirmRejectRequest() {
     console.log('in reject');

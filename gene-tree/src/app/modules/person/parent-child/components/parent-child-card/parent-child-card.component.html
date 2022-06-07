@@ -1,10 +1,15 @@
-<ion-card>
-  <ion-card-header  [routerLink]="['/person/details', parentChild?.personId]">
+<ion-card [ngClass]="utilsService.cardColor(parentChild)">
+  <ion-card-header
+    class="person-box"
+    [routerLink]="['/person/details', parentChild?.personId]"
+  >
     <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
         <img
-          [src]="imageUrl"
-          [alt]="parentChild?.firstName + parentChild?.lastName + 'profile picture'"
+          [src]="utilsService.imageUrl(parentChild?.imageFile)"
+          [alt]="
+            parentChild?.firstName + parentChild?.lastName + 'profile picture'
+          "
         />
       </ion-avatar>
       <ion-label class="ion-padding-start" text-wrap>
@@ -14,12 +19,7 @@
     </ion-item>
   </ion-card-header>
   <ion-card-content *ngIf="canModify" class="ion-text-center">
-    <ion-button
-      fill="clear"
-      color="danger"
-      slot="end"
-      (click)="confirmDeleteParentChild()"
-    >
+    <ion-button color="danger" slot="end" (click)="confirmDeleteParentChild()">
       <ion-icon name="trash" slot="start"></ion-icon>
       {{ "_common.delete" | translate }}
     </ion-button>

@@ -1,11 +1,14 @@
 <ion-card *ngIf="requestResponse">
   <ion-card-header
-    class="box uni"
+    class="person-box"
     [routerLink]="['/user/profile', requestResponse?.receiverUser.userId]"
   >
     <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
-        <img [src]="imageUrl" [alt]="receiverName + 'profile picture'" />
+        <img
+          [src]="utilsService.imageUrl(requestResponse.receiverUser?.imageFile)"
+          [alt]="receiverName + 'profile picture'"
+        />
       </ion-avatar>
       <ion-label class="ion-padding-start" text-wrap>
         <h1>

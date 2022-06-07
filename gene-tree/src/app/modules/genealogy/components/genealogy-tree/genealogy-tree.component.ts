@@ -27,7 +27,7 @@ export class GenealogyTreeComponent implements OnInit {
     private personService: PersonService,
     private userService: UserService,
     public datepipe: DatePipe
-  ) {}
+  ) { }
 
   //href="tel://{val}
   ngOnInit() {

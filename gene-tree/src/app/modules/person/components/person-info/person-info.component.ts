@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./person-info.component.scss'],
 })
 export class PersonInfoComponent implements OnInit {
-  @Input() type:string = 'person';
+  @Input() type: string = 'person';
   @Input() personInfo: PersonEditModel;
   @Input() showHeader = true;
   @Input() canModify: boolean = false;

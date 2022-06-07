@@ -1,5 +1,6 @@
+import { UtilsService } from './../../../../shared/services/utils.service';
 import { ParentChildService } from '../../service/parent-child.service';
-import { AlertService } from 'src/app/modules/core/services/alert.service';
+import { AlertService } from '../../../../core/services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ParentChildBaseModel } from '../../models/parent-child-base.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -19,16 +20,11 @@ export class ParentChildCardComponent implements OnInit {
   constructor(
     private translateService: TranslateService,
     private alertService: AlertService,
-    private parentChildService: ParentChildService
+    private parentChildService: ParentChildService,
+    public utilsService: UtilsService
   ) { }
 
   ngOnInit() { }
-  get imageUrl(): string {
-    if (this.parentChild && this.parentChild.imageFile) {
-      return `data:${this.parentChild.imageFile.mimeType};base64,${this.parentChild.imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
 
   async confirmDeleteParentChild() {
     await this.alertService.presentAlert(

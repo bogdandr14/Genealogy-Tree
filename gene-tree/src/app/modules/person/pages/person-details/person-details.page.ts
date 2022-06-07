@@ -23,7 +23,7 @@ export class PersonDetailsPage implements OnInit {
     private userService: UserService,
     private dataService: DataService,
     private personService: PersonService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.paramMap

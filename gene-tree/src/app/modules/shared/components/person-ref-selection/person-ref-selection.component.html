@@ -1,12 +1,13 @@
-<ion-card *ngIf="person" [ngClass]="cardColor" [class.selected]="selected">
-  <ion-card-header
-    class="box uni"
-    (click)="selectPerson.emit(person)"
-  >
+<ion-card
+  *ngIf="person"
+  [ngClass]="utilsService.cardColor(person)"
+  [class.selected]="selected"
+>
+  <ion-card-header class="person-box" (click)="selectPerson.emit(person)">
     <ion-item lines="none">
       <ion-avatar class="avatar" slot="start">
         <img
-          [src]="imageUrl"
+          [src]="utilsService.imageUrl(person.imageFile)"
           [alt]="person?.firstName + person?.lastName + 'profile picture'"
         />
       </ion-avatar>

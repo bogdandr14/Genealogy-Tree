@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import FamilyTree from '@balkangraph/familytree.js';
 import { TranslateService } from '@ngx-translate/core';
 import { DataService } from '../../core/services/data.service';
+import { UserService } from '../../user/service/user.service';
 import { TreeTemplateConstants } from '../models/tree-template.constants';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class TreeService {
   constructor(
     private router: Router,
     private dataService: DataService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private userService: UserService
   ) {
     this.setThemeSubscriber();
     this.setLangSubscriber();
@@ -73,25 +75,14 @@ export class TreeService {
       template: 'gene',
       miniMap: false,
       toolbar: {
-        layout: true,
+        layout: false,
         zoom: true,
         fit: false,
         expandAll: false,
-        fullScreen: false,
+        fullScreen: true,
       },
       roots: [],
-      nodeMenu: {
-        edit: {
-          text: this.translateService.instant('_common.edit'),
-          icon: FamilyTree.icon.edit(18, 18, '#ffd534'),
-          onClick: this.personEditHandler,
-        },
-        details: {
-          text: this.translateService.instant('_common.details'),
-          icon: FamilyTree.icon.details(18, 18, '#50c8ff'),
-          onClick: this.personDetailHandler,
-        },
-      },
+      nodeMenu: this.treeMenu,
       nodeBinding: {
         field_0: 'name',
         field_1: 'born',
@@ -110,6 +101,31 @@ export class TreeService {
         args.value = date.toLocaleDateString();
       }
     });
+  }
+
+  get treeMenu() {
+    if (this.userService.isUserTree(this.treeId)) {
+      return {
+        edit: {
+          text: this.translateService.instant('_common.edit'),
+          icon: FamilyTree.icon.edit(18, 18, '#ffd534'),
+          onClick: this.personEditHandler,
+        },
+        details: {
+          text: this.translateService.instant('_common.details'),
+          icon: FamilyTree.icon.details(18, 18, '#50c8ff'),
+          onClick: this.personDetailHandler,
+        },
+      }
+    } else {
+      return {
+        details: {
+          text: this.translateService.instant('_common.details'),
+          icon: FamilyTree.icon.details(18, 18, '#50c8ff'),
+          onClick: this.personDetailHandler,
+        },
+      }
+    }
   }
 
   loadFamilyTree(people: any[]) {

@@ -1,4 +1,3 @@
-import { AccountProfileModel } from './../models/profile.model';
 import { NotificationsBundle } from './../../notifications/models/nofitications-bundle.model';
 import { UserPositionModel } from './../../genealogy/models/user-position.model';
 import { PositionModel } from './../../genealogy/models/position.model';
@@ -6,7 +5,7 @@ import { UserEditModel } from '../models/user-edit.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, merge, Observable, Subscription, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountSettingsModel } from '../../settings/models/account-settings.model';
 import { CurrentUserModel } from '../../core/models/current-user.model';
@@ -22,6 +21,8 @@ export class UserService extends BaseService {
   private userState = new BehaviorSubject<CurrentUserModel>(null);
   private notificationCount = new BehaviorSubject<number>(0);
   public notificationCount$ = this.notificationCount.asObservable();
+  public notificationsModified = new BehaviorSubject<boolean>(false);
+  private notificationsModified$ = this.notificationsModified.asObservable();
   private notificationSubscription: Subscription;
 
   constructor(httpClient: HttpClient, private dataService: DataService) {
@@ -33,7 +34,8 @@ export class UserService extends BaseService {
     this.dataService.user$.subscribe((user) => {
       this.userState.next(user);
       if (user && Object.keys(user).length > 0) {
-        this.notificationSubscription = timer(100, 60000)
+        const notificationTimer = timer(100, 60000);
+        this.notificationSubscription = merge(notificationTimer, this.notificationsModified$)
           .pipe(
             switchMap(() => this.getNotificationsCount()),
             tap((count) => this.notificationCount.next(count))
@@ -61,13 +63,13 @@ export class UserService extends BaseService {
     return this.userState.value.email;
   }
 
-  public getNotificationsCount(){
+  public getNotificationsCount() {
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
-      super.getOneByPath<number>(`notificationsCount/${user.userId}`,BaseService.noLoadingConfig)
+      super.getOneByPath<number>(`notificationsCount/${user.userId}`, BaseService.noLoadingConfig)
     ));
   }
 
-  public getNotifications(){
+  public getNotifications() {
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
       super.getOneByPath<NotificationsBundle>(`notifications/${user.userId}`)
     ));
@@ -103,7 +105,7 @@ export class UserService extends BaseService {
     return super.getOneById<AccountProfileModel>(userId);
   }
 
-  public getTreeRoot<AccountProfileModel>(treeId: Guid|string):Observable<AccountProfileModel>{
+  public getTreeRoot<AccountProfileModel>(treeId: Guid | string): Observable<AccountProfileModel> {
     return super.getOneById<AccountProfileModel>(treeId, 'treeRoot');
   }
 
