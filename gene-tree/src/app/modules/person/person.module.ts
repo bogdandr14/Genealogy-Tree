@@ -1,7 +1,6 @@
 import { ParentChildModule } from './parent-child/parent-child.module';
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonInfoComponent } from './components/person-info/person-info.component';
-import { LocationEditComponent } from './components/location-edit/location-edit.component';
 import { PersonEditPage } from './pages/person-edit/person-edit.page';
 import { PersonDetailsPage } from './pages/person-details/person-details.page';
 import { NgModule } from '@angular/core';
@@ -19,7 +18,6 @@ import { RouterModule } from '@angular/router';
     PersonDetailsPage,
     PersonEditPage,
     FileMaxSizeDirective,
-    LocationEditComponent,
     PersonInfoComponent,
     PersonAvatarComponent,
     PersonCardComponent

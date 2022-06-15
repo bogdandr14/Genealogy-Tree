@@ -21,11 +21,6 @@ export class NavigationComponent {
   }
   setupConnectedUserLinks() {
     this.connectedUserLinks = [
-      // {
-      //   title: '_pages.home',
-      //   path: '/home',
-      //   icon: 'home',
-      // },
       {
         title: '_pages.notifications',
         path: '/notifications',
@@ -51,11 +46,6 @@ export class NavigationComponent {
 
   setupFreeUserLinks() {
     this.freeUserLinks = [
-      // {
-      //   title: '_pages.home',
-      //   path: '/home',
-      //   icon: 'home',
-      // },
       {
         title: '_pages.login',
         path: '/user/login',

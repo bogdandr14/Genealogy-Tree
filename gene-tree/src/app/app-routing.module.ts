@@ -5,14 +5,8 @@ import { IntroGuard } from './modules/core/guards/intro.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomePageModule),
-    canLoad: [IntroGuard],
-    data: { title: '_pages.home' }
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'user/login',
     pathMatch: 'full'
   },
   {

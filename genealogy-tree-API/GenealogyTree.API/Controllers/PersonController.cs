@@ -169,40 +169,6 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("location/{id:int}")]
-        public async Task<ActionResult<LocationModel>> GetLocationAsync(int id)
-        {
-            try
-            {
-                LocationModel returnEvent = await _locationService.GetLocationAsync(id);
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpPut]
-        [Route("location")]
-        public async Task<ActionResult<LocationModel>> UpdateLocation(LocationModel location)
-        {
-            try
-            {
-                LocationModel returnEvent = await _locationService.UpdateLocation(location);
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
         [HttpPost]
         [Route("photo/{personId:int}")]
         public async Task<ActionResult<ImageFile>> UploadPhoto(int personId, [Required][FromForm][MaxImageSize(4 * 1024)] IFormFile image)

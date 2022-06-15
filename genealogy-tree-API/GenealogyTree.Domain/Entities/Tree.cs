@@ -12,7 +12,6 @@ namespace GenealogyTree.Domain.Entities
         }
 
         public Guid Id { get; set; }
-        public string Name { get; set; }
         public DateTime LastUpdate { get; set; }
 
         public virtual ICollection<Person> PeopleInTree { get; set; }

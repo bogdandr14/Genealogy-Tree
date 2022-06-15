@@ -10,14 +10,14 @@
 <ion-content class="ion-text-center">
   <ion-grid>
     <ion-row class="ion-align-item-center">
-      <ion-col size-sm="5" offset-sm="1">
+      <ion-col size-sm="4">
         <app-person-info
           [personInfo]="personDetails"
           [canModify]="isUserTree"
         ></app-person-info>
       </ion-col>
 
-      <ion-col size-sm="4" offset-sm="1">
+      <ion-col size-sm="4">
         <app-parent-child-list
           [parentsChildren]="personDetails?.parents"
           [personLinkedTo]="personDetails"
@@ -25,7 +25,8 @@
           [isParentList]="true"
         >
         </app-parent-child-list>
-
+      </ion-col>
+      <ion-col size-sm="4">
         <app-parent-child-list
           [parentsChildren]="personDetails?.children"
           [personLinkedTo]="personDetails"
@@ -33,7 +34,8 @@
           [isParentList]="false"
         >
         </app-parent-child-list>
-
+      </ion-col>
+      <ion-col size-sm="4">
         <app-marriage-list
           [marriages]="personDetails?.marriages"
           [personLinkedTo]="personDetails"

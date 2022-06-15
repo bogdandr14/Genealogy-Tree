@@ -1,3 +1,4 @@
+import { IntroGuard } from './../core/guards/intro.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
@@ -15,7 +16,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPage,
-    canLoad: [AutoLoginGuard],
+    canLoad: [IntroGuard, AutoLoginGuard],
     data: { title: '_pages.login' }
   },
   {

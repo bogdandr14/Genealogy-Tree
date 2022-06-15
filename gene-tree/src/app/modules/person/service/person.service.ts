@@ -53,14 +53,6 @@ export class PersonService extends BaseService {
     return super.remove(personId);
   }
 
-  public getLocation(locationId: number): Observable<LocationModel> {
-    return super.getOneById<LocationModel>(locationId, 'location');
-  }
-
-  public updateLocation(locationUpdate: LocationModel): Observable<LocationModel> {
-    return super.update<LocationModel>(locationUpdate, 'location');
-  }
-
   public uploadPhoto(personId: number, image: File): Observable<ImageFile> {
     let path = `${this.url}/photo/${personId}`;
     const formData = new FormData();
