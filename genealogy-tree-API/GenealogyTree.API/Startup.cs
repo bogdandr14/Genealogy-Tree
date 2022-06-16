@@ -78,7 +78,6 @@ namespace GenealogyTree.API
             services
                .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(PersonService)))
                .Where(x => x.Name.EndsWith("Service")).AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
-            //services.AddScoped<IAuthService, AuthService>
             services.Configure<SMTPModel>(Configuration.GetSection("SMTP"));
         }
 
