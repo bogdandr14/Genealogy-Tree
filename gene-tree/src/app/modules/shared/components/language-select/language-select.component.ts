@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { DataService } from 'src/app/modules/core/services/data.service';
 import { environment } from 'src/environments/environment';
 import { LanguageModel } from '../../../core/models/language.model';

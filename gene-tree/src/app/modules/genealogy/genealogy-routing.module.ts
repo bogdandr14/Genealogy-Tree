@@ -32,16 +32,12 @@ const routes: Routes = [
       },
       {
         path: 'events',
-        children: [
-          {
-            path: '',
-            component: GenealogyEventsComponent
-          },
-          {
-            path: ':id',
-            component: GenealogyEventsComponent
-          }
-        ],
+        component: GenealogyEventsComponent,
+        data: { title: '_pages.genealogyEvents' }
+      },
+      {
+        path: 'events/:id',
+        component: GenealogyEventsComponent,
         data: { title: '_pages.genealogyEvents' }
       },
       {

@@ -1,5 +1,4 @@
 import { ParentChildModule } from './parent-child/parent-child.module';
-import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonInfoComponent } from './components/person-info/person-info.component';
 import { PersonEditPage } from './pages/person-edit/person-edit.page';
 import { PersonDetailsPage } from './pages/person-details/person-details.page';
@@ -20,10 +19,9 @@ import { RouterModule } from '@angular/router';
     FileMaxSizeDirective,
     PersonInfoComponent,
     PersonAvatarComponent,
-    PersonCardComponent
   ],
   imports: [SharedModule, MarriageModule, ParentChildModule, PersonRoutingModule, RouterModule],
-  exports: [PhotoUploadComponent, PersonInfoComponent, PersonAvatarComponent, PersonCardComponent],
+  exports: [PhotoUploadComponent, PersonInfoComponent, PersonAvatarComponent],
   providers: [NgxImageCompressService],
 })
 export class PersonModule { }

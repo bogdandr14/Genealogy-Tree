@@ -1,6 +1,6 @@
-import { UtilsService } from './../../../shared/services/utils.service';
+import { UtilsService } from '../../services/utils.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { GenericPersonModel } from '../../models/generic-person.model';
+import { GenericPersonModel } from '../../../person/models/generic-person.model';
 
 @Component({
   selector: 'app-person-card',

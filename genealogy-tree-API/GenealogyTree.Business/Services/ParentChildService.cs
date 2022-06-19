@@ -130,9 +130,12 @@ namespace GenealogyTree.Business.Services
         public async Task<List<GenericPersonModel>> GetChildrenOptions(int personId)
         {
             List<GenericPersonModel> notRelatedByDescendants = await GetNotRelatedByDescendants(personId);
+            List<GenericPersonModel> notRelatedByAncestors = await GetNotRelatedByAncestors(personId);
+            List<GenericPersonModel> notRelated = notRelatedByDescendants.Where(notRelated => notRelatedByAncestors.Any(x => x.PersonId == notRelated.PersonId)).ToList();
+
             List<int> peopleWithoutParent = await GetPeopleWithoutParent(personId);
             List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
-            return notRelatedByDescendants.Where((person) =>
+            return notRelated.Where((person) =>
                                         peopleWithoutParent.Exists((personId) => person.PersonId == personId) &&
                                         !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
         }
@@ -140,7 +143,8 @@ namespace GenealogyTree.Business.Services
         public async Task<List<GenericPersonModel>> GetParentSpouceOptions(int personId)
         {
             List<GenericPersonModel> notRelatedByAncestors = await GetNotRelatedByAncestors(personId);
-            List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
+            List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Where(marriage => marriage.MarriageEnded == null)
+                                    .Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
             return notRelatedByAncestors.Where((person) => !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
         }
 

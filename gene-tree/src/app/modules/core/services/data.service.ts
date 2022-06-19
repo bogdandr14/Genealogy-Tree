@@ -66,8 +66,6 @@ export class DataService {
     )
   }
 
-
-
   set(key: string, value: any) {
     this.storage.set(key, JSON.stringify(value));
   }

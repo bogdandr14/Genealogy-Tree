@@ -115,10 +115,6 @@ export class AlertService {
     this.warnSound.play();
   }
 
-  public showConfirmation(message: string): boolean {
-    return confirm(message);
-  }
-
   private async createToast(
     title: string,
     message: string,

@@ -277,7 +277,6 @@ namespace GenealogyTree.Business.Services
             personEntity.CreatedOn = DateTime.UtcNow;
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
-            returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
             return returnEvent;
         }
         private Person removeAttachedEntities(Person personEntity)
@@ -314,16 +313,6 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
-            Person personEntity = _mapper.Map<Person>(person);
-            await updateLocations(person);
-            if (person.LivingPlace.Id == 0)
-            {
-                person.LivingPlace = null;
-            }
-            if (person.BirthPlace.Id == 0)
-            {
-                person.BirthPlace = null;
-            }
 
             personInDb.FirstName = person.FirstName;
             personInDb.LastName = person.LastName;
@@ -333,24 +322,35 @@ namespace GenealogyTree.Business.Services
             personInDb.ModifiedOn = DateTime.UtcNow;
             personInDb.NationalityId = person.Nationality.Id;
             personInDb.ReligionId = person.Religion.Id;
+            if (person.LivingPlace != null)
+            {
+                personInDb.LivingPlace.State = person.LivingPlace.State;
+                personInDb.LivingPlace.Country = person.LivingPlace.Country;
+                personInDb.LivingPlace.City = person.LivingPlace.City;
+            }
+            if (person.BirthPlace != null)
+            {
+                personInDb.BirthPlace.State = person.BirthPlace.State;
+                personInDb.BirthPlace.Country = person.BirthPlace.Country;
+                personInDb.BirthPlace.City = person.BirthPlace.City;
+            }
+            await updateLocations(personInDb);
 
-            personEntity = await unitOfWork.Person.Update(personInDb);
+            Person personEntity = await unitOfWork.Person.Update(personInDb);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
             return returnEvent;
         }
 
-        private async Task updateLocations(PersonCreateUpdateModel person)
+        private async Task updateLocations(Person person)
         {
             if (person.LivingPlace != null && person.LivingPlace.Id != 0)
             {
-                Location locationEntity = _mapper.Map<Location>(person.LivingPlace);
-                await unitOfWork.Location.Update(locationEntity);
+                await unitOfWork.Location.Update(person.LivingPlace);
             }
             if (person.BirthPlace != null && person.BirthPlace.Id != 0)
             {
-                Location locationEntity = _mapper.Map<Location>(person.BirthPlace);
-                await unitOfWork.Location.Update(locationEntity);
+                await unitOfWork.Location.Update(person.BirthPlace);
             }
         }
 
@@ -369,6 +369,16 @@ namespace GenealogyTree.Business.Services
 
         public async Task<PersonDetailsModel> DeletePersonAsync(int personId)
         {
+            List<int> parentChildIds = unitOfWork.ParentChild.Filter(parentChild => parentChild.ParentId == personId || parentChild.ChildId == personId).Select(parentChild => parentChild.Id).ToList();
+            foreach (var parentChildId in parentChildIds)
+            {
+                unitOfWork.ParentChild.Delete(parentChildId);
+            }
+            List<int> marriageIds = unitOfWork.Marriage.Filter(marriage => marriage.FirstPersonId == personId || marriage.SecondPersonId == personId).Select(marriage => marriage.Id).ToList();
+            foreach (var marriageId in marriageIds)
+            {
+                unitOfWork.Marriage.Delete(marriageId);
+            }
             Person personEntity = await unitOfWork.Person.Delete(personId);
             int oldImageId = (personEntity.ImageId == null) ? 0 : (int)personEntity.ImageId;
             if (oldImageId != 0)
