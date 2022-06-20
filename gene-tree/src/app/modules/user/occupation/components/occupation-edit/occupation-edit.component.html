@@ -19,6 +19,7 @@
             <form #form="ngForm" (ngSubmit)="onSubmit()">
               <!-- OCCUPATION NAME -->
               <app-input-template
+                [isRequired]="true"
                 id="occupation-name"
                 [(field)]="occupation.occupationName"
                 name="_occupation.occupationName"
@@ -26,6 +27,7 @@
 
               <!-- WORKING PLACE -->
               <app-input-template
+                [isRequired]="true"
                 id="working-place-name"
                 [(field)]="occupation.workingPlaceName"
                 name="_occupation.workingPlaceName"
