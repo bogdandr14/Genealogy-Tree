@@ -16,13 +16,6 @@
 
             switch (lang)
             {
-                case "eng":
-                    return new EmailDescription()
-                    {
-                        ReportedBy = ReportedByEng,
-                        ReplyNote = ReplyNoteEng,
-                        SupportNote = SupportNoteEng
-                    };
                 case "ro":
                     return new EmailDescription()
                     {
@@ -30,6 +23,7 @@
                         ReplyNote = ReplyNoteRo,
                         SupportNote = SupportNoteRo
                     };
+                case "eng":
                 default:
                     return new EmailDescription()
                     {
