@@ -1,3 +1,4 @@
+import { UtilsService } from './../../shared/services/utils.service';
 import { RelativeService } from './relative.service';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +25,8 @@ export class MapService {
 
   constructor(
     private translateService: TranslateService,
-    private relativeService: RelativeService
+    private relativeService: RelativeService,
+    private utilsService: UtilsService
   ) {
     this.setUsersIcons();
     this.datePipe = new DatePipe('ro-RO');
@@ -151,13 +153,6 @@ export class MapService {
     });
   }
 
-  private getImageUrl(imageFile: ImageFile) {
-    if (!!imageFile) {
-      return `data:${imageFile.mimeType};base64,${imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  }
-
   private addRelativeMarker(userPosition: UserPositionModel) {
     const leafletIcon = Leaflet.marker(
       [userPosition.latitude, userPosition.longitude],
@@ -170,7 +165,7 @@ export class MapService {
           ${userPosition.firstName} ${userPosition.lastName}
         </b>
         <ion-avatar>
-          <img src="${this.getImageUrl(null)}"/>
+          <img src="${this.utilsService.imageUrl(userPosition.imageFile)}"/>
         </ion-avatar>
       </h2>
       <p>
@@ -185,10 +180,5 @@ export class MapService {
     );
     newMarker.icon.addTo(this.myMap);
     this.relativesMarkers.push(newMarker);
-  }
-
-  private removeWatcher() {
-    console.log('ngOnDestroy: cleaning up...');
-    navigator.geolocation.clearWatch(this.navigationId);
   }
 }
