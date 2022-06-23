@@ -19,6 +19,6 @@ namespace GenealogyTree.Domain.Interfaces.Services
         Task<bool> CheckEmailAvailable(string email);
         Task<UserSettingsModel> GetUserSettings(Guid userId);
         Task<UserSettingsModel> UpdateUserSettings(Guid userId, UserSettingsModel userSettings);
-        Task<UserPositionModel> UpdateUserPosition(int positionId, PositionModel position);
+        Task<PositionModel> UpdateUserPosition(Guid userId, PositionModel position);
     }
 }

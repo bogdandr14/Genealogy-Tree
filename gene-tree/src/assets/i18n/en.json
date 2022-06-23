@@ -188,6 +188,7 @@
   "_updates":{
     "relativeChanges": "{ name } made changes in his/her genealogy tree",
     "markAsChecked": "Mark as checked",
+    "seeChanges": "See changes",
     "personCreated": "A new person was created: { name }",
     "personModified": "The person { name } was modified",
     "marriageCreated": "A new marriage was added between { firstPerson } and { secondPerson }",

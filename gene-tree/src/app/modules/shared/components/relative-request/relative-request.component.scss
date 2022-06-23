@@ -1,0 +1,11 @@
+.selection-list-height{
+  @media (min-width: 768px) {
+    max-height: 350px;
+  }
+  max-height: 550px;
+  overflow: auto;
+}
+
+ion-card{
+  margin-bottom: 60px;
+}

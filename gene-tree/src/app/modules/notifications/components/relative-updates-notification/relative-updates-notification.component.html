@@ -18,18 +18,28 @@
     </ion-item>
   </ion-card-header>
   <ion-card-content class="ion-text-center">
-    <ion-card *ngFor="let update of relativeUpdate.updates">
-      <ion-card-header
-        class="person-box"
-        [routerLink]="['/person/details', update.referenceId]"
-      >
-        <ion-label>
-          {{ getTranslatedMessage(update) }}
-        </ion-label>
-      </ion-card-header>
-    </ion-card>
-    <ion-button color="danger" slot="end" (click)="markAsChecked()">
-      <ion-icon name="trash" slot="start"></ion-icon>
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <ion-label>{{ "_updates.seeChanges" | translate }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-card *ngFor="let update of relativeUpdate.updates">
+            <ion-card-header
+              class="person-box"
+              [routerLink]="['/person/details', update.referenceId]"
+            >
+              <ion-label>
+                {{ getTranslatedMessage(update) }}
+              </ion-label>
+            </ion-card-header>
+          </ion-card>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <ion-button color="primary" slot="end" (click)="markAsChecked()">
+      <ion-icon name="checkmark" slot="start"></ion-icon>
       {{ "_updates.markAsChecked" | translate }}
     </ion-button>
   </ion-card-content>

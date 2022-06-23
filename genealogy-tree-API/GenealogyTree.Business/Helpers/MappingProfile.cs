@@ -67,7 +67,7 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Parent.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Parent.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Parent.LastName))
-                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Parent.Gender))
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Parent.Gender.ToString()))
                 .ForMember(x => x.ImageId, y => y.MapFrom(z => z.Parent.ImageId))
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Parent.BirthDate))
                 .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Parent.DeathDate))
@@ -81,6 +81,7 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Child.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Child.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Child.LastName))
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Child.Gender.ToString()))
                 .ForMember(x => x.ImageId, y => y.MapFrom(z => z.Child.ImageId))
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Child.BirthDate))
                 .ForMember(x => x.DeathDate, y => y.MapFrom(z => z.Child.DeathDate))
@@ -134,7 +135,7 @@ namespace GenealogyTree.Business.Helpers
                 .ReverseMap();
 
             CreateMap<Relative, RelativeModel>()
-                .ForMember(x=> x.RelativePersonInTreeId, y=>y.MapFrom(z=>z.RelativePersonInPrimaryTreeId))
+                .ForMember(x => x.RelativePersonInTreeId, y => y.MapFrom(z => z.RelativePersonInPrimaryTreeId))
                 .ReverseMap();
             CreateMap<Relative, UsersToLinkModel>()
                 .ReverseMap();
@@ -179,7 +180,7 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Person.BirthDate))
-                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Person.Gender))
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Person.Gender.ToString()))
                 .ForMember(x => x.BirthDate, y => y.MapFrom(z => z.Person.BirthDate))
                 .ForMember(x => x.ImageId, y => y.MapFrom(z => z.Person.ImageId))
                 .ReverseMap();
@@ -203,6 +204,8 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<User, LoginResponseModel>()
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Person.TreeId))
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id));
-        }
+
+            CreateMap<Position, PositionModel>();
+       }
     }
 }

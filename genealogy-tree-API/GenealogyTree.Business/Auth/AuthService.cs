@@ -52,10 +52,13 @@ namespace GenealogyTree.Business.Auth
             person.LivingPlace = new Location();
             person.BirthPlace = new Location();
             Person personCreated = await unitOfWork.Person.Create(person);
+            Position newPosition = new Position();
+            Position position = await unitOfWork.Position.Create(newPosition);
 
             User user = _mapper.Map<User>(userRegister);
             user.Id = Guid.NewGuid();
             user.PersonId = personCreated.Id;
+            user.PositionId = position.Id; 
             user.PasswordSalt = Salt.Create();
             user.PasswordHash = Hash.CreateHash(userRegister.Password, user.PasswordSalt);
             User createdUser = await unitOfWork.User.Create(user);

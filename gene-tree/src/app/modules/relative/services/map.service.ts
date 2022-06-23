@@ -7,7 +7,7 @@ import * as L_EXTRA from '../../../../assets/js/leaflet.extra-markers.min.js';
 import { UserMarker } from '../models/user-marker.model';
 import { UserPositionModel } from '../../genealogy/models/user-position.model';
 import { DatePipe } from '@angular/common';
-import { ImageFile } from '../../shared/models/image-file';
+import { UserService } from '../../user/service/user.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,6 +26,7 @@ export class MapService {
   constructor(
     private translateService: TranslateService,
     private relativeService: RelativeService,
+    private userService: UserService,
     private utilsService: UtilsService
   ) {
     this.setUsersIcons();
@@ -96,6 +97,10 @@ export class MapService {
           this.currentUserCoords[0] != position.coords.latitude ||
           this.currentUserCoords[1] != position.coords.longitude
         ) {
+          this.userService.updateUserPosition(
+            position.coords.latitude,
+            position.coords.longitude
+          ).subscribe();
           this.onUserPositionChange([
             position.coords.latitude,
             position.coords.longitude,
@@ -140,12 +145,19 @@ export class MapService {
 
   private updateOtherUsersOnMap() {
     this.relativeService.getRelativesPosition().subscribe((userPositions) => {
-      userPositions.forEach(userPosition => {
-        const existingMarkerIndex = this.relativesMarkers.findIndex(marker => marker.userId === userPosition.userId);
+      userPositions.forEach((userPosition) => {
+        const existingMarkerIndex = this.relativesMarkers.findIndex(
+          (marker) => marker.userId === userPosition.userId
+        );
         if (existingMarkerIndex === -1) {
           this.addRelativeMarker(userPosition);
-        } else if (this.relativesMarkers[existingMarkerIndex].lastVerified < userPosition.lastVerified) {
-          this.myMap.removeLayer(this.relativesMarkers[existingMarkerIndex].icon.getPane());
+        } else if (
+          this.relativesMarkers[existingMarkerIndex].lastVerified <
+          userPosition.updatedOn
+        ) {
+          this.myMap.removeLayer(
+            this.relativesMarkers[existingMarkerIndex].icon.getPane()
+          );
           this.relativesMarkers.splice(existingMarkerIndex, 1);
           this.addRelativeMarker(userPosition);
         }
@@ -158,7 +170,11 @@ export class MapService {
       [userPosition.latitude, userPosition.longitude],
       { icon: this.otherUsersIcon }
     );
-    const newMarker = new UserMarker(leafletIcon, userPosition.userId, userPosition.lastVerified);
+    const newMarker = new UserMarker(
+      leafletIcon,
+      userPosition.userId,
+      userPosition.updatedOn
+    );
     newMarker.icon.bindPopup(
       `<h2>
         <b>
@@ -172,7 +188,7 @@ export class MapService {
       ${this.translateService.instant(
         '_map.updatedOn'
       )}: ${this.datePipe.transform(
-        userPosition.lastVerified,
+        userPosition.updatedOn,
         'dd MMM yyy, HH:mm'
       )}
       </p>`,

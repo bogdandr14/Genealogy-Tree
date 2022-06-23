@@ -25,6 +25,12 @@
           [isParentList]="true"
         >
         </app-parent-child-list>
+        <app-marriage-list
+          [marriages]="personDetails?.marriages"
+          [personLinkedTo]="personDetails"
+          [canModify]="isUserTree"
+        >
+        </app-marriage-list>
       </ion-col>
       <ion-col size-sm="4">
         <app-parent-child-list
@@ -34,14 +40,6 @@
           [isParentList]="false"
         >
         </app-parent-child-list>
-      </ion-col>
-      <ion-col size-sm="4">
-        <app-marriage-list
-          [marriages]="personDetails?.marriages"
-          [personLinkedTo]="personDetails"
-          [canModify]="isUserTree"
-        >
-        </app-marriage-list>
       </ion-col>
     </ion-row>
   </ion-grid>

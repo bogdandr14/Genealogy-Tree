@@ -172,6 +172,7 @@ namespace GenealogyTree.Data
             modelBuilder.Entity<User>().Navigation(u => u.Occupations).AutoInclude();
             modelBuilder.Entity<User>().Navigation(u => u.Educations).AutoInclude();
             modelBuilder.Entity<User>().Navigation(u => u.Person).AutoInclude();
+            modelBuilder.Entity<User>().Navigation(u => u.Position).AutoInclude();
 
             modelBuilder.Entity<Relative>().Navigation(u => u.RelativeUser).AutoInclude();
         }

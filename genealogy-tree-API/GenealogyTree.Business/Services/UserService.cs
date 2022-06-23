@@ -133,13 +133,14 @@ namespace GenealogyTree.Business.Services
 
         public async Task<NotificationsBundle> GetNotifications(Guid userId)
         {
-            User user = unitOfWork.User.Filter(user => user.Id == userId).Include(u => u.UserRelatives).FirstOrDefault();
+            User user = unitOfWork.User.Filter(user => user.Id == userId).Include(u => u.UserRelatives).ThenInclude(r => r.RelativeUser).ThenInclude(ru => ru.Person).FirstOrDefault();
             NotificationsBundle notifications = new NotificationsBundle();
             notifications.RequestsReceived = await _requestService.GetRequestsReceived(userId);
             notifications.RequestsResponded = await _requestService.GetRequestsResponded(userId);
             if (user.NotifyBirthdays)
             {
-                notifications.EventsToday = (await _personService.GetEventsInTree(user.Person.TreeId)).Where(e => e.Date.Date.CompareTo(DateTime.Today.Date) == 0).ToList();
+                List<EventInTreeModel> eventsInTree = (await _personService.GetEventsInTree(user.Person.TreeId));
+                notifications.EventsToday = eventsInTree.FindAll(e => e.Date.Day == DateTime.Today.Day && e.Date.Month == DateTime.Today.Month);
             }
             else
             {
@@ -190,6 +191,7 @@ namespace GenealogyTree.Business.Services
                     {
                         relativeUpdates.RelativeId = relative.Id;
                         relativeUpdates.Relative = _mapper.Map<GenericPersonModel>(relative.RelativeUser);
+                        relativeUpdates.Relative.ImageFile = await _fileManagementService.GetFile(relative.RelativeUser.Person.Image);
                         notifications.RelativeUpdates.Add(relativeUpdates);
                     }
                 }
@@ -257,9 +259,9 @@ namespace GenealogyTree.Business.Services
             return returnEvent;
         }
 
-        public async Task<UserPositionModel> UpdateUserPosition(int positionId, PositionModel position)
+        public async Task<PositionModel> UpdateUserPosition(Guid userId, PositionModel position)
         {
-            Position positionInDb = await unitOfWork.Position.FindById(positionId);
+            Position positionInDb = (await unitOfWork.User.FindById(userId)).Position;
             if (positionInDb == null || position == null)
             {
                 return null;
@@ -268,7 +270,7 @@ namespace GenealogyTree.Business.Services
             positionInDb.Latitude = position.Latitude;
             positionInDb.Longitude = position.Longitude;
             Position positionEntity = await unitOfWork.Position.Update(positionInDb);
-            UserPositionModel returnEvent = _mapper.Map<UserPositionModel>(positionEntity);
+            PositionModel returnEvent = _mapper.Map<PositionModel>(positionEntity);
             return returnEvent;
         }
     }

@@ -41,6 +41,7 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Education educationEntity = _mapper.Map<Education>(education);
+            educationEntity.EducationLevel = null;
             educationEntity = await unitOfWork.Education.Create(educationEntity);
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
             return returnEvent;
@@ -52,6 +53,7 @@ namespace GenealogyTree.Business.Services
                 return null;
             }
             Education educationEntity = _mapper.Map<Education>(education);
+            educationEntity.EducationLevel = null;
             educationEntity = await unitOfWork.Education.Update(educationEntity);
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
             return returnEvent;

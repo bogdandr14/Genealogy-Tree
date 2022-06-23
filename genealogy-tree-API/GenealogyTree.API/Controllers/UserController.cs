@@ -237,12 +237,12 @@ namespace GenealogyTree.API.Controllers
 
         [GeneTreeAuthorize]
         [HttpPut]
-        [Route("position/{id:int}")]
-        public async Task<ActionResult<UserPositionModel>> UpdateUserPosition(int id, UserPositionModel position)
+        [Route("position/{userId:Guid}")]
+        public async Task<ActionResult<PositionModel>> UpdateUserPosition(Guid userId, UserPositionModel position)
         {
             try
             {
-                UserPositionModel updatedPosition = await _userService.UpdateUserPosition(id, position);
+                PositionModel updatedPosition = await _userService.UpdateUserPosition(userId, position);
                 if (updatedPosition == null)
                 {
                     return NotFound();

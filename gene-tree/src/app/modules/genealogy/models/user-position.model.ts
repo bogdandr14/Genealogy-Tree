@@ -4,6 +4,6 @@ import { PositionModel } from './position.model';
 export class UserPositionModel extends PositionModel {
   firstName: string;
   lastName: string;
-  lastVerified: Date;
+  updatedOn: Date;
   imageFile: ImageFile;
 }

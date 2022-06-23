@@ -126,7 +126,10 @@ export class UserService extends BaseService {
       super.updateById<AccountSettingsModel>(user.userId, userEdit)
     ));
   }
-  public updateUserPosition(position: PositionModel) {
+  public updateUserPosition(latitude: number, longitude: number) {
+    let position = new  PositionModel();
+    position.latitude = latitude;
+    position.longitude = longitude;
     return this.dataService.getCurrentUser().pipe(switchMap((user) =>
       super.updateById<UserPositionModel>(user.userId, position, 'position')
     ));
