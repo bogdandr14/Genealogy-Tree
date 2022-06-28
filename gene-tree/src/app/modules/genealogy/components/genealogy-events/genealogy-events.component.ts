@@ -8,6 +8,7 @@ import { switchMap, take, tap } from 'rxjs/operators';
 import { EventInTreeModel } from '../../models/event-in-tree.model';
 import { ImageFile } from '../../../shared/models/image-file';
 import { CalendarMode } from 'ionic2-calendar/calendar';
+import { UtilsService } from 'src/app/modules/shared/services/utils.service';
 
 @Component({
   selector: 'app-genealogy-events',
@@ -25,7 +26,8 @@ export class GenealogyEventsComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private personService: PersonService,
-    public localeService: LocaleService
+    public localeService: LocaleService,
+    public utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -78,13 +80,6 @@ export class GenealogyEventsComponent implements OnInit {
 
   public back() {
     this.myCalendar.slidePrev();
-  }
-
-  public getImageUrl(imageFile: ImageFile) {
-    if (imageFile) {
-      return `data:${imageFile.mimeType};base64,${imageFile.fileInBytes}`;
-    }
-    return 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
   }
 
   private setOriginalEvents(events: EventInTreeModel[]) {

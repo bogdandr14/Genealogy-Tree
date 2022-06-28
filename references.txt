@@ -1,0 +1,22 @@
+  //https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development
+  //https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
+  //https://ionicframework.com/docs/v3/native/mobile-accessibility/
+  //https://www.a11yproject.com/
+  //https://blog.angular.io/build-more-accessible-angular-apps-1aca4fc39aff
+  //https://www.youtube.com/watch?v=-g2Dat7z2WQ
+  //
+  //https://www.youtube.com/watch?v=2ZFgcTOcnUg
+  //https://www.youtube.com/watch?v=B-nFj2o03i8
+  //https://www.youtube.com/watch?v=_hVdPEmbwA0
+//https://stackblitz.com/edit/ionic-calendar-demo?file=pages%2Fhome%2Fhome.html
+//https://github.com/twinssbc/Ionic2-Calendar
+//https://stackoverflow.com/questions/61638956/can-i-change-whats-inside-the-fill-tag-of-an-svg-element-with-javascript
+//https://stackoverflow.com/questions/14051351/svg-gradient-using-css
+//https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Gradients
+//https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient
+//https://htmldog.com/guides/css/advanced/gradients/
+  //for setting the icon and using ion-icons, consult the following:
+  //https://ionic.io/ionicons/v4/usage
+  //https://github.com/coryasilva/Leaflet.ExtraMarkers
+  //https://blog.logrocket.com/advanced-effects-with-css-background-blend-modes-4b750198522a/
+//https://www.youtube.com/watch?v=qimopjP6YoM

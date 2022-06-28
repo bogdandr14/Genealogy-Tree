@@ -71,9 +71,6 @@ export class MapService {
     this.myMap = null;
   }
 
-  //for setting the icon and using ion-icons, consult the following:
-  //https://ionic.io/ionicons/v4/usage
-  //https://github.com/coryasilva/Leaflet.ExtraMarkers
   private setUsersIcons() {
     this.currentUserIcon = L_EXTRA.ExtraMarkers.icon({
       icon: 'ion-md-person',

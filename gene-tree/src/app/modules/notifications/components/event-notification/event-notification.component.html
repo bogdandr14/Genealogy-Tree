@@ -65,7 +65,7 @@
           [routerLink]="['/person/details', person.personId]"
         >
           <img
-            [src]="getImageUrl(person.imageFile)"
+            [src]="utilsService.imageUrl(person.imageFile)"
             [alt]="person.firstName + ' ' + person.lastName"
           />
         </ion-avatar>

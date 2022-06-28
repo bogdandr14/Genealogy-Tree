@@ -33,7 +33,7 @@ import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
       ],
     }),
     CoreModule,
-    SharedModule, // DO NOT TOUCH
+    SharedModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
