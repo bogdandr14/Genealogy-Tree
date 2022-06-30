@@ -65,7 +65,7 @@ export class ProfilePage implements OnInit {
   }
 
   get canSync(){
-    return this.relativeState === RelativeStateEnum.Unrelated;
+    return this.relativeState === RelativeStateEnum.Unrelated && !this.isCurrentUser;
   }
   get isCurrentUser() {
     return this.userService.isCurrentUser(this.personalInfo?.userId);

@@ -6,7 +6,7 @@ namespace GenealogyTree.Domain.DTO.User
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int GenderId { get; set; }
+        public string Gender { get; set; }
         public int? NationalityId { get; set; }
         public int? ReligionId { get; set; }
         public DateTime BirthDate { get; set; }

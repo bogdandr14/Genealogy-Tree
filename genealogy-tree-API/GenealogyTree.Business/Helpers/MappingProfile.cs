@@ -198,8 +198,9 @@ namespace GenealogyTree.Business.Helpers
 
             CreateMap<User, RegisterModel>()
                 .ReverseMap();
-            CreateMap<Person, RegisterModel>()
-                .ReverseMap();
+
+            CreateMap<RegisterModel, Person>()
+                .ForMember(x => x.Gender, y => y.MapFrom(z => z.Gender == "m" ? 'm' : 'f'));
 
             CreateMap<User, LoginResponseModel>()
                 .ForMember(x => x.TreeId, y => y.MapFrom(z => z.Person.TreeId))
