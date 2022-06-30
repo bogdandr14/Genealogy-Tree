@@ -34,11 +34,16 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images/",
                 "output": "assets"
-             }
+              },
+              {
+                "glob": "**/*",
+                "input": "src/environments",
+                "output": "environments"
+              }
             ],
             "styles": [
               "src/theme/variables.scss",
-              "src/global.scss",
+              "src/theme/global.scss",
               "./node_modules/@videogular/ngx-videogular/fonts/videogular.css",
               "src/assets/css/leaflet.extra-markers.min.css"
             ],

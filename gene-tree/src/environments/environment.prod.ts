@@ -1,9 +1,12 @@
 export const environment = {
   production: true,
-  baseApiUrl: 'http://localhost:48888',//TODO modify
+  baseApiUrl: 'https://genealogytreeapi20220630211142.azurewebsites.net', //TODO modify
   defaultLanguage: 'en',
   appSettings: {
     version: '',
-    languages: [],
+    languages: [
+      { translationKey: 'languageEN', iso: 'en-US', languageKey: 'en' },
+      { translationKey: 'languageRO', iso: 'ro-RO', languageKey: 'ro' },
+    ],
   },
 };

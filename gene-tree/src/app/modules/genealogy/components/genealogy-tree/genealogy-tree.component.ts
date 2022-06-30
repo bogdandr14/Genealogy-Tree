@@ -51,7 +51,6 @@ export class GenealogyTreeComponent implements OnInit {
         )
       )
       .subscribe((people) => {
-        //this.loadGeneTreeMockup();
         this.treeService.loadFamilyTree(this.mapTreeData(people));
       });
   }
@@ -79,79 +78,6 @@ export class GenealogyTreeComponent implements OnInit {
     });
   }
 
-  loadGeneTreeMockup() {
-    this.treeService.loadFamilyTree([
-      {
-        id: 1,
-        mid: -2,
-        fid: -3,
-        pids: [4],
-        name: 'Gustav Alfonzoj',
-        gender: 'male',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '1983-09-26',
-      },
-      {
-        id: 3,
-        mid: 1,
-        fid: 4,
-        name: 'Deiq Toe',
-        gender: 'female',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '1999-07-12',
-      },
-      {
-        id: 4,
-        fid: 34,
-        mid: 33,
-        pids: [1],
-        name: 'Valeria Umof',
-        gender: 'female',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '1980-10-25',
-      },
-      {
-        id: 33,
-        pids: [34],
-
-        name: 'qwe asd',
-        gender: 'male',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '2022-02-04',
-      },
-      {
-        id: 34,
-        name: 'Tilkova Asmeradis',
-        gender: 'female',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '2003-10-03',
-      },
-
-      {
-        id: -2,
-        pids: [-3],
-        name: 'Unknown',
-        gender: 'male',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '1983-09-26',
-      },
-      {
-        id: -3,
-        pids: [-2],
-        name: 'Unknown',
-        gender: 'female',
-        photo:
-          'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y',
-        born: '1983-09-26',
-      },
-    ]);
-  }
   get isUserTree() {
     return this.userService.isUserTree(this.userForTree?.treeId);
   }

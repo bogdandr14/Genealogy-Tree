@@ -33,7 +33,7 @@ namespace GenealogyTree.API
         {
 
             services.AddDbContext<GenealogyTreeDbContext>(options =>
-                            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                            options.UseSqlServer(Configuration.GetConnectionString("CloudConnection"))
             );
 
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });

@@ -28,7 +28,7 @@ import { LocaleProvider } from './locale.provider';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(httpClient: HttpClient): TranslateLoader {
-  return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
+  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
 @NgModule({

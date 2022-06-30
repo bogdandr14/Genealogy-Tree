@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: 'http://localhost:48888',
+  baseApiUrl: 'https://genealogytreeapi20220630211142.azurewebsites.net',
   defaultLanguage: 'en',
   appSettings: {
     version: '',
