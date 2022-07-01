@@ -20,3 +20,4 @@
   //https://github.com/coryasilva/Leaflet.ExtraMarkers
   //https://blog.logrocket.com/advanced-effects-with-css-background-blend-modes-4b750198522a/
 //https://www.youtube.com/watch?v=qimopjP6YoM
+https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
