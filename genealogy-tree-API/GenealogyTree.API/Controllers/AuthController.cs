@@ -54,11 +54,7 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
-        //https://www.c-sharpcorner.com/article/exception-handling-in-asp-net-web-api/
-        //https://laravel.com/docs/8.x/responses
-        //https://www.tutorialsteacher.com/webapi/action-method-return-type-in-web-api
-        //https://www.c-sharpcorner.com/UploadFile/dacca2/a-new-way-to-send-response-using-ihttpactionresult/
-        //https://www.azureblue.io/how-to-return-a-custom-http-status-code-using-webapi-2/
+
         [GeneTreeAuthorize]
         [HttpPut]
         [Route("changePassword")]

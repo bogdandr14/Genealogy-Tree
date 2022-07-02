@@ -146,7 +146,7 @@ namespace GenealogyTree.Business.Services
             {
                 notifications.EventsToday = new List<EventInTreeModel>();
             }
-            notifications.RelativeUpdates = new List<RelativeUpdates>(); //TODO
+            notifications.RelativeUpdates = new List<RelativeUpdates>();
             if (user.NotifyUpdates)
             {
                 foreach (var relative in user.UserRelatives)

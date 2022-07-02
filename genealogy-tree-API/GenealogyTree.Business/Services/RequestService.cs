@@ -130,7 +130,7 @@ namespace GenealogyTree.Business.Services
             };
             if (respondedRequest.Response)
             {
-                await _relativeService.AddRelativeUser(firstRelative);//TODO
+                await _relativeService.AddRelativeUser(firstRelative);
             }
             return firstRelative;
         }
