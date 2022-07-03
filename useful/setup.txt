@@ -1,0 +1,7 @@
+1. execute db_backup.sql
+2. install nodejs from https://nodejs.org/en/
+3. install ionic using command npm install -g @ionic/cli in terminal
+4. for frontend project run command npm i in terminal to install all dependencies
+5. start backend project
+6. execute command ionic serve to start frontend project
+
