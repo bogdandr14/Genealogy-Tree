@@ -45,7 +45,7 @@ namespace GenealogyTree.Business.Helpers
             CreateMap<Marriage, MarriedPersonModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
                 .ForMember(x => x.MarriageEnded, y => y.MapFrom(z => z.EndDate))
-                .ForMember(x => x.PersonMarriedTo, y => y.MapFrom(z => (z.FirstPerson != null) ? z.FirstPerson : (z.SecondPerson != null ? z.SecondPerson : null)));
+                .ForMember(x => x.PersonMarriedTo, y => y.MapFrom(z => DefineMapping(z.FirstPerson, z.SecondPerson)));
 
             CreateMap<Marriage, MarriageDetailsModel>()
                 .ForMember(x => x.MarriageStarted, y => y.MapFrom(z => z.StartDate))
@@ -207,6 +207,21 @@ namespace GenealogyTree.Business.Helpers
                 .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id));
 
             CreateMap<Position, PositionModel>();
-       }
+        }
+
+        private static T DefineMapping<T>(T first, T second)
+        {
+            if (first != null)
+            {
+                return first;
+            }
+
+            if (second != null)
+            {
+                return second;
+            }
+
+            return default(T);
+        }
     }
 }

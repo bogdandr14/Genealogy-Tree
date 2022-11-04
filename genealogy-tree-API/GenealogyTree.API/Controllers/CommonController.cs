@@ -40,7 +40,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize(UserRoleEnum.Admin)]
+        [GeneTreeAuthorize(UserRoles.Admin)]
         [HttpPost]
         [Route("nationality")]
         public async Task<ActionResult<GenericNameModel>> AddNationality(string nationalityName)
@@ -75,7 +75,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize(UserRoleEnum.Admin)]
+        [GeneTreeAuthorize(UserRoles.Admin)]
         [HttpPost]
         [Route("religion")]
         public async Task<ActionResult<GenericNameModel>> AddReligion(string religionName)

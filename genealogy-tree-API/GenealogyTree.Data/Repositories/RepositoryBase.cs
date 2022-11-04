@@ -13,7 +13,7 @@ namespace GenealogyTree.Data.Repositories
 
         protected GenealogyTreeDbContext Context { get; set; }
 
-        public RepositoryBase(GenealogyTreeDbContext context)
+        protected RepositoryBase(GenealogyTreeDbContext context)
         {
             Context = context;
         }
@@ -40,9 +40,9 @@ namespace GenealogyTree.Data.Repositories
             return DbSet.Where(expression).AsNoTracking();
         }
 
-        public async Task<T> FindById(params object[] keyValues)
+        public async Task<T> FindById(params object[] keys)
         {
-            return await DbSet.FindAsync(keyValues);
+            return await DbSet.FindAsync(keys);
         }
         #endregion
 

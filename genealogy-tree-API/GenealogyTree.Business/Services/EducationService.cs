@@ -22,7 +22,7 @@ namespace GenealogyTree.Business.Services
 
         public List<EducationModel> GetAllEducationsForUser(Guid userId)
         {
-            List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).Include(e=> e.EducationLevel).ToList();
+            List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).Include(e => e.EducationLevel).ToList();
             List<EducationModel> returnEvent = _mapper.Map<List<EducationModel>>(educations);
             return returnEvent;
         }
@@ -69,7 +69,7 @@ namespace GenealogyTree.Business.Services
         public async Task<List<GenericNameModel>> GetAllEducationLevelsAsync()
         {
             List<EducationLevel> educationLevels = unitOfWork.EducationLevel.GetAll().ToList();
-            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(educationLevels);
+            List<GenericNameModel> returnEvent = await Task.Run(() => _mapper.Map<List<GenericNameModel>>(educationLevels));
             return returnEvent;
         }
 

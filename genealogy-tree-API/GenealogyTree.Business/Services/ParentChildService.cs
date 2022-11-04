@@ -26,7 +26,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<ParentChildModel>> GetAllParentsForPerson(int childId)
         {
-            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Include(pc => pc.Parent).ToList();
+            List<ParentChild> parentChildren = await Task.Run(() => unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Include(pc => pc.Parent).ToList());
             List<ParentModel> parentRelatives = _mapper.Map<List<ParentModel>>(parentChildren);
             List<ParentChildModel> parents = _mapper.Map<List<ParentChildModel>>(parentRelatives);
             return parents;
@@ -34,7 +34,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<ParentChildModel>> GetAllChildrenForPerson(int parentId)
         {
-            List<ParentChild> parentChildren = unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc => pc.Child).ToList();
+            List<ParentChild> parentChildren = await Task.Run(() => unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc => pc.Child).ToList());
             List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
             List<ParentChildModel> children = _mapper.Map<List<ParentChildModel>>(childRelatives);
             return children;
@@ -88,10 +88,10 @@ namespace GenealogyTree.Business.Services
                 List<ParentChildModel> searchRelatives = new List<ParentChildModel>();
                 searchRelatives.AddRange(foundRelatives);
                 foundRelatives.Clear();
-                foreach (ParentChildModel relative in searchRelatives)
+                foreach (int relativeId in searchRelatives.Select(relative => relative.PersonId))
                 {
-                    foundRelatives.AddRange(await GetAllParentsForPerson(relative.PersonId));
-                    foundRelatives.AddRange(await GetAllChildrenForPerson(relative.PersonId));
+                    foundRelatives.AddRange(await GetAllParentsForPerson(relativeId));
+                    foundRelatives.AddRange(await GetAllChildrenForPerson(relativeId));
                 }
                 foundRelatives = foundRelatives.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
                 foundRelatives.RemoveAll(relative => relatedPeople.Exists(person => person.PersonId == relative.PersonId));
@@ -176,7 +176,6 @@ namespace GenealogyTree.Business.Services
         private async Task<List<int>> GetPeopleWithoutParent(int personId)
         {
             Person personToCheck = await unitOfWork.Person.FindById(personId);
-            List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == personToCheck.TreeId).ToList();
             List<int> childrenWithoutParent = unitOfWork.Person.Filter((person) => !person.Parents.Any((parent) => parent.Parent.Gender == personToCheck.Gender)).Include(p => p.Parents).Select((person) => person.Id).ToList();
             return childrenWithoutParent;
         }
@@ -224,8 +223,14 @@ namespace GenealogyTree.Business.Services
 
         public async Task<ParentChildDetailsModel> UpdateParentChildAsync(ParentChildCreateUpdateModel parentChild)
         {
+            if (parentChild == null)
+            {
+                return null;
+            }
+
             ParentChild parentChildInDb = await unitOfWork.ParentChild.FindById(parentChild.RelativeId);
-            if (parentChild == null || parentChildInDb == null)
+
+            if (parentChildInDb == null)
             {
                 return null;
             }

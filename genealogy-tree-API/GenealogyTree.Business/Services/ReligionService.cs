@@ -19,7 +19,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericNameModel>> GetAllReligionsAsync()
         {
-            List<Religion> religions = unitOfWork.Religion.GetAll().OrderBy(x => x.Name).ToList();
+            List<Religion> religions = await Task.Run(() => unitOfWork.Religion.GetAll().OrderBy(x => x.Name).ToList());
             List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(religions);
             return returnEvent;
         }

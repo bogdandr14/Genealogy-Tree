@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Domain.Enums
 {
-    public enum RelativeStateEnum
+    public enum RelativeState
     {
         Related = 1,
         Requested = 2,

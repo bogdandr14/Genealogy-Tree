@@ -1,0 +1,29 @@
+﻿namespace GenealogyTree.Domain.Enums
+{
+    public enum Religions
+    {
+        CHRISTIANITY,
+        ISLAM,
+        AGNOSTIC,
+        ATHEIST,
+        HINDUISM,
+        BUDDHISM,
+        CHINESE_TRADITIONAL,
+        ETHNIC,
+        AFRICAN_TRADITIONAL,
+        SIKHISM,
+        SPIRITISM,
+        JUDAISM,
+        BAHAI,
+        JAINISM,
+        SHINTO,
+        CAO_DAI,
+        ZOROASTRIANISM,
+        TENRIKYO,
+        ANIMISM,
+        NEO_PAGANISM,
+        UNITARIAN_UNIVERSALISM,
+        RASTAFARI,
+        OTHER
+    }
+}

@@ -43,19 +43,19 @@ namespace GenealogyTree.Business.Services
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relative);
             return returnEvent;
         }
-        public async Task<RelativeStateEnum> CheckRelative(Guid userId, Guid relativeId)
+        public async Task<RelativeState> CheckRelative(Guid userId, Guid relativeId)
         {
-            bool isAlreadyRelative = unitOfWork.Relatives.Filter(r => (r.PrimaryUserId == userId && r.RelativeUserId == relativeId)).Any();
+            bool isAlreadyRelative = await Task.Run(() => unitOfWork.Relatives.Filter(r => (r.PrimaryUserId == userId && r.RelativeUserId == relativeId)).Any());
             if (isAlreadyRelative)
             {
-                return RelativeStateEnum.Related;
+                return RelativeState.Related;
             }
-            bool requestAlreadySent = unitOfWork.Requests.Filter(r => (r.SenderId == userId && r.ReceiverId == relativeId) || (r.SenderId == relativeId && r.ReceiverId == userId)).Any();
+            bool requestAlreadySent = await Task.Run(() => unitOfWork.Requests.Filter(r => (r.SenderId == userId && r.ReceiverId == relativeId) || (r.SenderId == relativeId && r.ReceiverId == userId)).Any());
             if (requestAlreadySent)
             {
-                return RelativeStateEnum.Requested;
+                return RelativeState.Requested;
             }
-            return RelativeStateEnum.Unrelated;
+            return RelativeState.Unrelated;
         }
 
         public async Task<RelativeModel> MarkChanges(int relativeId)
@@ -109,7 +109,7 @@ namespace GenealogyTree.Business.Services
                                                         .ThenInclude(ru => ru.Position)
                                                     .Include(r => r.RelativeUser)
                                                         .ThenInclude(ru => ru.Person)
-                                                    .Where(relative =>  relative.RelativeUser.ShareLocation && relative.RelativeUser.Position.UpdatedOn != null)
+                                                    .Where(relative => relative.RelativeUser.ShareLocation && relative.RelativeUser.Position.UpdatedOn != null)
                                                     .Select(relative => relative.RelativeUser).ToList();
 
             List<UserPositionModel> returnEvent = new List<UserPositionModel>();

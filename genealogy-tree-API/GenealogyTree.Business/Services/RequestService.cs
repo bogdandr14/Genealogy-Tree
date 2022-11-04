@@ -27,7 +27,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RequestDetailsModel>> GetRequestsSent(Guid senderId)
         {
-            List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && x.ReceiverResponded == false)
+            List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && !x.ReceiverResponded)
                                                 .Include(x => x.Receiver).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.Sender).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.ReceiverReferenceInSenderTree).ThenInclude(p => p.Image)
@@ -73,7 +73,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RequestDetailsModel>> GetRequestsReceived(Guid receiverId)
         {
-            List<Request> requests = unitOfWork.Requests.Filter(x => x.ReceiverId == receiverId && x.ReceiverResponded == false)
+            List<Request> requests = unitOfWork.Requests.Filter(x => x.ReceiverId == receiverId && !x.ReceiverResponded)
                                                 .Include(x => x.Receiver).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.Sender).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.ReceiverReferenceInSenderTree).ThenInclude(p => p.Image).ToList();
@@ -82,7 +82,7 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<RequestResponseModel>> GetRequestsResponded(Guid senderId)
         {
-            List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && x.ReceiverResponded == true)
+            List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && x.ReceiverResponded)
                                                 .Include(x => x.Receiver).ThenInclude(r => r.Person).ThenInclude(p => p.Image).ToList();
             return await MapRequestResponse(requests);
         }
@@ -111,16 +111,14 @@ namespace GenealogyTree.Business.Services
             request.Response = respondedRequest.Response;
 
             Relative alreadyRelated = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == request.ReceiverId && x.RelativeUserId == request.SenderId).FirstOrDefault();
-            if (respondedRequest.SenderReferenceInReceiverTreeId != null && alreadyRelated != default(Relative))
+            
+            if (respondedRequest.SenderReferenceInReceiverTreeId != 0 && alreadyRelated != default(Relative))
             {
                 request.ReceiverReferenceInSenderTreeId = respondedRequest.SenderReferenceInReceiverTreeId;
             }
+
             Request updatedRequest = await unitOfWork.Requests.Update(request);
 
-            if (!respondedRequest.Response == null)
-            {
-                return null;
-            }
             UsersToLinkModel firstRelative = new UsersToLinkModel()
             {
                 PrimaryUserId = updatedRequest.SenderId,

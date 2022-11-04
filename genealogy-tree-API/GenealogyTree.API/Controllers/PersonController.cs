@@ -20,13 +20,11 @@ namespace GenealogyTree.API.Controllers
     {
         private readonly IPersonService _personService;
         private readonly IImageService _imageService;
-        private readonly ILocationService _locationService;
 
-        public PersonController(IPersonService personService, IImageService imageService, ILocationService locationService)
+        public PersonController(IPersonService personService, IImageService imageService)
         {
             _personService = personService;
             _imageService = imageService;
-            _locationService = locationService;
         }
 
         [HttpGet]
@@ -126,7 +124,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<PersonDetailsModel>> AddPerson([FromBody]PersonCreateUpdateModel person)
+        public async Task<ActionResult<PersonDetailsModel>> AddPerson([FromBody] PersonCreateUpdateModel person)
         {
             try
             {
@@ -145,7 +143,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync( person);
+                PersonDetailsModel returnEvent = await _personService.UpdatePersonAsync(person);
                 return Ok(returnEvent);
             }
             catch (Exception e)

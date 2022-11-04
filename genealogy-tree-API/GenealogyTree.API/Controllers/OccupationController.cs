@@ -25,7 +25,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                List<OccupationModel> returnEvent = _occupationService.GetAllOccupationsForUser(userId);
+                List<OccupationModel> returnEvent = await Task.Run(() => _occupationService.GetAllOccupationsForUser(userId));
                 if (returnEvent == null)
                 {
                     return NotFound();

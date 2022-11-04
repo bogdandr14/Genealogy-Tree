@@ -38,7 +38,7 @@ namespace GenealogyTree.Business.Services
         public async Task<MarriedPersonModel> GetCurrentMarriageForPerson(int personId)
         {
             Marriage marriage = unitOfWork.Marriage.Filter(x => (x.FirstPersonId == personId || x.SecondPersonId == personId) && x.EndDate == default(DateTime)).FirstOrDefault();
-            MarriageDetailsModel returnEvent = _mapper.Map<MarriageDetailsModel>(marriage);
+            MarriageDetailsModel returnEvent = await Task.Run(() => _mapper.Map<MarriageDetailsModel>(marriage));
             return returnEvent;
         }
 
@@ -69,11 +69,17 @@ namespace GenealogyTree.Business.Services
 
         public async Task<MarriageDetailsModel> UpdateMarriageAsync(MarriageCreateUpdateModel marriage)
         {
-            Marriage marriageInDb = await unitOfWork.Marriage.FindById(marriage.Id);
-            if (marriage == null || marriageInDb == null)
+            if (marriage == null)
             {
                 return null;
             }
+            Marriage marriageInDb = await unitOfWork.Marriage.FindById(marriage.Id);
+
+            if (marriageInDb == default(Marriage))
+            {
+                return null;
+            }
+
             marriageInDb.FirstPersonId = marriage.FirstPersonId;
             marriageInDb.SecondPersonId = marriage.SecondPersonId;
             marriageInDb.StartDate = marriage.StartDate;

@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { SupportTicketModel } from './models/support-ticket.model';
 import { AuthService } from '../core/services/auth.service';
 import { SupportTypeEnum } from './models/support-type.enum';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { AlertService } from '../core/services/alert.service';
 
 @Component({
@@ -29,9 +29,6 @@ export class SupportPage implements OnInit, AfterViewInit {
     this.authService.isLoggedIn$.pipe(filter((isLoggedIn) => isLoggedIn), take(1)).subscribe(() =>
       this.supportForm.emailContact = this.userService.getUserEmail()
     );
-    this.dataService.getLanguage().subscribe((lang) => {
-      this.supportForm.language = lang;
-    })
   }
 
   ngAfterViewInit(): void {
@@ -41,13 +38,16 @@ export class SupportPage implements OnInit, AfterViewInit {
   }
 
   submit() {
-    this.userService.sendSupportTicket(this.supportForm).pipe(
+    this.dataService.getLanguage().pipe(
+      tap(lang => this.supportForm.language = lang),
+      switchMap(() => this.userService.sendSupportTicket(this.supportForm)),
       take(1),
       tap(() => {
         this.alertService.showInfo('_message._information.supportRequestSent');
         this.supportForm = new SupportTicketModel();
         this.form.form.markAsPristine();
-      })
-    ).subscribe();
+      }
+      )).subscribe();
+
   }
 }

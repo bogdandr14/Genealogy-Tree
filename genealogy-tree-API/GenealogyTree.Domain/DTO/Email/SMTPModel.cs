@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Domain.DTO.Email
 {
-    public class SMTPModel
+    public class SmtpModel
     {
         public string Host { get; set; }
         public int Port { get; set; }

@@ -11,25 +11,25 @@ namespace GenealogyTree.API.Attributes
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class GeneTreeAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
-        private readonly IEnumerable<UserRoleEnum> allowRoles;
+        private readonly IEnumerable<UserRoles> allowRoles;
 
         public GeneTreeAuthorizeAttribute()
         {
-            allowRoles = new List<UserRoleEnum>
+            allowRoles = new List<UserRoles>
             {
-                UserRoleEnum.Admin,
-                UserRoleEnum.User
+                UserRoles.Admin,
+                UserRoles.User
             };
         }
-        public GeneTreeAuthorizeAttribute(UserRoleEnum role)
+        public GeneTreeAuthorizeAttribute(UserRoles role)
         {
-            allowRoles = new List<UserRoleEnum>
+            allowRoles = new List<UserRoles>
             {
                 role
             };
         }
 
-        private void AppendUnauthorizedRequest(AuthorizationFilterContext context)
+        private static void AppendUnauthorizedRequest(AuthorizationFilterContext context)
         {
             context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
         }
@@ -41,8 +41,8 @@ namespace GenealogyTree.API.Attributes
                 var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
                 if (token != null && TokenService.ValidateToken(token))
                 {
-                    int.TryParse(TokenService.GetClaim(token, TokenService.UserRole), out var userRole);
-                    if (!allowRoles.Contains((UserRoleEnum)userRole))
+                    bool parseSucceded = int.TryParse(TokenService.GetClaim(token, TokenService.UserRole), out var userRole);
+                    if (!parseSucceded || !allowRoles.Contains((UserRoles)userRole))
                     {
                         AppendUnauthorizedRequest(context);
                     }

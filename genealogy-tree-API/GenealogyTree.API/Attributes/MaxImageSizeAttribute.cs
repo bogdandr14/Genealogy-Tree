@@ -1,5 +1,4 @@
-﻿using GenealogyTree.Domain.DTO.Person;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace GenealogyTree.API.Attributes
@@ -15,13 +14,12 @@ namespace GenealogyTree.API.Attributes
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var image = (value as IFormFile);
-            if (image != null)
+
+            if (image != null && image.Length > _maxImageSize * 1024)
             {
-                if (image.Length > _maxImageSize * 1024)
-                {
-                    return new ValidationResult($"Image size exceeds {_maxImageSize}Kb.");
-                }
+                return new ValidationResult($"Image size exceeds {_maxImageSize}Kb.");
             }
+
             return ValidationResult.Success;
         }
     }

@@ -13,6 +13,8 @@ namespace GenealogyTree.Domain.DTO.Person
         public int? ImageId { get; set; }
         public DateTime? BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
+
+#nullable enable
         public ImageFile? ImageFile { get; set; }
     }
 }

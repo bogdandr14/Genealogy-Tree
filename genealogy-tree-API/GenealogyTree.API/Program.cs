@@ -15,7 +15,6 @@ namespace GenealogyTree.API
             var host = CreateHostBuilder(args).Build();
             CreateDbIfNotExists(host);
             host.Run();
-            //BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
@@ -48,6 +47,6 @@ namespace GenealogyTree.API
             }
         }
 
-        
+
     }
 }

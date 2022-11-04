@@ -21,10 +21,10 @@ namespace GenealogyTree.Business.Auth
         public async Task<LoginResponseModel> Login(LoginModel userLogin)
         {
             User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
-            if (Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
+            if (user != null && Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(user);
-                loginResponseModel.Token = TokenService.GenerateToken(user, UserRoleEnum.User);
+                loginResponseModel.Token = await Task.Run(() => TokenService.GenerateToken(user, UserRoles.User));
                 return loginResponseModel;
             }
             return null;
@@ -70,7 +70,7 @@ namespace GenealogyTree.Business.Auth
         public async Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword)
         {
             User user = unitOfWork.User.Filter(x => x.Username == updatePassword.Username).FirstOrDefault();
-            if (Hash.ValidateHash(updatePassword.CurrentPassword, user.PasswordSalt, user.PasswordHash))
+            if (user != default(User) && Hash.ValidateHash(updatePassword.CurrentPassword, user.PasswordSalt, user.PasswordHash))
             {
                 user.PasswordSalt = Salt.Create();
                 user.PasswordHash = Hash.CreateHash(updatePassword.NewPassword, user.PasswordSalt);

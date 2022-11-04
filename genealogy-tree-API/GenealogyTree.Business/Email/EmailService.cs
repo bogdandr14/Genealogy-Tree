@@ -15,10 +15,10 @@ namespace GenealogyTree.Business.Email
 {
     public class EmailService : BaseService, IEmailService
     {
-        private readonly SMTPModel _smtp;
+        private readonly SmtpModel _smtp;
         public IConfiguration _configuration { get; }
 
-        public EmailService(IUnitOfWork unitOfWork, IOptions<SMTPModel> smtp, IConfiguration configuration): base(unitOfWork)
+        public EmailService(IUnitOfWork unitOfWork, IOptions<SmtpModel> smtp, IConfiguration configuration) : base(unitOfWork)
         {
             _smtp = smtp.Value;
             _configuration = configuration;
@@ -35,7 +35,7 @@ namespace GenealogyTree.Business.Email
             {
                 mailMessage.CC.Add(supportTicket.EmailContact);
             }
-            SendEmail(mailMessage);
+            await Task.Run(() => SendEmail(mailMessage));
         }
 
         private SmtpClient GetSMTPClient()
@@ -45,7 +45,7 @@ namespace GenealogyTree.Business.Email
             {
                 Host = _smtp.Host,
                 Port = _smtp.Port,
-                EnableSsl = _smtp.EnableSsl,
+                EnableSsl = true,
                 UseDefaultCredentials = _smtp.UseDefaultCredentials,
                 Credentials = networkCredential
             };
@@ -74,13 +74,11 @@ namespace GenealogyTree.Business.Email
             return message;
         }
 
-        private bool IsValidEmail(string emailaddress)
+        private static bool IsValidEmail(string emailaddress)
         {
             try
             {
-                MailAddress m = new MailAddress(emailaddress);
-
-                return true;
+                return MailAddress.TryCreate(emailaddress, out MailAddress _);
             }
             catch (FormatException)
             {
@@ -88,7 +86,7 @@ namespace GenealogyTree.Business.Email
             }
         }
 
-        private string GetSupportTicketEmailBody(SupportTicket supportTicket, string path)
+        private static string GetSupportTicketEmailBody(SupportTicket supportTicket, string path)
         {
             StreamReader reader = File.OpenText(path);
             string body = reader.ReadToEnd();

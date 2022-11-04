@@ -1,0 +1,43 @@
+﻿namespace GenealogyTree.Domain.Enums
+{
+    public enum Nationalities
+    {
+        Danish,
+        British,
+        Estonian,
+        Finnish,
+        Icelandic,
+        Irish,
+        Latvian,
+        Lithuanian,
+        Northern_Irish,
+        Norwegian,
+        Scottish,
+        Swedish,
+        Welsh,
+        Austrian,
+        Belgian,
+        French,
+        German,
+        Dutch,
+        Swiss,
+        Albanian,
+        Croatian,
+        Cypriot,
+        Greek,
+        Italian,
+        Portuguese,
+        Serbian,
+        Slovenian,
+        Spanish,
+        Belarusian,
+        Bulgarian,
+        Czech,
+        Hungarian,
+        Polish,
+        Romanian,
+        Russian,
+        Slovakian,
+        Ukrainian
+    }
+}

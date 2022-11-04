@@ -20,7 +20,7 @@ namespace GenealogyTree.Business.Services
         public async Task<List<GenericNameModel>> GetAllNationalitiesAsync()
         {
             List<Nationality> nationalities = unitOfWork.Nationality.GetAll().ToList();
-            List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(nationalities);
+            List<GenericNameModel> returnEvent = await Task.Run(() => _mapper.Map<List<GenericNameModel>>(nationalities));
             return returnEvent;
         }
 

@@ -177,11 +177,6 @@ namespace GenealogyTree.Data
             modelBuilder.Entity<Relative>().Navigation(u => u.RelativeUser).AutoInclude();
         }
 
-        public DbSet<T> DbSet<T>() where T : class
-        {
-            return DbSet<T>();
-        }
-
         public async Task SaveChangesAsync()
         {
             await base.SaveChangesAsync();

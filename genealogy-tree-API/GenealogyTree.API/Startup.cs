@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NetCore.AutoRegisterDi;
+using System;
 using System.Reflection;
 
 namespace GenealogyTree.API
@@ -69,14 +70,14 @@ namespace GenealogyTree.API
                                     Id = "bearerAuth"
                                 }
                             },
-                            new string[] {}
+                            Array.Empty<string>()
                     }
                 });
             });
             services
                .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(PersonService)))
                .Where(x => x.Name.EndsWith("Service")).AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
-            services.Configure<SMTPModel>(Configuration.GetSection("SMTP"));
+            services.Configure<SmtpModel>(Configuration.GetSection("SMTP"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

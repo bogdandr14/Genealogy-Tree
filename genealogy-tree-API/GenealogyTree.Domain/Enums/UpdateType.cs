@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Domain.Enums
 {
-    public enum UpdateTypeEnum
+    public enum UpdateType
     {
         PersonCreated = 1,
         PersonModified = 2,

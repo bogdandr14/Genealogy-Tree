@@ -76,7 +76,7 @@ namespace GenealogyTree.Business.Services
                 {
                     returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
                 }
-                if (person.Id == user.PersonId)
+                if (user != null && person.Id == user.PersonId)
                 {
                     returnPerson.UserId = user.Id;
                 }
@@ -104,7 +104,7 @@ namespace GenealogyTree.Business.Services
                 {
                     returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
                 }
-                if (person.Id == user.PersonId)
+                if (user != null && person.Id == user.PersonId)
                 {
                     returnPerson.UserId = user.Id;
                 }
@@ -155,7 +155,7 @@ namespace GenealogyTree.Business.Services
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
             foreach (var person in poepleList)
             {
-                if (person.Id != user.PersonId)
+                if (user != null && person.Id != user.PersonId)
                 {
                     GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
                     returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
@@ -191,7 +191,6 @@ namespace GenealogyTree.Business.Services
             };
         }
 
-
         private PersonTreeInfoModel MapPersonInfo(Person person)
         {
             PersonTreeInfoModel returnPerson = _mapper.Map<PersonTreeInfoModel>(person);
@@ -218,7 +217,7 @@ namespace GenealogyTree.Business.Services
             return returnPerson;
         }
 
-        private List<PersonTreeInfoModel> AddPartnersToPeopleList(List<PersonTreeInfoModel> peopleList)
+        private static List<PersonTreeInfoModel> AddPartnersToPeopleList(List<PersonTreeInfoModel> peopleList)
         {
             List<PersonTreeInfoModel> updatedList = new List<PersonTreeInfoModel>();
 
@@ -231,39 +230,49 @@ namespace GenealogyTree.Business.Services
 
                 if (person.FatherId != 0 && person.MotherId != 0)
                 {
-                    PersonTreeInfoModel mother = updatedList.Find(x => x.PersonId == person.MotherId);
-                    if (mother != default(PersonTreeInfoModel))
-                    {
-                        updatedList.Remove(mother);
-                    }
-                    else
-                    {
-                        mother = peopleList.Find(x => x.PersonId == person.MotherId);
-                    }
-                    if (mother.PartnersIds.FirstOrDefault(id => id == person.FatherId) == default(int))
-                    {
-                        mother.PartnersIds.Add(person.FatherId);
-                    }
-                    updatedList.Add(mother);
+                    UpdateMother(ref updatedList, ref peopleList, person);
 
-                    PersonTreeInfoModel father = updatedList.Find(x => x.PersonId == person.FatherId);
-                    if (father != default(PersonTreeInfoModel))
-                    {
-                        updatedList.Remove(father);
-                    }
-                    else
-                    {
-                        father = peopleList.Find(x => x.PersonId == person.FatherId);
-                    }
-                    if (father.PartnersIds.FirstOrDefault(id => id == person.MotherId) == default(int))
-                    {
-                        father.PartnersIds.Add(person.MotherId);
-                    }
-                    updatedList.Add(father);
+                    UpdateFather(ref updatedList, ref peopleList, person);
                 }
 
             }
             return updatedList;
+        }
+
+        private static void UpdateMother(ref List<PersonTreeInfoModel> updatedList, ref List<PersonTreeInfoModel> peopleList, PersonTreeInfoModel person)
+        {
+            PersonTreeInfoModel mother = updatedList.Find(x => x.PersonId == person.MotherId);
+            if (mother != default(PersonTreeInfoModel))
+            {
+                updatedList.Remove(mother);
+            }
+            else
+            {
+                mother = peopleList.Find(x => x.PersonId == person.MotherId);
+            }
+            if (mother.PartnersIds.FirstOrDefault(id => id == person.FatherId) == 0)
+            {
+                mother.PartnersIds.Add(person.FatherId);
+            }
+            updatedList.Add(mother);
+        }
+
+        private static void UpdateFather(ref List<PersonTreeInfoModel> updatedList, ref List<PersonTreeInfoModel> peopleList, PersonTreeInfoModel person)
+        {
+            PersonTreeInfoModel father = updatedList.Find(x => x.PersonId == person.FatherId);
+            if (father != default(PersonTreeInfoModel))
+            {
+                updatedList.Remove(father);
+            }
+            else
+            {
+                father = peopleList.Find(x => x.PersonId == person.FatherId);
+            }
+            if (father.PartnersIds.FirstOrDefault(id => id == person.MotherId) == default(int))
+            {
+                father.PartnersIds.Add(person.MotherId);
+            }
+            updatedList.Add(father);
         }
 
         public async Task<PersonDetailsModel> AddPersonAsync(PersonCreateUpdateModel person)
@@ -279,7 +288,8 @@ namespace GenealogyTree.Business.Services
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             return returnEvent;
         }
-        private Person removeAttachedEntities(Person personEntity)
+
+        private static Person removeAttachedEntities(Person personEntity)
         {
             personEntity.Nationality = null;
             personEntity.Religion = null;
@@ -288,6 +298,7 @@ namespace GenealogyTree.Business.Services
             personEntity.RelativeForPerson = null;
             return personEntity;
         }
+
         private async Task<Person> addLocations(PersonCreateUpdateModel person)
         {
             Person personEntity = _mapper.Map<Person>(person);
@@ -308,8 +319,13 @@ namespace GenealogyTree.Business.Services
 
         public async Task<PersonDetailsModel> UpdatePersonAsync(PersonCreateUpdateModel person)
         {
+            if (person == null)
+            {
+                return null;
+            }
+
             Person personInDb = await unitOfWork.Person.FindById(person.PersonId);
-            if (person == null || personInDb == null)
+            if (personInDb == null)
             {
                 return null;
             }
@@ -372,12 +388,12 @@ namespace GenealogyTree.Business.Services
             List<int> parentChildIds = unitOfWork.ParentChild.Filter(parentChild => parentChild.ParentId == personId || parentChild.ChildId == personId).Select(parentChild => parentChild.Id).ToList();
             foreach (var parentChildId in parentChildIds)
             {
-                unitOfWork.ParentChild.Delete(parentChildId);
+                await unitOfWork.ParentChild.Delete(parentChildId);
             }
             List<int> marriageIds = unitOfWork.Marriage.Filter(marriage => marriage.FirstPersonId == personId || marriage.SecondPersonId == personId).Select(marriage => marriage.Id).ToList();
             foreach (var marriageId in marriageIds)
             {
-                unitOfWork.Marriage.Delete(marriageId);
+                await unitOfWork.Marriage.Delete(marriageId);
             }
             Person personEntity = await unitOfWork.Person.Delete(personId);
             int oldImageId = (personEntity.ImageId == null) ? 0 : (int)personEntity.ImageId;
@@ -391,7 +407,7 @@ namespace GenealogyTree.Business.Services
         private async Task checkImageUsageAsync(int imageId)
         {
             Image image = await _imageService.GetImageAsync(imageId);
-            if (image.People.Count() == 0)
+            if (!image.People.Any())
             {
                 await _imageService.DeleteImageAsync(imageId);
             }

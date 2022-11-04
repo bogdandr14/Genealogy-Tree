@@ -1,6 +1,6 @@
 ﻿namespace GenealogyTree.Business.Helpers
 {
-    public class ConstantsJwt
+    public static class ConstantsJwt
     {
         public const string Issuer = "http://localhost:48888";
         public const string Audience = "http://localhost:8100";

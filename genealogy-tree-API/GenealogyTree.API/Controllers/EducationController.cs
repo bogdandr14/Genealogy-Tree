@@ -27,7 +27,7 @@ namespace GenealogyTree.API.Controllers
         {
             try
             {
-                List<EducationModel> returnEvent = _educationService.GetAllEducationsForUser(userId);
+                List<EducationModel> returnEvent = await Task.Run(() => _educationService.GetAllEducationsForUser(userId));
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -79,7 +79,7 @@ namespace GenealogyTree.API.Controllers
         [GeneTreeAuthorize]
         [HttpPut]
         [Route("")]
-        public async Task<ActionResult<EducationModel>> UpdateEducation( EducationModel education)
+        public async Task<ActionResult<EducationModel>> UpdateEducation(EducationModel education)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace GenealogyTree.API.Controllers
             }
         }
 
-        [GeneTreeAuthorize(UserRoleEnum.Admin)]
+        [GeneTreeAuthorize(UserRoles.Admin)]
         [HttpPost]
         [Route("levels")]
         public async Task<ActionResult<GenericNameModel>> AddEducationLevel(string name)

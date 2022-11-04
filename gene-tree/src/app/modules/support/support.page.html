@@ -102,7 +102,7 @@
                     name="email"
                     #email="ngModel"
                     [(ngModel)]="supportForm.emailContact"
-                    pattern="^[a-z0-9]+@[a-z]+.[a-z]{2,3}$"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                     required
                   ></ion-input>
                 </ion-item>

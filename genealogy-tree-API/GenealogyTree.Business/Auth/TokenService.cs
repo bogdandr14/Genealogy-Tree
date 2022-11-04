@@ -10,11 +10,11 @@ using System.Text;
 
 namespace GenealogyTree.Business.Auth
 {
-    public class TokenService
+    public static class TokenService
     {
         public static readonly string UserRole = "user_role";
 
-        public static string GenerateToken(User user, UserRoleEnum userRole)
+        public static string GenerateToken(User user, UserRoles userRole)
         {
 
             var authClaims = new List<Claim>

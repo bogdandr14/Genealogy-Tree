@@ -46,15 +46,12 @@ namespace GenealogyTree.API.Controllers
 
         [HttpGet]
         [Route("check/{userId:Guid}")]
-        public async Task<ActionResult<RelativeStateEnum>> CanAddRelativeForUser(Guid userId, [FromQuery] Guid relativeId)
+        public async Task<ActionResult<RelativeState>> CanAddRelativeForUser(Guid userId, [FromQuery] Guid relativeId)
         {
             try
             {
-                RelativeStateEnum canAdd = await _relativeService.CheckRelative(userId, relativeId);
-                if (canAdd == null)
-                {
-                    return NotFound();
-                }
+                RelativeState canAdd = await _relativeService.CheckRelative(userId, relativeId);
+                
                 return Ok(canAdd);
             }
             catch (Exception e)
@@ -65,7 +62,7 @@ namespace GenealogyTree.API.Controllers
 
         [HttpPut]
         [Route("markChanges/{relativeId:int}")]
-        public async Task<ActionResult<RelativeStateEnum>> MarkChangesForRelative(int relativeId)
+        public async Task<ActionResult<RelativeState>> MarkChangesForRelative(int relativeId)
         {
             try
             {

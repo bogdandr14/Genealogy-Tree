@@ -10,26 +10,24 @@ namespace GenealogyTree.Business.Services
 {
     public class FileManagementService : IFileManagementService
     {
-        private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly string _fileDirectoryPath;
         public FileManagementService(IMapper mapper, IConfiguration configuration)
         {
             _mapper = mapper;
-            _configuration = configuration;
-            string relativeFileDirectoryPath = this._configuration.GetSection("FilesDirectory").Value;
+            string relativeFileDirectoryPath = configuration.GetSection("FilesDirectory").Value;
             _fileDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), relativeFileDirectoryPath);
-            DirectoryInfo directory = Directory.CreateDirectory(_fileDirectoryPath);
+            Directory.CreateDirectory(_fileDirectoryPath);
         }
 
-        public async Task<ImageFile> GetFile(Image image)
+        public async Task<ImageFile> GetFile(Image fileName)
         {
-            if(image == null)
+            if (fileName == null)
             {
                 return null;
             }
-            ImageFile imageFile = _mapper.Map<ImageFile>(image);
-            imageFile.FileInBytes = await File.ReadAllBytesAsync(Path.Combine(_fileDirectoryPath, image.FileName));
+            ImageFile imageFile = _mapper.Map<ImageFile>(fileName);
+            imageFile.FileInBytes = await File.ReadAllBytesAsync(Path.Combine(_fileDirectoryPath, fileName.FileName));
             return imageFile;
         }
 
