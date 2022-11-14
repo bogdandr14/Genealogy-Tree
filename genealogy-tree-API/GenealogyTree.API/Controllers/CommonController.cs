@@ -28,10 +28,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericNameModel> nationalities = await _nationalityService.GetAllNationalitiesAsync();
+
                 if (nationalities == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(nationalities);
             }
             catch (Exception e)
@@ -63,10 +65,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericNameModel> religions = await _religionService.GetAllReligionsAsync();
+
                 if (religions == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(religions);
             }
             catch (Exception e)

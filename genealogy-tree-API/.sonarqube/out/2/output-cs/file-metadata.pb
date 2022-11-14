@@ -1,7 +1,7 @@
 j
-aE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\AuthService.csutf-8c
-ZE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\Hash.csutf-8c
-ZE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\Salt.csutf-8k
+aE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\AuthService.csutf-8l
+cE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\HashGenerator.csutf-8l
+cE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\SaltGenerator.csutf-8k
 bE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\TokenService.csutf-8h
 _E:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\UserRoles.csutf-8p
 gE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Email\EmailDescription.csutf-8s

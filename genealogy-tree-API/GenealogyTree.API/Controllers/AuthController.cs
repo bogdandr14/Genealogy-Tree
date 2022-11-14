@@ -24,10 +24,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 LoginResponseModel loginResponse = await _authService.Login(loginCredentials);
+
                 if (loginResponse == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(loginResponse);
             }
             catch (Exception e)
@@ -43,10 +45,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserDetailsModel userDetails = await _authService.Register(userRegister);
+
                 if (userDetails == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(userDetails);
             }
             catch (Exception e)
@@ -63,10 +67,13 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserDetailsModel updatedUser = await _authService.UpdatePassword(updatePassword);
+
                 if (updatedUser == null)
                 {
                     return NotFound();
                 }
+
+
                 return Ok(updatedUser);
             }
             catch (Exception e)

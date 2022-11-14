@@ -14,6 +14,7 @@ namespace GenealogyTree.API.Controllers
     public class OccupationController : Controller
     {
         private readonly IOccupationService _occupationService;
+
         public OccupationController(IOccupationService occupationService)
         {
             _occupationService = occupationService;
@@ -26,29 +27,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<OccupationModel> returnEvent = await Task.Run(() => _occupationService.GetAllOccupationsForUser(userId));
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult<OccupationModel>> GetOccupation(int id)
-        {
-            try
-            {
-                OccupationModel returnEvent = await _occupationService.GetOccupationAsync(id);
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)

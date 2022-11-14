@@ -21,6 +21,7 @@ namespace GenealogyTree.Business.Services
         {
             List<Religion> religions = await Task.Run(() => unitOfWork.Religion.GetAll().OrderBy(x => x.Name).ToList());
             List<GenericNameModel> returnEvent = _mapper.Map<List<GenericNameModel>>(religions);
+
             return returnEvent;
         }
 
@@ -30,12 +31,15 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Religion religion = new Religion()
             {
                 Name = religionName
             };
+
             Religion religionEntity = await unitOfWork.Religion.Create(religion);
             GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(religionEntity);
+
             return returnEvent;
         }
     }

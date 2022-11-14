@@ -11,12 +11,16 @@ namespace GenealogyTree.Business.Services
     public class FileManagementService : IFileManagementService
     {
         private readonly IMapper _mapper;
+
         private readonly string _fileDirectoryPath;
+
         public FileManagementService(IMapper mapper, IConfiguration configuration)
         {
             _mapper = mapper;
+
             string relativeFileDirectoryPath = configuration.GetSection("FilesDirectory").Value;
             _fileDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), relativeFileDirectoryPath);
+
             Directory.CreateDirectory(_fileDirectoryPath);
         }
 
@@ -26,8 +30,10 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             ImageFile imageFile = _mapper.Map<ImageFile>(fileName);
             imageFile.FileInBytes = await File.ReadAllBytesAsync(Path.Combine(_fileDirectoryPath, fileName.FileName));
+
             return imageFile;
         }
 
@@ -45,11 +51,13 @@ namespace GenealogyTree.Business.Services
         public bool DeleteFile(string fileName)
         {
             string path = Path.Combine(_fileDirectoryPath, fileName);
+
             if (File.Exists(path))
             {
                 File.Delete(path);
                 return true;
             }
+
             return false;
         }
     }

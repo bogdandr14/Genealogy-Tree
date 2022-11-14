@@ -14,6 +14,7 @@ namespace GenealogyTree.API.Controllers
     public class MarriageController : Controller
     {
         private readonly IMarriageService _marriageService;
+
         public MarriageController(IMarriageService marriageService)
         {
             _marriageService = marriageService;
@@ -26,25 +27,7 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<MarriedPersonModel> returnEvent = await _marriageService.GetAllMarriagesForPerson(personId);
-                if (returnEvent == null)
-                {
-                    return NotFound();
-                }
-                return Ok(returnEvent);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
 
-        [HttpGet]
-        [Route("person/{personId:int}/current")]
-        public async Task<ActionResult<MarriedPersonModel>> GetPersonCurrentMarriage(int personId)
-        {
-            try
-            {
-                MarriedPersonModel returnEvent = await _marriageService.GetCurrentMarriageForPerson(personId);
                 if (returnEvent == null)
                 {
                     return NotFound();
@@ -64,10 +47,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 MarriageDetailsModel returnEvent = await _marriageService.GetMarriageAsync(id);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)

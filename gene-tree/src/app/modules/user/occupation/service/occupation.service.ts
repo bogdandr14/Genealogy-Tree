@@ -22,10 +22,6 @@ export class OccupationService extends BaseService {
     );
   }
 
-  getOccupation(occupationId: number): Observable<OccupationModel> {
-    return this.getOneById(occupationId, null, BaseService.noLoadingConfig);
-  }
-
   updateOccupation(occupation: OccupationModel): Observable<OccupationModel> {
     return super.update<OccupationModel>(occupation);
   }

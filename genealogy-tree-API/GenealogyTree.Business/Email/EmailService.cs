@@ -16,6 +16,7 @@ namespace GenealogyTree.Business.Email
     public class EmailService : BaseService, IEmailService
     {
         private readonly SmtpModel _smtp;
+
         public IConfiguration _configuration { get; }
 
         public EmailService(IUnitOfWork unitOfWork, IOptions<SmtpModel> smtp, IConfiguration configuration) : base(unitOfWork)
@@ -27,14 +28,17 @@ namespace GenealogyTree.Business.Email
         public async Task SendSupportTicket(SupportTicket supportTicket)
         {
             MailMessage mailMessage = GetDefaultMailMessage();
+
             mailMessage.Subject = "[" + supportTicket.Type + "][" + supportTicket.Language.ToUpper() + "] " + supportTicket.Subject;
             string path = Directory.GetCurrentDirectory() + _configuration["SupportMailPath"];
             mailMessage.Body = GetSupportTicketEmailBody(supportTicket, path);
             mailMessage.To.Add(_smtp.From);
+
             if (IsValidEmail(supportTicket.EmailContact))
             {
                 mailMessage.CC.Add(supportTicket.EmailContact);
             }
+
             await Task.Run(() => SendEmail(mailMessage));
         }
 
@@ -71,6 +75,7 @@ namespace GenealogyTree.Business.Email
                 From = new MailAddress(_smtp.From),
                 IsBodyHtml = _smtp.IsBodyHtml,
             };
+
             return message;
         }
 
@@ -91,6 +96,7 @@ namespace GenealogyTree.Business.Email
             StreamReader reader = File.OpenText(path);
             string body = reader.ReadToEnd();
             PropertyInfo[] st = supportTicket.GetType().GetProperties();
+
             foreach (PropertyInfo f in st)
             {
                 body = body.Replace("{" + f.Name + "}", f.GetValue(supportTicket).ToString());
@@ -98,6 +104,7 @@ namespace GenealogyTree.Business.Email
 
             EmailDescription emailDescription = EmailLanguageHelper.GetEmailDescription(supportTicket.Language);
             PropertyInfo[] ed = emailDescription.GetType().GetProperties();
+
             foreach (PropertyInfo f in ed)
             {
                 body = body.Replace("{" + f.Name + "}", f.GetValue(emailDescription).ToString());

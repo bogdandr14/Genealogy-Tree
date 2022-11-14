@@ -14,11 +14,12 @@ namespace GenealogyTree.Business.Services
         {
             _mapper = mapper;
         }
-        
+
         public async Task<LocationModel> GetLocationAsync(int locationId)
         {
             Location location = await unitOfWork.Location.FindById(locationId);
             LocationModel returnEvent = _mapper.Map<LocationModel>(location);
+
             return returnEvent;
         }
 
@@ -28,9 +29,11 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Location locationEntity = _mapper.Map<Location>(location);
             locationEntity = await unitOfWork.Location.Update(locationEntity);
             LocationModel returnEvent = _mapper.Map<LocationModel>(locationEntity);
+
             return returnEvent;
         }
     }

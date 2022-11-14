@@ -21,6 +21,7 @@ namespace GenealogyTree.Business.Services
         {
             List<Nationality> nationalities = unitOfWork.Nationality.GetAll().ToList();
             List<GenericNameModel> returnEvent = await Task.Run(() => _mapper.Map<List<GenericNameModel>>(nationalities));
+
             return returnEvent;
         }
 
@@ -30,12 +31,15 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Nationality nationality = new Nationality()
             {
                 Name = nationalityName
             };
+
             Nationality nationalityEntity = await unitOfWork.Nationality.Create(nationality);
             GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(nationalityEntity);
+
             return returnEvent;
         }
     }

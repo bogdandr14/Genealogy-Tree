@@ -18,6 +18,7 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
         private readonly IRelativeService _relativeService;
+
         public RequestService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRelativeService relativeService) : base(unitOfWork)
         {
             _mapper = mapper;
@@ -32,12 +33,14 @@ namespace GenealogyTree.Business.Services
                                                 .Include(x => x.Sender).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.ReceiverReferenceInSenderTree).ThenInclude(p => p.Image)
                                                 .ToList();
+
             return await MapRequestDetails(requests);
         }
 
         private async Task<List<RequestDetailsModel>> MapRequestDetails(List<Request> requests)
         {
             List<RequestDetailsModel> returnEvent = new List<RequestDetailsModel>();
+
             foreach (var request in requests)
             {
                 RequestDetailsModel returnRequest = new RequestDetailsModel()
@@ -47,16 +50,19 @@ namespace GenealogyTree.Business.Services
                     SenderUser = _mapper.Map<GenericPersonModel>(request.Sender),
                     ReceiverReferenceInSenderTreeId = request.ReceiverReferenceInSenderTreeId
                 };
+
                 returnRequest.ReceiverUser.ImageFile = await _fileManagementService.GetFile(request.Receiver.Person.Image);
                 returnRequest.SenderUser.ImageFile = await _fileManagementService.GetFile(request.Sender.Person.Image);
                 returnEvent.Add(returnRequest);
             }
+
             return returnEvent;
         }
 
         private async Task<List<RequestResponseModel>> MapRequestResponse(List<Request> requests)
         {
             List<RequestResponseModel> returnEvent = new List<RequestResponseModel>();
+
             foreach (var request in requests)
             {
                 RequestResponseModel returnRequest = new RequestResponseModel()
@@ -65,9 +71,11 @@ namespace GenealogyTree.Business.Services
                     ReceiverUser = _mapper.Map<GenericPersonModel>(request.Receiver),
                     Response = request.Response
                 };
+
                 returnRequest.ReceiverUser.ImageFile = await _fileManagementService.GetFile(request.Receiver.Person.Image);
                 returnEvent.Add(returnRequest);
             }
+
             return returnEvent;
         }
 
@@ -77,6 +85,7 @@ namespace GenealogyTree.Business.Services
                                                 .Include(x => x.Receiver).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.Sender).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.ReceiverReferenceInSenderTree).ThenInclude(p => p.Image).ToList();
+
             return await MapRequestDetails(requests);
         }
 
@@ -84,6 +93,7 @@ namespace GenealogyTree.Business.Services
         {
             List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && x.ReceiverResponded)
                                                 .Include(x => x.Receiver).ThenInclude(r => r.Person).ThenInclude(p => p.Image).ToList();
+
             return await MapRequestResponse(requests);
         }
 
@@ -93,25 +103,29 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Request requestEntity = _mapper.Map<Request>(request);
             requestEntity.ReceiverReferenceInSenderTree = null;
             Request createdRequest = await unitOfWork.Requests.Create(requestEntity);
             RequestCreateUpdateModel returnEvent = _mapper.Map<RequestCreateUpdateModel>(createdRequest);
+
             return returnEvent;
         }
 
         public async Task<UsersToLinkModel> RespondToRequest(int requestId, RequestResponseModel respondedRequest)
         {
             Request request = await unitOfWork.Requests.FindById(requestId);
+
             if (request == null)
             {
                 return null;
             }
+
             request.ReceiverResponded = true;
             request.Response = respondedRequest.Response;
 
             Relative alreadyRelated = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == request.ReceiverId && x.RelativeUserId == request.SenderId).FirstOrDefault();
-            
+
             if (respondedRequest.SenderReferenceInReceiverTreeId != 0 && alreadyRelated != default(Relative))
             {
                 request.ReceiverReferenceInSenderTreeId = respondedRequest.SenderReferenceInReceiverTreeId;
@@ -126,10 +140,12 @@ namespace GenealogyTree.Business.Services
                 PrimaryPersonInRelativeTreeId = respondedRequest.SenderReferenceInReceiverTreeId,
                 LinkedPersonInPrimaryTreeId = updatedRequest.ReceiverReferenceInSenderTreeId
             };
+
             if (respondedRequest.Response)
             {
                 await _relativeService.AddRelativeUser(firstRelative);
             }
+
             return firstRelative;
         }
 
@@ -137,6 +153,7 @@ namespace GenealogyTree.Business.Services
         {
             Request request = await unitOfWork.Requests.Delete(requestId);
             RequestDetailsModel returnEvent = _mapper.Map<RequestDetailsModel>(request);
+
             return returnEvent;
         }
     }

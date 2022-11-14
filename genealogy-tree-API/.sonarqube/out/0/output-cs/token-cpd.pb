@@ -5257,21 +5257,21 @@ qE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Int
 
 Interfaces )
 { 
-public 
+public		 
 
-	interface #
-IGenealogyTreeDbContext ,
-{ 
-public 
-Task 
-SaveChangesAsync $
-($ %
-)% &
-;& '
-}		 
-}
+	interface		 #
+IGenealogyTreeDbContext		 ,
+{
 
- º
+ 
+public 
+Task 
+SaveChangesAsync $
+($ %
+)% &
+;& '
+} 
+} º
 eE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\IUnitOfWork.cs
 	namespace 	
 GenealogyTree
@@ -5282,116 +5282,106 @@ eE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Int
 
 Interfaces )
 { 
-public 
+public		 
 
-	interface 
-IUnitOfWork  
-{ %
-IEducationLevelRepository !
-EducationLevel" 0
-{1 2
-get3 6
-;6 7
-}8 9 
-IEducationRepository 
-	Education &
-{' (
-get) ,
-;, -
-}. /
-IImageRepository		 
-Image		 
-{		  
-get		! $
-;		$ %
-}		& '
-ILocationRepository
-
- 
-Location
-
- $
+	interface		 
+IUnitOfWork		  
 {
 
-% &
-get
-
-' *
-;
-
-* +
-}
-
-, -
-IMarriageRepository 
-Marriage $
-{% &
-get' *
-;* +
-}, -"
-INationalityRepository 
-Nationality *
-{+ ,
-get- 0
-;0 1
-}2 3!
-IOccupationRepository 
+ %
+IEducationLevelRepository !
+EducationLevel" 0
+{1 2
+get3 6
+;6 7
+}8 9 
+IEducationRepository 
+	Education &
+{' (
+get) ,
+;, -
+}. /
+IImageRepository 
+Image 
+{  
+get! $
+;$ %
+}& '
+ILocationRepository 
+Location $
+{% &
+get' *
+;* +
+}, -
+IMarriageRepository 
+Marriage $
+{% &
+get' *
+;* +
+}, -"
+INationalityRepository 
+Nationality *
+{+ ,
+get- 0
+;0 1
+}2 3!
+IOccupationRepository 
 
-Occupation (
-{) *
-get+ .
-;. /
-}0 1"
-IParentChildRepository 
-ParentChild *
-{+ ,
-get- 0
-;0 1
-}2 3
-IPersonRepository 
-Person  
-{! "
-get# &
-;& '
-}( )
-IPositionRepository 
-Position $
-{% &
-get' *
-;* +
-}, -
-IReligionRepository 
-Religion $
-{% &
-get' *
-;* +
-}, -
-IRelativeRepository 
-	Relatives %
-{& '
-get( +
-;+ ,
-}- .
-IRequestRepository 
-Requests #
-{$ %
-get& )
-;) *
-}+ ,
-ITreeRepository 
-Tree 
-{ 
-get "
-;" #
-}$ %
-IUserRepository 
-User 
-{ 
-get "
-;" #
-}$ %
-} 
-} ñ
+Occupation (
+{) *
+get+ .
+;. /
+}0 1"
+IParentChildRepository 
+ParentChild *
+{+ ,
+get- 0
+;0 1
+}2 3
+IPersonRepository 
+Person  
+{! "
+get# &
+;& '
+}( )
+IPositionRepository 
+Position $
+{% &
+get' *
+;* +
+}, -
+IReligionRepository 
+Religion $
+{% &
+get' *
+;* +
+}, -
+IRelativeRepository 
+	Relatives %
+{& '
+get( +
+;+ ,
+}- .
+IRequestRepository 
+Requests #
+{$ %
+get& )
+;) *
+}+ ,
+ITreeRepository 
+Tree 
+{ 
+get "
+;" #
+}$ %
+IUserRepository 
+User 
+{ 
+get "
+;" #
+}$ %
+} 
+} ñ
 ÄE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IEducationLevelRepository.cs
 	namespace 	
 GenealogyTree
@@ -5404,18 +5394,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface %
-IEducationLevelRepository .
-:/ 0
-IRepositoryBase1 @
-<@ A
-EducationLevelA O
->O P
-{ 
-} 
-} Ü
+	interface		 %
+IEducationLevelRepository		 .
+:		/ 0
+IRepositoryBase		1 @
+<		@ A
+EducationLevel		A O
+>		O P
+{
+
+ 
+} 
+} Ü
 {E:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IEducationRepository.cs
 	namespace 	
 GenealogyTree
@@ -5428,18 +5420,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface  
-IEducationRepository )
-:* +
-IRepositoryBase, ;
-<; <
-	Education< E
->E F
-{ 
-} 
-} ˙
+	interface		  
+IEducationRepository		 )
+:		* +
+IRepositoryBase		, ;
+<		; <
+	Education		< E
+>		E F
+{
+
+ 
+} 
+} ˙
 wE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IImageRepository.cs
 	namespace 	
 GenealogyTree
@@ -5452,18 +5446,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IImageRepository %
-:& '
-IRepositoryBase( 7
-<7 8
-Image8 =
->= >
-{ 
-} 
-} É
+	interface		 
+IImageRepository		 %
+:		& '
+IRepositoryBase		( 7
+<		7 8
+Image		8 =
+>		= >
+{
+
+ 
+} 
+} É
 zE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\ILocationRepository.cs
 	namespace 	
 GenealogyTree
@@ -5476,18 +5472,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-ILocationRepository (
-:) *
-IRepositoryBase+ :
-<: ;
-Location; C
->C D
-{ 
-} 
-} É
+	interface		 
+ILocationRepository		 (
+:		) *
+IRepositoryBase		+ :
+<		: ;
+Location		; C
+>		C D
+{
+
+ 
+} 
+} É
 zE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IMarriageRepository.cs
 	namespace 	
 GenealogyTree
@@ -5500,18 +5498,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IMarriageRepository (
-:) *
-IRepositoryBase+ :
-<: ;
-Marriage; C
->C D
-{ 
-} 
-} å
+	interface		 
+IMarriageRepository		 (
+:		) *
+IRepositoryBase		+ :
+<		: ;
+Marriage		; C
+>		C D
+{
+
+ 
+} 
+} å
 }E:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\INationalityRepository.cs
 	namespace 	
 GenealogyTree
@@ -5524,18 +5524,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface "
-INationalityRepository +
-:, -
-IRepositoryBase. =
-<= >
-Nationality> I
->I J
-{ 
-} 
-} â
+	interface		 "
+INationalityRepository		 +
+:		, -
+IRepositoryBase		. =
+<		= >
+Nationality		> I
+>		I J
+{
+
+ 
+} 
+} â
 |E:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IOccupationRepository.cs
 	namespace 	
 GenealogyTree
@@ -5548,19 +5550,21 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface !
-IOccupationRepository *
-:+ ,
-IRepositoryBase- <
-<< =
+	interface		 !
+IOccupationRepository		 *
+:		+ ,
+IRepositoryBase		- <
+<		< =
 
-Occupation= G
->G H
-{ 
-} 
-} å
+Occupation		= G
+>		G H
+{
+
+ 
+} 
+} å
 }E:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IParentChildRepository.cs
 	namespace 	
 GenealogyTree
@@ -5573,18 +5577,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface "
-IParentChildRepository +
-:, -
-IRepositoryBase. =
-<= >
-ParentChild> I
->I J
-{ 
-} 
-} ˝
+	interface		 "
+IParentChildRepository		 +
+:		, -
+IRepositoryBase		. =
+<		= >
+ParentChild		> I
+>		I J
+{
+
+ 
+} 
+} ˝
 xE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IPersonRepository.cs
 	namespace 	
 GenealogyTree
@@ -5597,18 +5603,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IPersonRepository &
-:' (
-IRepositoryBase) 8
-<8 9
-Person9 ?
->? @
-{ 
-} 
-} É
+	interface		 
+IPersonRepository		 &
+:		' (
+IRepositoryBase		) 8
+<		8 9
+Person		9 ?
+>		? @
+{
+
+ 
+} 
+} É
 zE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IPositionRepository.cs
 	namespace 	
 GenealogyTree
@@ -5621,18 +5629,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IPositionRepository (
-:) *
-IRepositoryBase+ :
-<: ;
-Position; C
->C D
-{ 
-} 
-} É
+	interface		 
+IPositionRepository		 (
+:		) *
+IRepositoryBase		+ :
+<		: ;
+Position		; C
+>		C D
+{
+
+ 
+} 
+} É
 zE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IRelativeRepository.cs
 	namespace 	
 GenealogyTree
@@ -5645,18 +5655,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IRelativeRepository (
-:) *
-IRepositoryBase+ :
-<: ;
-Relative; C
->C D
-{ 
-} 
-} É
+	interface		 
+IRelativeRepository		 (
+:		) *
+IRepositoryBase		+ :
+<		: ;
+Relative		; C
+>		C D
+{
+
+ 
+} 
+} É
 zE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IReligionRepository.cs
 	namespace 	
 GenealogyTree
@@ -5669,18 +5681,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IReligionRepository (
-:) *
-IRepositoryBase+ :
-<: ;
-Religion; C
->C D
-{ 
-} 
-} Ç
+	interface		 
+IReligionRepository		 (
+:		) *
+IRepositoryBase		+ :
+<		: ;
+Religion		; C
+>		C D
+{
+
+ 
+} 
+} Ç
 vE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IRepositoryBase.cs
 	namespace 	
 GenealogyTree
@@ -5693,112 +5707,100 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public 
 
-	interface 
-IRepositoryBase $
-<$ %
-T% &
->& '
-:( )
-IDisposable* 5
-{		 
-int
-
- 
-Count
-
- 
-{
-
- 
-get
-
- 
-;
-
- 
-}
-
- 
+	interface 
+IRepositoryBase $
+<$ %
+T% &
+>& '
+:( )
+IDisposable* 5
+{ 
+int 
+Count 
+{ 
+get 
+; 
+} 
 
-IQueryable 
-< 
-T 
-> 
-GetAll 
-( 
-) 
-; 
+IQueryable 
+< 
+T 
+> 
+GetAll 
+( 
+) 
+; 
 
-IQueryable 
-< 
-T 
-> 
-Filter 
-( 
+IQueryable 
+< 
+T 
+> 
+Filter 
+( 
 
-Expression '
-<' (
-Func( ,
-<, -
-T- .
-,. /
-bool0 4
->4 5
->5 6
+Expression '
+<' (
+Func( ,
+<, -
+T- .
+,. /
+bool0 4
+>4 5
+>5 6
 
-expression7 A
-)A B
-;B C
-Task 
-< 
-T 
-> 
-FindById 
-( 
-params 
-object  &
-[& '
-]' (
-keys) -
-)- .
-;. /
-Task 
-< 
-T 
-> 
-Create 
-( 
-T 
-entity 
-)  
-;  !
-Task 
-< 
-T 
-> 
-Update 
-( 
-T 
-entity 
-)  
-;  !
-Task 
-< 
-T 
-> 
-Delete 
-( 
-params 
-object $
-[$ %
-]% &
-id' )
-)) *
-;* +
-} 
-} Ä
+expression7 A
+)A B
+;B C
+Task'' 
+<'' 
+T'' 
+>'' 
+FindById'' 
+('' 
+params'' 
+object''  &
+[''& '
+]''' (
+keys'') -
+)''- .
+;''. /
+Task00 
+<00 
+T00 
+>00 
+Create00 
+(00 
+T00 
+entity00 
+)00  
+;00  !
+Task99 
+<99 
+T99 
+>99 
+Update99 
+(99 
+T99 
+entity99 
+)99  
+;99  !
+TaskBB 
+<BB 
+TBB 
+>BB 
+DeleteBB 
+(BB 
+paramsBB 
+objectBB $
+[BB$ %
+]BB% &
+idBB' )
+)BB) *
+;BB* +
+}CC 
+}DD Ä
 yE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IRequestRepository.cs
 	namespace 	
 GenealogyTree
@@ -5811,18 +5813,34 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public
+
+ 
 
-	interface 
-IRequestRepository '
-:( )
-IRepositoryBase* 9
-<9 :
-Request: A
->A B
-{ 
-} 
-} ˜
+	interface
+
+ 
+IRequestRepository
+
+ '
+:
+
+( )
+IRepositoryBase
+
+* 9
+<
+
+9 :
+Request
+
+: A
+>
+
+A B
+{ 
+} 
+} ˜
 vE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\ITreeRepository.cs
 	namespace 	
 GenealogyTree
@@ -5835,18 +5853,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-ITreeRepository $
-:% &
-IRepositoryBase' 6
-<6 7
-Tree7 ;
->; <
-{ 
-} 
-} ˜
+	interface		 
+ITreeRepository		 $
+:		% &
+IRepositoryBase		' 6
+<		6 7
+Tree		7 ;
+>		; <
+{
+
+ 
+} 
+} ˜
 vE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Repositories\IUserRepository.cs
 	namespace 	
 GenealogyTree
@@ -5859,18 +5879,20 @@ Interfaces )
 .) *
 Repositories* 6
 { 
-public 
+public		 
 
-	interface 
-IUserRepository $
-:% &
-IRepositoryBase' 6
-<6 7
-User7 ;
->; <
-{ 
-} 
-} Ê
+	interface		 
+IUserRepository		 $
+:		% &
+IRepositoryBase		' 6
+<		6 7
+User		7 ;
+>		; <
+{
+
+ 
+} 
+} Ê
 oE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IAuthService.cs
 	namespace 	
 GenealogyTree
@@ -5883,64 +5905,44 @@ Interfaces )
 .) *
 Services* 2
 { 
-public 
+public 
 
-	interface 
-IAuthService !
-{ 
-Task 
-< 
-LoginResponseModel 
->  
-Login! &
-(& '
+	interface 
+IAuthService !
+{ 
+Task 
+< 
+LoginResponseModel 
+>  
+Login! &
+(& '
 
-LoginModel' 1
-	userLogin2 ;
-); <
-;< =
-Task		 
-<		 
-UserDetailsModel		 
->		 
-Register		 '
-(		' (
-RegisterModel		( 5
-userRegister		6 B
-)		B C
-;		C D
-Task
-
- 
-<
-
- 
-UserDetailsModel
-
- 
->
-
- 
-UpdatePassword
-
- -
-(
-
-- .
-UpdatePasswordModel
-
-. A
-updatePassword
-
-B P
-)
-
-P Q
-;
-
-Q R
-} 
-} °
+LoginModel' 1
+	userLogin2 ;
+); <
+;< =
+Task!! 
+<!! 
+UserDetailsModel!! 
+>!! 
+Register!! '
+(!!' (
+RegisterModel!!( 5
+userRegister!!6 B
+)!!B C
+;!!C D
+Task,, 
+<,, 
+UserDetailsModel,, 
+>,, 
+UpdatePassword,, -
+(,,- .
+UpdatePasswordModel,,. A
+updatePassword,,B P
+),,P Q
+;,,Q R
+}-- 
+}.. °
 tE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IEducationService.cs
 	namespace 	
 GenealogyTree
@@ -5960,79 +5962,79 @@ Interfaces )
 {
 
  
-List 
-< 
-EducationModel 
-> #
-GetAllEducationsForUser 4
-(4 5
-Guid5 9
-userId: @
-)@ A
-;A B
-Task 
-< 
-EducationModel 
-> 
-GetEducationAsync .
-(. /
-int/ 2
-educationId3 >
-)> ?
-;? @
-Task 
-< 
-EducationModel 
-> 
-AddEducationAsync .
-(. /
-EducationModel/ =
-	education> G
-)G H
-;H I
-Task 
-< 
-EducationModel 
->  
-UpdateEducationAsync 1
-(1 2
-EducationModel2 @
-	educationA J
-)J K
-;K L
-Task 
-< 
-EducationModel 
->  
-DeleteEducationAsync 1
-(1 2
-int2 5
-educationId6 A
-)A B
-;B C
-Task 
-< 
-List 
-< 
-GenericNameModel "
->" #
-># $&
-GetAllEducationLevelsAsync% ?
-(? @
-)@ A
-;A B
-Task 
-< 
-GenericNameModel 
-> "
-AddEducationLevelAsync 5
-(5 6
-string6 <
-educationLevelName= O
-)O P
-;P Q
-} 
-} £
+List 
+< 
+EducationModel 
+> #
+GetAllEducationsForUser 4
+(4 5
+Guid5 9
+userId: @
+)@ A
+;A B
+Task 
+< 
+EducationModel 
+> 
+GetEducationAsync .
+(. /
+int/ 2
+educationId3 >
+)> ?
+;? @
+Task&& 
+<&& 
+EducationModel&& 
+>&& 
+AddEducationAsync&& .
+(&&. /
+EducationModel&&/ =
+	education&&> G
+)&&G H
+;&&H I
+Task00 
+<00 
+EducationModel00 
+>00  
+UpdateEducationAsync00 1
+(001 2
+EducationModel002 @
+	education00A J
+)00J K
+;00K L
+Task99 
+<99 
+EducationModel99 
+>99  
+DeleteEducationAsync99 1
+(991 2
+int992 5
+educationId996 A
+)99A B
+;99B C
+TaskBB 
+<BB 
+ListBB 
+<BB 
+GenericNameModelBB "
+>BB" #
+>BB# $&
+GetAllEducationLevelsAsyncBB% ?
+(BB? @
+)BB@ A
+;BBA B
+TaskMM 
+<MM 
+GenericNameModelMM 
+>MM "
+AddEducationLevelAsyncMM 5
+(MM5 6
+stringMM6 <
+educationLevelNameMM= O
+)MMO P
+;MMP Q
+}NN 
+}OO £
 pE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IEmailService.cs
 	namespace 	
 GenealogyTree
@@ -6050,17 +6052,15 @@ Interfaces )
 	interface 
 IEmailService "
 { 
-Task 
-SendSupportTicket 
-( 
-SupportTicket ,
-supportTicket- :
-): ;
-;; <
-}
-
- 
-} ◊
+Task 
+SendSupportTicket 
+( 
+SupportTicket ,
+supportTicket- :
+): ;
+;; <
+} 
+} ◊
 yE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IFileManagementService.cs
 	namespace 	
 GenealogyTree
@@ -6078,47 +6078,33 @@ Interfaces )
 	interface "
 IFileManagementService +
 { 
-Task		 
-<		 
-	ImageFile		 
->		 
-GetFile		 
-(		  
-Image		  %
-fileName		& .
-)		. /
-;		/ 0
-Task
-
- 
-SaveFileAsync
-
- 
-(
-
- 
-	ImageFile
-
- $
-file
-
-% )
-)
-
-) *
-;
-
-* +
-bool 
+Task 
+< 
+	ImageFile 
+> 
+GetFile 
+(  
+Image  %
+fileName& .
+). /
+;/ 0
+Task 
+SaveFileAsync 
+( 
+	ImageFile $
+file% )
+)) *
+;* +
+bool%% 
 
-DeleteFile 
-( 
-string 
-fileName '
-)' (
-;( )
-} 
-} ∂
+DeleteFile%% 
+(%% 
+string%% 
+fileName%% '
+)%%' (
+;%%( )
+}&& 
+}'' ∂
 pE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IImageService.cs
 	namespace 	
 GenealogyTree
@@ -6136,59 +6122,39 @@ Interfaces )
 	interface 
 IImageService "
 { 
-Task		 
-<		 
-Image		 
->		 
-GetImageAsync		 !
-(		! "
-int		" %
-?		% &
-imageId		' .
-)		. /
-;		/ 0
-Task
-
- 
-<
-
- 
-Image
-
- 
->
-
- 
-AddImageAsync
-
- !
-(
-
-! "
-	ImageFile
-
-" +
-file
-
-, 0
-)
-
-0 1
-;
-
-1 2
-Task 
-< 
-bool 
-> 
-DeleteImageAsync #
-(# $
-int$ '
-imageId( /
-)/ 0
-;0 1
-} 
-} ô
+Task 
+< 
+Image 
+> 
+GetImageAsync !
+(! "
+int" %
+?% &
+imageId' .
+). /
+;/ 0
+Task 
+< 
+Image 
+> 
+AddImageAsync !
+(! "
+	ImageFile" +
+file, 0
+)0 1
+;1 2
+Task## 
+<## 
+bool## 
+>## 
+DeleteImageAsync## #
+(### $
+int##$ '
+imageId##( /
+)##/ 0
+;##0 1
+}$$ 
+}%% ô
 sE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\ILocationService.cs
 	namespace 	
 GenealogyTree
@@ -6206,31 +6172,29 @@ Interfaces )
 	interface 
 ILocationService %
 { 
-Task 
-< 
-LocationModel 
-> 
-GetLocationAsync ,
-(, -
-int- 0
+Task 
+< 
+LocationModel 
+> 
+GetLocationAsync ,
+(, -
+int- 0
 
-locationId1 ;
-); <
-;< =
-Task		 
-<		 
-LocationModel		 
->		 
-UpdateLocation		 *
-(		* +
-LocationModel		+ 8
-location		9 A
-)		A B
-;		B C
-}
-
- 
-} ¢
+locationId1 ;
+); <
+;< =
+Task 
+< 
+LocationModel 
+> 
+UpdateLocation *
+(* +
+LocationModel+ 8
+location9 A
+)A B
+;B C
+} 
+} ’
 sE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IMarriageService.cs
 	namespace 	
 GenealogyTree
@@ -6248,93 +6212,63 @@ Interfaces )
 	interface 
 IMarriageService %
 { 
-Task		 
-<		 
-List		 
-<		 
-MarriedPersonModel		 $
->		$ %
->		% &$
-GetAllMarriagesForPerson		' ?
-(		? @
-int		@ C
-personId		D L
-)		L M
-;		M N
-Task
-
- 
-<
-
-  
-MarriageDetailsModel
-
- !
->
-
-! "
-GetMarriageAsync
-
-# 3
-(
-
-3 4
-int
-
-4 7
+Task 
+< 
+List 
+< 
+MarriedPersonModel $
+>$ %
+>% &$
+GetAllMarriagesForPerson' ?
+(? @
+int@ C
+personIdD L
+)L M
+;M N
+Task 
+<  
+MarriageDetailsModel !
+>! "
+GetMarriageAsync# 3
+(3 4
+int4 7
 
-marriageId
-
-8 B
-)
-
-B C
-;
-
-C D
-Task 
-< 
-MarriedPersonModel 
->  '
-GetCurrentMarriageForPerson! <
-(< =
-int= @
-personIdA I
-)I J
-;J K
-Task 
-<  
-MarriageDetailsModel !
->! "
-AddMarriageAsync# 3
-(3 4%
-MarriageCreateUpdateModel4 M
-marriageN V
-)V W
-;W X
-Task 
-<  
-MarriageDetailsModel !
->! "
-UpdateMarriageAsync# 6
-(6 7%
-MarriageCreateUpdateModel7 P
-marriageQ Y
-)Y Z
-;Z [
-Task 
-<  
-MarriageDetailsModel !
->! "
-DeleteMarriageAsync# 6
-(6 7
-int7 :
+marriageId8 B
+)B C
+;C D
+Task%% 
+<%%  
+MarriageDetailsModel%% !
+>%%! "
+AddMarriageAsync%%# 3
+(%%3 4%
+MarriageCreateUpdateModel%%4 M
+marriage%%N V
+)%%V W
+;%%W X
+Task// 
+<//  
+MarriageDetailsModel// !
+>//! "
+UpdateMarriageAsync//# 6
+(//6 7%
+MarriageCreateUpdateModel//7 P
+marriage//Q Y
+)//Y Z
+;//Z [
+Task88 
+<88  
+MarriageDetailsModel88 !
+>88! "
+DeleteMarriageAsync88# 6
+(886 7
+int887 :
 
-marriageId; E
-)E F
-;F G
-} 
-} π
+marriageId88; E
+)88E F
+;88F G
+}99 
+}:: π
 vE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\INationalityService.cs
 	namespace 	
 GenealogyTree
@@ -6352,49 +6286,29 @@ Interfaces )
 	interface 
 INationalityService (
 { 
-Task		 
-<		 
-List		 
-<		 
-GenericNameModel		 "
->		" #
->		# $$
-GetAllNationalitiesAsync		% =
-(		= >
-)		> ?
-;		? @
-Task
-
- 
-<
-
- 
-GenericNameModel
-
- 
->
-
- 
-AddNationalityAsync
-
- 2
-(
-
-2 3
-string
-
-3 9
-nationalityName
-
-: I
-)
-
-I J
-;
-
-J K
-} 
-} ç
+Task 
+< 
+List 
+< 
+GenericNameModel "
+>" #
+># $$
+GetAllNationalitiesAsync% =
+(= >
+)> ?
+;? @
+Task 
+< 
+GenericNameModel 
+> 
+AddNationalityAsync 2
+(2 3
+string3 9
+nationalityName: I
+)I J
+;J K
+} 
+} »	
 uE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IOccupationService.cs
 	namespace 	
 GenealogyTree
@@ -6412,80 +6326,50 @@ Interfaces )
 	interface 
 IOccupationService '
 {		 
-List
-
- 
-<
-
- 
-OccupationModel
-
- 
->
-
- $
-GetAllOccupationsForUser
-
- 6
-(
-
-6 7
-Guid
-
-7 ;
-userId
-
-< B
-)
-
-B C
-;
-
-C D
-Task 
-< 
-OccupationModel 
-> 
-GetOccupationAsync 0
-(0 1
-int1 4
-occupationId5 A
-)A B
-;B C
-Task 
-< 
-OccupationModel 
-> 
-AddOccupationAsync 0
-(0 1
-OccupationModel1 @
+List 
+< 
+OccupationModel 
+> $
+GetAllOccupationsForUser 6
+(6 7
+Guid7 ;
+userId< B
+)B C
+;C D
+Task 
+< 
+OccupationModel 
+> 
+AddOccupationAsync 0
+(0 1
+OccupationModel1 @
 
-occupationA K
-)K L
-;L M
-Task 
-< 
-OccupationModel 
-> !
-UpdateOccupationAsync 3
-(3 4
-OccupationModel4 C
+occupationA K
+)K L
+;L M
+Task'' 
+<'' 
+OccupationModel'' 
+>'' !
+UpdateOccupationAsync'' 3
+(''3 4
+OccupationModel''4 C
 
-occupationD N
-)N O
-;O P
-Task 
-< 
-OccupationModel 
-> !
-DeleteOccupationAsync 3
-(3 4
-int4 7
-occupationId8 D
-)D E
-;E F
-} 
-} å!
+occupation''D N
+)''N O
+;''O P
+Task00 
+<00 
+OccupationModel00 
+>00 !
+DeleteOccupationAsync00 3
+(003 4
+int004 7
+occupationId008 D
+)00D E
+;00E F
+}11 
+}22 Ï
 vE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IParentChildService.cs
 	namespace 	
 GenealogyTree
@@ -6503,230 +6387,232 @@ Interfaces )
 	interface 
 IParentChildService (
 {		 
-Task
-
- 
-<
-
- 
-List
-
- 
-<
-
- 
-ParentChildModel
-
- "
->
-
-" #
->
-
-# $"
-GetAllParentsForPerson
-
-% ;
-(
-
-; <
-int
-
-< ?
-childId
-
-@ G
-)
-
-G H
-;
-
-H I
-Task 
-< 
-List 
-< 
-ParentChildModel "
->" #
-># $#
-GetAllChildrenForPerson% <
-(< =
-int= @
-parentIdA I
-)I J
-;J K
-Task 
-< 
-List 
-< 
-ParentChildModel "
->" #
-># $
-GetAllAncestors% 4
-(4 5
-int5 8
-personId9 A
-)A B
-;B C
-Task 
-< 
-List 
-< 
-ParentChildModel "
->" #
-># $
-GetAllDescendants% 6
-(6 7
-int7 :
-personId; C
-)C D
-;D E
-Task 
-< 
-List 
-< 
-ParentChildModel "
->" #
-># $
-GetAllRelatedPeople% 8
-(8 9
-int9 <
-personId= E
-)E F
-;F G
-Task 
-< 
-List 
-< 
-ParentChildModel "
->" #
-># $!
-GetRelatedByAncestors% :
-(: ;
-int; >
-personId? G
-)G H
-;H I
-Task 
-< 
-List 
-< 
-ParentChildModel "
->" #
-># $#
-GetRelatedByDescendants% <
-(< =
-int= @
-personIdA I
-)I J
-;J K
-Task 
-< 
-List 
-< 
-GenericPersonModel $
->$ %
->% &
-GetChildrenOptions' 9
-(9 :
-int: =
-personId> F
-)F G
-;G H
 Task 
 < 
 List 
-< 
-GenericPersonModel $
->$ %
->% &"
-GetParentSpouceOptions' =
-(= >
-int> A
-personIdB J
-)J K
-;K L
-Task 
-< 
-List 
-< 
-GenericPersonModel $
->$ %
->% &
-GetUnrelatedPeople' 9
-(9 :
-int: =
-personId> F
-)F G
-;G H
-Task 
-< 
-List 
-< 
-GenericPersonModel $
->$ %
->% &$
-GetNotRelatedByAncestors' ?
-(? @
-int@ C
-personIdD L
-)L M
-;M N
-Task 
-< 
-List 
-< 
-GenericPersonModel $
->$ %
->% &&
-GetNotRelatedByDescendants' A
-(A B
-intB E
-personIdF N
-)N O
-;O P
-Task 
-< #
-ParentChildDetailsModel $
->$ %
-GetParentChildAsync& 9
-(9 :
-int: =
-parentChildId> K
-)K L
-;L M
-Task 
-< #
-ParentChildDetailsModel $
->$ %
-AddParentChildAsync& 9
-(9 :(
-ParentChildCreateUpdateModel: V
-parentChildW b
-)b c
-;c d
-Task 
-< #
-ParentChildDetailsModel $
->$ %"
-UpdateParentChildAsync& <
-(< =(
-ParentChildCreateUpdateModel= Y
-parentChildZ e
-)e f
-;f g
-Task 
-< #
-ParentChildDetailsModel $
->$ %"
-DeleteParentChildAsync& <
-(< =
-int= @
-parentChildIdA N
-)N O
-;O P
-} 
-} ˇ
+< 
+ParentChildModel "
+>" #
+># $"
+GetAllParentsForPerson% ;
+(; <
+int< ?
+childId@ G
+)G H
+;H I
+Task 
+< 
+List 
+< 
+ParentChildModel "
+>" #
+># $#
+GetAllChildrenForPerson% <
+(< =
+int= @
+parentIdA I
+)I J
+;J K
+Task&& 
+<&& 
+List&& 
+<&& 
+ParentChildModel&& "
+>&&" #
+>&&# $
+GetAllAncestors&&% 4
+(&&4 5
+int&&5 8
+personId&&9 A
+)&&A B
+;&&B C
+Task00 
+<00 
+List00 
+<00 
+ParentChildModel00 "
+>00" #
+>00# $
+GetAllDescendants00% 6
+(006 7
+int007 :
+personId00; C
+)00C D
+;00D E
+Task:: 
+<:: 
+List:: 
+<:: 
+ParentChildModel:: "
+>::" #
+>::# $
+GetAllRelatedPeople::% 8
+(::8 9
+int::9 <
+personId::= E
+)::E F
+;::F G
+TaskDD 
+<DD 
+ListDD 
+<DD 
+ParentChildModelDD "
+>DD" #
+>DD# $!
+GetRelatedByAncestorsDD% :
+(DD: ;
+intDD; >
+personIdDD? G
+)DDG H
+;DDH I
+TaskNN 
+<NN 
+ListNN 
+<NN 
+ParentChildModelNN "
+>NN" #
+>NN# $#
+GetRelatedByDescendantsNN% <
+(NN< =
+intNN= @
+personIdNNA I
+)NNI J
+;NNJ K
+TaskZZ 
+<ZZ 
+ListZZ 
+<ZZ 
+GenericPersonModelZZ $
+>ZZ$ %
+>ZZ% &
+GetChildrenOptionsZZ' 9
+(ZZ9 :
+intZZ: =
+personIdZZ> F
+)ZZF G
+;ZZG H
+Taskee 
+<ee 
+Listee 
+<ee 
+GenericPersonModelee $
+>ee$ %
+>ee% &"
+GetParentSpouceOptionsee' =
+(ee= >
+intee> A
+personIdeeB J
+)eeJ K
+;eeK L
+Taskqq 
+<qq 
+Listqq 
+<qq 
+GenericPersonModelqq $
+>qq$ %
+>qq% &$
+GetNotRelatedByAncestorsqq' ?
+(qq? @
+intqq@ C
+personIdqqD L
+)qqL M
+;qqM N
+Task}} 
+<}} 
+List}} 
+<}} 
+GenericPersonModel}} $
+>}}$ %
+>}}% &&
+GetNotRelatedByDescendants}}' A
+(}}A B
+int}}B E
+personId}}F N
+)}}N O
+;}}O P
+Task
+áá 
+<
+áá %
+ParentChildDetailsModel
+áá $
+>
+áá$ %!
+GetParentChildAsync
+áá& 9
+(
+áá9 :
+int
+áá: =
+parentChildId
+áá> K
+)
+ááK L
+;
+ááL M
+Task
+ëë 
+<
+ëë %
+ParentChildDetailsModel
+ëë $
+>
+ëë$ %!
+AddParentChildAsync
+ëë& 9
+(
+ëë9 :*
+ParentChildCreateUpdateModel
+ëë: V
+parentChild
+ëëW b
+)
+ëëb c
+;
+ëëc d
+Task
+õõ 
+<
+õõ %
+ParentChildDetailsModel
+õõ $
+>
+õõ$ %$
+UpdateParentChildAsync
+õõ& <
+(
+õõ< =*
+ParentChildCreateUpdateModel
+õõ= Y
+parentChild
+õõZ e
+)
+õõe f
+;
+õõf g
+Task
+§§ 
+<
+§§ %
+ParentChildDetailsModel
+§§ $
+>
+§§$ %$
+DeleteParentChildAsync
+§§& <
+(
+§§< =
+int
+§§= @
+parentChildId
+§§A N
+)
+§§N O
+;
+§§O P
+}
+•• 
+}¶¶ ˇ
 qE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IPersonService.cs
 	namespace 	
 GenealogyTree
@@ -6746,113 +6632,113 @@ Interfaces )
 {
 
  
-Task 
-< 
-PersonDetailsModel 
->  
-GetPersonAsync! /
-(/ 0
-int0 3
-personId4 <
-)< =
-;= >
-Task 
-< 
-List 
-< 
-GenericPersonModel $
->$ %
->% &
-GetPeopleListInTree' :
-(: ;
-Guid; ?
-treeId@ F
-)F G
-;G H
-Task 
-< 
-List 
-< 
-PersonTreeInfoModel %
->% &
->& '#
-GetPeopleTreeDataInTree( ?
-(? @
-Guid@ D
-treeIdE K
-)K L
-;L M
-Task 
-< 
-List 
-< 
-GenericPersonModel $
->$ %
->% &$
-GetPeopleWithoutRelative' ?
-(? @
-Guid@ D
-treeIdE K
-)K L
-;L M
-Task 
-< 
-List 
-< 
-EventInTreeModel "
->" #
-># $
-GetEventsInTree% 4
-(4 5
-Guid5 9
-treeId: @
-)@ A
-;A B
-Task 
-< 
-PersonDetailsModel 
->  
-AddPersonAsync! /
-(/ 0#
-PersonCreateUpdateModel0 G
-personH N
-)N O
-;O P
-Task 
-< 
-PersonDetailsModel 
->  
-UpdatePersonAsync! 2
-(2 3#
-PersonCreateUpdateModel3 J
-personK Q
-)Q R
-;R S
-Task 
-< 
-	ImageFile 
-> 
-UpdatePictureAsync *
-(* +
-int+ .
-personId/ 7
-,7 8
-int9 <
-imageId= D
-)D E
-;E F
-Task 
-< 
-PersonDetailsModel 
->  
-DeletePersonAsync! 2
-(2 3
-int3 6
-personId7 ?
-)? @
-;@ A
-} 
-} Í
+Task 
+< 
+PersonDetailsModel 
+>  
+GetPersonAsync! /
+(/ 0
+int0 3
+personId4 <
+)< =
+;= >
+Task 
+< 
+List 
+< 
+GenericPersonModel $
+>$ %
+>% &
+GetPeopleListInTree' :
+(: ;
+Guid; ?
+treeId@ F
+)F G
+;G H
+Task++ 
+<++ 
+List++ 
+<++ 
+PersonTreeInfoModel++ %
+>++% &
+>++& '#
+GetPeopleTreeDataInTree++( ?
+(++? @
+Guid++@ D
+treeId++E K
+)++K L
+;++L M
+Task77 
+<77 
+List77 
+<77 
+GenericPersonModel77 $
+>77$ %
+>77% &$
+GetPeopleWithoutRelative77' ?
+(77? @
+Guid77@ D
+treeId77E K
+)77K L
+;77L M
+TaskBB 
+<BB 
+ListBB 
+<BB 
+EventInTreeModelBB "
+>BB" #
+>BB# $
+GetEventsInTreeBB% 4
+(BB4 5
+GuidBB5 9
+treeIdBB: @
+)BB@ A
+;BBA B
+TaskLL 
+<LL 
+PersonDetailsModelLL 
+>LL  
+AddPersonAsyncLL! /
+(LL/ 0#
+PersonCreateUpdateModelLL0 G
+personLLH N
+)LLN O
+;LLO P
+TaskVV 
+<VV 
+PersonDetailsModelVV 
+>VV  
+UpdatePersonAsyncVV! 2
+(VV2 3#
+PersonCreateUpdateModelVV3 J
+personVVK Q
+)VVQ R
+;VVR S
+Taskaa 
+<aa 
+	ImageFileaa 
+>aa 
+UpdatePictureAsyncaa *
+(aa* +
+intaa+ .
+personIdaa/ 7
+,aa7 8
+intaa9 <
+imageIdaa= D
+)aaD E
+;aaE F
+Taskjj 
+<jj 
+PersonDetailsModeljj 
+>jj  
+DeletePersonAsyncjj! 2
+(jj2 3
+intjj3 6
+personIdjj7 ?
+)jj? @
+;jj@ A
+}kk 
+}ll Í
 sE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IRelativeService.cs
 	namespace		 	
 GenealogyTree		
@@ -6872,153 +6758,131 @@ Interfaces		 )
 	interface 
 IRelativeService %
 { 
-Task 
-< 
-List 
-< 
-RelativeModel 
->  
->  !"
-GetAllRelativesForUser" 8
-(8 9
-Guid9 =
-userId> D
-)D E
-;E F
-Task 
-< 
-RelativeModel 
-> 
-GetRelative '
-(' (
-int( +
+Task 
+< 
+List 
+< 
+RelativeModel 
+>  
+>  !"
+GetAllRelativesForUser" 8
+(8 9
+Guid9 =
+userId> D
+)D E
+;E F
+Task   
+<   
+RelativeModel   
+>   
+GetRelative   '
+(  ' (
+int  ( +
 
-relativeId, 6
-)6 7
-;7 8
-Task 
-< 
-RelativeState 
-> 
-CheckRelative )
-() *
-Guid* .
-userId/ 5
-,5 6
-Guid7 ;
+relativeId  , 6
+)  6 7
+;  7 8
+Task++ 
+<++ 
+RelativeState++ 
+>++ 
+CheckRelative++ )
+(++) *
+Guid++* .
+userId++/ 5
+,++5 6
+Guid++7 ;
 
-relativeId< F
-)F G
-;G H
-Task 
-< 
-RelativeModel 
-> 
-MarkChanges '
-(' (
-int( +
+relativeId++< F
+)++F G
+;++G H
+Task55 
+<55 
+RelativeModel55 
+>55 
+MarkChanges55 '
+(55' (
+int55( +
 
-relativeId, 6
-)6 7
-;7 8
-Task 
-< 
-RelativeModel 
-> 
-AddRelativeUser +
-(+ ,
-UsersToLinkModel, <
-usersToLink= H
-)H I
-;I J
-Task 
-< 
-RelativeModel 
-> 
-DeleteRelative *
-(* +
-int+ .
+relativeId55, 6
+)556 7
+;557 8
+Task@@ 
+<@@ 
+RelativeModel@@ 
+>@@ 
+AddRelativeUser@@ +
+(@@+ ,
+UsersToLinkModel@@, <
+usersToLink@@= H
+)@@H I
+;@@I J
+TaskII 
+<II 
+RelativeModelII 
+>II 
+DeleteRelativeII *
+(II* +
+intII+ .
 
-relativeId/ 9
-)9 :
-;: ;
-Task 
-< 
-List 
-< 
-UserPositionModel #
-># $
->$ % 
-GetRelativesPosition& :
-(: ;
-Guid; ?
-userId@ F
-)F G
-;G H
-} 
-} ©
+relativeIdII/ 9
+)II9 :
+;II: ;
+TaskUU 
+<UU 
+ListUU 
+<UU 
+UserPositionModelUU #
+>UU# $
+>UU$ % 
+GetRelativesPositionUU& :
+(UU: ;
+GuidUU; ?
+userIdUU@ F
+)UUF G
+;UUG H
+}VV 
+}WW ©
 sE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IReligionService.cs
-	namespace 	
-GenealogyTree
+	namespace 	
+GenealogyTree
  
-. 
-Domain 
-. 
+. 
+Domain 
+. 
 
-Interfaces )
-.) *
-Services* 2
-{ 
-public 
+Interfaces )
+.) *
+Services* 2
+{ 
+public 
 
-	interface 
-IReligionService %
-{		 
-Task
-
- 
-<
-
- 
-List
-
- 
-<
-
- 
-GenericNameModel
-
- "
->
-
-" #
->
-
-# $ 
-GetAllReligionsAsync
-
-% 9
-(
-
-9 :
-)
-
-: ;
-;
-
-; <
-Task 
-< 
-GenericNameModel 
-> 
-AddReligionAsync /
-(/ 0
-string0 6
-religionName7 C
-)C D
-;D E
-} 
-} ü
+	interface 
+IReligionService %
+{ 
+Task 
+< 
+List 
+< 
+GenericNameModel "
+>" #
+># $ 
+GetAllReligionsAsync% 9
+(9 :
+): ;
+;; <
+Task 
+< 
+GenericNameModel 
+> 
+AddReligionAsync /
+(/ 0
+string0 6
+religionName7 C
+)C D
+;D E
+} 
+} ü
 rE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IRequestService.cs
 	namespace 	
 GenealogyTree
@@ -7038,112 +6902,112 @@ Interfaces )
 {
 
  
-Task 
-< 
-List 
-< 
-RequestDetailsModel %
->% &
->& '
-GetRequestsSent( 7
-(7 8
-Guid8 <
-senderId= E
-)E F
-;F G
-Task 
-< 
-List 
-< 
-RequestDetailsModel %
->% &
->& '
-GetRequestsReceived( ;
-(; <
-Guid< @
+Task 
+< 
+List 
+< 
+RequestDetailsModel %
+>% &
+>& '
+GetRequestsSent( 7
+(7 8
+Guid8 <
+senderId= E
+)E F
+;F G
+Task 
+< 
+List 
+< 
+RequestDetailsModel %
+>% &
+>& '
+GetRequestsReceived( ;
+(; <
+Guid< @
 
-receiverIdA K
-)K L
-;L M
-Task 
-< 
-List 
-<  
-RequestResponseModel &
->& '
->' ( 
-GetRequestsResponded) =
-(= >
-Guid> B
-senderIdC K
-)K L
-;L M
-Task 
-< $
-RequestCreateUpdateModel %
->% &
+receiverIdA K
+)K L
+;L M
+Task'' 
+<'' 
+List'' 
+<''  
+RequestResponseModel'' &
+>''& '
+>''' ( 
+GetRequestsResponded'') =
+(''= >
+Guid''> B
+senderId''C K
+)''K L
+;''L M
+Task11 
+<11 $
+RequestCreateUpdateModel11 %
+>11% &
 
-AddRequest' 1
-(1 2$
-RequestCreateUpdateModel2 J
-requestK R
-)R S
-;S T
-Task 
-< 
-UsersToLinkModel 
-> 
-RespondToRequest /
-(/ 0
-int0 3
-	requestId4 =
-,= > 
-RequestResponseModel? S
-respondedRequestT d
-)d e
-;e f
-Task 
-< 
-RequestDetailsModel  
->  !
-DeleteRequest" /
-(/ 0
-int0 3
-	requestId4 =
-)= >
-;> ?
-} 
-} ÷
+AddRequest11' 1
+(111 2$
+RequestCreateUpdateModel112 J
+request11K R
+)11R S
+;11S T
+Task;; 
+<;; 
+UsersToLinkModel;; 
+>;; 
+RespondToRequest;; /
+(;;/ 0
+int;;0 3
+	requestId;;4 =
+,;;= > 
+RequestResponseModel;;? S
+respondedRequest;;T d
+);;d e
+;;;e f
+TaskDD 
+<DD 
+RequestDetailsModelDD  
+>DD  !
+DeleteRequestDD" /
+(DD/ 0
+intDD0 3
+	requestIdDD4 =
+)DD= >
+;DD> ?
+}EE 
+}FF ◊
 oE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\ITreeService.cs
-	namespace 	
-GenealogyTree
+	namespace 	
+GenealogyTree
  
-. 
-Domain 
-. 
+. 
+Domain 
+. 
 
-Interfaces )
-.) *
-Services* 2
-{ 
-public 
+Interfaces )
+.) *
+Services* 2
+{ 
+public 
 
-	interface 
-ITreeService !
-{ 
-Task 
-GetTreeForUser 
-( 
-int 
-userId  &
-,& '
-int( +
-?+ ,
-rootPersonId- 9
-)9 :
-;: ;
-} 
-}		 Ø
+	interface 
+ITreeService !
+{ 
+Task 
+GetTreeForUser 
+( 
+Guid  
+userId! '
+,' (
+int) ,
+?, -
+rootPersonId. :
+): ;
+;; <
+} 
+} Õ
 oE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IUserService.cs
 	namespace 	
 GenealogyTree
@@ -7163,139 +7027,153 @@ Interfaces )
 {
 
  
-Task 
-< 
-
-UsersFound 
-> 
-	FindUsers "
-(" # 
-InfiniteScrollFilter# 7
-filter8 >
-)> ?
-;? @
-Task 
-< 
-UserDetailsModel 
-> 
-GetUserByIdAsync /
-(/ 0
-Guid0 4
-userId5 ;
-); <
-;< =
-Task 
-< 
-UserDetailsModel 
-> 
-GetUser &
-(& '
-string' -
-username. 6
-)6 7
-;7 8
-Task 
-< 
-GenericPersonModel 
->  
-GetTreeRoot! ,
-(, -
-Guid- 1
-treeId2 8
-)8 9
-;9 :
-Task 
-< 
-int 
-> !
-GetNotificationsCount '
-(' (
-Guid( ,
-userId- 3
-)3 4
-;4 5
-Task 
-< 
-NotificationsBundle  
->  !
-GetNotifications" 2
-(2 3
-Guid3 7
-userId8 >
-)> ?
-;? @
-Task 
-< 
-UserDetailsModel 
-> 
-
-UpdateUser )
-() *
-Guid* .
-userId/ 5
-,5 6
-UserUpdateModel7 F
-userG K
-)K L
-;L M
-Task 
-< 
-bool 
-> "
-CheckUsernameAvailable )
-() *
-string* 0
-username1 9
-)9 :
-;: ;
-Task 
-< 
-bool 
-> 
-CheckEmailAvailable &
-(& '
-string' -
-email. 3
-)3 4
-;4 5
-Task 
-< 
-UserSettingsModel 
-> 
-GetUserSettings  /
-(/ 0
-Guid0 4
-userId5 ;
-); <
-;< =
-Task 
-< 
-UserSettingsModel 
-> 
-UpdateUserSettings  2
-(2 3
-Guid3 7
-userId8 >
-,> ?
-UserSettingsModel@ Q
-userSettingsR ^
-)^ _
-;_ `
 Task 
-< 
-PositionModel 
-> 
-UpdateUserPosition .
-(. /
-Guid/ 3
-userId4 :
-,: ;
-PositionModel< I
-positionJ R
-)R S
-;S T
-} 
-} £
+< 
+
+UsersFound 
+> 
+	FindUsers "
+(" # 
+InfiniteScrollFilter# 7
+filter8 >
+)> ?
+;? @
+Task   
+<   
+UserDetailsModel   
+>   
+GetUserByIdAsync   /
+(  / 0
+Guid  0 4
+userId  5 ;
+)  ; <
+;  < =
+Task** 
+<** 
+UserDetailsModel** 
+>** 
+GetUser** &
+(**& '
+string**' -
+username**. 6
+)**6 7
+;**7 8
+Task44 
+<44 
+GenericPersonModel44 
+>44  
+GetTreeRoot44! ,
+(44, -
+Guid44- 1
+treeId442 8
+)448 9
+;449 :
+Task>> 
+<>> 
+int>> 
+>>> !
+GetNotificationsCount>> '
+(>>' (
+Guid>>( ,
+userId>>- 3
+)>>3 4
+;>>4 5
+TaskHH 
+<HH 
+NotificationsBundleHH  
+>HH  !
+GetNotificationsHH" 2
+(HH2 3
+GuidHH3 7
+userIdHH8 >
+)HH> ?
+;HH? @
+TaskTT 
+<TT 
+UserDetailsModelTT 
+>TT 
+
+UpdateUserTT )
+(TT) *
+GuidTT* .
+userIdTT/ 5
+,TT5 6
+UserUpdateModelTT7 F
+userTTG K
+)TTK L
+;TTL M
+Task]] 
+<]] 
+bool]] 
+>]] "
+CheckUsernameAvailable]] )
+(]]) *
+string]]* 0
+username]]1 9
+)]]9 :
+;]]: ;
+Taskff 
+<ff 
+boolff 
+>ff 
+CheckEmailAvailableff &
+(ff& '
+stringff' -
+emailff. 3
+)ff3 4
+;ff4 5
+Taskpp 
+<pp 
+UserSettingsModelpp 
+>pp 
+GetUserSettingspp  /
+(pp/ 0
+Guidpp0 4
+userIdpp5 ;
+)pp; <
+;pp< =
+Task{{ 
+<{{ 
+UserSettingsModel{{ 
+>{{ 
+UpdateUserSettings{{  2
+({{2 3
+Guid{{3 7
+userId{{8 >
+,{{> ?
+UserSettingsModel{{@ Q
+userSettings{{R ^
+){{^ _
+;{{_ `
+Task
+ÜÜ 
+<
+ÜÜ 
+PositionModel
+ÜÜ 
+>
+ÜÜ  
+UpdateUserPosition
+ÜÜ .
+(
+ÜÜ. /
+Guid
+ÜÜ/ 3
+userId
+ÜÜ4 :
+,
+ÜÜ: ;
+PositionModel
+ÜÜ< I
+position
+ÜÜJ R
+)
+ÜÜR S
+;
+ÜÜS T
+}
+áá 
+}àà £
 uE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Domain\Interfaces\Services\IValidationService.cs
 	namespace 	
 GenealogyTree
@@ -7313,22 +7191,20 @@ Interfaces )
 	interface 
 IValidationService '
 { 
-Task 
-ValidateLogin 
-( 
-) 
-; 
-Task		 
-<		 
-string		 
->		 
-GenerateToken		 "
-(		" #
-User		# '
-user		( ,
-)		, -
-;		- .
-}
-
- 
-} 
+Task 
+ValidateLogin 
+( 
+) 
+; 
+Task 
+< 
+string 
+> 
+GenerateToken "
+(" #
+User# '
+user( ,
+), -
+;- .
+} 
+} 

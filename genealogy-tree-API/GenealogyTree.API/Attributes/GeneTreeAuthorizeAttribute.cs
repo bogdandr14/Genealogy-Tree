@@ -42,6 +42,7 @@ namespace GenealogyTree.API.Attributes
                 if (token != null && TokenService.ValidateToken(token))
                 {
                     bool parseSucceded = int.TryParse(TokenService.GetClaim(token, TokenService.UserRole), out var userRole);
+
                     if (!parseSucceded || !allowRoles.Contains((UserRoles)userRole))
                     {
                         AppendUnauthorizedRequest(context);

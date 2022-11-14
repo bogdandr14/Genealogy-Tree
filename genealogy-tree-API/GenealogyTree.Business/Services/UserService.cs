@@ -22,6 +22,7 @@ namespace GenealogyTree.Business.Services
         private readonly IFileManagementService _fileManagementService;
         private readonly IRequestService _requestService;
         private readonly IPersonService _personService;
+
         public UserService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRequestService requestService, IPersonService personService) : base(unitOfWork)
         {
             _mapper = mapper;
@@ -36,6 +37,7 @@ namespace GenealogyTree.Business.Services
             {
                 filter.Name = "";
             }
+
             List<string> names = filter.Name.Split(" ").ToList();
             IEnumerable<User> filteredUsers = unitOfWork.User.GetAll()
                 .Include(user => user.Person)
@@ -49,12 +51,14 @@ namespace GenealogyTree.Business.Services
             usersFound.skippedUsers = filter.Skip;
             usersFound.takenUsers = filter.Take;
             usersFound.areLast = usersFound.totalUsers <= filter.Skip + filter.Take;
+
             foreach (var user in foundUsers)
             {
                 GenericPersonModel personToReturn = _mapper.Map<GenericPersonModel>(user);
                 personToReturn.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
                 usersFound.users.Add(personToReturn);
             }
+
             return usersFound;
         }
 
@@ -71,13 +75,16 @@ namespace GenealogyTree.Business.Services
                             .ThenInclude(e => e.EducationLevel)
                             .Include(u => u.Occupations)
                             .FirstOrDefault();
+
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
+
             if (user != null && !user.SharePersonalInfo)
             {
                 returnEvent.Email = null;
                 returnEvent.PhoneNumber = null;
                 returnEvent.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
             }
+
             return returnEvent;
         }
 
@@ -93,11 +100,13 @@ namespace GenealogyTree.Business.Services
                             .Include(u => u.Educations)
                             .ThenInclude(e => e.EducationLevel)
                             .Include(u => u.Occupations).FirstOrDefault();
+
             UserDetailsModel userEntity = _mapper.Map<UserDetailsModel>(user);
             if (user != null)
             {
                 userEntity.ImageFile = await _fileManagementService.GetFile(user.Person.Image);
             }
+
             return userEntity;
         }
         public async Task<GenericPersonModel> GetTreeRoot(Guid treeId)
@@ -105,7 +114,9 @@ namespace GenealogyTree.Business.Services
             User user = await Task.Run(() => unitOfWork.User.Filter(x => x.Person.TreeId == treeId)
                         .Include(u => u.Person)
                         .FirstOrDefault());
+
             GenericPersonModel userEntity = _mapper.Map<GenericPersonModel>(user);
+
             return userEntity;
         }
 
@@ -126,11 +137,13 @@ namespace GenealogyTree.Business.Services
             int totalNotifications = 0;
             totalNotifications += user.ReceivedRequests.Count(x => !x.ReceiverResponded);
             totalNotifications += user.SentRequests.Count(x => x.ReceiverResponded);
+
             if (user.NotifyBirthdays)
             {
                 totalNotifications += unitOfWork.Person.Filter(p => p.TreeId == user.Person.TreeId && p.BirthDate.HasValue && p.BirthDate.Value.DayOfYear == DateTime.Now.DayOfYear).Count();
                 totalNotifications += unitOfWork.Marriage.Filter(m => m.FirstPerson.TreeId == user.Person.TreeId && m.StartDate.DayOfYear == DateTime.Now.DayOfYear).Count();
             }
+
             if (user.NotifyUpdates)
             {
                 foreach (var relative in user.UserRelatives)
@@ -166,7 +179,9 @@ namespace GenealogyTree.Business.Services
             {
                 notifications.EventsToday = new List<EventInTreeModel>();
             }
+
             notifications.RelativeUpdates = new List<RelativeUpdates>();
+
             if (user.NotifyUpdates)
             {
                 foreach (var relative in user.UserRelatives)
@@ -179,6 +194,7 @@ namespace GenealogyTree.Business.Services
                             UpdateType = UpdateType.PersonCreated,
                             AffectedPeopleNames = GetAffectedPersonNames(person, null)
                         }).ToList());
+
                     relativeUpdates.Updates.AddRange(unitOfWork.Person.Filter(person => person.TreeId == relative.RelativeUser.Person.TreeId && person.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(person.ModifiedOn.Value) < 0)
                         .Select(person => new UpdateInfoModel()
                         {
@@ -186,6 +202,7 @@ namespace GenealogyTree.Business.Services
                             UpdateType = UpdateType.PersonModified,
                             AffectedPeopleNames = GetAffectedPersonNames(person, null)
                         }).ToList());
+
                     relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(marriage.CreatedOn) < 0)
                         .Select(marriage => new UpdateInfoModel()
                         {
@@ -193,6 +210,7 @@ namespace GenealogyTree.Business.Services
                             UpdateType = UpdateType.MarriageCreated,
                             AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
                         }).ToList());
+
                     relativeUpdates.Updates.AddRange(unitOfWork.Marriage.Filter(marriage => marriage.FirstPerson.TreeId == relative.RelativeUser.Person.TreeId && marriage.ModifiedOn.HasValue && relative.LastSyncCheck.CompareTo(marriage.ModifiedOn.Value) < 0)
                         .Select(marriage => new UpdateInfoModel()
                         {
@@ -200,6 +218,7 @@ namespace GenealogyTree.Business.Services
                             UpdateType = UpdateType.MarriageModified,
                             AffectedPeopleNames = GetAffectedPersonNames(marriage.FirstPerson, marriage.SecondPerson)
                         }).ToList());
+
                     relativeUpdates.Updates.AddRange(unitOfWork.ParentChild.Filter(parentChild => parentChild.Parent.TreeId == relative.RelativeUser.Person.TreeId && relative.LastSyncCheck.CompareTo(parentChild.CreatedOn) < 0)
                         .Select(parentChild => new UpdateInfoModel()
                         {
@@ -207,6 +226,7 @@ namespace GenealogyTree.Business.Services
                             UpdateType = UpdateType.ParentChildAdded,
                             AffectedPeopleNames = GetAffectedPersonNames(parentChild.Parent, parentChild.Child)
                         }).ToList());
+
                     if (relativeUpdates.Updates.Any())
                     {
                         relativeUpdates.RelativeId = relative.Id;
@@ -214,8 +234,10 @@ namespace GenealogyTree.Business.Services
                         relativeUpdates.Relative.ImageFile = await _fileManagementService.GetFile(relative.RelativeUser.Person.Image);
                         notifications.RelativeUpdates.Add(relativeUpdates);
                     }
+
                 }
             }
+
             return notifications;
         }
 
@@ -223,10 +245,12 @@ namespace GenealogyTree.Business.Services
         {
             List<string> affectedNames = new List<string>();
             affectedNames.Add(firstPerson.FirstName + " " + firstPerson.LastName);
+
             if (secondPerson != null)
             {
                 affectedNames.Add(secondPerson.FirstName + " " + secondPerson.LastName);
             }
+
             return affectedNames;
         }
 
@@ -237,11 +261,13 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             userToUpdate.About = user.About;
             userToUpdate.Email = user.Email;
             userToUpdate.PhoneNumber = user.PhoneNumber;
             User userEntity = await unitOfWork.User.Update(userToUpdate);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(userEntity);
+
             return returnEvent;
         }
 
@@ -270,27 +296,32 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             userToUpdate.NotifyUpdates = userSettings.NotifyUpdates;
             userToUpdate.NotifyBirthdays = userSettings.NotifyBirthdays;
             userToUpdate.SharePersonalInfo = userSettings.SharePersonalInfo;
             userToUpdate.ShareLocation = userSettings.ShareLocation;
             User userEntity = await unitOfWork.User.Update(userToUpdate);
             UserSettingsModel returnEvent = _mapper.Map<UserSettingsModel>(userEntity);
+
             return returnEvent;
         }
 
         public async Task<PositionModel> UpdateUserPosition(Guid userId, PositionModel position)
         {
             Position positionInDb = (await unitOfWork.User.FindById(userId)).Position;
+
             if (positionInDb == null || position == null)
             {
                 return null;
             }
+
             positionInDb.UpdatedOn = DateTime.Now;
             positionInDb.Latitude = position.Latitude;
             positionInDb.Longitude = position.Longitude;
             Position positionEntity = await unitOfWork.Position.Update(positionInDb);
             PositionModel returnEvent = _mapper.Map<PositionModel>(positionEntity);
+
             return returnEvent;
         }
     }

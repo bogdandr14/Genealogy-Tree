@@ -11,6 +11,7 @@ namespace GenealogyTree.Business.Services
     {
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
+
         public ImageService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
         {
             _mapper = mapper;
@@ -24,6 +25,7 @@ namespace GenealogyTree.Business.Services
                 Image image = await this.unitOfWork.Image.FindById(imageId);
                 return image;
             }
+
             return null;
         }
 
@@ -32,6 +34,7 @@ namespace GenealogyTree.Business.Services
             await _fileManagementService.SaveFileAsync(file);
             Image image = _mapper.Map<Image>(file);
             Image imageEntity = await unitOfWork.Image.Create(image);
+
             return imageEntity;
         }
 
@@ -39,6 +42,7 @@ namespace GenealogyTree.Business.Services
         {
             Image imageEntity = await unitOfWork.Image.Delete(imageId);
             bool wasDeleted = _fileManagementService.DeleteFile(imageEntity.FileName);
+
             return wasDeleted;
         }
     }

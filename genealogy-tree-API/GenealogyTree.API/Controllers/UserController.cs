@@ -38,7 +38,7 @@ namespace GenealogyTree.API.Controllers
                 return BadRequest(e);
             }
         }
-        
+
         [GeneTreeAuthorize]
         [HttpGet]
         [Route("notifications/{userId:Guid}")]
@@ -143,10 +143,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserDetailsModel userDetails = await _userService.GetUserByIdAsync(id);
+
                 if (userDetails == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(userDetails);
             }
             catch (Exception e)
@@ -163,10 +165,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 GenericPersonModel userDetails = await _userService.GetTreeRoot(treeId);
+
                 if (userDetails == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(userDetails);
             }
             catch (Exception e)
@@ -183,10 +187,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserDetailsModel updatedUser = await _userService.UpdateUser(id, user);
+
                 if (updatedUser == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(updatedUser);
             }
             catch (Exception e)
@@ -203,10 +209,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserSettingsModel updatedUser = await _userService.GetUserSettings(id);
+
                 if (updatedUser == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(updatedUser);
             }
             catch (Exception e)
@@ -223,10 +231,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 UserSettingsModel updatedUser = await _userService.UpdateUserSettings(id, user);
+
                 if (updatedUser == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(updatedUser);
             }
             catch (Exception e)
@@ -243,10 +253,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 PositionModel updatedPosition = await _userService.UpdateUserPosition(userId, position);
+
                 if (updatedPosition == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(updatedPosition);
             }
             catch (Exception e)

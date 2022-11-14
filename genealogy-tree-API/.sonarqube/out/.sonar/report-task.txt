@@ -2,5 +2,5 @@ projectKey=Genealogy-Tree-metrics
 serverUrl=http://localhost:9000
 serverVersion=9.7.0.61563
 dashboardUrl=http://localhost:9000/dashboard?id=Genealogy-Tree-metrics
-ceTaskId=AYQ_oBhc70n-rOiDHf8U
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYQ_oBhc70n-rOiDHf8U
+ceTaskId=AYR3sNQgiRzccU5i5Evh
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYR3sNQgiRzccU5i5Evh

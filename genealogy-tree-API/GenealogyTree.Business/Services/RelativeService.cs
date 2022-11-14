@@ -28,12 +28,14 @@ namespace GenealogyTree.Business.Services
         {
             List<Relative> relatives = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == userId).Include(r => r.RelativeUser).ThenInclude(u => u.Person).ToList();
             List<RelativeModel> returnEvent = new List<RelativeModel>();
+
             foreach (var relative in relatives)
             {
                 RelativeModel personToReturn = _mapper.Map<RelativeModel>(relative);
                 personToReturn.RelativeUser.ImageFile = await _fileManagementService.GetFile(relative.RelativeUser.Person.Image);
                 returnEvent.Add(personToReturn);
             }
+
             return returnEvent;
         }
 
@@ -41,20 +43,25 @@ namespace GenealogyTree.Business.Services
         {
             Relative relative = await unitOfWork.Relatives.FindById(relativeId);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relative);
+
             return returnEvent;
         }
         public async Task<RelativeState> CheckRelative(Guid userId, Guid relativeId)
         {
             bool isAlreadyRelative = await Task.Run(() => unitOfWork.Relatives.Filter(r => (r.PrimaryUserId == userId && r.RelativeUserId == relativeId)).Any());
+
             if (isAlreadyRelative)
             {
                 return RelativeState.Related;
             }
+
             bool requestAlreadySent = await Task.Run(() => unitOfWork.Requests.Filter(r => (r.SenderId == userId && r.ReceiverId == relativeId) || (r.SenderId == relativeId && r.ReceiverId == userId)).Any());
+
             if (requestAlreadySent)
             {
                 return RelativeState.Requested;
             }
+
             return RelativeState.Unrelated;
         }
 
@@ -64,6 +71,7 @@ namespace GenealogyTree.Business.Services
             relativeToUpdate.LastSyncCheck = DateTime.Now;
             Relative relativeEntity = await unitOfWork.Relatives.Update(relativeToUpdate);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
+
             return returnEvent;
         }
 
@@ -92,6 +100,7 @@ namespace GenealogyTree.Business.Services
                 Relative createdReceiverRelative = await unitOfWork.Relatives.Create(receiverRelative);
                 returnEvent = _mapper.Map<RelativeModel>(createdReceiverRelative);
             }
+
             return returnEvent;
         }
 
@@ -99,6 +108,7 @@ namespace GenealogyTree.Business.Services
         {
             Relative relativeEntity = await unitOfWork.Relatives.Delete(relativeId);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
+
             return returnEvent;
         }
 
@@ -119,6 +129,7 @@ namespace GenealogyTree.Business.Services
                 userPositionToReturn.ImageFile = await _fileManagementService.GetFile(relative.Person.Image);
                 returnEvent.Add(userPositionToReturn);
             }
+
             return returnEvent;
         }
     }

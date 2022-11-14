@@ -1,4 +1,4 @@
-ÍN
+¢O
 aE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\AuthService.cs
 	namespace 	
 GenealogyTree
@@ -22,559 +22,560 @@ aE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\A
 IMapper  
 _mapper! (
 ;( )
-public 
-AuthService 
-( 
-IUnitOfWork &
+public 
+AuthService 
+( 
+IUnitOfWork &
 
-unitOfWork' 1
-,1 2
-IMapper3 :
-mapper; A
-)A B
-:C D
-baseE I
-(I J
+unitOfWork' 1
+,1 2
+IMapper3 :
+mapper; A
+)A B
+:C D
+baseE I
+(I J
 
-unitOfWorkJ T
-)T U
-{ 	
-_mapper 
-= 
-mapper 
-; 
-} 	
-public 
-async 
-Task 
-< 
-LoginResponseModel ,
->, -
-Login. 3
-(3 4
+unitOfWorkJ T
+)T U
+{ 	
+_mapper 
+= 
+mapper 
+; 
+} 	
+public 
+async 
+Task 
+< 
+LoginResponseModel ,
+>, -
+Login. 3
+(3 4
 
-LoginModel4 >
-	userLogin? H
-)H I
-{ 	
-User 
-user 
-= 
+LoginModel4 >
+	userLogin? H
+)H I
+{ 	
+User 
+user 
+= 
 
-unitOfWork "
-." #
-User# '
-.' (
-Filter( .
-(. /
-x/ 0
-=>1 3
-x4 5
-.5 6
-Username6 >
-==? A
-	userLoginB K
-.K L
-UsernameL T
-)T U
-.U V
-IncludeV ]
-(] ^
-u^ _
-=>` b
-uc d
-.d e
-Persone k
-)k l
-.l m
-FirstOrDefaultm {
-({ |
-)| }
-;} ~
-if 
-( 
-user 
-!= 
-null 
-&& 
-Hash  $
-.$ %
-ValidateHash% 1
-(1 2
-	userLogin2 ;
-.; <
-Password< D
-,D E
-userF J
-.J K
-PasswordSaltK W
-,W X
-userY ]
-.] ^
-PasswordHash^ j
-)j k
-)k l
-{ 
-LoginResponseModel "
-loginResponseModel# 5
-=6 7
-_mapper8 ?
-.? @
-Map@ C
-<C D
-LoginResponseModelD V
->V W
-(W X
-userX \
-)\ ]
-;] ^
-loginResponseModel "
-." #
-Token# (
-=) *
-await+ 0
-Task1 5
-.5 6
-Run6 9
-(9 :
-(: ;
-); <
-=>= ?
-TokenService@ L
-.L M
-GenerateTokenM Z
-(Z [
-user[ _
-,_ `
-	UserRolesa j
-.j k
-Userk o
-)o p
-)p q
-;q r
-return 
-loginResponseModel )
-;) *
-} 
-return 
-null 
-; 
-} 	
-public!! 
-async!! 
-Task!! 
-<!! 
-UserDetailsModel!! *
->!!* +
-Register!!, 4
-(!!4 5
-RegisterModel!!5 B
-userRegister!!C O
-)!!O P
-{"" 	
-if## 
-(## 
+unitOfWork "
+." #
+User# '
+.' (
+Filter( .
+(. /
+x/ 0
+=>1 3
+x4 5
+.5 6
+Username6 >
+==? A
+	userLoginB K
+.K L
+UsernameL T
+)T U
+.U V
+IncludeV ]
+(] ^
+u^ _
+=>` b
+uc d
+.d e
+Persone k
+)k l
+.l m
+FirstOrDefaultm {
+({ |
+)| }
+;} ~
+if 
+( 
+user 
+!= 
+null 
+&& 
+HashGenerator  -
+.- .
+ValidateHash. :
+(: ;
+	userLogin; D
+.D E
+PasswordE M
+,M N
+userO S
+.S T
+PasswordSaltT `
+,` a
+userb f
+.f g
+PasswordHashg s
+)s t
+)t u
+{ 
+LoginResponseModel "
+loginResponseModel# 5
+=6 7
+_mapper8 ?
+.? @
+Map@ C
+<C D
+LoginResponseModelD V
+>V W
+(W X
+userX \
+)\ ]
+;] ^
+loginResponseModel "
+." #
+Token# (
+=) *
+await+ 0
+Task1 5
+.5 6
+Run6 9
+(9 :
+(: ;
+); <
+=>= ?
+TokenService@ L
+.L M
+GenerateTokenM Z
+(Z [
+user[ _
+,_ `
+	UserRolesa j
+.j k
+Userk o
+)o p
+)p q
+;q r
+return 
+loginResponseModel )
+;) *
+}   
+return!! 
+null!! 
+;!! 
+}"" 	
+public$$ 
+async$$ 
+Task$$ 
+<$$ 
+UserDetailsModel$$ *
+>$$* +
+Register$$, 4
+($$4 5
+RegisterModel$$5 B
+userRegister$$C O
+)$$O P
+{%% 	
+if&& 
+(&& 
 
-unitOfWork## 
-.## 
-User## 
-.##  
-Filter##  &
-(##& '
-x##' (
-=>##) +
-x##, -
-.##- .
-Username##. 6
-==##7 9
-userRegister##: F
-.##F G
-Username##G O
-)##O P
-.##P Q
-FirstOrDefault##Q _
-(##_ `
-)##` a
-!=##b d
-default##e l
-(##l m
-User##m q
-)##q r
-)##r s
-{$$ 
-return%% 
-null%% 
-;%% 
-}&& 
-if'' 
-('' 
+unitOfWork&& 
+.&& 
+User&& 
+.&&  
+Filter&&  &
+(&&& '
+x&&' (
+=>&&) +
+x&&, -
+.&&- .
+Username&&. 6
+==&&7 9
+userRegister&&: F
+.&&F G
+Username&&G O
+)&&O P
+.&&P Q
+FirstOrDefault&&Q _
+(&&_ `
+)&&` a
+!=&&b d
+default&&e l
+(&&l m
+User&&m q
+)&&q r
+)&&r s
+{'' 
+return(( 
+null(( 
+;(( 
+})) 
+if++ 
+(++ 
 
-unitOfWork'' 
-.'' 
-User'' 
-.''  
-Filter''  &
-(''& '
-x''' (
-=>'') +
-x'', -
-.''- .
-Email''. 3
-==''4 6
-userRegister''7 C
-.''C D
-Email''D I
-)''I J
-.''J K
-FirstOrDefault''K Y
-(''Y Z
-)''Z [
-!=''\ ^
-default''_ f
-(''f g
-User''g k
-)''k l
-)''l m
-{(( 
-return)) 
-null)) 
-;)) 
-}** 
-Tree,, 
-userTree,, 
-=,, 
-new,, 
-Tree,,  $
-(,,$ %
-),,% &
-{-- 
+unitOfWork++ 
+.++ 
+User++ 
+.++  
+Filter++  &
+(++& '
+x++' (
+=>++) +
+x++, -
+.++- .
+Email++. 3
+==++4 6
+userRegister++7 C
+.++C D
+Email++D I
+)++I J
+.++J K
+FirstOrDefault++K Y
+(++Y Z
+)++Z [
+!=++\ ^
+default++_ f
+(++f g
+User++g k
+)++k l
+)++l m
+{,, 
+return-- 
+null-- 
+;-- 
+}.. 
+Tree00 
+userTree00 
+=00 
+new00 
+Tree00  $
+(00$ %
+)00% &
+{11 
 
-LastUpdate.. 
-=.. 
-DateTime.. %
-...% &
-UtcNow..& ,
-}// 
-;// 
-userTree00 
-=00 
-await00 
+LastUpdate22 
+=22 
+DateTime22 %
+.22% &
+UtcNow22& ,
+}33 
+;33 
+userTree55 
+=55 
+await55 
 
-unitOfWork00 '
-.00' (
-Tree00( ,
-.00, -
-Create00- 3
-(003 4
-userTree004 <
-)00< =
-;00= >
-Person22 
-person22 
-=22 
-_mapper22 #
-.22# $
-Map22$ '
-<22' (
-Person22( .
->22. /
-(22/ 0
-userRegister220 <
-)22< =
-;22= >
-person33 
-.33 
-TreeId33 
-=33 
-userTree33 $
-.33$ %
-Id33% '
-;33' (
-person44 
-.44 
-LivingPlace44 
-=44  
-new44! $
-Location44% -
-(44- .
-)44. /
-;44/ 0
-person55 
-.55 
+unitOfWork55 '
+.55' (
+Tree55( ,
+.55, -
+Create55- 3
+(553 4
+userTree554 <
+)55< =
+;55= >
+Person77 
+person77 
+=77 
+_mapper77 #
+.77# $
+Map77$ '
+<77' (
+Person77( .
+>77. /
+(77/ 0
+userRegister770 <
+)77< =
+;77= >
+person99 
+.99 
+TreeId99 
+=99 
+userTree99 $
+.99$ %
+Id99% '
+;99' (
+person:: 
+.:: 
+LivingPlace:: 
+=::  
+new::! $
+Location::% -
+(::- .
+)::. /
+;::/ 0
+person;; 
+.;; 
 
-BirthPlace55 
-=55 
-new55  #
-Location55$ ,
-(55, -
-)55- .
-;55. /
-Person66 
-personCreated66  
-=66! "
-await66# (
+BirthPlace;; 
+=;; 
+new;;  #
+Location;;$ ,
+(;;, -
+);;- .
+;;;. /
+Person<< 
+personCreated<<  
+=<<! "
+await<<# (
 
-unitOfWork66) 3
-.663 4
-Person664 :
-.66: ;
-Create66; A
-(66A B
-person66B H
-)66H I
-;66I J
-Position77 
-newPosition77  
-=77! "
-new77# &
-Position77' /
-(77/ 0
-)770 1
-;771 2
-Position88 
-position88 
-=88 
-await88  %
+unitOfWork<<) 3
+.<<3 4
+Person<<4 :
+.<<: ;
+Create<<; A
+(<<A B
+person<<B H
+)<<H I
+;<<I J
+Position== 
+newPosition==  
+===! "
+new==# &
+Position==' /
+(==/ 0
+)==0 1
+;==1 2
+Position>> 
+position>> 
+=>> 
+await>>  %
 
-unitOfWork88& 0
-.880 1
-Position881 9
-.889 :
-Create88: @
-(88@ A
-newPosition88A L
-)88L M
-;88M N
-User:: 
-user:: 
-=:: 
-_mapper:: 
-.::  
-Map::  #
-<::# $
-User::$ (
->::( )
-(::) *
-userRegister::* 6
-)::6 7
-;::7 8
-user;; 
-.;; 
-Id;; 
-=;; 
-Guid;; 
-.;; 
-NewGuid;; "
-(;;" #
-);;# $
-;;;$ %
-user<< 
-.<< 
-PersonId<< 
-=<< 
-personCreated<< )
-.<<) *
-Id<<* ,
-;<<, -
-user== 
-.== 
+unitOfWork>>& 0
+.>>0 1
+Position>>1 9
+.>>9 :
+Create>>: @
+(>>@ A
+newPosition>>A L
+)>>L M
+;>>M N
+User@@ 
+user@@ 
+=@@ 
+_mapper@@ 
+.@@  
+Map@@  #
+<@@# $
+User@@$ (
+>@@( )
+(@@) *
+userRegister@@* 6
+)@@6 7
+;@@7 8
+userAA 
+.AA 
+IdAA 
+=AA 
+GuidAA 
+.AA 
+NewGuidAA "
+(AA" #
+)AA# $
+;AA$ %
+userBB 
+.BB 
+PersonIdBB 
+=BB 
+personCreatedBB )
+.BB) *
+IdBB* ,
+;BB, -
+userCC 
+.CC 
 
-PositionId== 
-=== 
-position== &
-.==& '
-Id==' )
-;==) *
-user>> 
-.>> 
-PasswordSalt>> 
-=>> 
-Salt>>  $
-.>>$ %
-Create>>% +
-(>>+ ,
-)>>, -
-;>>- .
-user?? 
-.?? 
-PasswordHash?? 
-=?? 
-Hash??  $
-.??$ %
+PositionIdCC 
+=CC 
+positionCC &
+.CC& '
+IdCC' )
+;CC) *
+userDD 
+.DD 
+PasswordSaltDD 
+=DD 
+SaltGeneratorDD  -
+.DD- .
+CreateDD. 4
+(DD4 5
+)DD5 6
+;DD6 7
+userEE 
+.EE 
+PasswordHashEE 
+=EE 
+HashGeneratorEE  -
+.EE- .
 
-CreateHash??% /
-(??/ 0
-userRegister??0 <
-.??< =
-Password??= E
-,??E F
-user??G K
-.??K L
-PasswordSalt??L X
-)??X Y
-;??Y Z
-User@@ 
-createdUser@@ 
-=@@ 
-await@@ $
+CreateHashEE. 8
+(EE8 9
+userRegisterEE9 E
+.EEE F
+PasswordEEF N
+,EEN O
+userEEP T
+.EET U
+PasswordSaltEEU a
+)EEa b
+;EEb c
+UserFF 
+createdUserFF 
+=FF 
+awaitFF $
 
-unitOfWork@@% /
-.@@/ 0
-User@@0 4
-.@@4 5
-Create@@5 ;
-(@@; <
-user@@< @
-)@@@ A
-;@@A B
-UserDetailsModelAA 
-returnEventAA (
-=AA) *
-_mapperAA+ 2
-.AA2 3
-MapAA3 6
-<AA6 7
-UserDetailsModelAA7 G
->AAG H
-(AAH I
-createdUserAAI T
-)AAT U
-;AAU V
-returnCC 
-returnEventCC 
-;CC 
-}DD 	
-publicFF 
-asyncFF 
-TaskFF 
-<FF 
-UserDetailsModelFF *
->FF* +
-UpdatePasswordFF, :
-(FF: ;
-UpdatePasswordModelFF; N
-updatePasswordFFO ]
-)FF] ^
-{GG 	
-UserHH 
-userHH 
-=HH 
+unitOfWorkFF% /
+.FF/ 0
+UserFF0 4
+.FF4 5
+CreateFF5 ;
+(FF; <
+userFF< @
+)FF@ A
+;FFA B
+UserDetailsModelGG 
+returnEventGG (
+=GG) *
+_mapperGG+ 2
+.GG2 3
+MapGG3 6
+<GG6 7
+UserDetailsModelGG7 G
+>GGG H
+(GGH I
+createdUserGGI T
+)GGT U
+;GGU V
+returnII 
+returnEventII 
+;II 
+}JJ 	
+publicLL 
+asyncLL 
+TaskLL 
+<LL 
+UserDetailsModelLL *
+>LL* +
+UpdatePasswordLL, :
+(LL: ;
+UpdatePasswordModelLL; N
+updatePasswordLLO ]
+)LL] ^
+{MM 	
+UserNN 
+userNN 
+=NN 
 
-unitOfWorkHH "
-.HH" #
-UserHH# '
-.HH' (
-FilterHH( .
-(HH. /
-xHH/ 0
-=>HH1 3
-xHH4 5
-.HH5 6
-UsernameHH6 >
-==HH? A
-updatePasswordHHB P
-.HHP Q
-UsernameHHQ Y
-)HHY Z
-.HHZ [
-FirstOrDefaultHH[ i
-(HHi j
-)HHj k
-;HHk l
-ifII 
-(II 
-userII 
-!=II 
-defaultII 
-(II  
-UserII  $
-)II$ %
-&&II& (
-HashII) -
-.II- .
-ValidateHashII. :
-(II: ;
-updatePasswordII; I
-.III J
-CurrentPasswordIIJ Y
-,IIY Z
-userII[ _
-.II_ `
-PasswordSaltII` l
-,IIl m
-userIIn r
-.IIr s
-PasswordHashIIs 
-)	II Ä
+unitOfWorkNN "
+.NN" #
+UserNN# '
+.NN' (
+FilterNN( .
+(NN. /
+xNN/ 0
+=>NN1 3
+xNN4 5
+.NN5 6
+UsernameNN6 >
+==NN? A
+updatePasswordNNB P
+.NNP Q
+UsernameNNQ Y
+)NNY Z
+.NNZ [
+FirstOrDefaultNN[ i
+(NNi j
+)NNj k
+;NNk l
+ifPP 
+(PP 
+userPP 
+!=PP 
+defaultPP 
+(PP  
+UserPP  $
+)PP$ %
+&&PP& (
+HashGeneratorPP) 6
+.PP6 7
+ValidateHashPP7 C
+(PPC D
+updatePasswordPPD R
+.PPR S
+CurrentPasswordPPS b
+,PPb c
+userPPd h
+.PPh i
+PasswordSaltPPi u
+,PPu v
+userPPw {
+.PP{ |
+PasswordHash	PP| à
 )
-IIÄ Å
-{JJ 
-userKK 
-.KK 
-PasswordSaltKK !
-=KK" #
-SaltKK$ (
-.KK( )
-CreateKK) /
-(KK/ 0
-)KK0 1
-;KK1 2
-userLL 
-.LL 
-PasswordHashLL !
-=LL" #
-HashLL$ (
-.LL( )
+PPà â
+)
+PPâ ä
+{QQ 
+userRR 
+.RR 
+PasswordSaltRR !
+=RR" #
+SaltGeneratorRR$ 1
+.RR1 2
+CreateRR2 8
+(RR8 9
+)RR9 :
+;RR: ;
+userSS 
+.SS 
+PasswordHashSS !
+=SS" #
+HashGeneratorSS$ 1
+.SS1 2
 
-CreateHashLL) 3
-(LL3 4
-updatePasswordLL4 B
-.LLB C
-NewPasswordLLC N
-,LLN O
-userLLP T
-.LLT U
-PasswordSaltLLU a
-)LLa b
-;LLb c
-awaitMM 
+CreateHashSS2 <
+(SS< =
+updatePasswordSS= K
+.SSK L
+NewPasswordSSL W
+,SSW X
+userSSY ]
+.SS] ^
+PasswordSaltSS^ j
+)SSj k
+;SSk l
+awaitTT 
 
-unitOfWorkMM  
-.MM  !
-UserMM! %
-.MM% &
-UpdateMM& ,
-(MM, -
-userMM- 1
-)MM1 2
-;MM2 3
-UserDetailsModelNN  
-returnEventNN! ,
-=NN- .
-_mapperNN/ 6
-.NN6 7
-MapNN7 :
-<NN: ;
-UserDetailsModelNN; K
->NNK L
-(NNL M
-userNNM Q
-)NNQ R
-;NNR S
-returnOO 
-returnEventOO "
-;OO" #
-}PP 
-elseQQ 
-{RR 
-returnSS 
-nullSS 
-;SS 
-}TT 
-}UU 	
-}VV 
-}WW ¯
-ZE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\Hash.cs
+unitOfWorkTT  
+.TT  !
+UserTT! %
+.TT% &
+UpdateTT& ,
+(TT, -
+userTT- 1
+)TT1 2
+;TT2 3
+UserDetailsModelUU  
+returnEventUU! ,
+=UU- .
+_mapperUU/ 6
+.UU6 7
+MapUU7 :
+<UU: ;
+UserDetailsModelUU; K
+>UUK L
+(UUL M
+userUUM Q
+)UUQ R
+;UUR S
+returnVV 
+returnEventVV "
+;VV" #
+}WW 
+elseXX 
+{YY 
+returnZZ 
+nullZZ 
+;ZZ 
+}[[ 
+}\\ 	
+}]] 
+}^^ ä
+cE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\HashGenerator.cs
 	namespace 	
 GenealogyTree
  
@@ -585,8 +586,8 @@ ZE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\A
 { 
 internal 
 static 
-class 
-Hash 
+class 
+HashGenerator '
 { 
 public		 
 static		 
@@ -681,8 +682,8 @@ CreateHash 
 )2 3
 ;3 4
 } 
-} £	
-ZE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\Salt.cs
+} µ	
+cE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Auth\SaltGenerator.cs
 	namespace 	
 GenealogyTree
  
@@ -693,8 +694,8 @@ ZE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\A
 { 
 internal 
 static 
-class 
-Salt 
+class 
+SaltGenerator '
 { 
 public 
 static 
@@ -1341,474 +1342,474 @@ cE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\E
 	SmtpModel "
 _smtp# (
 ;( )
-public 
-IConfiguration 
-_configuration ,
-{- .
-get/ 2
-;2 3
-}4 5
-public 
-EmailService 
-( 
-IUnitOfWork '
+public 
+IConfiguration 
+_configuration ,
+{- .
+get/ 2
+;2 3
+}4 5
+public 
+EmailService 
+( 
+IUnitOfWork '
 
-unitOfWork( 2
-,2 3
-IOptions4 <
-<< =
-	SmtpModel= F
->F G
-smtpH L
-,L M
-IConfigurationN \
-configuration] j
-)j k
-:l m
-basen r
-(r s
+unitOfWork( 2
+,2 3
+IOptions4 <
+<< =
+	SmtpModel= F
+>F G
+smtpH L
+,L M
+IConfigurationN \
+configuration] j
+)j k
+:l m
+basen r
+(r s
 
-unitOfWorks }
-)} ~
-{ 	
-_smtp 
-= 
-smtp 
-. 
-Value 
-; 
-_configuration 
-= 
-configuration *
-;* +
-} 	
-public 
-async 
-Task 
-SendSupportTicket +
-(+ ,
-SupportTicket, 9
-supportTicket: G
-)G H
-{ 	
-MailMessage 
-mailMessage #
-=$ %!
-GetDefaultMailMessage& ;
-(; <
-)< =
-;= >
-mailMessage 
-. 
-Subject 
-=  !
-$str" %
-+& '
-supportTicket( 5
-.5 6
-Type6 :
-+; <
-$str= A
-+B C
-supportTicketD Q
-.Q R
-LanguageR Z
-.Z [
-ToUpper[ b
-(b c
-)c d
-+e f
-$strg k
-+l m
-supportTicketn {
-.{ |
-Subject	| É
-;
-É Ñ
-string 
-path 
-= 
-	Directory #
-.# $
-GetCurrentDirectory$ 7
-(7 8
-)8 9
-+: ;
-_configuration< J
-[J K
-$strK \
-]\ ]
-;] ^
+unitOfWorks }
+)} ~
+{ 	
+_smtp 
+= 
+smtp 
+. 
+Value 
+; 
+_configuration 
+= 
+configuration *
+;* +
+} 	
+public 
+async 
+Task 
+SendSupportTicket +
+(+ ,
+SupportTicket, 9
+supportTicket: G
+)G H
+{ 	
+MailMessage 
+mailMessage #
+=$ %!
+GetDefaultMailMessage& ;
+(; <
+)< =
+;= >
 mailMessage   
-.   
-Body   
-=   %
-GetSupportTicketEmailBody   8
-(  8 9
-supportTicket  9 F
-,  F G
-path  H L
-)  L M
-;  M N
-mailMessage!! 
-.!! 
-To!! 
-.!! 
-Add!! 
-(!! 
-_smtp!! $
-.!!$ %
-From!!% )
-)!!) *
-;!!* +
-if"" 
-("" 
-IsValidEmail"" 
-("" 
-supportTicket"" *
-.""* +
-EmailContact""+ 7
-)""7 8
-)""8 9
-{## 
-mailMessage$$ 
-.$$ 
-CC$$ 
-.$$ 
-Add$$ "
-($$" #
-supportTicket$$# 0
-.$$0 1
-EmailContact$$1 =
-)$$= >
-;$$> ?
-}%% 
-await&& 
-Task&& 
-.&& 
-Run&& 
-(&& 
-(&& 
-)&& 
-=>&&  
-	SendEmail&&! *
-(&&* +
-mailMessage&&+ 6
-)&&6 7
-)&&7 8
-;&&8 9
-}'' 	
-private)) 
+.   
+Subject   
+=    !
+$str  " %
++  & '
+supportTicket  ( 5
+.  5 6
+Type  6 :
++  ; <
+$str  = A
++  B C
+supportTicket  D Q
+.  Q R
+Language  R Z
+.  Z [
+ToUpper  [ b
+(  b c
+)  c d
++  e f
+$str  g k
++  l m
+supportTicket  n {
+.  { |
+Subject	  | É
+;
+  É Ñ
+string!! 
+path!! 
+=!! 
+	Directory!! #
+.!!# $
+GetCurrentDirectory!!$ 7
+(!!7 8
+)!!8 9
++!!: ;
+_configuration!!< J
+[!!J K
+$str!!K \
+]!!\ ]
+;!!] ^
+mailMessage"" 
+."" 
+Body"" 
+="" %
+GetSupportTicketEmailBody"" 8
+(""8 9
+supportTicket""9 F
+,""F G
+path""H L
+)""L M
+;""M N
+mailMessage## 
+.## 
+To## 
+.## 
+Add## 
+(## 
+_smtp## $
+.##$ %
+From##% )
+)##) *
+;##* +
+if%% 
+(%% 
+IsValidEmail%% 
+(%% 
+supportTicket%% *
+.%%* +
+EmailContact%%+ 7
+)%%7 8
+)%%8 9
+{&& 
+mailMessage'' 
+.'' 
+CC'' 
+.'' 
+Add'' "
+(''" #
+supportTicket''# 0
+.''0 1
+EmailContact''1 =
+)''= >
+;''> ?
+}(( 
+await** 
+Task** 
+.** 
+Run** 
+(** 
+(** 
+)** 
+=>**  
+	SendEmail**! *
+(*** +
+mailMessage**+ 6
+)**6 7
+)**7 8
+;**8 9
+}++ 	
+private-- 
 
-SmtpClient)) 
-GetSMTPClient)) (
-())( )
-)))) *
-{** 	
-NetworkCredential++ 
-networkCredential++ /
-=++0 1
-new++2 5
-NetworkCredential++6 G
-(++G H
-_smtp++H M
-.++M N
-From++N R
-,++R S
-_smtp++T Y
-.++Y Z
-Password++Z b
-)++b c
-;++c d
+SmtpClient-- 
+GetSMTPClient-- (
+(--( )
+)--) *
+{.. 	
+NetworkCredential// 
+networkCredential// /
+=//0 1
+new//2 5
+NetworkCredential//6 G
+(//G H
+_smtp//H M
+.//M N
+From//N R
+,//R S
+_smtp//T Y
+.//Y Z
+Password//Z b
+)//b c
+;//c d
 
-SmtpClient,, 
-client,, 
-=,, 
-new,,  #
+SmtpClient00 
+client00 
+=00 
+new00  #
 
-SmtpClient,,$ .
-{-- 
-Host.. 
-=.. 
-_smtp.. 
-... 
-Host.. !
-,..! "
-Port// 
-=// 
-_smtp// 
-.// 
-Port// !
-,//! "
-	EnableSsl00 
-=00 
-true00  
-,00  !!
-UseDefaultCredentials11 %
-=11& '
-_smtp11( -
-.11- .!
-UseDefaultCredentials11. C
-,11C D
-Credentials22 
-=22 
-networkCredential22 /
-}33 
-;33 
-return44 
-client44 
-;44 
-}55 	
-private77 
-void77 
-	SendEmail77 
-(77 
-MailMessage77 *
-mailMessage77+ 6
-)776 7
-{88 	
-try99 
-{:: 
-GetSMTPClient;; 
-(;; 
-);; 
-.;;  
-Send;;  $
-(;;$ %
-mailMessage;;% 0
-);;0 1
-;;;1 2
-}<< 
-catch== 
-{>> 
-Console?? 
-.?? 
-	WriteLine?? !
-(??! "
-$str??" H
-)??H I
-;??I J
-}@@ 
-}AA 	
-privateCC 
-MailMessageCC !
-GetDefaultMailMessageCC 1
-(CC1 2
-)CC2 3
-{DD 	
-MailMessageEE 
-messageEE 
-=EE  !
-newEE" %
-MailMessageEE& 1
-{FF 
-FromGG 
-=GG 
-newGG 
-MailAddressGG &
-(GG& '
-_smtpGG' ,
-.GG, -
-FromGG- 1
-)GG1 2
-,GG2 3
+SmtpClient00$ .
+{11 
+Host22 
+=22 
+_smtp22 
+.22 
+Host22 !
+,22! "
+Port33 
+=33 
+_smtp33 
+.33 
+Port33 !
+,33! "
+	EnableSsl44 
+=44 
+true44  
+,44  !!
+UseDefaultCredentials55 %
+=55& '
+_smtp55( -
+.55- .!
+UseDefaultCredentials55. C
+,55C D
+Credentials66 
+=66 
+networkCredential66 /
+}77 
+;77 
+return88 
+client88 
+;88 
+}99 	
+private;; 
+void;; 
+	SendEmail;; 
+(;; 
+MailMessage;; *
+mailMessage;;+ 6
+);;6 7
+{<< 	
+try== 
+{>> 
+GetSMTPClient?? 
+(?? 
+)?? 
+.??  
+Send??  $
+(??$ %
+mailMessage??% 0
+)??0 1
+;??1 2
+}@@ 
+catchAA 
+{BB 
+ConsoleCC 
+.CC 
+	WriteLineCC !
+(CC! "
+$strCC" H
+)CCH I
+;CCI J
+}DD 
+}EE 	
+privateGG 
+MailMessageGG !
+GetDefaultMailMessageGG 1
+(GG1 2
+)GG2 3
+{HH 	
+MailMessageII 
+messageII 
+=II  !
+newII" %
+MailMessageII& 1
+{JJ 
+FromKK 
+=KK 
+newKK 
+MailAddressKK &
+(KK& '
+_smtpKK' ,
+.KK, -
+FromKK- 1
+)KK1 2
+,KK2 3
 
-IsBodyHtmlHH 
-=HH 
-_smtpHH "
-.HH" #
+IsBodyHtmlLL 
+=LL 
+_smtpLL "
+.LL" #
 
-IsBodyHtmlHH# -
-,HH- .
-}II 
-;II 
-returnJJ 
-messageJJ 
-;JJ 
-}KK 	
-privateMM 
-staticMM 
-boolMM 
-IsValidEmailMM (
-(MM( )
-stringMM) /
-emailaddressMM0 <
-)MM< =
-{NN 	
-tryOO 
-{PP 
-returnQQ 
-MailAddressQQ "
-.QQ" #
-	TryCreateQQ# ,
-(QQ, -
-emailaddressQQ- 9
-,QQ9 :
-outQQ; >
-MailAddressQQ? J
-_QQK L
-)QQL M
-;QQM N
-}RR 
-catchSS 
-(SS 
-FormatExceptionSS "
-)SS" #
-{TT 
-returnUU 
-falseUU 
-;UU 
-}VV 
-}WW 	
-privateYY 
-staticYY 
-stringYY %
-GetSupportTicketEmailBodyYY 7
-(YY7 8
-SupportTicketYY8 E
-supportTicketYYF S
-,YYS T
-stringYYU [
-pathYY\ `
-)YY` a
-{ZZ 	
-StreamReader[[ 
-reader[[ 
-=[[  !
-File[[" &
-.[[& '
-OpenText[[' /
-([[/ 0
-path[[0 4
-)[[4 5
-;[[5 6
-string\\ 
-body\\ 
-=\\ 
-reader\\  
-.\\  !
-	ReadToEnd\\! *
-(\\* +
-)\\+ ,
-;\\, -
-PropertyInfo]] 
-[]] 
-]]] 
-st]] 
-=]] 
-supportTicket]]  -
-.]]- .
-GetType]]. 5
-(]]5 6
-)]]6 7
-.]]7 8
-GetProperties]]8 E
-(]]E F
-)]]F G
-;]]G H
-foreach^^ 
-(^^ 
-PropertyInfo^^ !
-f^^" #
-in^^$ &
-st^^' )
-)^^) *
-{__ 
-body`` 
-=`` 
-body`` 
-.`` 
-Replace`` #
-(``# $
-$str``$ '
-+``( )
-f``* +
-.``+ ,
-Name``, 0
-+``1 2
-$str``3 6
-,``6 7
-f``8 9
-.``9 :
-GetValue``: B
-(``B C
-supportTicket``C P
-)``P Q
-.``Q R
-ToString``R Z
-(``Z [
-)``[ \
-)``\ ]
-;``] ^
-}aa 
-EmailDescriptioncc 
-emailDescriptioncc -
-=cc. /
-EmailLanguageHelpercc0 C
-.ccC D
-GetEmailDescriptionccD W
-(ccW X
-supportTicketccX e
-.cce f
-Languageccf n
-)ccn o
-;cco p
-PropertyInfodd 
-[dd 
-]dd 
-eddd 
-=dd 
-emailDescriptiondd  0
-.dd0 1
-GetTypedd1 8
-(dd8 9
-)dd9 :
-.dd: ;
-GetPropertiesdd; H
-(ddH I
-)ddI J
-;ddJ K
-foreachee 
-(ee 
-PropertyInfoee !
-fee" #
-inee$ &
-edee' )
-)ee) *
-{ff 
-bodygg 
-=gg 
-bodygg 
-.gg 
-Replacegg #
-(gg# $
-$strgg$ '
-+gg( )
-fgg* +
-.gg+ ,
-Namegg, 0
-+gg1 2
-$strgg3 6
-,gg6 7
-fgg8 9
-.gg9 :
-GetValuegg: B
-(ggB C
-emailDescriptionggC S
-)ggS T
-.ggT U
-ToStringggU ]
-(gg] ^
-)gg^ _
-)gg_ `
-;gg` a
-}hh 
-returnii 
-bodyii 
-;ii 
-}jj 	
-}kk 
-}ll Ï
+IsBodyHtmlLL# -
+,LL- .
+}MM 
+;MM 
+returnOO 
+messageOO 
+;OO 
+}PP 	
+privateRR 
+staticRR 
+boolRR 
+IsValidEmailRR (
+(RR( )
+stringRR) /
+emailaddressRR0 <
+)RR< =
+{SS 	
+tryTT 
+{UU 
+returnVV 
+MailAddressVV "
+.VV" #
+	TryCreateVV# ,
+(VV, -
+emailaddressVV- 9
+,VV9 :
+outVV; >
+MailAddressVV? J
+_VVK L
+)VVL M
+;VVM N
+}WW 
+catchXX 
+(XX 
+FormatExceptionXX "
+)XX" #
+{YY 
+returnZZ 
+falseZZ 
+;ZZ 
+}[[ 
+}\\ 	
+private^^ 
+static^^ 
+string^^ %
+GetSupportTicketEmailBody^^ 7
+(^^7 8
+SupportTicket^^8 E
+supportTicket^^F S
+,^^S T
+string^^U [
+path^^\ `
+)^^` a
+{__ 	
+StreamReader`` 
+reader`` 
+=``  !
+File``" &
+.``& '
+OpenText``' /
+(``/ 0
+path``0 4
+)``4 5
+;``5 6
+stringaa 
+bodyaa 
+=aa 
+readeraa  
+.aa  !
+	ReadToEndaa! *
+(aa* +
+)aa+ ,
+;aa, -
+PropertyInfobb 
+[bb 
+]bb 
+stbb 
+=bb 
+supportTicketbb  -
+.bb- .
+GetTypebb. 5
+(bb5 6
+)bb6 7
+.bb7 8
+GetPropertiesbb8 E
+(bbE F
+)bbF G
+;bbG H
+foreachdd 
+(dd 
+PropertyInfodd !
+fdd" #
+indd$ &
+stdd' )
+)dd) *
+{ee 
+bodyff 
+=ff 
+bodyff 
+.ff 
+Replaceff #
+(ff# $
+$strff$ '
++ff( )
+fff* +
+.ff+ ,
+Nameff, 0
++ff1 2
+$strff3 6
+,ff6 7
+fff8 9
+.ff9 :
+GetValueff: B
+(ffB C
+supportTicketffC P
+)ffP Q
+.ffQ R
+ToStringffR Z
+(ffZ [
+)ff[ \
+)ff\ ]
+;ff] ^
+}gg 
+EmailDescriptionii 
+emailDescriptionii -
+=ii. /
+EmailLanguageHelperii0 C
+.iiC D
+GetEmailDescriptioniiD W
+(iiW X
+supportTicketiiX e
+.iie f
+Languageiif n
+)iin o
+;iio p
+PropertyInfojj 
+[jj 
+]jj 
+edjj 
+=jj 
+emailDescriptionjj  0
+.jj0 1
+GetTypejj1 8
+(jj8 9
+)jj9 :
+.jj: ;
+GetPropertiesjj; H
+(jjH I
+)jjI J
+;jjJ K
+foreachll 
+(ll 
+PropertyInfoll !
+fll" #
+inll$ &
+edll' )
+)ll) *
+{mm 
+bodynn 
+=nn 
+bodynn 
+.nn 
+Replacenn #
+(nn# $
+$strnn$ '
++nn( )
+fnn* +
+.nn+ ,
+Namenn, 0
++nn1 2
+$strnn3 6
+,nn6 7
+fnn8 9
+.nn9 :
+GetValuenn: B
+(nnB C
+emailDescriptionnnC S
+)nnS T
+.nnT U
+ToStringnnU ]
+(nn] ^
+)nn^ _
+)nn_ `
+;nn` a
+}oo 
+returnpp 
+bodypp 
+;pp 
+}qq 	
+}rr 
+}ss Ï
 eE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Helpers\ConstantsJwt.cs
 	namespace 	
 GenealogyTree
@@ -1921,7 +1922,7 @@ kE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\H
 ; 
 } 	
 } 
-} ÄÕ
+} Ãœ
 gE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Helpers\MappingProfile.cs
 	namespace 	
 GenealogyTree
@@ -1965,580 +1966,429 @@ gE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\H
 (& '
 )' (
 { 	
-	CreateMap   
-<   
-	Education   
-,    
-EducationModel  ! /
->  / 0
-(  0 1
-)  1 2
-.!! 
+	CreateMap"" 
+<"" 
+	Education"" 
+,""  
+EducationModel""! /
+>""/ 0
+(""0 1
+)""1 2
+.## 
 
-ReverseMap!! 
-(!! 
-)!! 
-;!! 
-	CreateMap## 
-<## 
-EducationLevel## $
-,##$ %
-GenericNameModel##& 6
->##6 7
-(##7 8
-)##8 9
-.$$ 
+ReverseMap## 
+(## 
+)## 
+;## 
+	CreateMap%% 
+<%% 
+EducationLevel%% $
+,%%$ %
+GenericNameModel%%& 6
+>%%6 7
+(%%7 8
+)%%8 9
+.&& 
 
-ReverseMap$$ 
-($$ 
-)$$ 
-;$$ 
-	CreateMap&& 
-<&& 
-Image&& 
-,&& 
-	ImageFile&& &
->&&& '
-(&&' (
-)&&( )
-.'' 
-	ForMember'' 
-('' 
-x'' 
-=>'' 
-x''  !
-.''! "
-Name''" &
-,''& '
-y''( )
-=>''* ,
-y''- .
-.''. /
-MapFrom''/ 6
-(''6 7
-z''7 8
-=>''9 ;
-Guid''< @
-.''@ A
-Parse''A F
-(''F G
-Path''G K
-.''K L'
-GetFileNameWithoutExtension''L g
-(''g h
-z''h i
-.''i j
-FileName''j r
-)''r s
-)''s t
-)''t u
-)''u v
-;''v w
-	CreateMap(( 
-<(( 
-	ImageFile(( 
-,((  
-Image((! &
->((& '
-(((' (
-)((( )
-;(() *
-	CreateMap** 
-<** 
-Location** 
-,** 
-LocationModel**  -
->**- .
-(**. /
-)**/ 0
-.++ 
+ReverseMap&& 
+(&& 
+)&& 
+;&& 
+	CreateMap)) 
+<)) 
+Image)) 
+,)) 
+	ImageFile)) &
+>))& '
+())' (
+)))( )
+.** 
+	ForMember** 
+(** 
+x** 
+=>** 
+x**  !
+.**! "
+Name**" &
+,**& '
+y**( )
+=>*** ,
+y**- .
+.**. /
+MapFrom**/ 6
+(**6 7
+z**7 8
+=>**9 ;
+Guid**< @
+.**@ A
+Parse**A F
+(**F G
+Path**G K
+.**K L'
+GetFileNameWithoutExtension**L g
+(**g h
+z**h i
+.**i j
+FileName**j r
+)**r s
+)**s t
+)**t u
+)**u v
+;**v w
+	CreateMap,, 
+<,, 
+	ImageFile,, 
+,,,  
+Image,,! &
+>,,& '
+(,,' (
+),,( )
+;,,) *
+	CreateMap// 
+<// 
+Location// 
+,// 
+LocationModel//  -
+>//- .
+(//. /
+)/// 0
+.00 
 
-ReverseMap++ 
-(++ 
-)++ 
-;++ 
-	CreateMap-- 
-<-- 
-Marriage-- 
-,-- 
-MarriedPersonModel--  2
->--2 3
-(--3 4
-)--4 5
-... 
-	ForMember.. 
-(.. 
-x.. 
-=>.. 
-x..  !
-...! "
-MarriageStarted.." 1
-,..1 2
-y..3 4
-=>..5 7
-y..8 9
-...9 :
-MapFrom..: A
-(..A B
-z..B C
-=>..D F
-z..G H
-...H I
-	StartDate..I R
-)..R S
-)..S T
-.// 
-	ForMember// 
-(// 
-x// 
-=>// 
-x//  !
-.//! "
-MarriageEnded//" /
-,/// 0
-y//1 2
-=>//3 5
-y//6 7
-.//7 8
-MapFrom//8 ?
-(//? @
-z//@ A
-=>//B D
-z//E F
-.//F G
-EndDate//G N
-)//N O
-)//O P
-.00 
-	ForMember00 
-(00 
-x00 
-=>00 
-x00  !
-.00! "
-PersonMarriedTo00" 1
-,001 2
-y003 4
-=>005 7
-y008 9
-.009 :
-MapFrom00: A
-(00A B
-z00B C
-=>00D F
-DefineMapping00G T
-(00T U
-z00U V
-.00V W
-FirstPerson00W b
-,00b c
-z00d e
-.00e f
-SecondPerson00f r
-)00r s
-)00s t
-)00t u
-;00u v
-	CreateMap22 
-<22 
-Marriage22 
-,22  
-MarriageDetailsModel22  4
->224 5
-(225 6
-)226 7
-.33 
-	ForMember33 
-(33 
-x33 
-=>33 
-x33  !
-.33! "
-MarriageStarted33" 1
-,331 2
-y333 4
-=>335 7
-y338 9
-.339 :
-MapFrom33: A
-(33A B
-z33B C
-=>33D F
-z33G H
-.33H I
-	StartDate33I R
-)33R S
-)33S T
+ReverseMap00 
+(00 
+)00 
+;00 
+	CreateMap33 
+<33 
+Marriage33 
+,33 
+MarriedPersonModel33  2
+>332 3
+(333 4
+)334 5
 .44 
 	ForMember44 
 (44 
 x44 
 =>44 
 x44  !
-.44! "
-MarriageEnded44" /
-,44/ 0
-y441 2
-=>443 5
-y446 7
-.447 8
-MapFrom448 ?
-(44? @
-z44@ A
-=>44B D
-z44E F
-.44F G
-EndDate44G N
-)44N O
-)44O P
+.44! "
+MarriageStarted44" 1
+,441 2
+y443 4
+=>445 7
+y448 9
+.449 :
+MapFrom44: A
+(44A B
+z44B C
+=>44D F
+z44G H
+.44H I
+	StartDate44I R
+)44R S
+)44S T
 .55 
 	ForMember55 
 (55 
 x55 
 =>55 
 x55  !
-.55! "
-PersonMarriedTo55" 1
-,551 2
-y553 4
-=>555 7
-y558 9
-.559 :
-MapFrom55: A
-(55A B
-z55B C
-=>55D F
-z55G H
-.55H I
-SecondPerson55I U
-)55U V
-)55V W
-.66 
+.55! "
+MarriageEnded55" /
+,55/ 0
+y551 2
+=>553 5
+y556 7
+.557 8
+MapFrom558 ?
+(55? @
+z55@ A
+=>55B D
+z55E F
+.55F G
+EndDate55G N
+)55N O
+)55O P
+.66 
+	ForMember66 
+(66 
+x66 
+=>66 
+x66  !
+.66! "
+PersonMarriedTo66" 1
+,661 2
+y663 4
+=>665 7
+y668 9
+.669 :
+MapFrom66: A
+(66A B
+z66B C
+=>66D F
+DefineMapping66G T
+(66T U
+z66U V
+.66V W
+FirstPerson66W b
+,66b c
+z66d e
+.66e f
+SecondPerson66f r
+)66r s
+)66s t
+)66t u
+;66u v
+	CreateMap88 
+<88 
+Marriage88 
+,88  
+MarriageDetailsModel88  4
+>884 5
+(885 6
+)886 7
+.99 
+	ForMember99 
+(99 
+x99 
+=>99 
+x99  !
+.99! "
+MarriageStarted99" 1
+,991 2
+y993 4
+=>995 7
+y998 9
+.999 :
+MapFrom99: A
+(99A B
+z99B C
+=>99D F
+z99G H
+.99H I
+	StartDate99I R
+)99R S
+)99S T
+.:: 
+	ForMember:: 
+(:: 
+x:: 
+=>:: 
+x::  !
+.::! "
+MarriageEnded::" /
+,::/ 0
+y::1 2
+=>::3 5
+y::6 7
+.::7 8
+MapFrom::8 ?
+(::? @
+z::@ A
+=>::B D
+z::E F
+.::F G
+EndDate::G N
+)::N O
+)::O P
+.;; 
+	ForMember;; 
+(;; 
+x;; 
+=>;; 
+x;;  !
+.;;! "
+PersonMarriedTo;;" 1
+,;;1 2
+y;;3 4
+=>;;5 7
+y;;8 9
+.;;9 :
+MapFrom;;: A
+(;;A B
+z;;B C
+=>;;D F
+z;;G H
+.;;H I
+SecondPerson;;I U
+);;U V
+);;V W
+.<< 
 
-ReverseMap66 
-(66 
-)66 
-;66 
-	CreateMap77 
-<77 
-Marriage77 
-,77 %
-MarriageCreateUpdateModel77  9
->779 :
-(77: ;
-)77; <
-.88 
+ReverseMap<< 
+(<< 
+)<< 
+;<< 
+	CreateMap>> 
+<>> 
+Marriage>> 
+,>> %
+MarriageCreateUpdateModel>>  9
+>>>9 :
+(>>: ;
+)>>; <
+.?? 
 
-ReverseMap88 
-(88 
-)88 
-;88 
-	CreateMap:: 
-<:: 
-Nationality:: !
-,::! "
-GenericNameModel::# 3
->::3 4
-(::4 5
-)::5 6
-.;; 
+ReverseMap?? 
+(?? 
+)?? 
+;?? 
+	CreateMapBB 
+<BB 
+NationalityBB !
+,BB! "
+GenericNameModelBB# 3
+>BB3 4
+(BB4 5
+)BB5 6
+.CC 
 
-ReverseMap;; 
-(;; 
-);; 
-;;; 
-	CreateMap== 
-<== 
+ReverseMapCC 
+(CC 
+)CC 
+;CC 
+	CreateMapFF 
+<FF 
 
-Occupation==  
-,==  !
-OccupationModel==" 1
->==1 2
-(==2 3
-)==3 4
-.>> 
+OccupationFF  
+,FF  !
+OccupationModelFF" 1
+>FF1 2
+(FF2 3
+)FF3 4
+.GG 
 
-ReverseMap>> 
-(>> 
-)>> 
-;>> 
-	CreateMap@@ 
-<@@ 
-ParentChild@@ !
-,@@! "
-ParentModel@@# .
->@@. /
-(@@/ 0
-)@@0 1
-.AA 
-	ForMemberAA 
-(AA 
-xAA 
-=>AA 
-xAA  !
-.AA! "
-ParentChildIdAA" /
-,AA/ 0
-yAA1 2
-=>AA3 5
-yAA6 7
-.AA7 8
-MapFromAA8 ?
-(AA? @
-zAA@ A
-=>AAB D
-zAAE F
-.AAF G
-IdAAG I
-)AAI J
-)AAJ K
-.BB 
-	ForMemberBB 
-(BB 
-xBB 
-=>BB 
-xBB  !
-.BB! "
-TreeIdBB" (
-,BB( )
-yBB* +
-=>BB, .
-yBB/ 0
-.BB0 1
-MapFromBB1 8
-(BB8 9
-zBB9 :
-=>BB; =
-zBB> ?
-.BB? @
-ParentBB@ F
-.BBF G
-TreeIdBBG M
-)BBM N
-)BBN O
-.CC 
-	ForMemberCC 
-(CC 
-xCC 
-=>CC 
-xCC  !
-.CC! "
-PersonIdCC" *
-,CC* +
-yCC, -
-=>CC. 0
-yCC1 2
-.CC2 3
-MapFromCC3 :
-(CC: ;
-zCC; <
-=>CC= ?
-zCC@ A
-.CCA B
-ParentCCB H
-.CCH I
-IdCCI K
-)CCK L
-)CCL M
-.DD 
-	ForMemberDD 
-(DD 
-xDD 
-=>DD 
-xDD  !
-.DD! "
-	FirstNameDD" +
-,DD+ ,
-yDD- .
-=>DD/ 1
-yDD2 3
-.DD3 4
-MapFromDD4 ;
-(DD; <
-zDD< =
-=>DD> @
-zDDA B
-.DDB C
-ParentDDC I
-.DDI J
-	FirstNameDDJ S
-)DDS T
-)DDT U
-.EE 
-	ForMemberEE 
-(EE 
-xEE 
-=>EE 
-xEE  !
-.EE! "
-LastNameEE" *
-,EE* +
-yEE, -
-=>EE. 0
-yEE1 2
-.EE2 3
-MapFromEE3 :
-(EE: ;
-zEE; <
-=>EE= ?
-zEE@ A
-.EEA B
-ParentEEB H
-.EEH I
-LastNameEEI Q
-)EEQ R
-)EER S
-.FF 
-	ForMemberFF 
-(FF 
-xFF 
-=>FF 
-xFF  !
-.FF! "
-GenderFF" (
-,FF( )
-yFF* +
-=>FF, .
-yFF/ 0
-.FF0 1
-MapFromFF1 8
-(FF8 9
-zFF9 :
-=>FF; =
-zFF> ?
-.FF? @
-ParentFF@ F
-.FFF G
-GenderFFG M
-.FFM N
-ToStringFFN V
-(FFV W
-)FFW X
-)FFX Y
-)FFY Z
-.GG 
-	ForMemberGG 
-(GG 
-xGG 
-=>GG 
-xGG  !
-.GG! "
-ImageIdGG" )
-,GG) *
-yGG+ ,
-=>GG- /
-yGG0 1
-.GG1 2
-MapFromGG2 9
-(GG9 :
-zGG: ;
-=>GG< >
-zGG? @
-.GG@ A
-ParentGGA G
-.GGG H
-ImageIdGGH O
-)GGO P
-)GGP Q
-.HH 
-	ForMemberHH 
-(HH 
-xHH 
-=>HH 
-xHH  !
-.HH! "
-	BirthDateHH" +
-,HH+ ,
-yHH- .
-=>HH/ 1
-yHH2 3
-.HH3 4
-MapFromHH4 ;
-(HH; <
-zHH< =
-=>HH> @
-zHHA B
-.HHB C
-ParentHHC I
-.HHI J
-	BirthDateHHJ S
-)HHS T
-)HHT U
-.II 
-	ForMemberII 
-(II 
-xII 
-=>II 
-xII  !
-.II! "
-	DeathDateII" +
-,II+ ,
-yII- .
-=>II/ 1
-yII2 3
-.II3 4
-MapFromII4 ;
-(II; <
-zII< =
-=>II> @
-zIIA B
-.IIB C
-ParentIIC I
-.III J
-	DeathDateIIJ S
-)IIS T
-)IIT U
-.JJ 
-
-ReverseMapJJ 
-(JJ 
-)JJ 
-;JJ 
-	CreateMapKK 
-<KK 
-ParentModelKK !
-,KK! "
-ParentChildModelKK# 3
->KK3 4
-(KK4 5
-)KK5 6
-.LL 
-
-ReverseMapLL 
-(LL 
-)LL 
-;LL 
-	CreateMapNN 
-<NN 
-ParentChildNN !
-,NN! "
-
-ChildModelNN# -
->NN- .
-(NN. /
-)NN/ 0
+ReverseMapGG 
+(GG 
+)GG 
+;GG 
+	CreateMapJJ 
+<JJ 
+ParentChildJJ !
+,JJ! "
+ParentModelJJ# .
+>JJ. /
+(JJ/ 0
+)JJ0 1
+.KK 
+	ForMemberKK 
+(KK 
+xKK 
+=>KK 
+xKK  !
+.KK! "
+ParentChildIdKK" /
+,KK/ 0
+yKK1 2
+=>KK3 5
+yKK6 7
+.KK7 8
+MapFromKK8 ?
+(KK? @
+zKK@ A
+=>KKB D
+zKKE F
+.KKF G
+IdKKG I
+)KKI J
+)KKJ K
+.LL 
+	ForMemberLL 
+(LL 
+xLL 
+=>LL 
+xLL  !
+.LL! "
+TreeIdLL" (
+,LL( )
+yLL* +
+=>LL, .
+yLL/ 0
+.LL0 1
+MapFromLL1 8
+(LL8 9
+zLL9 :
+=>LL; =
+zLL> ?
+.LL? @
+ParentLL@ F
+.LLF G
+TreeIdLLG M
+)LLM N
+)LLN O
+.MM 
+	ForMemberMM 
+(MM 
+xMM 
+=>MM 
+xMM  !
+.MM! "
+PersonIdMM" *
+,MM* +
+yMM, -
+=>MM. 0
+yMM1 2
+.MM2 3
+MapFromMM3 :
+(MM: ;
+zMM; <
+=>MM= ?
+zMM@ A
+.MMA B
+ParentMMB H
+.MMH I
+IdMMI K
+)MMK L
+)MML M
+.NN 
+	ForMemberNN 
+(NN 
+xNN 
+=>NN 
+xNN  !
+.NN! "
+	FirstNameNN" +
+,NN+ ,
+yNN- .
+=>NN/ 1
+yNN2 3
+.NN3 4
+MapFromNN4 ;
+(NN; <
+zNN< =
+=>NN> @
+zNNA B
+.NNB C
+ParentNNC I
+.NNI J
+	FirstNameNNJ S
+)NNS T
+)NNT U
 .OO 
 	ForMemberOO 
 (OO 
 xOO 
 =>OO 
 xOO  !
-.OO! "
-ParentChildIdOO" /
-,OO/ 0
-yOO1 2
-=>OO3 5
-yOO6 7
-.OO7 8
-MapFromOO8 ?
-(OO? @
-zOO@ A
-=>OOB D
-zOOE F
-.OOF G
-IdOOG I
-)OOI J
-)OOJ K
+.OO! "
+LastNameOO" *
+,OO* +
+yOO, -
+=>OO. 0
+yOO1 2
+.OO2 3
+MapFromOO3 :
+(OO: ;
+zOO; <
+=>OO= ?
+zOO@ A
+.OOA B
+ParentOOB H
+.OOH I
+LastNameOOI Q
+)OOQ R
+)OOR S
 .PP 
 	ForMemberPP 
 (PP 
@@ -2546,7 +2396,7 @@ ChildModelNN# -
 =>PP 
 xPP  !
 .PP! "
-TreeIdPP" (
+GenderPP" (
 ,PP( )
 yPP* +
 =>PP, .
@@ -2557,36 +2407,40 @@ ChildModelNN# -
 zPP9 :
 =>PP; =
 zPP> ?
-.PP? @
-ChildPP@ E
-.PPE F
-TreeIdPPF L
-)PPL M
-)PPM N
+.PP? @
+ParentPP@ F
+.PPF G
+GenderPPG M
+.PPM N
+ToStringPPN V
+(PPV W
+)PPW X
+)PPX Y
+)PPY Z
 .QQ 
 	ForMemberQQ 
 (QQ 
 xQQ 
 =>QQ 
 xQQ  !
-.QQ! "
-PersonIdQQ" *
-,QQ* +
-yQQ, -
-=>QQ. 0
-yQQ1 2
-.QQ2 3
-MapFromQQ3 :
-(QQ: ;
-zQQ; <
-=>QQ= ?
-zQQ@ A
-.QQA B
-ChildQQB G
-.QQG H
-IdQQH J
-)QQJ K
-)QQK L
+.QQ! "
+ImageIdQQ" )
+,QQ) *
+yQQ+ ,
+=>QQ- /
+yQQ0 1
+.QQ1 2
+MapFromQQ2 9
+(QQ9 :
+zQQ: ;
+=>QQ< >
+zQQ? @
+.QQ@ A
+ParentQQA G
+.QQG H
+ImageIdQQH O
+)QQO P
+)QQP Q
 .RR 
 	ForMemberRR 
 (RR 
@@ -2594,7 +2448,7 @@ ChildModelNN# -
 =>RR 
 xRR  !
 .RR! "
-	FirstNameRR" +
+	BirthDateRR" +
 ,RR+ ,
 yRR- .
 =>RR/ 1
@@ -2605,754 +2459,831 @@ ChildModelNN# -
 zRR< =
 =>RR> @
 zRRA B
-.RRB C
-ChildRRC H
-.RRH I
-	FirstNameRRI R
-)RRR S
+.RRB C
+ParentRRC I
+.RRI J
+	BirthDateRRJ S
 )RRS T
+)RRT U
 .SS 
 	ForMemberSS 
 (SS 
 xSS 
 =>SS 
 xSS  !
-.SS! "
-LastNameSS" *
-,SS* +
-ySS, -
-=>SS. 0
-ySS1 2
-.SS2 3
-MapFromSS3 :
-(SS: ;
-zSS; <
-=>SS= ?
-zSS@ A
-.SSA B
-ChildSSB G
-.SSG H
-LastNameSSH P
-)SSP Q
-)SSQ R
-.TT 
-	ForMemberTT 
-(TT 
-xTT 
-=>TT 
-xTT  !
-.TT! "
-GenderTT" (
-,TT( )
-yTT* +
-=>TT, .
-yTT/ 0
-.TT0 1
-MapFromTT1 8
-(TT8 9
-zTT9 :
-=>TT; =
-zTT> ?
-.TT? @
-ChildTT@ E
-.TTE F
-GenderTTF L
-.TTL M
-ToStringTTM U
-(TTU V
-)TTV W
-)TTW X
-)TTX Y
-.UU 
-	ForMemberUU 
-(UU 
-xUU 
-=>UU 
-xUU  !
-.UU! "
-ImageIdUU" )
-,UU) *
-yUU+ ,
-=>UU- /
-yUU0 1
-.UU1 2
-MapFromUU2 9
-(UU9 :
-zUU: ;
-=>UU< >
-zUU? @
-.UU@ A
-ChildUUA F
-.UUF G
-ImageIdUUG N
-)UUN O
-)UUO P
-.VV 
-	ForMemberVV 
-(VV 
-xVV 
-=>VV 
-xVV  !
-.VV! "
-	BirthDateVV" +
-,VV+ ,
-yVV- .
-=>VV/ 1
-yVV2 3
-.VV3 4
-MapFromVV4 ;
-(VV; <
-zVV< =
-=>VV> @
-zVVA B
-.VVB C
-ChildVVC H
-.VVH I
-	BirthDateVVI R
-)VVR S
-)VVS T
-.WW 
-	ForMemberWW 
-(WW 
-xWW 
-=>WW 
-xWW  !
-.WW! "
-	DeathDateWW" +
-,WW+ ,
-yWW- .
-=>WW/ 1
-yWW2 3
-.WW3 4
-MapFromWW4 ;
-(WW; <
-zWW< =
-=>WW> @
-zWWA B
-.WWB C
-ChildWWC H
-.WWH I
-	DeathDateWWI R
-)WWR S
-)WWS T
-.XX 
+.SS! "
+	DeathDateSS" +
+,SS+ ,
+ySS- .
+=>SS/ 1
+ySS2 3
+.SS3 4
+MapFromSS4 ;
+(SS; <
+zSS< =
+=>SS> @
+zSSA B
+.SSB C
+ParentSSC I
+.SSI J
+	DeathDateSSJ S
+)SSS T
+)SST U
+.TT 
 
-ReverseMapXX 
-(XX 
-)XX 
-;XX 
-	CreateMapYY 
-<YY 
+ReverseMapTT 
+(TT 
+)TT 
+;TT 
+	CreateMapVV 
+<VV 
+ParentModelVV !
+,VV! "
+ParentChildModelVV# 3
+>VV3 4
+(VV4 5
+)VV5 6
+.WW 
 
-ChildModelYY  
-,YY  !
-ParentChildModelYY" 2
->YY2 3
-(YY3 4
-)YY4 5
-.ZZ 
+ReverseMapWW 
+(WW 
+)WW 
+;WW 
+	CreateMapZZ 
+<ZZ 
+ParentChildZZ !
+,ZZ! "
 
-ReverseMapZZ 
-(ZZ 
-)ZZ 
-;ZZ 
-	CreateMap\\ 
-<\\ 
-ParentChild\\ !
-,\\! "#
-ParentChildDetailsModel\\# :
->\\: ;
-(\\; <
-)\\< =
+ChildModelZZ# -
+>ZZ- .
+(ZZ. /
+)ZZ/ 0
+.[[ 
+	ForMember[[ 
+([[ 
+x[[ 
+=>[[ 
+x[[  !
+.[[! "
+ParentChildId[[" /
+,[[/ 0
+y[[1 2
+=>[[3 5
+y[[6 7
+.[[7 8
+MapFrom[[8 ?
+([[? @
+z[[@ A
+=>[[B D
+z[[E F
+.[[F G
+Id[[G I
+)[[I J
+)[[J K
+.\\ 
+	ForMember\\ 
+(\\ 
+x\\ 
+=>\\ 
+x\\  !
+.\\! "
+TreeId\\" (
+,\\( )
+y\\* +
+=>\\, .
+y\\/ 0
+.\\0 1
+MapFrom\\1 8
+(\\8 9
+z\\9 :
+=>\\; =
+z\\> ?
+.\\? @
+Child\\@ E
+.\\E F
+TreeId\\F L
+)\\L M
+)\\M N
 .]] 
 	ForMember]] 
 (]] 
 x]] 
 =>]] 
 x]]  !
-.]]! "
-
-RelativeId]]" ,
-,]], -
-y]]. /
-=>]]0 2
-y]]3 4
-.]]4 5
-MapFrom]]5 <
-(]]< =
-z]]= >
-=>]]? A
-z]]B C
-.]]C D
-Id]]D F
-)]]F G
-)]]G H
-.^^ 
-
-ReverseMap^^ 
-(^^ 
-)^^ 
-;^^ 
-	CreateMap__ 
-<__ 
-ParentChild__ !
-,__! "(
-ParentChildCreateUpdateModel__# ?
->__? @
-(__@ A
-)__A B
+.]]! "
+PersonId]]" *
+,]]* +
+y]], -
+=>]]. 0
+y]]1 2
+.]]2 3
+MapFrom]]3 :
+(]]: ;
+z]]; <
+=>]]= ?
+z]]@ A
+.]]A B
+Child]]B G
+.]]G H
+Id]]H J
+)]]J K
+)]]K L
+.^^ 
+	ForMember^^ 
+(^^ 
+x^^ 
+=>^^ 
+x^^  !
+.^^! "
+	FirstName^^" +
+,^^+ ,
+y^^- .
+=>^^/ 1
+y^^2 3
+.^^3 4
+MapFrom^^4 ;
+(^^; <
+z^^< =
+=>^^> @
+z^^A B
+.^^B C
+Child^^C H
+.^^H I
+	FirstName^^I R
+)^^R S
+)^^S T
+.__ 
+	ForMember__ 
+(__ 
+x__ 
+=>__ 
+x__  !
+.__! "
+LastName__" *
+,__* +
+y__, -
+=>__. 0
+y__1 2
+.__2 3
+MapFrom__3 :
+(__: ;
+z__; <
+=>__= ?
+z__@ A
+.__A B
+Child__B G
+.__G H
+LastName__H P
+)__P Q
+)__Q R
 .`` 
 	ForMember`` 
 (`` 
 x`` 
 =>`` 
 x``  !
-.``! "
+.``! "
+Gender``" (
+,``( )
+y``* +
+=>``, .
+y``/ 0
+.``0 1
+MapFrom``1 8
+(``8 9
+z``9 :
+=>``; =
+z``> ?
+.``? @
+Child``@ E
+.``E F
+Gender``F L
+.``L M
+ToString``M U
+(``U V
+)``V W
+)``W X
+)``X Y
+.aa 
+	ForMemberaa 
+(aa 
+xaa 
+=>aa 
+xaa  !
+.aa! "
+ImageIdaa" )
+,aa) *
+yaa+ ,
+=>aa- /
+yaa0 1
+.aa1 2
+MapFromaa2 9
+(aa9 :
+zaa: ;
+=>aa< >
+zaa? @
+.aa@ A
+ChildaaA F
+.aaF G
+ImageIdaaG N
+)aaN O
+)aaO P
+.bb 
+	ForMemberbb 
+(bb 
+xbb 
+=>bb 
+xbb  !
+.bb! "
+	BirthDatebb" +
+,bb+ ,
+ybb- .
+=>bb/ 1
+ybb2 3
+.bb3 4
+MapFrombb4 ;
+(bb; <
+zbb< =
+=>bb> @
+zbbA B
+.bbB C
+ChildbbC H
+.bbH I
+	BirthDatebbI R
+)bbR S
+)bbS T
+.cc 
+	ForMembercc 
+(cc 
+xcc 
+=>cc 
+xcc  !
+.cc! "
+	DeathDatecc" +
+,cc+ ,
+ycc- .
+=>cc/ 1
+ycc2 3
+.cc3 4
+MapFromcc4 ;
+(cc; <
+zcc< =
+=>cc> @
+zccA B
+.ccB C
+ChildccC H
+.ccH I
+	DeathDateccI R
+)ccR S
+)ccS T
+.dd 
 
-RelativeId``" ,
-,``, -
-y``. /
-=>``0 2
-y``3 4
-.``4 5
-MapFrom``5 <
-(``< =
-z``= >
-=>``? A
-z``B C
-.``C D
-Id``D F
-)``F G
-)``G H
-.aa 
+ReverseMapdd 
+(dd 
+)dd 
+;dd 
+	CreateMapff 
+<ff 
 
-ReverseMapaa 
-(aa 
-)aa 
-;aa 
-	CreateMapcc 
-<cc 
-Personcc 
-,cc 
-GenericPersonModelcc 0
->cc0 1
-(cc1 2
-)cc2 3
-.dd 
-	ForMemberdd 
-(dd 
-xdd 
-=>dd 
-xdd  !
-.dd! "
-PersonIddd" *
-,dd* +
-ydd, -
-=>dd. 0
-ydd1 2
-.dd2 3
-MapFromdd3 :
-(dd: ;
-zdd; <
-=>dd= ?
-zdd@ A
-.ddA B
-IdddB D
-)ddD E
-)ddE F
-.ee 
-	ForMemberee 
-(ee 
-xee 
-=>ee 
-xee  !
-.ee! "
-UserIdee" (
-,ee( )
-yee* +
-=>ee, .
-{ff 
-ygg 
-.gg 
-PreConditiongg "
-(gg" #
-srcgg# &
-=>gg' )
-(gg* +
-srcgg+ .
-.gg. /
-RelativeForPersongg/ @
-!=ggA C
-nullggD H
-)ggH I
-)ggI J
-;ggJ K
-yhh 
-.hh 
-MapFromhh 
-(hh 
-zhh 
-=>hh  "
-zhh# $
-.hh$ %
-RelativeForPersonhh% 6
-.hh6 7
-RelativeUserIdhh7 E
-)hhE F
-;hhF G
-}ii 
-)ii 
-.jj 
+ChildModelff  
+,ff  !
+ParentChildModelff" 2
+>ff2 3
+(ff3 4
+)ff4 5
+.gg 
 
-ReverseMapjj 
-(jj 
-)jj 
-;jj 
-	CreateMapll 
-<ll 
-Personll 
-,ll 
-PersonTreeInfoModelll 1
->ll1 2
-(ll2 3
-)ll3 4
-.mm 
-	ForMembermm 
-(mm 
-xmm 
-=>mm 
-xmm  !
-.mm! "
-PersonIdmm" *
-,mm* +
-ymm, -
-=>mm. 0
-ymm1 2
-.mm2 3
-MapFrommm3 :
-(mm: ;
-zmm; <
-=>mm= ?
-zmm@ A
-.mmA B
-IdmmB D
-)mmD E
-)mmE F
-.nn 
-	ForMembernn 
-(nn 
-xnn 
-=>nn 
-xnn  !
-.nn! "
-UserIdnn" (
-,nn( )
-ynn* +
-=>nn, .
-{oo 
-ypp 
-.pp 
-PreConditionpp "
-(pp" #
-srcpp# &
-=>pp' )
-(pp* +
-srcpp+ .
-.pp. /
-RelativeForPersonpp/ @
-!=ppA C
-nullppD H
-)ppH I
-)ppI J
-;ppJ K
-yqq 
-.qq 
-MapFromqq 
-(qq 
-zqq 
-=>qq  "
-zqq# $
-.qq$ %
-RelativeForPersonqq% 6
-.qq6 7
-RelativeUserIdqq7 E
-)qqE F
-;qqF G
-}rr 
-)rr 
-.ss 
+ReverseMapgg 
+(gg 
+)gg 
+;gg 
+	CreateMapjj 
+<jj 
+ParentChildjj !
+,jj! "#
+ParentChildDetailsModeljj# :
+>jj: ;
+(jj; <
+)jj< =
+.kk 
+	ForMemberkk 
+(kk 
+xkk 
+=>kk 
+xkk  !
+.kk! "
 
-ReverseMapss 
-(ss 
-)ss 
-;ss 
-	CreateMapuu 
-<uu 
-Personuu 
-,uu 
-PersonDetailsModeluu 0
->uu0 1
-(uu1 2
-)uu2 3
-.vv 
-	ForMembervv 
-(vv 
-xvv 
-=>vv 
-xvv  !
-.vv! "
-PersonIdvv" *
-,vv* +
-yvv, -
-=>vv. 0
-yvv1 2
-.vv2 3
-MapFromvv3 :
-(vv: ;
-zvv; <
-=>vv= ?
-zvv@ A
-.vvA B
-IdvvB D
-)vvD E
-)vvE F
-.ww 
-	ForMemberww 
-(ww 
-xww 
-=>ww 
-xww  !
-.ww! "
-Genderww" (
-,ww( )
-yww* +
-=>ww, .
-yww/ 0
-.ww0 1
-MapFromww1 8
-(ww8 9
-zww9 :
-=>ww; =
-zww> ?
-.ww? @
-Genderww@ F
-==wwG I
-$charwwJ M
-?wwN O
-$strwwP S
-:wwT U
-$strwwV Y
-)wwY Z
-)wwZ [
-.xx 
-	ForMemberxx 
-(xx 
-xxx 
-=>xx 
-xxx  !
-.xx! "
-UserIdxx" (
-,xx( )
-yxx* +
-=>xx, .
-{yy 
-yzz 
-.zz 
-PreConditionzz "
-(zz" #
-srczz# &
-=>zz' )
-(zz* +
-srczz+ .
-.zz. /
-RelativeForPersonzz/ @
-!=zzA C
-nullzzD H
-)zzH I
-)zzI J
-;zzJ K
-y{{ 
-.{{ 
-MapFrom{{ 
-({{ 
-z{{ 
-=>{{  "
-z{{# $
-.{{$ %
-RelativeForPerson{{% 6
-.{{6 7
-RelativeUserId{{7 E
-){{E F
-;{{F G
-}|| 
-)|| 
-;}} 
-	CreateMap~~ 
-<~~ 
-Person~~ 
-,~~ #
-PersonCreateUpdateModel~~ 5
->~~5 6
-(~~6 7
-)~~7 8
-. 
-	ForMember 
-( 
-x 
-=> 
-x  !
-.! "
-PersonId" *
-,* +
-y, -
-=>. 0
-y1 2
-.2 3
-MapFrom3 :
-(: ;
-z; <
-=>= ?
-z@ A
-.A B
-IdB D
-)D E
-)E F
-.
-ÄÄ 
-	ForMember
-ÄÄ 
-(
-ÄÄ 
-x
-ÄÄ 
-=>
-ÄÄ 
-x
-ÄÄ  !
-.
-ÄÄ! "
-UserId
-ÄÄ" (
-,
-ÄÄ( )
+RelativeIdkk" ,
+,kk, -
+ykk. /
+=>kk0 2
+ykk3 4
+.kk4 5
+MapFromkk5 <
+(kk< =
+zkk= >
+=>kk? A
+zkkB C
+.kkC D
+IdkkD F
+)kkF G
+)kkG H
+.ll 
+
+ReverseMapll 
+(ll 
+)ll 
+;ll 
+	CreateMapnn 
+<nn 
+ParentChildnn !
+,nn! "(
+ParentChildCreateUpdateModelnn# ?
+>nn? @
+(nn@ A
+)nnA B
+.oo 
+	ForMemberoo 
+(oo 
+xoo 
+=>oo 
+xoo  !
+.oo! "
+
+RelativeIdoo" ,
+,oo, -
+yoo. /
+=>oo0 2
+yoo3 4
+.oo4 5
+MapFromoo5 <
+(oo< =
+zoo= >
+=>oo? A
+zooB C
+.ooC D
+IdooD F
+)ooF G
+)ooG H
+.pp 
+
+ReverseMappp 
+(pp 
+)pp 
+;pp 
+	CreateMapss 
+<ss 
+Personss 
+,ss 
+GenericPersonModelss 0
+>ss0 1
+(ss1 2
+)ss2 3
+.tt 
+	ForMembertt 
+(tt 
+xtt 
+=>tt 
+xtt  !
+.tt! "
+PersonIdtt" *
+,tt* +
+ytt, -
+=>tt. 0
+ytt1 2
+.tt2 3
+MapFromtt3 :
+(tt: ;
+ztt; <
+=>tt= ?
+ztt@ A
+.ttA B
+IdttB D
+)ttD E
+)ttE F
+.uu 
+	ForMemberuu 
+(uu 
+xuu 
+=>uu 
+xuu  !
+.uu! "
+UserIduu" (
+,uu( )
+yuu* +
+=>uu, .
+{vv 
+yww 
+.ww 
+PreConditionww "
+(ww" #
+srcww# &
+=>ww' )
+(ww* +
+srcww+ .
+.ww. /
+RelativeForPersonww/ @
+!=wwA C
+nullwwD H
+)wwH I
+)wwI J
+;wwJ K
+yxx 
+.xx 
+MapFromxx 
+(xx 
+zxx 
+=>xx  "
+zxx# $
+.xx$ %
+RelativeForPersonxx% 6
+.xx6 7
+RelativeUserIdxx7 E
+)xxE F
+;xxF G
+}yy 
+)yy 
+.zz 
+
+ReverseMapzz 
+(zz 
+)zz 
+;zz 
+	CreateMap|| 
+<|| 
+Person|| 
+,|| 
+PersonTreeInfoModel|| 1
+>||1 2
+(||2 3
+)||3 4
+.}} 
+	ForMember}} 
+(}} 
+x}} 
+=>}} 
+x}}  !
+.}}! "
+PersonId}}" *
+,}}* +
+y}}, -
+=>}}. 0
+y}}1 2
+.}}2 3
+MapFrom}}3 :
+(}}: ;
+z}}; <
+=>}}= ?
+z}}@ A
+.}}A B
+Id}}B D
+)}}D E
+)}}E F
+.~~ 
+	ForMember~~ 
+(~~ 
+x~~ 
+=>~~ 
+x~~  !
+.~~! "
+UserId~~" (
+,~~( )
+y~~* +
+=>~~, .
+{ 
 y
-ÄÄ* +
-=>
-ÄÄ, .
-{
-ÅÅ 
-y
-ÇÇ 
+ÄÄ 
 .
-ÇÇ 
+ÄÄ 
 PreCondition
-ÇÇ "
+ÄÄ "
 (
-ÇÇ" #
+ÄÄ" #
 src
-ÇÇ# &
+ÄÄ# &
 =>
-ÇÇ' )
+ÄÄ' )
 (
-ÇÇ* +
+ÄÄ* +
 src
-ÇÇ+ .
+ÄÄ+ .
 .
-ÇÇ. /
+ÄÄ. /
 RelativeForPerson
-ÇÇ/ @
+ÄÄ/ @
 !=
-ÇÇA C
+ÄÄA C
 null
-ÇÇD H
+ÄÄD H
 )
-ÇÇH I
+ÄÄH I
 )
-ÇÇI J
+ÄÄI J
 ;
-ÇÇJ K
+ÄÄJ K
 y
-ÉÉ 
+ÅÅ 
 .
-ÉÉ 
+ÅÅ 
 MapFrom
-ÉÉ 
+ÅÅ 
 (
-ÉÉ 
+ÅÅ 
 z
-ÉÉ 
+ÅÅ 
 =>
-ÉÉ  "
+ÅÅ  "
 z
-ÉÉ# $
+ÅÅ# $
 .
-ÉÉ$ %
+ÅÅ$ %
 RelativeForPerson
-ÉÉ% 6
+ÅÅ% 6
 .
-ÉÉ6 7
+ÅÅ6 7
 RelativeUserId
-ÉÉ7 E
+ÅÅ7 E
 )
-ÉÉE F
+ÅÅE F
 ;
-ÉÉF G
+ÅÅF G
 }
-ÑÑ 
+ÇÇ 
 )
-ÑÑ 
+ÇÇ 
 .
-ÑÑ 
+ÉÉ 
 
 ReverseMap
-ÑÑ 
+ÉÉ 
 (
-ÑÑ 
+ÉÉ 
 )
-ÑÑ 
+ÉÉ 
 ;
-ÑÑ  
+ÉÉ 
 	CreateMap
-ÜÜ 
+ÖÖ 
 <
-ÜÜ 
-Religion
-ÜÜ 
+ÖÖ 
+Person
+ÖÖ 
 ,
-ÜÜ 
-GenericNameModel
-ÜÜ  0
+ÖÖ  
+PersonDetailsModel
+ÖÖ 0
 >
-ÜÜ0 1
+ÖÖ0 1
 (
-ÜÜ1 2
+ÖÖ1 2
 )
-ÜÜ2 3
+ÖÖ2 3
 .
-áá 
-
-ReverseMap
-áá 
-(
-áá 
-)
-áá 
-;
-áá 
-	CreateMap
-ââ 
-<
-ââ 
-Relative
-ââ 
-,
-ââ 
-RelativeModel
-ââ  -
->
-ââ- .
-(
-ââ. /
-)
-ââ/ 0
-.
-ää 
+ÜÜ 
 	ForMember
-ää 
+ÜÜ 
 (
-ää 
+ÜÜ 
 x
-ää 
+ÜÜ 
 =>
-ää 
+ÜÜ 
 x
-ää  !
+ÜÜ  !
 .
-ää! "$
-RelativePersonInTreeId
-ää" 8
+ÜÜ! "
+PersonId
+ÜÜ" *
 ,
-ää8 9
+ÜÜ* +
 y
-ää: ;
+ÜÜ, -
 =>
-ää< >
+ÜÜ. 0
 y
-ää? @
+ÜÜ1 2
 .
-ää@ A
+ÜÜ2 3
 MapFrom
-ääA H
+ÜÜ3 :
 (
-ääH I
+ÜÜ: ;
 z
-ääI J
+ÜÜ; <
 =>
-ääK M
+ÜÜ= ?
 z
-ääN O
+ÜÜ@ A
 .
-ääO P+
-RelativePersonInPrimaryTreeId
-ääP m
+ÜÜA B
+Id
+ÜÜB D
 )
-ääm n
+ÜÜD E
 )
-ään o
+ÜÜE F
 .
-ãã 
-
-ReverseMap
-ãã 
+áá 
+	ForMember
+áá 
 (
-ãã 
-)
-ãã 
-;
-ãã 
-	CreateMap
-åå 
-<
-åå 
-Relative
-åå 
+áá 
+x
+áá 
+=>
+áá 
+x
+áá  !
+.
+áá! "
+Gender
+áá" (
 ,
-åå 
-UsersToLinkModel
-åå  0
->
-åå0 1
-(
-åå1 2
-)
-åå2 3
+áá( )
+y
+áá* +
+=>
+áá, .
+y
+áá/ 0
 .
-çç 
-
-ReverseMap
-çç 
+áá0 1
+MapFrom
+áá1 8
 (
-çç 
+áá8 9
+z
+áá9 :
+=>
+áá; =
+z
+áá> ?
+.
+áá? @
+Gender
+áá@ F
+==
+ááG I
+$char
+ááJ M
+?
+ááN O
+$str
+ááP S
+:
+ááT U
+$str
+ááV Y
 )
-çç 
-;
-çç 
-	CreateMap
-èè 
-<
-èè 
-Request
-èè 
+ááY Z
+)
+ááZ [
+.
+àà 
+	ForMember
+àà 
+(
+àà 
+x
+àà 
+=>
+àà 
+x
+àà  !
+.
+àà! "
+UserId
+àà" (
 ,
-èè !
-RequestDetailsModel
-èè 2
->
-èè2 3
+àà( )
+y
+àà* +
+=>
+àà, .
+{
+ââ 
+y
+ää 
+.
+ää 
+PreCondition
+ää "
 (
-èè3 4
+ää" #
+src
+ää# &
+=>
+ää' )
+(
+ää* +
+src
+ää+ .
+.
+ää. /
+RelativeForPerson
+ää/ @
+!=
+ääA C
+null
+ääD H
 )
-èè4 5
+ääH I
+)
+ääI J
+;
+ääJ K
+y
+ãã 
+.
+ãã 
+MapFrom
+ãã 
+(
+ãã 
+z
+ãã 
+=>
+ãã  "
+z
+ãã# $
+.
+ãã$ %
+RelativeForPerson
+ãã% 6
+.
+ãã6 7
+RelativeUserId
+ãã7 E
+)
+ããE F
+;
+ããF G
+}
+åå 
+)
+åå 
+;
+åå 
+	CreateMap
+éé 
+<
+éé 
+Person
+éé 
+,
+éé %
+PersonCreateUpdateModel
+éé 5
+>
+éé5 6
+(
+éé6 7
+)
+éé7 8
+.
+èè 
+	ForMember
+èè 
+(
+èè 
+x
+èè 
+=>
+èè 
+x
+èè  !
+.
+èè! "
+PersonId
+èè" *
+,
+èè* +
+y
+èè, -
+=>
+èè. 0
+y
+èè1 2
+.
+èè2 3
+MapFrom
+èè3 :
+(
+èè: ;
+z
+èè; <
+=>
+èè= ?
+z
+èè@ A
+.
+èèA B
+Id
+èèB D
+)
+èèD E
+)
+èèE F
 .
 êê 
 	ForMember
@@ -3366,326 +3297,131 @@ ReverseMap
 x
 êê  !
 .
-êê! "
-ReceiverUser
-êê" .
+êê! "
+UserId
+êê" (
 ,
-êê. /
+êê( )
 y
-êê0 1
+êê* +
 =>
-êê2 4
+êê, .
+{
+ëë 
 y
-êê5 6
+íí 
 .
-êê6 7
+íí 
+PreCondition
+íí "
+(
+íí" #
+src
+íí# &
+=>
+íí' )
+(
+íí* +
+src
+íí+ .
+.
+íí. /
+RelativeForPerson
+íí/ @
+!=
+ííA C
+null
+ííD H
+)
+ííH I
+)
+ííI J
+;
+ííJ K
+y
+ìì 
+.
+ìì 
 MapFrom
-êê7 >
+ìì 
 (
-êê> ?
+ìì 
 z
-êê? @
+ìì 
 =>
-êêA C
+ìì  "
 z
-êêD E
+ìì# $
 .
-êêE F
-Receiver
-êêF N
+ìì$ %
+RelativeForPerson
+ìì% 6
+.
+ìì6 7
+RelativeUserId
+ìì7 E
 )
-êêN O
+ììE F
+;
+ììF G
+}
+îî 
 )
-êêO P
+îî 
 .
-ëë 
-	ForMember
-ëë 
-(
-ëë 
-x
-ëë 
-=>
-ëë 
-x
-ëë  !
-.
-ëë! "
-
-SenderUser
-ëë" ,
-,
-ëë, -
-y
-ëë. /
-=>
-ëë0 2
-y
-ëë3 4
-.
-ëë4 5
-MapFrom
-ëë5 <
-(
-ëë< =
-z
-ëë= >
-=>
-ëë? A
-z
-ëëB C
-.
-ëëC D
-Sender
-ëëD J
-)
-ëëJ K
-)
-ëëK L
-.
-íí 
+îî 
 
 ReverseMap
-íí 
+îî 
 (
-íí 
+îî 
 )
-íí 
+îî 
 ;
-íí 
-	CreateMap
-ìì 
-<
-ìì 
-Request
-ìì 
-,
-ìì &
-RequestCreateUpdateModel
-ìì 7
->
-ìì7 8
-(
-ìì8 9
-)
-ìì9 :
-.
-îî 
-	ForMember
-îî 
-(
-îî 
-x
-îî 
-=>
-îî 
-x
-îî  !
-.
-îî! "
-ReceiverUser
-îî" .
-,
-îî. /
-y
-îî0 1
-=>
-îî2 4
-y
-îî5 6
-.
-îî6 7
-MapFrom
-îî7 >
-(
-îî> ?
-z
-îî? @
-=>
-îîA C
-z
-îîD E
-.
-îîE F
-Receiver
-îîF N
-)
-îîN O
-)
-îîO P
-.
-ïï 
-	ForMember
-ïï 
-(
-ïï 
-x
-ïï 
-=>
-ïï 
-x
-ïï  !
-.
-ïï! "
-SenderUserId
-ïï" .
-,
-ïï. /
-y
-ïï0 1
-=>
-ïï2 4
-y
-ïï5 6
-.
-ïï6 7
-MapFrom
-ïï7 >
-(
-ïï> ?
-z
-ïï? @
-=>
-ïïA C
-z
-ïïD E
-.
-ïïE F
-SenderId
-ïïF N
-)
-ïïN O
-)
-ïïO P
-;
-ïïP Q
+îî  
 	CreateMap
 óó 
 <
-óó &
-RequestCreateUpdateModel
-óó .
+óó 
+Religion
+óó 
 ,
-óó. /
-Request
-óó0 7
+óó 
+GenericNameModel
+óó  0
 >
-óó7 8
+óó0 1
 (
-óó8 9
+óó1 2
 )
-óó9 :
+óó2 3
 .
-òò 
-	ForMember
-òò 
-(
-òò 
-x
-òò 
-=>
-òò 
-x
-òò  !
-.
-òò! "
+òò 
 
-ReceiverId
-òò" ,
-,
-òò, -
-y
-òò. /
-=>
-òò0 2
-y
-òò3 4
-.
-òò4 5
-MapFrom
-òò5 <
+ReverseMap
+òò 
 (
-òò< =
-z
-òò= >
-=>
-òò? A
-z
-òòB C
-.
-òòC D
-ReceiverUser
-òòD P
-.
-òòP Q
-UserId
-òòQ W
+òò 
 )
-òòW X
-)
-òòX Y
-.
-ôô 
-	ForMember
-ôô 
-(
-ôô 
-x
-ôô 
-=>
-ôô 
-x
-ôô  !
-.
-ôô! "
-SenderId
-ôô" *
-,
-ôô* +
-y
-ôô, -
-=>
-ôô. 0
-y
-ôô1 2
-.
-ôô2 3
-MapFrom
-ôô3 :
-(
-ôô: ;
-z
-ôô; <
-=>
-ôô= ?
-z
-ôô@ A
-.
-ôôA B
-SenderUserId
-ôôB N
-)
-ôôN O
-)
-ôôO P
+òò 
 ;
-ôôP Q
+òò 
 	CreateMap
 õõ 
 <
-õõ 
-Request
-õõ 
+õõ 
+Relative
+õõ 
 ,
-õõ "
-RequestResponseModel
-õõ 3
+õõ 
+RelativeModel
+õõ  -
 >
-õõ3 4
+õõ- .
 (
-õõ4 5
+õõ. /
 )
-õõ5 6
+õõ/ 0
 .
 úú 
 	ForMember
@@ -3699,226 +3435,91 @@ ReceiverId
 x
 úú  !
 .
-úú! "
-ReceiverUser
-úú" .
+úú! "$
+RelativePersonInTreeId
+úú" 8
 ,
-úú. /
+úú8 9
 y
-úú0 1
+úú: ;
 =>
-úú2 4
+úú< >
 y
-úú5 6
+úú? @
 .
-úú6 7
+úú@ A
 MapFrom
-úú7 >
+úúA H
 (
-úú> ?
+úúH I
 z
-úú? @
+úúI J
 =>
-úúA C
+úúK M
 z
-úúD E
-.
-úúE F
-Receiver
-úúF N
-)
 úúN O
-)
-úúO P
-;
-úúP Q
-	CreateMap
-ûû 
-<
-ûû 
-User
-ûû 
-,
-ûû 
-UserSettingsModel
-ûû -
->
-ûû- .
-(
-ûû. /
-)
-ûû/ 0
 .
-üü 
+úúO P+
+RelativePersonInPrimaryTreeId
+úúP m
+)
+úúm n
+)
+úún o
+.
+ùù 
 
 ReverseMap
-üü 
+ùù 
 (
-üü 
+ùù 
 )
-üü 
+ùù 
 ;
-üü 
+ùù 
 	CreateMap
-†† 
+üü 
 <
-†† 
-User
-†† 
+üü 
+Relative
+üü 
 ,
-†† 
-UserDetailsModel
-†† ,
+üü 
+UsersToLinkModel
+üü  0
 >
-††, -
+üü0 1
 (
-††- .
+üü1 2
 )
-††. /
+üü2 3
 .
-°° 
-	ForMember
-°° 
+†† 
+
+ReverseMap
+†† 
 (
-°° 
-x
-°° 
-=>
-°° 
-x
-°°  !
-.
-°°! "
-	FirstName
-°°" +
+†† 
+)
+†† 
+;
+†† 
+	CreateMap
+££ 
+<
+££ 
+Request
+££ 
 ,
-°°+ ,
-y
-°°- .
-=>
-°°/ 1
-y
-°°2 3
-.
-°°3 4
-MapFrom
-°°4 ;
-(
-°°; <
-z
-°°< =
-=>
-°°> @
-z
-°°A B
-.
-°°B C
-Person
-°°C I
-.
-°°I J
-	FirstName
-°°J S
-)
-°°S T
-)
-°°T U
-.
-¢¢ 
-	ForMember
-¢¢ 
-(
-¢¢ 
-x
-¢¢ 
-=>
-¢¢ 
-x
-¢¢  !
-.
-¢¢! "
-LastName
-¢¢" *
-,
-¢¢* +
-y
-¢¢, -
-=>
-¢¢. 0
-y
-¢¢1 2
-.
-¢¢2 3
-MapFrom
-¢¢3 :
-(
-¢¢: ;
-z
-¢¢; <
-=>
-¢¢= ?
-z
-¢¢@ A
-.
-¢¢A B
-Person
-¢¢B H
-.
-¢¢H I
-LastName
-¢¢I Q
-)
-¢¢Q R
-)
-¢¢R S
-.
-££ 
-	ForMember
-££ 
-(
-££ 
-x
-££ 
-=>
-££ 
-x
-££  !
-.
-££! "
-	BirthDate
-££" +
-,
-££+ ,
-y
-££- .
-=>
-££/ 1
-y
+££ !
+RequestDetailsModel
+££ 2
+>
 ££2 3
-.
-££3 4
-MapFrom
-££4 ;
 (
-££; <
-z
-££< =
-=>
-££> @
-z
-££A B
-.
-££B C
-Person
-££C I
-.
-££I J
-	BirthDate
-££J S
+££3 4
 )
-££S T
-)
-££T U
+££4 5
 .
 §§ 
 	ForMember
@@ -3932,41 +3533,37 @@ ReverseMap
 x
 §§  !
 .
-§§! "
-Gender
-§§" (
+§§! "
+ReceiverUser
+§§" .
 ,
-§§( )
+§§. /
 y
-§§* +
+§§0 1
 =>
-§§, .
+§§2 4
 y
-§§/ 0
+§§5 6
 .
-§§0 1
+§§6 7
 MapFrom
-§§1 8
+§§7 >
 (
-§§8 9
-z
-§§9 :
-=>
-§§; =
-z
 §§> ?
+z
+§§? @
+=>
+§§A C
+z
+§§D E
 .
-§§? @
-Person
-§§@ F
-.
-§§F G
-Gender
-§§G M
-)
-§§M N
+§§E F
+Receiver
+§§F N
 )
 §§N O
+)
+§§O P
 .
 •• 
 	ForMember
@@ -3980,187 +3577,65 @@ ReverseMap
 x
 ••  !
 .
-••! "
-Nationality
-••" -
-,
-••- .
-y
-••/ 0
-=>
-••1 3
-y
-••4 5
-.
-••5 6
-MapFrom
-••6 =
-(
-••= >
-z
-••> ?
-=>
-••@ B
-z
-••C D
-.
-••D E
-Person
-••E K
-.
-••K L
-Nationality
-••L W
-)
-••W X
-)
-••X Y
-.
-¶¶ 
-	ForMember
-¶¶ 
-(
-¶¶ 
-x
-¶¶ 
-=>
-¶¶ 
-x
-¶¶  !
-.
-¶¶! "
-Religion
-¶¶" *
-,
-¶¶* +
-y
-¶¶, -
-=>
-¶¶. 0
-y
-¶¶1 2
-.
-¶¶2 3
-MapFrom
-¶¶3 :
-(
-¶¶: ;
-z
-¶¶; <
-=>
-¶¶= ?
-z
-¶¶@ A
-.
-¶¶A B
-Person
-¶¶B H
-.
-¶¶H I
-Religion
-¶¶I Q
-)
-¶¶Q R
-)
-¶¶R S
-.
-ßß 
-	ForMember
-ßß 
-(
-ßß 
-x
-ßß 
-=>
-ßß 
-x
-ßß  !
-.
-ßß! "
+••! "
 
-BirthPlace
-ßß" ,
+SenderUser
+••" ,
 ,
-ßß, -
+••, -
 y
-ßß. /
+••. /
 =>
-ßß0 2
+••0 2
 y
-ßß3 4
+••3 4
 .
-ßß4 5
+••4 5
 MapFrom
-ßß5 <
+••5 <
 (
-ßß< =
+••< =
 z
-ßß= >
+••= >
 =>
-ßß? A
+••? A
 z
-ßßB C
+••B C
 .
-ßßC D
-Person
-ßßD J
+••C D
+Sender
+••D J
+)
+••J K
+)
+••K L
 .
-ßßJ K
+¶¶ 
 
-BirthPlace
-ßßK U
-)
-ßßU V
-)
-ßßV W
-.
-®® 
-	ForMember
-®® 
+ReverseMap
+¶¶ 
 (
-®® 
-x
-®® 
-=>
-®® 
-x
-®®  !
-.
-®®! "
-LivingPlace
-®®" -
+¶¶ 
+)
+¶¶ 
+;
+¶¶ 
+	CreateMap
+®® 
+<
+®® 
+Request
+®® 
 ,
-®®- .
-y
-®®/ 0
-=>
-®®1 3
-y
-®®4 5
-.
-®®5 6
-MapFrom
-®®6 =
+®® &
+RequestCreateUpdateModel
+®® 7
+>
+®®7 8
 (
-®®= >
-z
-®®> ?
-=>
-®®@ B
-z
-®®C D
-.
-®®D E
-Person
-®®E K
-.
-®®K L
-LivingPlace
-®®L W
+®®8 9
 )
-®®W X
-)
-®®X Y
+®®9 :
 .
 ©© 
 	ForMember
@@ -4174,49 +3649,37 @@ BirthPlace
 x
 ©©  !
 .
-©©! "
-Parents
-©©" )
+©©! "
+ReceiverUser
+©©" .
 ,
-©©) *
+©©. /
 y
-©©+ ,
+©©0 1
 =>
-©©- /
+©©2 4
 y
-©©0 1
+©©5 6
 .
-©©1 2
+©©6 7
 MapFrom
-©©2 9
+©©7 >
 (
-©©9 :
+©©> ?
 z
-©©: ;
+©©? @
 =>
-©©< >
+©©A C
 z
-©©? @
+©©D E
 .
-©©@ A
-Person
-©©A G
-.
-©©G H
-Parents
-©©H O
-.
-©©O P
-ToList
-©©P V
-(
-©©V W
+©©E F
+Receiver
+©©F N
 )
-©©W X
+©©N O
 )
-©©X Y
-)
-©©Y Z
+©©O P
 .
 ™™ 
 	ForMember
@@ -4230,141 +3693,55 @@ BirthPlace
 x
 ™™  !
 .
-™™! "
-Children
-™™" *
+™™! "
+SenderUserId
+™™" .
 ,
-™™* +
+™™. /
 y
-™™, -
+™™0 1
 =>
-™™. 0
+™™2 4
 y
-™™1 2
+™™5 6
 .
-™™2 3
+™™6 7
 MapFrom
-™™3 :
+™™7 >
 (
-™™: ;
+™™> ?
 z
-™™; <
+™™? @
 =>
-™™= ?
+™™A C
 z
-™™@ A
+™™D E
 .
-™™A B
-Person
-™™B H
-.
-™™H I
-Children
-™™I Q
-.
-™™Q R
-ToList
-™™R X
-(
-™™X Y
+™™E F
+SenderId
+™™F N
 )
-™™Y Z
+™™N O
 )
-™™Z [
-)
-™™[ \
-.
-´´ 
-	ForMember
-´´ 
-(
-´´ 
-x
-´´ 
-=>
-´´ 
-x
-´´  !
-.
-´´! "
-UserId
-´´" (
+™™O P
+;
+™™P Q
+	CreateMap
+¨¨ 
+<
+¨¨ &
+RequestCreateUpdateModel
+¨¨ .
 ,
-´´( )
-y
-´´* +
-=>
-´´, .
-y
-´´/ 0
-.
-´´0 1
-MapFrom
-´´1 8
-(
-´´8 9
-z
-´´9 :
-=>
-´´; =
-z
-´´> ?
-.
-´´? @
-Id
-´´@ B
-)
-´´B C
-)
-´´C D
-.
-¨¨ 
-	ForMember
-¨¨ 
-(
-¨¨ 
-x
-¨¨ 
-=>
-¨¨ 
-x
-¨¨  !
-.
-¨¨! "
-TreeId
-¨¨" (
-,
-¨¨( )
-y
-¨¨* +
-=>
-¨¨, .
-y
-¨¨/ 0
-.
-¨¨0 1
-MapFrom
-¨¨1 8
+¨¨. /
+Request
+¨¨0 7
+>
+¨¨7 8
 (
 ¨¨8 9
-z
-¨¨9 :
-=>
-¨¨; =
-z
-¨¨> ?
-.
-¨¨? @
-Person
-¨¨@ F
-.
-¨¨F G
-TreeId
-¨¨G M
 )
-¨¨M N
-)
-¨¨N O
+¨¨9 :
 .
 ≠≠ 
 	ForMember
@@ -4378,68 +3755,104 @@ BirthPlace
 x
 ≠≠  !
 .
-≠≠! "
-PersonId
-≠≠" *
-,
-≠≠* +
-y
-≠≠, -
-=>
-≠≠. 0
-y
-≠≠1 2
-.
-≠≠2 3
-MapFrom
-≠≠3 :
-(
-≠≠: ;
-z
-≠≠; <
-=>
-≠≠= ?
-z
-≠≠@ A
-.
-≠≠A B
-Person
-≠≠B H
-.
-≠≠H I
-Id
-≠≠I K
-)
-≠≠K L
-)
-≠≠L M
-.
-ÆÆ 
+≠≠! "
 
-ReverseMap
-ÆÆ 
+ReceiverId
+≠≠" ,
+,
+≠≠, -
+y
+≠≠. /
+=>
+≠≠0 2
+y
+≠≠3 4
+.
+≠≠4 5
+MapFrom
+≠≠5 <
 (
-ÆÆ 
+≠≠< =
+z
+≠≠= >
+=>
+≠≠? A
+z
+≠≠B C
+.
+≠≠C D
+ReceiverUser
+≠≠D P
+.
+≠≠P Q
+UserId
+≠≠Q W
 )
-ÆÆ 
+≠≠W X
+)
+≠≠X Y
+.
+ÆÆ 
+	ForMember
+ÆÆ 
+(
+ÆÆ 
+x
+ÆÆ 
+=>
+ÆÆ 
+x
+ÆÆ  !
+.
+ÆÆ! "
+SenderId
+ÆÆ" *
+,
+ÆÆ* +
+y
+ÆÆ, -
+=>
+ÆÆ. 0
+y
+ÆÆ1 2
+.
+ÆÆ2 3
+MapFrom
+ÆÆ3 :
+(
+ÆÆ: ;
+z
+ÆÆ; <
+=>
+ÆÆ= ?
+z
+ÆÆ@ A
+.
+ÆÆA B
+SenderUserId
+ÆÆB N
+)
+ÆÆN O
+)
+ÆÆO P
 ;
-ÆÆ 
+ÆÆP Q
 	CreateMap
 ∞∞ 
 <
-∞∞ 
-User
-∞∞ 
+∞∞ 
+Request
+∞∞ 
 ,
-∞∞  
-GenericPersonModel
-∞∞ .
+∞∞ "
+RequestResponseModel
+∞∞ 3
 >
-∞∞. /
+∞∞3 4
 (
-∞∞/ 0
+∞∞4 5
 )
-∞∞0 1
+∞∞5 6
 .
 ±± 
 	ForMember
@@ -4453,333 +3866,82 @@ ReverseMap
 x
 ±±  !
 .
-±±! "
-UserId
-±±" (
+±±! "
+ReceiverUser
+±±" .
 ,
-±±( )
+±±. /
 y
-±±* +
+±±0 1
 =>
-±±, .
+±±2 4
 y
-±±/ 0
+±±5 6
 .
-±±0 1
+±±6 7
 MapFrom
-±±1 8
+±±7 >
 (
-±±8 9
-z
-±±9 :
-=>
-±±; =
-z
 ±±> ?
-.
+z
 ±±? @
-Id
-±±@ B
-)
-±±B C
-)
-±±C D
-.
-≤≤ 
-	ForMember
-≤≤ 
-(
-≤≤ 
-x
-≤≤ 
 =>
-≤≤ 
-x
-≤≤  !
+±±A C
+z
+±±D E
 .
-≤≤! "
-PersonId
-≤≤" *
+±±E F
+Receiver
+±±F N
+)
+±±N O
+)
+±±O P
+;
+±±P Q
+	CreateMap
+¥¥ 
+<
+¥¥ 
+User
+¥¥ 
 ,
-≤≤* +
-y
-≤≤, -
-=>
-≤≤. 0
-y
-≤≤1 2
-.
-≤≤2 3
-MapFrom
-≤≤3 :
+¥¥ 
+UserSettingsModel
+¥¥ -
+>
+¥¥- .
 (
-≤≤: ;
-z
-≤≤; <
-=>
-≤≤= ?
-z
-≤≤@ A
-.
-≤≤A B
-Person
-≤≤B H
-.
-≤≤H I
-Id
-≤≤I K
+¥¥. /
 )
-≤≤K L
-)
-≤≤L M
+¥¥/ 0
 .
-≥≥ 
-	ForMember
-≥≥ 
+µµ 
+
+ReverseMap
+µµ 
 (
-≥≥ 
-x
-≥≥ 
-=>
-≥≥ 
-x
-≥≥  !
-.
-≥≥! "
-TreeId
-≥≥" (
+µµ 
+)
+µµ 
+;
+µµ 
+	CreateMap
+∑∑ 
+<
+∑∑ 
+User
+∑∑ 
 ,
-≥≥( )
-y
-≥≥* +
-=>
-≥≥, .
-y
-≥≥/ 0
-.
-≥≥0 1
-MapFrom
-≥≥1 8
+∑∑ 
+UserDetailsModel
+∑∑ ,
+>
+∑∑, -
 (
-≥≥8 9
-z
-≥≥9 :
-=>
-≥≥; =
-z
-≥≥> ?
-.
-≥≥? @
-Person
-≥≥@ F
-.
-≥≥F G
-TreeId
-≥≥G M
+∑∑- .
 )
-≥≥M N
-)
-≥≥N O
-.
-¥¥ 
-	ForMember
-¥¥ 
-(
-¥¥ 
-x
-¥¥ 
-=>
-¥¥ 
-x
-¥¥  !
-.
-¥¥! "
-	FirstName
-¥¥" +
-,
-¥¥+ ,
-y
-¥¥- .
-=>
-¥¥/ 1
-y
-¥¥2 3
-.
-¥¥3 4
-MapFrom
-¥¥4 ;
-(
-¥¥; <
-z
-¥¥< =
-=>
-¥¥> @
-z
-¥¥A B
-.
-¥¥B C
-Person
-¥¥C I
-.
-¥¥I J
-	FirstName
-¥¥J S
-)
-¥¥S T
-)
-¥¥T U
-.
-µµ 
-	ForMember
-µµ 
-(
-µµ 
-x
-µµ 
-=>
-µµ 
-x
-µµ  !
-.
-µµ! "
-LastName
-µµ" *
-,
-µµ* +
-y
-µµ, -
-=>
-µµ. 0
-y
-µµ1 2
-.
-µµ2 3
-MapFrom
-µµ3 :
-(
-µµ: ;
-z
-µµ; <
-=>
-µµ= ?
-z
-µµ@ A
-.
-µµA B
-Person
-µµB H
-.
-µµH I
-LastName
-µµI Q
-)
-µµQ R
-)
-µµR S
-.
-∂∂ 
-	ForMember
-∂∂ 
-(
-∂∂ 
-x
-∂∂ 
-=>
-∂∂ 
-x
-∂∂  !
-.
-∂∂! "
-	BirthDate
-∂∂" +
-,
-∂∂+ ,
-y
-∂∂- .
-=>
-∂∂/ 1
-y
-∂∂2 3
-.
-∂∂3 4
-MapFrom
-∂∂4 ;
-(
-∂∂; <
-z
-∂∂< =
-=>
-∂∂> @
-z
-∂∂A B
-.
-∂∂B C
-Person
-∂∂C I
-.
-∂∂I J
-	BirthDate
-∂∂J S
-)
-∂∂S T
-)
-∂∂T U
-.
-∑∑ 
-	ForMember
-∑∑ 
-(
-∑∑ 
-x
-∑∑ 
-=>
-∑∑ 
-x
-∑∑  !
-.
-∑∑! "
-Gender
-∑∑" (
-,
-∑∑( )
-y
-∑∑* +
-=>
-∑∑, .
-y
-∑∑/ 0
-.
-∑∑0 1
-MapFrom
-∑∑1 8
-(
-∑∑8 9
-z
-∑∑9 :
-=>
-∑∑; =
-z
-∑∑> ?
-.
-∑∑? @
-Person
-∑∑@ F
-.
-∑∑F G
-Gender
-∑∑G M
-.
-∑∑M N
-ToString
-∑∑N V
-(
-∑∑V W
-)
-∑∑W X
-)
-∑∑X Y
-)
-∑∑Y Z
+∑∑. /
 .
 ∏∏ 
 	ForMember
@@ -4794,7 +3956,7 @@ ReverseMap
 ∏∏  !
 .
 ∏∏! "
-	BirthDate
+	FirstName
 ∏∏" +
 ,
 ∏∏+ ,
@@ -4822,7 +3984,7 @@ ReverseMap
 ∏∏C I
 .
 ∏∏I J
-	BirthDate
+	FirstName
 ∏∏J S
 )
 ∏∏S T
@@ -4841,95 +4003,331 @@ ReverseMap
 x
 ππ  !
 .
-ππ! "
-ImageId
-ππ" )
+ππ! "
+LastName
+ππ" *
 ,
-ππ) *
+ππ* +
 y
-ππ+ ,
+ππ, -
 =>
-ππ- /
+ππ. 0
 y
-ππ0 1
+ππ1 2
 .
-ππ1 2
+ππ2 3
 MapFrom
-ππ2 9
+ππ3 :
 (
-ππ9 :
+ππ: ;
 z
-ππ: ;
+ππ; <
 =>
-ππ< >
+ππ= ?
 z
-ππ? @
+ππ@ A
 .
-ππ@ A
+ππA B
 Person
-ππA G
+ππB H
 .
-ππG H
-ImageId
-ππH O
+ππH I
+LastName
+ππI Q
 )
-ππO P
+ππQ R
 )
-ππP Q
+ππR S
 .
-∫∫ 
-
-ReverseMap
-∫∫ 
+∫∫ 
+	ForMember
+∫∫ 
 (
-∫∫ 
-)
-∫∫ 
-;
-∫∫ 
-	CreateMap
-ºº 
-<
-ºº 
-User
-ºº 
+∫∫ 
+x
+∫∫ 
+=>
+∫∫ 
+x
+∫∫  !
+.
+∫∫! "
+	BirthDate
+∫∫" +
 ,
-ºº 
-UserUpdateModel
-ºº +
->
-ºº+ ,
+∫∫+ ,
+y
+∫∫- .
+=>
+∫∫/ 1
+y
+∫∫2 3
+.
+∫∫3 4
+MapFrom
+∫∫4 ;
 (
-ºº, -
+∫∫; <
+z
+∫∫< =
+=>
+∫∫> @
+z
+∫∫A B
+.
+∫∫B C
+Person
+∫∫C I
+.
+∫∫I J
+	BirthDate
+∫∫J S
 )
+∫∫S T
+)
+∫∫T U
+.
+ªª 
+	ForMember
+ªª 
+(
+ªª 
+x
+ªª 
+=>
+ªª 
+x
+ªª  !
+.
+ªª! "
+Gender
+ªª" (
+,
+ªª( )
+y
+ªª* +
+=>
+ªª, .
+y
+ªª/ 0
+.
+ªª0 1
+MapFrom
+ªª1 8
+(
+ªª8 9
+z
+ªª9 :
+=>
+ªª; =
+z
+ªª> ?
+.
+ªª? @
+Person
+ªª@ F
+.
+ªªF G
+Gender
+ªªG M
+)
+ªªM N
+)
+ªªN O
+.
+ºº 
+	ForMember
+ºº 
+(
+ºº 
+x
+ºº 
+=>
+ºº 
+x
+ºº  !
+.
+ºº! "
+Nationality
+ºº" -
+,
 ºº- .
+y
+ºº/ 0
+=>
+ºº1 3
+y
+ºº4 5
 .
-ΩΩ 
-
-ReverseMap
-ΩΩ 
+ºº5 6
+MapFrom
+ºº6 =
 (
-ΩΩ 
+ºº= >
+z
+ºº> ?
+=>
+ºº@ B
+z
+ººC D
+.
+ººD E
+Person
+ººE K
+.
+ººK L
+Nationality
+ººL W
 )
-ΩΩ 
-;
-ΩΩ 
-	CreateMap
-øø 
-<
-øø 
-User
-øø 
+ººW X
+)
+ººX Y
+.
+ΩΩ 
+	ForMember
+ΩΩ 
+(
+ΩΩ 
+x
+ΩΩ 
+=>
+ΩΩ 
+x
+ΩΩ  !
+.
+ΩΩ! "
+Religion
+ΩΩ" *
 ,
-øø 
-UserPositionModel
-øø -
->
-øø- .
+ΩΩ* +
+y
+ΩΩ, -
+=>
+ΩΩ. 0
+y
+ΩΩ1 2
+.
+ΩΩ2 3
+MapFrom
+ΩΩ3 :
 (
-øø. /
+ΩΩ: ;
+z
+ΩΩ; <
+=>
+ΩΩ= ?
+z
+ΩΩ@ A
+.
+ΩΩA B
+Person
+ΩΩB H
+.
+ΩΩH I
+Religion
+ΩΩI Q
 )
-øø/ 0
+ΩΩQ R
+)
+ΩΩR S
+.
+ææ 
+	ForMember
+ææ 
+(
+ææ 
+x
+ææ 
+=>
+ææ 
+x
+ææ  !
+.
+ææ! "
+
+BirthPlace
+ææ" ,
+,
+ææ, -
+y
+ææ. /
+=>
+ææ0 2
+y
+ææ3 4
+.
+ææ4 5
+MapFrom
+ææ5 <
+(
+ææ< =
+z
+ææ= >
+=>
+ææ? A
+z
+ææB C
+.
+ææC D
+Person
+ææD J
+.
+ææJ K
+
+BirthPlace
+ææK U
+)
+ææU V
+)
+ææV W
+.
+øø 
+	ForMember
+øø 
+(
+øø 
+x
+øø 
+=>
+øø 
+x
+øø  !
+.
+øø! "
+LivingPlace
+øø" -
+,
+øø- .
+y
+øø/ 0
+=>
+øø1 3
+y
+øø4 5
+.
+øø5 6
+MapFrom
+øø6 =
+(
+øø= >
+z
+øø> ?
+=>
+øø@ B
+z
+øøC D
+.
+øøD E
+Person
+øøE K
+.
+øøK L
+LivingPlace
+øøL W
+)
+øøW X
+)
+øøX Y
 .
 ¿¿ 
 	ForMember
@@ -4943,37 +4341,49 @@ ReverseMap
 x
 ¿¿  !
 .
-¿¿! "
-UserId
-¿¿" (
+¿¿! "
+Parents
+¿¿" )
 ,
-¿¿( )
+¿¿) *
 y
-¿¿* +
+¿¿+ ,
 =>
-¿¿, .
+¿¿- /
 y
-¿¿/ 0
+¿¿0 1
 .
-¿¿0 1
+¿¿1 2
 MapFrom
-¿¿1 8
+¿¿2 9
 (
-¿¿8 9
+¿¿9 :
 z
-¿¿9 :
+¿¿: ;
 =>
-¿¿; =
+¿¿< >
 z
-¿¿> ?
+¿¿? @
 .
-¿¿? @
-Id
-¿¿@ B
+¿¿@ A
+Person
+¿¿A G
+.
+¿¿G H
+Parents
+¿¿H O
+.
+¿¿O P
+ToList
+¿¿P V
+(
+¿¿V W
 )
-¿¿B C
+¿¿W X
 )
-¿¿C D
+¿¿X Y
+)
+¿¿Y Z
 .
 ¡¡ 
 	ForMember
@@ -4987,41 +4397,49 @@ ReverseMap
 x
 ¡¡  !
 .
-¡¡! "
-	FirstName
-¡¡" +
+¡¡! "
+Children
+¡¡" *
 ,
-¡¡+ ,
+¡¡* +
 y
-¡¡- .
+¡¡, -
 =>
-¡¡/ 1
+¡¡. 0
 y
-¡¡2 3
+¡¡1 2
 .
-¡¡3 4
+¡¡2 3
 MapFrom
-¡¡4 ;
+¡¡3 :
 (
-¡¡; <
+¡¡: ;
 z
-¡¡< =
+¡¡; <
 =>
-¡¡> @
+¡¡= ?
 z
-¡¡A B
+¡¡@ A
 .
-¡¡B C
+¡¡A B
 Person
-¡¡C I
+¡¡B H
 .
-¡¡I J
-	FirstName
-¡¡J S
+¡¡H I
+Children
+¡¡I Q
+.
+¡¡Q R
+ToList
+¡¡R X
+(
+¡¡X Y
 )
-¡¡S T
+¡¡Y Z
 )
-¡¡T U
+¡¡Z [
+)
+¡¡[ \
 .
 ¬¬ 
 	ForMember
@@ -5035,41 +4453,37 @@ ReverseMap
 x
 ¬¬  !
 .
-¬¬! "
-LastName
-¬¬" *
+¬¬! "
+UserId
+¬¬" (
 ,
-¬¬* +
+¬¬( )
 y
-¬¬, -
+¬¬* +
 =>
-¬¬. 0
+¬¬, .
 y
-¬¬1 2
+¬¬/ 0
 .
-¬¬2 3
+¬¬0 1
 MapFrom
-¬¬3 :
+¬¬1 8
 (
-¬¬: ;
+¬¬8 9
 z
-¬¬; <
+¬¬9 :
 =>
-¬¬= ?
+¬¬; =
 z
-¬¬@ A
+¬¬> ?
 .
-¬¬A B
-Person
-¬¬B H
-.
-¬¬H I
-LastName
-¬¬I Q
+¬¬? @
+Id
+¬¬@ B
 )
-¬¬Q R
+¬¬B C
 )
-¬¬R S
+¬¬C D
 .
 √√ 
 	ForMember
@@ -5083,41 +4497,41 @@ ReverseMap
 x
 √√  !
 .
-√√! "
-Latitude
-√√" *
+√√! "
+TreeId
+√√" (
 ,
-√√* +
+√√( )
 y
-√√, -
+√√* +
 =>
-√√. 0
+√√, .
 y
-√√1 2
+√√/ 0
 .
-√√2 3
+√√0 1
 MapFrom
-√√3 :
+√√1 8
 (
-√√: ;
+√√8 9
 z
-√√; <
+√√9 :
 =>
-√√= ?
+√√; =
 z
-√√@ A
+√√> ?
 .
-√√A B
-Position
-√√B J
+√√? @
+Person
+√√@ F
 .
-√√J K
-Latitude
-√√K S
+√√F G
+TreeId
+√√G M
 )
-√√S T
+√√M N
 )
-√√T U
+√√N O
 .
 ƒƒ 
 	ForMember
@@ -5131,91 +4545,52 @@ ReverseMap
 x
 ƒƒ  !
 .
-ƒƒ! "
-	Longitude
-ƒƒ" +
+ƒƒ! "
+PersonId
+ƒƒ" *
 ,
-ƒƒ+ ,
+ƒƒ* +
 y
-ƒƒ- .
+ƒƒ, -
 =>
-ƒƒ/ 1
+ƒƒ. 0
 y
-ƒƒ2 3
+ƒƒ1 2
 .
-ƒƒ3 4
+ƒƒ2 3
 MapFrom
-ƒƒ4 ;
+ƒƒ3 :
 (
-ƒƒ; <
+ƒƒ: ;
 z
-ƒƒ< =
+ƒƒ; <
 =>
-ƒƒ> @
+ƒƒ= ?
 z
-ƒƒA B
+ƒƒ@ A
 .
-ƒƒB C
-Position
-ƒƒC K
+ƒƒA B
+Person
+ƒƒB H
 .
-ƒƒK L
-	Longitude
-ƒƒL U
+ƒƒH I
+Id
+ƒƒI K
 )
-ƒƒU V
+ƒƒK L
 )
-ƒƒV W
+ƒƒL M
 .
-≈≈ 
-	ForMember
-≈≈ 
+≈≈ 
+
+ReverseMap
+≈≈ 
 (
-≈≈ 
-x
-≈≈ 
-=>
-≈≈ 
-x
-≈≈  !
-.
-≈≈! "
-	UpdatedOn
-≈≈" +
-,
-≈≈+ ,
-y
-≈≈- .
-=>
-≈≈/ 1
-y
-≈≈2 3
-.
-≈≈3 4
-MapFrom
-≈≈4 ;
-(
-≈≈; <
-z
-≈≈< =
-=>
-≈≈> @
-z
-≈≈A B
-.
-≈≈B C
-Position
-≈≈C K
-.
-≈≈K L
-	UpdatedOn
-≈≈L U
+≈≈ 
 )
-≈≈U V
-)
-≈≈V W
+≈≈ 
 ;
-≈≈W X
+≈≈ 
 	CreateMap
 «« 
 <
@@ -5223,116 +4598,134 @@ ReverseMap
 User
 «« 
 ,
-«« 
-RegisterModel
-«« )
+«« 
+UserUpdateModel
+«« +
 >
-««) *
-(
-««* +
-)
 ««+ ,
+(
+««, -
+)
+««- .
 .
-»» 
+»» 
 
 ReverseMap
-»» 
+»» 
 (
+»» 
+)
 »» 
-)
-»» 
 ;
-»» 
+»» 
 	CreateMap
-   
+ÀÀ 
 <
-   
-RegisterModel
-   #
-,
-  # $
-Person
-  % +
->
-  + ,
-(
-  , -
-)
-  - .
-.
-ÀÀ 
-	ForMember
-ÀÀ 
-(
-ÀÀ 
-x
-ÀÀ 
-=>
-ÀÀ 
-x
-ÀÀ  !
-.
-ÀÀ! "
-Gender
-ÀÀ" (
-,
-ÀÀ( )
-y
-ÀÀ* +
-=>
-ÀÀ, .
-y
-ÀÀ/ 0
-.
-ÀÀ0 1
-MapFrom
-ÀÀ1 8
-(
-ÀÀ8 9
-z
-ÀÀ9 :
-=>
-ÀÀ; =
-z
-ÀÀ> ?
-.
-ÀÀ? @
-Gender
-ÀÀ@ F
-==
-ÀÀG I
-$str
-ÀÀJ M
-?
-ÀÀN O
-$char
-ÀÀP S
-:
-ÀÀT U
-$char
-ÀÀV Y
-)
-ÀÀY Z
-)
-ÀÀZ [
-;
-ÀÀ[ \
-	CreateMap
-ÕÕ 
-<
-ÕÕ 
+ÀÀ 
 User
-ÕÕ 
+ÀÀ 
 ,
-ÕÕ  
-LoginResponseModel
-ÕÕ .
+ÀÀ  
+GenericPersonModel
+ÀÀ .
 >
-ÕÕ. /
+ÀÀ. /
 (
-ÕÕ/ 0
+ÀÀ/ 0
 )
-ÕÕ0 1
+ÀÀ0 1
+.
+ÃÃ 
+	ForMember
+ÃÃ 
+(
+ÃÃ 
+x
+ÃÃ 
+=>
+ÃÃ 
+x
+ÃÃ  !
+.
+ÃÃ! "
+UserId
+ÃÃ" (
+,
+ÃÃ( )
+y
+ÃÃ* +
+=>
+ÃÃ, .
+y
+ÃÃ/ 0
+.
+ÃÃ0 1
+MapFrom
+ÃÃ1 8
+(
+ÃÃ8 9
+z
+ÃÃ9 :
+=>
+ÃÃ; =
+z
+ÃÃ> ?
+.
+ÃÃ? @
+Id
+ÃÃ@ B
+)
+ÃÃB C
+)
+ÃÃC D
+.
+ÕÕ 
+	ForMember
+ÕÕ 
+(
+ÕÕ 
+x
+ÕÕ 
+=>
+ÕÕ 
+x
+ÕÕ  !
+.
+ÕÕ! "
+PersonId
+ÕÕ" *
+,
+ÕÕ* +
+y
+ÕÕ, -
+=>
+ÕÕ. 0
+y
+ÕÕ1 2
+.
+ÕÕ2 3
+MapFrom
+ÕÕ3 :
+(
+ÕÕ: ;
+z
+ÕÕ; <
+=>
+ÕÕ= ?
+z
+ÕÕ@ A
+.
+ÕÕA B
+Person
+ÕÕB H
+.
+ÕÕH I
+Id
+ÕÕI K
+)
+ÕÕK L
+)
+ÕÕL M
 .
 ŒŒ 
 	ForMember
@@ -5394,154 +4787,928 @@ ReverseMap
 x
 œœ  !
 .
-œœ! "
-PersonId
-œœ" *
+œœ! "
+	FirstName
+œœ" +
 ,
-œœ* +
+œœ+ ,
 y
-œœ, -
+œœ- .
 =>
-œœ. 0
+œœ/ 1
 y
-œœ1 2
+œœ2 3
 .
-œœ2 3
+œœ3 4
 MapFrom
-œœ3 :
+œœ4 ;
 (
-œœ: ;
+œœ; <
 z
-œœ; <
+œœ< =
 =>
-œœ= ?
+œœ> @
 z
-œœ@ A
+œœA B
 .
-œœA B
+œœB C
 Person
-œœB H
+œœC I
 .
-œœH I
-Id
-œœI K
+œœI J
+	FirstName
+œœJ S
 )
-œœK L
+œœS T
 )
-œœL M
-;
-œœM N
-	CreateMap
-—— 
-<
-—— 
-Position
-—— 
+œœT U
+.
+–– 
+	ForMember
+–– 
+(
+–– 
+x
+–– 
+=>
+–– 
+x
+––  !
+.
+––! "
+LastName
+––" *
 ,
-—— 
-PositionModel
-——  -
->
-——- .
+––* +
+y
+––, -
+=>
+––. 0
+y
+––1 2
+.
+––2 3
+MapFrom
+––3 :
 (
-——. /
+––: ;
+z
+––; <
+=>
+––= ?
+z
+––@ A
+.
+––A B
+Person
+––B H
+.
+––H I
+LastName
+––I Q
 )
-——/ 0
-;
-——0 1
-}
-““ 	
-private
-‘‘ 
-static
-‘‘ 
-T
-‘‘ 
-DefineMapping
-‘‘ &
-<
-‘‘& '
-T
-‘‘' (
->
-‘‘( )
+––Q R
+)
+––R S
+.
+—— 
+	ForMember
+—— 
 (
+—— 
+x
+—— 
+=>
+—— 
+x
+——  !
+.
+——! "
+	BirthDate
+——" +
+,
+——+ ,
+y
+——- .
+=>
+——/ 1
+y
+——2 3
+.
+——3 4
+MapFrom
+——4 ;
+(
+——; <
+z
+——< =
+=>
+——> @
+z
+——A B
+.
+——B C
+Person
+——C I
+.
+——I J
+	BirthDate
+——J S
+)
+——S T
+)
+——T U
+.
+““ 
+	ForMember
+““ 
+(
+““ 
+x
+““ 
+=>
+““ 
+x
+““  !
+.
+““! "
+Gender
+““" (
+,
+““( )
+y
+““* +
+=>
+““, .
+y
+““/ 0
+.
+““0 1
+MapFrom
+““1 8
+(
+““8 9
+z
+““9 :
+=>
+““; =
+z
+““> ?
+.
+““? @
+Person
+““@ F
+.
+““F G
+Gender
+““G M
+.
+““M N
+ToString
+““N V
+(
+““V W
+)
+““W X
+)
+““X Y
+)
+““Y Z
+.
+”” 
+	ForMember
+”” 
+(
+”” 
+x
+”” 
+=>
+”” 
+x
+””  !
+.
+””! "
+	BirthDate
+””" +
+,
+””+ ,
+y
+””- .
+=>
+””/ 1
+y
+””2 3
+.
+””3 4
+MapFrom
+””4 ;
+(
+””; <
+z
+””< =
+=>
+””> @
+z
+””A B
+.
+””B C
+Person
+””C I
+.
+””I J
+	BirthDate
+””J S
+)
+””S T
+)
+””T U
+.
+‘‘ 
+	ForMember
+‘‘ 
+(
+‘‘ 
+x
+‘‘ 
+=>
+‘‘ 
+x
+‘‘  !
+.
+‘‘! "
+ImageId
+‘‘" )
+,
 ‘‘) *
-T
-‘‘* +
-first
-‘‘, 1
+y
+‘‘+ ,
+=>
+‘‘- /
+y
+‘‘0 1
+.
+‘‘1 2
+MapFrom
+‘‘2 9
+(
+‘‘9 :
+z
+‘‘: ;
+=>
+‘‘< >
+z
+‘‘? @
+.
+‘‘@ A
+Person
+‘‘A G
+.
+‘‘G H
+ImageId
+‘‘H O
+)
+‘‘O P
+)
+‘‘P Q
+.
+’’ 
+
+ReverseMap
+’’ 
+(
+’’ 
+)
+’’ 
+;
+’’ 
+	CreateMap
+ÿÿ 
+<
+ÿÿ 
+User
+ÿÿ 
 ,
-‘‘1 2
+ÿÿ 
+UserPositionModel
+ÿÿ -
+>
+ÿÿ- .
+(
+ÿÿ. /
+)
+ÿÿ/ 0
+.
+ŸŸ 
+	ForMember
+ŸŸ 
+(
+ŸŸ 
+x
+ŸŸ 
+=>
+ŸŸ 
+x
+ŸŸ  !
+.
+ŸŸ! "
+UserId
+ŸŸ" (
+,
+ŸŸ( )
+y
+ŸŸ* +
+=>
+ŸŸ, .
+y
+ŸŸ/ 0
+.
+ŸŸ0 1
+MapFrom
+ŸŸ1 8
+(
+ŸŸ8 9
+z
+ŸŸ9 :
+=>
+ŸŸ; =
+z
+ŸŸ> ?
+.
+ŸŸ? @
+Id
+ŸŸ@ B
+)
+ŸŸB C
+)
+ŸŸC D
+.
+⁄⁄ 
+	ForMember
+⁄⁄ 
+(
+⁄⁄ 
+x
+⁄⁄ 
+=>
+⁄⁄ 
+x
+⁄⁄  !
+.
+⁄⁄! "
+	FirstName
+⁄⁄" +
+,
+⁄⁄+ ,
+y
+⁄⁄- .
+=>
+⁄⁄/ 1
+y
+⁄⁄2 3
+.
+⁄⁄3 4
+MapFrom
+⁄⁄4 ;
+(
+⁄⁄; <
+z
+⁄⁄< =
+=>
+⁄⁄> @
+z
+⁄⁄A B
+.
+⁄⁄B C
+Person
+⁄⁄C I
+.
+⁄⁄I J
+	FirstName
+⁄⁄J S
+)
+⁄⁄S T
+)
+⁄⁄T U
+.
+€€ 
+	ForMember
+€€ 
+(
+€€ 
+x
+€€ 
+=>
+€€ 
+x
+€€  !
+.
+€€! "
+LastName
+€€" *
+,
+€€* +
+y
+€€, -
+=>
+€€. 0
+y
+€€1 2
+.
+€€2 3
+MapFrom
+€€3 :
+(
+€€: ;
+z
+€€; <
+=>
+€€= ?
+z
+€€@ A
+.
+€€A B
+Person
+€€B H
+.
+€€H I
+LastName
+€€I Q
+)
+€€Q R
+)
+€€R S
+.
+‹‹ 
+	ForMember
+‹‹ 
+(
+‹‹ 
+x
+‹‹ 
+=>
+‹‹ 
+x
+‹‹  !
+.
+‹‹! "
+Latitude
+‹‹" *
+,
+‹‹* +
+y
+‹‹, -
+=>
+‹‹. 0
+y
+‹‹1 2
+.
+‹‹2 3
+MapFrom
+‹‹3 :
+(
+‹‹: ;
+z
+‹‹; <
+=>
+‹‹= ?
+z
+‹‹@ A
+.
+‹‹A B
+Position
+‹‹B J
+.
+‹‹J K
+Latitude
+‹‹K S
+)
+‹‹S T
+)
+‹‹T U
+.
+›› 
+	ForMember
+›› 
+(
+›› 
+x
+›› 
+=>
+›› 
+x
+››  !
+.
+››! "
+	Longitude
+››" +
+,
+››+ ,
+y
+››- .
+=>
+››/ 1
+y
+››2 3
+.
+››3 4
+MapFrom
+››4 ;
+(
+››; <
+z
+››< =
+=>
+››> @
+z
+››A B
+.
+››B C
+Position
+››C K
+.
+››K L
+	Longitude
+››L U
+)
+››U V
+)
+››V W
+.
+ﬁﬁ 
+	ForMember
+ﬁﬁ 
+(
+ﬁﬁ 
+x
+ﬁﬁ 
+=>
+ﬁﬁ 
+x
+ﬁﬁ  !
+.
+ﬁﬁ! "
+	UpdatedOn
+ﬁﬁ" +
+,
+ﬁﬁ+ ,
+y
+ﬁﬁ- .
+=>
+ﬁﬁ/ 1
+y
+ﬁﬁ2 3
+.
+ﬁﬁ3 4
+MapFrom
+ﬁﬁ4 ;
+(
+ﬁﬁ; <
+z
+ﬁﬁ< =
+=>
+ﬁﬁ> @
+z
+ﬁﬁA B
+.
+ﬁﬁB C
+Position
+ﬁﬁC K
+.
+ﬁﬁK L
+	UpdatedOn
+ﬁﬁL U
+)
+ﬁﬁU V
+)
+ﬁﬁV W
+;
+ﬁﬁW X
+	CreateMap
+‡‡ 
+<
+‡‡ 
+Position
+‡‡ 
+,
+‡‡ 
+PositionModel
+‡‡  -
+>
+‡‡- .
+(
+‡‡. /
+)
+‡‡/ 0
+;
+‡‡0 1
+	CreateMap
+„„ 
+<
+„„ 
+User
+„„ 
+,
+„„ 
+RegisterModel
+„„ )
+>
+„„) *
+(
+„„* +
+)
+„„+ ,
+.
+‰‰ 
+
+ReverseMap
+‰‰ 
+(
+‰‰ 
+)
+‰‰ 
+;
+‰‰ 
+	CreateMap
+ÊÊ 
+<
+ÊÊ 
+RegisterModel
+ÊÊ #
+,
+ÊÊ# $
+Person
+ÊÊ% +
+>
+ÊÊ+ ,
+(
+ÊÊ, -
+)
+ÊÊ- .
+.
+ÁÁ 
+	ForMember
+ÁÁ 
+(
+ÁÁ 
+x
+ÁÁ 
+=>
+ÁÁ 
+x
+ÁÁ  !
+.
+ÁÁ! "
+Gender
+ÁÁ" (
+,
+ÁÁ( )
+y
+ÁÁ* +
+=>
+ÁÁ, .
+y
+ÁÁ/ 0
+.
+ÁÁ0 1
+MapFrom
+ÁÁ1 8
+(
+ÁÁ8 9
+z
+ÁÁ9 :
+=>
+ÁÁ; =
+z
+ÁÁ> ?
+.
+ÁÁ? @
+Gender
+ÁÁ@ F
+==
+ÁÁG I
+$str
+ÁÁJ M
+?
+ÁÁN O
+$char
+ÁÁP S
+:
+ÁÁT U
+$char
+ÁÁV Y
+)
+ÁÁY Z
+)
+ÁÁZ [
+;
+ÁÁ[ \
+	CreateMap
+ÈÈ 
+<
+ÈÈ 
+User
+ÈÈ 
+,
+ÈÈ  
+LoginResponseModel
+ÈÈ .
+>
+ÈÈ. /
+(
+ÈÈ/ 0
+)
+ÈÈ0 1
+.
+ÍÍ 
+	ForMember
+ÍÍ 
+(
+ÍÍ 
+x
+ÍÍ 
+=>
+ÍÍ 
+x
+ÍÍ  !
+.
+ÍÍ! "
+TreeId
+ÍÍ" (
+,
+ÍÍ( )
+y
+ÍÍ* +
+=>
+ÍÍ, .
+y
+ÍÍ/ 0
+.
+ÍÍ0 1
+MapFrom
+ÍÍ1 8
+(
+ÍÍ8 9
+z
+ÍÍ9 :
+=>
+ÍÍ; =
+z
+ÍÍ> ?
+.
+ÍÍ? @
+Person
+ÍÍ@ F
+.
+ÍÍF G
+TreeId
+ÍÍG M
+)
+ÍÍM N
+)
+ÍÍN O
+.
+ÎÎ 
+	ForMember
+ÎÎ 
+(
+ÎÎ 
+x
+ÎÎ 
+=>
+ÎÎ 
+x
+ÎÎ  !
+.
+ÎÎ! "
+PersonId
+ÎÎ" *
+,
+ÎÎ* +
+y
+ÎÎ, -
+=>
+ÎÎ. 0
+y
+ÎÎ1 2
+.
+ÎÎ2 3
+MapFrom
+ÎÎ3 :
+(
+ÎÎ: ;
+z
+ÎÎ; <
+=>
+ÎÎ= ?
+z
+ÎÎ@ A
+.
+ÎÎA B
+Person
+ÎÎB H
+.
+ÎÎH I
+Id
+ÎÎI K
+)
+ÎÎK L
+)
+ÎÎL M
+;
+ÎÎM N
+}
+ÏÏ 	
+private
+ÓÓ 
+static
+ÓÓ 
 T
-‘‘3 4
-second
-‘‘5 ;
-)
-‘‘; <
-{
-’’ 	
-if
-÷÷ 
+ÓÓ 
+DefineMapping
+ÓÓ &
+<
+ÓÓ& '
+T
+ÓÓ' (
+>
+ÓÓ( )
 (
-÷÷ 
+ÓÓ) *
+T
+ÓÓ* +
 first
-÷÷ 
-!=
-÷÷ 
-null
-÷÷ 
+ÓÓ, 1
+,
+ÓÓ1 2
+T
+ÓÓ3 4
+second
+ÓÓ5 ;
 )
-÷÷ 
+ÓÓ; <
 {
-◊◊ 
-return
-ÿÿ 
-first
-ÿÿ 
-;
-ÿÿ 
-}
-ŸŸ 
+ÔÔ 	
 if
-€€ 
+ 
 (
-€€ 
-second
-€€ 
+ 
+first
+ 
 !=
-€€ 
+ 
 null
-€€ 
+ 
 )
-€€ 
+ 
 {
-‹‹ 
+ÒÒ 
 return
-›› 
-second
-›› 
+ÚÚ 
+first
+ÚÚ 
 ;
-›› 
+ÚÚ 
 }
-ﬁﬁ 
+ÛÛ 
+if
+ıı 
+(
+ıı 
+second
+ıı 
+!=
+ıı 
+null
+ıı 
+)
+ıı 
+{
+ˆˆ 
 return
-‡‡ 
+˜˜ 
+second
+˜˜ 
+;
+˜˜ 
+}
+¯¯ 
+return
+˙˙ 
 default
-‡‡ 
+˙˙ 
 (
-‡‡ 
+˙˙ 
 T
-‡‡ 
+˙˙ 
 )
-‡‡ 
+˙˙ 
 ;
-‡‡ 
+˙˙ 
 }
-·· 	
+˚˚ 	
 }
-‚‚ 
-}„„ ®
+¸¸ 
+}˝˝ ®
 eE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\BaseService.cs
 	namespace 	
 GenealogyTree
@@ -5601,392 +5768,328 @@ jE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IMapper  
 _mapper! (
 ;( )
-public 
-EducationService 
-(  
-IUnitOfWork  +
+public 
+EducationService 
+(  
+IUnitOfWork  +
 
-unitOfWork, 6
-,6 7
-IMapper8 ?
-mapper@ F
-)F G
-:H I
-baseJ N
-(N O
+unitOfWork, 6
+,6 7
+IMapper8 ?
+mapper@ F
+)F G
+:H I
+baseJ N
+(N O
 
-unitOfWorkO Y
-)Y Z
-{ 	
-_mapper 
-= 
-mapper 
-; 
-} 	
-public 
-List 
-< 
-EducationModel "
->" ##
-GetAllEducationsForUser$ ;
-(; <
-Guid< @
-userIdA G
-)G H
-{ 	
-List 
-< 
-	Education 
-> 
-
-educations &
-=' (
-
-unitOfWork) 3
-.3 4
-	Education4 =
-.= >
-Filter> D
-(D E
-xE F
-=>G I
-xJ K
-.K L
-UserIdL R
-==S U
-userIdV \
-)\ ]
-.] ^
-Include^ e
-(e f
-ef g
-=>h j
-ek l
-.l m
-EducationLevelm {
-){ |
-.| }
-ToList	} É
-(
-É Ñ
-)
-Ñ Ö
-;
-Ö Ü
+unitOfWorkO Y
+)Y Z
+{ 	
+_mapper 
+= 
+mapper 
+; 
+} 	
+public 
+List 
+< 
+EducationModel "
+>" ##
+GetAllEducationsForUser$ ;
+(; <
+Guid< @
+userIdA G
+)G H
+{ 	
 List 
-< 
-EducationModel 
->  
-returnEvent! ,
-=- .
-_mapper/ 6
-.6 7
-Map7 :
-<: ;
-List; ?
-<? @
-EducationModel@ N
->N O
->O P
-(P Q
+< 
+	Education 
+> 
 
-educationsQ [
-)[ \
-;\ ]
-return 
-returnEvent 
-; 
-} 	
-public 
-async 
-Task 
-< 
-EducationModel (
->( )
-GetEducationAsync* ;
-(; <
-int< ?
-educationId@ K
-)K L
-{ 	
-	Education   
-	education   
-=    !
-await  " '
+educations &
+=' (
 
-unitOfWork  ( 2
-.  2 3
-	Education  3 <
-.  < =
-FindById  = E
-(  E F
-educationId  F Q
-)  Q R
-;  R S
-EducationModel!! 
-returnEvent!! &
-=!!' (
-_mapper!!) 0
-.!!0 1
-Map!!1 4
-<!!4 5
-EducationModel!!5 C
->!!C D
-(!!D E
-	education!!E N
-)!!N O
-;!!O P
-return"" 
-returnEvent"" 
-;"" 
-}## 	
-public%% 
-async%% 
-Task%% 
-<%% 
-EducationModel%% (
->%%( )
-AddEducationAsync%%* ;
-(%%; <
-EducationModel%%< J
-	education%%K T
-)%%T U
-{&& 	
-if'' 
-('' 
-	education'' 
-=='' 
-null'' !
-)''! "
-{(( 
-return)) 
-null)) 
-;)) 
-}** 
-	Education++ 
-educationEntity++ %
-=++& '
-_mapper++( /
-.++/ 0
-Map++0 3
-<++3 4
-	Education++4 =
->++= >
-(++> ?
-	education++? H
-)++H I
-;++I J
-educationEntity,, 
-.,, 
-EducationLevel,, *
-=,,+ ,
-null,,- 1
-;,,1 2
-educationEntity-- 
-=-- 
-await-- #
+unitOfWork) 3
+.3 4
+	Education4 =
+.= >
+Filter> D
+(D E
+xE F
+=>G I
+xJ K
+.K L
+UserIdL R
+==S U
+userIdV \
+)\ ]
+.] ^
+Include^ e
+(e f
+ef g
+=>h j
+ek l
+.l m
+EducationLevelm {
+){ |
+.| }
+ToList	} É
+(
+É Ñ
+)
+Ñ Ö
+;
+Ö Ü
+List 
+< 
+EducationModel 
+>  
+returnEvent! ,
+=- .
+_mapper/ 6
+.6 7
+Map7 :
+<: ;
+List; ?
+<? @
+EducationModel@ N
+>N O
+>O P
+(P Q
 
-unitOfWork--$ .
-.--. /
-	Education--/ 8
-.--8 9
-Create--9 ?
-(--? @
-educationEntity--@ O
-)--O P
-;--P Q
-EducationModel.. 
-returnEvent.. &
-=..' (
-_mapper..) 0
-...0 1
-Map..1 4
-<..4 5
-EducationModel..5 C
->..C D
-(..D E
-educationEntity..E T
-)..T U
-;..U V
-return// 
-returnEvent// 
-;// 
-}00 	
-public11 
-async11 
-Task11 
-<11 
-EducationModel11 (
->11( ) 
-UpdateEducationAsync11* >
-(11> ?
-EducationModel11? M
-	education11N W
-)11W X
-{22 	
-if33 
-(33 
-	education33 
-==33 
-null33 !
-)33! "
-{44 
-return55 
-null55 
-;55 
-}66 
-	Education77 
-educationEntity77 %
-=77& '
-_mapper77( /
-.77/ 0
-Map770 3
-<773 4
-	Education774 =
->77= >
-(77> ?
-	education77? H
-)77H I
-;77I J
-educationEntity88 
-.88 
-EducationLevel88 *
-=88+ ,
-null88- 1
-;881 2
-educationEntity99 
-=99 
-await99 #
+educationsQ [
+)[ \
+;\ ]
+return 
+returnEvent 
+; 
+} 	
+public   
+async   
+Task   
+<   
+EducationModel   (
+>  ( )
+GetEducationAsync  * ;
+(  ; <
+int  < ?
+educationId  @ K
+)  K L
+{!! 	
+	Education"" 
+	education"" 
+=""  !
+await""" '
 
-unitOfWork99$ .
-.99. /
-	Education99/ 8
-.998 9
-Update999 ?
-(99? @
-educationEntity99@ O
-)99O P
-;99P Q
-EducationModel:: 
-returnEvent:: &
-=::' (
-_mapper::) 0
-.::0 1
-Map::1 4
-<::4 5
-EducationModel::5 C
->::C D
-(::D E
-educationEntity::E T
-)::T U
-;::U V
-return;; 
-returnEvent;; 
-;;; 
-}<< 	
-public>> 
-async>> 
-Task>> 
-<>> 
-EducationModel>> (
->>>( ) 
-DeleteEducationAsync>>* >
-(>>> ?
-int>>? B
-educationId>>C N
-)>>N O
-{?? 	
-	Education@@ 
-educationEntity@@ %
-=@@& '
-await@@( -
+unitOfWork""( 2
+.""2 3
+	Education""3 <
+.""< =
+FindById""= E
+(""E F
+educationId""F Q
+)""Q R
+;""R S
+EducationModel## 
+returnEvent## &
+=##' (
+_mapper##) 0
+.##0 1
+Map##1 4
+<##4 5
+EducationModel##5 C
+>##C D
+(##D E
+	education##E N
+)##N O
+;##O P
+return$$ 
+returnEvent$$ 
+;$$ 
+}%% 	
+public'' 
+async'' 
+Task'' 
+<'' 
+EducationModel'' (
+>''( )
+AddEducationAsync''* ;
+(''; <
+EducationModel''< J
+	education''K T
+)''T U
+{(( 	
+if)) 
+()) 
+	education)) 
+==)) 
+null)) !
+)))! "
+{** 
+return++ 
+null++ 
+;++ 
+},, 
+	Education.. 
+educationEntity.. %
+=..& '
+_mapper..( /
+.../ 0
+Map..0 3
+<..3 4
+	Education..4 =
+>..= >
+(..> ?
+	education..? H
+)..H I
+;..I J
+educationEntity// 
+.// 
+EducationLevel// *
+=//+ ,
+null//- 1
+;//1 2
+educationEntity00 
+=00 
+await00 #
 
-unitOfWork@@. 8
-.@@8 9
-	Education@@9 B
-.@@B C
-Delete@@C I
-(@@I J
-educationId@@J U
-)@@U V
-;@@V W
-EducationModelAA 
-returnEventAA &
-=AA' (
-_mapperAA) 0
-.AA0 1
-MapAA1 4
-<AA4 5
-EducationModelAA5 C
->AAC D
-(AAD E
-educationEntityAAE T
-)AAT U
-;AAU V
-returnBB 
-returnEventBB 
-;BB 
-}CC 	
-publicEE 
-asyncEE 
-TaskEE 
-<EE 
-ListEE 
-<EE 
-GenericNameModelEE /
->EE/ 0
->EE0 1&
-GetAllEducationLevelsAsyncEE2 L
-(EEL M
-)EEM N
-{FF 	
-ListGG 
-<GG 
-EducationLevelGG 
->GG  
-educationLevelsGG! 0
-=GG1 2
+unitOfWork00$ .
+.00. /
+	Education00/ 8
+.008 9
+Create009 ?
+(00? @
+educationEntity00@ O
+)00O P
+;00P Q
+EducationModel11 
+returnEvent11 &
+=11' (
+_mapper11) 0
+.110 1
+Map111 4
+<114 5
+EducationModel115 C
+>11C D
+(11D E
+educationEntity11E T
+)11T U
+;11U V
+return33 
+returnEvent33 
+;33 
+}44 	
+public55 
+async55 
+Task55 
+<55 
+EducationModel55 (
+>55( ) 
+UpdateEducationAsync55* >
+(55> ?
+EducationModel55? M
+	education55N W
+)55W X
+{66 	
+if77 
+(77 
+	education77 
+==77 
+null77 !
+)77! "
+{88 
+return99 
+null99 
+;99 
+}:: 
+	Education<< 
+educationEntity<< %
+=<<& '
+_mapper<<( /
+.<</ 0
+Map<<0 3
+<<<3 4
+	Education<<4 =
+><<= >
+(<<> ?
+	education<<? H
+)<<H I
+;<<I J
+educationEntity== 
+.== 
+EducationLevel== *
+===+ ,
+null==- 1
+;==1 2
+educationEntity>> 
+=>> 
+await>> #
 
-unitOfWorkGG3 =
-.GG= >
-EducationLevelGG> L
-.GGL M
-GetAllGGM S
-(GGS T
+unitOfWork>>$ .
+.>>. /
+	Education>>/ 8
+.>>8 9
+Update>>9 ?
+(>>? @
+educationEntity>>@ O
+)>>O P
+;>>P Q
+EducationModel?? 
+returnEvent?? &
+=??' (
+_mapper??) 0
+.??0 1
+Map??1 4
+<??4 5
+EducationModel??5 C
+>??C D
+(??D E
+educationEntity??E T
+)??T U
+;??U V
+returnAA 
+returnEventAA 
+;AA 
+}BB 	
+publicDD 
+asyncDD 
+TaskDD 
+<DD 
+EducationModelDD (
+>DD( ) 
+DeleteEducationAsyncDD* >
+(DD> ?
+intDD? B
+educationIdDDC N
+)DDN O
+{EE 	
+	EducationFF 
+educationEntityFF %
+=FF& '
+awaitFF( -
+
+unitOfWorkFF. 8
+.FF8 9
+	EducationFF9 B
+.FFB C
+DeleteFFC I
+(FFI J
+educationIdFFJ U
+)FFU V
+;FFV W
+EducationModelGG 
+returnEventGG &
+=GG' (
+_mapperGG) 0
+.GG0 1
+MapGG1 4
+<GG4 5
+EducationModelGG5 C
+>GGC D
+(GGD E
+educationEntityGGE T
 )GGT U
-.GGU V
-ToListGGV \
-(GG\ ]
-)GG] ^
-;GG^ _
-ListHH 
-<HH 
-GenericNameModelHH !
->HH! "
-returnEventHH# .
-=HH/ 0
-awaitHH1 6
-TaskHH7 ;
-.HH; <
-RunHH< ?
-(HH? @
-(HH@ A
-)HHA B
-=>HHC E
-_mapperHHF M
-.HHM N
-MapHHN Q
-<HHQ R
-ListHHR V
-<HHV W
-GenericNameModelHHW g
->HHg h
->HHh i
-(HHi j
-educationLevelsHHj y
-)HHy z
-)HHz {
-;HH{ |
+;GGU V
 returnII 
 returnEventII 
 ;II 
@@ -5994,72 +6097,136 @@ unitOfWorkGG3 =
 publicLL 
 asyncLL 
 TaskLL 
-<LL 
-GenericNameModelLL *
->LL* +"
-AddEducationLevelAsyncLL, B
-(LLB C
-stringLLC I
-educationLevelNameLLJ \
-)LL\ ]
-{MM 	
-ifNN 
-(NN 
-educationLevelNameNN "
-==NN# %
-nullNN& *
-)NN* +
-{OO 
-returnPP 
-nullPP 
-;PP 
-}QQ 
-EducationLevelRR 
-educationLevelRR )
-=RR* +
-newRR, /
-EducationLevelRR0 >
-(RR> ?
-)RR? @
-{SS 
-NameTT 
-=TT 
-educationLevelNameTT )
-}UU 
-;UU 
-EducationLevelVV 
-educationEntityVV *
-=VV+ ,
-awaitVV- 2
+<LL 
+ListLL 
+<LL 
+GenericNameModelLL /
+>LL/ 0
+>LL0 1&
+GetAllEducationLevelsAsyncLL2 L
+(LLL M
+)LLM N
+{MM 	
+ListNN 
+<NN 
+EducationLevelNN 
+>NN  
+educationLevelsNN! 0
+=NN1 2
 
-unitOfWorkVV3 =
-.VV= >
-EducationLevelVV> L
-.VVL M
-CreateVVM S
-(VVS T
-educationLevelVVT b
-)VVb c
-;VVc d
-GenericNameModelWW 
-returnEventWW (
-=WW) *
-_mapperWW+ 2
-.WW2 3
-MapWW3 6
-<WW6 7
-GenericNameModelWW7 G
->WWG H
-(WWH I
-educationEntityWWI X
-)WWX Y
-;WWY Z
-returnXX 
-returnEventXX 
-;XX 
-}YY 	
-}ZZ 
-}[[ œ#
+unitOfWorkNN3 =
+.NN= >
+EducationLevelNN> L
+.NNL M
+GetAllNNM S
+(NNS T
+)NNT U
+.NNU V
+ToListNNV \
+(NN\ ]
+)NN] ^
+;NN^ _
+ListOO 
+<OO 
+GenericNameModelOO !
+>OO! "
+returnEventOO# .
+=OO/ 0
+awaitOO1 6
+TaskOO7 ;
+.OO; <
+RunOO< ?
+(OO? @
+(OO@ A
+)OOA B
+=>OOC E
+_mapperOOF M
+.OOM N
+MapOON Q
+<OOQ R
+ListOOR V
+<OOV W
+GenericNameModelOOW g
+>OOg h
+>OOh i
+(OOi j
+educationLevelsOOj y
+)OOy z
+)OOz {
+;OO{ |
+returnQQ 
+returnEventQQ 
+;QQ 
+}RR 	
+publicTT 
+asyncTT 
+TaskTT 
+<TT 
+GenericNameModelTT *
+>TT* +"
+AddEducationLevelAsyncTT, B
+(TTB C
+stringTTC I
+educationLevelNameTTJ \
+)TT\ ]
+{UU 	
+ifVV 
+(VV 
+educationLevelNameVV "
+==VV# %
+nullVV& *
+)VV* +
+{WW 
+returnXX 
+nullXX 
+;XX 
+}YY 
+EducationLevel[[ 
+educationLevel[[ )
+=[[* +
+new[[, /
+EducationLevel[[0 >
+([[> ?
+)[[? @
+{\\ 
+Name]] 
+=]] 
+educationLevelName]] )
+}^^ 
+;^^ 
+EducationLevel`` 
+educationEntity`` *
+=``+ ,
+await``- 2
+
+unitOfWork``3 =
+.``= >
+EducationLevel``> L
+.``L M
+Create``M S
+(``S T
+educationLevel``T b
+)``b c
+;``c d
+GenericNameModelaa 
+returnEventaa (
+=aa) *
+_mapperaa+ 2
+.aa2 3
+Mapaa3 6
+<aa6 7
+GenericNameModelaa7 G
+>aaG H
+(aaH I
+educationEntityaaI X
+)aaX Y
+;aaY Z
+returncc 
+returnEventcc 
+;cc 
+}dd 	
+}ee 
+}ff œ#
 oE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\FileManagementService.cs
 	namespace		 	
 GenealogyTree		
@@ -6083,234 +6250,234 @@ oE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IMapper  
 _mapper! (
 ;( )
-private 
-readonly 
-string 
-_fileDirectoryPath  2
-;2 3
-public !
-FileManagementService $
-($ %
-IMapper% ,
-mapper- 3
-,3 4
-IConfiguration5 C
-configurationD Q
-)Q R
-{ 	
-_mapper 
-= 
-mapper 
-; 
-string %
-relativeFileDirectoryPath ,
-=- .
-configuration/ <
-.< =
+private 
+readonly 
+string 
+_fileDirectoryPath  2
+;2 3
+public !
+FileManagementService $
+($ %
+IMapper% ,
+mapper- 3
+,3 4
+IConfiguration5 C
+configurationD Q
+)Q R
+{ 	
+_mapper 
+= 
+mapper 
+; 
+string %
+relativeFileDirectoryPath ,
+=- .
+configuration/ <
+.< =
 
-GetSection= G
-(G H
-$strH X
-)X Y
-.Y Z
-ValueZ _
-;_ `
-_fileDirectoryPath 
-=  
-Path! %
-.% &
-Combine& -
-(- .
-	Directory. 7
-.7 8
-GetCurrentDirectory8 K
-(K L
-)L M
-,M N%
-relativeFileDirectoryPathO h
-)h i
-;i j
-	Directory 
-. 
-CreateDirectory %
-(% &
-_fileDirectoryPath& 8
-)8 9
-;9 :
-} 	
-public 
-async 
-Task 
-< 
-	ImageFile #
-># $
-GetFile% ,
-(, -
-Image- 2
-fileName3 ;
-); <
-{ 	
-if 
-( 
-fileName 
-== 
-null  
-)  !
-{ 
-return 
-null 
-; 
-} 
-	ImageFile 
-	imageFile 
-=  !
-_mapper" )
-.) *
-Map* -
-<- .
-	ImageFile. 7
->7 8
-(8 9
-fileName9 A
-)A B
-;B C
-	imageFile 
-. 
-FileInBytes !
-=" #
-await$ )
-File* .
-.. /
-ReadAllBytesAsync/ @
-(@ A
-PathA E
-.E F
-CombineF M
-(M N
-_fileDirectoryPathN `
-,` a
-fileNameb j
-.j k
-FileNamek s
-)s t
-)t u
-;u v
-return 
-	imageFile 
-; 
-}   	
-public"" 
-async"" 
-Task"" 
-SaveFileAsync"" '
-(""' (
-	ImageFile""( 1
-file""2 6
-)""6 7
-{## 	
-string$$ 
-fullPath$$ 
-=$$ 
-Path$$ "
-.$$" #
-Combine$$# *
-($$* +
-_fileDirectoryPath$$+ =
-,$$= >
-file$$? C
-.$$C D
-FileName$$D L
-)$$L M
-;$$M N
-using&& 
-(&& 
+GetSection= G
+(G H
+$strH X
+)X Y
+.Y Z
+ValueZ _
+;_ `
+_fileDirectoryPath 
+=  
+Path! %
+.% &
+Combine& -
+(- .
+	Directory. 7
+.7 8
+GetCurrentDirectory8 K
+(K L
+)L M
+,M N%
+relativeFileDirectoryPathO h
+)h i
+;i j
+	Directory 
+. 
+CreateDirectory %
+(% &
+_fileDirectoryPath& 8
+)8 9
+;9 :
+} 	
+public 
+async 
+Task 
+< 
+	ImageFile #
+># $
+GetFile% ,
+(, -
+Image- 2
+fileName3 ;
+); <
+{ 	
+if 
+( 
+fileName 
+== 
+null  
+)  !
+{ 
+return 
+null 
+; 
+}   
+	ImageFile"" 
+	imageFile"" 
+=""  !
+_mapper""" )
+."") *
+Map""* -
+<""- .
+	ImageFile"". 7
+>""7 8
+(""8 9
+fileName""9 A
+)""A B
+;""B C
+	imageFile## 
+.## 
+FileInBytes## !
+=##" #
+await##$ )
+File##* .
+.##. /
+ReadAllBytesAsync##/ @
+(##@ A
+Path##A E
+.##E F
+Combine##F M
+(##M N
+_fileDirectoryPath##N `
+,##` a
+fileName##b j
+.##j k
+FileName##k s
+)##s t
+)##t u
+;##u v
+return%% 
+	imageFile%% 
+;%% 
+}&& 	
+public(( 
+async(( 
+Task(( 
+SaveFileAsync(( '
+(((' (
+	ImageFile((( 1
+file((2 6
+)((6 7
+{)) 	
+string** 
+fullPath** 
+=** 
+Path** "
+.**" #
+Combine**# *
+(*** +
+_fileDirectoryPath**+ =
+,**= >
+file**? C
+.**C D
+FileName**D L
+)**L M
+;**M N
+using,, 
+(,, 
 
-FileStream&& 
+FileStream,, 
 
-fileStream&& (
-=&&) *
-File&&+ /
-.&&/ 0
-Create&&0 6
-(&&6 7
-fullPath&&7 ?
-)&&? @
-)&&@ A
-{'' 
+fileStream,, (
+=,,) *
+File,,+ /
+.,,/ 0
+Create,,0 6
+(,,6 7
+fullPath,,7 ?
+),,? @
+),,@ A
+{-- 
 
-fileStream(( 
-.(( 
-Seek(( 
-(((  
-$num((  !
-,((! "
+fileStream.. 
+... 
+Seek.. 
+(..  
+$num..  !
+,..! "
 
-SeekOrigin((# -
-.((- .
-Begin((. 3
-)((3 4
-;((4 5
-await)) 
-file)) 
-.)) 
-Stream)) !
-.))! "
-CopyToAsync))" -
-())- .
+SeekOrigin..# -
+...- .
+Begin... 3
+)..3 4
+;..4 5
+await// 
+file// 
+.// 
+Stream// !
+.//! "
+CopyToAsync//" -
+(//- .
 
-fileStream)). 8
-)))8 9
-;))9 :
-}** 
-}++ 	
-public-- 
-bool-- 
+fileStream//. 8
+)//8 9
+;//9 :
+}00 
+}11 	
+public33 
+bool33 
 
-DeleteFile-- 
-(-- 
-string-- %
-fileName--& .
-)--. /
-{.. 	
-string// 
-path// 
-=// 
-Path// 
-.// 
-Combine// &
-(//& '
-_fileDirectoryPath//' 9
-,//9 :
-fileName//; C
-)//C D
-;//D E
-if00 
-(00 
-File00 
-.00 
-Exists00 
-(00 
-path00  
-)00  !
-)00! "
-{11 
-File22 
-.22 
-Delete22 
-(22 
-path22  
-)22  !
-;22! "
-return33 
-true33 
-;33 
-}44 
-return55 
-false55 
-;55 
-}66 	
-}77 
-}88 ª
+DeleteFile33 
+(33 
+string33 %
+fileName33& .
+)33. /
+{44 	
+string55 
+path55 
+=55 
+Path55 
+.55 
+Combine55 &
+(55& '
+_fileDirectoryPath55' 9
+,559 :
+fileName55; C
+)55C D
+;55D E
+if77 
+(77 
+File77 
+.77 
+Exists77 
+(77 
+path77  
+)77  !
+)77! "
+{88 
+File99 
+.99 
+Delete99 
+(99 
+path99  
+)99  !
+;99! "
+return:: 
+true:: 
+;:: 
+};; 
+return== 
+false== 
+;== 
+}>> 	
+}?? 
+}@@ ª
 fE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\ImageService.cs
 	namespace 	
 GenealogyTree
@@ -6353,178 +6520,178 @@ fE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IFileManagementService /"
 _fileManagementService0 F
 ;F G
-public 
-ImageService 
-( 
-IUnitOfWork '
+public 
+ImageService 
+( 
+IUnitOfWork '
 
-unitOfWork( 2
-,2 3
-IMapper4 ;
-mapper< B
-,B C"
-IFileManagementServiceD Z!
-fileManagementService[ p
-)p q
-:r s
-baset x
-(x y
+unitOfWork( 2
+,2 3
+IMapper4 ;
+mapper< B
+,B C"
+IFileManagementServiceD Z!
+fileManagementService[ p
+)p q
+:r s
+baset x
+(x y
 
-unitOfWork	y É
+unitOfWork	y É
 )
-É Ñ
-{ 	
-_mapper 
-= 
-mapper 
-; "
-_fileManagementService "
-=# $!
-fileManagementService% :
-;: ;
-} 	
-public 
-async 
-Task 
-< 
-Image 
->  
-GetImageAsync! .
-(. /
-int/ 2
-?2 3
-imageId4 ;
-); <
-{ 	
-if 
-( 
-imageId 
-!= 
-null 
-)  
-{ 
-Image 
-image 
-= 
-await #
-this$ (
-.( )
+É Ñ
+{ 	
+_mapper 
+= 
+mapper 
+; "
+_fileManagementService "
+=# $!
+fileManagementService% :
+;: ;
+} 	
+public 
+async 
+Task 
+< 
+Image 
+>  
+GetImageAsync! .
+(. /
+int/ 2
+?2 3
+imageId4 ;
+); <
+{ 	
+if 
+( 
+imageId 
+!= 
+null 
+)  
+{ 
+Image 
+image 
+= 
+await #
+this$ (
+.( )
 
-unitOfWork) 3
-.3 4
-Image4 9
-.9 :
-FindById: B
-(B C
-imageIdC J
-)J K
-;K L
-return 
-image 
-; 
-} 
-return 
-null 
-; 
-} 	
-public 
-async 
-Task 
-< 
-Image 
->  
-AddImageAsync! .
-(. /
-	ImageFile/ 8
-file9 =
-)= >
-{ 	
-await   "
-_fileManagementService   (
-.  ( )
-SaveFileAsync  ) 6
-(  6 7
-file  7 ;
-)  ; <
-;  < =
-Image!! 
-image!! 
-=!! 
-_mapper!! !
-.!!! "
-Map!!" %
-<!!% &
-Image!!& +
->!!+ ,
-(!!, -
-file!!- 1
-)!!1 2
-;!!2 3
-Image"" 
-imageEntity"" 
-="" 
-await""  %
+unitOfWork) 3
+.3 4
+Image4 9
+.9 :
+FindById: B
+(B C
+imageIdC J
+)J K
+;K L
+return 
+image 
+; 
+} 
+return 
+null 
+; 
+} 	
+public   
+async   
+Task   
+<   
+Image   
+>    
+AddImageAsync  ! .
+(  . /
+	ImageFile  / 8
+file  9 =
+)  = >
+{!! 	
+await"" "
+_fileManagementService"" (
+.""( )
+SaveFileAsync"") 6
+(""6 7
+file""7 ;
+)""; <
+;""< =
+Image## 
+image## 
+=## 
+_mapper## !
+.##! "
+Map##" %
+<##% &
+Image##& +
+>##+ ,
+(##, -
+file##- 1
+)##1 2
+;##2 3
+Image$$ 
+imageEntity$$ 
+=$$ 
+await$$  %
 
-unitOfWork""& 0
-.""0 1
-Image""1 6
-.""6 7
-Create""7 =
-(""= >
-image""> C
-)""C D
-;""D E
-return## 
-imageEntity## 
-;## 
-}$$ 	
-public&& 
-async&& 
-Task&& 
-<&& 
-bool&& 
->&& 
-DeleteImageAsync&&  0
-(&&0 1
-int&&1 4
-imageId&&5 <
-)&&< =
-{'' 	
-Image(( 
-imageEntity(( 
-=(( 
-await((  %
+unitOfWork$$& 0
+.$$0 1
+Image$$1 6
+.$$6 7
+Create$$7 =
+($$= >
+image$$> C
+)$$C D
+;$$D E
+return&& 
+imageEntity&& 
+;&& 
+}'' 	
+public)) 
+async)) 
+Task)) 
+<)) 
+bool)) 
+>)) 
+DeleteImageAsync))  0
+())0 1
+int))1 4
+imageId))5 <
+)))< =
+{** 	
+Image++ 
+imageEntity++ 
+=++ 
+await++  %
 
-unitOfWork((& 0
-.((0 1
-Image((1 6
-.((6 7
-Delete((7 =
-(((= >
-imageId((> E
-)((E F
-;((F G
-bool)) 
+unitOfWork++& 0
+.++0 1
+Image++1 6
+.++6 7
+Delete++7 =
+(++= >
+imageId++> E
+)++E F
+;++F G
+bool,, 
 
-wasDeleted)) 
-=)) "
-_fileManagementService)) 4
-.))4 5
+wasDeleted,, 
+=,, "
+_fileManagementService,, 4
+.,,4 5
 
-DeleteFile))5 ?
-())? @
-imageEntity))@ K
-.))K L
-FileName))L T
-)))T U
-;))U V
-return** 
+DeleteFile,,5 ?
+(,,? @
+imageEntity,,@ K
+.,,K L
+FileName,,L T
+),,T U
+;,,U V
+return.. 
 
-wasDeleted** 
-;** 
-}++ 	
-},, 
-}-- Ê
+wasDeleted.. 
+;.. 
+}// 	
+}00 
+}11 Ê
 iE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\LocationService.cs
 	namespace 	
 GenealogyTree
@@ -6625,78 +6792,78 @@ locationIdC M
 locationC K
 )K L
 ;L M
-return 
-returnEvent 
-; 
-} 	
-public 
-async 
-Task 
-< 
-LocationModel '
->' (
-UpdateLocation) 7
-(7 8
-LocationModel8 E
-locationF N
-)N O
-{ 	
-if 
-( 
-location 
-== 
-null  
-)  !
-{ 
-return 
-null 
-; 
-} 
-Location 
-locationEntity #
-=$ %
-_mapper& -
-.- .
-Map. 1
-<1 2
-Location2 :
->: ;
-(; <
-location< D
-)D E
-;E F
-locationEntity   
-=   
-await   "
+return 
+returnEvent 
+; 
+} 	
+public 
+async 
+Task 
+< 
+LocationModel '
+>' (
+UpdateLocation) 7
+(7 8
+LocationModel8 E
+locationF N
+)N O
+{ 	
+if 
+( 
+location 
+== 
+null  
+)  !
+{ 
+return 
+null 
+; 
+} 
+Location!! 
+locationEntity!! #
+=!!$ %
+_mapper!!& -
+.!!- .
+Map!!. 1
+<!!1 2
+Location!!2 :
+>!!: ;
+(!!; <
+location!!< D
+)!!D E
+;!!E F
+locationEntity"" 
+="" 
+await"" "
 
-unitOfWork  # -
-.  - .
-Location  . 6
-.  6 7
-Update  7 =
-(  = >
-locationEntity  > L
-)  L M
-;  M N
-LocationModel!! 
-returnEvent!! %
-=!!& '
-_mapper!!( /
-.!!/ 0
-Map!!0 3
-<!!3 4
-LocationModel!!4 A
->!!A B
-(!!B C
-locationEntity!!C Q
-)!!Q R
-;!!R S
-return"" 
-returnEvent"" 
-;"" 
-}## 	
-}$$ 
-}%% »`
+unitOfWork""# -
+.""- .
+Location"". 6
+.""6 7
+Update""7 =
+(""= >
+locationEntity""> L
+)""L M
+;""M N
+LocationModel## 
+returnEvent## %
+=##& '
+_mapper##( /
+.##/ 0
+Map##0 3
+<##3 4
+LocationModel##4 A
+>##A B
+(##B C
+locationEntity##C Q
+)##Q R
+;##R S
+return%% 
+returnEvent%% 
+;%% 
+}&& 	
+}'' 
+}(( †U
 iE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\MarriageService.cs
 	namespace 	
 GenealogyTree
@@ -6725,522 +6892,430 @@ iE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IFileManagementService /"
 _fileManagementService0 F
 ;F G
-public 
-MarriageService 
-( 
-IUnitOfWork *
+public 
+MarriageService 
+( 
+IUnitOfWork *
 
-unitOfWork+ 5
-,5 6
-IMapper7 >
-mapper? E
-,E F"
-IFileManagementServiceG ]!
-fileManagementService^ s
-)s t
-:u v
-basew {
-({ |
+unitOfWork+ 5
+,5 6
+IMapper7 >
+mapper? E
+,E F"
+IFileManagementServiceG ]!
+fileManagementService^ s
+)s t
+:u v
+basew {
+({ |
 
-unitOfWork	| Ü
+unitOfWork	| Ü
 )
-Ü á
-{ 	
-_mapper 
-= 
-mapper 
-; "
-_fileManagementService "
-=# $!
-fileManagementService% :
-;: ;
-} 	
-public 
-async 
-Task 
-< 
-List 
-< 
-MarriedPersonModel 1
->1 2
->2 3$
-GetAllMarriagesForPerson4 L
-(L M
-intM P
-personIdQ Y
-)Y Z
-{ 	
-List 
-< 
-Marriage 
-> 
-	marriages $
-=% &
+Ü á
+{ 	
+_mapper 
+= 
+mapper 
+; "
+_fileManagementService "
+=# $!
+fileManagementService% :
+;: ;
+} 	
+public 
+async 
+Task 
+< 
+List 
+< 
+MarriedPersonModel 1
+>1 2
+>2 3$
+GetAllMarriagesForPerson4 L
+(L M
+intM P
+personIdQ Y
+)Y Z
+{ 	
+List 
+< 
+Marriage 
+> 
+	marriages $
+=% &
 
-unitOfWork' 1
-.1 2
-Marriage2 :
-.: ;
-Filter; A
-(A B
-xB C
-=>D F
-xG H
-.H I
-SecondPersonIdI W
-==X Z
-personId[ c
-)c d
-.d e
-Includee l
-(l m
-mm n
-=>o q
-mr s
-.s t
-FirstPersont 
-)	 Ä
+unitOfWork' 1
+.1 2
+Marriage2 :
+.: ;
+Filter; A
+(A B
+xB C
+=>D F
+xG H
+.H I
+SecondPersonIdI W
+==X Z
+personId[ c
+)c d
+.d e
+Includee l
+(l m
+mm n
+=>o q
+mr s
+.s t
+FirstPersont 
+)	 Ä
 .
-Ä Å
+Ä Å
 ToList
-Å á
+Å á
 (
-á à
+á à
 )
-à â
+à â
 ;
-â ä
-	marriages 
-. 
-AddRange 
-( 
+â ä
+	marriages 
+. 
+AddRange 
+( 
 
-unitOfWork )
-.) *
-Marriage* 2
-.2 3
-Filter3 9
-(9 :
-x: ;
-=>< >
-x? @
-.@ A
-FirstPersonIdA N
-==O Q
-personIdR Z
-)Z [
-.[ \
-Include\ c
-(c d
-md e
-=>f h
-mi j
-.j k
-SecondPersonk w
-)w x
-.x y
-ToListy 
-(	 Ä
+unitOfWork )
+.) *
+Marriage* 2
+.2 3
+Filter3 9
+(9 :
+x: ;
+=>< >
+x? @
+.@ A
+FirstPersonIdA N
+==O Q
+personIdR Z
+)Z [
+.[ \
+Include\ c
+(c d
+md e
+=>f h
+mi j
+.j k
+SecondPersonk w
+)w x
+.x y
+ToListy 
+(	 Ä
 )
-Ä Å
+Ä Å
 )
-Å Ç
+Å Ç
 ;
-Ç É
-List 
-< 
-MarriedPersonModel #
-># $
-returnEvent% 0
-=1 2
-new3 6
-List7 ;
-<; <
-MarriedPersonModel< N
->N O
-(O P
-)P Q
-;Q R
-foreach 
-( 
-var 
-marriage !
-in" $
-	marriages% .
-). /
-{ 
-MarriedPersonModel "
-returnMarriage# 1
-=2 3
-_mapper4 ;
-.; <
-Map< ?
-<? @
-MarriedPersonModel@ R
->R S
-(S T
-marriageT \
-)\ ]
-;] ^
-returnMarriage   
-.   
-PersonMarriedTo   .
-.  . /
-	ImageFile  / 8
-=  9 :
-await  ; @"
-_fileManagementService  A W
-.  W X
-GetFile  X _
-(  _ `
-marriage  ` h
-.  h i
-FirstPerson  i t
-!=  u w
-null  x |
-?  } ~
-marriage	   á
+Ç É
+List 
+< 
+MarriedPersonModel #
+># $
+returnEvent% 0
+=1 2
+new3 6
+List7 ;
+<; <
+MarriedPersonModel< N
+>N O
+(O P
+)P Q
+;Q R
+foreach 
+( 
+var 
+marriage !
+in" $
+	marriages% .
+). /
+{   
+MarriedPersonModel!! "
+returnMarriage!!# 1
+=!!2 3
+_mapper!!4 ;
+.!!; <
+Map!!< ?
+<!!? @
+MarriedPersonModel!!@ R
+>!!R S
+(!!S T
+marriage!!T \
+)!!\ ]
+;!!] ^
+returnMarriage"" 
+."" 
+PersonMarriedTo"" .
+."". /
+	ImageFile""/ 8
+=""9 :
+await""; @"
+_fileManagementService""A W
+.""W X
+GetFile""X _
+(""_ `
+marriage""` h
+.""h i
+FirstPerson""i t
+!=""u w
+null""x |
+?""} ~
+marriage	"" á
 .
-  á à
+""á à
 FirstPerson
-  à ì
+""à ì
 .
-  ì î
+""ì î
 Image
-  î ô
+""î ô
 :
-  ö õ
+""ö õ
 marriage
-  ú §
+""ú §
 .
-  § •
+""§ •
 SecondPerson
-  • ±
+""• ±
 .
-  ± ≤
+""± ≤
 Image
-  ≤ ∑
+""≤ ∑
 )
-  ∑ ∏
+""∑ ∏
 ;
-  ∏ π
-returnEvent!! 
-.!! 
-Add!! 
-(!!  
-returnMarriage!!  .
-)!!. /
-;!!/ 0
-}"" 
-return## 
-returnEvent## 
-;## 
-}$$ 	
-public&& 
-async&& 
-Task&& 
-<&& 
-MarriedPersonModel&& ,
->&&, -'
-GetCurrentMarriageForPerson&&. I
-(&&I J
-int&&J M
-personId&&N V
-)&&V W
-{'' 	
-Marriage(( 
-marriage(( 
-=(( 
+""∏ π
+returnEvent## 
+.## 
+Add## 
+(##  
+returnMarriage##  .
+)##. /
+;##/ 0
+}$$ 
+return&& 
+returnEvent&& 
+;&& 
+}'' 	
+public)) 
+async)) 
+Task)) 
+<))  
+MarriageDetailsModel)) .
+>)). /
+GetMarriageAsync))0 @
+())@ A
+int))A D
 
-unitOfWork((  *
-.((* +
-Marriage((+ 3
-.((3 4
-Filter((4 :
-(((: ;
-x((; <
-=>((= ?
-(((@ A
-x((A B
-.((B C
-FirstPersonId((C P
-==((Q S
-personId((T \
-||((] _
-x((` a
-.((a b
-SecondPersonId((b p
-==((q s
-personId((t |
-)((| }
-&&	((~ Ä
-x
-((Å Ç
-.
-((Ç É
-EndDate
-((É ä
-==
-((ã ç
-default
-((é ï
-(
-((ï ñ
-DateTime
-((ñ û
-)
-((û ü
-)
-((ü †
-.
-((† °
-FirstOrDefault
-((° Ø
-(
-((Ø ∞
-)
-((∞ ±
-;
-((± ≤ 
-MarriageDetailsModel))  
-returnEvent))! ,
-=))- .
-await))/ 4
-Task))5 9
-.))9 :
-Run)): =
-())= >
-())> ?
-)))? @
-=>))A C
-_mapper))D K
-.))K L
-Map))L O
-<))O P 
-MarriageDetailsModel))P d
->))d e
-())e f
-marriage))f n
-)))n o
-)))o p
-;))p q
-return** 
-returnEvent** 
-;** 
-}++ 	
-public-- 
-async-- 
-Task-- 
-<--  
-MarriageDetailsModel-- .
->--. /
-GetMarriageAsync--0 @
-(--@ A
-int--A D
+marriageId))E O
+)))O P
+{** 	
+Marriage++ 
+marriage++ 
+=++ 
+await++  %
 
-marriageId--E O
-)--O P
-{.. 	
-Marriage// 
-marriage// 
-=// 
-await//  %
+unitOfWork++& 0
+.++0 1
+Marriage++1 9
+.++9 :
+FindById++: B
+(++B C
 
-unitOfWork//& 0
-.//0 1
-Marriage//1 9
-.//9 :
-FindById//: B
-(//B C
+marriageId++C M
+)++M N
+;++N O
+marriage,, 
+.,, 
+FirstPerson,,  
+=,,! "
+await,,# (
 
-marriageId//C M
-)//M N
-;//N O
-marriage00 
-.00 
-FirstPerson00  
-=00! "
-await00# (
+unitOfWork,,) 3
+.,,3 4
+Person,,4 :
+.,,: ;
+FindById,,; C
+(,,C D
+marriage,,D L
+.,,L M
+FirstPersonId,,M Z
+),,Z [
+;,,[ \
+marriage-- 
+.-- 
+SecondPerson-- !
+=--" #
+await--$ )
 
-unitOfWork00) 3
-.003 4
-Person004 :
-.00: ;
-FindById00; C
-(00C D
-marriage00D L
-.00L M
-FirstPersonId00M Z
-)00Z [
-;00[ \
-marriage11 
-.11 
-SecondPerson11 !
-=11" #
-await11$ )
+unitOfWork--* 4
+.--4 5
+Person--5 ;
+.--; <
+FindById--< D
+(--D E
+marriage--E M
+.--M N
+SecondPersonId--N \
+)--\ ]
+;--] ^ 
+MarriageDetailsModel//  
+returnEvent//! ,
+=//- .
+_mapper/// 6
+.//6 7
+Map//7 :
+<//: ; 
+MarriageDetailsModel//; O
+>//O P
+(//P Q
+marriage//Q Y
+)//Y Z
+;//Z [
+returnEvent00 
+.00 
+FirstPerson00 #
+.00# $
+	ImageFile00$ -
+=00. /
+await000 5"
+_fileManagementService006 L
+.00L M
+GetFile00M T
+(00T U
+marriage00U ]
+.00] ^
+FirstPerson00^ i
+.00i j
+Image00j o
+)00o p
+;00p q
+returnEvent11 
+.11 
+PersonMarriedTo11 '
+.11' (
+	ImageFile11( 1
+=112 3
+await114 9"
+_fileManagementService11: P
+.11P Q
+GetFile11Q X
+(11X Y
+marriage11Y a
+.11a b
+SecondPerson11b n
+.11n o
+Image11o t
+)11t u
+;11u v
+return33 
+returnEvent33 
+;33 
+}44 	
+public66 
+async66 
+Task66 
+<66  
+MarriageDetailsModel66 .
+>66. /
+AddMarriageAsync660 @
+(66@ A%
+MarriageCreateUpdateModel66A Z
+marriage66[ c
+)66c d
+{77 	
+if88 
+(88 
+marriage88 
+==88 
+null88  
+)88  !
+{99 
+return:: 
+null:: 
+;:: 
+};; 
+Marriage== 
+marriageEntity== #
+===$ %
+_mapper==& -
+.==- .
+Map==. 1
+<==1 2
+Marriage==2 :
+>==: ;
+(==; <
+marriage==< D
+)==D E
+;==E F
+marriageEntity>> 
+.>> 
+	CreatedOn>> $
+=>>% &
+DateTime>>' /
+.>>/ 0
+UtcNow>>0 6
+;>>6 7
+Marriage?? 
+marriageCreated?? $
+=??% &
+await??' ,
 
-unitOfWork11* 4
-.114 5
-Person115 ;
-.11; <
-FindById11< D
-(11D E
-marriage11E M
-.11M N
-SecondPersonId11N \
-)11\ ]
-;11] ^ 
-MarriageDetailsModel22  
-returnEvent22! ,
-=22- .
-_mapper22/ 6
-.226 7
-Map227 :
-<22: ; 
-MarriageDetailsModel22; O
->22O P
-(22P Q
-marriage22Q Y
-)22Y Z
-;22Z [
-returnEvent33 
-.33 
-FirstPerson33 #
-.33# $
-	ImageFile33$ -
-=33. /
-await330 5"
-_fileManagementService336 L
-.33L M
-GetFile33M T
-(33T U
-marriage33U ]
-.33] ^
-FirstPerson33^ i
-.33i j
-Image33j o
-)33o p
-;33p q
-returnEvent44 
-.44 
-PersonMarriedTo44 '
-.44' (
-	ImageFile44( 1
-=442 3
-await444 9"
-_fileManagementService44: P
-.44P Q
-GetFile44Q X
-(44X Y
-marriage44Y a
-.44a b
-SecondPerson44b n
-.44n o
-Image44o t
-)44t u
-;44u v
-return66 
-returnEvent66 
-;66 
-}77 	
-public99 
-async99 
-Task99 
-<99  
-MarriageDetailsModel99 .
->99. /
-AddMarriageAsync990 @
-(99@ A%
-MarriageCreateUpdateModel99A Z
-marriage99[ c
-)99c d
-{:: 	
-if;; 
-(;; 
-marriage;; 
-==;; 
-null;;  
-);;  !
-{<< 
-return== 
-null== 
-;== 
-}>> 
-Marriage?? 
-marriageEntity?? #
-=??$ %
-_mapper??& -
-.??- .
-Map??. 1
-<??1 2
-Marriage??2 :
->??: ;
-(??; <
-marriage??< D
-)??D E
-;??E F
-marriageEntity@@ 
-.@@ 
-	CreatedOn@@ $
-=@@% &
-DateTime@@' /
-.@@/ 0
-UtcNow@@0 6
-;@@6 7
-MarriageAA 
-marriageCreatedAA $
-=AA% &
-awaitAA' ,
-
-unitOfWorkAA- 7
-.AA7 8
-MarriageAA8 @
-.AA@ A
-CreateAAA G
-(AAG H
-marriageEntityAAH V
-)AAV W
-;AAW X 
-MarriageDetailsModelBB  
-returnEventBB! ,
-=BB- .
-_mapperBB/ 6
-.BB6 7
-MapBB7 :
-<BB: ; 
-MarriageDetailsModelBB; O
->BBO P
-(BBP Q
-marriageCreatedBBQ `
-)BB` a
-;BBa b
-returnCC 
-returnEventCC 
-;CC 
-}DD 	
-publicFF 
-asyncFF 
-TaskFF 
-<FF  
-MarriageDetailsModelFF .
->FF. /
-UpdateMarriageAsyncFF0 C
-(FFC D%
-MarriageCreateUpdateModelFFD ]
-marriageFF^ f
-)FFf g
-{GG 	
-ifHH 
-(HH 
-marriageHH 
-==HH 
-nullHH  
-)HH  !
-{II 
-returnJJ 
-nullJJ 
-;JJ 
-}KK 
+unitOfWork??- 7
+.??7 8
+Marriage??8 @
+.??@ A
+Create??A G
+(??G H
+marriageEntity??H V
+)??V W
+;??W X 
+MarriageDetailsModel@@  
+returnEvent@@! ,
+=@@- .
+_mapper@@/ 6
+.@@6 7
+Map@@7 :
+<@@: ; 
+MarriageDetailsModel@@; O
+>@@O P
+(@@P Q
+marriageCreated@@Q `
+)@@` a
+;@@a b
+returnBB 
+returnEventBB 
+;BB 
+}CC 	
+publicEE 
+asyncEE 
+TaskEE 
+<EE  
+MarriageDetailsModelEE .
+>EE. /
+UpdateMarriageAsyncEE0 C
+(EEC D%
+MarriageCreateUpdateModelEED ]
+marriageEE^ f
+)EEf g
+{FF 	
+ifGG 
+(GG 
+marriageGG 
+==GG 
+nullGG  
+)GG  !
+{HH 
+returnII 
+nullII 
+;II 
+}JJ 
 MarriageLL 
 marriageInDbLL !
 =LL" #
@@ -7339,57 +7414,57 @@ unitOfWorkYY- 7
 marriageUpdatedZZQ `
 )ZZ` a
 ;ZZa b
-return[[ 
-returnEvent[[ 
-;[[ 
-}\\ 	
-public^^ 
-async^^ 
-Task^^ 
-<^^  
-MarriageDetailsModel^^ .
->^^. /
-DeleteMarriageAsync^^0 C
-(^^C D
-int^^D G
+return\\ 
+returnEvent\\ 
+;\\ 
+}]] 	
+public__ 
+async__ 
+Task__ 
+<__  
+MarriageDetailsModel__ .
+>__. /
+DeleteMarriageAsync__0 C
+(__C D
+int__D G
 
-marriageId^^H R
-)^^R S
-{__ 	
-Marriage`` 
-marriageEntity`` #
-=``$ %
-await``& +
+marriageId__H R
+)__R S
+{`` 	
+Marriageaa 
+marriageEntityaa #
+=aa$ %
+awaitaa& +
 
-unitOfWork``, 6
-.``6 7
-Marriage``7 ?
-.``? @
-Delete``@ F
-(``F G
+unitOfWorkaa, 6
+.aa6 7
+Marriageaa7 ?
+.aa? @
+Deleteaa@ F
+(aaF G
 
-marriageId``G Q
-)``Q R
-;``R S 
-MarriageDetailsModelaa  
-returnEventaa! ,
-=aa- .
-_mapperaa/ 6
-.aa6 7
-Mapaa7 :
-<aa: ; 
-MarriageDetailsModelaa; O
->aaO P
-(aaP Q
-marriageEntityaaQ _
-)aa_ `
-;aa` a
-returnbb 
-returnEventbb 
-;bb 
-}cc 	
-}dd 
-}ee ä
+marriageIdaaG Q
+)aaQ R
+;aaR S 
+MarriageDetailsModelbb  
+returnEventbb! ,
+=bb- .
+_mapperbb/ 6
+.bb6 7
+Mapbb7 :
+<bb: ; 
+MarriageDetailsModelbb; O
+>bbO P
+(bbP Q
+marriageEntitybbQ _
+)bb_ `
+;bb` a
+returndd 
+returnEventdd 
+;dd 
+}ee 	
+}ff 
+}gg ä
 lE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\NationalityService.cs
 	namespace
 
@@ -7507,79 +7582,79 @@ unitOfWork. 8
 )w x
 )x y
 ;y z
-return 
-returnEvent 
-; 
-} 	
-public 
-async 
-Task 
-< 
-GenericNameModel *
->* +
-AddNationalityAsync, ?
-(? @
-string@ F
-nationalityNameG V
-)V W
-{ 	
-if 
-( 
-nationalityName 
-==  "
-null# '
-)' (
-{ 
-return 
-null 
-; 
-}   
-Nationality!! 
-nationality!! #
-=!!$ %
-new!!& )
-Nationality!!* 5
-(!!5 6
-)!!6 7
-{"" 
-Name## 
-=## 
-nationalityName## &
-}$$ 
-;$$ 
-Nationality%% 
-nationalityEntity%% )
-=%%* +
-await%%, 1
+return 
+returnEvent 
+; 
+} 	
+public 
+async 
+Task 
+< 
+GenericNameModel *
+>* +
+AddNationalityAsync, ?
+(? @
+string@ F
+nationalityNameG V
+)V W
+{ 	
+if 
+( 
+nationalityName 
+==  "
+null# '
+)' (
+{ 
+return   
+null   
+;   
+}!! 
+Nationality## 
+nationality## #
+=##$ %
+new##& )
+Nationality##* 5
+(##5 6
+)##6 7
+{$$ 
+Name%% 
+=%% 
+nationalityName%% &
+}&& 
+;&& 
+Nationality(( 
+nationalityEntity(( )
+=((* +
+await((, 1
 
-unitOfWork%%2 <
-.%%< =
-Nationality%%= H
-.%%H I
-Create%%I O
-(%%O P
-nationality%%P [
-)%%[ \
-;%%\ ]
-GenericNameModel&& 
-returnEvent&& (
-=&&) *
-_mapper&&+ 2
-.&&2 3
-Map&&3 6
-<&&6 7
-GenericNameModel&&7 G
->&&G H
-(&&H I
-nationalityEntity&&I Z
-)&&Z [
-;&&[ \
-return'' 
-returnEvent'' 
-;'' 
-}(( 	
-})) 
-}** ≥0
+unitOfWork((2 <
+.((< =
+Nationality((= H
+.((H I
+Create((I O
+(((O P
+nationality((P [
+)(([ \
+;((\ ]
+GenericNameModel)) 
+returnEvent)) (
+=))) *
+_mapper))+ 2
+.))2 3
+Map))3 6
+<))6 7
+GenericNameModel))7 G
+>))G H
+())H I
+nationalityEntity))I Z
+)))Z [
+;))[ \
+return++ 
+returnEvent++ 
+;++ 
+},, 	
+}-- 
+}.. ˘)
 kE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\OccupationService.cs
 	namespace 	
 GenealogyTree
@@ -7683,199 +7758,154 @@ Occupation6 @
 occupationsS ^
 )^ _
 ;_ `
-return 
-returnEvent 
-; 
-} 	
-public 
-async 
-Task 
-< 
-OccupationModel )
->) *
-GetOccupationAsync+ =
-(= >
-int> A
-occupationIdB N
-)N O
-{ 	
+return 
+returnEvent 
+; 
+} 	
+public 
+async 
+Task 
+< 
+OccupationModel )
+>) *
+AddOccupationAsync+ =
+(= >
+OccupationModel> M
 
-Occupation 
-occupationEntity '
-=( )
-await* /
+occupationN X
+)X Y
+{ 	
+if 
+( 
 
-unitOfWork0 :
-.: ;
+occupation 
+== 
+null "
+)" #
+{   
+return!! 
+null!! 
+;!! 
+}"" 
 
-Occupation; E
-.E F
-FindByIdF N
-(N O
-occupationIdO [
-)[ \
-;\ ]
-OccupationModel 
-returnEvent '
-=( )
-_mapper* 1
-.1 2
-Map2 5
-<5 6
-OccupationModel6 E
->E F
-(F G
-occupationEntityG W
-)W X
-;X Y
-return   
-returnEvent   
-;   
-}!! 	
-public"" 
-async"" 
-Task"" 
-<"" 
-OccupationModel"" )
->"") *
-AddOccupationAsync""+ =
-(""= >
-OccupationModel""> M
+Occupation$$ 
+occupationEntity$$ '
+=$$( )
+_mapper$$* 1
+.$$1 2
+Map$$2 5
+<$$5 6
 
-occupation""N X
-)""X Y
-{## 	
-if$$ 
-($$ 
+Occupation$$6 @
+>$$@ A
+($$A B
 
-occupation$$ 
-==$$ 
-null$$ "
-)$$" #
-{%% 
-return&& 
-null&& 
-;&& 
-}'' 
+occupation$$B L
+)$$L M
+;$$M N
 
-Occupation(( 
-occupationEntity(( '
-=((( )
-_mapper((* 1
-.((1 2
-Map((2 5
-<((5 6
+Occupation%% 
+occupationCreated%% (
+=%%) *
+await%%+ 0
 
-Occupation((6 @
->((@ A
-(((A B
+unitOfWork%%1 ;
+.%%; <
 
-occupation((B L
-)((L M
-;((M N
+Occupation%%< F
+.%%F G
+Create%%G M
+(%%M N
+occupationEntity%%N ^
+)%%^ _
+;%%_ `
+OccupationModel&& 
+returnEvent&& '
+=&&( )
+_mapper&&* 1
+.&&1 2
+Map&&2 5
+<&&5 6
+OccupationModel&&6 E
+>&&E F
+(&&F G
+occupationCreated&&G X
+)&&X Y
+;&&Y Z
+return(( 
+returnEvent(( 
+;(( 
+})) 	
+public++ 
+async++ 
+Task++ 
+<++ 
+OccupationModel++ )
+>++) *!
+UpdateOccupationAsync+++ @
+(++@ A
+OccupationModel++A P
 
-Occupation)) 
-occupationCreated)) (
-=))) *
-await))+ 0
+occupation++Q [
+)++[ \
+{,, 	
+if-- 
+(-- 
 
-unitOfWork))1 ;
-.)); <
+occupation-- 
+==-- 
+null-- "
+)--" #
+{.. 
+return// 
+null// 
+;// 
+}00 
 
-Occupation))< F
-.))F G
-Create))G M
-())M N
-occupationEntity))N ^
-)))^ _
-;))_ `
-OccupationModel** 
-returnEvent** '
-=**( )
-_mapper*** 1
-.**1 2
-Map**2 5
-<**5 6
-OccupationModel**6 E
->**E F
-(**F G
-occupationCreated**G X
-)**X Y
-;**Y Z
-return++ 
-returnEvent++ 
-;++ 
-},, 	
-public-- 
-async-- 
-Task-- 
-<-- 
-OccupationModel-- )
->--) *!
-UpdateOccupationAsync--+ @
-(--@ A
-OccupationModel--A P
+Occupation22 
+occupationEntity22 '
+=22( )
+_mapper22* 1
+.221 2
+Map222 5
+<225 6
 
-occupation--Q [
-)--[ \
-{.. 	
-if// 
-(// 
+Occupation226 @
+>22@ A
+(22A B
 
-occupation// 
-==// 
-null// "
-)//" #
-{00 
-return11 
-null11 
-;11 
-}22 
+occupation22B L
+)22L M
+;22M N
 
-Occupation33 
-occupationEntity33 '
-=33( )
-_mapper33* 1
-.331 2
-Map332 5
-<335 6
+Occupation33 
+occupationUpdated33 (
+=33) *
+await33+ 0
 
-Occupation336 @
->33@ A
-(33A B
+unitOfWork331 ;
+.33; <
 
-occupation33B L
-)33L M
-;33M N
-
-Occupation44 
-occupationUpdated44 (
-=44) *
-await44+ 0
-
-unitOfWork441 ;
-.44; <
-
-Occupation44< F
-.44F G
-Update44G M
-(44M N
-occupationEntity44N ^
-)44^ _
-;44_ `
-OccupationModel55 
-returnEvent55 '
-=55( )
-_mapper55* 1
-.551 2
-Map552 5
-<555 6
-OccupationModel556 E
->55E F
-(55F G
-occupationUpdated55G X
-)55X Y
-;55Y Z
+Occupation33< F
+.33F G
+Update33G M
+(33M N
+occupationEntity33N ^
+)33^ _
+;33_ `
+OccupationModel44 
+returnEvent44 '
+=44( )
+_mapper44* 1
+.441 2
+Map442 5
+<445 6
+OccupationModel446 E
+>44E F
+(44F G
+occupationUpdated44G X
+)44X Y
+;44Y Z
 return66 
 returnEvent66 
 ;66 
@@ -7921,12 +7951,12 @@ Occupation;;; E
 occupationEntity<<G W
 )<<W X
 ;<<X Y
-return== 
-returnEvent== 
-;== 
-}>> 	
-}?? 
-}@@ ‚∏
+return>> 
+returnEvent>> 
+;>> 
+}?? 	
+}@@ 
+}AA È£
 lE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\ParentChildService.cs
 	namespace 	
 GenealogyTree
@@ -7960,1746 +7990,1411 @@ lE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IMarriageService )
 _marriageService* :
 ;: ;
-public 
-ParentChildService !
-(! "
-IUnitOfWork" -
+public 
+ParentChildService !
+(! "
+IUnitOfWork" -
 
-unitOfWork. 8
-,8 9
-IMapper: A
-mapperB H
-,H I"
-IFileManagementServiceJ `!
-fileManagementServicea v
-,v w
-IMarriageService	x à
+unitOfWork. 8
+,8 9
+IMapper: A
+mapperB H
+,H I"
+IFileManagementServiceJ `!
+fileManagementServicea v
+,v w
+IMarriageService	x à
 marriageService
-â ò
+â ò
 )
-ò ô
+ò ô
 :
-ö õ
+ö õ
 base
-ú †
+ú †
 (
-† °
+† °
 
 unitOfWork
-° ´
+° ´
 )
-´ ¨
-{ 	
-_mapper 
-= 
-mapper 
-; "
-_fileManagementService "
-=# $!
-fileManagementService% :
-;: ;
-_marriageService 
-= 
-marriageService .
-;. /
-} 	
-public 
-async 
-Task 
-< 
-List 
-< 
-ParentChildModel /
->/ 0
->0 1"
-GetAllParentsForPerson2 H
-(H I
-intI L
-childIdM T
-)T U
-{ 	
-List 
-< 
-ParentChild 
-> 
-parentChildren ,
-=- .
-await/ 4
-Task5 9
-.9 :
-Run: =
-(= >
-(> ?
-)? @
-=>A C
-
-unitOfWorkD N
-.N O
-ParentChildO Z
-.Z [
-Filter[ a
-(a b
-xb c
-=>d f
-xg h
-.h i
-ChildIdi p
-==q s
-childIdt {
-){ |
-.| }
-Include	} Ñ
-(
-Ñ Ö
-pc
-Ö á
-=>
-à ä
-pc
-ã ç
-.
-ç é
-Parent
-é î
-)
-î ï
-.
-ï ñ
-ToList
-ñ ú
-(
-ú ù
-)
-ù û
-)
-û ü
-;
-ü †
+´ ¨
+{ 	
+_mapper 
+= 
+mapper 
+; "
+_fileManagementService "
+=# $!
+fileManagementService% :
+;: ;
+_marriageService 
+= 
+marriageService .
+;. /
+} 	
+public 
+async 
+Task 
+< 
+List 
+< 
+ParentChildModel /
+>/ 0
+>0 1"
+GetAllParentsForPerson2 H
+(H I
+intI L
+childIdM T
+)T U
+{ 	
 List 
 < 
-ParentModel 
-> 
-parentRelatives -
-=. /
-_mapper0 7
-.7 8
-Map8 ;
-<; <
-List< @
-<@ A
-ParentModelA L
->L M
->M N
-(N O
-parentChildrenO ]
-)] ^
-;^ _
-List 
-< 
-ParentChildModel !
->! "
-parents# *
-=+ ,
-_mapper- 4
-.4 5
-Map5 8
-<8 9
-List9 =
-<= >
-ParentChildModel> N
->N O
->O P
-(P Q
-parentRelativesQ `
-)` a
-;a b
-return   
-parents   
-;   
-}!! 	
-public## 
-async## 
-Task## 
-<## 
-List## 
-<## 
-ParentChildModel## /
->##/ 0
->##0 1#
-GetAllChildrenForPerson##2 I
-(##I J
-int##J M
-parentId##N V
-)##V W
-{$$ 	
-List%% 
-<%% 
-ParentChild%% 
->%% 
-parentChildren%% ,
-=%%- .
-await%%/ 4
-Task%%5 9
-.%%9 :
-Run%%: =
-(%%= >
-(%%> ?
-)%%? @
-=>%%A C
+ParentChild 
+> 
+parentChildren ,
+=- .
+await/ 4
+Task5 9
+.9 :
+Run: =
+(= >
+(> ?
+)? @
+=>A C
 
-unitOfWork%%D N
-.%%N O
-ParentChild%%O Z
-.%%Z [
-Filter%%[ a
-(%%a b
-x%%b c
-=>%%d f
-x%%g h
-.%%h i
-ParentId%%i q
-==%%r t
-parentId%%u }
-)%%} ~
-.%%~ 
-Include	%% Ü
+unitOfWorkD N
+.N O
+ParentChildO Z
+.Z [
+Filter[ a
+(a b
+xb c
+=>d f
+xg h
+.h i
+ChildIdi p
+==q s
+childIdt {
+){ |
+.| }
+Include	} Ñ
 (
-%%Ü á
+Ñ Ö
 pc
-%%á â
+Ö á
 =>
-%%ä å
+à ä
 pc
-%%ç è
+ã ç
 .
-%%è ê
-Child
-%%ê ï
+ç é
+Parent
+é î
 )
-%%ï ñ
+î ï
 .
-%%ñ ó
+ï ñ
 ToList
-%%ó ù
+ñ ú
 (
-%%ù û
+ú ù
 )
-%%û ü
+ù û
 )
-%%ü †
+û ü
 ;
-%%† °
-List&& 
-<&& 
-
-ChildModel&& 
->&& 
-childRelatives&& +
-=&&, -
-_mapper&&. 5
-.&&5 6
-Map&&6 9
-<&&9 :
-List&&: >
-<&&> ?
-
-ChildModel&&? I
->&&I J
->&&J K
-(&&K L
-parentChildren&&L Z
-)&&Z [
-;&&[ \
+ü †
+List 
+< 
+ParentModel 
+> 
+parentRelatives -
+=. /
+_mapper0 7
+.7 8
+Map8 ;
+<; <
+List< @
+<@ A
+ParentModelA L
+>L M
+>M N
+(N O
+parentChildrenO ]
+)] ^
+;^ _
+List   
+<   
+ParentChildModel   !
+>  ! "
+parents  # *
+=  + ,
+_mapper  - 4
+.  4 5
+Map  5 8
+<  8 9
+List  9 =
+<  = >
+ParentChildModel  > N
+>  N O
+>  O P
+(  P Q
+parentRelatives  Q `
+)  ` a
+;  a b
+return"" 
+parents"" 
+;"" 
+}## 	
+public%% 
+async%% 
+Task%% 
+<%% 
+List%% 
+<%% 
+ParentChildModel%% /
+>%%/ 0
+>%%0 1#
+GetAllChildrenForPerson%%2 I
+(%%I J
+int%%J M
+parentId%%N V
+)%%V W
+{&& 	
 List'' 
-<'' 
-ParentChildModel'' !
->''! "
-children''# +
-='', -
-_mapper''. 5
-.''5 6
-Map''6 9
-<''9 :
-List'': >
-<''> ?
-ParentChildModel''? O
->''O P
->''P Q
-(''Q R
-childRelatives''R `
-)''` a
-;''a b
-return(( 
-children(( 
-;(( 
-})) 	
-public++ 
-async++ 
-Task++ 
-<++ 
-List++ 
-<++ 
-ParentChildModel++ /
->++/ 0
->++0 1
-GetAllAncestors++2 A
-(++A B
-int++B E
-personId++F N
-)++N O
-{,, 	
-List-- 
-<-- 
-ParentChildModel-- !
->--! "
-foundParents--# /
-=--0 1
-await--2 7"
-GetAllParentsForPerson--8 N
-(--N O
-personId--O W
-)--W X
-;--X Y
-List.. 
-<.. 
-ParentChildModel.. !
->..! "
-	ancestors..# ,
-=..- .
-new../ 2
-List..3 7
-<..7 8
-ParentChildModel..8 H
->..H I
-(..I J
-)..J K
-;..K L
-while// 
-(// 
-foundParents// 
-.//  
-Any//  #
-(//# $
-)//$ %
-)//% &
-{00 
-	ancestors11 
-.11 
-AddRange11 "
-(11" #
-foundParents11# /
-)11/ 0
-;110 1
-List22 
-<22 
-ParentChildModel22 %
->22% &
-searchParents22' 4
-=225 6
-new227 :
-List22; ?
-<22? @
-ParentChildModel22@ P
->22P Q
-(22Q R
-)22R S
-;22S T
-searchParents33 
-.33 
-AddRange33 &
-(33& '
-foundParents33' 3
-)333 4
-;334 5
-foundParents44 
-.44 
-Clear44 "
-(44" #
-)44# $
-;44$ %
-foreach55 
-(55 
-ParentChildModel55 )
-parent55* 0
-in551 3
-searchParents554 A
-)55A B
-{66 
-foundParents77  
-.77  !
-AddRange77! )
-(77) *
-await77* /"
-GetAllParentsForPerson770 F
-(77F G
-parent77G M
-.77M N
-PersonId77N V
-)77V W
-)77W X
-;77X Y
-}88 
-}99 
-return:: 
-	ancestors:: 
-;:: 
-};; 	
-public== 
-async== 
-Task== 
-<== 
-List== 
-<== 
-ParentChildModel== /
->==/ 0
->==0 1
-GetAllDescendants==2 C
-(==C D
-int==D G
-personId==H P
-)==P Q
-{>> 	
-List?? 
-<?? 
-ParentChildModel?? !
->??! "
-foundChildren??# 0
-=??1 2
-await??3 8#
-GetAllChildrenForPerson??9 P
-(??P Q
-personId??Q Y
-)??Y Z
-;??Z [
-List@@ 
-<@@ 
-ParentChildModel@@ !
->@@! "
-descendants@@# .
-=@@/ 0
-new@@1 4
-List@@5 9
-<@@9 :
-ParentChildModel@@: J
->@@J K
-(@@K L
-)@@L M
-;@@M N
-whileAA 
-(AA 
-foundChildrenAA  
-.AA  !
-AnyAA! $
-(AA$ %
-)AA% &
-)AA& '
-{BB 
-descendantsCC 
-.CC 
-AddRangeCC $
-(CC$ %
-foundChildrenCC% 2
-)CC2 3
-;CC3 4
-ListDD 
-<DD 
-ParentChildModelDD %
->DD% &
-searchChildrenDD' 5
-=DD6 7
-newDD8 ;
-ListDD< @
-<DD@ A
-ParentChildModelDDA Q
->DDQ R
-(DDR S
-)DDS T
-;DDT U
-searchChildrenEE 
-.EE 
-AddRangeEE '
-(EE' (
-foundChildrenEE( 5
-)EE5 6
-;EE6 7
-foundChildrenFF 
-.FF 
-ClearFF #
-(FF# $
-)FF$ %
-;FF% &
-foreachGG 
-(GG 
-ParentChildModelGG )
-childGG* /
-inGG0 2
-searchChildrenGG3 A
-)GGA B
-{HH 
-foundChildrenII !
-.II! "
-AddRangeII" *
-(II* +
-awaitII+ 0#
-GetAllChildrenForPersonII1 H
-(IIH I
-childIII N
-.IIN O
-PersonIdIIO W
-)IIW X
-)IIX Y
-;IIY Z
-}JJ 
-}KK 
-returnLL 
-descendantsLL 
-;LL 
-}MM 	
-publicOO 
-asyncOO 
-TaskOO 
-<OO 
-ListOO 
-<OO 
-ParentChildModelOO /
->OO/ 0
->OO0 1
-GetAllRelatedPeopleOO2 E
-(OOE F
-intOOF I
-personIdOOJ R
-)OOR S
-{PP 	
-ListQQ 
-<QQ 
-ParentChildModelQQ !
->QQ! "
-foundRelativesQQ# 1
-=QQ2 3
-newQQ4 7
-ListQQ8 <
-<QQ< =
-ParentChildModelQQ= M
->QQM N
-(QQN O
-)QQO P
-;QQP Q
-foundRelativesRR 
-.RR 
-AddRangeRR #
-(RR# $
-awaitRR$ )"
-GetAllParentsForPersonRR* @
-(RR@ A
-personIdRRA I
-)RRI J
-)RRJ K
-;RRK L
-foundRelativesSS 
-.SS 
-AddRangeSS #
-(SS# $
-awaitSS$ )#
-GetAllChildrenForPersonSS* A
-(SSA B
-personIdSSB J
-)SSJ K
-)SSK L
-;SSL M
-ListTT 
-<TT 
-ParentChildModelTT !
->TT! "
-relatedPeopleTT# 0
-=TT1 2
-newTT3 6
-ListTT7 ;
-<TT; <
-ParentChildModelTT< L
->TTL M
-(TTM N
-)TTN O
-;TTO P
-whileUU 
-(UU 
-foundRelativesUU !
-.UU! "
-AnyUU" %
-(UU% &
-)UU& '
-)UU' (
-{VV 
-relatedPeopleWW 
-.WW 
-AddRangeWW &
-(WW& '
-foundRelativesWW' 5
-)WW5 6
-;WW6 7
-ListXX 
-<XX 
-ParentChildModelXX %
->XX% &
-searchRelativesXX' 6
-=XX7 8
-newXX9 <
-ListXX= A
-<XXA B
-ParentChildModelXXB R
->XXR S
-(XXS T
-)XXT U
-;XXU V
-searchRelativesYY 
-.YY  
-AddRangeYY  (
-(YY( )
-foundRelativesYY) 7
-)YY7 8
-;YY8 9
-foundRelativesZZ 
-.ZZ 
-ClearZZ $
-(ZZ$ %
-)ZZ% &
-;ZZ& '
-foreach[[ 
-([[ 
-int[[ 
+<'' 
+ParentChild'' 
+>'' 
+parentChildren'' ,
+=''- .
+await''/ 4
+Task''5 9
+.''9 :
+Run'': =
+(''= >
+(''> ?
+)''? @
+=>''A C
 
-relativeId[[ '
-in[[( *
-searchRelatives[[+ :
-.[[: ;
-Select[[; A
-([[A B
-relative[[B J
-=>[[K M
-relative[[N V
-.[[V W
-PersonId[[W _
-)[[_ `
-)[[` a
-{\\ 
-foundRelatives]] "
-.]]" #
-AddRange]]# +
-(]]+ ,
-await]], 1"
-GetAllParentsForPerson]]2 H
-(]]H I
-
-relativeId]]I S
-)]]S T
-)]]T U
-;]]U V
-foundRelatives^^ "
-.^^" #
-AddRange^^# +
-(^^+ ,
-await^^, 1#
-GetAllChildrenForPerson^^2 I
-(^^I J
-
-relativeId^^J T
-)^^T U
-)^^U V
-;^^V W
-}__ 
-foundRelatives`` 
-=``  
-foundRelatives``! /
-.``/ 0
-GroupBy``0 7
-(``7 8
-relative``8 @
-=>``A C
-relative``D L
-.``L M
-PersonId``M U
-)``U V
-.``V W
-Select``W ]
-(``] ^
-relative``^ f
-=>``g i
-relative``j r
-.``r s
-First``s x
-(``x y
-)``y z
-)``z {
-.``{ |
-ToList	``| Ç
+unitOfWork''D N
+.''N O
+ParentChild''O Z
+.''Z [
+Filter''[ a
+(''a b
+x''b c
+=>''d f
+x''g h
+.''h i
+ParentId''i q
+==''r t
+parentId''u }
+)''} ~
+.''~ 
+Include	'' Ü
 (
-``Ç É
+''Ü á
+pc
+''á â
+=>
+''ä å
+pc
+''ç è
+.
+''è ê
+Child
+''ê ï
 )
-``É Ñ
-;
-``Ñ Ö
-foundRelativesaa 
-.aa 
-	RemoveAllaa (
-(aa( )
-relativeaa) 1
-=>aa2 4
-relatedPeopleaa5 B
-.aaB C
-ExistsaaC I
-(aaI J
-personaaJ P
-=>aaQ S
-personaaT Z
-.aaZ [
-PersonIdaa[ c
-==aad f
-relativeaag o
-.aao p
-PersonIdaap x
-)aax y
-)aay z
-;aaz {
-}bb 
-returncc 
-relatedPeoplecc  
-;cc  !
-}dd 	
-publicff 
-asyncff 
-Taskff 
-<ff 
-Listff 
-<ff 
-ParentChildModelff /
->ff/ 0
->ff0 1!
-GetRelatedByAncestorsff2 G
-(ffG H
-intffH K
-personIdffL T
-)ffT U
-{gg 	
-Listhh 
-<hh 
-ParentChildModelhh !
->hh! "
-allAncestorshh# /
-=hh0 1
-awaithh2 7
-GetAllAncestorshh8 G
-(hhG H
-personIdhhH P
-)hhP Q
-;hhQ R
-Listii 
-<ii 
-ParentChildModelii !
->ii! "
-relatedByAncestorsii# 5
-=ii6 7
-newii8 ;
-Listii< @
-<ii@ A
-ParentChildModeliiA Q
->iiQ R
-(iiR S
-)iiS T
-;iiT U
-relatedByAncestorsjj 
-.jj 
-AddRangejj '
-(jj' (
-allAncestorsjj( 4
-)jj4 5
-;jj5 6
-foreachkk 
-(kk 
-varkk 
-ancestorkk !
-inkk" $
-allAncestorskk% 1
-)kk1 2
-{ll 
-relatedByAncestorsmm "
-.mm" #
-AddRangemm# +
-(mm+ ,
-awaitmm, 1
-GetAllDescendantsmm2 C
-(mmC D
-ancestormmD L
-.mmL M
-PersonIdmmM U
-)mmU V
-)mmV W
-;mmW X
-}nn 
-relatedByAncestorsoo 
-.oo 
-AddRangeoo '
-(oo' (
-awaitoo( -
-GetAllDescendantsoo. ?
-(oo? @
-personIdoo@ H
-)ooH I
-)ooI J
-;ooJ K
-relatedByAncestorspp 
-=pp  
-relatedByAncestorspp! 3
-.pp3 4
-GroupBypp4 ;
-(pp; <
-relativepp< D
-=>ppE G
-relativeppH P
-.ppP Q
-PersonIdppQ Y
-)ppY Z
-.ppZ [
-Selectpp[ a
-(ppa b
-relativeppb j
-=>ppk m
-relativeppn v
-.ppv w
-Firstppw |
-(pp| }
-)pp} ~
-)pp~ 
-.	pp Ä
+''ï ñ
+.
+''ñ ó
 ToList
-ppÄ Ü
+''ó ù
 (
-ppÜ á
+''ù û
 )
-ppá à
+''û ü
+)
+''ü †
 ;
-ppà â
-returnqq 
-relatedByAncestorsqq %
-;qq% &
-}rr 	
-publictt 
-asynctt 
-Tasktt 
-<tt 
-Listtt 
-<tt 
-ParentChildModeltt /
->tt/ 0
->tt0 1#
-GetRelatedByDescendantstt2 I
-(ttI J
-intttJ M
-personIdttN V
-)ttV W
-{uu 	
+''† °
+List(( 
+<(( 
+
+ChildModel(( 
+>(( 
+childRelatives(( +
+=((, -
+_mapper((. 5
+.((5 6
+Map((6 9
+<((9 :
+List((: >
+<((> ?
+
+ChildModel((? I
+>((I J
+>((J K
+(((K L
+parentChildren((L Z
+)((Z [
+;(([ \
+List)) 
+<)) 
+ParentChildModel)) !
+>))! "
+children))# +
+=)), -
+_mapper)). 5
+.))5 6
+Map))6 9
+<))9 :
+List)): >
+<))> ?
+ParentChildModel))? O
+>))O P
+>))P Q
+())Q R
+childRelatives))R `
+)))` a
+;))a b
+return++ 
+children++ 
+;++ 
+},, 	
+public.. 
+async.. 
+Task.. 
+<.. 
+List.. 
+<.. 
+ParentChildModel.. /
+>../ 0
+>..0 1
+GetAllAncestors..2 A
+(..A B
+int..B E
+personId..F N
+)..N O
+{// 	
+List00 
+<00 
+ParentChildModel00 !
+>00! "
+foundParents00# /
+=000 1
+await002 7"
+GetAllParentsForPerson008 N
+(00N O
+personId00O W
+)00W X
+;00X Y
+List11 
+<11 
+ParentChildModel11 !
+>11! "
+	ancestors11# ,
+=11- .
+new11/ 2
+List113 7
+<117 8
+ParentChildModel118 H
+>11H I
+(11I J
+)11J K
+;11K L
+while33 
+(33 
+foundParents33 
+.33  
+Any33  #
+(33# $
+)33$ %
+)33% &
+{44 
+	ancestors55 
+.55 
+AddRange55 "
+(55" #
+foundParents55# /
+)55/ 0
+;550 1
+List66 
+<66 
+ParentChildModel66 %
+>66% &
+searchParents66' 4
+=665 6
+new667 :
+List66; ?
+<66? @
+ParentChildModel66@ P
+>66P Q
+(66Q R
+)66R S
+;66S T
+searchParents77 
+.77 
+AddRange77 &
+(77& '
+foundParents77' 3
+)773 4
+;774 5
+foundParents88 
+.88 
+Clear88 "
+(88" #
+)88# $
+;88$ %
+foreach:: 
+(:: 
+ParentChildModel:: )
+parent::* 0
+in::1 3
+searchParents::4 A
+)::A B
+{;; 
+foundParents<<  
+.<<  !
+AddRange<<! )
+(<<) *
+await<<* /"
+GetAllParentsForPerson<<0 F
+(<<F G
+parent<<G M
+.<<M N
+PersonId<<N V
+)<<V W
+)<<W X
+;<<X Y
+}== 
+}>> 
+return@@ 
+	ancestors@@ 
+;@@ 
+}AA 	
+publicCC 
+asyncCC 
+TaskCC 
+<CC 
+ListCC 
+<CC 
+ParentChildModelCC /
+>CC/ 0
+>CC0 1
+GetAllDescendantsCC2 C
+(CCC D
+intCCD G
+personIdCCH P
+)CCP Q
+{DD 	
+ListEE 
+<EE 
+ParentChildModelEE !
+>EE! "
+foundChildrenEE# 0
+=EE1 2
+awaitEE3 8#
+GetAllChildrenForPersonEE9 P
+(EEP Q
+personIdEEQ Y
+)EEY Z
+;EEZ [
+ListFF 
+<FF 
+ParentChildModelFF !
+>FF! "
+descendantsFF# .
+=FF/ 0
+newFF1 4
+ListFF5 9
+<FF9 :
+ParentChildModelFF: J
+>FFJ K
+(FFK L
+)FFL M
+;FFM N
+whileHH 
+(HH 
+foundChildrenHH  
+.HH  !
+AnyHH! $
+(HH$ %
+)HH% &
+)HH& '
+{II 
+descendantsJJ 
+.JJ 
+AddRangeJJ $
+(JJ$ %
+foundChildrenJJ% 2
+)JJ2 3
+;JJ3 4
+ListKK 
+<KK 
+ParentChildModelKK %
+>KK% &
+searchChildrenKK' 5
+=KK6 7
+newKK8 ;
+ListKK< @
+<KK@ A
+ParentChildModelKKA Q
+>KKQ R
+(KKR S
+)KKS T
+;KKT U
+searchChildrenLL 
+.LL 
+AddRangeLL '
+(LL' (
+foundChildrenLL( 5
+)LL5 6
+;LL6 7
+foundChildrenMM 
+.MM 
+ClearMM #
+(MM# $
+)MM$ %
+;MM% &
+foreachOO 
+(OO 
+ParentChildModelOO )
+childOO* /
+inOO0 2
+searchChildrenOO3 A
+)OOA B
+{PP 
+foundChildrenQQ !
+.QQ! "
+AddRangeQQ" *
+(QQ* +
+awaitQQ+ 0#
+GetAllChildrenForPersonQQ1 H
+(QQH I
+childQQI N
+.QQN O
+PersonIdQQO W
+)QQW X
+)QQX Y
+;QQY Z
+}RR 
+}SS 
+returnUU 
+descendantsUU 
+;UU 
+}VV 	
+publicXX 
+asyncXX 
+TaskXX 
+<XX 
+ListXX 
+<XX 
+ParentChildModelXX /
+>XX/ 0
+>XX0 1
+GetAllRelatedPeopleXX2 E
+(XXE F
+intXXF I
+personIdXXJ R
+)XXR S
+{YY 	
+ListZZ 
+<ZZ 
+ParentChildModelZZ !
+>ZZ! "
+foundRelativesZZ# 1
+=ZZ2 3
+newZZ4 7
+ListZZ8 <
+<ZZ< =
+ParentChildModelZZ= M
+>ZZM N
+(ZZN O
+)ZZO P
+;ZZP Q
+foundRelatives[[ 
+.[[ 
+AddRange[[ #
+([[# $
+await[[$ )"
+GetAllParentsForPerson[[* @
+([[@ A
+personId[[A I
+)[[I J
+)[[J K
+;[[K L
+foundRelatives\\ 
+.\\ 
+AddRange\\ #
+(\\# $
+await\\$ )#
+GetAllChildrenForPerson\\* A
+(\\A B
+personId\\B J
+)\\J K
+)\\K L
+;\\L M
+List]] 
+<]] 
+ParentChildModel]] !
+>]]! "
+relatedPeople]]# 0
+=]]1 2
+new]]3 6
+List]]7 ;
+<]]; <
+ParentChildModel]]< L
+>]]L M
+(]]M N
+)]]N O
+;]]O P
+while__ 
+(__ 
+foundRelatives__ !
+.__! "
+Any__" %
+(__% &
+)__& '
+)__' (
+{`` 
+relatedPeopleaa 
+.aa 
+AddRangeaa &
+(aa& '
+foundRelativesaa' 5
+)aa5 6
+;aa6 7
+Listbb 
+<bb 
+ParentChildModelbb %
+>bb% &
+searchRelativesbb' 6
+=bb7 8
+newbb9 <
+Listbb= A
+<bbA B
+ParentChildModelbbB R
+>bbR S
+(bbS T
+)bbT U
+;bbU V
+searchRelativescc 
+.cc  
+AddRangecc  (
+(cc( )
+foundRelativescc) 7
+)cc7 8
+;cc8 9
+foundRelativesdd 
+.dd 
+Cleardd $
+(dd$ %
+)dd% &
+;dd& '
+foreachff 
+(ff 
+intff 
+
+relativeIdff '
+inff( *
+searchRelativesff+ :
+.ff: ;
+Selectff; A
+(ffA B
+relativeffB J
+=>ffK M
+relativeffN V
+.ffV W
+PersonIdffW _
+)ff_ `
+)ff` a
+{gg 
+foundRelativeshh "
+.hh" #
+AddRangehh# +
+(hh+ ,
+awaithh, 1"
+GetAllParentsForPersonhh2 H
+(hhH I
+
+relativeIdhhI S
+)hhS T
+)hhT U
+;hhU V
+foundRelativesii "
+.ii" #
+AddRangeii# +
+(ii+ ,
+awaitii, 1#
+GetAllChildrenForPersonii2 I
+(iiI J
+
+relativeIdiiJ T
+)iiT U
+)iiU V
+;iiV W
+}jj 
+foundRelativesll 
+=ll  
+foundRelativesll! /
+.ll/ 0
+GroupByll0 7
+(ll7 8
+relativell8 @
+=>llA C
+relativellD L
+.llL M
+PersonIdllM U
+)llU V
+.llV W
+SelectllW ]
+(ll] ^
+relativell^ f
+=>llg i
+relativellj r
+.llr s
+Firstlls x
+(llx y
+)lly z
+)llz {
+.ll{ |
+ToList	ll| Ç
+(
+llÇ É
+)
+llÉ Ñ
+;
+llÑ Ö
+foundRelativesmm 
+.mm 
+	RemoveAllmm (
+(mm( )
+relativemm) 1
+=>mm2 4
+relatedPeoplemm5 B
+.mmB C
+ExistsmmC I
+(mmI J
+personmmJ P
+=>mmQ S
+personmmT Z
+.mmZ [
+PersonIdmm[ c
+==mmd f
+relativemmg o
+.mmo p
+PersonIdmmp x
+)mmx y
+)mmy z
+;mmz {
+}nn 
+returnpp 
+relatedPeoplepp  
+;pp  !
+}qq 	
+publicss 
+asyncss 
+Taskss 
+<ss 
+Listss 
+<ss 
+ParentChildModelss /
+>ss/ 0
+>ss0 1!
+GetRelatedByAncestorsss2 G
+(ssG H
+intssH K
+personIdssL T
+)ssT U
+{tt 	
+Listuu 
+<uu 
+ParentChildModeluu !
+>uu! "
+allAncestorsuu# /
+=uu0 1
+awaituu2 7
+GetAllAncestorsuu8 G
+(uuG H
+personIduuH P
+)uuP Q
+;uuQ R
 Listvv 
 <vv 
 ParentChildModelvv !
->vv! "
-allDescendantsvv# 1
-=vv2 3
-awaitvv4 9
-GetAllDescendantsvv: K
-(vvK L
-personIdvvL T
-)vvT U
-;vvU V
-Listww 
-<ww 
-ParentChildModelww !
->ww! " 
-relatedByDescendantsww# 7
-=ww8 9
-newww: =
-Listww> B
-<wwB C
-ParentChildModelwwC S
->wwS T
-(wwT U
-)wwU V
-;wwV W 
-relatedByDescendantsxx  
-.xx  !
-AddRangexx! )
-(xx) *
-allDescendantsxx* 8
-)xx8 9
-;xx9 :
+>vv! "
+relatedByAncestorsvv# 5
+=vv6 7
+newvv8 ;
+Listvv< @
+<vv@ A
+ParentChildModelvvA Q
+>vvQ R
+(vvR S
+)vvS T
+;vvT U
+relatedByAncestorsww 
+.ww 
+AddRangeww '
+(ww' (
+allAncestorsww( 4
+)ww4 5
+;ww5 6
 foreachyy 
 (yy 
-varyy 
-
-descendantyy #
-inyy$ &
-allDescendantsyy' 5
-)yy5 6
-{zz  
-relatedByDescendants{{ $
-.{{$ %
-AddRange{{% -
-({{- .
-await{{. 3
-GetAllAncestors{{4 C
-({{C D
-
-descendant{{D N
-.{{N O
-PersonId{{O W
-){{W X
-){{X Y
-;{{Y Z
-}||  
-relatedByDescendants}}  
-.}}  !
-AddRange}}! )
-(}}) *
-await}}* /
-GetAllAncestors}}0 ?
-(}}? @
-personId}}@ H
-)}}H I
-)}}I J
-;}}J K 
-relatedByDescendants~~  
-=~~! " 
-relatedByDescendants~~# 7
-.~~7 8
-GroupBy~~8 ?
+varyy 
+ancestoryy !
+inyy" $
+allAncestorsyy% 1
+)yy1 2
+{zz 
+relatedByAncestors{{ "
+.{{" #
+AddRange{{# +
+({{+ ,
+await{{, 1
+GetAllDescendants{{2 C
+({{C D
+ancestor{{D L
+.{{L M
+PersonId{{M U
+){{U V
+){{V W
+;{{W X
+}|| 
+relatedByAncestors~~ 
+.~~ 
+AddRange~~ '
+(~~' (
+await~~( -
+GetAllDescendants~~. ?
 (~~? @
-relative~~@ H
-=>~~I K
-relative~~L T
-.~~T U
-PersonId~~U ]
-)~~] ^
-.~~^ _
-Select~~_ e
-(~~e f
-relative~~f n
-=>~~o q
-relative~~r z
-.~~z {
-First	~~{ Ä
-(
-~~Ä Å
-)
-~~Å Ç
-)
-~~Ç É
-.
-~~É Ñ
+personId~~@ H
+)~~H I
+)~~I J
+;~~J K
+relatedByAncestors 
+=  
+relatedByAncestors! 3
+.3 4
+GroupBy4 ;
+(; <
+relative< D
+=>E G
+relativeH P
+.P Q
+PersonIdQ Y
+)Y Z
+.Z [
+Select[ a
+(a b
+relativeb j
+=>k m
+relativen v
+.v w
+Firstw |
+(| }
+)} ~
+)~ 
+.	 Ä
 ToList
-~~Ñ ä
+Ä Ü
 (
-~~ä ã
+Ü á
 )
-~~ã å
+á à
 ;
-~~å ç
-return  
-relatedByDescendants '
-;' (
+à â
+return
+ÅÅ  
+relatedByAncestors
+ÅÅ %
+;
+ÅÅ% &
 }
-ÄÄ 	
+ÇÇ 	
 public
-ÇÇ 
+ÑÑ 
 async
-ÇÇ 
+ÑÑ 
 Task
-ÇÇ 
+ÑÑ 
 <
-ÇÇ 
+ÑÑ 
 List
-ÇÇ 
+ÑÑ 
 <
-ÇÇ  
-GenericPersonModel
-ÇÇ 1
+ÑÑ 
+ParentChildModel
+ÑÑ /
 >
-ÇÇ1 2
+ÑÑ/ 0
 >
-ÇÇ2 3 
-GetChildrenOptions
-ÇÇ4 F
+ÑÑ0 1%
+GetRelatedByDescendants
+ÑÑ2 I
 (
-ÇÇF G
+ÑÑI J
 int
-ÇÇG J
+ÑÑJ M
 personId
-ÇÇK S
+ÑÑN V
 )
-ÇÇS T
+ÑÑV W
 {
-ÉÉ 	
-List
-ÑÑ 
-<
-ÑÑ  
-GenericPersonModel
-ÑÑ #
->
-ÑÑ# $%
-notRelatedByDescendants
-ÑÑ% <
-=
-ÑÑ= >
-await
-ÑÑ? D(
-GetNotRelatedByDescendants
-ÑÑE _
-(
-ÑÑ_ `
-personId
-ÑÑ` h
-)
-ÑÑh i
-;
-ÑÑi j
-List
-ÖÖ 
-<
-ÖÖ  
-GenericPersonModel
-ÖÖ #
->
-ÖÖ# $#
-notRelatedByAncestors
-ÖÖ% :
-=
-ÖÖ; <
-await
-ÖÖ= B&
-GetNotRelatedByAncestors
-ÖÖC [
-(
-ÖÖ[ \
-personId
-ÖÖ\ d
-)
-ÖÖd e
-;
-ÖÖe f
+ÖÖ 	
 List
 ÜÜ 
 <
-ÜÜ  
-GenericPersonModel
-ÜÜ #
+ÜÜ 
+ParentChildModel
+ÜÜ !
 >
-ÜÜ# $
-
-notRelated
-ÜÜ% /
+ÜÜ! "
+allDescendants
+ÜÜ# 1
 =
-ÜÜ0 1%
+ÜÜ2 3
+await
+ÜÜ4 9
+GetAllDescendants
+ÜÜ: K
+(
+ÜÜK L
+personId
+ÜÜL T
+)
+ÜÜT U
+;
+ÜÜU V
+List
+áá 
+<
+áá 
+ParentChildModel
+áá !
+>
+áá! ""
+relatedByDescendants
+áá# 7
+=
+áá8 9
+new
+áá: =
+List
+áá> B
+<
+ááB C
+ParentChildModel
+ááC S
+>
+ááS T
+(
+ááT U
+)
+ááU V
+;
+ááV W"
+relatedByDescendants
+àà  
+.
+àà  !
+AddRange
+àà! )
+(
+àà) *
+allDescendants
+àà* 8
+)
+àà8 9
+;
+àà9 :
+foreach
+ää 
+(
+ää 
+var
+ää 
+
+descendant
+ää #
+in
+ää$ &
+allDescendants
+ää' 5
+)
+ää5 6
+{
+ãã "
+relatedByDescendants
+åå $
+.
+åå$ %
+AddRange
+åå% -
+(
+åå- .
+await
+åå. 3
+GetAllAncestors
+åå4 C
+(
+ååC D
+
+descendant
+ååD N
+.
+ååN O
+PersonId
+ååO W
+)
+ååW X
+)
+ååX Y
+;
+ååY Z
+}
+çç "
+relatedByDescendants
+èè  
+.
+èè  !
+AddRange
+èè! )
+(
+èè) *
+await
+èè* /
+GetAllAncestors
+èè0 ?
+(
+èè? @
+personId
+èè@ H
+)
+èèH I
+)
+èèI J
+;
+èèJ K"
+relatedByDescendants
+êê  
+=
+êê! ""
+relatedByDescendants
+êê# 7
+.
+êê7 8
+GroupBy
+êê8 ?
+(
+êê? @
+relative
+êê@ H
+=>
+êêI K
+relative
+êêL T
+.
+êêT U
+PersonId
+êêU ]
+)
+êê] ^
+.
+êê^ _
+Select
+êê_ e
+(
+êêe f
+relative
+êêf n
+=>
+êêo q
+relative
+êêr z
+.
+êêz {
+Firstêê{ Ä
+(êêÄ Å
+)êêÅ Ç
+)êêÇ É
+.êêÉ Ñ
+ToListêêÑ ä
+(êêä ã
+)êêã å
+;êêå ç
+return
+íí "
+relatedByDescendants
+íí '
+;
+íí' (
+}
+ìì 	
+public
+ïï 
+async
+ïï 
+Task
+ïï 
+<
+ïï 
+List
+ïï 
+<
+ïï  
+GenericPersonModel
+ïï 1
+>
+ïï1 2
+>
+ïï2 3 
+GetChildrenOptions
+ïï4 F
+(
+ïïF G
+int
+ïïG J
+personId
+ïïK S
+)
+ïïS T
+{
+ññ 	
+List
+óó 
+<
+óó  
+GenericPersonModel
+óó #
+>
+óó# $%
 notRelatedByDescendants
-ÜÜ2 I
-.
-ÜÜI J
-Where
-ÜÜJ O
-(
-ÜÜO P
-
-notRelated
-ÜÜP Z
-=>
-ÜÜ[ ]#
-notRelatedByAncestors
-ÜÜ^ s
-.
-ÜÜs t
-Any
-ÜÜt w
-(
-ÜÜw x
-x
-ÜÜx y
-=>
-ÜÜz |
-x
-ÜÜ} ~
-.
-ÜÜ~ 
-PersonIdÜÜ á
-==ÜÜà ä
-
-notRelatedÜÜã ï
-.ÜÜï ñ
-PersonIdÜÜñ û
-)ÜÜû ü
-)ÜÜü †
-.ÜÜ† °
-ToListÜÜ° ß
-(ÜÜß ®
-)ÜÜ® ©
-;ÜÜ© ™
-List
-àà 
-<
-àà 
-int
-àà 
->
-àà !
-peopleWithoutParent
-àà )
+óó% <
 =
-àà* +
+óó= >
 await
-àà, 1$
-GetPeopleWithoutParent
-àà2 H
+óó? D(
+GetNotRelatedByDescendants
+óóE _
 (
-ààH I
+óó_ `
 personId
-ààI Q
+óó` h
 )
-ààQ R
+óóh i
 ;
-ààR S
+óói j
 List
-ââ 
+òò 
 <
-ââ 
-int
-ââ 
->
-ââ 
-spouces
-ââ 
-=
-ââ 
-(
-ââ  !
-await
-ââ! &
-_marriageService
-ââ' 7
-.
-ââ7 8&
-GetAllMarriagesForPerson
-ââ8 P
-(
-ââP Q
-personId
-ââQ Y
-)
-ââY Z
-)
-ââZ [
-.
-ââ[ \
-Select
-ââ\ b
-(
-ââb c
-(
-ââc d
-marriage
-ââd l
-)
-ââl m
-=>
-âân p
-marriage
-ââq y
-.
-âây z
-PersonMarriedToââz â
-.âââ ä
-PersonIdââä í
-)ââí ì
-.ââì î
-ToListââî ö
-(ââö õ
-)ââõ ú
-;ââú ù
-return
-ää 
-
-notRelated
-ää 
-.
-ää 
-Where
-ää #
-(
-ää# $
-(
-ää$ %
-person
-ää% +
-)
-ää+ ,
-=>
-ää- /!
-peopleWithoutParent
-ãã( ;
-.
-ãã; <
-Exists
-ãã< B
-(
-ããB C
-(
-ããC D
-personId
-ããD L
-)
-ããL M
-=>
-ããN P
-person
-ããQ W
-.
-ããW X
-PersonId
-ããX `
-==
-ããa c
-personId
-ããd l
-)
-ããl m
-&&
-ããn p
-!
-åå( )
-spouces
-åå) 0
-.
-åå0 1
-Exists
-åå1 7
-(
-åå7 8
-(
-åå8 9
-spouceId
-åå9 A
-)
-ååA B
-=>
-ååC E
-person
-ååF L
-.
-ååL M
-PersonId
-ååM U
-==
-ååV X
-spouceId
-ååY a
-)
-ååa b
-)
-ååb c
-.
-ååc d
-ToList
-ååd j
-(
-ååj k
-)
-ååk l
-;
-åål m
-}
-çç 	
-public
-èè 
-async
-èè 
-Task
-èè 
-<
-èè 
-List
-èè 
-<
-èè  
+òò  
 GenericPersonModel
-èè 1
+òò #
 >
-èè1 2
->
-èè2 3$
-GetParentSpouceOptions
-èè4 J
-(
-èèJ K
-int
-èèK N
-personId
-èèO W
-)
-èèW X
-{
-êê 	
-List
-ëë 
-<
-ëë  
-GenericPersonModel
-ëë #
->
-ëë# $#
+òò# $#
 notRelatedByAncestors
-ëë% :
+òò% :
 =
-ëë; <
+òò; <
 await
-ëë= B&
+òò= B&
 GetNotRelatedByAncestors
-ëëC [
+òòC [
 (
-ëë[ \
+òò[ \
 personId
-ëë\ d
+òò\ d
 )
-ëëd e
+òòd e
 ;
-ëëe f
-List
-íí 
-<
-íí 
-int
-íí 
->
-íí 
-spouces
-íí 
-=
-íí 
-(
-íí  !
-await
-íí! &
-_marriageService
-íí' 7
-.
-íí7 8&
-GetAllMarriagesForPerson
-íí8 P
-(
-ííP Q
-personId
-ííQ Y
-)
-ííY Z
-)
-ííZ [
-.
-íí[ \
-Where
-íí\ a
-(
-íía b
-marriage
-ííb j
-=>
-íík m
-marriage
-íín v
-.
-íív w
-MarriageEndedííw Ñ
-==ííÖ á
-nullííà å
-)ííå ç
-.
-ìì$ %
-Select
-ìì% +
-(
-ìì+ ,
-(
-ìì, -
-marriage
-ìì- 5
-)
-ìì5 6
-=>
-ìì7 9
-marriage
-ìì: B
-.
-ììB C
-PersonMarriedTo
-ììC R
-.
-ììR S
-PersonId
-ììS [
-)
-ìì[ \
-.
-ìì\ ]
-ToList
-ìì] c
-(
-ììc d
-)
-ììd e
-;
-ììe f
-return
-îî #
-notRelatedByAncestors
-îî (
-.
-îî( )
-Where
-îî) .
-(
-îî. /
-(
-îî/ 0
-person
-îî0 6
-)
-îî6 7
-=>
-îî8 :
-!
-îî; <
-spouces
-îî< C
-.
-îîC D
-Exists
-îîD J
-(
-îîJ K
-(
-îîK L
-spouceId
-îîL T
-)
-îîT U
-=>
-îîV X
-person
-îîY _
-.
-îî_ `
-PersonId
-îî` h
-==
-îîi k
-spouceId
-îîl t
-)
-îît u
-)
-îîu v
-.
-îîv w
-ToList
-îîw }
-(
-îî} ~
-)
-îî~ 
-;îî Ä
-}
-ïï 	
-public
-óó 
-async
-óó 
-Task
-óó 
-<
-óó 
-List
-óó 
-<
-óó  
-GenericPersonModel
-óó 1
->
-óó1 2
->
-óó2 3 
-GetUnrelatedPeople
-óó4 F
-(
-óóF G
-int
-óóG J
-personId
-óóK S
-)
-óóS T
-{
-òò 	
+òòe f
 List
 ôô 
 <
-ôô 
-int
-ôô 
->
-ôô 
-relatedPeopleIds
-ôô &
-=
-ôô' (
-(
-ôô) *
-await
-ôô* /!
-GetAllRelatedPeople
-ôô0 C
-(
-ôôC D
-personId
-ôôD L
-)
-ôôL M
-)
-ôôM N
-.
-ôôN O
-Select
-ôôO U
-(
-ôôU V
-(
-ôôV W
-relative
-ôôW _
-)
-ôô_ `
-=>
-ôôa c
-relative
-ôôd l
-.
-ôôl m
-PersonId
-ôôm u
-)
-ôôu v
-.
-ôôv w
-ToList
-ôôw }
-(
-ôô} ~
-)
-ôô~ 
-;ôô Ä
-List
-öö 
-<
-öö 
-int
-öö 
->
-öö 
-marriedPeopleIds
-öö &
-=
-öö' (
-(
-öö) *
-await
-öö* /
-_marriageService
-öö0 @
-.
-öö@ A&
-GetAllMarriagesForPerson
-ööA Y
-(
-ööY Z
-personId
-ööZ b
-)
-ööb c
-)
-ööc d
-.
-ööd e
-Select
-ööe k
-(
-öök l
-(
-ööl m
-marriage
-ööm u
-)
-ööu v
-=>
-ööw y
-marriageööz Ç
-.ööÇ É
-PersonMarriedToööÉ í
-.ööí ì
-PersonIdööì õ
-)ööõ ú
-.ööú ù
-ToListööù £
-(öö£ §
-)öö§ •
-;öö• ¶
-foreach
-õõ 
-(
-õõ 
-var
-õõ 
-marriedPersonId
-õõ (
-in
-õõ) +
-marriedPeopleIds
-õõ, <
-)
-õõ< =
-{
-úú 
-List
-ùù 
-<
-ùù 
-int
-ùù 
->
-ùù '
-relatedToMarriedPersonIds
-ùù 3
-=
-ùù4 5
-(
-ùù6 7
-await
-ùù7 <!
-GetAllRelatedPeople
-ùù= P
-(
-ùùP Q
-marriedPersonId
-ùùQ `
-)
-ùù` a
-)
-ùùa b
-.
-ùùb c
-Select
-ùùc i
-(
-ùùi j
-(
-ùùj k
-person
-ùùk q
-)
-ùùq r
-=>
-ùùs u
-person
-ùùv |
-.
-ùù| }
-PersonIdùù} Ö
-)ùùÖ Ü
-.ùùÜ á
-ToListùùá ç
-(ùùç é
-)ùùé è
-;ùùè ê
-relatedPeopleIds
-ûû  
-.
-ûû  !
-AddRange
-ûû! )
-(
-ûû) *'
-relatedToMarriedPersonIds
-ûû* C
-)
-ûûC D
-;
-ûûD E
-}
-üü 
-relatedPeopleIds
-†† 
-.
-†† 
-AddRange
-†† %
-(
-††% &
-marriedPeopleIds
-††& 6
-)
-††6 7
-;
-††7 8
-return
-°° 
-await
-°° 
-GetExcludedPeople
-°° *
-(
-°°* +
-relatedPeopleIds
-°°+ ;
-,
-°°; <
-personId
-°°= E
-)
-°°E F
-;
-°°F G
-}
-¢¢ 	
-public
-§§ 
-async
-§§ 
-Task
-§§ 
-<
-§§ 
-List
-§§ 
-<
-§§  
+ôô  
 GenericPersonModel
-§§ 1
+ôô #
 >
-§§1 2
->
-§§2 3&
-GetNotRelatedByAncestors
-§§4 L
+ôô# $
+
+notRelated
+ôô% /
+=
+ôô0 1%
+notRelatedByDescendants
+ôô2 I
+.
+ôôI J
+Where
+ôôJ O
 (
-§§L M
+ôôO P
+
+notRelated
+ôôP Z
+=>
+ôô[ ]#
+notRelatedByAncestors
+ôô^ s
+.
+ôôs t
+Any
+ôôt w
+(
+ôôw x
+x
+ôôx y
+=>
+ôôz |
+x
+ôô} ~
+.
+ôô~ 
+PersonIdôô á
+==ôôà ä
+
+notRelatedôôã ï
+.ôôï ñ
+PersonIdôôñ û
+)ôôû ü
+)ôôü †
+.ôô† °
+ToListôô° ß
+(ôôß ®
+)ôô® ©
+;ôô© ™
+List
+õõ 
+<
+õõ 
 int
-§§M P
+õõ 
+>
+õõ !
+peopleWithoutParent
+õõ )
+=
+õõ* +
+await
+õõ, 1$
+GetPeopleWithoutParent
+õõ2 H
+(
+õõH I
 personId
-§§Q Y
+õõI Q
 )
-§§Y Z
+õõQ R
+;
+õõR S
+List
+úú 
+<
+úú 
+int
+úú 
+>
+úú 
+spouces
+úú 
+=
+úú 
+(
+úú  !
+await
+úú! &
+_marriageService
+úú' 7
+.
+úú7 8&
+GetAllMarriagesForPerson
+úú8 P
+(
+úúP Q
+personId
+úúQ Y
+)
+úúY Z
+)
+úúZ [
+.
+úú[ \
+Select
+úú\ b
+(
+úúb c
+(
+úúc d
+marriage
+úúd l
+)
+úúl m
+=>
+úún p
+marriage
+úúq y
+.
+úúy z
+PersonMarriedToúúz â
+.úúâ ä
+PersonIdúúä í
+)úúí ì
+.úúì î
+ToListúúî ö
+(úúö õ
+)úúõ ú
+;úúú ù
+return
+ûû 
+
+notRelated
+ûû 
+.
+ûû 
+Where
+ûû #
+(
+ûû# $
+(
+ûû$ %
+person
+ûû% +
+)
+ûû+ ,
+=>
+ûû- /!
+peopleWithoutParent
+üü( ;
+.
+üü; <
+Exists
+üü< B
+(
+üüB C
+(
+üüC D
+personId
+üüD L
+)
+üüL M
+=>
+üüN P
+person
+üüQ W
+.
+üüW X
+PersonId
+üüX `
+==
+üüa c
+personId
+üüd l
+)
+üül m
+&&
+üün p
+!
+††( )
+spouces
+††) 0
+.
+††0 1
+Exists
+††1 7
+(
+††7 8
+(
+††8 9
+spouceId
+††9 A
+)
+††A B
+=>
+††C E
+person
+††F L
+.
+††L M
+PersonId
+††M U
+==
+††V X
+spouceId
+††Y a
+)
+††a b
+)
+††b c
+.
+††c d
+ToList
+††d j
+(
+††j k
+)
+††k l
+;
+††l m
+}
+°° 	
+public
+££ 
+async
+££ 
+Task
+££ 
+<
+££ 
+List
+££ 
+<
+££  
+GenericPersonModel
+££ 1
+>
+££1 2
+>
+££2 3$
+GetParentSpouceOptions
+££4 J
+(
+££J K
+int
+££K N
+personId
+££O W
+)
+££W X
 {
-•• 	
+§§ 	
+List
+•• 
+<
+••  
+GenericPersonModel
+•• #
+>
+••# $#
+notRelatedByAncestors
+••% :
+=
+••; <
+await
+••= B&
+GetNotRelatedByAncestors
+••C [
+(
+••[ \
+personId
+••\ d
+)
+••d e
+;
+••e f
 List
 ¶¶ 
 <
@@ -9707,543 +9402,498 @@ notRelated
 int
 ¶¶ 
 >
-¶¶ #
-bloodRelatedPeopleIds
-¶¶ +
+¶¶ 
+spouces
+¶¶ 
 =
-¶¶, -
+¶¶ 
 (
-¶¶. /
+¶¶  !
 await
-¶¶/ 4#
-GetRelatedByAncestors
-¶¶5 J
-(
-¶¶J K
-personId
-¶¶K S
-)
-¶¶S T
-)
-¶¶T U
+¶¶! &
+_marriageService
+¶¶' 7
 .
-¶¶U V
+¶¶7 8&
+GetAllMarriagesForPerson
+¶¶8 P
+(
+¶¶P Q
+personId
+¶¶Q Y
+)
+¶¶Y Z
+)
+¶¶Z [
+.
+¶¶[ \
+Where
+¶¶\ a
+(
+¶¶a b
+marriage
+¶¶b j
+=>
+¶¶k m
+marriage
+¶¶n v
+.
+¶¶v w
+MarriageEnded¶¶w Ñ
+==¶¶Ö á
+null¶¶à å
+)¶¶å ç
+.
+ßß$ %
 Select
-¶¶V \
+ßß% +
 (
-¶¶\ ]
+ßß+ ,
 (
-¶¶] ^ 
-bloodRelatedPerson
-¶¶^ p
+ßß, -
+marriage
+ßß- 5
 )
-¶¶p q
+ßß5 6
 =>
-¶¶r t!
-bloodRelatedPerson¶¶u á
-.¶¶á à
-PersonId¶¶à ê
-)¶¶ê ë
-.¶¶ë í
-ToList¶¶í ò
-(¶¶ò ô
-)¶¶ô ö
-;¶¶ö õ
-return
-ßß 
-await
-ßß 
-GetExcludedPeople
-ßß *
-(
-ßß* +#
-bloodRelatedPeopleIds
-ßß+ @
-,
-ßß@ A
-personId
-ßßB J
+ßß7 9
+marriage
+ßß: B
+.
+ßßB C
+PersonMarriedTo
+ßßC R
+.
+ßßR S
+PersonId
+ßßS [
 )
-ßßJ K
-;
-ßßK L
-}
-®® 	
-public
-™™ 
-async
-™™ 
-Task
-™™ 
-<
-™™ 
-List
-™™ 
-<
-™™  
-GenericPersonModel
-™™ 1
->
-™™1 2
->
-™™2 3(
-GetNotRelatedByDescendants
-™™4 N
-(
-™™N O
-int
-™™O R
-personId
-™™S [
-)
-™™[ \
-{
-´´ 	
-List
-¨¨ 
-<
-¨¨ 
-int
-¨¨ 
->
-¨¨ %
-relatedByDescendantsIds
-¨¨ -
-=
-¨¨. /
-(
-¨¨0 1
-await
-¨¨1 6%
-GetRelatedByDescendants
-¨¨7 N
-(
-¨¨N O
-personId
-¨¨O W
-)
-¨¨W X
-)
-¨¨X Y
+ßß[ \
 .
-¨¨Y Z
-Select
-¨¨Z `
-(
-¨¨` a
-(
-¨¨a b
-relatedPerson
-¨¨b o
-)
-¨¨o p
-=>
-¨¨q s
-relatedPerson¨¨t Å
-.¨¨Å Ç
-PersonId¨¨Ç ä
-)¨¨ä ã
-.¨¨ã å
-ToList¨¨å í
-(¨¨í ì
-)¨¨ì î
-;¨¨î ï
-return
-≠≠ 
-await
-≠≠ 
-GetExcludedPeople
-≠≠ *
-(
-≠≠* +%
-relatedByDescendantsIds
-≠≠+ B
-,
-≠≠B C
-personId
-≠≠D L
-)
-≠≠L M
-;
-≠≠M N
-}
-ÆÆ 	
-private
-∞∞ 
-async
-∞∞ 
-Task
-∞∞ 
-<
-∞∞ 
-List
-∞∞ 
-<
-∞∞  
-int
-∞∞  #
->
-∞∞# $
->
-∞∞$ %$
-GetPeopleWithoutParent
-∞∞& <
-(
-∞∞< =
-int
-∞∞= @
-personId
-∞∞A I
-)
-∞∞I J
-{
-±± 	
-Person
-≤≤ 
-personToCheck
-≤≤  
-=
-≤≤! "
-await
-≤≤# (
-
-unitOfWork
-≤≤) 3
-.
-≤≤3 4
-Person
-≤≤4 :
-.
-≤≤: ;
-FindById
-≤≤; C
-(
-≤≤C D
-personId
-≤≤D L
-)
-≤≤L M
-;
-≤≤M N
-List
-≥≥ 
-<
-≥≥ 
-int
-≥≥ 
->
-≥≥ #
-childrenWithoutParent
-≥≥ +
-=
-≥≥, -
-
-unitOfWork
-≥≥. 8
-.
-≥≥8 9
-Person
-≥≥9 ?
-.
-≥≥? @
-Filter
-≥≥@ F
-(
-≥≥F G
-(
-≥≥G H
-person
-≥≥H N
-)
-≥≥N O
-=>
-≥≥P R
-!
-≥≥S T
-person
-≥≥T Z
-.
-≥≥Z [
-Parents
-≥≥[ b
-.
-≥≥b c
-Any
-≥≥c f
-(
-≥≥f g
-(
-≥≥g h
-parent
-≥≥h n
-)
-≥≥n o
-=>
-≥≥p r
-parent
-≥≥s y
-.
-≥≥y z
-Parent≥≥z Ä
-.≥≥Ä Å
-Gender≥≥Å á
-==≥≥à ä
-personToCheck≥≥ã ò
-.≥≥ò ô
-Gender≥≥ô ü
-)≥≥ü †
-)≥≥† °
-.≥≥° ¢
-Include≥≥¢ ©
-(≥≥© ™
-p≥≥™ ´
-=>≥≥¨ Æ
-p≥≥Ø ∞
-.≥≥∞ ±
-Parents≥≥± ∏
-)≥≥∏ π
-.≥≥π ∫
-Select≥≥∫ ¿
-(≥≥¿ ¡
-(≥≥¡ ¬
-person≥≥¬ »
-)≥≥» …
-=>≥≥  Ã
-person≥≥Õ ”
-.≥≥” ‘
-Id≥≥‘ ÷
-)≥≥÷ ◊
-.≥≥◊ ÿ
-ToList≥≥ÿ ﬁ
-(≥≥ﬁ ﬂ
-)≥≥ﬂ ‡
-;≥≥‡ ·
-return
-¥¥ #
-childrenWithoutParent
-¥¥ (
-;
-¥¥( )
-}
-µµ 	
-private
-∑∑ 
-async
-∑∑ 
-Task
-∑∑ 
-<
-∑∑ 
-List
-∑∑ 
-<
-∑∑   
-GenericPersonModel
-∑∑  2
->
-∑∑2 3
->
-∑∑3 4
-GetExcludedPeople
-∑∑5 F
-(
-∑∑F G
-List
-∑∑G K
-<
-∑∑K L
-int
-∑∑L O
->
-∑∑O P
-includedPeopleIds
-∑∑Q b
-,
-∑∑b c
-int
-∑∑d g
-personId
-∑∑h p
-)
-∑∑p q
-{
-∏∏ 	
-Person
-ππ 
-person
-ππ 
-=
-ππ 
-await
-ππ !
-
-unitOfWork
-ππ" ,
-.
-ππ, -
-Person
-ππ- 3
-.
-ππ3 4
-FindById
-ππ4 <
-(
-ππ< =
-personId
-ππ= E
-)
-ππE F
-;
-ππF G
-List
-∫∫ 
-<
-∫∫ 
-Person
-∫∫ 
->
-∫∫ 
-peopleInTree
-∫∫ %
-=
-∫∫& '
-
-unitOfWork
-∫∫( 2
-.
-∫∫2 3
-Person
-∫∫3 9
-.
-∫∫9 :
-Filter
-∫∫: @
-(
-∫∫@ A
-x
-∫∫A B
-=>
-∫∫C E
-x
-∫∫F G
-.
-∫∫G H
-TreeId
-∫∫H N
-==
-∫∫O Q
-person
-∫∫R X
-.
-∫∫X Y
-TreeId
-∫∫Y _
-)
-∫∫_ `
-.
-∫∫` a
+ßß\ ]
 ToList
-∫∫a g
+ßß] c
 (
-∫∫g h
+ßßc d
 )
-∫∫h i
+ßßd e
 ;
-∫∫i j
+ßße f
+return
+©© #
+notRelatedByAncestors
+©© (
+.
+©©( )
+Where
+©©) .
+(
+©©. /
+(
+©©/ 0
+person
+©©0 6
+)
+©©6 7
+=>
+©©8 :
+!
+©©; <
+spouces
+©©< C
+.
+©©C D
+Exists
+©©D J
+(
+©©J K
+(
+©©K L
+spouceId
+©©L T
+)
+©©T U
+=>
+©©V X
+person
+©©Y _
+.
+©©_ `
+PersonId
+©©` h
+==
+©©i k
+spouceId
+©©l t
+)
+©©t u
+)
+©©u v
+.
+©©v w
+ToList
+©©w }
+(
+©©} ~
+)
+©©~ 
+;©© Ä
+}
+™™ 	
+public
+¨¨ 
+async
+¨¨ 
+Task
+¨¨ 
+<
+¨¨ 
+List
+¨¨ 
+<
+¨¨  
+GenericPersonModel
+¨¨ 1
+>
+¨¨1 2
+>
+¨¨2 3&
+GetNotRelatedByAncestors
+¨¨4 L
+(
+¨¨L M
+int
+¨¨M P
+personId
+¨¨Q Y
+)
+¨¨Y Z
+{
+≠≠ 	
+List
+ÆÆ 
+<
+ÆÆ 
+int
+ÆÆ 
+>
+ÆÆ #
+bloodRelatedPeopleIds
+ÆÆ +
+=
+ÆÆ, -
+(
+ÆÆ. /
+await
+ÆÆ/ 4#
+GetRelatedByAncestors
+ÆÆ5 J
+(
+ÆÆJ K
+personId
+ÆÆK S
+)
+ÆÆS T
+)
+ÆÆT U
+.
+ÆÆU V
+Select
+ÆÆV \
+(
+ÆÆ\ ]
+(
+ÆÆ] ^ 
+bloodRelatedPerson
+ÆÆ^ p
+)
+ÆÆp q
+=>
+ÆÆr t!
+bloodRelatedPersonÆÆu á
+.ÆÆá à
+PersonIdÆÆà ê
+)ÆÆê ë
+.ÆÆë í
+ToListÆÆí ò
+(ÆÆò ô
+)ÆÆô ö
+;ÆÆö õ
+return
+ØØ 
+await
+ØØ 
+GetExcludedPeople
+ØØ *
+(
+ØØ* +#
+bloodRelatedPeopleIds
+ØØ+ @
+,
+ØØ@ A
+personId
+ØØB J
+)
+ØØJ K
+;
+ØØK L
+}
+∞∞ 	
+public
+≤≤ 
+async
+≤≤ 
+Task
+≤≤ 
+<
+≤≤ 
+List
+≤≤ 
+<
+≤≤  
+GenericPersonModel
+≤≤ 1
+>
+≤≤1 2
+>
+≤≤2 3(
+GetNotRelatedByDescendants
+≤≤4 N
+(
+≤≤N O
+int
+≤≤O R
+personId
+≤≤S [
+)
+≤≤[ \
+{
+≥≥ 	
+List
+¥¥ 
+<
+¥¥ 
+int
+¥¥ 
+>
+¥¥ %
+relatedByDescendantsIds
+¥¥ -
+=
+¥¥. /
+(
+¥¥0 1
+await
+¥¥1 6%
+GetRelatedByDescendants
+¥¥7 N
+(
+¥¥N O
+personId
+¥¥O W
+)
+¥¥W X
+)
+¥¥X Y
+.
+¥¥Y Z
+Select
+¥¥Z `
+(
+¥¥` a
+(
+¥¥a b
+relatedPerson
+¥¥b o
+)
+¥¥o p
+=>
+¥¥q s
+relatedPerson¥¥t Å
+.¥¥Å Ç
+PersonId¥¥Ç ä
+)¥¥ä ã
+.¥¥ã å
+ToList¥¥å í
+(¥¥í ì
+)¥¥ì î
+;¥¥î ï
+return
+µµ 
+await
+µµ 
+GetExcludedPeople
+µµ *
+(
+µµ* +%
+relatedByDescendantsIds
+µµ+ B
+,
+µµB C
+personId
+µµD L
+)
+µµL M
+;
+µµM N
+}
+∂∂ 	
+private
+∏∏ 
+async
+∏∏ 
+Task
+∏∏ 
+<
+∏∏ 
+List
+∏∏ 
+<
+∏∏  
+int
+∏∏  #
+>
+∏∏# $
+>
+∏∏$ %$
+GetPeopleWithoutParent
+∏∏& <
+(
+∏∏< =
+int
+∏∏= @
+personId
+∏∏A I
+)
+∏∏I J
+{
+ππ 	
+Person
+∫∫ 
+personToCheck
+∫∫  
+=
+∫∫! "
+await
+∫∫# (
+
+unitOfWork
+∫∫) 3
+.
+∫∫3 4
+Person
+∫∫4 :
+.
+∫∫: ;
+FindById
+∫∫; C
+(
+∫∫C D
+personId
+∫∫D L
+)
+∫∫L M
+;
+∫∫M N
 List
 ªª 
 <
-ªª 
-Person
-ªª 
+ªª 
+int
+ªª 
 >
-ªª 
-excludedPeople
-ªª '
+ªª #
+childrenWithoutParent
+ªª +
 =
-ªª( )
-peopleInTree
-ªª* 6
+ªª, -
+
+unitOfWork
+ªª. 8
 .
-ªª6 7
-Where
-ªª7 <
+ªª8 9
+Person
+ªª9 ?
+.
+ªª? @
+Filter
+ªª@ F
 (
-ªª< =
+ªªF G
+(
+ªªG H
 person
-ªª= C
+ªªH N
+)
+ªªN O
 =>
-ªªD F
+ªªP R
 !
-ªªG H
-includedPeopleIds
-ªªH Y
-.
-ªªY Z
-Exists
-ªªZ `
-(
-ªª` a
-includedPersonId
-ªªa q
-=>
-ªªr t
-includedPersonIdªªu Ö
-==ªªÜ à
-personªªâ è
-.ªªè ê
-Idªªê í
-)ªªí ì
-)ªªì î
-.ªªî ï
-ToListªªï õ
-(ªªõ ú
-)ªªú ù
-;ªªù û
-excludedPeople
-ºº 
-.
-ºº 
-	RemoveAll
-ºº $
-(
-ºº$ %
-relative
-ºº% -
-=>
-ºº. 0
+ªªS T
 person
-ºº1 7
+ªªT Z
 .
-ºº7 8
-Id
-ºº8 :
-==
-ºº; =
-relative
-ºº> F
+ªªZ [
+Parents
+ªª[ b
 .
-ººF G
-Id
-ººG I
-)
-ººI J
-;
-ººJ K
-return
-ΩΩ 
-await
-ΩΩ %
-MapToGenericPersonModel
-ΩΩ 0
+ªªb c
+Any
+ªªc f
 (
-ΩΩ0 1
-excludedPeople
-ΩΩ1 ?
+ªªf g
+(
+ªªg h
+parent
+ªªh n
 )
-ΩΩ? @
+ªªn o
+=>
+ªªp r
+parent
+ªªs y
+.
+ªªy z
+Parentªªz Ä
+.ªªÄ Å
+GenderªªÅ á
+==ªªà ä
+personToCheckªªã ò
+.ªªò ô
+Genderªªô ü
+)ªªü †
+)ªª† °
+.ªª° ¢
+Includeªª¢ ©
+(ªª© ™
+pªª™ ´
+=>ªª¨ Æ
+pªªØ ∞
+.ªª∞ ±
+Parentsªª± ∏
+)ªª∏ π
+.ªªπ ∫
+Selectªª∫ ¿
+(ªª¿ ¡
+(ªª¡ ¬
+personªª¬ »
+)ªª» …
+=>ªª  Ã
+personªªÕ ”
+.ªª” ‘
+Idªª‘ ÷
+)ªª÷ ◊
+.ªª◊ ÿ
+ToListªªÿ ﬁ
+(ªªﬁ ﬂ
+)ªªﬂ ‡
+;ªª‡ ·
+return
+ΩΩ #
+childrenWithoutParent
+ΩΩ (
 ;
-ΩΩ@ A
+ΩΩ( )
 }
 ææ 	
 private
@@ -10263,371 +9913,444 @@ unitOfWork
 >
 ¿¿2 3
 >
-¿¿3 4%
-MapToGenericPersonModel
-¿¿5 L
+¿¿3 4
+GetExcludedPeople
+¿¿5 F
 (
-¿¿L M
+¿¿F G
 List
-¿¿M Q
+¿¿G K
 <
-¿¿Q R
-Person
-¿¿R X
->
-¿¿X Y
-people
-¿¿Z `
-)
-¿¿` a
-{
-¡¡ 	
-List
-¬¬ 
-<
-¬¬  
-GenericPersonModel
-¬¬ #
->
-¬¬# $
-returnEvent
-¬¬% 0
-=
-¬¬1 2
-new
-¬¬3 6
-List
-¬¬7 ;
-<
-¬¬; < 
-GenericPersonModel
-¬¬< N
->
-¬¬N O
-(
-¬¬O P
-)
-¬¬P Q
-;
-¬¬Q R
-foreach
-√√ 
-(
-√√ 
-var
-√√ 
-person
-√√ 
-in
-√√  "
-people
-√√# )
-)
-√√) *
-{
-ƒƒ  
-GenericPersonModel
-≈≈ "
-returnPerson
-≈≈# /
-=
-≈≈0 1
-_mapper
-≈≈2 9
-.
-≈≈9 :
-Map
-≈≈: =
-<
-≈≈= > 
-GenericPersonModel
-≈≈> P
->
-≈≈P Q
-(
-≈≈Q R
-person
-≈≈R X
-)
-≈≈X Y
-;
-≈≈Y Z
-returnPerson
-∆∆ 
-.
-∆∆ 
-	ImageFile
-∆∆ &
-=
-∆∆' (
-await
-∆∆) .$
-_fileManagementService
-∆∆/ E
-.
-∆∆E F
-GetFile
-∆∆F M
-(
-∆∆M N
-person
-∆∆N T
-.
-∆∆T U
-Image
-∆∆U Z
-)
-∆∆Z [
-;
-∆∆[ \
-returnEvent
-«« 
-.
-«« 
-Add
-«« 
-(
-««  
-returnPerson
-««  ,
-)
-««, -
-;
-««- .
-}
-»» 
-return
-…… 
-returnEvent
-…… 
-;
-…… 
-}
-   	
-public
-ÃÃ 
-async
-ÃÃ 
-Task
-ÃÃ 
-<
-ÃÃ %
-ParentChildDetailsModel
-ÃÃ 1
->
-ÃÃ1 2!
-GetParentChildAsync
-ÃÃ3 F
-(
-ÃÃF G
+¿¿K L
 int
-ÃÃG J
-parentChildId
-ÃÃK X
+¿¿L O
+>
+¿¿O P
+includedPeopleIds
+¿¿Q b
+,
+¿¿b c
+int
+¿¿d g
+personId
+¿¿h p
 )
-ÃÃX Y
+¿¿p q
 {
-ÕÕ 	
-ParentChild
-ŒŒ 
-parentChild
-ŒŒ #
+¡¡ 	
+Person
+¬¬ 
+person
+¬¬ 
 =
-ŒŒ$ %
+¬¬ 
 await
-ŒŒ& +
+¬¬ !
 
 unitOfWork
-ŒŒ, 6
+¬¬" ,
 .
-ŒŒ6 7
-ParentChild
-ŒŒ7 B
+¬¬, -
+Person
+¬¬- 3
 .
-ŒŒB C
+¬¬3 4
 FindById
-ŒŒC K
+¬¬4 <
 (
-ŒŒK L
-parentChildId
-ŒŒL Y
+¬¬< =
+personId
+¬¬= E
 )
-ŒŒY Z
+¬¬E F
 ;
-ŒŒZ [%
-ParentChildDetailsModel
-œœ #
-returnEvent
-œœ$ /
-=
-œœ0 1
-_mapper
-œœ2 9
-.
-œœ9 :
-Map
-œœ: =
+¬¬F G
+List
+√√ 
 <
-œœ= >%
-ParentChildDetailsModel
-œœ> U
+√√ 
+Person
+√√ 
 >
-œœU V
-(
-œœV W
-parentChild
-œœW b
-)
-œœb c
-;
-œœc d
-return
-–– 
-returnEvent
-–– 
-;
-–– 
-}
-—— 	
-public
-”” 
-async
-”” 
-Task
-”” 
-<
-”” %
-ParentChildDetailsModel
-”” 1
->
-””1 2!
-AddParentChildAsync
-””3 F
-(
-””F G*
-ParentChildCreateUpdateModel
-””G c
-parentChild
-””d o
-)
-””o p
-{
-‘‘ 	
-if
-’’ 
-(
-’’ 
-parentChild
-’’ 
-==
-’’ 
-null
-’’ #
-)
-’’# $
-{
-÷÷ 
-return
-◊◊ 
-null
-◊◊ 
-;
-◊◊ 
-}
-ÿÿ 
-ParentChild
-ŸŸ 
-parentChildEntity
-ŸŸ )
+√√ 
+peopleInTree
+√√ %
 =
-ŸŸ* +
-_mapper
-ŸŸ, 3
-.
-ŸŸ3 4
-Map
-ŸŸ4 7
-<
-ŸŸ7 8
-ParentChild
-ŸŸ8 C
->
-ŸŸC D
-(
-ŸŸD E
-parentChild
-ŸŸE P
-)
-ŸŸP Q
-;
-ŸŸQ R
-parentChildEntity
-⁄⁄ 
-.
-⁄⁄ 
-	CreatedOn
-⁄⁄ '
-=
-⁄⁄( )
-DateTime
-⁄⁄* 2
-.
-⁄⁄2 3
-UtcNow
-⁄⁄3 9
-;
-⁄⁄9 :
-parentChildEntity
-€€ 
-=
-€€ 
-await
-€€  %
+√√& '
 
 unitOfWork
-€€& 0
+√√( 2
 .
-€€0 1
-ParentChild
-€€1 <
+√√2 3
+Person
+√√3 9
 .
-€€< =
-Create
-€€= C
+√√9 :
+Filter
+√√: @
 (
-€€C D
-parentChildEntity
-€€D U
-)
-€€U V
-;
-€€V W%
-ParentChildDetailsModel
-‹‹ #
-returnEvent
-‹‹$ /
-=
-‹‹0 1
-_mapper
-‹‹2 9
+√√@ A
+x
+√√A B
+=>
+√√C E
+x
+√√F G
 .
-‹‹9 :
-Map
-‹‹: =
+√√G H
+TreeId
+√√H N
+==
+√√O Q
+person
+√√R X
+.
+√√X Y
+TreeId
+√√Y _
+)
+√√_ `
+.
+√√` a
+ToList
+√√a g
+(
+√√g h
+)
+√√h i
+;
+√√i j
+List
+ƒƒ 
 <
-‹‹= >%
-ParentChildDetailsModel
-‹‹> U
+ƒƒ 
+Person
+ƒƒ 
 >
-‹‹U V
+ƒƒ 
+excludedPeople
+ƒƒ '
+=
+ƒƒ( )
+peopleInTree
+ƒƒ* 6
+.
+ƒƒ6 7
+Where
+ƒƒ7 <
 (
-‹‹V W
-parentChildEntity
-‹‹W h
+ƒƒ< =
+person
+ƒƒ= C
+=>
+ƒƒD F
+!
+ƒƒG H
+includedPeopleIds
+ƒƒH Y
+.
+ƒƒY Z
+Exists
+ƒƒZ `
+(
+ƒƒ` a
+includedPersonId
+ƒƒa q
+=>
+ƒƒr t
+includedPersonIdƒƒu Ö
+==ƒƒÜ à
+personƒƒâ è
+.ƒƒè ê
+Idƒƒê í
+)ƒƒí ì
+)ƒƒì î
+.ƒƒî ï
+ToListƒƒï õ
+(ƒƒõ ú
+)ƒƒú ù
+;ƒƒù û
+excludedPeople
+≈≈ 
+.
+≈≈ 
+	RemoveAll
+≈≈ $
+(
+≈≈$ %
+relative
+≈≈% -
+=>
+≈≈. 0
+person
+≈≈1 7
+.
+≈≈7 8
+Id
+≈≈8 :
+==
+≈≈; =
+relative
+≈≈> F
+.
+≈≈F G
+Id
+≈≈G I
 )
-‹‹h i
+≈≈I J
 ;
-‹‹i j
+≈≈J K
+return
+«« 
+await
+«« %
+MapToGenericPersonModel
+«« 0
+(
+««0 1
+excludedPeople
+««1 ?
+)
+««? @
+;
+««@ A
+}
+»» 	
+private
+   
+async
+   
+Task
+   
+<
+   
+List
+   
+<
+     
+GenericPersonModel
+    2
+>
+  2 3
+>
+  3 4%
+MapToGenericPersonModel
+  5 L
+(
+  L M
+List
+  M Q
+<
+  Q R
+Person
+  R X
+>
+  X Y
+people
+  Z `
+)
+  ` a
+{
+ÀÀ 	
+List
+ÃÃ 
+<
+ÃÃ  
+GenericPersonModel
+ÃÃ #
+>
+ÃÃ# $
+returnEvent
+ÃÃ% 0
+=
+ÃÃ1 2
+new
+ÃÃ3 6
+List
+ÃÃ7 ;
+<
+ÃÃ; < 
+GenericPersonModel
+ÃÃ< N
+>
+ÃÃN O
+(
+ÃÃO P
+)
+ÃÃP Q
+;
+ÃÃQ R
+foreach
+ŒŒ 
+(
+ŒŒ 
+var
+ŒŒ 
+person
+ŒŒ 
+in
+ŒŒ  "
+people
+ŒŒ# )
+)
+ŒŒ) *
+{
+œœ  
+GenericPersonModel
+–– "
+returnPerson
+––# /
+=
+––0 1
+_mapper
+––2 9
+.
+––9 :
+Map
+––: =
+<
+––= > 
+GenericPersonModel
+––> P
+>
+––P Q
+(
+––Q R
+person
+––R X
+)
+––X Y
+;
+––Y Z
+returnPerson
+—— 
+.
+—— 
+	ImageFile
+—— &
+=
+——' (
+await
+——) .$
+_fileManagementService
+——/ E
+.
+——E F
+GetFile
+——F M
+(
+——M N
+person
+——N T
+.
+——T U
+Image
+——U Z
+)
+——Z [
+;
+——[ \
+returnEvent
+““ 
+.
+““ 
+Add
+““ 
+(
+““  
+returnPerson
+““  ,
+)
+““, -
+;
+““- .
+}
+”” 
+return
+’’ 
+returnEvent
+’’ 
+;
+’’ 
+}
+÷÷ 	
+public
+ÿÿ 
+async
+ÿÿ 
+Task
+ÿÿ 
+<
+ÿÿ %
+ParentChildDetailsModel
+ÿÿ 1
+>
+ÿÿ1 2!
+GetParentChildAsync
+ÿÿ3 F
+(
+ÿÿF G
+int
+ÿÿG J
+parentChildId
+ÿÿK X
+)
+ÿÿX Y
+{
+ŸŸ 	
+ParentChild
+⁄⁄ 
+parentChild
+⁄⁄ #
+=
+⁄⁄$ %
+await
+⁄⁄& +
+
+unitOfWork
+⁄⁄, 6
+.
+⁄⁄6 7
+ParentChild
+⁄⁄7 B
+.
+⁄⁄B C
+FindById
+⁄⁄C K
+(
+⁄⁄K L
+parentChildId
+⁄⁄L Y
+)
+⁄⁄Y Z
+;
+⁄⁄Z [%
+ParentChildDetailsModel
+€€ #
+returnEvent
+€€$ /
+=
+€€0 1
+_mapper
+€€2 9
+.
+€€9 :
+Map
+€€: =
+<
+€€= >%
+ParentChildDetailsModel
+€€> U
+>
+€€U V
+(
+€€V W
+parentChild
+€€W b
+)
+€€b c
+;
+€€c d
 return
 ›› 
 returnEvent
@@ -10647,17 +10370,17 @@ unitOfWork
 ParentChildDetailsModel
 ‡‡ 1
 >
-‡‡1 2$
-UpdateParentChildAsync
-‡‡3 I
+‡‡1 2!
+AddParentChildAsync
+‡‡3 F
 (
-‡‡I J*
+‡‡F G*
 ParentChildCreateUpdateModel
-‡‡J f
+‡‡G c
 parentChild
-‡‡g r
+‡‡d o
 )
-‡‡r s
+‡‡o p
 {
 ·· 	
 if
@@ -10683,273 +10406,420 @@ unitOfWork
 }
 ÂÂ 
 ParentChild
-ÁÁ 
-parentChildInDb
-ÁÁ '
+ÁÁ 
+parentChildEntity
+ÁÁ )
 =
-ÁÁ( )
+ÁÁ* +
+_mapper
+ÁÁ, 3
+.
+ÁÁ3 4
+Map
+ÁÁ4 7
+<
+ÁÁ7 8
+ParentChild
+ÁÁ8 C
+>
+ÁÁC D
+(
+ÁÁD E
+parentChild
+ÁÁE P
+)
+ÁÁP Q
+;
+ÁÁQ R
+parentChildEntity
+ËË 
+.
+ËË 
+	CreatedOn
+ËË '
+=
+ËË( )
+DateTime
+ËË* 2
+.
+ËË2 3
+UtcNow
+ËË3 9
+;
+ËË9 :
+parentChildEntity
+ÈÈ 
+=
+ÈÈ 
 await
-ÁÁ* /
+ÈÈ  %
 
 unitOfWork
-ÁÁ0 :
+ÈÈ& 0
 .
-ÁÁ: ;
+ÈÈ0 1
 ParentChild
-ÁÁ; F
+ÈÈ1 <
 .
-ÁÁF G
-FindById
-ÁÁG O
+ÈÈ< =
+Create
+ÈÈ= C
 (
-ÁÁO P
-parentChild
-ÁÁP [
+ÈÈC D
+parentChildEntity
+ÈÈD U
+)
+ÈÈU V
+;
+ÈÈV W%
+ParentChildDetailsModel
+ÍÍ #
+returnEvent
+ÍÍ$ /
+=
+ÍÍ0 1
+_mapper
+ÍÍ2 9
 .
-ÁÁ[ \
+ÍÍ9 :
+Map
+ÍÍ: =
+<
+ÍÍ= >%
+ParentChildDetailsModel
+ÍÍ> U
+>
+ÍÍU V
+(
+ÍÍV W
+parentChildEntity
+ÍÍW h
+)
+ÍÍh i
+;
+ÍÍi j
+return
+ÏÏ 
+returnEvent
+ÏÏ 
+;
+ÏÏ 
+}
+ÌÌ 	
+public
+ÔÔ 
+async
+ÔÔ 
+Task
+ÔÔ 
+<
+ÔÔ %
+ParentChildDetailsModel
+ÔÔ 1
+>
+ÔÔ1 2$
+UpdateParentChildAsync
+ÔÔ3 I
+(
+ÔÔI J*
+ParentChildCreateUpdateModel
+ÔÔJ f
+parentChild
+ÔÔg r
+)
+ÔÔr s
+{
+ 	
+if
+ÒÒ 
+(
+ÒÒ 
+parentChild
+ÒÒ 
+==
+ÒÒ 
+null
+ÒÒ #
+)
+ÒÒ# $
+{
+ÚÚ 
+return
+ÛÛ 
+null
+ÛÛ 
+;
+ÛÛ 
+}
+ÙÙ 
+ParentChild
+ˆˆ 
+parentChildInDb
+ˆˆ '
+=
+ˆˆ( )
+await
+ˆˆ* /
+
+unitOfWork
+ˆˆ0 :
+.
+ˆˆ: ;
+ParentChild
+ˆˆ; F
+.
+ˆˆF G
+FindById
+ˆˆG O
+(
+ˆˆO P
+parentChild
+ˆˆP [
+.
+ˆˆ[ \
 
 RelativeId
-ÁÁ\ f
+ˆˆ\ f
 )
-ÁÁf g
+ˆˆf g
 ;
-ÁÁg h
+ˆˆg h
 if
-ÈÈ 
+¯¯ 
 (
-ÈÈ 
+¯¯ 
 parentChildInDb
-ÈÈ 
+¯¯ 
 ==
-ÈÈ  "
+¯¯  "
 null
-ÈÈ# '
+¯¯# '
 )
-ÈÈ' (
+¯¯' (
 {
-ÍÍ 
+˘˘ 
 return
-ÎÎ 
+˙˙ 
 null
-ÎÎ 
+˙˙ 
 ;
-ÎÎ 
+˙˙ 
 }
-ÏÏ 
+˚˚ 
 parentChildInDb
-ÓÓ 
+˝˝ 
 .
-ÓÓ 
+˝˝ 
 ChildId
-ÓÓ #
+˝˝ #
 =
-ÓÓ$ %
+˝˝$ %
 parentChild
-ÓÓ& 1
+˝˝& 1
 .
-ÓÓ1 2
+˝˝1 2
 ChildId
-ÓÓ2 9
+˝˝2 9
 ;
-ÓÓ9 :
+˝˝9 :
 parentChildInDb
-ÔÔ 
+˛˛ 
 .
-ÔÔ 
+˛˛ 
 ParentId
-ÔÔ $
+˛˛ $
 =
-ÔÔ% &
+˛˛% &
 parentChild
-ÔÔ' 2
+˛˛' 2
 .
-ÔÔ2 3
+˛˛2 3
 ParentId
-ÔÔ3 ;
+˛˛3 ;
 ;
-ÔÔ; <
+˛˛; <
 parentChildInDb
- 
+ˇˇ 
 .
- 
+ˇˇ 
 BloodRelatives
- *
+ˇˇ *
 =
-+ ,
+ˇˇ+ ,
 parentChild
-- 8
+ˇˇ- 8
 .
-8 9
+ˇˇ8 9
 BloodRelatives
-9 G
+ˇˇ9 G
 ;
-G H
+ˇˇG H
 parentChildInDb
-ÒÒ 
+ÄÄ 
 .
-ÒÒ 
+ÄÄ 
 
 ModifiedOn
-ÒÒ &
+ÄÄ &
 =
-ÒÒ' (
+ÄÄ' (
 DateTime
-ÒÒ) 1
+ÄÄ) 1
 .
-ÒÒ1 2
+ÄÄ1 2
 UtcNow
-ÒÒ2 8
+ÄÄ2 8
 ;
-ÒÒ8 9
+ÄÄ8 9
 ParentChild
-ÛÛ 
+ÇÇ 
 parentChildEntity
-ÛÛ )
+ÇÇ )
 =
-ÛÛ* +
+ÇÇ* +
 await
-ÛÛ, 1
+ÇÇ, 1
 
 unitOfWork
-ÛÛ2 <
+ÇÇ2 <
 .
-ÛÛ< =
+ÇÇ< =
 ParentChild
-ÛÛ= H
+ÇÇ= H
 .
-ÛÛH I
+ÇÇH I
 Update
-ÛÛI O
+ÇÇI O
 (
-ÛÛO P
+ÇÇO P
 parentChildInDb
-ÛÛP _
+ÇÇP _
 )
-ÛÛ_ `
+ÇÇ_ `
 ;
-ÛÛ` a%
+ÇÇ` a%
 ParentChildDetailsModel
-ÙÙ #
+ÉÉ #
 returnEvent
-ÙÙ$ /
+ÉÉ$ /
 =
-ÙÙ0 1
+ÉÉ0 1
 _mapper
-ÙÙ2 9
+ÉÉ2 9
 .
-ÙÙ9 :
+ÉÉ9 :
 Map
-ÙÙ: =
+ÉÉ: =
 <
-ÙÙ= >%
+ÉÉ= >%
 ParentChildDetailsModel
-ÙÙ> U
+ÉÉ> U
 >
-ÙÙU V
+ÉÉU V
 (
-ÙÙV W
+ÉÉV W
 parentChildEntity
-ÙÙW h
+ÉÉW h
 )
-ÙÙh i
+ÉÉh i
 ;
-ÙÙi j
+ÉÉi j
 return
-ıı 
+ÖÖ 
 returnEvent
-ıı 
+ÖÖ 
 ;
-ıı 
+ÖÖ 
 }
-ˆˆ 	
+ÜÜ 	
 public
-¯¯ 
+àà 
 async
-¯¯ 
+àà 
 Task
-¯¯ 
+àà 
 <
-¯¯ %
+àà %
 ParentChildDetailsModel
-¯¯ 1
+àà 1
 >
-¯¯1 2$
+àà1 2$
 DeleteParentChildAsync
-¯¯3 I
+àà3 I
 (
-¯¯I J
+ààI J
 int
-¯¯J M
+ààJ M
 parentChildId
-¯¯N [
+ààN [
 )
-¯¯[ \
+àà[ \
 {
-˘˘ 	
+ââ 	
 ParentChild
-˙˙ 
+ää 
 educationEntity
-˙˙ '
+ää '
 =
-˙˙( )
+ää( )
 await
-˙˙* /
+ää* /
 
 unitOfWork
-˙˙0 :
+ää0 :
 .
-˙˙: ;
+ää: ;
 ParentChild
-˙˙; F
+ää; F
 .
-˙˙F G
+ääF G
 Delete
-˙˙G M
+ääG M
 (
-˙˙M N
+ääM N
 parentChildId
-˙˙N [
+ääN [
 )
-˙˙[ \
+ää[ \
 ;
-˙˙\ ]%
+ää\ ]%
 ParentChildDetailsModel
-˚˚ #
+ãã #
 returnEvent
-˚˚$ /
+ãã$ /
 =
-˚˚0 1
+ãã0 1
 _mapper
-˚˚2 9
+ãã2 9
 .
-˚˚9 :
+ãã9 :
 Map
-˚˚: =
+ãã: =
 <
-˚˚= >%
+ãã= >%
 ParentChildDetailsModel
-˚˚> U
+ãã> U
 >
-˚˚U V
+ããU V
 (
-˚˚V W
+ããV W
 educationEntity
-˚˚W f
+ããW f
 )
-˚˚f g
+ããf g
 ;
-˚˚g h
+ããg h
 return
-¸¸ 
+çç 
 returnEvent
-¸¸ 
+çç 
 ;
-¸¸ 
+çç 
 }
-˝˝ 	
+éé 	
 }
-˛˛ 
-}ˇˇ ˙ú
+èè 
+}êê Œû
 gE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\PersonService.cs
 	namespace 	
 GenealogyTree
@@ -10993,4479 +10863,4585 @@ gE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IMarriageService )
 _marriageService* :
 ;: ;
-public 
-PersonService 
-( 
-IUnitOfWork (
+public 
+PersonService 
+( 
+IUnitOfWork (
 
-unitOfWork) 3
-,3 4
-IMapper5 <
-mapper= C
-,C D
-IImageServiceE R
-imageServiceS _
-,_ `"
-IFileManagementServicea w"
-fileManagementService	x ç
+unitOfWork) 3
+,3 4
+IMapper5 <
+mapper= C
+,C D
+IImageServiceE R
+imageServiceS _
+,_ `"
+IFileManagementServicea w"
+fileManagementService	x ç
 ,
-ç é!
+ç é!
 IParentChildService
-è ¢ 
+è ¢ 
 parentChildService
-£ µ
+£ µ
 ,
-µ ∂
+µ ∂
 IMarriageService
-∑ «
+∑ «
 marriageService
-» ◊
+» ◊
 )
-◊ ÿ
+◊ ÿ
 :
-Ÿ ⁄
+Ÿ ⁄
 base
-€ ﬂ
+€ ﬂ
 (
-ﬂ ‡
+ﬂ ‡
 
 unitOfWork
-‡ Í
+‡ Í
 )
-Í Î
-{ 	
-_mapper 
-= 
-mapper 
-; 
-_imageService 
-= 
-imageService (
-;( )"
-_fileManagementService "
-=# $!
-fileManagementService% :
-;: ;
-_parentChildService 
-=  !
-parentChildService" 4
-;4 5
-_marriageService 
-= 
-marriageService .
-;. /
-} 	
-public   
-async   
-Task   
-<   
-PersonDetailsModel   ,
->  , -
-GetPersonAsync  . <
-(  < =
-int  = @
-personId  A I
-)  I J
-{!! 	
-Person"" 
-person"" 
-="" 
-await"" !
+Í Î
+{ 	
+_mapper 
+= 
+mapper 
+; 
+_imageService 
+= 
+imageService (
+;( )"
+_fileManagementService "
+=# $!
+fileManagementService% :
+;: ;
+_parentChildService 
+=  !
+parentChildService" 4
+;4 5
+_marriageService 
+= 
+marriageService .
+;. /
+} 	
+public!! 
+async!! 
+Task!! 
+<!! 
+PersonDetailsModel!! ,
+>!!, -
+GetPersonAsync!!. <
+(!!< =
+int!!= @
+personId!!A I
+)!!I J
+{"" 	
+Person## 
+person## 
+=## 
+await## !
 
-unitOfWork""" ,
-."", -
-Person""- 3
-.""3 4
-FindById""4 <
-(""< =
-personId""= E
-)""E F
-;""F G
-PersonDetailsModel## 
-personEntity## +
-=##, -
-_mapper##. 5
-.##5 6
-Map##6 9
-<##9 :
-PersonDetailsModel##: L
->##L M
-(##M N
-person##N T
-)##T U
-;##U V
-personEntity$$ 
-.$$ 
-	Marriages$$ "
-=$$# $
-await$$% *
-_marriageService$$+ ;
-.$$; <$
-GetAllMarriagesForPerson$$< T
-($$T U
-personId$$U ]
-)$$] ^
-;$$^ _
-personEntity&& 
-.&& 
-Children&& !
-=&&" #
-await&&$ )
-_parentChildService&&* =
-.&&= >#
-GetAllChildrenForPerson&&> U
-(&&U V
-personId&&V ^
-)&&^ _
-;&&_ `
-foreach'' 
-('' 
-var'' 
-child'' 
-in'' !
-personEntity''" .
-.''. /
-Children''/ 7
-)''7 8
-{(( 
-child)) 
-.)) 
-	ImageFile)) 
-=))  !
-await))" '"
-_fileManagementService))( >
-.))> ?
-GetFile))? F
-())F G
-await))G L
-_imageService))M Z
-.))Z [
-GetImageAsync))[ h
-())h i
-child))i n
-.))n o
-ImageId))o v
-)))v w
-)))w x
-;))x y
-}** 
-personEntity++ 
-.++ 
-Parents++  
-=++! "
-await++# (
-_parentChildService++) <
-.++< ="
-GetAllParentsForPerson++= S
-(++S T
-personId++T \
-)++\ ]
-;++] ^
-foreach-- 
-(-- 
-var-- 
-parent-- 
-in--  "
-personEntity--# /
-.--/ 0
-Parents--0 7
-)--7 8
-{.. 
-parent// 
-.// 
-	ImageFile//  
-=//! "
-await//# ("
-_fileManagementService//) ?
-.//? @
-GetFile//@ G
-(//G H
-await//H M
-_imageService//N [
-.//[ \
-GetImageAsync//\ i
-(//i j
-parent//j p
-.//p q
-ImageId//q x
-)//x y
-)//y z
-;//z {
-}00 
-personEntity11 
-.11 
-	ImageFile11 "
-=11# $
-await11% *"
-_fileManagementService11+ A
-.11A B
-GetFile11B I
-(11I J
-person11J P
-.11P Q
-Image11Q V
-)11V W
-;11W X
-if22 
-(22 
-person22 
-.22 
-RelativeForPerson22 (
-!=22) +
-null22, 0
-)220 1
-{33 
-personEntity44 
-.44 
-UserId44 #
-=44$ %
-person44& ,
-.44, -
-RelativeForPerson44- >
-.44> ?
-RelativeUserId44? M
-;44M N
-}55 
-else66 
-{77 
-User88 
-user88 
-=88 
+unitOfWork##" ,
+.##, -
+Person##- 3
+.##3 4
+FindById##4 <
+(##< =
+personId##= E
+)##E F
+;##F G
+PersonDetailsModel$$ 
+personEntity$$ +
+=$$, -
+_mapper$$. 5
+.$$5 6
+Map$$6 9
+<$$9 :
+PersonDetailsModel$$: L
+>$$L M
+($$M N
+person$$N T
+)$$T U
+;$$U V
+personEntity%% 
+.%% 
+	Marriages%% "
+=%%# $
+await%%% *
+_marriageService%%+ ;
+.%%; <$
+GetAllMarriagesForPerson%%< T
+(%%T U
+personId%%U ]
+)%%] ^
+;%%^ _
+personEntity'' 
+.'' 
+Children'' !
+=''" #
+await''$ )
+_parentChildService''* =
+.''= >#
+GetAllChildrenForPerson''> U
+(''U V
+personId''V ^
+)''^ _
+;''_ `
+foreach)) 
+()) 
+var)) 
+child)) 
+in)) !
+personEntity))" .
+.)). /
+Children))/ 7
+)))7 8
+{** 
+child++ 
+.++ 
+	ImageFile++ 
+=++  !
+await++" '"
+_fileManagementService++( >
+.++> ?
+GetFile++? F
+(++F G
+await++G L
+_imageService++M Z
+.++Z [
+GetImageAsync++[ h
+(++h i
+child++i n
+.++n o
+ImageId++o v
+)++v w
+)++w x
+;++x y
+},, 
+personEntity.. 
+... 
+Parents..  
+=..! "
+await..# (
+_parentChildService..) <
+...< ="
+GetAllParentsForPerson..= S
+(..S T
+personId..T \
+)..\ ]
+;..] ^
+foreach00 
+(00 
+var00 
+parent00 
+in00  "
+personEntity00# /
+.00/ 0
+Parents000 7
+)007 8
+{11 
+parent22 
+.22 
+	ImageFile22  
+=22! "
+await22# ("
+_fileManagementService22) ?
+.22? @
+GetFile22@ G
+(22G H
+await22H M
+_imageService22N [
+.22[ \
+GetImageAsync22\ i
+(22i j
+parent22j p
+.22p q
+ImageId22q x
+)22x y
+)22y z
+;22z {
+}33 
+personEntity55 
+.55 
+	ImageFile55 "
+=55# $
+await55% *"
+_fileManagementService55+ A
+.55A B
+GetFile55B I
+(55I J
+person55J P
+.55P Q
+Image55Q V
+)55V W
+;55W X
+if77 
+(77 
+person77 
+.77 
+RelativeForPerson77 (
+!=77) +
+null77, 0
+)770 1
+{88 
+personEntity99 
+.99 
+UserId99 #
+=99$ %
+person99& ,
+.99, -
+RelativeForPerson99- >
+.99> ?
+RelativeUserId99? M
+;99M N
+}:: 
+else;; 
+{<< 
+User== 
+user== 
+=== 
 
-unitOfWork88 &
-.88& '
-User88' +
-.88+ ,
-Filter88, 2
-(882 3
-u883 4
-=>885 7
-u888 9
-.889 :
-PersonId88: B
-==88C E
-person88F L
-.88L M
-Id88M O
-)88O P
-.88P Q
-FirstOrDefault88Q _
-(88_ `
-)88` a
-;88a b
-if99 
-(99 
-user99 
-!=99 
-default99 #
-(99# $
-User99$ (
-)99( )
-)99) *
-{:: 
-personEntity;;  
-.;;  !
-UserId;;! '
-=;;( )
-user;;* .
-.;;. /
-Id;;/ 1
-;;;1 2
-}<< 
-}== 
-return>> 
-personEntity>> 
-;>>  
-}?? 	
-publicAA 
-asyncAA 
-TaskAA 
-<AA 
-ListAA 
-<AA 
-GenericPersonModelAA 1
->AA1 2
->AA2 3
-GetPeopleListInTreeAA4 G
-(AAG H
-GuidAAH L
-treeIdAAM S
-)AAS T
-{BB 	
-ListCC 
-<CC 
-PersonCC 
->CC 
+unitOfWork== &
+.==& '
+User==' +
+.==+ ,
+Filter==, 2
+(==2 3
+u==3 4
+=>==5 7
+u==8 9
+.==9 :
+PersonId==: B
+====C E
+person==F L
+.==L M
+Id==M O
+)==O P
+.==P Q
+FirstOrDefault==Q _
+(==_ `
+)==` a
+;==a b
+if?? 
+(?? 
+user?? 
+!=?? 
+default?? #
+(??# $
+User??$ (
+)??( )
+)??) *
+{@@ 
+personEntityAA  
+.AA  !
+UserIdAA! '
+=AA( )
+userAA* .
+.AA. /
+IdAA/ 1
+;AA1 2
+}BB 
+}CC 
+returnEE 
+personEntityEE 
+;EE  
+}FF 	
+publicHH 
+asyncHH 
+TaskHH 
+<HH 
+ListHH 
+<HH 
+GenericPersonModelHH 1
+>HH1 2
+>HH2 3
+GetPeopleListInTreeHH4 G
+(HHG H
+GuidHHH L
+treeIdHHM S
+)HHS T
+{II 	
+ListJJ 
+<JJ 
+PersonJJ 
+>JJ 
 
-poepleListCC #
-=CC$ %
+poepleListJJ #
+=JJ$ %
 
-unitOfWorkCC& 0
-.CC0 1
-PersonCC1 7
-.CC7 8
-FilterCC8 >
-(CC> ?
-pCC? @
-=>CCA C
-pCCD E
-.CCE F
-TreeIdCCF L
-==CCM O
-treeIdCCP V
-)CCV W
-.DD 
-IncludeDD 
-(DD 
-pDD 
-=>DD 
-pDD 
-.DD  
-RelativeForPersonDD  1
-)DD1 2
-.DD2 3
-ToListDD3 9
-(DD9 :
-)DD: ;
-;DD; <
-ListEE 
-<EE 
-GenericPersonModelEE #
->EE# $
-returnPeopleListEE% 5
-=EE6 7
-newEE8 ;
-ListEE< @
-<EE@ A
-GenericPersonModelEEA S
->EES T
-(EET U
-)EEU V
-;EEV W
-UserFF 
-userFF 
-=FF 
+unitOfWorkJJ& 0
+.JJ0 1
+PersonJJ1 7
+.JJ7 8
+FilterJJ8 >
+(JJ> ?
+pJJ? @
+=>JJA C
+pJJD E
+.JJE F
+TreeIdJJF L
+==JJM O
+treeIdJJP V
+)JJV W
+.KK 
+IncludeKK 
+(KK 
+pKK 
+=>KK 
+pKK 
+.KK  
+RelativeForPersonKK  1
+)KK1 2
+.KK2 3
+ToListKK3 9
+(KK9 :
+)KK: ;
+;KK; <
+ListLL 
+<LL 
+GenericPersonModelLL #
+>LL# $
+returnPeopleListLL% 5
+=LL6 7
+newLL8 ;
+ListLL< @
+<LL@ A
+GenericPersonModelLLA S
+>LLS T
+(LLT U
+)LLU V
+;LLV W
+UserMM 
+userMM 
+=MM 
 
-unitOfWorkFF "
-.FF" #
-UserFF# '
-.FF' (
-FilterFF( .
-(FF. /
-uFF/ 0
-=>FF1 3
-uFF4 5
-.FF5 6
-PersonFF6 <
-.FF< =
-TreeIdFF= C
-==FFD F
-treeIdFFG M
-)FFM N
-.FFN O
-FirstOrDefaultFFO ]
-(FF] ^
-)FF^ _
-;FF_ `
-foreachGG 
-(GG 
-varGG 
-personGG 
-inGG  "
+unitOfWorkMM "
+.MM" #
+UserMM# '
+.MM' (
+FilterMM( .
+(MM. /
+uMM/ 0
+=>MM1 3
+uMM4 5
+.MM5 6
+PersonMM6 <
+.MM< =
+TreeIdMM= C
+==MMD F
+treeIdMMG M
+)MMM N
+.MMN O
+FirstOrDefaultMMO ]
+(MM] ^
+)MM^ _
+;MM_ `
+foreachOO 
+(OO 
+varOO 
+personOO 
+inOO  "
 
-poepleListGG# -
-)GG- .
-{HH 
-GenericPersonModelII "
-returnPersonII# /
-=II0 1
-_mapperII2 9
-.II9 :
-MapII: =
-<II= >
-GenericPersonModelII> P
->IIP Q
-(IIQ R
-personIIR X
-)IIX Y
-;IIY Z
-returnPersonJJ 
-.JJ 
-	ImageFileJJ &
-=JJ' (
-awaitJJ) ."
-_fileManagementServiceJJ/ E
-.JJE F
-GetFileJJF M
-(JJM N
-personJJN T
-.JJT U
-ImageJJU Z
-)JJZ [
-;JJ[ \
-ifKK 
-(KK 
-personKK 
-.KK 
-RelativeForPersonKK ,
-!=KK- /
-nullKK0 4
-)KK4 5
-{LL 
-returnPersonMM  
-.MM  !
-UserIdMM! '
-=MM( )
-personMM* 0
-.MM0 1
-RelativeForPersonMM1 B
-.MMB C
-RelativeUserIdMMC Q
-;MMQ R
-}NN 
-ifOO 
-(OO 
-userOO 
-!=OO 
-nullOO  
-&&OO! #
-personOO$ *
-.OO* +
-IdOO+ -
-==OO. 0
-userOO1 5
-.OO5 6
-PersonIdOO6 >
-)OO> ?
-{PP 
-returnPersonQQ  
-.QQ  !
-UserIdQQ! '
-=QQ( )
-userQQ* .
-.QQ. /
-IdQQ/ 1
-;QQ1 2
-}RR 
-returnPeopleListSS  
-.SS  !
-AddSS! $
-(SS$ %
-returnPersonSS% 1
-)SS1 2
-;SS2 3
-}TT 
-returnUU 
-returnPeopleListUU #
-;UU# $
-}VV 	
-publicXX 
-asyncXX 
-TaskXX 
-<XX 
-ListXX 
-<XX 
-PersonTreeInfoModelXX 2
->XX2 3
->XX3 4#
-GetPeopleTreeDataInTreeXX5 L
-(XXL M
-GuidXXM Q
-treeIdXXR X
-)XXX Y
-{YY 	
-ListZZ 
-<ZZ 
-PersonZZ 
->ZZ 
+poepleListOO# -
+)OO- .
+{PP 
+GenericPersonModelQQ "
+returnPersonQQ# /
+=QQ0 1
+_mapperQQ2 9
+.QQ9 :
+MapQQ: =
+<QQ= >
+GenericPersonModelQQ> P
+>QQP Q
+(QQQ R
+personQQR X
+)QQX Y
+;QQY Z
+returnPersonRR 
+.RR 
+	ImageFileRR &
+=RR' (
+awaitRR) ."
+_fileManagementServiceRR/ E
+.RRE F
+GetFileRRF M
+(RRM N
+personRRN T
+.RRT U
+ImageRRU Z
+)RRZ [
+;RR[ \
+ifTT 
+(TT 
+personTT 
+.TT 
+RelativeForPersonTT ,
+!=TT- /
+nullTT0 4
+)TT4 5
+{UU 
+returnPersonVV  
+.VV  !
+UserIdVV! '
+=VV( )
+personVV* 0
+.VV0 1
+RelativeForPersonVV1 B
+.VVB C
+RelativeUserIdVVC Q
+;VVQ R
+}WW 
+ifYY 
+(YY 
+userYY 
+!=YY 
+nullYY  
+&&YY! #
+personYY$ *
+.YY* +
+IdYY+ -
+==YY. 0
+userYY1 5
+.YY5 6
+PersonIdYY6 >
+)YY> ?
+{ZZ 
+returnPerson[[  
+.[[  !
+UserId[[! '
+=[[( )
+user[[* .
+.[[. /
+Id[[/ 1
+;[[1 2
+}\\ 
+returnPeopleList^^  
+.^^  !
+Add^^! $
+(^^$ %
+returnPerson^^% 1
+)^^1 2
+;^^2 3
+}__ 
+returnaa 
+returnPeopleListaa #
+;aa# $
+}bb 	
+publicdd 
+asyncdd 
+Taskdd 
+<dd 
+Listdd 
+<dd 
+PersonTreeInfoModeldd 2
+>dd2 3
+>dd3 4#
+GetPeopleTreeDataInTreedd5 L
+(ddL M
+GuidddM Q
+treeIdddR X
+)ddX Y
+{ee 	
+Listff 
+<ff 
+Personff 
+>ff 
 
-poepleListZZ #
-=ZZ$ %
+poepleListff #
+=ff$ %
 
-unitOfWorkZZ& 0
-.ZZ0 1
-PersonZZ1 7
-.ZZ7 8
-FilterZZ8 >
-(ZZ> ?
-pZZ? @
-=>ZZA C
-pZZD E
-.ZZE F
-TreeIdZZF L
-==ZZM O
-treeIdZZP V
-)ZZV W
-.[[ 
-Include[[ 
-([[ 
-p[[ 
-=>[[ 
-p[[ 
-.[[  
-Parents[[  '
-)[[' (
-.\\ 
-ThenInclude\\ 
-(\\ 
-p\\ 
-=>\\ !
-p\\" #
-.\\# $
-Parent\\$ *
-)\\* +
-.]] 
-Include]] 
-(]] 
-p]] 
-=>]] 
-p]] 
-.]]   
-FirstPersonMarriages]]  4
-)]]4 5
-.^^ 
-Include^^ 
-(^^ 
-p^^ 
-=>^^ 
-p^^ 
-.^^  !
-SecondPersonMarriages^^  5
-)^^5 6
-.__ 
-Include__ 
-(__ 
-p__ 
-=>__ 
-p__ 
-.__  
-RelativeForPerson__  1
-)__1 2
-.__2 3
-ToList__3 9
-(__9 :
-)__: ;
-;__; <
-List`` 
-<`` 
-PersonTreeInfoModel`` $
->``$ % 
-returnPeopleTreeData``& :
-=``; <
-new``= @
-List``A E
-<``E F
-PersonTreeInfoModel``F Y
->``Y Z
-(``Z [
-)``[ \
-;``\ ]
-Useraa 
-useraa 
-=aa 
+unitOfWorkff& 0
+.ff0 1
+Personff1 7
+.ff7 8
+Filterff8 >
+(ff> ?
+pff? @
+=>ffA C
+pffD E
+.ffE F
+TreeIdffF L
+==ffM O
+treeIdffP V
+)ffV W
+.gg 
+Includegg 
+(gg 
+pgg 
+=>gg 
+pgg 
+.gg  
+Parentsgg  '
+)gg' (
+.hh 
+ThenIncludehh 
+(hh 
+phh 
+=>hh !
+phh" #
+.hh# $
+Parenthh$ *
+)hh* +
+.ii 
+Includeii 
+(ii 
+pii 
+=>ii 
+pii 
+.ii   
+FirstPersonMarriagesii  4
+)ii4 5
+.jj 
+Includejj 
+(jj 
+pjj 
+=>jj 
+pjj 
+.jj  !
+SecondPersonMarriagesjj  5
+)jj5 6
+.kk 
+Includekk 
+(kk 
+pkk 
+=>kk 
+pkk 
+.kk  
+RelativeForPersonkk  1
+)kk1 2
+.kk2 3
+ToListkk3 9
+(kk9 :
+)kk: ;
+;kk; <
+Listmm 
+<mm 
+PersonTreeInfoModelmm $
+>mm$ % 
+returnPeopleTreeDatamm& :
+=mm; <
+newmm= @
+ListmmA E
+<mmE F
+PersonTreeInfoModelmmF Y
+>mmY Z
+(mmZ [
+)mm[ \
+;mm\ ]
+Usernn 
+usernn 
+=nn 
 
-unitOfWorkaa "
-.aa" #
-Useraa# '
-.aa' (
-Filteraa( .
-(aa. /
-uaa/ 0
-=>aa1 3
-uaa4 5
-.aa5 6
-Personaa6 <
-.aa< =
-TreeIdaa= C
-==aaD F
-treeIdaaG M
-)aaM N
-.aaN O
-FirstOrDefaultaaO ]
-(aa] ^
-)aa^ _
-;aa_ `
-foreachcc 
-(cc 
-varcc 
-personcc 
-incc  "
+unitOfWorknn "
+.nn" #
+Usernn# '
+.nn' (
+Filternn( .
+(nn. /
+unn/ 0
+=>nn1 3
+unn4 5
+.nn5 6
+Personnn6 <
+.nn< =
+TreeIdnn= C
+==nnD F
+treeIdnnG M
+)nnM N
+.nnN O
+FirstOrDefaultnnO ]
+(nn] ^
+)nn^ _
+;nn_ `
+foreachpp 
+(pp 
+varpp 
+personpp 
+inpp  "
 
-poepleListcc# -
-)cc- .
-{dd 
-PersonTreeInfoModelee #
-returnPersonee$ 0
-=ee1 2
-MapPersonInfoee3 @
-(ee@ A
-personeeA G
-)eeG H
-;eeH I
-returnPersonff 
-.ff 
-	ImageFileff &
-=ff' (
-awaitff) ."
-_fileManagementServiceff/ E
-.ffE F
-GetFileffF M
-(ffM N
-personffN T
-.ffT U
-ImageffU Z
-)ffZ [
-;ff[ \
-ifgg 
-(gg 
-persongg 
-.gg 
-RelativeForPersongg ,
-!=gg- /
-nullgg0 4
-)gg4 5
-{hh 
-returnPersonii  
-.ii  !
-UserIdii! '
-=ii( )
-personii* 0
-.ii0 1
-RelativeForPersonii1 B
-.iiB C
-RelativeUserIdiiC Q
-;iiQ R
-}jj 
-ifkk 
-(kk 
-userkk 
-!=kk 
-nullkk  
-&&kk! #
-personkk$ *
-.kk* +
-Idkk+ -
-==kk. 0
-userkk1 5
-.kk5 6
-PersonIdkk6 >
-)kk> ?
-{ll 
-returnPersonmm  
-.mm  !
-UserIdmm! '
-=mm( )
-usermm* .
-.mm. /
-Idmm/ 1
-;mm1 2
-}nn  
-returnPeopleTreeDataoo $
-.oo$ %
-Addoo% (
-(oo( )
-returnPersonoo) 5
-)oo5 6
-;oo6 7
-}pp  
-returnPeopleTreeDataqq  
-=qq! "#
-AddPartnersToPeopleListqq# :
-(qq: ; 
-returnPeopleTreeDataqq; O
-)qqO P
-;qqP Q
-returnrr  
-returnPeopleTreeDatarr '
-;rr' (
-}ss 	
-publicuu 
-asyncuu 
-Taskuu 
-<uu 
-Listuu 
-<uu 
-EventInTreeModeluu /
->uu/ 0
->uu0 1
-GetEventsInTreeuu2 A
-(uuA B
-GuiduuB F
-treeIduuG M
-)uuM N
-{vv 	
-Listww 
-<ww 
-Personww 
->ww 
-
-poepleListww #
-=ww$ %
-
-unitOfWorkww& 0
-.ww0 1
-Personww1 7
-.ww7 8
-Filterww8 >
-(ww> ?
-pww? @
-=>wwA C
-pwwD E
-.wwE F
-TreeIdwwF L
-==wwM O
-treeIdwwP V
-&&wwW Y
-pwwZ [
-.ww[ \
-	DeathDateww\ e
-==wwf h
-nullwwi m
-)wwm n
-.wwn o
-ToListwwo u
-(wwu v
-)wwv w
-;www x
-Listxx 
-<xx 
-EventInTreeModelxx !
->xx! "
-returnEventsListxx# 3
-=xx4 5
-newxx6 9
-Listxx: >
-<xx> ?
-EventInTreeModelxx? O
->xxO P
-(xxP Q
-)xxQ R
-;xxR S
-foreachyy 
-(yy 
-varyy 
-personyy 
-inyy  "
-
-poepleListyy# -
-)yy- .
-{zz 
-if{{ 
-({{ 
-person{{ 
-.{{ 
-	BirthDate{{ $
-.{{$ %
-HasValue{{% -
-){{- .
-{|| 
-returnEventsList}} $
-.}}$ %
-Add}}% (
-(}}( )
-new}}) ,
-EventInTreeModel}}- =
-(}}= >
-)}}> ?
-{~~ 
-Date 
-= 
-(  
-DateTime  (
-)( )
-person) /
-./ 0
-	BirthDate0 9
-,9 :
-	EventType
-ÄÄ !
+poepleListpp# -
+)pp- .
+{qq 
+PersonTreeInfoModelrr #
+returnPersonrr$ 0
+=rr1 2
+MapPersonInforr3 @
+(rr@ A
+personrrA G
+)rrG H
+;rrH I
+returnPersonss 
+.ss 
+	ImageFiless &
+=ss' (
+awaitss) ."
+_fileManagementServicess/ E
+.ssE F
+GetFilessF M
+(ssM N
+personssN T
+.ssT U
+ImagessU Z
+)ssZ [
+;ss[ \
+iftt 
+(tt 
+persontt 
+.tt 
+RelativeForPersontt ,
+!=tt- /
+nulltt0 4
+)tt4 5
+{uu 
+returnPersonvv  
+.vv  !
+UserIdvv! '
+=vv( )
+personvv* 0
+.vv0 1
+RelativeForPersonvv1 B
+.vvB C
+RelativeUserIdvvC Q
+;vvQ R
+}ww 
+ifyy 
+(yy 
+useryy 
+!=yy 
+nullyy  
+&&yy! #
+personyy$ *
+.yy* +
+Idyy+ -
+==yy. 0
+useryy1 5
+.yy5 6
+PersonIdyy6 >
+)yy> ?
+{zz 
+returnPerson{{  
+.{{  !
+UserId{{! '
+={{( )
+user{{* .
+.{{. /
+Id{{/ 1
+;{{1 2
+}||  
+returnPeopleTreeData~~ $
+.~~$ %
+Add~~% (
+(~~( )
+returnPerson~~) 5
+)~~5 6
+;~~6 7
+} "
+returnPeopleTreeData
+ÄÄ  
 =
-ÄÄ" #
-$str
-ÄÄ$ .
-,
-ÄÄ. /
-AffectedPeople
-ÅÅ &
-=
-ÅÅ' (
-await
-ÅÅ) .,
-MapAffectedPersonBirthdayEvent
-ÅÅ/ M
+ÄÄ! "%
+AddPartnersToPeopleList
+ÄÄ# :
 (
-ÅÅM N
-person
-ÅÅN T
+ÄÄ: ;"
+returnPeopleTreeData
+ÄÄ; O
 )
-ÅÅT U
-}
-ÇÇ 
-)
-ÇÇ 
+ÄÄO P
 ;
-ÇÇ 
+ÄÄP Q
+return
+ÅÅ "
+returnPeopleTreeData
+ÅÅ '
+;
+ÅÅ' (
 }
-ÉÉ 
-}
-ÑÑ 
-List
-ÖÖ 
+ÇÇ 	
+public
+ÑÑ 
+async
+ÑÑ 
+Task
+ÑÑ 
 <
-ÖÖ 
-Marriage
-ÖÖ 
+ÑÑ 
+List
+ÑÑ 
+<
+ÑÑ 
+EventInTreeModel
+ÑÑ /
 >
-ÖÖ 
-	marriages
-ÖÖ $
+ÑÑ/ 0
+>
+ÑÑ0 1
+GetEventsInTree
+ÑÑ2 A
+(
+ÑÑA B
+Guid
+ÑÑB F
+treeId
+ÑÑG M
+)
+ÑÑM N
+{
+ÖÖ 	
+List
+ÜÜ 
+<
+ÜÜ 
+Person
+ÜÜ 
+>
+ÜÜ 
+
+poepleList
+ÜÜ #
 =
-ÖÖ% &
+ÜÜ$ %
 
 unitOfWork
-ÖÖ' 1
+ÜÜ& 0
 .
-ÖÖ1 2
-Marriage
-ÖÖ2 :
+ÜÜ0 1
+Person
+ÜÜ1 7
 .
-ÖÖ: ;
+ÜÜ7 8
 Filter
-ÖÖ; A
+ÜÜ8 >
 (
-ÖÖA B
-x
-ÖÖB C
+ÜÜ> ?
+p
+ÜÜ? @
 =>
-ÖÖD F
-x
-ÖÖG H
+ÜÜA C
+p
+ÜÜD E
 .
-ÖÖH I
-FirstPerson
-ÖÖI T
-.
-ÖÖT U
+ÜÜE F
 TreeId
-ÖÖU [
+ÜÜF L
 ==
-ÖÖ\ ^
+ÜÜM O
 treeId
-ÖÖ_ e
+ÜÜP V
 &&
-ÖÖf h
-x
-ÖÖi j
+ÜÜW Y
+p
+ÜÜZ [
 .
-ÖÖj k
-SecondPerson
-ÖÖk w
-.
-ÖÖw x
-TreeId
-ÖÖx ~
-==ÖÖ Å
-treeIdÖÖÇ à
-&&ÖÖâ ã
-xÖÖå ç
-.ÖÖç é
-EndDateÖÖé ï
-==ÖÖñ ò
-nullÖÖô ù
-)ÖÖù û
-.
-ÜÜ 
-Include
-ÜÜ 
-(
-ÜÜ 
-x
-ÜÜ 
-=>
-ÜÜ 
-x
-ÜÜ 
-.
-ÜÜ  
-FirstPerson
-ÜÜ  +
+ÜÜ[ \
+	DeathDate
+ÜÜ\ e
+==
+ÜÜf h
+null
+ÜÜi m
 )
-ÜÜ+ ,
+ÜÜm n
 .
-áá 
-Include
-áá 
-(
-áá 
-x
-áá 
-=>
-áá 
-x
-áá 
-.
-áá  
-SecondPerson
-áá  ,
-)
-áá, -
-.
-àà 
+ÜÜn o
 ToList
-àà 
+ÜÜo u
 (
-àà 
+ÜÜu v
 )
-àà 
+ÜÜv w
 ;
-àà 
+ÜÜw x
+List
+áá 
+<
+áá 
+EventInTreeModel
+áá !
+>
+áá! "
+returnEventsList
+áá# 3
+=
+áá4 5
+new
+áá6 9
+List
+áá: >
+<
+áá> ?
+EventInTreeModel
+áá? O
+>
+ááO P
+(
+ááP Q
+)
+ááQ R
+;
+ááR S
 foreach
 ââ 
 (
 ââ 
 var
-ââ 
-marriage
-ââ !
+ââ 
+person
+ââ 
 in
-ââ" $
-	marriages
-ââ% .
+ââ  "
+
+poepleList
+ââ# -
 )
-ââ. /
+ââ- .
 {
-ää "
-MarriageDetailsModel
-ãã $
-returnMarriage
-ãã% 3
-=
-ãã4 5
-_mapper
-ãã6 =
-.
-ãã= >
-Map
-ãã> A
-<
-ããA B"
-MarriageDetailsModel
-ããB V
->
-ããV W
+ää 
+if
+ãã 
 (
-ããW X
-marriage
-ããX `
+ãã 
+person
+ãã 
+.
+ãã 
+	BirthDate
+ãã $
+.
+ãã$ %
+HasValue
+ãã% -
 )
-ãã` a
-;
-ããa b
-returnMarriage
-åå 
-.
-åå 
-PersonMarriedTo
-åå .
-.
-åå. /
-	ImageFile
-åå/ 8
-=
-åå9 :
-await
-åå; @$
-_fileManagementService
-ååA W
-.
-ååW X
-GetFile
-ååX _
-(
-åå_ `
-marriage
-åå` h
-.
-ååh i
-FirstPerson
-ååi t
-!=
-ååu w
-null
-ååx |
-?
-åå} ~
-marriageåå á
-.ååá à
-FirstPersonååà ì
-.ååì î
-Imageååî ô
-:ååö õ
-marriageååú §
-.åå§ •
-SecondPersonåå• ±
-.åå± ≤
-Imageåå≤ ∑
-)åå∑ ∏
-;åå∏ π
+ãã- .
+{
+åå 
 returnEventsList
-çç  
+çç $
 .
-çç  !
-Add
-çç! $
-(
 çç$ %
+Add
+çç% (
+(
+çç( )
 new
-çç% (
+çç) ,
 EventInTreeModel
-çç) 9
+çç- =
 (
-çç9 :
+çç= >
 )
-çç: ;
+çç> ?
 {
-éé 
+éé 
 Date
-èè 
+èè 
 =
-èè 
-marriage
-èè #
+èè 
+(
+èè  
+DateTime
+èè  (
+)
+èè( )
+person
+èè) /
 .
-èè# $
-	StartDate
-èè$ -
+èè/ 0
+	BirthDate
+èè0 9
 ,
-èè- .
+èè9 :
 	EventType
-êê 
+êê !
 =
-êê 
+êê" #
 $str
-êê  *
+êê$ .
 ,
-êê* +
+êê. /
 AffectedPeople
-ëë "
+ëë &
 =
-ëë# $
+ëë' (
 await
-ëë% *1
-#MapAffectedMarriageAnniversaryEvent
-ëë+ N
-(
-ëëN O
-marriage
-ëëO W
-)
-ëëW X
-}
-íí 
-)
-íí 
-;
-íí 
-}
-ìì 
-return
-îî 
-returnEventsList
-îî #
-;
-îî# $
-}
-ïï 	
-public
-óó 
-async
-óó 
-Task
-óó 
-<
-óó 
-List
-óó 
-<
-óó  
-GenericPersonModel
-óó 1
->
-óó1 2
->
-óó2 3&
-GetPeopleWithoutRelative
-óó4 L
-(
-óóL M
-Guid
-óóM Q
-treeId
-óóR X
-)
-óóX Y
-{
-òò 	
-List
-ôô 
-<
-ôô 
-Person
-ôô 
->
-ôô 
-
-poepleList
-ôô #
-=
-ôô$ %
-
-unitOfWork
-ôô& 0
-.
-ôô0 1
-Person
-ôô1 7
-.
-ôô7 8
-Filter
-ôô8 >
-(
-ôô> ?
-p
-ôô? @
-=>
-ôôA C
-p
-ôôD E
-.
-ôôE F
-TreeId
-ôôF L
-==
-ôôM O
-treeId
-ôôP V
-&&
-ôôW Y
-p
-ôôZ [
-.
-ôô[ \
-RelativeForPerson
-ôô\ m
-==
-ôôn p
-null
-ôôq u
-)
-ôôu v
-.
-ôôv w
-Include
-ôôw ~
-(
-ôô~ 
-pôô Ä
-=>ôôÅ É
-pôôÑ Ö
-.ôôÖ Ü!
-RelativeForPersonôôÜ ó
-)ôôó ò
-.ôôò ô
-ToListôôô ü
-(ôôü †
-)ôô† °
-;ôô° ¢
-List
-öö 
-<
-öö  
-GenericPersonModel
-öö #
->
-öö# $
-returnPeopleList
-öö% 5
-=
-öö6 7
-new
-öö8 ;
-List
-öö< @
-<
-öö@ A 
-GenericPersonModel
-ööA S
->
-ööS T
-(
-ööT U
-)
-ööU V
-;
-ööV W
-User
-õõ 
-user
-õõ 
-=
-õõ 
-
-unitOfWork
-õõ "
-.
-õõ" #
-User
-õõ# '
-.
-õõ' (
-Filter
-õõ( .
-(
-õõ. /
-u
-õõ/ 0
-=>
-õõ1 3
-u
-õõ4 5
-.
-õõ5 6
-Person
-õõ6 <
-.
-õõ< =
-TreeId
-õõ= C
-==
-õõD F
-treeId
-õõG M
-)
-õõM N
-.
-õõN O
-FirstOrDefault
-õõO ]
-(
-õõ] ^
-)
-õõ^ _
-;
-õõ_ `
-foreach
-úú 
-(
-úú 
-var
-úú 
-person
-úú 
-in
-úú  "
-
-poepleList
-úú# -
-)
-úú- .
-{
-ùù 
-if
-ûû 
-(
-ûû 
-user
-ûû 
-!=
-ûû 
-null
-ûû  
-&&
-ûû! #
-person
-ûû$ *
-.
-ûû* +
-Id
-ûû+ -
-!=
-ûû. 0
-user
-ûû1 5
-.
-ûû5 6
-PersonId
-ûû6 >
-)
-ûû> ?
-{
-üü  
-GenericPersonModel
-†† &
-returnPerson
-††' 3
-=
-††4 5
-_mapper
-††6 =
-.
-††= >
-Map
-††> A
-<
-††A B 
-GenericPersonModel
-††B T
->
-††T U
-(
-††U V
-person
-††V \
-)
-††\ ]
-;
-††] ^
-returnPerson
-°°  
-.
-°°  !
-	ImageFile
-°°! *
-=
-°°+ ,
-await
-°°- 2$
-_fileManagementService
-°°3 I
-.
-°°I J
-GetFile
-°°J Q
-(
-°°Q R
-person
-°°R X
-.
-°°X Y
-Image
-°°Y ^
-)
-°°^ _
-;
-°°_ `
-returnPeopleList
-¢¢ $
-.
-¢¢$ %
-Add
-¢¢% (
-(
-¢¢( )
-returnPerson
-¢¢) 5
-)
-¢¢5 6
-;
-¢¢6 7
-}
-££ 
-}
-§§ 
-return
-•• 
-returnPeopleList
-•• #
-;
-••# $
-}
-¶¶ 	
-private
-®® 
-async
-®® 
-Task
-®® 
-<
-®® 
-List
-®® 
-<
-®®  
-PersonBaseModel
-®®  /
->
-®®/ 0
->
-®®0 11
-#MapAffectedMarriageAnniversaryEvent
-®®2 U
-(
-®®U V
-Marriage
-®®V ^
-marriage
-®®_ g
-)
-®®g h
-{
-©© 	
-List
-™™ 
-<
-™™ 
-PersonBaseModel
-™™  
->
-™™  !
-
-peopleList
-™™" ,
-=
-™™- .
-new
-™™/ 2
-List
-™™3 7
-<
-™™7 8
-PersonBaseModel
-™™8 G
->
-™™G H
-(
-™™H I
-)
-™™I J
-;
-™™J K
-
-peopleList
-´´ 
-.
-´´ 
-Add
-´´ 
-(
-´´ 
-await
-´´  "
-MapToPersonBaseModel
-´´! 5
-(
-´´5 6
-marriage
-´´6 >
-.
-´´> ?
-FirstPerson
-´´? J
-)
-´´J K
-)
-´´K L
-;
-´´L M
-
-peopleList
-¨¨ 
-.
-¨¨ 
-Add
-¨¨ 
-(
-¨¨ 
-await
-¨¨  "
-MapToPersonBaseModel
-¨¨! 5
-(
-¨¨5 6
-marriage
-¨¨6 >
-.
-¨¨> ?
-SecondPerson
-¨¨? K
-)
-¨¨K L
-)
-¨¨L M
-;
-¨¨M N
-return
-≠≠ 
-
-peopleList
-≠≠ 
-;
-≠≠ 
-}
-ÆÆ 	
-private
-∞∞ 
-async
-∞∞ 
-Task
-∞∞ 
-<
-∞∞ 
-List
-∞∞ 
-<
-∞∞  
-PersonBaseModel
-∞∞  /
->
-∞∞/ 0
->
-∞∞0 1,
+ëë) .,
 MapAffectedPersonBirthdayEvent
-∞∞2 P
+ëë/ M
 (
-∞∞P Q
-Person
-∞∞Q W
+ëëM N
 person
-∞∞X ^
+ëëN T
 )
-∞∞^ _
-{
-±± 	
+ëëT U
+}
+íí 
+)
+íí 
+;
+íí 
+}
+ìì 
+}
+îî 
 List
-≤≤ 
+ññ 
 <
-≤≤ 
-PersonBaseModel
-≤≤  
+ññ 
+Marriage
+ññ 
 >
-≤≤  !
+ññ 
+	marriages
+ññ $
+=
+ññ% &
 
-peopleList
-≤≤" ,
-=
-≤≤- .
-new
-≤≤/ 2
-List
-≤≤3 7
-<
-≤≤7 8
-PersonBaseModel
-≤≤8 G
->
-≤≤G H
-(
-≤≤H I
-)
-≤≤I J
-;
-≤≤J K
-
-peopleList
-≥≥ 
+unitOfWork
+ññ' 1
 .
-≥≥ 
-Add
-≥≥ 
+ññ1 2
+Marriage
+ññ2 :
+.
+ññ: ;
+Filter
+ññ; A
 (
-≥≥ 
-await
-≥≥  "
-MapToPersonBaseModel
-≥≥! 5
+ññA B
+x
+ññB C
+=>
+ññD F
+x
+ññG H
+.
+ññH I
+FirstPerson
+ññI T
+.
+ññT U
+TreeId
+ññU [
+==
+ññ\ ^
+treeId
+ññ_ e
+&&
+ññf h
+x
+ññi j
+.
+ññj k
+SecondPerson
+ññk w
+.
+ññw x
+TreeId
+ññx ~
+==ññ Å
+treeIdññÇ à
+&&ññâ ã
+xññå ç
+.ññç é
+EndDateññé ï
+==ñññ ò
+nullññô ù
+)ññù û
+.
+óó 
+Include
+óó 
 (
-≥≥5 6
-person
-≥≥6 <
+óó 
+x
+óó 
+=>
+óó 
+x
+óó 
+.
+óó  
+FirstPerson
+óó  +
 )
-≥≥< =
+óó+ ,
+.
+òò 
+Include
+òò 
+(
+òò 
+x
+òò 
+=>
+òò 
+x
+òò 
+.
+òò  
+SecondPerson
+òò  ,
 )
-≥≥= >
+òò, -
+.
+ôô 
+ToList
+ôô 
+(
+ôô 
+)
+ôô 
 ;
-≥≥> ?
-return
-¥¥ 
-
-peopleList
-¥¥ 
-;
-¥¥ 
-}
-µµ 	
-private
-∑∑ 
-async
-∑∑ 
-Task
-∑∑ 
-<
-∑∑ 
-PersonBaseModel
-∑∑ *
->
-∑∑* +"
-MapToPersonBaseModel
-∑∑, @
+ôô 
+foreach
+õõ 
 (
-∑∑@ A
-Person
-∑∑A G
-person
-∑∑H N
+õõ 
+var
+õõ 
+marriage
+õõ !
+in
+õõ" $
+	marriages
+õõ% .
 )
-∑∑N O
+õõ. /
 {
-∏∏ 	
-return
-ππ 
-new
-ππ 
-PersonBaseModel
-ππ &
-(
-ππ& '
-)
-ππ' (
-{
-∫∫ 
-	FirstName
-ªª 
+úú "
+MarriageDetailsModel
+ùù $
+returnMarriage
+ùù% 3
 =
-ªª 
-person
-ªª "
-.
-ªª" #
-	FirstName
-ªª# ,
-,
-ªª, -
-LastName
-ºº 
-=
-ºº 
-person
-ºº !
-.
-ºº! "
-LastName
-ºº" *
-,
-ºº* +
-PersonId
-ΩΩ 
-=
-ΩΩ 
-person
-ΩΩ !
-.
-ΩΩ! "
-Id
-ΩΩ" $
-,
-ΩΩ$ %
-	ImageFile
-ææ 
-=
-ææ 
-person
-ææ "
-.
-ææ" #
-ImageId
-ææ# *
-!=
-ææ+ -
-null
-ææ. 2
-?
-ææ3 4
-await
-ææ5 :$
-_fileManagementService
-ææ; Q
-.
-ææQ R
-GetFile
-ææR Y
-(
-ææY Z
-await
-ææZ _
-_imageService
-ææ` m
-.
-ææm n
-GetImageAsync
-ææn {
-(
-ææ{ |
-personææ| Ç
-.ææÇ É
-ImageIdææÉ ä
-)ææä ã
-)ææã å
-:ææç é
-nullææè ì
-}
-øø 
-;
-øø 
-}
-¿¿ 	
-private
-√√ !
-PersonTreeInfoModel
-√√ #
-MapPersonInfo
-√√$ 1
-(
-√√1 2
-Person
-√√2 8
-person
-√√9 ?
-)
-√√? @
-{
-ƒƒ 	!
-PersonTreeInfoModel
-≈≈ 
-returnPerson
-≈≈  ,
-=
-≈≈- .
+ùù4 5
 _mapper
-≈≈/ 6
+ùù6 =
 .
-≈≈6 7
+ùù= >
 Map
-≈≈7 :
+ùù> A
 <
-≈≈: ;!
-PersonTreeInfoModel
-≈≈; N
+ùùA B"
+MarriageDetailsModel
+ùùB V
 >
-≈≈N O
+ùùV W
 (
-≈≈O P
-person
-≈≈P V
+ùùW X
+marriage
+ùùX `
 )
-≈≈V W
+ùù` a
 ;
-≈≈W X
-foreach
-∆∆ 
-(
-∆∆ 
-var
-∆∆ 
-parent
-∆∆ 
-in
-∆∆  "
-person
-∆∆# )
+ùùa b
+returnMarriage
+ûû 
 .
-∆∆) *
-Parents
-∆∆* 1
-)
-∆∆1 2
-{
-«« 
-if
-»» 
-(
-»» 
-parent
-»» 
+ûû 
+PersonMarriedTo
+ûû .
 .
-»» 
-Parent
-»» !
-.
-»»! "
-Gender
-»»" (
-==
-»») +
-$char
-»», /
-)
-»»/ 0
-{
-…… 
-returnPerson
-    
-.
-    !
-FatherId
-  ! )
+ûû. /
+	ImageFile
+ûû/ 8
 =
-  * +
-parent
-  , 2
+ûû9 :
+await
+ûû; @$
+_fileManagementService
+ûûA W
 .
-  2 3
-ParentId
-  3 ;
-;
-  ; <
-}
-ÀÀ 
-if
-ÃÃ 
+ûûW X
+GetFile
+ûûX _
 (
-ÃÃ 
-parent
-ÃÃ 
+ûû_ `
+marriage
+ûû` h
 .
-ÃÃ 
-Parent
-ÃÃ !
+ûûh i
+FirstPerson
+ûûi t
+!=
+ûûu w
+null
+ûûx |
+?
+ûû} ~
+marriageûû á
+.ûûá à
+FirstPersonûûà ì
+.ûûì î
+Imageûûî ô
+:ûûö õ
+marriageûûú §
+.ûû§ •
+SecondPersonûû• ±
+.ûû± ≤
+Imageûû≤ ∑
+)ûû∑ ∏
+;ûû∏ π
+returnEventsList
+††  
 .
-ÃÃ! "
-Gender
-ÃÃ" (
-==
-ÃÃ) +
-$char
-ÃÃ, /
-)
-ÃÃ/ 0
-{
-ÕÕ 
-returnPerson
-ŒŒ  
-.
-ŒŒ  !
-MotherId
-ŒŒ! )
-=
-ŒŒ* +
-parent
-ŒŒ, 2
-.
-ŒŒ2 3
-ParentId
-ŒŒ3 ;
-;
-ŒŒ; <
-}
-œœ 
-}
-–– 
-returnPerson
-—— 
-.
-—— 
-PartnersIds
-—— $
-=
-——% &
+††  !
+Add
+††! $
+(
+††$ %
 new
-——' *
-List
-——+ /
-<
-——/ 0
-int
-——0 3
->
-——3 4
+††% (
+EventInTreeModel
+††) 9
 (
-——4 5
+††9 :
 )
-——5 6
-;
-——6 7
-foreach
-““ 
-(
-““ 
-var
-““ 
-marriage
-““ !
-in
-““" $
-person
-““% +
-.
-““+ ,"
-FirstPersonMarriages
-““, @
-)
-““@ A
+††: ;
 {
-”” 
-returnPerson
-‘‘ 
-.
-‘‘ 
-PartnersIds
-‘‘ (
-.
-‘‘( )
-Add
-‘‘) ,
-(
-‘‘, -
+°° 
+Date
+¢¢ 
+=
+¢¢ 
 marriage
-‘‘- 5
+¢¢ #
 .
-‘‘5 6
-SecondPersonId
-‘‘6 D
+¢¢# $
+	StartDate
+¢¢$ -
+,
+¢¢- .
+	EventType
+££ 
+=
+££ 
+$str
+££  *
+,
+££* +
+AffectedPeople
+§§ "
+=
+§§# $
+await
+§§% *1
+#MapAffectedMarriageAnniversaryEvent
+§§+ N
+(
+§§N O
+marriage
+§§O W
 )
-‘‘D E
-;
-‘‘E F
+§§W X
 }
-’’ 
-foreach
-÷÷ 
-(
-÷÷ 
-var
-÷÷ 
-marriage
-÷÷ !
-in
-÷÷" $
-person
-÷÷% +
-.
-÷÷+ ,#
-SecondPersonMarriages
-÷÷, A
+•• 
 )
-÷÷A B
-{
-◊◊ 
-returnPerson
-ÿÿ 
-.
-ÿÿ 
-PartnersIds
-ÿÿ (
-.
-ÿÿ( )
-Add
-ÿÿ) ,
-(
-ÿÿ, -
-marriage
-ÿÿ- 5
-.
-ÿÿ5 6
-FirstPersonId
-ÿÿ6 C
-)
-ÿÿC D
+•• 
 ;
-ÿÿD E
+•• 
 }
-ŸŸ 
+¶¶ 
 return
-⁄⁄ 
-returnPerson
-⁄⁄ 
+®® 
+returnEventsList
+®® #
 ;
-⁄⁄  
+®®# $
 }
-€€ 	
-private
-›› 
-static
-›› 
-List
-›› 
+©© 	
+public
+´´ 
+async
+´´ 
+Task
+´´ 
 <
-›› !
-PersonTreeInfoModel
-›› /
+´´ 
+List
+´´ 
+<
+´´  
+GenericPersonModel
+´´ 1
 >
-››/ 0%
-AddPartnersToPeopleList
-››1 H
+´´1 2
+>
+´´2 3&
+GetPeopleWithoutRelative
+´´4 L
 (
-››H I
-List
-››I M
-<
-››M N!
-PersonTreeInfoModel
-››N a
->
-››a b
-
-peopleList
-››c m
+´´L M
+Guid
+´´M Q
+treeId
+´´R X
 )
-››m n
+´´X Y
 {
-ﬁﬁ 	
+¨¨ 	
 List
-ﬂﬂ 
+≠≠ 
 <
-ﬂﬂ !
-PersonTreeInfoModel
-ﬂﬂ $
+≠≠ 
+Person
+≠≠ 
 >
-ﬂﬂ$ %
-updatedList
-ﬂﬂ& 1
+≠≠ 
+
+poepleList
+≠≠ #
 =
-ﬂﬂ2 3
-new
-ﬂﬂ4 7
-List
-ﬂﬂ8 <
-<
-ﬂﬂ< =!
-PersonTreeInfoModel
-ﬂﬂ= P
->
-ﬂﬂP Q
+≠≠$ %
+
+unitOfWork
+≠≠& 0
+.
+≠≠0 1
+Person
+≠≠1 7
+.
+≠≠7 8
+Filter
+≠≠8 >
 (
-ﬂﬂQ R
+≠≠> ?
+p
+≠≠? @
+=>
+≠≠A C
+p
+≠≠D E
+.
+≠≠E F
+TreeId
+≠≠F L
+==
+≠≠M O
+treeId
+≠≠P V
+&&
+≠≠W Y
+p
+≠≠Z [
+.
+≠≠[ \
+RelativeForPerson
+≠≠\ m
+==
+≠≠n p
+null
+≠≠q u
 )
-ﬂﬂR S
-;
-ﬂﬂS T
-foreach
-·· 
+≠≠u v
+.
+≠≠v w
+Include
+≠≠w ~
 (
-·· 
+≠≠~ 
+p≠≠ Ä
+=>≠≠Å É
+p≠≠Ñ Ö
+.≠≠Ö Ü!
+RelativeForPerson≠≠Ü ó
+)≠≠ó ò
+.≠≠ò ô
+ToList≠≠ô ü
+(≠≠ü †
+)≠≠† °
+;≠≠° ¢
+List
+ÆÆ 
+<
+ÆÆ  
+GenericPersonModel
+ÆÆ #
+>
+ÆÆ# $
+returnPeopleList
+ÆÆ% 5
+=
+ÆÆ6 7
+new
+ÆÆ8 ;
+List
+ÆÆ< @
+<
+ÆÆ@ A 
+GenericPersonModel
+ÆÆA S
+>
+ÆÆS T
+(
+ÆÆT U
+)
+ÆÆU V
+;
+ÆÆV W
+User
+ØØ 
+user
+ØØ 
+=
+ØØ 
+
+unitOfWork
+ØØ "
+.
+ØØ" #
+User
+ØØ# '
+.
+ØØ' (
+Filter
+ØØ( .
+(
+ØØ. /
+u
+ØØ/ 0
+=>
+ØØ1 3
+u
+ØØ4 5
+.
+ØØ5 6
+Person
+ØØ6 <
+.
+ØØ< =
+TreeId
+ØØ= C
+==
+ØØD F
+treeId
+ØØG M
+)
+ØØM N
+.
+ØØN O
+FirstOrDefault
+ØØO ]
+(
+ØØ] ^
+)
+ØØ^ _
+;
+ØØ_ `
+foreach
+±± 
+(
+±± 
 var
-·· 
+±± 
 person
-·· 
+±± 
 in
-··  "
+±±  "
+
+poepleList
+±±# -
+)
+±±- .
+{
+≤≤ 
+if
+≥≥ 
+(
+≥≥ 
+user
+≥≥ 
+!=
+≥≥ 
+null
+≥≥  
+&&
+≥≥! #
+person
+≥≥$ *
+.
+≥≥* +
+Id
+≥≥+ -
+!=
+≥≥. 0
+user
+≥≥1 5
+.
+≥≥5 6
+PersonId
+≥≥6 >
+)
+≥≥> ?
+{
+¥¥  
+GenericPersonModel
+µµ &
+returnPerson
+µµ' 3
+=
+µµ4 5
+_mapper
+µµ6 =
+.
+µµ= >
+Map
+µµ> A
+<
+µµA B 
+GenericPersonModel
+µµB T
+>
+µµT U
+(
+µµU V
+person
+µµV \
+)
+µµ\ ]
+;
+µµ] ^
+returnPerson
+∂∂  
+.
+∂∂  !
+	ImageFile
+∂∂! *
+=
+∂∂+ ,
+await
+∂∂- 2$
+_fileManagementService
+∂∂3 I
+.
+∂∂I J
+GetFile
+∂∂J Q
+(
+∂∂Q R
+person
+∂∂R X
+.
+∂∂X Y
+Image
+∂∂Y ^
+)
+∂∂^ _
+;
+∂∂_ `
+returnPeopleList
+∑∑ $
+.
+∑∑$ %
+Add
+∑∑% (
+(
+∑∑( )
+returnPerson
+∑∑) 5
+)
+∑∑5 6
+;
+∑∑6 7
+}
+∏∏ 
+}
+ππ 
+return
+ªª 
+returnPeopleList
+ªª #
+;
+ªª# $
+}
+ºº 	
+private
+ææ 
+async
+ææ 
+Task
+ææ 
+<
+ææ 
+List
+ææ 
+<
+ææ  
+PersonBaseModel
+ææ  /
+>
+ææ/ 0
+>
+ææ0 11
+#MapAffectedMarriageAnniversaryEvent
+ææ2 U
+(
+ææU V
+Marriage
+ææV ^
+marriage
+ææ_ g
+)
+ææg h
+{
+øø 	
+List
+¿¿ 
+<
+¿¿ 
+PersonBaseModel
+¿¿  
+>
+¿¿  !
 
 peopleList
-··# -
+¿¿" ,
+=
+¿¿- .
+new
+¿¿/ 2
+List
+¿¿3 7
+<
+¿¿7 8
+PersonBaseModel
+¿¿8 G
+>
+¿¿G H
+(
+¿¿H I
 )
-··- .
+¿¿I J
+;
+¿¿J K
+
+peopleList
+¡¡ 
+.
+¡¡ 
+Add
+¡¡ 
+(
+¡¡ 
+await
+¡¡  "
+MapToPersonBaseModel
+¡¡! 5
+(
+¡¡5 6
+marriage
+¡¡6 >
+.
+¡¡> ?
+FirstPerson
+¡¡? J
+)
+¡¡J K
+)
+¡¡K L
+;
+¡¡L M
+
+peopleList
+¬¬ 
+.
+¬¬ 
+Add
+¬¬ 
+(
+¬¬ 
+await
+¬¬  "
+MapToPersonBaseModel
+¬¬! 5
+(
+¬¬5 6
+marriage
+¬¬6 >
+.
+¬¬> ?
+SecondPerson
+¬¬? K
+)
+¬¬K L
+)
+¬¬L M
+;
+¬¬M N
+return
+ƒƒ 
+
+peopleList
+ƒƒ 
+;
+ƒƒ 
+}
+≈≈ 	
+private
+«« 
+async
+«« 
+Task
+«« 
+<
+«« 
+List
+«« 
+<
+««  
+PersonBaseModel
+««  /
+>
+««/ 0
+>
+««0 1,
+MapAffectedPersonBirthdayEvent
+««2 P
+(
+««P Q
+Person
+««Q W
+person
+««X ^
+)
+««^ _
 {
-‚‚ 
+»» 	
+List
+…… 
+<
+…… 
+PersonBaseModel
+……  
+>
+……  !
+
+peopleList
+……" ,
+=
+……- .
+new
+……/ 2
+List
+……3 7
+<
+……7 8
+PersonBaseModel
+……8 G
+>
+……G H
+(
+……H I
+)
+……I J
+;
+……J K
+
+peopleList
+   
+.
+   
+Add
+   
+(
+   
+await
+    "
+MapToPersonBaseModel
+  ! 5
+(
+  5 6
+person
+  6 <
+)
+  < =
+)
+  = >
+;
+  > ?
+return
+ÃÃ 
+
+peopleList
+ÃÃ 
+;
+ÃÃ 
+}
+ÕÕ 	
+private
+œœ 
+async
+œœ 
+Task
+œœ 
+<
+œœ 
+PersonBaseModel
+œœ *
+>
+œœ* +"
+MapToPersonBaseModel
+œœ, @
+(
+œœ@ A
+Person
+œœA G
+person
+œœH N
+)
+œœN O
+{
+–– 	
+return
+—— 
+new
+—— 
+PersonBaseModel
+—— &
+(
+——& '
+)
+——' (
+{
+““ 
+	FirstName
+”” 
+=
+”” 
+person
+”” "
+.
+””" #
+	FirstName
+””# ,
+,
+””, -
+LastName
+‘‘ 
+=
+‘‘ 
+person
+‘‘ !
+.
+‘‘! "
+LastName
+‘‘" *
+,
+‘‘* +
+PersonId
+’’ 
+=
+’’ 
+person
+’’ !
+.
+’’! "
+Id
+’’" $
+,
+’’$ %
+	ImageFile
+÷÷ 
+=
+÷÷ 
+person
+÷÷ "
+.
+÷÷" #
+ImageId
+÷÷# *
+!=
+÷÷+ -
+null
+÷÷. 2
+?
+÷÷3 4
+await
+÷÷5 :$
+_fileManagementService
+÷÷; Q
+.
+÷÷Q R
+GetFile
+÷÷R Y
+(
+÷÷Y Z
+await
+÷÷Z _
+_imageService
+÷÷` m
+.
+÷÷m n
+GetImageAsync
+÷÷n {
+(
+÷÷{ |
+person÷÷| Ç
+.÷÷Ç É
+ImageId÷÷É ä
+)÷÷ä ã
+)÷÷ã å
+:÷÷ç é
+null÷÷è ì
+}
+◊◊ 
+;
+◊◊ 
+}
+ÿÿ 	
+private
+⁄⁄ !
+PersonTreeInfoModel
+⁄⁄ #
+MapPersonInfo
+⁄⁄$ 1
+(
+⁄⁄1 2
+Person
+⁄⁄2 8
+person
+⁄⁄9 ?
+)
+⁄⁄? @
+{
+€€ 	!
+PersonTreeInfoModel
+‹‹ 
+returnPerson
+‹‹  ,
+=
+‹‹- .
+_mapper
+‹‹/ 6
+.
+‹‹6 7
+Map
+‹‹7 :
+<
+‹‹: ;!
+PersonTreeInfoModel
+‹‹; N
+>
+‹‹N O
+(
+‹‹O P
+person
+‹‹P V
+)
+‹‹V W
+;
+‹‹W X
+foreach
+›› 
+(
+›› 
+var
+›› 
+parent
+›› 
+in
+››  "
+person
+››# )
+.
+››) *
+Parents
+››* 1
+)
+››1 2
+{
+ﬁﬁ 
+if
+ﬂﬂ 
+(
+ﬂﬂ 
+parent
+ﬂﬂ 
+.
+ﬂﬂ 
+Parent
+ﬂﬂ !
+.
+ﬂﬂ! "
+Gender
+ﬂﬂ" (
+==
+ﬂﬂ) +
+$char
+ﬂﬂ, /
+)
+ﬂﬂ/ 0
+{
+‡‡ 
+returnPerson
+··  
+.
+··  !
+FatherId
+··! )
+=
+··* +
+parent
+··, 2
+.
+··2 3
+ParentId
+··3 ;
+;
+··; <
+}
+‚‚ 
 if
 „„ 
 (
-„„ 
-updatedList
-„„ 
+„„ 
+parent
+„„ 
 .
-„„  
-	FindIndex
-„„  )
-(
-„„) *
-x
-„„* +
-=>
-„„, .
-x
+„„ 
+Parent
+„„ !
+.
+„„! "
+Gender
+„„" (
+==
+„„) +
+$char
+„„, /
+)
 „„/ 0
-.
-„„0 1
-PersonId
-„„1 9
-==
-„„: <
-person
-„„= C
-.
-„„C D
-PersonId
-„„D L
-)
-„„L M
-==
-„„N P
--
-„„Q R
-$num
-„„R S
-)
-„„S T
 {
-‰‰ 
-updatedList
-ÂÂ 
+‰‰ 
+returnPerson
+ÂÂ  
 .
-ÂÂ  
-Add
-ÂÂ  #
-(
-ÂÂ# $
-person
-ÂÂ$ *
-)
-ÂÂ* +
-;
-ÂÂ+ ,
-}
-ÊÊ 
-if
-ËË 
-(
-ËË 
-person
-ËË 
-.
-ËË 
-FatherId
-ËË #
-!=
-ËË$ &
-$num
-ËË' (
-&&
-ËË) +
-person
-ËË, 2
-.
-ËË2 3
+ÂÂ  !
 MotherId
-ËË3 ;
-!=
-ËË< >
-$num
-ËË? @
+ÂÂ! )
+=
+ÂÂ* +
+parent
+ÂÂ, 2
+.
+ÂÂ2 3
+ParentId
+ÂÂ3 ;
+;
+ÂÂ; <
+}
+ÊÊ 
+}
+ÁÁ 
+returnPerson
+ÈÈ 
+.
+ÈÈ 
+PartnersIds
+ÈÈ $
+=
+ÈÈ% &
+new
+ÈÈ' *
+List
+ÈÈ+ /
+<
+ÈÈ/ 0
+int
+ÈÈ0 3
+>
+ÈÈ3 4
+(
+ÈÈ4 5
 )
-ËË@ A
+ÈÈ5 6
+;
+ÈÈ6 7
+foreach
+ÍÍ 
+(
+ÍÍ 
+var
+ÍÍ 
+marriage
+ÍÍ !
+in
+ÍÍ" $
+person
+ÍÍ% +
+.
+ÍÍ+ ,"
+FirstPersonMarriages
+ÍÍ, @
+)
+ÍÍ@ A
 {
-ÈÈ 
-UpdateMother
-ÍÍ  
+ÎÎ 
+returnPerson
+ÏÏ 
+.
+ÏÏ 
+PartnersIds
+ÏÏ (
+.
+ÏÏ( )
+Add
+ÏÏ) ,
 (
-ÍÍ  !
-ref
-ÍÍ! $
-updatedList
-ÍÍ% 0
-,
-ÍÍ0 1
-ref
-ÍÍ2 5
-
-peopleList
-ÍÍ6 @
-,
-ÍÍ@ A
-person
-ÍÍB H
+ÏÏ, -
+marriage
+ÏÏ- 5
+.
+ÏÏ5 6
+SecondPersonId
+ÏÏ6 D
 )
-ÍÍH I
+ÏÏD E
 ;
-ÍÍI J
-UpdateFather
-ÏÏ  
+ÏÏE F
+}
+ÌÌ 
+foreach
+ÔÔ 
 (
-ÏÏ  !
-ref
-ÏÏ! $
-updatedList
-ÏÏ% 0
-,
-ÏÏ0 1
-ref
-ÏÏ2 5
-
-peopleList
-ÏÏ6 @
-,
-ÏÏ@ A
+ÔÔ 
+var
+ÔÔ 
+marriage
+ÔÔ !
+in
+ÔÔ" $
 person
-ÏÏB H
+ÔÔ% +
+.
+ÔÔ+ ,#
+SecondPersonMarriages
+ÔÔ, A
 )
-ÏÏH I
+ÔÔA B
+{
+ 
+returnPerson
+ÒÒ 
+.
+ÒÒ 
+PartnersIds
+ÒÒ (
+.
+ÒÒ( )
+Add
+ÒÒ) ,
+(
+ÒÒ, -
+marriage
+ÒÒ- 5
+.
+ÒÒ5 6
+FirstPersonId
+ÒÒ6 C
+)
+ÒÒC D
 ;
-ÏÏI J
+ÒÒD E
 }
-ÌÌ 
-}
-ÔÔ 
+ÚÚ 
 return
- 
-updatedList
- 
+ÙÙ 
+returnPerson
+ÙÙ 
 ;
- 
+ÙÙ  
 }
-ÒÒ 	
+ıı 	
 private
-ÛÛ 
+˜˜ 
 static
-ÛÛ 
-void
-ÛÛ 
-UpdateMother
-ÛÛ (
+˜˜ 
+List
+˜˜ 
+<
+˜˜ !
+PersonTreeInfoModel
+˜˜ /
+>
+˜˜/ 0%
+AddPartnersToPeopleList
+˜˜1 H
 (
-ÛÛ( )
-ref
-ÛÛ) ,
+˜˜H I
 List
-ÛÛ- 1
+˜˜I M
 <
-ÛÛ1 2!
+˜˜M N!
 PersonTreeInfoModel
-ÛÛ2 E
+˜˜N a
 >
-ÛÛE F
-updatedList
-ÛÛG R
-,
-ÛÛR S
-ref
-ÛÛT W
-List
-ÛÛX \
-<
-ÛÛ\ ]!
-PersonTreeInfoModel
-ÛÛ] p
->
-ÛÛp q
+˜˜a b
 
 peopleList
-ÛÛr |
-,
-ÛÛ| }"
-PersonTreeInfoModelÛÛ~ ë
-personÛÛí ò
-)ÛÛò ô
+˜˜c m
+)
+˜˜m n
 {
-ÙÙ 	!
+¯¯ 	
+List
+˘˘ 
+<
+˘˘ !
 PersonTreeInfoModel
-ıı 
-mother
-ıı  &
-=
-ıı' (
+˘˘ $
+>
+˘˘$ %
 updatedList
-ıı) 4
-.
-ıı4 5
-Find
-ıı5 9
+˘˘& 1
+=
+˘˘2 3
+new
+˘˘4 7
+List
+˘˘8 <
+<
+˘˘< =!
+PersonTreeInfoModel
+˘˘= P
+>
+˘˘P Q
 (
-ıı9 :
-x
-ıı: ;
-=>
-ıı< >
-x
-ıı? @
-.
-ıı@ A
-PersonId
-ııA I
-==
-ııJ L
+˘˘Q R
+)
+˘˘R S
+;
+˘˘S T
+foreach
+˚˚ 
+(
+˚˚ 
+var
+˚˚ 
 person
-ııM S
-.
-ııS T
-MotherId
-ııT \
-)
-ıı\ ]
-;
-ıı] ^
-if
-ˆˆ 
-(
-ˆˆ 
-mother
-ˆˆ 
-!=
-ˆˆ 
-default
-ˆˆ !
-(
-ˆˆ! "!
-PersonTreeInfoModel
-ˆˆ" 5
-)
-ˆˆ5 6
-)
-ˆˆ6 7
-{
-˜˜ 
-updatedList
-¯¯ 
-.
-¯¯ 
-Remove
-¯¯ "
-(
-¯¯" #
-mother
-¯¯# )
-)
-¯¯) *
-;
-¯¯* +
-}
-˘˘ 
-else
-˙˙ 
-{
-˚˚ 
-mother
-¸¸ 
-=
-¸¸ 
+˚˚ 
+in
+˚˚  "
 
 peopleList
-¸¸ #
-.
-¸¸# $
-Find
-¸¸$ (
-(
-¸¸( )
-x
-¸¸) *
-=>
-¸¸+ -
-x
-¸¸. /
-.
-¸¸/ 0
-PersonId
-¸¸0 8
-==
-¸¸9 ;
-person
-¸¸< B
-.
-¸¸B C
-MotherId
-¸¸C K
+˚˚# -
 )
-¸¸K L
-;
-¸¸L M
-}
-˝˝ 
+˚˚- .
+{
+¸¸ 
 if
-˛˛ 
+˝˝ 
 (
-˛˛ 
-mother
-˛˛ 
+˝˝ 
+updatedList
+˝˝ 
 .
-˛˛ 
-PartnersIds
-˛˛ "
-.
-˛˛" #
-FirstOrDefault
-˛˛# 1
+˝˝  
+	FindIndex
+˝˝  )
 (
-˛˛1 2
-id
-˛˛2 4
+˝˝) *
+x
+˝˝* +
 =>
-˛˛5 7
-id
-˛˛8 :
-==
-˛˛; =
-person
-˛˛> D
+˝˝, .
+x
+˝˝/ 0
 .
-˛˛D E
-FatherId
-˛˛E M
-)
-˛˛M N
+˝˝0 1
+PersonId
+˝˝1 9
 ==
-˛˛O Q
+˝˝: <
+person
+˝˝= C
+.
+˝˝C D
+PersonId
+˝˝D L
+)
+˝˝L M
+==
+˝˝N P
+-
+˝˝Q R
 $num
-˛˛R S
+˝˝R S
 )
-˛˛S T
+˝˝S T
 {
-ˇˇ 
-mother
-ÄÄ 
+˛˛ 
+updatedList
+ˇˇ 
 .
-ÄÄ 
-PartnersIds
-ÄÄ "
-.
-ÄÄ" #
+ˇˇ  
 Add
-ÄÄ# &
+ˇˇ  #
 (
-ÄÄ& '
+ˇˇ# $
 person
-ÄÄ' -
-.
-ÄÄ- .
-FatherId
-ÄÄ. 6
+ˇˇ$ *
 )
-ÄÄ6 7
+ˇˇ* +
 ;
-ÄÄ7 8
+ˇˇ+ ,
 }
-ÅÅ 
-updatedList
-ÇÇ 
-.
-ÇÇ 
-Add
-ÇÇ 
-(
-ÇÇ 
-mother
-ÇÇ "
-)
-ÇÇ" #
-;
-ÇÇ# $
-}
-ÉÉ 	
-private
-ÖÖ 
-static
-ÖÖ 
-void
-ÖÖ 
-UpdateFather
-ÖÖ (
-(
-ÖÖ( )
-ref
-ÖÖ) ,
-List
-ÖÖ- 1
-<
-ÖÖ1 2!
-PersonTreeInfoModel
-ÖÖ2 E
->
-ÖÖE F
-updatedList
-ÖÖG R
-,
-ÖÖR S
-ref
-ÖÖT W
-List
-ÖÖX \
-<
-ÖÖ\ ]!
-PersonTreeInfoModel
-ÖÖ] p
->
-ÖÖp q
-
-peopleList
-ÖÖr |
-,
-ÖÖ| }"
-PersonTreeInfoModelÖÖ~ ë
-personÖÖí ò
-)ÖÖò ô
-{
-ÜÜ 	!
-PersonTreeInfoModel
-áá 
-father
-áá  &
-=
-áá' (
-updatedList
-áá) 4
-.
-áá4 5
-Find
-áá5 9
-(
-áá9 :
-x
-áá: ;
-=>
-áá< >
-x
-áá? @
-.
-áá@ A
-PersonId
-ááA I
-==
-ááJ L
-person
-ááM S
-.
-ááS T
-FatherId
-ááT \
-)
-áá\ ]
-;
-áá] ^
+ÄÄ 
 if
-àà 
+ÇÇ 
 (
-àà 
-father
-àà 
-!=
-àà 
-default
-àà !
-(
-àà! "!
-PersonTreeInfoModel
-àà" 5
-)
-àà5 6
-)
-àà6 7
-{
-ââ 
-updatedList
-ää 
+ÇÇ 
+person
+ÇÇ 
 .
-ää 
-Remove
-ää "
-(
-ää" #
-father
-ää# )
+ÇÇ 
+FatherId
+ÇÇ #
+!=
+ÇÇ$ &
+$num
+ÇÇ' (
+&&
+ÇÇ) +
+person
+ÇÇ, 2
+.
+ÇÇ2 3
+MotherId
+ÇÇ3 ;
+!=
+ÇÇ< >
+$num
+ÇÇ? @
 )
-ää) *
-;
-ää* +
-}
-ãã 
-else
-åå 
+ÇÇ@ A
 {
-çç 
-father
-éé 
-=
-éé 
+ÉÉ 
+UpdateMother
+ÑÑ  
+(
+ÑÑ  !
+ref
+ÑÑ! $
+updatedList
+ÑÑ% 0
+,
+ÑÑ0 1
+ref
+ÑÑ2 5
 
 peopleList
-éé #
-.
-éé# $
-Find
-éé$ (
-(
-éé( )
-x
-éé) *
-=>
-éé+ -
-x
-éé. /
-.
-éé/ 0
-PersonId
-éé0 8
-==
-éé9 ;
+ÑÑ6 @
+,
+ÑÑ@ A
 person
-éé< B
-.
-ééB C
-FatherId
-ééC K
+ÑÑB H
 )
-ééK L
+ÑÑH I
 ;
-ééL M
+ÑÑI J
+UpdateFather
+ÜÜ  
+(
+ÜÜ  !
+ref
+ÜÜ! $
+updatedList
+ÜÜ% 0
+,
+ÜÜ0 1
+ref
+ÜÜ2 5
+
+peopleList
+ÜÜ6 @
+,
+ÜÜ@ A
+person
+ÜÜB H
+)
+ÜÜH I
+;
+ÜÜI J
 }
-èè 
+áá 
+}
+ââ 
+return
+ää 
+updatedList
+ää 
+;
+ää 
+}
+ãã 	
+private
+çç 
+static
+çç 
+void
+çç 
+UpdateMother
+çç (
+(
+çç( )
+ref
+çç) ,
+List
+çç- 1
+<
+çç1 2!
+PersonTreeInfoModel
+çç2 E
+>
+ççE F
+updatedList
+ççG R
+,
+ççR S
+ref
+ççT W
+List
+ççX \
+<
+çç\ ]!
+PersonTreeInfoModel
+çç] p
+>
+ççp q
+
+peopleList
+ççr |
+,
+çç| }"
+PersonTreeInfoModelçç~ ë
+personççí ò
+)ççò ô
+{
+éé 	!
+PersonTreeInfoModel
+èè 
+mother
+èè  &
+=
+èè' (
+updatedList
+èè) 4
+.
+èè4 5
+Find
+èè5 9
+(
+èè9 :
+x
+èè: ;
+=>
+èè< >
+x
+èè? @
+.
+èè@ A
+PersonId
+èèA I
+==
+èèJ L
+person
+èèM S
+.
+èèS T
+MotherId
+èèT \
+)
+èè\ ]
+;
+èè] ^
 if
 êê 
 (
 êê 
-father
-êê 
-.
-êê 
-PartnersIds
-êê "
-.
-êê" #
-FirstOrDefault
-êê# 1
-(
-êê1 2
-id
-êê2 4
-=>
-êê5 7
-id
-êê8 :
-==
-êê; =
-person
-êê> D
-.
-êêD E
-MotherId
-êêE M
-)
-êêM N
-==
-êêO Q
+mother
+êê 
+!=
+êê 
 default
-êêR Y
+êê !
 (
-êêY Z
-int
-êêZ ]
+êê! "!
+PersonTreeInfoModel
+êê" 5
 )
-êê] ^
+êê5 6
 )
-êê^ _
+êê6 7
 {
-ëë 
-father
-íí 
-.
-íí 
-PartnersIds
-íí "
-.
-íí" #
-Add
-íí# &
-(
-íí& '
-person
-íí' -
-.
-íí- .
-MotherId
-íí. 6
-)
-íí6 7
-;
-íí7 8
-}
-ìì 
+ëë 
 updatedList
-îî 
+íí 
 .
-îî 
-Add
-îî 
+íí 
+Remove
+íí "
 (
-îî 
-father
-îî "
+íí" #
+mother
+íí# )
 )
-îî" #
+íí) *
 ;
-îî# $
+íí* +
 }
-ïï 	
-public
-óó 
-async
-óó 
-Task
-óó 
-<
-óó  
-PersonDetailsModel
-óó ,
->
-óó, -
-AddPersonAsync
-óó. <
-(
-óó< =%
-PersonCreateUpdateModel
-óó= T
-person
-óóU [
-)
-óó[ \
+ìì 
+else
+îî 
 {
-òò 	
+ïï 
+mother
+ññ 
+=
+ññ 
+
+peopleList
+ññ #
+.
+ññ# $
+Find
+ññ$ (
+(
+ññ( )
+x
+ññ) *
+=>
+ññ+ -
+x
+ññ. /
+.
+ññ/ 0
+PersonId
+ññ0 8
+==
+ññ9 ;
+person
+ññ< B
+.
+ññB C
+MotherId
+ññC K
+)
+ññK L
+;
+ññL M
+}
+óó 
 if
 ôô 
 (
 ôô 
-person
-ôô 
+mother
+ôô 
+.
+ôô 
+PartnersIds
+ôô "
+.
+ôô" #
+FirstOrDefault
+ôô# 1
+(
+ôô1 2
+id
+ôô2 4
+=>
+ôô5 7
+id
+ôô8 :
 ==
-ôô 
-null
-ôô 
+ôô; =
+person
+ôô> D
+.
+ôôD E
+FatherId
+ôôE M
 )
-ôô 
+ôôM N
+==
+ôôO Q
+$num
+ôôR S
+)
+ôôS T
 {
 öö 
-return
-õõ 
-null
-õõ 
-;
-õõ 
-}
-úú 
-Person
-ùù 
-personEntity
-ùù 
-=
-ùù  !
-await
-ùù" '
-addLocations
-ùù( 4
+mother
+õõ 
+.
+õõ 
+PartnersIds
+õõ "
+.
+õõ" #
+Add
+õõ# &
 (
-ùù4 5
+õõ& '
 person
-ùù5 ;
+õõ' -
+.
+õõ- .
+FatherId
+õõ. 6
 )
-ùù; <
+õõ6 7
 ;
-ùù< =
-personEntity
-ûû 
-=
-ûû $
-removeAttachedEntities
-ûû 1
-(
-ûû1 2
-personEntity
-ûû2 >
-)
-ûû> ?
-;
-ûû? @
-personEntity
-üü 
-.
-üü 
-	CreatedOn
-üü "
-=
-üü# $
-DateTime
-üü% -
-.
-üü- .
-UtcNow
-üü. 4
-;
-üü4 5
-personEntity
-†† 
-=
-†† 
-await
-††  
-
-unitOfWork
-††! +
-.
-††+ ,
-Person
-††, 2
-.
-††2 3
-Create
-††3 9
-(
-††9 :
-personEntity
-††: F
-)
-††F G
-;
-††G H 
-PersonDetailsModel
-°° 
-returnEvent
-°° *
-=
-°°+ ,
-_mapper
-°°- 4
-.
-°°4 5
-Map
-°°5 8
-<
-°°8 9 
-PersonDetailsModel
-°°9 K
->
-°°K L
-(
-°°L M
-personEntity
-°°M Y
-)
-°°Y Z
-;
-°°Z [
-return
-¢¢ 
-returnEvent
-¢¢ 
-;
-¢¢ 
+õõ7 8
 }
-££ 	
+úú 
+updatedList
+ùù 
+.
+ùù 
+Add
+ùù 
+(
+ùù 
+mother
+ùù "
+)
+ùù" #
+;
+ùù# $
+}
+ûû 	
 private
-•• 
+†† 
 static
-•• 
-Person
-•• $
-removeAttachedEntities
-•• 4
+†† 
+void
+†† 
+UpdateFather
+†† (
 (
-••4 5
-Person
-••5 ;
-personEntity
-••< H
-)
-••H I
-{
-¶¶ 	
-personEntity
-ßß 
-.
-ßß 
-Nationality
-ßß $
-=
-ßß% &
-null
-ßß' +
-;
-ßß+ ,
-personEntity
-®® 
-.
-®® 
-Religion
-®® !
-=
-®®" #
-null
-®®$ (
-;
-®®( )
-personEntity
-©© 
-.
-©© 
+††( )
+ref
+††) ,
+List
+††- 1
+<
+††1 2!
+PersonTreeInfoModel
+††2 E
+>
+††E F
+updatedList
+††G R
+,
+††R S
+ref
+††T W
+List
+††X \
+<
+††\ ]!
+PersonTreeInfoModel
+††] p
+>
+††p q
 
-BirthPlace
+peopleList
+††r |
+,
+††| }"
+PersonTreeInfoModel††~ ë
+person††í ò
+)††ò ô
+{
+°° 	!
+PersonTreeInfoModel
+¢¢ 
+father
+¢¢  &
+=
+¢¢' (
+updatedList
+¢¢) 4
+.
+¢¢4 5
+Find
+¢¢5 9
+(
+¢¢9 :
+x
+¢¢: ;
+=>
+¢¢< >
+x
+¢¢? @
+.
+¢¢@ A
+PersonId
+¢¢A I
+==
+¢¢J L
+person
+¢¢M S
+.
+¢¢S T
+FatherId
+¢¢T \
+)
+¢¢\ ]
+;
+¢¢] ^
+if
+££ 
+(
+££ 
+father
+££ 
+!=
+££ 
+default
+££ !
+(
+££! "!
+PersonTreeInfoModel
+££" 5
+)
+££5 6
+)
+££6 7
+{
+§§ 
+updatedList
+•• 
+.
+•• 
+Remove
+•• "
+(
+••" #
+father
+••# )
+)
+••) *
+;
+••* +
+}
+¶¶ 
+else
+ßß 
+{
+®® 
+father
+©© 
+=
+©© 
+
+peopleList
 ©© #
-=
-©©$ %
-null
-©©& *
-;
-©©* +
-personEntity
-™™ 
 .
-™™ 
-LivingPlace
-™™ $
-=
-™™% &
-null
-™™' +
-;
-™™+ ,
-personEntity
-´´ 
+©©# $
+Find
+©©$ (
+(
+©©( )
+x
+©©) *
+=>
+©©+ -
+x
+©©. /
 .
-´´ 
-RelativeForPerson
-´´ *
-=
-´´+ ,
-null
-´´- 1
+©©/ 0
+PersonId
+©©0 8
+==
+©©9 ;
+person
+©©< B
+.
+©©B C
+FatherId
+©©C K
+)
+©©K L
 ;
-´´1 2
-return
-¨¨ 
-personEntity
-¨¨ 
-;
-¨¨  
+©©L M
 }
-≠≠ 	
-private
-ØØ 
+™™ 
+if
+¨¨ 
+(
+¨¨ 
+father
+¨¨ 
+.
+¨¨ 
+PartnersIds
+¨¨ "
+.
+¨¨" #
+FirstOrDefault
+¨¨# 1
+(
+¨¨1 2
+id
+¨¨2 4
+=>
+¨¨5 7
+id
+¨¨8 :
+==
+¨¨; =
+person
+¨¨> D
+.
+¨¨D E
+MotherId
+¨¨E M
+)
+¨¨M N
+==
+¨¨O Q
+default
+¨¨R Y
+(
+¨¨Y Z
+int
+¨¨Z ]
+)
+¨¨] ^
+)
+¨¨^ _
+{
+≠≠ 
+father
+ÆÆ 
+.
+ÆÆ 
+PartnersIds
+ÆÆ "
+.
+ÆÆ" #
+Add
+ÆÆ# &
+(
+ÆÆ& '
+person
+ÆÆ' -
+.
+ÆÆ- .
+MotherId
+ÆÆ. 6
+)
+ÆÆ6 7
+;
+ÆÆ7 8
+}
+ØØ 
+updatedList
+∞∞ 
+.
+∞∞ 
+Add
+∞∞ 
+(
+∞∞ 
+father
+∞∞ "
+)
+∞∞" #
+;
+∞∞# $
+}
+±± 	
+public
+≥≥ 
 async
-ØØ 
+≥≥ 
 Task
-ØØ 
+≥≥ 
 <
-ØØ 
-Person
-ØØ !
+≥≥  
+PersonDetailsModel
+≥≥ ,
 >
-ØØ! "
-addLocations
-ØØ# /
+≥≥, -
+AddPersonAsync
+≥≥. <
 (
-ØØ/ 0%
+≥≥< =%
 PersonCreateUpdateModel
-ØØ0 G
+≥≥= T
 person
-ØØH N
+≥≥U [
 )
-ØØN O
+≥≥[ \
 {
-∞∞ 	
-Person
-±± 
-personEntity
-±± 
-=
-±±  !
-_mapper
-±±" )
-.
-±±) *
-Map
-±±* -
-<
-±±- .
-Person
-±±. 4
->
-±±4 5
-(
-±±5 6
-person
-±±6 <
-)
-±±< =
-;
-±±= >
+¥¥ 	
 if
-≥≥ 
+µµ 
 (
-≥≥ 
-personEntity
-≥≥ 
-.
-≥≥ 
-LivingPlace
-≥≥ (
+µµ 
+person
+µµ 
 ==
-≥≥) +
+µµ 
 null
-≥≥, 0
+µµ 
 )
-≥≥0 1
+µµ 
 {
-¥¥ 
-personEntity
-µµ 
-.
-µµ 
-LivingPlace
-µµ (
-=
-µµ) *
-new
-µµ+ .
-Location
-µµ/ 7
-(
-µµ7 8
-)
-µµ8 9
+∂∂ 
+return
+∑∑ 
+null
+∑∑ 
 ;
-µµ9 :
+∑∑ 
 }
-∂∂ 
+∏∏ 
+Person
+∫∫ 
 personEntity
-∑∑ 
-.
-∑∑ 
-LivingPlaceId
-∑∑ &
+∫∫ 
 =
-∑∑' (
-(
-∑∑) *
+∫∫  !
 await
-∑∑* /
-
-unitOfWork
-∑∑0 :
-.
-∑∑: ;
-Location
-∑∑; C
-.
-∑∑C D
-Create
-∑∑D J
+∫∫" '
+addLocations
+∫∫( 4
 (
-∑∑J K
-personEntity
-∑∑K W
-.
-∑∑W X
-LivingPlace
-∑∑X c
+∫∫4 5
+person
+∫∫5 ;
 )
-∑∑c d
-)
-∑∑d e
-.
-∑∑e f
-Id
-∑∑f h
+∫∫; <
 ;
-∑∑h i
-if
-ππ 
-(
-ππ 
+∫∫< =
 personEntity
-ππ 
-.
-ππ 
-
-BirthPlace
-ππ '
-==
-ππ( *
-null
-ππ+ /
-)
-ππ/ 0
-{
-∫∫ 
-personEntity
-ªª 
-.
-ªª 
-
-BirthPlace
-ªª '
+ªª 
 =
-ªª( )
-new
-ªª* -
-Location
-ªª. 6
+ªª $
+removeAttachedEntities
+ªª 1
 (
-ªª6 7
+ªª1 2
+personEntity
+ªª2 >
 )
-ªª7 8
+ªª> ?
 ;
-ªª8 9
-}
-ºº 
+ªª? @
+personEntity
+ºº 
+.
+ºº 
+	CreatedOn
+ºº "
+=
+ºº# $
+DateTime
+ºº% -
+.
+ºº- .
+UtcNow
+ºº. 4
+;
+ºº4 5
 personEntity
 ΩΩ 
-.
-ΩΩ 
-BirthPlaceId
-ΩΩ %
 =
-ΩΩ& '
-(
-ΩΩ( )
+ΩΩ 
 await
-ΩΩ) .
+ΩΩ  
 
 unitOfWork
-ΩΩ/ 9
+ΩΩ! +
 .
-ΩΩ9 :
-Location
-ΩΩ: B
+ΩΩ+ ,
+Person
+ΩΩ, 2
 .
-ΩΩB C
+ΩΩ2 3
 Create
-ΩΩC I
+ΩΩ3 9
 (
-ΩΩI J
+ΩΩ9 :
 personEntity
-ΩΩJ V
-.
-ΩΩV W
-
-BirthPlace
-ΩΩW a
+ΩΩ: F
 )
-ΩΩa b
-)
-ΩΩb c
-.
-ΩΩc d
-Id
-ΩΩd f
+ΩΩF G
 ;
-ΩΩf g
-return
-ææ 
-personEntity
-ææ 
-;
-ææ  
-}
-øø 	
-public
-¡¡ 
-async
-¡¡ 
-Task
-¡¡ 
-<
-¡¡  
+ΩΩG H 
 PersonDetailsModel
-¡¡ ,
->
-¡¡, -
-UpdatePersonAsync
-¡¡. ?
-(
-¡¡? @%
-PersonCreateUpdateModel
-¡¡@ W
-person
-¡¡X ^
-)
-¡¡^ _
-{
-¬¬ 	
-if
-√√ 
-(
-√√ 
-person
-√√ 
-==
-√√ 
-null
-√√ 
-)
-√√ 
-{
-ƒƒ 
-return
-≈≈ 
-null
-≈≈ 
-;
-≈≈ 
-}
-∆∆ 
-Person
-»» 
-
-personInDb
-»» 
-=
-»» 
-await
-»»  %
-
-unitOfWork
-»»& 0
-.
-»»0 1
-Person
-»»1 7
-.
-»»7 8
-FindById
-»»8 @
-(
-»»@ A
-person
-»»A G
-.
-»»G H
-PersonId
-»»H P
-)
-»»P Q
-;
-»»Q R
-if
-…… 
-(
-…… 
-
-personInDb
-…… 
-==
-…… 
-null
-…… "
-)
-……" #
-{
-   
-return
-ÀÀ 
-null
-ÀÀ 
-;
-ÀÀ 
-}
-ÃÃ 
-
-personInDb
-ŒŒ 
-.
-ŒŒ 
-	FirstName
-ŒŒ  
-=
-ŒŒ! "
-person
-ŒŒ# )
-.
-ŒŒ) *
-	FirstName
-ŒŒ* 3
-;
-ŒŒ3 4
-
-personInDb
-œœ 
-.
-œœ 
-LastName
-œœ 
-=
-œœ  !
-person
-œœ" (
-.
-œœ( )
-LastName
-œœ) 1
-;
-œœ1 2
-
-personInDb
-–– 
-.
-–– 
-Gender
-–– 
-=
-–– 
-person
-––  &
-.
-––& '
-Gender
-––' -
-[
-––- .
-$num
-––. /
-]
-––/ 0
-;
-––0 1
-
-personInDb
-—— 
-.
-—— 
-	BirthDate
-——  
-=
-——! "
-person
-——# )
-.
-——) *
-	BirthDate
-——* 3
-;
-——3 4
-
-personInDb
-““ 
-.
-““ 
-	DeathDate
-““  
-=
-““! "
-person
-““# )
-.
-““) *
-	DeathDate
-““* 3
-;
-““3 4
-
-personInDb
-”” 
-.
-”” 
-
-ModifiedOn
-”” !
-=
-””" #
-DateTime
-””$ ,
-.
-””, -
-UtcNow
-””- 3
-;
-””3 4
-
-personInDb
-‘‘ 
-.
-‘‘ 
-NationalityId
-‘‘ $
-=
-‘‘% &
-person
-‘‘' -
-.
-‘‘- .
-Nationality
-‘‘. 9
-.
-‘‘9 :
-Id
-‘‘: <
-;
-‘‘< =
-
-personInDb
-’’ 
-.
-’’ 
-
-ReligionId
-’’ !
-=
-’’" #
-person
-’’$ *
-.
-’’* +
-Religion
-’’+ 3
-.
-’’3 4
-Id
-’’4 6
-;
-’’6 7
-if
-÷÷ 
-(
-÷÷ 
-person
-÷÷ 
-.
-÷÷ 
-LivingPlace
-÷÷ "
-!=
-÷÷# %
-null
-÷÷& *
-)
-÷÷* +
-{
-◊◊ 
-
-personInDb
-ÿÿ 
-.
-ÿÿ 
-LivingPlace
-ÿÿ &
-.
-ÿÿ& '
-State
-ÿÿ' ,
-=
-ÿÿ- .
-person
-ÿÿ/ 5
-.
-ÿÿ5 6
-LivingPlace
-ÿÿ6 A
-.
-ÿÿA B
-State
-ÿÿB G
-;
-ÿÿG H
-
-personInDb
-ŸŸ 
-.
-ŸŸ 
-LivingPlace
-ŸŸ &
-.
-ŸŸ& '
-Country
-ŸŸ' .
-=
-ŸŸ/ 0
-person
-ŸŸ1 7
-.
-ŸŸ7 8
-LivingPlace
-ŸŸ8 C
-.
-ŸŸC D
-Country
-ŸŸD K
-;
-ŸŸK L
-
-personInDb
-⁄⁄ 
-.
-⁄⁄ 
-LivingPlace
-⁄⁄ &
-.
-⁄⁄& '
-City
-⁄⁄' +
-=
-⁄⁄, -
-person
-⁄⁄. 4
-.
-⁄⁄4 5
-LivingPlace
-⁄⁄5 @
-.
-⁄⁄@ A
-City
-⁄⁄A E
-;
-⁄⁄E F
-}
-€€ 
-if
-‹‹ 
-(
-‹‹ 
-person
-‹‹ 
-.
-‹‹ 
-
-BirthPlace
-‹‹ !
-!=
-‹‹" $
-null
-‹‹% )
-)
-‹‹) *
-{
-›› 
-
-personInDb
-ﬁﬁ 
-.
-ﬁﬁ 
-
-BirthPlace
-ﬁﬁ %
-.
-ﬁﬁ% &
-State
-ﬁﬁ& +
-=
-ﬁﬁ, -
-person
-ﬁﬁ. 4
-.
-ﬁﬁ4 5
-
-BirthPlace
-ﬁﬁ5 ?
-.
-ﬁﬁ? @
-State
-ﬁﬁ@ E
-;
-ﬁﬁE F
-
-personInDb
-ﬂﬂ 
-.
-ﬂﬂ 
-
-BirthPlace
-ﬂﬂ %
-.
-ﬂﬂ% &
-Country
-ﬂﬂ& -
-=
-ﬂﬂ. /
-person
-ﬂﬂ0 6
-.
-ﬂﬂ6 7
-
-BirthPlace
-ﬂﬂ7 A
-.
-ﬂﬂA B
-Country
-ﬂﬂB I
-;
-ﬂﬂI J
-
-personInDb
-‡‡ 
-.
-‡‡ 
-
-BirthPlace
-‡‡ %
-.
-‡‡% &
-City
-‡‡& *
-=
-‡‡+ ,
-person
-‡‡- 3
-.
-‡‡3 4
-
-BirthPlace
-‡‡4 >
-.
-‡‡> ?
-City
-‡‡? C
-;
-‡‡C D
-}
-·· 
-await
-‚‚ 
-updateLocations
-‚‚ !
-(
-‚‚! "
-
-personInDb
-‚‚" ,
-)
-‚‚, -
-;
-‚‚- .
-Person
-‰‰ 
-personEntity
-‰‰ 
-=
-‰‰  !
-await
-‰‰" '
-
-unitOfWork
-‰‰( 2
-.
-‰‰2 3
-Person
-‰‰3 9
-.
-‰‰9 :
-Update
-‰‰: @
-(
-‰‰@ A
-
-personInDb
-‰‰A K
-)
-‰‰K L
-;
-‰‰L M 
-PersonDetailsModel
-ÂÂ 
+ææ 
 returnEvent
-ÂÂ *
+ææ *
 =
-ÂÂ+ ,
+ææ+ ,
 _mapper
-ÂÂ- 4
+ææ- 4
 .
-ÂÂ4 5
+ææ4 5
 Map
-ÂÂ5 8
+ææ5 8
 <
-ÂÂ8 9 
+ææ8 9 
 PersonDetailsModel
-ÂÂ9 K
+ææ9 K
 >
-ÂÂK L
+ææK L
 (
-ÂÂL M
+ææL M
 personEntity
-ÂÂM Y
+ææM Y
 )
-ÂÂY Z
+ææY Z
 ;
-ÂÂZ [
-returnEvent
-ÊÊ 
-.
-ÊÊ 
-	ImageFile
-ÊÊ !
-=
-ÊÊ" #
-await
-ÊÊ$ )$
-_fileManagementService
-ÊÊ* @
-.
-ÊÊ@ A
-GetFile
-ÊÊA H
-(
-ÊÊH I
-personEntity
-ÊÊI U
-.
-ÊÊU V
-Image
-ÊÊV [
-)
-ÊÊ[ \
-;
-ÊÊ\ ]
+ææZ [
 return
-ÁÁ 
+¿¿ 
 returnEvent
-ÁÁ 
+¿¿ 
 ;
-ÁÁ 
+¿¿ 
 }
-ËË 	
+¡¡ 	
 private
-ÍÍ 
-async
-ÍÍ 
-Task
-ÍÍ 
-updateLocations
-ÍÍ *
-(
-ÍÍ* +
+√√ 
+static
+√√ 
 Person
-ÍÍ+ 1
-person
-ÍÍ2 8
-)
-ÍÍ8 9
-{
-ÎÎ 	
-if
-ÏÏ 
+√√ $
+removeAttachedEntities
+√√ 4
 (
-ÏÏ 
-person
-ÏÏ 
+√√4 5
+Person
+√√5 ;
+personEntity
+√√< H
+)
+√√H I
+{
+ƒƒ 	
+personEntity
+≈≈ 
 .
-ÏÏ 
-LivingPlace
-ÏÏ "
-!=
-ÏÏ# %
+≈≈ 
+Nationality
+≈≈ $
+=
+≈≈% &
 null
-ÏÏ& *
-&&
-ÏÏ+ -
-person
-ÏÏ. 4
-.
-ÏÏ4 5
-LivingPlace
-ÏÏ5 @
-.
-ÏÏ@ A
-Id
-ÏÏA C
-!=
-ÏÏD F
-$num
-ÏÏG H
-)
-ÏÏH I
-{
-ÌÌ 
-await
-ÓÓ 
-
-unitOfWork
-ÓÓ  
-.
-ÓÓ  !
-Location
-ÓÓ! )
-.
-ÓÓ) *
-Update
-ÓÓ* 0
-(
-ÓÓ0 1
-person
-ÓÓ1 7
-.
-ÓÓ7 8
-LivingPlace
-ÓÓ8 C
-)
-ÓÓC D
+≈≈' +
 ;
-ÓÓD E
-}
-ÔÔ 
-if
- 
-(
- 
-person
- 
+≈≈+ ,
+personEntity
+∆∆ 
 .
- 
+∆∆ 
+Religion
+∆∆ !
+=
+∆∆" #
+null
+∆∆$ (
+;
+∆∆( )
+personEntity
+«« 
+.
+«« 
 
 BirthPlace
- !
-!=
-" $
+«« #
+=
+««$ %
 null
-% )
-&&
-* ,
-person
-- 3
+««& *
+;
+««* +
+personEntity
+»» 
 .
+»» 
+LivingPlace
+»» $
+=
+»»% &
+null
+»»' +
+;
+»»+ ,
+personEntity
+…… 
+.
+…… 
+RelativeForPerson
+…… *
+=
+……+ ,
+null
+……- 1
+;
+……1 2
+return
+ÀÀ 
+personEntity
+ÀÀ 
+;
+ÀÀ  
+}
+ÃÃ 	
+private
+ŒŒ 
+async
+ŒŒ 
+Task
+ŒŒ 
+<
+ŒŒ 
+Person
+ŒŒ !
+>
+ŒŒ! "
+addLocations
+ŒŒ# /
+(
+ŒŒ/ 0%
+PersonCreateUpdateModel
+ŒŒ0 G
+person
+ŒŒH N
+)
+ŒŒN O
+{
+œœ 	
+Person
+–– 
+personEntity
+–– 
+=
+––  !
+_mapper
+––" )
+.
+––) *
+Map
+––* -
+<
+––- .
+Person
+––. 4
+>
+––4 5
+(
+––5 6
+person
+––6 <
+)
+––< =
+;
+––= >
+if
+““ 
+(
+““ 
+personEntity
+““ 
+.
+““ 
+LivingPlace
+““ (
+==
+““) +
+null
+““, 0
+)
+““0 1
+{
+”” 
+personEntity
+‘‘ 
+.
+‘‘ 
+LivingPlace
+‘‘ (
+=
+‘‘) *
+new
+‘‘+ .
+Location
+‘‘/ 7
+(
+‘‘7 8
+)
+‘‘8 9
+;
+‘‘9 :
+}
+’’ 
+personEntity
+◊◊ 
+.
+◊◊ 
+LivingPlaceId
+◊◊ &
+=
+◊◊' (
+(
+◊◊) *
+await
+◊◊* /
+
+unitOfWork
+◊◊0 :
+.
+◊◊: ;
+Location
+◊◊; C
+.
+◊◊C D
+Create
+◊◊D J
+(
+◊◊J K
+personEntity
+◊◊K W
+.
+◊◊W X
+LivingPlace
+◊◊X c
+)
+◊◊c d
+)
+◊◊d e
+.
+◊◊e f
+Id
+◊◊f h
+;
+◊◊h i
+if
+ŸŸ 
+(
+ŸŸ 
+personEntity
+ŸŸ 
+.
+ŸŸ 
+
+BirthPlace
+ŸŸ '
+==
+ŸŸ( *
+null
+ŸŸ+ /
+)
+ŸŸ/ 0
+{
+⁄⁄ 
+personEntity
+€€ 
+.
+€€ 
+
+BirthPlace
+€€ '
+=
+€€( )
+new
+€€* -
+Location
+€€. 6
+(
+€€6 7
+)
+€€7 8
+;
+€€8 9
+}
+‹‹ 
+personEntity
+ﬁﬁ 
+.
+ﬁﬁ 
+BirthPlaceId
+ﬁﬁ %
+=
+ﬁﬁ& '
+(
+ﬁﬁ( )
+await
+ﬁﬁ) .
+
+unitOfWork
+ﬁﬁ/ 9
+.
+ﬁﬁ9 :
+Location
+ﬁﬁ: B
+.
+ﬁﬁB C
+Create
+ﬁﬁC I
+(
+ﬁﬁI J
+personEntity
+ﬁﬁJ V
+.
+ﬁﬁV W
+
+BirthPlace
+ﬁﬁW a
+)
+ﬁﬁa b
+)
+ﬁﬁb c
+.
+ﬁﬁc d
+Id
+ﬁﬁd f
+;
+ﬁﬁf g
+return
+‡‡ 
+personEntity
+‡‡ 
+;
+‡‡  
+}
+·· 	
+public
+„„ 
+async
+„„ 
+Task
+„„ 
+<
+„„  
+PersonDetailsModel
+„„ ,
+>
+„„, -
+UpdatePersonAsync
+„„. ?
+(
+„„? @%
+PersonCreateUpdateModel
+„„@ W
+person
+„„X ^
+)
+„„^ _
+{
+‰‰ 	
+if
+ÂÂ 
+(
+ÂÂ 
+person
+ÂÂ 
+==
+ÂÂ 
+null
+ÂÂ 
+)
+ÂÂ 
+{
+ÊÊ 
+return
+ÁÁ 
+null
+ÁÁ 
+;
+ÁÁ 
+}
+ËË 
+Person
+ÍÍ 
+
+personInDb
+ÍÍ 
+=
+ÍÍ 
+await
+ÍÍ  %
+
+unitOfWork
+ÍÍ& 0
+.
+ÍÍ0 1
+Person
+ÍÍ1 7
+.
+ÍÍ7 8
+FindById
+ÍÍ8 @
+(
+ÍÍ@ A
+person
+ÍÍA G
+.
+ÍÍG H
+PersonId
+ÍÍH P
+)
+ÍÍP Q
+;
+ÍÍQ R
+if
+ÎÎ 
+(
+ÎÎ 
+
+personInDb
+ÎÎ 
+==
+ÎÎ 
+null
+ÎÎ "
+)
+ÎÎ" #
+{
+ÏÏ 
+return
+ÌÌ 
+null
+ÌÌ 
+;
+ÌÌ 
+}
+ÓÓ 
+
+personInDb
+ 
+.
+ 
+	FirstName
+  
+=
+! "
+person
+# )
+.
+) *
+	FirstName
+* 3
+;
 3 4
 
-BirthPlace
-4 >
+personInDb
+ÒÒ 
 .
-> ?
+ÒÒ 
+LastName
+ÒÒ 
+=
+ÒÒ  !
+person
+ÒÒ" (
+.
+ÒÒ( )
+LastName
+ÒÒ) 1
+;
+ÒÒ1 2
+
+personInDb
+ÚÚ 
+.
+ÚÚ 
+Gender
+ÚÚ 
+=
+ÚÚ 
+person
+ÚÚ  &
+.
+ÚÚ& '
+Gender
+ÚÚ' -
+[
+ÚÚ- .
+$num
+ÚÚ. /
+]
+ÚÚ/ 0
+;
+ÚÚ0 1
+
+personInDb
+ÛÛ 
+.
+ÛÛ 
+	BirthDate
+ÛÛ  
+=
+ÛÛ! "
+person
+ÛÛ# )
+.
+ÛÛ) *
+	BirthDate
+ÛÛ* 3
+;
+ÛÛ3 4
+
+personInDb
+ÙÙ 
+.
+ÙÙ 
+	DeathDate
+ÙÙ  
+=
+ÙÙ! "
+person
+ÙÙ# )
+.
+ÙÙ) *
+	DeathDate
+ÙÙ* 3
+;
+ÙÙ3 4
+
+personInDb
+ıı 
+.
+ıı 
+
+ModifiedOn
+ıı !
+=
+ıı" #
+DateTime
+ıı$ ,
+.
+ıı, -
+UtcNow
+ıı- 3
+;
+ıı3 4
+
+personInDb
+ˆˆ 
+.
+ˆˆ 
+NationalityId
+ˆˆ $
+=
+ˆˆ% &
+person
+ˆˆ' -
+.
+ˆˆ- .
+Nationality
+ˆˆ. 9
+.
+ˆˆ9 :
 Id
-? A
-!=
-B D
-$num
-E F
-)
-F G
-{
-ÒÒ 
-await
-ÚÚ 
+ˆˆ: <
+;
+ˆˆ< =
 
-unitOfWork
-ÚÚ  
+personInDb
+˜˜ 
 .
-ÚÚ  !
-Location
-ÚÚ! )
-.
-ÚÚ) *
-Update
-ÚÚ* 0
-(
-ÚÚ0 1
+˜˜ 
+
+ReligionId
+˜˜ !
+=
+˜˜" #
 person
-ÚÚ1 7
+˜˜$ *
 .
-ÚÚ7 8
+˜˜* +
+Religion
+˜˜+ 3
+.
+˜˜3 4
+Id
+˜˜4 6
+;
+˜˜6 7
+if
+˘˘ 
+(
+˘˘ 
+person
+˘˘ 
+.
+˘˘ 
+LivingPlace
+˘˘ "
+!=
+˘˘# %
+null
+˘˘& *
+)
+˘˘* +
+{
+˙˙ 
+
+personInDb
+˚˚ 
+.
+˚˚ 
+LivingPlace
+˚˚ &
+.
+˚˚& '
+State
+˚˚' ,
+=
+˚˚- .
+person
+˚˚/ 5
+.
+˚˚5 6
+LivingPlace
+˚˚6 A
+.
+˚˚A B
+State
+˚˚B G
+;
+˚˚G H
+
+personInDb
+¸¸ 
+.
+¸¸ 
+LivingPlace
+¸¸ &
+.
+¸¸& '
+Country
+¸¸' .
+=
+¸¸/ 0
+person
+¸¸1 7
+.
+¸¸7 8
+LivingPlace
+¸¸8 C
+.
+¸¸C D
+Country
+¸¸D K
+;
+¸¸K L
+
+personInDb
+˝˝ 
+.
+˝˝ 
+LivingPlace
+˝˝ &
+.
+˝˝& '
+City
+˝˝' +
+=
+˝˝, -
+person
+˝˝. 4
+.
+˝˝4 5
+LivingPlace
+˝˝5 @
+.
+˝˝@ A
+City
+˝˝A E
+;
+˝˝E F
+}
+˛˛ 
+if
+ÄÄ 
+(
+ÄÄ 
+person
+ÄÄ 
+.
+ÄÄ 
 
 BirthPlace
-ÚÚ8 B
-)
-ÚÚB C
-;
-ÚÚC D
-}
-ÛÛ 
-}
-ÙÙ 	
-public
-ˆˆ 
-async
-ˆˆ 
-Task
-ˆˆ 
-<
-ˆˆ 
-	ImageFile
-ˆˆ #
->
-ˆˆ# $ 
-UpdatePictureAsync
-ˆˆ% 7
-(
-ˆˆ7 8
-int
-ˆˆ8 ;
-personId
-ˆˆ< D
-,
-ˆˆD E
-int
-ˆˆF I
-imageId
-ˆˆJ Q
-)
-ˆˆQ R
-{
-˜˜ 	
-Person
-¯¯ 
-person
-¯¯ 
-=
-¯¯ 
-await
-¯¯ !
-
-unitOfWork
-¯¯" ,
-.
-¯¯, -
-Person
-¯¯- 3
-.
-¯¯3 4
-FindById
-¯¯4 <
-(
-¯¯< =
-personId
-¯¯= E
-)
-¯¯E F
-;
-¯¯F G
-int
-˘˘ 
-
-oldImageId
-˘˘ 
-=
-˘˘ 
-(
-˘˘ 
-person
-˘˘ $
-.
-˘˘$ %
-ImageId
-˘˘% ,
-==
-˘˘- /
+ÄÄ !
+!=
+ÄÄ" $
 null
-˘˘0 4
+ÄÄ% )
 )
-˘˘4 5
-?
-˘˘6 7
-$num
-˘˘8 9
-:
-˘˘: ;
-(
-˘˘< =
-int
-˘˘= @
-)
-˘˘@ A
-person
-˘˘A G
+ÄÄ) *
+{
+ÅÅ 
+
+personInDb
+ÇÇ 
 .
-˘˘G H
-ImageId
-˘˘H O
-;
-˘˘O P
-person
-˙˙ 
+ÇÇ 
+
+BirthPlace
+ÇÇ %
 .
-˙˙ 
-ImageId
-˙˙ 
+ÇÇ% &
+State
+ÇÇ& +
 =
-˙˙ 
-imageId
-˙˙ $
+ÇÇ, -
+person
+ÇÇ. 4
+.
+ÇÇ4 5
+
+BirthPlace
+ÇÇ5 ?
+.
+ÇÇ? @
+State
+ÇÇ@ E
 ;
-˙˙$ %
-Person
-˚˚ 
-personEntity
-˚˚ 
+ÇÇE F
+
+personInDb
+ÉÉ 
+.
+ÉÉ 
+
+BirthPlace
+ÉÉ %
+.
+ÉÉ% &
+Country
+ÉÉ& -
 =
-˚˚  !
+ÉÉ. /
+person
+ÉÉ0 6
+.
+ÉÉ6 7
+
+BirthPlace
+ÉÉ7 A
+.
+ÉÉA B
+Country
+ÉÉB I
+;
+ÉÉI J
+
+personInDb
+ÑÑ 
+.
+ÑÑ 
+
+BirthPlace
+ÑÑ %
+.
+ÑÑ% &
+City
+ÑÑ& *
+=
+ÑÑ+ ,
+person
+ÑÑ- 3
+.
+ÑÑ3 4
+
+BirthPlace
+ÑÑ4 >
+.
+ÑÑ> ?
+City
+ÑÑ? C
+;
+ÑÑC D
+}
+ÖÖ 
 await
-˚˚" '
+áá 
+updateLocations
+áá !
+(
+áá! "
+
+personInDb
+áá" ,
+)
+áá, -
+;
+áá- .
+Person
+ââ 
+personEntity
+ââ 
+=
+ââ  !
+await
+ââ" '
 
 unitOfWork
-˚˚( 2
+ââ( 2
 .
-˚˚2 3
+ââ2 3
 Person
-˚˚3 9
+ââ3 9
 .
-˚˚9 :
+ââ9 :
 Update
-˚˚: @
+ââ: @
 (
-˚˚@ A
-person
-˚˚A G
-)
-˚˚G H
-;
-˚˚H I
-if
-¸¸ 
-(
-¸¸ 
+ââ@ A
 
-oldImageId
-¸¸ 
-!=
-¸¸ 
-$num
-¸¸ 
+personInDb
+ââA K
 )
-¸¸  
-{
-˝˝ 
-await
-˛˛ "
-checkImageUsageAsync
-˛˛ *
-(
-˛˛* +
-
-oldImageId
-˛˛+ 5
-)
-˛˛5 6
+ââK L
 ;
-˛˛6 7
-}
-ˇˇ 
-return
-ÄÄ 
-await
-ÄÄ $
-_fileManagementService
-ÄÄ /
-.
-ÄÄ/ 0
-GetFile
-ÄÄ0 7
-(
-ÄÄ7 8
-personEntity
-ÄÄ8 D
-.
-ÄÄD E
-Image
-ÄÄE J
-)
-ÄÄJ K
-;
-ÄÄK L
-}
-ÅÅ 	
-public
-ÉÉ 
-async
-ÉÉ 
-Task
-ÉÉ 
-<
-ÉÉ  
+ââL M 
 PersonDetailsModel
-ÉÉ ,
->
-ÉÉ, -
-DeletePersonAsync
-ÉÉ. ?
-(
-ÉÉ? @
-int
-ÉÉ@ C
-personId
-ÉÉD L
-)
-ÉÉL M
-{
-ÑÑ 	
-List
-ÖÖ 
-<
-ÖÖ 
-int
-ÖÖ 
->
-ÖÖ 
-parentChildIds
-ÖÖ $
+ää 
+returnEvent
+ää *
 =
-ÖÖ% &
-
-unitOfWork
-ÖÖ' 1
-.
-ÖÖ1 2
-ParentChild
-ÖÖ2 =
-.
-ÖÖ= >
-Filter
-ÖÖ> D
-(
-ÖÖD E
-parentChild
-ÖÖE P
-=>
-ÖÖQ S
-parentChild
-ÖÖT _
-.
-ÖÖ_ `
-ParentId
-ÖÖ` h
-==
-ÖÖi k
-personId
-ÖÖl t
-||
-ÖÖu w
-parentChildÖÖx É
-.ÖÖÉ Ñ
-ChildIdÖÖÑ ã
-==ÖÖå é
-personIdÖÖè ó
-)ÖÖó ò
-.ÖÖò ô
-SelectÖÖô ü
-(ÖÖü †
-parentChildÖÖ† ´
-=>ÖÖ¨ Æ
-parentChildÖÖØ ∫
-.ÖÖ∫ ª
-IdÖÖª Ω
-)ÖÖΩ æ
-.ÖÖæ ø
-ToListÖÖø ≈
-(ÖÖ≈ ∆
-)ÖÖ∆ «
-;ÖÖ« »
-foreach
-ÜÜ 
-(
-ÜÜ 
-var
-ÜÜ 
-parentChildId
-ÜÜ &
-in
-ÜÜ' )
-parentChildIds
-ÜÜ* 8
-)
-ÜÜ8 9
-{
-áá 
-await
-àà 
-
-unitOfWork
-àà  
-.
-àà  !
-ParentChild
-àà! ,
-.
-àà, -
-Delete
-àà- 3
-(
-àà3 4
-parentChildId
-àà4 A
-)
-ààA B
-;
-ààB C
-}
-ââ 
-List
-ää 
-<
-ää 
-int
-ää 
->
-ää 
-marriageIds
-ää !
-=
-ää" #
-
-unitOfWork
-ää$ .
-.
-ää. /
-Marriage
-ää/ 7
-.
-ää7 8
-Filter
-ää8 >
-(
-ää> ?
-marriage
-ää? G
-=>
-ääH J
-marriage
-ääK S
-.
-ääS T
-FirstPersonId
-ääT a
-==
-ääb d
-personId
-ääe m
-||
-ään p
-marriage
-ääq y
-.
-ääy z
-SecondPersonIdääz à
-==ääâ ã
-personIdääå î
-)ääî ï
-.ääï ñ
-Selectääñ ú
-(ääú ù
-marriageääù •
-=>ää¶ ®
-marriageää© ±
-.ää± ≤
-Idää≤ ¥
-)ää¥ µ
-.ääµ ∂
-ToListää∂ º
-(ääº Ω
-)ääΩ æ
-;ääæ ø
-foreach
-ãã 
-(
-ãã 
-var
-ãã 
-
-marriageId
-ãã #
-in
-ãã$ &
-marriageIds
-ãã' 2
-)
-ãã2 3
-{
-åå 
-await
-çç 
-
-unitOfWork
-çç  
-.
-çç  !
-Marriage
-çç! )
-.
-çç) *
-Delete
-çç* 0
-(
-çç0 1
-
-marriageId
-çç1 ;
-)
-çç; <
-;
-çç< =
-}
-éé 
-Person
-èè 
-personEntity
-èè 
-=
-èè  !
-await
-èè" '
-
-unitOfWork
-èè( 2
-.
-èè2 3
-Person
-èè3 9
-.
-èè9 :
-Delete
-èè: @
-(
-èè@ A
-personId
-èèA I
-)
-èèI J
-;
-èèJ K
-int
-êê 
-
-oldImageId
-êê 
-=
-êê 
-(
-êê 
-personEntity
-êê *
-.
-êê* +
-ImageId
-êê+ 2
-==
-êê3 5
-null
-êê6 :
-)
-êê: ;
-?
-êê< =
-$num
-êê> ?
-:
-êê@ A
-(
-êêB C
-int
-êêC F
-)
-êêF G
-personEntity
-êêG S
-.
-êêS T
-ImageId
-êêT [
-;
-êê[ \
-if
-ëë 
-(
-ëë 
-
-oldImageId
-ëë 
-!=
-ëë 
-$num
-ëë 
-)
-ëë  
-{
-íí 
-await
-ìì "
-checkImageUsageAsync
-ìì *
-(
-ìì* +
-
-oldImageId
-ìì+ 5
-)
-ìì5 6
-;
-ìì6 7
-}
-îî 
-return
-ïï 
+ää+ ,
 _mapper
-ïï 
+ää- 4
 .
-ïï 
+ää4 5
 Map
-ïï 
+ää5 8
 <
-ïï  
+ää8 9 
 PersonDetailsModel
-ïï 1
+ää9 K
 >
-ïï1 2
+ääK L
 (
-ïï2 3
+ääL M
 personEntity
-ïï3 ?
+ääM Y
 )
-ïï? @
+ääY Z
 ;
-ïï@ A
-}
-ññ 	
-private
-òò 
-async
-òò 
-Task
-òò "
-checkImageUsageAsync
-òò /
-(
-òò/ 0
-int
-òò0 3
-imageId
-òò4 ;
-)
-òò; <
-{
-ôô 	
-Image
-öö 
-image
-öö 
+ääZ [
+returnEvent
+ãã 
+.
+ãã 
+	ImageFile
+ãã !
 =
-öö 
+ãã" #
 await
-öö 
-_imageService
-öö  -
+ãã$ )$
+_fileManagementService
+ãã* @
 .
-öö- .
-GetImageAsync
-öö. ;
+ãã@ A
+GetFile
+ããA H
 (
-öö; <
-imageId
-öö< C
+ããH I
+personEntity
+ããI U
+.
+ããU V
+Image
+ããV [
 )
-ööC D
+ãã[ \
 ;
-ööD E
-if
-õõ 
+ãã\ ]
+return
+çç 
+returnEvent
+çç 
+;
+çç 
+}
+éé 	
+private
+êê 
+async
+êê 
+Task
+êê 
+updateLocations
+êê *
 (
-õõ 
-!
-õõ 
-image
-õõ 
-.
-õõ 
-People
-õõ 
-.
-õõ 
-Any
-õõ !
-(
-õõ! "
+êê* +
+Person
+êê+ 1
+person
+êê2 8
 )
-õõ" #
-)
-õõ# $
+êê8 9
 {
-úú 
-await
-ùù 
-_imageService
-ùù #
-.
-ùù# $
-DeleteImageAsync
-ùù$ 4
+ëë 	
+if
+íí 
 (
-ùù4 5
-imageId
-ùù5 <
+íí 
+person
+íí 
+.
+íí 
+LivingPlace
+íí "
+!=
+íí# %
+null
+íí& *
+&&
+íí+ -
+person
+íí. 4
+.
+íí4 5
+LivingPlace
+íí5 @
+.
+íí@ A
+Id
+ííA C
+!=
+ííD F
+$num
+ííG H
 )
-ùù< =
+ííH I
+{
+ìì 
+await
+îî 
+
+unitOfWork
+îî  
+.
+îî  !
+Location
+îî! )
+.
+îî) *
+Update
+îî* 0
+(
+îî0 1
+person
+îî1 7
+.
+îî7 8
+LivingPlace
+îî8 C
+)
+îîC D
 ;
-ùù= >
+îîD E
 }
-ûû 
+ïï 
+if
+óó 
+(
+óó 
+person
+óó 
+.
+óó 
+
+BirthPlace
+óó !
+!=
+óó" $
+null
+óó% )
+&&
+óó* ,
+person
+óó- 3
+.
+óó3 4
+
+BirthPlace
+óó4 >
+.
+óó> ?
+Id
+óó? A
+!=
+óóB D
+$num
+óóE F
+)
+óóF G
+{
+òò 
+await
+ôô 
+
+unitOfWork
+ôô  
+.
+ôô  !
+Location
+ôô! )
+.
+ôô) *
+Update
+ôô* 0
+(
+ôô0 1
+person
+ôô1 7
+.
+ôô7 8
+
+BirthPlace
+ôô8 B
+)
+ôôB C
+;
+ôôC D
 }
-üü 	
+öö 
 }
-†† 
-}°° ˇs
+õõ 	
+public
+ùù 
+async
+ùù 
+Task
+ùù 
+<
+ùù 
+	ImageFile
+ùù #
+>
+ùù# $ 
+UpdatePictureAsync
+ùù% 7
+(
+ùù7 8
+int
+ùù8 ;
+personId
+ùù< D
+,
+ùùD E
+int
+ùùF I
+imageId
+ùùJ Q
+)
+ùùQ R
+{
+ûû 	
+Person
+üü 
+person
+üü 
+=
+üü 
+await
+üü !
+
+unitOfWork
+üü" ,
+.
+üü, -
+Person
+üü- 3
+.
+üü3 4
+FindById
+üü4 <
+(
+üü< =
+personId
+üü= E
+)
+üüE F
+;
+üüF G
+int
+†† 
+
+oldImageId
+†† 
+=
+†† 
+(
+†† 
+person
+†† $
+.
+††$ %
+ImageId
+††% ,
+==
+††- /
+null
+††0 4
+)
+††4 5
+?
+††6 7
+$num
+††8 9
+:
+††: ;
+(
+††< =
+int
+††= @
+)
+††@ A
+person
+††A G
+.
+††G H
+ImageId
+††H O
+;
+††O P
+person
+°° 
+.
+°° 
+ImageId
+°° 
+=
+°° 
+imageId
+°° $
+;
+°°$ %
+Person
+¢¢ 
+personEntity
+¢¢ 
+=
+¢¢  !
+await
+¢¢" '
+
+unitOfWork
+¢¢( 2
+.
+¢¢2 3
+Person
+¢¢3 9
+.
+¢¢9 :
+Update
+¢¢: @
+(
+¢¢@ A
+person
+¢¢A G
+)
+¢¢G H
+;
+¢¢H I
+if
+§§ 
+(
+§§ 
+
+oldImageId
+§§ 
+!=
+§§ 
+$num
+§§ 
+)
+§§  
+{
+•• 
+await
+¶¶ "
+checkImageUsageAsync
+¶¶ *
+(
+¶¶* +
+
+oldImageId
+¶¶+ 5
+)
+¶¶5 6
+;
+¶¶6 7
+}
+ßß 
+return
+®® 
+await
+®® $
+_fileManagementService
+®® /
+.
+®®/ 0
+GetFile
+®®0 7
+(
+®®7 8
+personEntity
+®®8 D
+.
+®®D E
+Image
+®®E J
+)
+®®J K
+;
+®®K L
+}
+©© 	
+public
+´´ 
+async
+´´ 
+Task
+´´ 
+<
+´´  
+PersonDetailsModel
+´´ ,
+>
+´´, -
+DeletePersonAsync
+´´. ?
+(
+´´? @
+int
+´´@ C
+personId
+´´D L
+)
+´´L M
+{
+¨¨ 	
+List
+≠≠ 
+<
+≠≠ 
+int
+≠≠ 
+>
+≠≠ 
+parentChildIds
+≠≠ $
+=
+≠≠% &
+
+unitOfWork
+≠≠' 1
+.
+≠≠1 2
+ParentChild
+≠≠2 =
+.
+≠≠= >
+Filter
+≠≠> D
+(
+≠≠D E
+parentChild
+≠≠E P
+=>
+≠≠Q S
+parentChild
+≠≠T _
+.
+≠≠_ `
+ParentId
+≠≠` h
+==
+≠≠i k
+personId
+≠≠l t
+||
+≠≠u w
+parentChild≠≠x É
+.≠≠É Ñ
+ChildId≠≠Ñ ã
+==≠≠å é
+personId≠≠è ó
+)≠≠ó ò
+.≠≠ò ô
+Select≠≠ô ü
+(≠≠ü †
+parentChild≠≠† ´
+=>≠≠¨ Æ
+parentChild≠≠Ø ∫
+.≠≠∫ ª
+Id≠≠ª Ω
+)≠≠Ω æ
+.≠≠æ ø
+ToList≠≠ø ≈
+(≠≠≈ ∆
+)≠≠∆ «
+;≠≠« »
+foreach
+ØØ 
+(
+ØØ 
+var
+ØØ 
+parentChildId
+ØØ &
+in
+ØØ' )
+parentChildIds
+ØØ* 8
+)
+ØØ8 9
+{
+∞∞ 
+await
+±± 
+
+unitOfWork
+±±  
+.
+±±  !
+ParentChild
+±±! ,
+.
+±±, -
+Delete
+±±- 3
+(
+±±3 4
+parentChildId
+±±4 A
+)
+±±A B
+;
+±±B C
+}
+≤≤ 
+List
+¥¥ 
+<
+¥¥ 
+int
+¥¥ 
+>
+¥¥ 
+marriageIds
+¥¥ !
+=
+¥¥" #
+
+unitOfWork
+¥¥$ .
+.
+¥¥. /
+Marriage
+¥¥/ 7
+.
+¥¥7 8
+Filter
+¥¥8 >
+(
+¥¥> ?
+marriage
+¥¥? G
+=>
+¥¥H J
+marriage
+¥¥K S
+.
+¥¥S T
+FirstPersonId
+¥¥T a
+==
+¥¥b d
+personId
+¥¥e m
+||
+¥¥n p
+marriage
+¥¥q y
+.
+¥¥y z
+SecondPersonId¥¥z à
+==¥¥â ã
+personId¥¥å î
+)¥¥î ï
+.¥¥ï ñ
+Select¥¥ñ ú
+(¥¥ú ù
+marriage¥¥ù •
+=>¥¥¶ ®
+marriage¥¥© ±
+.¥¥± ≤
+Id¥¥≤ ¥
+)¥¥¥ µ
+.¥¥µ ∂
+ToList¥¥∂ º
+(¥¥º Ω
+)¥¥Ω æ
+;¥¥æ ø
+foreach
+∂∂ 
+(
+∂∂ 
+var
+∂∂ 
+
+marriageId
+∂∂ #
+in
+∂∂$ &
+marriageIds
+∂∂' 2
+)
+∂∂2 3
+{
+∑∑ 
+await
+∏∏ 
+
+unitOfWork
+∏∏  
+.
+∏∏  !
+Marriage
+∏∏! )
+.
+∏∏) *
+Delete
+∏∏* 0
+(
+∏∏0 1
+
+marriageId
+∏∏1 ;
+)
+∏∏; <
+;
+∏∏< =
+}
+ππ 
+Person
+ªª 
+personEntity
+ªª 
+=
+ªª  !
+await
+ªª" '
+
+unitOfWork
+ªª( 2
+.
+ªª2 3
+Person
+ªª3 9
+.
+ªª9 :
+Delete
+ªª: @
+(
+ªª@ A
+personId
+ªªA I
+)
+ªªI J
+;
+ªªJ K
+int
+ºº 
+
+oldImageId
+ºº 
+=
+ºº 
+(
+ºº 
+personEntity
+ºº *
+.
+ºº* +
+ImageId
+ºº+ 2
+==
+ºº3 5
+null
+ºº6 :
+)
+ºº: ;
+?
+ºº< =
+$num
+ºº> ?
+:
+ºº@ A
+(
+ººB C
+int
+ººC F
+)
+ººF G
+personEntity
+ººG S
+.
+ººS T
+ImageId
+ººT [
+;
+ºº[ \
+if
+ææ 
+(
+ææ 
+
+oldImageId
+ææ 
+!=
+ææ 
+$num
+ææ 
+)
+ææ  
+{
+øø 
+await
+¿¿ "
+checkImageUsageAsync
+¿¿ *
+(
+¿¿* +
+
+oldImageId
+¿¿+ 5
+)
+¿¿5 6
+;
+¿¿6 7
+}
+¡¡ 
+return
+√√ 
+_mapper
+√√ 
+.
+√√ 
+Map
+√√ 
+<
+√√  
+PersonDetailsModel
+√√ 1
+>
+√√1 2
+(
+√√2 3
+personEntity
+√√3 ?
+)
+√√? @
+;
+√√@ A
+}
+ƒƒ 	
+private
+∆∆ 
+async
+∆∆ 
+Task
+∆∆ "
+checkImageUsageAsync
+∆∆ /
+(
+∆∆/ 0
+int
+∆∆0 3
+imageId
+∆∆4 ;
+)
+∆∆; <
+{
+«« 	
+Image
+»» 
+image
+»» 
+=
+»» 
+await
+»» 
+_imageService
+»»  -
+.
+»»- .
+GetImageAsync
+»». ;
+(
+»»; <
+imageId
+»»< C
+)
+»»C D
+;
+»»D E
+if
+   
+(
+   
+!
+   
+image
+   
+.
+   
+People
+   
+.
+   
+Any
+   !
+(
+  ! "
+)
+  " #
+)
+  # $
+{
+ÀÀ 
+await
+ÃÃ 
+_imageService
+ÃÃ #
+.
+ÃÃ# $
+DeleteImageAsync
+ÃÃ$ 4
+(
+ÃÃ4 5
+imageId
+ÃÃ5 <
+)
+ÃÃ< =
+;
+ÃÃ= >
+}
+ÕÕ 
+}
+ŒŒ 	
+}
+œœ 
+}–– ’t
 iE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\RelativeService.cs
 	namespace 	
 GenealogyTree
@@ -15610,718 +15586,760 @@ unitOfWork' 1
 (E F
 )F G
 ;G H
-foreach 
-( 
-var 
-relative !
-in" $
-	relatives% .
-). /
-{   
-RelativeModel!! 
-personToReturn!! ,
-=!!- .
-_mapper!!/ 6
-.!!6 7
-Map!!7 :
-<!!: ;
-RelativeModel!!; H
->!!H I
-(!!I J
-relative!!J R
-)!!R S
-;!!S T
-personToReturn"" 
-."" 
-RelativeUser"" +
-.""+ ,
-	ImageFile"", 5
-=""6 7
-await""8 ="
-_fileManagementService""> T
-.""T U
-GetFile""U \
-(""\ ]
-relative""] e
-.""e f
-RelativeUser""f r
-.""r s
-Person""s y
-.""y z
-Image""z 
-)	"" Ä
+foreach   
+(   
+var   
+relative   !
+in  " $
+	relatives  % .
+)  . /
+{!! 
+RelativeModel"" 
+personToReturn"" ,
+=""- .
+_mapper""/ 6
+.""6 7
+Map""7 :
+<"": ;
+RelativeModel""; H
+>""H I
+(""I J
+relative""J R
+)""R S
+;""S T
+personToReturn## 
+.## 
+RelativeUser## +
+.##+ ,
+	ImageFile##, 5
+=##6 7
+await##8 ="
+_fileManagementService##> T
+.##T U
+GetFile##U \
+(##\ ]
+relative##] e
+.##e f
+RelativeUser##f r
+.##r s
+Person##s y
+.##y z
+Image##z 
+)	## Ä
 ;
-""Ä Å
-returnEvent## 
-.## 
-Add## 
-(##  
-personToReturn##  .
-)##. /
-;##/ 0
-}$$ 
-return%% 
-returnEvent%% 
-;%% 
-}&& 	
-public(( 
-async(( 
-Task(( 
-<(( 
-RelativeModel(( '
->((' (
-GetRelative(() 4
-(((4 5
-int((5 8
+##Ä Å
+returnEvent$$ 
+.$$ 
+Add$$ 
+($$  
+personToReturn$$  .
+)$$. /
+;$$/ 0
+}%% 
+return'' 
+returnEvent'' 
+;'' 
+}(( 	
+public** 
+async** 
+Task** 
+<** 
+RelativeModel** '
+>**' (
+GetRelative**) 4
+(**4 5
+int**5 8
 
-relativeId((9 C
-)((C D
-{)) 	
-Relative** 
-relative** 
-=** 
-await**  %
+relativeId**9 C
+)**C D
+{++ 	
+Relative,, 
+relative,, 
+=,, 
+await,,  %
 
-unitOfWork**& 0
-.**0 1
-	Relatives**1 :
-.**: ;
-FindById**; C
-(**C D
+unitOfWork,,& 0
+.,,0 1
+	Relatives,,1 :
+.,,: ;
+FindById,,; C
+(,,C D
 
-relativeId**D N
-)**N O
-;**O P
-RelativeModel++ 
-returnEvent++ %
-=++& '
-_mapper++( /
-.++/ 0
-Map++0 3
-<++3 4
-RelativeModel++4 A
->++A B
-(++B C
-relative++C K
-)++K L
-;++L M
-return,, 
-returnEvent,, 
-;,, 
-}-- 	
-public.. 
-async.. 
-Task.. 
-<.. 
-RelativeState.. '
->..' (
-CheckRelative..) 6
-(..6 7
-Guid..7 ;
-userId..< B
-,..B C
-Guid..D H
+relativeId,,D N
+),,N O
+;,,O P
+RelativeModel-- 
+returnEvent-- %
+=--& '
+_mapper--( /
+.--/ 0
+Map--0 3
+<--3 4
+RelativeModel--4 A
+>--A B
+(--B C
+relative--C K
+)--K L
+;--L M
+return// 
+returnEvent// 
+;// 
+}00 	
+public11 
+async11 
+Task11 
+<11 
+RelativeState11 '
+>11' (
+CheckRelative11) 6
+(116 7
+Guid117 ;
+userId11< B
+,11B C
+Guid11D H
 
-relativeId..I S
-)..S T
-{// 	
-bool00 
-isAlreadyRelative00 "
-=00# $
-await00% *
-Task00+ /
-.00/ 0
-Run000 3
-(003 4
-(004 5
-)005 6
-=>007 9
+relativeId11I S
+)11S T
+{22 	
+bool33 
+isAlreadyRelative33 "
+=33# $
+await33% *
+Task33+ /
+.33/ 0
+Run330 3
+(333 4
+(334 5
+)335 6
+=>337 9
 
-unitOfWork00: D
-.00D E
-	Relatives00E N
-.00N O
-Filter00O U
-(00U V
-r00V W
-=>00X Z
-(00[ \
-r00\ ]
-.00] ^
-PrimaryUserId00^ k
-==00l n
-userId00o u
-&&00v x
-r00y z
-.00z {
-RelativeUserId	00{ â
+unitOfWork33: D
+.33D E
+	Relatives33E N
+.33N O
+Filter33O U
+(33U V
+r33V W
+=>33X Z
+(33[ \
+r33\ ]
+.33] ^
+PrimaryUserId33^ k
+==33l n
+userId33o u
+&&33v x
+r33y z
+.33z {
+RelativeUserId	33{ â
 ==
-00ä å
+33ä å
 
 relativeId
-00ç ó
+33ç ó
 )
-00ó ò
+33ó ò
 )
-00ò ô
+33ò ô
 .
-00ô ö
+33ô ö
 Any
-00ö ù
+33ö ù
 (
-00ù û
+33ù û
 )
-00û ü
+33û ü
 )
-00ü †
+33ü †
 ;
-00† °
-if11 
-(11 
-isAlreadyRelative11 !
-)11! "
-{22 
-return33 
-RelativeState33 $
-.33$ %
-Related33% ,
-;33, -
-}44 
-bool55 
-requestAlreadySent55 #
-=55$ %
-await55& +
-Task55, 0
-.550 1
-Run551 4
-(554 5
-(555 6
-)556 7
-=>558 :
+33† °
+if55 
+(55 
+isAlreadyRelative55 !
+)55! "
+{66 
+return77 
+RelativeState77 $
+.77$ %
+Related77% ,
+;77, -
+}88 
+bool:: 
+requestAlreadySent:: #
+=::$ %
+await::& +
+Task::, 0
+.::0 1
+Run::1 4
+(::4 5
+(::5 6
+)::6 7
+=>::8 :
 
-unitOfWork55; E
-.55E F
-Requests55F N
-.55N O
-Filter55O U
-(55U V
-r55V W
-=>55X Z
-(55[ \
-r55\ ]
-.55] ^
-SenderId55^ f
-==55g i
-userId55j p
-&&55q s
-r55t u
-.55u v
+unitOfWork::; E
+.::E F
+Requests::F N
+.::N O
+Filter::O U
+(::U V
+r::V W
+=>::X Z
+(::[ \
+r::\ ]
+.::] ^
+SenderId::^ f
+==::g i
+userId::j p
+&&::q s
+r::t u
+.::u v
 
-ReceiverId	55v Ä
+ReceiverId	::v Ä
 ==
-55Å É
+::Å É
 
 relativeId
-55Ñ é
+::Ñ é
 )
-55é è
+::é è
 ||
-55ê í
+::ê í
 (
-55ì î
+::ì î
 r
-55î ï
+::î ï
 .
-55ï ñ
+::ï ñ
 SenderId
-55ñ û
+::ñ û
 ==
-55ü °
+::ü °
 
 relativeId
-55¢ ¨
+::¢ ¨
 &&
-55≠ Ø
+::≠ Ø
 r
-55∞ ±
+::∞ ±
 .
-55± ≤
+::± ≤
 
 ReceiverId
-55≤ º
+::≤ º
 ==
-55Ω ø
+::Ω ø
 userId
-55¿ ∆
+::¿ ∆
 )
-55∆ «
+::∆ «
 )
-55« »
+::« »
 .
-55» …
+::» …
 Any
-55… Ã
+::… Ã
 (
-55Ã Õ
+::Ã Õ
 )
-55Õ Œ
+::Õ Œ
 )
-55Œ œ
+::Œ œ
 ;
-55œ –
-if66 
-(66 
-requestAlreadySent66 "
-)66" #
-{77 
-return88 
-RelativeState88 $
-.88$ %
-	Requested88% .
-;88. /
-}99 
-return:: 
-RelativeState::  
-.::  !
-	Unrelated::! *
-;::* +
-};; 	
-public== 
-async== 
-Task== 
-<== 
-RelativeModel== '
->==' (
-MarkChanges==) 4
-(==4 5
-int==5 8
+::œ –
+if<< 
+(<< 
+requestAlreadySent<< "
+)<<" #
+{== 
+return>> 
+RelativeState>> $
+.>>$ %
+	Requested>>% .
+;>>. /
+}?? 
+returnAA 
+RelativeStateAA  
+.AA  !
+	UnrelatedAA! *
+;AA* +
+}BB 	
+publicDD 
+asyncDD 
+TaskDD 
+<DD 
+RelativeModelDD '
+>DD' (
+MarkChangesDD) 4
+(DD4 5
+intDD5 8
 
-relativeId==9 C
-)==C D
-{>> 	
-Relative?? 
-relativeToUpdate?? %
-=??& '
-await??( -
+relativeIdDD9 C
+)DDC D
+{EE 	
+RelativeFF 
+relativeToUpdateFF %
+=FF& '
+awaitFF( -
 
-unitOfWork??. 8
-.??8 9
-	Relatives??9 B
-.??B C
-FindById??C K
-(??K L
+unitOfWorkFF. 8
+.FF8 9
+	RelativesFF9 B
+.FFB C
+FindByIdFFC K
+(FFK L
 
-relativeId??L V
-)??V W
-;??W X
-relativeToUpdate@@ 
-.@@ 
-LastSyncCheck@@ *
-=@@+ ,
-DateTime@@- 5
-.@@5 6
-Now@@6 9
-;@@9 :
-RelativeAA 
-relativeEntityAA #
-=AA$ %
-awaitAA& +
+relativeIdFFL V
+)FFV W
+;FFW X
+relativeToUpdateGG 
+.GG 
+LastSyncCheckGG *
+=GG+ ,
+DateTimeGG- 5
+.GG5 6
+NowGG6 9
+;GG9 :
+RelativeHH 
+relativeEntityHH #
+=HH$ %
+awaitHH& +
 
-unitOfWorkAA, 6
-.AA6 7
-	RelativesAA7 @
-.AA@ A
-UpdateAAA G
-(AAG H
-relativeToUpdateAAH X
-)AAX Y
-;AAY Z
-RelativeModelBB 
-returnEventBB %
-=BB& '
-_mapperBB( /
-.BB/ 0
-MapBB0 3
-<BB3 4
-RelativeModelBB4 A
->BBA B
-(BBB C
-relativeEntityBBC Q
-)BBQ R
-;BBR S
-returnCC 
-returnEventCC 
-;CC 
-}DD 	
-publicGG 
-asyncGG 
-TaskGG 
-<GG 
-RelativeModelGG '
->GG' (
-AddRelativeUserGG) 8
-(GG8 9
-UsersToLinkModelGG9 I
-usersToLinkGGJ U
-)GGU V
-{HH 	
-RelativeII 
-senderRelativeII #
-=II$ %
-newII& )
-RelativeII* 2
-(II2 3
-)II3 4
-{JJ 
-PrimaryUserIdKK 
-=KK 
-usersToLinkKK  +
-.KK+ ,
-PrimaryUserIdKK, 9
-,KK9 :
-RelativeUserIdLL 
-=LL  
-usersToLinkLL! ,
-.LL, -
-LinkedUserIdLL- 9
-,LL9 :)
-RelativePersonInPrimaryTreeIdMM -
-=MM. /
-usersToLinkMM0 ;
-.MM; <'
-LinkedPersonInPrimaryTreeIdMM< W
-,MMW X
-LastSyncCheckNN 
-=NN 
-DateTimeNN  (
-.NN( )
-UtcNowNN) /
-}OO 
-;OO 
-RelativePP !
-createdSenderRelativePP *
-=PP+ ,
-awaitPP- 2
+unitOfWorkHH, 6
+.HH6 7
+	RelativesHH7 @
+.HH@ A
+UpdateHHA G
+(HHG H
+relativeToUpdateHHH X
+)HHX Y
+;HHY Z
+RelativeModelII 
+returnEventII %
+=II& '
+_mapperII( /
+.II/ 0
+MapII0 3
+<II3 4
+RelativeModelII4 A
+>IIA B
+(IIB C
+relativeEntityIIC Q
+)IIQ R
+;IIR S
+returnKK 
+returnEventKK 
+;KK 
+}LL 	
+publicOO 
+asyncOO 
+TaskOO 
+<OO 
+RelativeModelOO '
+>OO' (
+AddRelativeUserOO) 8
+(OO8 9
+UsersToLinkModelOO9 I
+usersToLinkOOJ U
+)OOU V
+{PP 	
+RelativeQQ 
+senderRelativeQQ #
+=QQ$ %
+newQQ& )
+RelativeQQ* 2
+(QQ2 3
+)QQ3 4
+{RR 
+PrimaryUserIdSS 
+=SS 
+usersToLinkSS  +
+.SS+ ,
+PrimaryUserIdSS, 9
+,SS9 :
+RelativeUserIdTT 
+=TT  
+usersToLinkTT! ,
+.TT, -
+LinkedUserIdTT- 9
+,TT9 :)
+RelativePersonInPrimaryTreeIdUU -
+=UU. /
+usersToLinkUU0 ;
+.UU; <'
+LinkedPersonInPrimaryTreeIdUU< W
+,UUW X
+LastSyncCheckVV 
+=VV 
+DateTimeVV  (
+.VV( )
+UtcNowVV) /
+}WW 
+;WW 
+RelativeXX !
+createdSenderRelativeXX *
+=XX+ ,
+awaitXX- 2
 
-unitOfWorkPP3 =
-.PP= >
-	RelativesPP> G
-.PPG H
-CreatePPH N
-(PPN O
-senderRelativePPO ]
-)PP] ^
-;PP^ _
-RelativeModelQQ 
-returnEventQQ %
-=QQ& '
-_mapperQQ( /
-.QQ/ 0
-MapQQ0 3
-<QQ3 4
-RelativeModelQQ4 A
->QQA B
-(QQB C!
-createdSenderRelativeQQC X
-)QQX Y
-;QQY Z
-ifSS 
-(SS 
-usersToLinkSS 
-.SS )
-PrimaryPersonInRelativeTreeIdSS 9
-!=SS: <
-$numSS= >
-)SS> ?
-{TT 
-RelativeUU 
-receiverRelativeUU )
-=UU* +
-newUU, /
-RelativeUU0 8
-(UU8 9
-)UU9 :
-{VV 
-PrimaryUserIdWW !
-=WW" #
-usersToLinkWW$ /
-.WW/ 0
-LinkedUserIdWW0 <
-,WW< =
-RelativeUserIdXX "
-=XX# $
-usersToLinkXX% 0
-.XX0 1
-PrimaryUserIdXX1 >
-,XX> ?)
-RelativePersonInPrimaryTreeIdYY 1
-=YY2 3
-usersToLinkYY4 ?
-.YY? @)
-PrimaryPersonInRelativeTreeIdYY@ ]
-,YY] ^
-LastSyncCheckZZ !
-=ZZ" #
-DateTimeZZ$ ,
-.ZZ, -
-UtcNowZZ- 3
-}[[ 
-;[[ 
-Relative\\ #
-createdReceiverRelative\\ 0
-=\\1 2
-await\\3 8
+unitOfWorkXX3 =
+.XX= >
+	RelativesXX> G
+.XXG H
+CreateXXH N
+(XXN O
+senderRelativeXXO ]
+)XX] ^
+;XX^ _
+RelativeModelYY 
+returnEventYY %
+=YY& '
+_mapperYY( /
+.YY/ 0
+MapYY0 3
+<YY3 4
+RelativeModelYY4 A
+>YYA B
+(YYB C!
+createdSenderRelativeYYC X
+)YYX Y
+;YYY Z
+if[[ 
+([[ 
+usersToLink[[ 
+.[[ )
+PrimaryPersonInRelativeTreeId[[ 9
+!=[[: <
+$num[[= >
+)[[> ?
+{\\ 
+Relative]] 
+receiverRelative]] )
+=]]* +
+new]], /
+Relative]]0 8
+(]]8 9
+)]]9 :
+{^^ 
+PrimaryUserId__ !
+=__" #
+usersToLink__$ /
+.__/ 0
+LinkedUserId__0 <
+,__< =
+RelativeUserId`` "
+=``# $
+usersToLink``% 0
+.``0 1
+PrimaryUserId``1 >
+,``> ?)
+RelativePersonInPrimaryTreeIdaa 1
+=aa2 3
+usersToLinkaa4 ?
+.aa? @)
+PrimaryPersonInRelativeTreeIdaa@ ]
+,aa] ^
+LastSyncCheckbb !
+=bb" #
+DateTimebb$ ,
+.bb, -
+UtcNowbb- 3
+}cc 
+;cc 
+Relativedd #
+createdReceiverRelativedd 0
+=dd1 2
+awaitdd3 8
 
-unitOfWork\\9 C
-.\\C D
-	Relatives\\D M
-.\\M N
-Create\\N T
-(\\T U
-receiverRelative\\U e
-)\\e f
-;\\f g
-returnEvent]] 
-=]] 
-_mapper]] %
-.]]% &
-Map]]& )
-<]]) *
-RelativeModel]]* 7
->]]7 8
-(]]8 9#
-createdReceiverRelative]]9 P
-)]]P Q
-;]]Q R
-}^^ 
-return__ 
-returnEvent__ 
-;__ 
-}`` 	
-publicbb 
-asyncbb 
-Taskbb 
-<bb 
-RelativeModelbb '
->bb' (
-DeleteRelativebb) 7
-(bb7 8
-intbb8 ;
+unitOfWorkdd9 C
+.ddC D
+	RelativesddD M
+.ddM N
+CreateddN T
+(ddT U
+receiverRelativeddU e
+)dde f
+;ddf g
+returnEventee 
+=ee 
+_mapperee %
+.ee% &
+Mapee& )
+<ee) *
+RelativeModelee* 7
+>ee7 8
+(ee8 9#
+createdReceiverRelativeee9 P
+)eeP Q
+;eeQ R
+}ff 
+returnhh 
+returnEventhh 
+;hh 
+}ii 	
+publickk 
+asynckk 
+Taskkk 
+<kk 
+RelativeModelkk '
+>kk' (
+DeleteRelativekk) 7
+(kk7 8
+intkk8 ;
 
-relativeIdbb< F
-)bbF G
-{cc 	
-Relativedd 
-relativeEntitydd #
-=dd$ %
-awaitdd& +
+relativeIdkk< F
+)kkF G
+{ll 	
+Relativemm 
+relativeEntitymm #
+=mm$ %
+awaitmm& +
 
-unitOfWorkdd, 6
-.dd6 7
-	Relativesdd7 @
-.dd@ A
-DeleteddA G
-(ddG H
+unitOfWorkmm, 6
+.mm6 7
+	Relativesmm7 @
+.mm@ A
+DeletemmA G
+(mmG H
 
-relativeIdddH R
-)ddR S
-;ddS T
-RelativeModelee 
-returnEventee %
-=ee& '
-_mapperee( /
-.ee/ 0
-Mapee0 3
-<ee3 4
-RelativeModelee4 A
->eeA B
-(eeB C
-relativeEntityeeC Q
-)eeQ R
-;eeR S
-returnff 
-returnEventff 
-;ff 
-}gg 	
-publicii 
-asyncii 
-Taskii 
-<ii 
-Listii 
-<ii 
-UserPositionModelii 0
->ii0 1
->ii1 2 
-GetRelativesPositionii3 G
-(iiG H
-GuidiiH L
-userIdiiM S
-)iiS T
-{jj 	
-Listkk 
-<kk 
-Userkk 
->kk 
-relativeUserskk $
-=kk% &
+relativeIdmmH R
+)mmR S
+;mmS T
+RelativeModelnn 
+returnEventnn %
+=nn& '
+_mappernn( /
+.nn/ 0
+Mapnn0 3
+<nn3 4
+RelativeModelnn4 A
+>nnA B
+(nnB C
+relativeEntitynnC Q
+)nnQ R
+;nnR S
+returnpp 
+returnEventpp 
+;pp 
+}qq 	
+publicss 
+asyncss 
+Taskss 
+<ss 
+Listss 
+<ss 
+UserPositionModelss 0
+>ss0 1
+>ss1 2 
+GetRelativesPositionss3 G
+(ssG H
+GuidssH L
+userIdssM S
+)ssS T
+{tt 	
+Listuu 
+<uu 
+Useruu 
+>uu 
+relativeUsersuu $
+=uu% &
 
-unitOfWorkkk' 1
-.kk1 2
-	Relativeskk2 ;
-.kk; <
-Filterkk< B
-(kkB C
-relativekkC K
-=>kkL N
-relativekkO W
-.kkW X
-PrimaryUserIdkkX e
-==kkf h
-userIdkki o
-)kko p
-.ll4 5
-Includell5 <
-(ll< =
-rll= >
-=>ll? A
-rllB C
-.llC D
-RelativeUserllD P
-)llP Q
-.mm8 9
-ThenIncludemm9 D
-(mmD E
-rummE G
-=>mmH J
-rummK M
-.mmM N
-PositionmmN V
-)mmV W
-.nn4 5
-Includenn5 <
-(nn< =
-rnn= >
-=>nn? A
-rnnB C
-.nnC D
-RelativeUsernnD P
-)nnP Q
-.oo8 9
-ThenIncludeoo9 D
-(ooD E
-ruooE G
-=>ooH J
-ruooK M
-.ooM N
-PersonooN T
-)ooT U
-.pp4 5
-Wherepp5 :
-(pp: ;
-relativepp; C
-=>ppD F
-relativeppG O
-.ppO P
-RelativeUserppP \
-.pp\ ]
-ShareLocationpp] j
-&&ppk m
-relativeppn v
-.ppv w
-RelativeUser	ppw É
+unitOfWorkuu' 1
+.uu1 2
+	Relativesuu2 ;
+.uu; <
+Filteruu< B
+(uuB C
+relativeuuC K
+=>uuL N
+relativeuuO W
+.uuW X
+PrimaryUserIduuX e
+==uuf h
+userIduui o
+)uuo p
+.vv4 5
+Includevv5 <
+(vv< =
+rvv= >
+=>vv? A
+rvvB C
+.vvC D
+RelativeUservvD P
+)vvP Q
+.ww8 9
+ThenIncludeww9 D
+(wwD E
+ruwwE G
+=>wwH J
+ruwwK M
+.wwM N
+PositionwwN V
+)wwV W
+.xx4 5
+Includexx5 <
+(xx< =
+rxx= >
+=>xx? A
+rxxB C
+.xxC D
+RelativeUserxxD P
+)xxP Q
+.yy8 9
+ThenIncludeyy9 D
+(yyD E
+ruyyE G
+=>yyH J
+ruyyK M
+.yyM N
+PersonyyN T
+)yyT U
+.zz4 5
+Wherezz5 :
+(zz: ;
+relativezz; C
+=>zzD F
+relativezzG O
+.zzO P
+RelativeUserzzP \
+.zz\ ]
+ShareLocationzz] j
+&&zzk m
+relativezzn v
+.zzv w
+RelativeUser	zzw É
 .
-ppÉ Ñ
+zzÉ Ñ
 Position
-ppÑ å
+zzÑ å
 .
-ppå ç
+zzå ç
 	UpdatedOn
-ppç ñ
+zzç ñ
 !=
-ppó ô
+zzó ô
 null
-ppö û
+zzö û
 )
-ppû ü
-.qq4 5
-Selectqq5 ;
-(qq; <
-relativeqq< D
-=>qqE G
-relativeqqH P
-.qqP Q
-RelativeUserqqQ ]
-)qq] ^
-.qq^ _
-ToListqq_ e
-(qqe f
-)qqf g
-;qqg h
-Listss 
-<ss 
-UserPositionModelss "
->ss" #
-returnEventss$ /
-=ss0 1
-newss2 5
-Listss6 :
-<ss: ;
-UserPositionModelss; L
->ssL M
-(ssM N
-)ssN O
-;ssO P
-foreachtt 
-(tt 
-vartt 
-relativett !
-intt" $
-relativeUserstt% 2
-)tt2 3
-{uu 
-UserPositionModelvv ! 
-userPositionToReturnvv" 6
-=vv7 8
-_mappervv9 @
-.vv@ A
-MapvvA D
-<vvD E
-UserPositionModelvvE V
->vvV W
-(vvW X
-relativevvX `
-)vv` a
-;vva b 
-userPositionToReturnww $
-.ww$ %
-	ImageFileww% .
-=ww/ 0
-awaitww1 6"
-_fileManagementServiceww7 M
-.wwM N
-GetFilewwN U
-(wwU V
-relativewwV ^
-.ww^ _
-Personww_ e
-.wwe f
-Imagewwf k
-)wwk l
-;wwl m
-returnEventxx 
-.xx 
-Addxx 
-(xx   
-userPositionToReturnxx  4
-)xx4 5
-;xx5 6
-}yy 
-returnzz 
-returnEventzz 
-;zz 
-}{{ 	
-}|| 
-}}} Á
+zzû ü
+.{{4 5
+Select{{5 ;
+({{; <
+relative{{< D
+=>{{E G
+relative{{H P
+.{{P Q
+RelativeUser{{Q ]
+){{] ^
+.{{^ _
+ToList{{_ e
+({{e f
+){{f g
+;{{g h
+List}} 
+<}} 
+UserPositionModel}} "
+>}}" #
+returnEvent}}$ /
+=}}0 1
+new}}2 5
+List}}6 :
+<}}: ;
+UserPositionModel}}; L
+>}}L M
+(}}M N
+)}}N O
+;}}O P
+foreach~~ 
+(~~ 
+var~~ 
+relative~~ !
+in~~" $
+relativeUsers~~% 2
+)~~2 3
+{ 
+UserPositionModel
+ÄÄ !"
+userPositionToReturn
+ÄÄ" 6
+=
+ÄÄ7 8
+_mapper
+ÄÄ9 @
+.
+ÄÄ@ A
+Map
+ÄÄA D
+<
+ÄÄD E
+UserPositionModel
+ÄÄE V
+>
+ÄÄV W
+(
+ÄÄW X
+relative
+ÄÄX `
+)
+ÄÄ` a
+;
+ÄÄa b"
+userPositionToReturn
+ÅÅ $
+.
+ÅÅ$ %
+	ImageFile
+ÅÅ% .
+=
+ÅÅ/ 0
+await
+ÅÅ1 6$
+_fileManagementService
+ÅÅ7 M
+.
+ÅÅM N
+GetFile
+ÅÅN U
+(
+ÅÅU V
+relative
+ÅÅV ^
+.
+ÅÅ^ _
+Person
+ÅÅ_ e
+.
+ÅÅe f
+Image
+ÅÅf k
+)
+ÅÅk l
+;
+ÅÅl m
+returnEvent
+ÇÇ 
+.
+ÇÇ 
+Add
+ÇÇ 
+(
+ÇÇ  "
+userPositionToReturn
+ÇÇ  4
+)
+ÇÇ4 5
+;
+ÇÇ5 6
+}
+ÉÉ 
+return
+ÖÖ 
+returnEvent
+ÖÖ 
+;
+ÖÖ 
+}
+ÜÜ 	
+}
+áá 
+}àà Á
 iE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\ReligionService.cs
 	namespace
 
@@ -16446,79 +16464,79 @@ unitOfWork< F
 	religionsU ^
 )^ _
 ;_ `
-return 
-returnEvent 
-; 
-} 	
-public 
-async 
-Task 
-< 
-GenericNameModel *
->* +
-AddReligionAsync, <
-(< =
-string= C
-religionNameD P
-)P Q
-{ 	
-if 
-( 
-religionName 
-== 
-null  $
-)$ %
-{ 
-return 
-null 
-; 
-}   
-Religion!! 
-religion!! 
-=!! 
-new!!  #
-Religion!!$ ,
-(!!, -
-)!!- .
-{"" 
-Name## 
-=## 
-religionName## #
-}$$ 
-;$$ 
-Religion%% 
-religionEntity%% #
-=%%$ %
-await%%& +
+return 
+returnEvent 
+; 
+} 	
+public 
+async 
+Task 
+< 
+GenericNameModel *
+>* +
+AddReligionAsync, <
+(< =
+string= C
+religionNameD P
+)P Q
+{ 	
+if 
+( 
+religionName 
+== 
+null  $
+)$ %
+{ 
+return   
+null   
+;   
+}!! 
+Religion## 
+religion## 
+=## 
+new##  #
+Religion##$ ,
+(##, -
+)##- .
+{$$ 
+Name%% 
+=%% 
+religionName%% #
+}&& 
+;&& 
+Religion(( 
+religionEntity(( #
+=(($ %
+await((& +
 
-unitOfWork%%, 6
-.%%6 7
-Religion%%7 ?
-.%%? @
-Create%%@ F
-(%%F G
-religion%%G O
-)%%O P
-;%%P Q
-GenericNameModel&& 
-returnEvent&& (
-=&&) *
-_mapper&&+ 2
-.&&2 3
-Map&&3 6
-<&&6 7
-GenericNameModel&&7 G
->&&G H
-(&&H I
-religionEntity&&I W
-)&&W X
-;&&X Y
-return'' 
-returnEvent'' 
-;'' 
-}(( 	
-})) 
-}** ≤ã
+unitOfWork((, 6
+.((6 7
+Religion((7 ?
+.((? @
+Create((@ F
+(((F G
+religion((G O
+)((O P
+;((P Q
+GenericNameModel)) 
+returnEvent)) (
+=))) *
+_mapper))+ 2
+.))2 3
+Map))3 6
+<))6 7
+GenericNameModel))7 G
+>))G H
+())H I
+religionEntity))I W
+)))W X
+;))X Y
+return++ 
+returnEvent++ 
+;++ 
+},, 	
+}-- 
+}.. ºå
 hE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\RequestService.cs
 	namespace 	
 GenealogyTree
@@ -16552,886 +16570,811 @@ hE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IRelativeService )
 _relativeService* :
 ;: ;
-public 
-RequestService 
-( 
-IUnitOfWork )
+public 
+RequestService 
+( 
+IUnitOfWork )
 
-unitOfWork* 4
-,4 5
-IMapper6 =
-mapper> D
-,D E"
-IFileManagementServiceF \!
-fileManagementService] r
-,r s
-IRelativeService	t Ñ
+unitOfWork* 4
+,4 5
+IMapper6 =
+mapper> D
+,D E"
+IFileManagementServiceF \!
+fileManagementService] r
+,r s
+IRelativeService	t Ñ
 relativeService
-Ö î
+Ö î
 )
-î ï
+î ï
 :
-ñ ó
+ñ ó
 base
-ò ú
+ò ú
 (
-ú ù
+ú ù
 
 unitOfWork
-ù ß
+ù ß
 )
-ß ®
-{ 	
-_mapper 
-= 
-mapper 
-; "
-_fileManagementService "
-=# $!
-fileManagementService% :
-;: ;
-_relativeService 
-= 
-relativeService .
-;. /
-} 	
-public 
-async 
-Task 
-< 
-List 
-< 
-RequestDetailsModel 2
->2 3
->3 4
-GetRequestsSent5 D
-(D E
-GuidE I
-senderIdJ R
-)R S
-{ 	
-List 
-< 
-Request 
-> 
-requests "
-=# $
+ß ®
+{ 	
+_mapper 
+= 
+mapper 
+; "
+_fileManagementService "
+=# $!
+fileManagementService% :
+;: ;
+_relativeService 
+= 
+relativeService .
+;. /
+} 	
+public 
+async 
+Task 
+< 
+List 
+< 
+RequestDetailsModel 2
+>2 3
+>3 4
+GetRequestsSent5 D
+(D E
+GuidE I
+senderIdJ R
+)R S
+{ 	
+List 
+< 
+Request 
+> 
+requests "
+=# $
 
-unitOfWork% /
-./ 0
-Requests0 8
-.8 9
-Filter9 ?
-(? @
-x@ A
-=>B D
-xE F
-.F G
-SenderIdG O
-==P R
-senderIdS [
-&&\ ^
-!_ `
-x` a
-.a b
-ReceiverRespondedb s
-)s t
-.0 1
-Include1 8
-(8 9
-x9 :
-=>; =
-x> ?
-.? @
-Receiver@ H
-)H I
-.I J
-ThenIncludeJ U
-(U V
-rV W
-=>X Z
-r[ \
-.\ ]
-Person] c
-)c d
-.d e
-ThenIncludee p
-(p q
-pq r
-=>s u
-pv w
-.w x
-Imagex }
-)} ~
+unitOfWork% /
+./ 0
+Requests0 8
+.8 9
+Filter9 ?
+(? @
+x@ A
+=>B D
+xE F
+.F G
+SenderIdG O
+==P R
+senderIdS [
+&&\ ^
+!_ `
+x` a
+.a b
+ReceiverRespondedb s
+)s t
 .  0 1
 Include  1 8
 (  8 9
 x  9 :
 =>  ; =
 x  > ?
-.  ? @
-Sender  @ F
-)  F G
-.  G H
-ThenInclude  H S
-(  S T
-r  T U
-=>  V X
-r  Y Z
-.  Z [
-Person  [ a
-)  a b
-.  b c
-ThenInclude  c n
-(  n o
-p  o p
-=>  q s
-p  t u
-.  u v
-Image  v {
-)  { |
+.  ? @
+Receiver  @ H
+)  H I
+.  I J
+ThenInclude  J U
+(  U V
+r  V W
+=>  X Z
+r  [ \
+.  \ ]
+Person  ] c
+)  c d
+.  d e
+ThenInclude  e p
+(  p q
+p  q r
+=>  s u
+p  v w
+.  w x
+Image  x }
+)  } ~
 .!!0 1
 Include!!1 8
 (!!8 9
 x!!9 :
 =>!!; =
 x!!> ?
-.!!? @)
-ReceiverReferenceInSenderTree!!@ ]
-)!!] ^
-.!!^ _
-ThenInclude!!_ j
-(!!j k
-p!!k l
-=>!!m o
-p!!p q
-.!!q r
-Image!!r w
-)!!w x
-.""0 1
-ToList""1 7
-(""7 8
-)""8 9
-;""9 :
-return## 
-await## 
-MapRequestDetails## *
-(##* +
-requests##+ 3
-)##3 4
-;##4 5
-}$$ 	
-private&& 
-async&& 
-Task&& 
-<&& 
-List&& 
-<&&  
-RequestDetailsModel&&  3
->&&3 4
->&&4 5
-MapRequestDetails&&6 G
-(&&G H
-List&&H L
-<&&L M
-Request&&M T
->&&T U
-requests&&V ^
-)&&^ _
-{'' 	
-List(( 
-<(( 
-RequestDetailsModel(( $
->(($ %
-returnEvent((& 1
-=((2 3
-new((4 7
-List((8 <
-<((< =
-RequestDetailsModel((= P
->((P Q
-(((Q R
-)((R S
-;((S T
-foreach)) 
-()) 
-var)) 
-request))  
-in))! #
-requests))$ ,
-))), -
-{** 
-RequestDetailsModel++ #
-returnRequest++$ 1
-=++2 3
-new++4 7
-RequestDetailsModel++8 K
-(++K L
-)++L M
-{,, 
-Id-- 
-=-- 
-request--  
-.--  !
-Id--! #
-,--# $
-ReceiverUser..  
-=..! "
-_mapper..# *
-...* +
-Map..+ .
-<... /
-GenericPersonModel../ A
->..A B
-(..B C
-request..C J
-...J K
-Receiver..K S
-)..S T
-,..T U
+.!!? @
+Sender!!@ F
+)!!F G
+.!!G H
+ThenInclude!!H S
+(!!S T
+r!!T U
+=>!!V X
+r!!Y Z
+.!!Z [
+Person!![ a
+)!!a b
+.!!b c
+ThenInclude!!c n
+(!!n o
+p!!o p
+=>!!q s
+p!!t u
+.!!u v
+Image!!v {
+)!!{ |
+.""0 1
+Include""1 8
+(""8 9
+x""9 :
+=>""; =
+x""> ?
+.""? @)
+ReceiverReferenceInSenderTree""@ ]
+)""] ^
+.""^ _
+ThenInclude""_ j
+(""j k
+p""k l
+=>""m o
+p""p q
+.""q r
+Image""r w
+)""w x
+.##0 1
+ToList##1 7
+(##7 8
+)##8 9
+;##9 :
+return%% 
+await%% 
+MapRequestDetails%% *
+(%%* +
+requests%%+ 3
+)%%3 4
+;%%4 5
+}&& 	
+private(( 
+async(( 
+Task(( 
+<(( 
+List(( 
+<((  
+RequestDetailsModel((  3
+>((3 4
+>((4 5
+MapRequestDetails((6 G
+(((G H
+List((H L
+<((L M
+Request((M T
+>((T U
+requests((V ^
+)((^ _
+{)) 	
+List** 
+<** 
+RequestDetailsModel** $
+>**$ %
+returnEvent**& 1
+=**2 3
+new**4 7
+List**8 <
+<**< =
+RequestDetailsModel**= P
+>**P Q
+(**Q R
+)**R S
+;**S T
+foreach,, 
+(,, 
+var,, 
+request,,  
+in,,! #
+requests,,$ ,
+),,, -
+{-- 
+RequestDetailsModel.. #
+returnRequest..$ 1
+=..2 3
+new..4 7
+RequestDetailsModel..8 K
+(..K L
+)..L M
+{// 
+Id00 
+=00 
+request00  
+.00  !
+Id00! #
+,00# $
+ReceiverUser11  
+=11! "
+_mapper11# *
+.11* +
+Map11+ .
+<11. /
+GenericPersonModel11/ A
+>11A B
+(11B C
+request11C J
+.11J K
+Receiver11K S
+)11S T
+,11T U
 
-SenderUser// 
-=//  
-_mapper//! (
-.//( )
-Map//) ,
-<//, -
-GenericPersonModel//- ?
->//? @
-(//@ A
-request//A H
-.//H I
-Sender//I O
-)//O P
-,//P Q+
-ReceiverReferenceInSenderTreeId00 3
-=004 5
-request006 =
-.00= >+
-ReceiverReferenceInSenderTreeId00> ]
-}11 
-;11 
-returnRequest22 
-.22 
-ReceiverUser22 *
-.22* +
-	ImageFile22+ 4
-=225 6
-await227 <"
-_fileManagementService22= S
-.22S T
-GetFile22T [
-(22[ \
-request22\ c
-.22c d
-Receiver22d l
-.22l m
-Person22m s
-.22s t
-Image22t y
-)22y z
-;22z {
-returnRequest33 
-.33 
+SenderUser22 
+=22  
+_mapper22! (
+.22( )
+Map22) ,
+<22, -
+GenericPersonModel22- ?
+>22? @
+(22@ A
+request22A H
+.22H I
+Sender22I O
+)22O P
+,22P Q+
+ReceiverReferenceInSenderTreeId33 3
+=334 5
+request336 =
+.33= >+
+ReceiverReferenceInSenderTreeId33> ]
+}44 
+;44 
+returnRequest66 
+.66 
+ReceiverUser66 *
+.66* +
+	ImageFile66+ 4
+=665 6
+await667 <"
+_fileManagementService66= S
+.66S T
+GetFile66T [
+(66[ \
+request66\ c
+.66c d
+Receiver66d l
+.66l m
+Person66m s
+.66s t
+Image66t y
+)66y z
+;66z {
+returnRequest77 
+.77 
 
-SenderUser33 (
-.33( )
-	ImageFile33) 2
-=333 4
-await335 :"
-_fileManagementService33; Q
-.33Q R
-GetFile33R Y
-(33Y Z
-request33Z a
-.33a b
-Sender33b h
-.33h i
-Person33i o
-.33o p
-Image33p u
-)33u v
-;33v w
-returnEvent44 
-.44 
-Add44 
-(44  
-returnRequest44  -
-)44- .
-;44. /
-}55 
-return66 
-returnEvent66 
-;66 
-}77 	
-private99 
-async99 
-Task99 
-<99 
-List99 
-<99   
-RequestResponseModel99  4
->994 5
->995 6
-MapRequestResponse997 I
-(99I J
-List99J N
-<99N O
-Request99O V
->99V W
-requests99X `
-)99` a
-{:: 	
-List;; 
-<;;  
-RequestResponseModel;; %
->;;% &
-returnEvent;;' 2
-=;;3 4
-new;;5 8
-List;;9 =
-<;;= > 
-RequestResponseModel;;> R
->;;R S
-(;;S T
-);;T U
-;;;U V
-foreach<< 
-(<< 
-var<< 
-request<<  
-in<<! #
-requests<<$ ,
-)<<, -
-{==  
-RequestResponseModel>> $
-returnRequest>>% 2
-=>>3 4
-new>>5 8 
-RequestResponseModel>>9 M
-(>>M N
-)>>N O
-{?? 
-Id@@ 
-=@@ 
-request@@  
-.@@  !
-Id@@! #
-,@@# $
-ReceiverUserAA  
-=AA! "
-_mapperAA# *
-.AA* +
-MapAA+ .
-<AA. /
-GenericPersonModelAA/ A
->AAA B
-(AAB C
-requestAAC J
-.AAJ K
-ReceiverAAK S
-)AAS T
-,AAT U
-ResponseBB 
-=BB 
-requestBB &
-.BB& '
-ResponseBB' /
-}CC 
-;CC 
-returnRequestDD 
-.DD 
-ReceiverUserDD *
-.DD* +
-	ImageFileDD+ 4
-=DD5 6
-awaitDD7 <"
-_fileManagementServiceDD= S
-.DDS T
-GetFileDDT [
-(DD[ \
-requestDD\ c
-.DDc d
-ReceiverDDd l
-.DDl m
-PersonDDm s
-.DDs t
-ImageDDt y
-)DDy z
-;DDz {
-returnEventEE 
-.EE 
-AddEE 
-(EE  
-returnRequestEE  -
-)EE- .
-;EE. /
-}FF 
-returnGG 
-returnEventGG 
-;GG 
-}HH 	
-publicJJ 
-asyncJJ 
-TaskJJ 
-<JJ 
-ListJJ 
-<JJ 
-RequestDetailsModelJJ 2
->JJ2 3
->JJ3 4
-GetRequestsReceivedJJ5 H
-(JJH I
-GuidJJI M
+SenderUser77 (
+.77( )
+	ImageFile77) 2
+=773 4
+await775 :"
+_fileManagementService77; Q
+.77Q R
+GetFile77R Y
+(77Y Z
+request77Z a
+.77a b
+Sender77b h
+.77h i
+Person77i o
+.77o p
+Image77p u
+)77u v
+;77v w
+returnEvent88 
+.88 
+Add88 
+(88  
+returnRequest88  -
+)88- .
+;88. /
+}99 
+return;; 
+returnEvent;; 
+;;; 
+}<< 	
+private>> 
+async>> 
+Task>> 
+<>> 
+List>> 
+<>>   
+RequestResponseModel>>  4
+>>>4 5
+>>>5 6
+MapRequestResponse>>7 I
+(>>I J
+List>>J N
+<>>N O
+Request>>O V
+>>>V W
+requests>>X `
+)>>` a
+{?? 	
+List@@ 
+<@@  
+RequestResponseModel@@ %
+>@@% &
+returnEvent@@' 2
+=@@3 4
+new@@5 8
+List@@9 =
+<@@= > 
+RequestResponseModel@@> R
+>@@R S
+(@@S T
+)@@T U
+;@@U V
+foreachBB 
+(BB 
+varBB 
+requestBB  
+inBB! #
+requestsBB$ ,
+)BB, -
+{CC  
+RequestResponseModelDD $
+returnRequestDD% 2
+=DD3 4
+newDD5 8 
+RequestResponseModelDD9 M
+(DDM N
+)DDN O
+{EE 
+IdFF 
+=FF 
+requestFF  
+.FF  !
+IdFF! #
+,FF# $
+ReceiverUserGG  
+=GG! "
+_mapperGG# *
+.GG* +
+MapGG+ .
+<GG. /
+GenericPersonModelGG/ A
+>GGA B
+(GGB C
+requestGGC J
+.GGJ K
+ReceiverGGK S
+)GGS T
+,GGT U
+ResponseHH 
+=HH 
+requestHH &
+.HH& '
+ResponseHH' /
+}II 
+;II 
+returnRequestKK 
+.KK 
+ReceiverUserKK *
+.KK* +
+	ImageFileKK+ 4
+=KK5 6
+awaitKK7 <"
+_fileManagementServiceKK= S
+.KKS T
+GetFileKKT [
+(KK[ \
+requestKK\ c
+.KKc d
+ReceiverKKd l
+.KKl m
+PersonKKm s
+.KKs t
+ImageKKt y
+)KKy z
+;KKz {
+returnEventLL 
+.LL 
+AddLL 
+(LL  
+returnRequestLL  -
+)LL- .
+;LL. /
+}MM 
+returnOO 
+returnEventOO 
+;OO 
+}PP 	
+publicRR 
+asyncRR 
+TaskRR 
+<RR 
+ListRR 
+<RR 
+RequestDetailsModelRR 2
+>RR2 3
+>RR3 4
+GetRequestsReceivedRR5 H
+(RRH I
+GuidRRI M
 
-receiverIdJJN X
-)JJX Y
-{KK 	
-ListLL 
-<LL 
-RequestLL 
->LL 
-requestsLL "
-=LL# $
+receiverIdRRN X
+)RRX Y
+{SS 	
+ListTT 
+<TT 
+RequestTT 
+>TT 
+requestsTT "
+=TT# $
 
-unitOfWorkLL% /
-.LL/ 0
-RequestsLL0 8
-.LL8 9
-FilterLL9 ?
-(LL? @
-xLL@ A
-=>LLB D
-xLLE F
-.LLF G
+unitOfWorkTT% /
+.TT/ 0
+RequestsTT0 8
+.TT8 9
+FilterTT9 ?
+(TT? @
+xTT@ A
+=>TTB D
+xTTE F
+.TTF G
 
-ReceiverIdLLG Q
-==LLR T
+ReceiverIdTTG Q
+==TTR T
 
-receiverIdLLU _
-&&LL` b
-!LLc d
-xLLd e
-.LLe f
-ReceiverRespondedLLf w
-)LLw x
-.MM0 1
-IncludeMM1 8
-(MM8 9
-xMM9 :
-=>MM; =
-xMM> ?
-.MM? @
-ReceiverMM@ H
-)MMH I
-.MMI J
-ThenIncludeMMJ U
-(MMU V
-rMMV W
-=>MMX Z
-rMM[ \
-.MM\ ]
-PersonMM] c
-)MMc d
-.MMd e
-ThenIncludeMMe p
-(MMp q
-pMMq r
-=>MMs u
-pMMv w
-.MMw x
-ImageMMx }
-)MM} ~
-.NN0 1
-IncludeNN1 8
-(NN8 9
-xNN9 :
-=>NN; =
-xNN> ?
-.NN? @
-SenderNN@ F
-)NNF G
-.NNG H
-ThenIncludeNNH S
-(NNS T
-rNNT U
-=>NNV X
-rNNY Z
-.NNZ [
-PersonNN[ a
-)NNa b
-.NNb c
-ThenIncludeNNc n
-(NNn o
-pNNo p
-=>NNq s
-pNNt u
-.NNu v
-ImageNNv {
-)NN{ |
-.OO0 1
-IncludeOO1 8
-(OO8 9
-xOO9 :
-=>OO; =
-xOO> ?
-.OO? @)
-ReceiverReferenceInSenderTreeOO@ ]
-)OO] ^
-.OO^ _
-ThenIncludeOO_ j
-(OOj k
-pOOk l
-=>OOm o
-pOOp q
-.OOq r
-ImageOOr w
-)OOw x
-.OOx y
-ToListOOy 
-(	OO Ä
-)
-OOÄ Å
-;
-OOÅ Ç
-returnPP 
-awaitPP 
-MapRequestDetailsPP *
-(PP* +
-requestsPP+ 3
-)PP3 4
-;PP4 5
-}QQ 	
-publicSS 
-asyncSS 
-TaskSS 
-<SS 
-ListSS 
-<SS  
-RequestResponseModelSS 3
->SS3 4
->SS4 5 
-GetRequestsRespondedSS6 J
-(SSJ K
-GuidSSK O
-senderIdSSP X
-)SSX Y
-{TT 	
-ListUU 
-<UU 
-RequestUU 
->UU 
-requestsUU "
-=UU# $
-
-unitOfWorkUU% /
-.UU/ 0
-RequestsUU0 8
-.UU8 9
-FilterUU9 ?
-(UU? @
-xUU@ A
-=>UUB D
-xUUE F
-.UUF G
-SenderIdUUG O
-==UUP R
-senderIdUUS [
-&&UU\ ^
-xUU_ `
-.UU` a
-ReceiverRespondedUUa r
-)UUr s
+receiverIdTTU _
+&&TT` b
+!TTc d
+xTTd e
+.TTe f
+ReceiverRespondedTTf w
+)TTw x
+.UU0 1
+IncludeUU1 8
+(UU8 9
+xUU9 :
+=>UU; =
+xUU> ?
+.UU? @
+ReceiverUU@ H
+)UUH I
+.UUI J
+ThenIncludeUUJ U
+(UUU V
+rUUV W
+=>UUX Z
+rUU[ \
+.UU\ ]
+PersonUU] c
+)UUc d
+.UUd e
+ThenIncludeUUe p
+(UUp q
+pUUq r
+=>UUs u
+pUUv w
+.UUw x
+ImageUUx }
+)UU} ~
 .VV0 1
 IncludeVV1 8
 (VV8 9
 xVV9 :
 =>VV; =
 xVV> ?
-.VV? @
-ReceiverVV@ H
-)VVH I
-.VVI J
-ThenIncludeVVJ U
-(VVU V
-rVVV W
-=>VVX Z
-rVV[ \
-.VV\ ]
-PersonVV] c
-)VVc d
-.VVd e
-ThenIncludeVVe p
-(VVp q
-pVVq r
-=>VVs u
-pVVv w
-.VVw x
-ImageVVx }
-)VV} ~
-.VV~ 
-ToList	VV Ö
-(
-VVÖ Ü
+.VV? @
+SenderVV@ F
+)VVF G
+.VVG H
+ThenIncludeVVH S
+(VVS T
+rVVT U
+=>VVV X
+rVVY Z
+.VVZ [
+PersonVV[ a
+)VVa b
+.VVb c
+ThenIncludeVVc n
+(VVn o
+pVVo p
+=>VVq s
+pVVt u
+.VVu v
+ImageVVv {
+)VV{ |
+.WW0 1
+IncludeWW1 8
+(WW8 9
+xWW9 :
+=>WW; =
+xWW> ?
+.WW? @)
+ReceiverReferenceInSenderTreeWW@ ]
+)WW] ^
+.WW^ _
+ThenIncludeWW_ j
+(WWj k
+pWWk l
+=>WWm o
+pWWp q
+.WWq r
+ImageWWr w
+)WWw x
+.WWx y
+ToListWWy 
+(	WW Ä
 )
-VVÜ á
+WWÄ Å
 ;
-VVá à
-returnWW 
-awaitWW 
-MapRequestResponseWW +
-(WW+ ,
-requestsWW, 4
-)WW4 5
-;WW5 6
-}XX 	
-publicZZ 
-asyncZZ 
-TaskZZ 
-<ZZ $
-RequestCreateUpdateModelZZ 2
->ZZ2 3
+WWÅ Ç
+returnYY 
+awaitYY 
+MapRequestDetailsYY *
+(YY* +
+requestsYY+ 3
+)YY3 4
+;YY4 5
+}ZZ 	
+public\\ 
+async\\ 
+Task\\ 
+<\\ 
+List\\ 
+<\\  
+RequestResponseModel\\ 3
+>\\3 4
+>\\4 5 
+GetRequestsResponded\\6 J
+(\\J K
+Guid\\K O
+senderId\\P X
+)\\X Y
+{]] 	
+List^^ 
+<^^ 
+Request^^ 
+>^^ 
+requests^^ "
+=^^# $
 
-AddRequestZZ4 >
-(ZZ> ?$
-RequestCreateUpdateModelZZ? W
-requestZZX _
-)ZZ_ `
-{[[ 	
-if\\ 
-(\\ 
-request\\ 
-==\\ 
-null\\ 
-)\\  
-{]] 
-return^^ 
-null^^ 
-;^^ 
-}__ 
-Request`` 
-requestEntity`` !
-=``" #
-_mapper``$ +
-.``+ ,
-Map``, /
-<``/ 0
-Request``0 7
->``7 8
-(``8 9
-request``9 @
-)``@ A
-;``A B
-requestEntityaa 
-.aa )
-ReceiverReferenceInSenderTreeaa 7
-=aa8 9
-nullaa: >
-;aa> ?
-Requestbb 
-createdRequestbb "
-=bb# $
-awaitbb% *
+unitOfWork^^% /
+.^^/ 0
+Requests^^0 8
+.^^8 9
+Filter^^9 ?
+(^^? @
+x^^@ A
+=>^^B D
+x^^E F
+.^^F G
+SenderId^^G O
+==^^P R
+senderId^^S [
+&&^^\ ^
+x^^_ `
+.^^` a
+ReceiverResponded^^a r
+)^^r s
+.__0 1
+Include__1 8
+(__8 9
+x__9 :
+=>__; =
+x__> ?
+.__? @
+Receiver__@ H
+)__H I
+.__I J
+ThenInclude__J U
+(__U V
+r__V W
+=>__X Z
+r__[ \
+.__\ ]
+Person__] c
+)__c d
+.__d e
+ThenInclude__e p
+(__p q
+p__q r
+=>__s u
+p__v w
+.__w x
+Image__x }
+)__} ~
+.__~ 
+ToList	__ Ö
+(
+__Ö Ü
+)
+__Ü á
+;
+__á à
+returnaa 
+awaitaa 
+MapRequestResponseaa +
+(aa+ ,
+requestsaa, 4
+)aa4 5
+;aa5 6
+}bb 	
+publicdd 
+asyncdd 
+Taskdd 
+<dd $
+RequestCreateUpdateModeldd 2
+>dd2 3
 
-unitOfWorkbb+ 5
-.bb5 6
-Requestsbb6 >
-.bb> ?
-Createbb? E
-(bbE F
-requestEntitybbF S
-)bbS T
-;bbT U$
-RequestCreateUpdateModelcc $
-returnEventcc% 0
-=cc1 2
-_mappercc3 :
-.cc: ;
-Mapcc; >
-<cc> ?$
-RequestCreateUpdateModelcc? W
->ccW X
-(ccX Y
-createdRequestccY g
-)ccg h
-;cch i
-returndd 
-returnEventdd 
-;dd 
-}ee 	
-publicgg 
-asyncgg 
-Taskgg 
-<gg 
-UsersToLinkModelgg *
->gg* +
-RespondToRequestgg, <
-(gg< =
-intgg= @
-	requestIdggA J
-,ggJ K 
-RequestResponseModelggL `
-respondedRequestgga q
-)ggq r
-{hh 	
-Requestii 
-requestii 
-=ii 
-awaitii #
+AddRequestdd4 >
+(dd> ?$
+RequestCreateUpdateModeldd? W
+requestddX _
+)dd_ `
+{ee 	
+ifff 
+(ff 
+requestff 
+==ff 
+nullff 
+)ff  
+{gg 
+returnhh 
+nullhh 
+;hh 
+}ii 
+Requestkk 
+requestEntitykk !
+=kk" #
+_mapperkk$ +
+.kk+ ,
+Mapkk, /
+<kk/ 0
+Requestkk0 7
+>kk7 8
+(kk8 9
+requestkk9 @
+)kk@ A
+;kkA B
+requestEntityll 
+.ll )
+ReceiverReferenceInSenderTreell 7
+=ll8 9
+nullll: >
+;ll> ?
+Requestmm 
+createdRequestmm "
+=mm# $
+awaitmm% *
 
-unitOfWorkii$ .
-.ii. /
-Requestsii/ 7
-.ii7 8
-FindByIdii8 @
-(ii@ A
-	requestIdiiA J
-)iiJ K
-;iiK L
-ifjj 
-(jj 
-requestjj 
-==jj 
-nulljj 
-)jj  
-{kk 
-returnll 
-nullll 
-;ll 
-}mm 
-requestnn 
-.nn 
-ReceiverRespondednn %
-=nn& '
-truenn( ,
-;nn, -
-requestoo 
-.oo 
-Responseoo 
-=oo 
-respondedRequestoo /
-.oo/ 0
-Responseoo0 8
-;oo8 9
-Relativeqq 
-alreadyRelatedqq #
-=qq$ %
+unitOfWorkmm+ 5
+.mm5 6
+Requestsmm6 >
+.mm> ?
+Createmm? E
+(mmE F
+requestEntitymmF S
+)mmS T
+;mmT U$
+RequestCreateUpdateModelnn $
+returnEventnn% 0
+=nn1 2
+_mappernn3 :
+.nn: ;
+Mapnn; >
+<nn> ?$
+RequestCreateUpdateModelnn? W
+>nnW X
+(nnX Y
+createdRequestnnY g
+)nng h
+;nnh i
+returnpp 
+returnEventpp 
+;pp 
+}qq 	
+publicss 
+asyncss 
+Taskss 
+<ss 
+UsersToLinkModelss *
+>ss* +
+RespondToRequestss, <
+(ss< =
+intss= @
+	requestIdssA J
+,ssJ K 
+RequestResponseModelssL `
+respondedRequestssa q
+)ssq r
+{tt 	
+Requestuu 
+requestuu 
+=uu 
+awaituu #
 
-unitOfWorkqq& 0
-.qq0 1
-	Relativesqq1 :
-.qq: ;
-Filterqq; A
-(qqA B
-xqqB C
-=>qqD F
-xqqG H
-.qqH I
-PrimaryUserIdqqI V
-==qqW Y
-requestqqZ a
-.qqa b
+unitOfWorkuu$ .
+.uu. /
+Requestsuu/ 7
+.uu7 8
+FindByIduu8 @
+(uu@ A
+	requestIduuA J
+)uuJ K
+;uuK L
+ifww 
+(ww 
+requestww 
+==ww 
+nullww 
+)ww  
+{xx 
+returnyy 
+nullyy 
+;yy 
+}zz 
+request|| 
+.|| 
+ReceiverResponded|| %
+=||& '
+true||( ,
+;||, -
+request}} 
+.}} 
+Response}} 
+=}} 
+respondedRequest}} /
+.}}/ 0
+Response}}0 8
+;}}8 9
+Relative 
+alreadyRelated #
+=$ %
 
-ReceiverIdqqb l
-&&qqm o
-xqqp q
-.qqq r
-RelativeUserId	qqr Ä
+unitOfWork& 0
+.0 1
+	Relatives1 :
+.: ;
+Filter; A
+(A B
+xB C
+=>D F
+xG H
+.H I
+PrimaryUserIdI V
+==W Y
+requestZ a
+.a b
+
+ReceiverIdb l
+&&m o
+xp q
+.q r
+RelativeUserId	r Ä
 ==
-qqÅ É
+Å É
 request
-qqÑ ã
+Ñ ã
 .
-qqã å
+ã å
 SenderId
-qqå î
+å î
 )
-qqî ï
+î ï
 .
-qqï ñ
+ï ñ
 FirstOrDefault
-qqñ §
+ñ §
 (
-qq§ •
+§ •
 )
-qq• ¶
+• ¶
 ;
-qq¶ ß
-ifss 
-(ss 
-respondedRequestss  
-.ss  !+
-SenderReferenceInReceiverTreeIdss! @
-!=ssA C
-$numssD E
-&&ssF H
-alreadyRelatedssI W
-!=ssX Z
-defaultss[ b
-(ssb c
-Relativessc k
-)ssk l
-)ssl m
-{tt 
-requestuu 
-.uu +
-ReceiverReferenceInSenderTreeIduu 7
-=uu8 9
-respondedRequestuu: J
-.uuJ K+
-SenderReferenceInReceiverTreeIduuK j
-;uuj k
-}vv 
-Requestxx 
-updatedRequestxx "
-=xx# $
-awaitxx% *
-
-unitOfWorkxx+ 5
-.xx5 6
-Requestsxx6 >
-.xx> ?
-Updatexx? E
-(xxE F
-requestxxF M
-)xxM N
-;xxN O
-UsersToLinkModelzz 
-firstRelativezz *
-=zz+ ,
-newzz- 0
-UsersToLinkModelzz1 A
-(zzA B
-)zzB C
-{{{ 
-PrimaryUserId|| 
-=|| 
-updatedRequest||  .
-.||. /
-SenderId||/ 7
-,||7 8
-LinkedUserId}} 
-=}} 
-updatedRequest}} -
-.}}- .
-
-ReceiverId}}. 8
-,}}8 9)
-PrimaryPersonInRelativeTreeId~~ -
-=~~. /
-respondedRequest~~0 @
-.~~@ A+
-SenderReferenceInReceiverTreeId~~A `
-,~~` a'
-LinkedPersonInPrimaryTreeId +
-=, -
-updatedRequest. <
-.< =+
-ReceiverReferenceInSenderTreeId= \
-}
-ÄÄ 
-;
-ÄÄ 
+¶ ß
 if
 ÅÅ 
 (
@@ -17439,127 +17382,271 @@ ReceiverId}}. 8
 respondedRequest
 ÅÅ  
 .
-ÅÅ  !
-Response
-ÅÅ! )
-)
-ÅÅ) *
-{
-ÇÇ 
-await
-ÉÉ 
-_relativeService
-ÉÉ &
-.
-ÉÉ& '
-AddRelativeUser
-ÉÉ' 6
+ÅÅ  !-
+SenderReferenceInReceiverTreeId
+ÅÅ! @
+!=
+ÅÅA C
+$num
+ÅÅD E
+&&
+ÅÅF H
+alreadyRelated
+ÅÅI W
+!=
+ÅÅX Z
+default
+ÅÅ[ b
 (
-ÉÉ6 7
-firstRelative
-ÉÉ7 D
+ÅÅb c
+Relative
+ÅÅc k
 )
-ÉÉD E
-;
-ÉÉE F
-}
-ÑÑ 
-return
-ÖÖ 
-firstRelative
-ÖÖ  
-;
-ÖÖ  !
-}
-ÜÜ 	
-public
-àà 
-async
-àà 
-Task
-àà 
-<
-àà !
-RequestDetailsModel
-àà -
->
-àà- .
-DeleteRequest
-àà/ <
-(
-àà< =
-int
-àà= @
-	requestId
-ààA J
+ÅÅk l
 )
-ààJ K
+ÅÅl m
 {
-ââ 	
-Request
-ää 
+ÇÇ 
 request
-ää 
+ÉÉ 
+.
+ÉÉ -
+ReceiverReferenceInSenderTreeId
+ÉÉ 7
 =
-ää 
+ÉÉ8 9
+respondedRequest
+ÉÉ: J
+.
+ÉÉJ K-
+SenderReferenceInReceiverTreeId
+ÉÉK j
+;
+ÉÉj k
+}
+ÑÑ 
+Request
+ÜÜ 
+updatedRequest
+ÜÜ "
+=
+ÜÜ# $
 await
-ää #
+ÜÜ% *
 
 unitOfWork
-ää$ .
+ÜÜ+ 5
+.
+ÜÜ5 6
+Requests
+ÜÜ6 >
+.
+ÜÜ> ?
+Update
+ÜÜ? E
+(
+ÜÜE F
+request
+ÜÜF M
+)
+ÜÜM N
+;
+ÜÜN O
+UsersToLinkModel
+àà 
+firstRelative
+àà *
+=
+àà+ ,
+new
+àà- 0
+UsersToLinkModel
+àà1 A
+(
+ààA B
+)
+ààB C
+{
+ââ 
+PrimaryUserId
+ää 
+=
+ää 
+updatedRequest
+ää  .
 .
 ää. /
-Requests
+SenderId
 ää/ 7
-.
-ää7 8
-Delete
-ää8 >
-(
-ää> ?
-	requestId
-ää? H
-)
-ääH I
-;
-ääI J!
-RequestDetailsModel
-ãã 
-returnEvent
-ãã  +
+,
+ää7 8
+LinkedUserId
+ãã 
 =
-ãã, -
-_mapper
-ãã. 5
+ãã 
+updatedRequest
+ãã -
 .
-ãã5 6
-Map
-ãã6 9
-<
-ãã9 :!
-RequestDetailsModel
-ãã: M
->
-ããM N
+ãã- .
+
+ReceiverId
+ãã. 8
+,
+ãã8 9+
+PrimaryPersonInRelativeTreeId
+åå -
+=
+åå. /
+respondedRequest
+åå0 @
+.
+åå@ A-
+SenderReferenceInReceiverTreeId
+ååA `
+,
+åå` a)
+LinkedPersonInPrimaryTreeId
+çç +
+=
+çç, -
+updatedRequest
+çç. <
+.
+çç< =-
+ReceiverReferenceInSenderTreeId
+çç= \
+}
+éé 
+;
+éé 
+if
+êê 
 (
-ããN O
-request
-ããO V
+êê 
+respondedRequest
+êê  
+.
+êê  !
+Response
+êê! )
 )
-ããV W
+êê) *
+{
+ëë 
+await
+íí 
+_relativeService
+íí &
+.
+íí& '
+AddRelativeUser
+íí' 6
+(
+íí6 7
+firstRelative
+íí7 D
+)
+ííD E
 ;
-ããW X
+ííE F
+}
+ìì 
 return
-åå 
-returnEvent
-åå 
+ïï 
+firstRelative
+ïï  
 ;
-åå 
+ïï  !
 }
-çç 	
+ññ 	
+public
+òò 
+async
+òò 
+Task
+òò 
+<
+òò !
+RequestDetailsModel
+òò -
+>
+òò- .
+DeleteRequest
+òò/ <
+(
+òò< =
+int
+òò= @
+	requestId
+òòA J
+)
+òòJ K
+{
+ôô 	
+Request
+öö 
+request
+öö 
+=
+öö 
+await
+öö #
+
+unitOfWork
+öö$ .
+.
+öö. /
+Requests
+öö/ 7
+.
+öö7 8
+Delete
+öö8 >
+(
+öö> ?
+	requestId
+öö? H
+)
+ööH I
+;
+ööI J!
+RequestDetailsModel
+õõ 
+returnEvent
+õõ  +
+=
+õõ, -
+_mapper
+õõ. 5
+.
+õõ5 6
+Map
+õõ6 9
+<
+õõ9 :!
+RequestDetailsModel
+õõ: M
+>
+õõM N
+(
+õõN O
+request
+õõO V
+)
+õõV W
+;
+õõW X
+return
+ùù 
+returnEvent
+ùù 
+;
+ùù 
 }
-éé 
-}èè ≠˙
+ûû 	
+}
+üü 
+}†† ù˚
 eE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\Services\UserService.cs
 	namespace 	
 GenealogyTree
@@ -17598,415 +17685,373 @@ eE:\Facultate\Licence\Genealogy-Tree\genealogy-tree-API\GenealogyTree.Business\S
 IPersonService '
 _personService( 6
 ;6 7
-public 
-UserService 
-( 
-IUnitOfWork &
+public 
+UserService 
+( 
+IUnitOfWork &
 
-unitOfWork' 1
-,1 2
-IMapper3 :
-mapper; A
-,A B"
-IFileManagementServiceC Y!
-fileManagementServiceZ o
-,o p
-IRequestService	q Ä
+unitOfWork' 1
+,1 2
+IMapper3 :
+mapper; A
+,A B"
+IFileManagementServiceC Y!
+fileManagementServiceZ o
+,o p
+IRequestService	q Ä
 requestService
-Å è
+Å è
 ,
-è ê
+è ê
 IPersonService
-ë ü
+ë ü
 personService
-† ≠
+† ≠
 )
-≠ Æ
+≠ Æ
 :
-Ø ∞
+Ø ∞
 base
-± µ
+± µ
 (
-µ ∂
+µ ∂
 
 unitOfWork
-∂ ¿
+∂ ¿
 )
-¿ ¡
-{ 	
-_mapper 
-= 
-mapper 
-; "
-_fileManagementService "
-=# $!
-fileManagementService% :
-;: ;
-_requestService 
-= 
-requestService ,
-;, -
-_personService 
-= 
-personService *
-;* +
-} 	
-public!! 
-async!! 
-Task!! 
-<!! 
+¿ ¡
+{ 	
+_mapper 
+= 
+mapper 
+; "
+_fileManagementService "
+=# $!
+fileManagementService% :
+;: ;
+_requestService 
+= 
+requestService ,
+;, -
+_personService 
+= 
+personService *
+;* +
+}   	
+public"" 
+async"" 
+Task"" 
+<"" 
 
-UsersFound!! $
->!!$ %
-	FindUsers!!& /
-(!!/ 0 
-InfiniteScrollFilter!!0 D
-filter!!E K
-)!!K L
-{"" 	
-if## 
-(## 
-filter## 
-.## 
-Name## 
-==## 
-null## #
-)### $
-{$$ 
-filter%% 
-.%% 
-Name%% 
-=%% 
-$str%%  
-;%%  !
-}&& 
-List'' 
-<'' 
-string'' 
->'' 
-names'' 
-=''  
-filter''! '
-.''' (
-Name''( ,
-.'', -
-Split''- 2
-(''2 3
-$str''3 6
-)''6 7
-.''7 8
-ToList''8 >
-(''> ?
-)''? @
-;''@ A
-IEnumerable(( 
-<(( 
-User(( 
->(( 
-filteredUsers(( +
-=((, -
+UsersFound"" $
+>""$ %
+	FindUsers""& /
+(""/ 0 
+InfiniteScrollFilter""0 D
+filter""E K
+)""K L
+{## 	
+if$$ 
+($$ 
+filter$$ 
+.$$ 
+Name$$ 
+==$$ 
+null$$ #
+)$$# $
+{%% 
+filter&& 
+.&& 
+Name&& 
+=&& 
+$str&&  
+;&&  !
+}'' 
+List)) 
+<)) 
+string)) 
+>)) 
+names)) 
+=))  
+filter))! '
+.))' (
+Name))( ,
+.)), -
+Split))- 2
+())2 3
+$str))3 6
+)))6 7
+.))7 8
+ToList))8 >
+())> ?
+)))? @
+;))@ A
+IEnumerable** 
+<** 
+User** 
+>** 
+filteredUsers** +
+=**, -
 
-unitOfWork((. 8
-.((8 9
-User((9 =
-.((= >
-GetAll((> D
-(((D E
-)((E F
-.)) 
-Include)) 
-()) 
-user)) 
-=>))  
-user))! %
-.))% &
-Person))& ,
-))), -
-.** 
-ThenInclude** 
-(** 
-person** #
-=>**$ &
-person**' -
-.**- .
-Image**. 3
-)**3 4
-.**4 5
-ToList**5 ;
-(**; <
-)**< =
-;**= >
-filteredUsers++ 
-=++ 
-filteredUsers++ )
-.++) *
-Where++* /
-(++/ 0
-(++0 1
-user++1 5
-)++5 6
-=>++7 9
-names++: ?
-.++? @
-All++@ C
-(++C D
-name++D H
-=>++I K
-user++L P
-.++P Q
-Person++Q W
-.++W X
-	FirstName++X a
-.++a b
-Contains++b j
-(++j k
-name++k o
-)++o p
-||++q s
-user++t x
-.++x y
-Person++y 
-.	++ Ä
+unitOfWork**. 8
+.**8 9
+User**9 =
+.**= >
+GetAll**> D
+(**D E
+)**E F
+.++ 
+Include++ 
+(++ 
+user++ 
+=>++  
+user++! %
+.++% &
+Person++& ,
+)++, -
+.,, 
+ThenInclude,, 
+(,, 
+person,, #
+=>,,$ &
+person,,' -
+.,,- .
+Image,,. 3
+),,3 4
+.,,4 5
+ToList,,5 ;
+(,,; <
+),,< =
+;,,= >
+filteredUsers-- 
+=-- 
+filteredUsers-- )
+.--) *
+Where--* /
+(--/ 0
+(--0 1
+user--1 5
+)--5 6
+=>--7 9
+names--: ?
+.--? @
+All--@ C
+(--C D
+name--D H
+=>--I K
+user--L P
+.--P Q
+Person--Q W
+.--W X
+	FirstName--X a
+.--a b
+Contains--b j
+(--j k
+name--k o
+)--o p
+||--q s
+user--t x
+.--x y
+Person--y 
+.	-- Ä
 LastName
-++Ä à
+--Ä à
 .
-++à â
+--à â
 Contains
-++â ë
+--â ë
 (
-++ë í
+--ë í
 name
-++í ñ
+--í ñ
 )
-++ñ ó
+--ñ ó
 )
-++ó ò
+--ó ò
 )
-++ò ô
+--ò ô
 .
-++ô ö
+--ô ö
 ToList
-++ö †
+--ö †
 (
-++† °
+--† °
 )
-++° ¢
+--° ¢
 ;
-++¢ £
+--¢ £
 
-UsersFound.. 
+UsersFound00 
 
-usersFound.. !
-=.." #
-new..$ '
+usersFound00 !
+=00" #
+new00$ '
 
-UsersFound..( 2
-(..2 3
-)..3 4
-;..4 5
-List// 
-<// 
-User// 
->// 
+UsersFound00( 2
+(002 3
+)003 4
+;004 5
+List11 
+<11 
+User11 
+>11 
 
-foundUsers// !
-=//" #
-filteredUsers//$ 1
-.//1 2
-Skip//2 6
-(//6 7
-filter//7 =
-.//= >
-Skip//> B
-)//B C
-.//C D
-Take//D H
-(//H I
-filter//I O
-.//O P
-Take//P T
-)//T U
-.//U V
-ToList//V \
-(//\ ]
-)//] ^
-;//^ _
-
-usersFound00 
-.00 
-
-totalUsers00 !
-=00" #
-filteredUsers00$ 1
-.001 2
-Count002 7
-(007 8
-)008 9
-;009 :
-
-usersFound11 
-.11 
-skippedUsers11 #
-=11$ %
-filter11& ,
-.11, -
-Skip11- 1
-;111 2
+foundUsers11 !
+=11" #
+filteredUsers11$ 1
+.111 2
+Skip112 6
+(116 7
+filter117 =
+.11= >
+Skip11> B
+)11B C
+.11C D
+Take11D H
+(11H I
+filter11I O
+.11O P
+Take11P T
+)11T U
+.11U V
+ToList11V \
+(11\ ]
+)11] ^
+;11^ _
 
 usersFound22 
 .22 
 
-takenUsers22 !
-=22" #
-filter22$ *
-.22* +
-Take22+ /
-;22/ 0
+totalUsers22 !
+=22" #
+filteredUsers22$ 1
+.221 2
+Count222 7
+(227 8
+)228 9
+;229 :
 
 usersFound33 
-.33 
-areLast33 
-=33  
+.33 
+skippedUsers33 #
+=33$ %
+filter33& ,
+.33, -
+Skip33- 1
+;331 2
 
-usersFound33! +
-.33+ ,
+usersFound44 
+.44 
 
-totalUsers33, 6
-<=337 9
-filter33: @
-.33@ A
-Skip33A E
-+33F G
-filter33H N
-.33N O
-Take33O S
-;33S T
-foreach44 
-(44 
-var44 
-user44 
-in44  
+takenUsers44 !
+=44" #
+filter44$ *
+.44* +
+Take44+ /
+;44/ 0
 
-foundUsers44! +
-)44+ ,
-{55 
-GenericPersonModel66 "
-personToReturn66# 1
-=662 3
-_mapper664 ;
-.66; <
-Map66< ?
-<66? @
-GenericPersonModel66@ R
->66R S
-(66S T
-user66T X
-)66X Y
-;66Y Z
-personToReturn77 
-.77 
-	ImageFile77 (
-=77) *
-await77+ 0"
-_fileManagementService771 G
-.77G H
-GetFile77H O
-(77O P
-user77P T
-.77T U
-Person77U [
-.77[ \
-Image77\ a
-)77a b
-;77b c
+usersFound55 
+.55 
+areLast55 
+=55  
 
-usersFound88 
-.88 
-users88  
-.88  !
-Add88! $
-(88$ %
-personToReturn88% 3
-)883 4
-;884 5
-}99 
-return:: 
+usersFound55! +
+.55+ ,
 
-usersFound:: 
-;:: 
-};; 	
-public== 
-async== 
-Task== 
-<== 
-UserDetailsModel== *
->==* +
-GetUserByIdAsync==, <
-(==< =
-Guid=== A
-userId==B H
-)==H I
-{>> 	
-User?? 
-user?? 
-=?? 
+totalUsers55, 6
+<=557 9
+filter55: @
+.55@ A
+Skip55A E
++55F G
+filter55H N
+.55N O
+Take55O S
+;55S T
+foreach77 
+(77 
+var77 
+user77 
+in77  
 
-unitOfWork?? "
-.??" #
-User??# '
-.??' (
-Filter??( .
-(??. /
-user??/ 3
-=>??4 6
-user??7 ;
-.??; <
-Id??< >
-==??? A
-userId??B H
-)??H I
-.@@ 
-Include@@ $
-(@@$ %
-u@@% &
-=>@@' )
-u@@* +
-.@@+ ,
-Person@@, 2
-)@@2 3
-.AA 
-IncludeAA $
-(AA$ %
-uAA% &
-=>AA' )
-uAA* +
-.AA+ ,
-PersonAA, 2
-.AA2 3
-NationalityAA3 >
-)AA> ?
-.BB 
-IncludeBB $
-(BB$ %
-uBB% &
-=>BB' )
-uBB* +
-.BB+ ,
-PersonBB, 2
-.BB2 3
-ReligionBB3 ;
-)BB; <
-.CC 
-IncludeCC $
-(CC$ %
-uCC% &
-=>CC' )
-uCC* +
-.CC+ ,
-PersonCC, 2
-.CC2 3
-LivingPlaceCC3 >
-)CC> ?
+foundUsers77! +
+)77+ ,
+{88 
+GenericPersonModel99 "
+personToReturn99# 1
+=992 3
+_mapper994 ;
+.99; <
+Map99< ?
+<99? @
+GenericPersonModel99@ R
+>99R S
+(99S T
+user99T X
+)99X Y
+;99Y Z
+personToReturn:: 
+.:: 
+	ImageFile:: (
+=::) *
+await::+ 0"
+_fileManagementService::1 G
+.::G H
+GetFile::H O
+(::O P
+user::P T
+.::T U
+Person::U [
+.::[ \
+Image::\ a
+)::a b
+;::b c
+
+usersFound;; 
+.;; 
+users;;  
+.;;  !
+Add;;! $
+(;;$ %
+personToReturn;;% 3
+);;3 4
+;;;4 5
+}<< 
+return>> 
+
+usersFound>> 
+;>> 
+}?? 	
+publicAA 
+asyncAA 
+TaskAA 
+<AA 
+UserDetailsModelAA *
+>AA* +
+GetUserByIdAsyncAA, <
+(AA< =
+GuidAA= A
+userIdAAB H
+)AAH I
+{BB 	
+UserCC 
+userCC 
+=CC 
+
+unitOfWorkCC "
+.CC" #
+UserCC# '
+.CC' (
+FilterCC( .
+(CC. /
+userCC/ 3
+=>CC4 6
+userCC7 ;
+.CC; <
+IdCC< >
+==CC? A
+userIdCCB H
+)CCH I
 .DD 
 IncludeDD $
 (DD$ %
@@ -18015,10 +18060,7 @@ unitOfWork?? "
 uDD* +
 .DD+ ,
 PersonDD, 2
-.DD2 3
-
-BirthPlaceDD3 =
-)DD= >
+)DD2 3
 .EE 
 IncludeEE $
 (EE$ %
@@ -18027,27 +18069,30 @@ BirthPlaceDD3 =
 uEE* +
 .EE+ ,
 PersonEE, 2
-.EE2 3
-ImageEE3 8
-)EE8 9
+.EE2 3
+NationalityEE3 >
+)EE> ?
 .FF 
 IncludeFF $
 (FF$ %
 uFF% &
 =>FF' )
 uFF* +
-.FF+ ,
-
-EducationsFF, 6
-)FF6 7
-.GG 
-ThenIncludeGG (
-(GG( )
-eGG) *
-=>GG+ -
-eGG. /
-.GG/ 0
-EducationLevelGG0 >
+.FF+ ,
+PersonFF, 2
+.FF2 3
+ReligionFF3 ;
+)FF; <
+.GG 
+IncludeGG $
+(GG$ %
+uGG% &
+=>GG' )
+uGG* +
+.GG+ ,
+PersonGG, 2
+.GG2 3
+LivingPlaceGG3 >
 )GG> ?
 .HH 
 IncludeHH $
@@ -18055,329 +18100,297 @@ EducationsFF, 6
 uHH% &
 =>HH' )
 uHH* +
-.HH+ ,
-OccupationsHH, 7
-)HH7 8
-.II 
-FirstOrDefaultII +
-(II+ ,
-)II, -
-;II- .
-UserDetailsModelJJ 
-returnEventJJ (
-=JJ) *
-_mapperJJ+ 2
-.JJ2 3
-MapJJ3 6
-<JJ6 7
-UserDetailsModelJJ7 G
->JJG H
-(JJH I
-userJJI M
-)JJM N
-;JJN O
-ifKK 
-(KK 
-userKK 
-!=KK 
-nullKK 
-&&KK 
-!KK  !
-userKK! %
-.KK% &
-SharePersonalInfoKK& 7
-)KK7 8
-{LL 
-returnEventMM 
-.MM 
-EmailMM !
-=MM" #
-nullMM$ (
-;MM( )
-returnEventNN 
-.NN 
-PhoneNumberNN '
-=NN( )
-nullNN* .
-;NN. /
-returnEventOO 
-.OO 
-	ImageFileOO %
-=OO& '
-awaitOO( -"
-_fileManagementServiceOO. D
-.OOD E
-GetFileOOE L
-(OOL M
-userOOM Q
-.OOQ R
-PersonOOR X
-.OOX Y
-ImageOOY ^
-)OO^ _
-;OO_ `
-}PP 
-returnQQ 
-returnEventQQ 
-;QQ 
-}RR 	
-publicTT 
-asyncTT 
-TaskTT 
-<TT 
-UserDetailsModelTT *
->TT* +
-GetUserTT, 3
-(TT3 4
-stringTT4 :
-usernameTT; C
-)TTC D
-{UU 	
-UserVV 
-userVV 
-=VV 
+.HH+ ,
+PersonHH, 2
+.HH2 3
 
-unitOfWorkVV "
-.VV" #
-UserVV# '
-.VV' (
-FilterVV( .
-(VV. /
-xVV/ 0
-=>VV1 3
-xVV4 5
-.VV5 6
-UsernameVV6 >
-==VV? A
-usernameVVB J
-)VVJ K
-.WW 
-IncludeWW $
-(WW$ %
-uWW% &
-=>WW' )
-uWW* +
-.WW+ ,
-PersonWW, 2
-)WW2 3
-.XX 
-IncludeXX $
-(XX$ %
-uXX% &
-=>XX' )
-uXX* +
-.XX+ ,
-PersonXX, 2
-.XX2 3
-NationalityXX3 >
-)XX> ?
-.YY 
-IncludeYY $
-(YY$ %
-uYY% &
-=>YY' )
-uYY* +
-.YY+ ,
-PersonYY, 2
-.YY2 3
-ReligionYY3 ;
-)YY; <
-.ZZ 
-IncludeZZ $
-(ZZ$ %
-uZZ% &
-=>ZZ' )
-uZZ* +
-.ZZ+ ,
-PersonZZ, 2
-.ZZ2 3
-LivingPlaceZZ3 >
-)ZZ> ?
-.[[ 
-Include[[ $
-([[$ %
-u[[% &
-=>[[' )
-u[[* +
-.[[+ ,
-Person[[, 2
-.[[2 3
+BirthPlaceHH3 =
+)HH= >
+.II 
+IncludeII $
+(II$ %
+uII% &
+=>II' )
+uII* +
+.II+ ,
+PersonII, 2
+.II2 3
+ImageII3 8
+)II8 9
+.JJ 
+IncludeJJ $
+(JJ$ %
+uJJ% &
+=>JJ' )
+uJJ* +
+.JJ+ ,
 
-BirthPlace[[3 =
-)[[= >
-.\\ 
-Include\\ $
-(\\$ %
-u\\% &
-=>\\' )
-u\\* +
-.\\+ ,
-Person\\, 2
-.\\2 3
-Image\\3 8
-)\\8 9
-.]] 
-Include]] $
-(]]$ %
-u]]% &
-=>]]' )
-u]]* +
-.]]+ ,
+EducationsJJ, 6
+)JJ6 7
+.KK 
+ThenIncludeKK (
+(KK( )
+eKK) *
+=>KK+ -
+eKK. /
+.KK/ 0
+EducationLevelKK0 >
+)KK> ?
+.LL 
+IncludeLL $
+(LL$ %
+uLL% &
+=>LL' )
+uLL* +
+.LL+ ,
+OccupationsLL, 7
+)LL7 8
+.MM 
+FirstOrDefaultMM +
+(MM+ ,
+)MM, -
+;MM- .
+UserDetailsModelOO 
+returnEventOO (
+=OO) *
+_mapperOO+ 2
+.OO2 3
+MapOO3 6
+<OO6 7
+UserDetailsModelOO7 G
+>OOG H
+(OOH I
+userOOI M
+)OOM N
+;OON O
+ifQQ 
+(QQ 
+userQQ 
+!=QQ 
+nullQQ 
+&&QQ 
+!QQ  !
+userQQ! %
+.QQ% &
+SharePersonalInfoQQ& 7
+)QQ7 8
+{RR 
+returnEventSS 
+.SS 
+EmailSS !
+=SS" #
+nullSS$ (
+;SS( )
+returnEventTT 
+.TT 
+PhoneNumberTT '
+=TT( )
+nullTT* .
+;TT. /
+returnEventUU 
+.UU 
+	ImageFileUU %
+=UU& '
+awaitUU( -"
+_fileManagementServiceUU. D
+.UUD E
+GetFileUUE L
+(UUL M
+userUUM Q
+.UUQ R
+PersonUUR X
+.UUX Y
+ImageUUY ^
+)UU^ _
+;UU_ `
+}VV 
+returnXX 
+returnEventXX 
+;XX 
+}YY 	
+public[[ 
+async[[ 
+Task[[ 
+<[[ 
+UserDetailsModel[[ *
+>[[* +
+GetUser[[, 3
+([[3 4
+string[[4 :
+username[[; C
+)[[C D
+{\\ 	
+User]] 
+user]] 
+=]] 
 
-Educations]], 6
-)]]6 7
-.^^ 
-ThenInclude^^ (
-(^^( )
-e^^) *
-=>^^+ -
-e^^. /
-.^^/ 0
-EducationLevel^^0 >
-)^^> ?
+unitOfWork]] "
+.]]" #
+User]]# '
+.]]' (
+Filter]]( .
+(]]. /
+x]]/ 0
+=>]]1 3
+x]]4 5
+.]]5 6
+Username]]6 >
+==]]? A
+username]]B J
+)]]J K
+.^^ 
+Include^^ $
+(^^$ %
+u^^% &
+=>^^' )
+u^^* +
+.^^+ ,
+Person^^, 2
+)^^2 3
 .__ 
 Include__ $
 (__$ %
 u__% &
 =>__' )
 u__* +
-.__+ ,
-Occupations__, 7
-)__7 8
-.__8 9
-FirstOrDefault__9 G
-(__G H
-)__H I
-;__I J
-UserDetailsModel`` 
+.__+ ,
+Person__, 2
+.__2 3
+Nationality__3 >
+)__> ?
+.`` 
+Include`` $
+(``$ %
+u``% &
+=>``' )
+u``* +
+.``+ ,
+Person``, 2
+.``2 3
+Religion``3 ;
+)``; <
+.aa 
+Includeaa $
+(aa$ %
+uaa% &
+=>aa' )
+uaa* +
+.aa+ ,
+Personaa, 2
+.aa2 3
+LivingPlaceaa3 >
+)aa> ?
+.bb 
+Includebb $
+(bb$ %
+ubb% &
+=>bb' )
+ubb* +
+.bb+ ,
+Personbb, 2
+.bb2 3
 
-userEntity`` '
-=``( )
-_mapper``* 1
-.``1 2
-Map``2 5
-<``5 6
-UserDetailsModel``6 F
->``F G
-(``G H
-user``H L
-)``L M
-;``M N
-ifaa 
-(aa 
-useraa 
-!=aa 
-nullaa 
-)aa 
-{bb 
+BirthPlacebb3 =
+)bb= >
+.cc 
+Includecc $
+(cc$ %
+ucc% &
+=>cc' )
+ucc* +
+.cc+ ,
+Personcc, 2
+.cc2 3
+Imagecc3 8
+)cc8 9
+.dd 
+Includedd $
+(dd$ %
+udd% &
+=>dd' )
+udd* +
+.dd+ ,
 
-userEntitycc 
-.cc 
-	ImageFilecc $
-=cc% &
-awaitcc' ,"
-_fileManagementServicecc- C
-.ccC D
-GetFileccD K
-(ccK L
-userccL P
-.ccP Q
-PersonccQ W
-.ccW X
-ImageccX ]
-)cc] ^
-;cc^ _
-}dd 
-returnee 
+Educationsdd, 6
+)dd6 7
+.ee 
+ThenIncludeee (
+(ee( )
+eee) *
+=>ee+ -
+eee. /
+.ee/ 0
+EducationLevelee0 >
+)ee> ?
+.ff 
+Includeff $
+(ff$ %
+uff% &
+=>ff' )
+uff* +
+.ff+ ,
+Occupationsff, 7
+)ff7 8
+.ff8 9
+FirstOrDefaultff9 G
+(ffG H
+)ffH I
+;ffI J
+UserDetailsModelhh 
 
-userEntityee 
-;ee 
-}ff 	
-publicgg 
-asyncgg 
-Taskgg 
-<gg 
-GenericPersonModelgg ,
->gg, -
-GetTreeRootgg. 9
-(gg9 :
-Guidgg: >
-treeIdgg? E
-)ggE F
-{hh 	
-Userii 
-userii 
-=ii 
-awaitii 
-Taskii "
-.ii" #
-Runii# &
-(ii& '
-(ii' (
-)ii( )
-=>ii* ,
+userEntityhh '
+=hh( )
+_mapperhh* 1
+.hh1 2
+Maphh2 5
+<hh5 6
+UserDetailsModelhh6 F
+>hhF G
+(hhG H
+userhhH L
+)hhL M
+;hhM N
+ifii 
+(ii 
+userii 
+!=ii 
+nullii 
+)ii 
+{jj 
 
-unitOfWorkii- 7
-.ii7 8
-Userii8 <
-.ii< =
-Filterii= C
-(iiC D
-xiiD E
-=>iiF H
-xiiI J
-.iiJ K
-PersoniiK Q
-.iiQ R
-TreeIdiiR X
-==iiY [
-treeIdii\ b
-)iib c
-.jj 
-Includejj  
-(jj  !
-ujj! "
-=>jj# %
-ujj& '
-.jj' (
-Personjj( .
-)jj. /
-.kk 
-FirstOrDefaultkk '
-(kk' (
-)kk( )
-)kk) *
-;kk* +
-GenericPersonModelll 
+userEntitykk 
+.kk 
+	ImageFilekk $
+=kk% &
+awaitkk' ,"
+_fileManagementServicekk- C
+.kkC D
+GetFilekkD K
+(kkK L
+userkkL P
+.kkP Q
+PersonkkQ W
+.kkW X
+ImagekkX ]
+)kk] ^
+;kk^ _
+}ll 
+returnnn 
 
-userEntityll )
-=ll* +
-_mapperll, 3
-.ll3 4
-Mapll4 7
-<ll7 8
-GenericPersonModelll8 J
->llJ K
-(llK L
-userllL P
-)llP Q
-;llQ R
-returnmm 
-
-userEntitymm 
-;mm 
-}nn 	
+userEntitynn 
+;nn 
+}oo 	
 publicpp 
 asyncpp 
 Taskpp 
-<pp 
-intpp 
->pp !
-GetNotificationsCountpp 4
-(pp4 5
-Guidpp5 9
-userIdpp: @
-)pp@ A
+<pp 
+GenericPersonModelpp ,
+>pp, -
+GetTreeRootpp. 9
+(pp9 :
+Guidpp: >
+treeIdpp? E
+)ppE F
 {qq 	
 Userrr 
 userrr 
@@ -18397,2987 +18410,3117 @@ unitOfWorkrr- 7
 .rr< =
 Filterrr= C
 (rrC D
-urrD E
+xrrD E
 =>rrF H
-urrI J
-.rrJ K
-IdrrK M
-==rrN P
-userIdrrQ W
-)rrW X
-.ss( )
-Includess) 0
-(ss0 1
-uss1 2
-=>ss3 5
-uss6 7
-.ss7 8
-Personss8 >
-)ss> ?
-.tt( )
-Includett) 0
-(tt0 1
-utt1 2
-=>tt3 5
-utt6 7
-.tt7 8
-ReceivedRequeststt8 H
-)ttH I
-.uu( )
-Includeuu) 0
-(uu0 1
-uuu1 2
-=>uu3 5
-uuu6 7
-.uu7 8
-SentRequestsuu8 D
-)uuD E
-.vv( )
-Includevv) 0
-(vv0 1
-uvv1 2
-=>vv3 5
-uvv6 7
-.vv7 8
-UserRelativesvv8 E
-)vvE F
-.ww( )
-FirstOrDefaultww) 7
-(ww7 8
-)ww8 9
-)ww9 :
-;ww: ;
-ifyy 
-(yy 
-useryy 
-==yy 
-nullyy 
-)yy 
-{zz 
-return{{ 
-$num{{ 
-;{{ 
-}|| 
-int~~ 
-totalNotifications~~ "
-=~~# $
-$num~~% &
-;~~& '
-totalNotifications 
-+= !
-user" &
-.& '
-ReceivedRequests' 7
-.7 8
-Count8 =
-(= >
-x> ?
-=>@ B
-!C D
-xD E
-.E F
-ReceiverRespondedF W
-)W X
-;X Y 
-totalNotifications
-ÄÄ 
-+=
-ÄÄ !
-user
-ÄÄ" &
-.
-ÄÄ& '
-SentRequests
-ÄÄ' 3
-.
-ÄÄ3 4
-Count
-ÄÄ4 9
-(
-ÄÄ9 :
-x
-ÄÄ: ;
-=>
-ÄÄ< >
-x
-ÄÄ? @
-.
-ÄÄ@ A
-ReceiverResponded
-ÄÄA R
-)
-ÄÄR S
-;
-ÄÄS T
-if
-ÅÅ 
-(
-ÅÅ 
-user
-ÅÅ 
-.
-ÅÅ 
-NotifyBirthdays
-ÅÅ $
-)
-ÅÅ$ %
-{
-ÇÇ  
-totalNotifications
-ÉÉ "
-+=
-ÉÉ# %
+xrrI J
+.rrJ K
+PersonrrK Q
+.rrQ R
+TreeIdrrR X
+==rrY [
+treeIdrr\ b
+)rrb c
+.ss 
+Includess  
+(ss  !
+uss! "
+=>ss# %
+uss& '
+.ss' (
+Personss( .
+)ss. /
+.tt 
+FirstOrDefaulttt '
+(tt' (
+)tt( )
+)tt) *
+;tt* +
+GenericPersonModelvv 
 
-unitOfWork
-ÉÉ& 0
-.
-ÉÉ0 1
-Person
-ÉÉ1 7
-.
-ÉÉ7 8
-Filter
-ÉÉ8 >
-(
-ÉÉ> ?
-p
-ÉÉ? @
-=>
-ÉÉA C
-p
-ÉÉD E
-.
-ÉÉE F
-TreeId
-ÉÉF L
-==
-ÉÉM O
-user
-ÉÉP T
-.
-ÉÉT U
-Person
-ÉÉU [
-.
-ÉÉ[ \
-TreeId
-ÉÉ\ b
-&&
-ÉÉc e
-p
-ÉÉf g
-.
-ÉÉg h
-	BirthDate
-ÉÉh q
-.
-ÉÉq r
-HasValue
-ÉÉr z
-&&
-ÉÉ{ }
-p
-ÉÉ~ 
-.ÉÉ Ä
-	BirthDateÉÉÄ â
-.ÉÉâ ä
-ValueÉÉä è
-.ÉÉè ê
-	DayOfYearÉÉê ô
-==ÉÉö ú
-DateTimeÉÉù •
-.ÉÉ• ¶
-NowÉÉ¶ ©
-.ÉÉ© ™
-	DayOfYearÉÉ™ ≥
-)ÉÉ≥ ¥
-.ÉÉ¥ µ
-CountÉÉµ ∫
-(ÉÉ∫ ª
-)ÉÉª º
-;ÉÉº Ω 
-totalNotifications
-ÑÑ "
-+=
-ÑÑ# %
+userEntityvv )
+=vv* +
+_mappervv, 3
+.vv3 4
+Mapvv4 7
+<vv7 8
+GenericPersonModelvv8 J
+>vvJ K
+(vvK L
+uservvL P
+)vvP Q
+;vvQ R
+returnxx 
 
-unitOfWork
-ÑÑ& 0
-.
-ÑÑ0 1
-Marriage
-ÑÑ1 9
-.
-ÑÑ9 :
-Filter
-ÑÑ: @
-(
-ÑÑ@ A
-m
-ÑÑA B
-=>
-ÑÑC E
-m
-ÑÑF G
-.
-ÑÑG H
-FirstPerson
-ÑÑH S
-.
-ÑÑS T
-TreeId
-ÑÑT Z
-==
-ÑÑ[ ]
-user
-ÑÑ^ b
-.
-ÑÑb c
-Person
-ÑÑc i
-.
-ÑÑi j
-TreeId
-ÑÑj p
-&&
-ÑÑq s
-m
-ÑÑt u
-.
-ÑÑu v
-	StartDate
-ÑÑv 
-.ÑÑ Ä
-	DayOfYearÑÑÄ â
-==ÑÑä å
-DateTimeÑÑç ï
-.ÑÑï ñ
-NowÑÑñ ô
-.ÑÑô ö
-	DayOfYearÑÑö £
-)ÑÑ£ §
-.ÑÑ§ •
-CountÑÑ• ™
-(ÑÑ™ ´
-)ÑÑ´ ¨
-;ÑÑ¨ ≠
-}
-ÖÖ 
-if
-ÜÜ 
-(
-ÜÜ 
-user
-ÜÜ 
-.
-ÜÜ 
-NotifyUpdates
-ÜÜ "
-)
-ÜÜ" #
-{
-áá 
-foreach
-àà 
-(
-àà 
-var
-àà 
-relative
-àà %
-in
-àà& (
-user
-àà) -
-.
-àà- .
-UserRelatives
-àà. ;
-)
-àà; <
-{
-ââ  
-totalNotifications
-ää &
-+=
-ää' )
+userEntityxx 
+;xx 
+}yy 	
+public{{ 
+async{{ 
+Task{{ 
+<{{ 
+int{{ 
+>{{ !
+GetNotificationsCount{{ 4
+({{4 5
+Guid{{5 9
+userId{{: @
+){{@ A
+{|| 	
+User}} 
+user}} 
+=}} 
+await}} 
+Task}} "
+.}}" #
+Run}}# &
+(}}& '
+(}}' (
+)}}( )
+=>}}* ,
 
-unitOfWork
-ää* 4
+unitOfWork}}- 7
+.}}7 8
+User}}8 <
+.}}< =
+Filter}}= C
+(}}C D
+u}}D E
+=>}}F H
+u}}I J
+.}}J K
+Id}}K M
+==}}N P
+userId}}Q W
+)}}W X
+.~~( )
+Include~~) 0
+(~~0 1
+u~~1 2
+=>~~3 5
+u~~6 7
+.~~7 8
+Person~~8 >
+)~~> ?
+.( )
+Include) 0
+(0 1
+u1 2
+=>3 5
+u6 7
+.7 8
+ReceivedRequests8 H
+)H I
 .
-ää4 5
-Person
-ää5 ;
-.
-ää; <
-Filter
-ää< B
-(
-ääB C
-person
-ääC I
-=>
-ääJ L
-person
-ääM S
-.
-ääS T
-TreeId
-ääT Z
-==
-ää[ ]
-relative
-ää^ f
-.
-ääf g
-RelativeUser
-ääg s
-.
-ääs t
-Person
-äät z
-.
-ääz {
-TreeIdää{ Å
-&&ääÇ Ñ
-relativeääÖ ç
-.ääç é
-LastSyncCheckääé õ
-.ääõ ú
-	CompareToääú •
-(ää• ¶
-personää¶ ¨
-.ää¨ ≠
-	CreatedOnää≠ ∂
-)ää∂ ∑
-<ää∏ π
-$numää∫ ª
-)ääª º
-.ääº Ω
-CountääΩ ¬
-(ää¬ √
-)ää√ ƒ
-;ääƒ ≈ 
-totalNotifications
-ãã &
-+=
-ãã' )
-
-unitOfWork
-ãã* 4
-.
-ãã4 5
-Person
-ãã5 ;
-.
-ãã; <
-Filter
-ãã< B
-(
-ããB C
-person
-ããC I
-=>
-ããJ L
-person
-ããM S
-.
-ããS T
-TreeId
-ããT Z
-==
-ãã[ ]
-relative
-ãã^ f
-.
-ããf g
-RelativeUser
-ããg s
-.
-ããs t
-Person
-ããt z
-.
-ããz {
-TreeIdãã{ Å
-&&ããÇ Ñ
-personããÖ ã
-.ããã å
-
-ModifiedOnããå ñ
-.ããñ ó
-HasValueããó ü
-&&ãã† ¢
-relativeãã£ ´
-.ãã´ ¨
-LastSyncCheckãã¨ π
-.ããπ ∫
-	CompareToãã∫ √
-(ãã√ ƒ
-personããƒ  
-.ãã  À
-
-ModifiedOnããÀ ’
-.ãã’ ÷
-Valueãã÷ €
-)ãã€ ‹
-<ãã› ﬁ
-$numããﬂ ‡
-)ãã‡ ·
-.ãã· ‚
-Countãã‚ Á
-(ããÁ Ë
-)ããË È
-;ããÈ Í 
-totalNotifications
-åå &
-+=
-åå' )
-
-unitOfWork
-åå* 4
-.
-åå4 5
-Marriage
-åå5 =
-.
-åå= >
-Filter
-åå> D
-(
-ååD E
-marriage
-ååE M
-=>
-ååN P
-marriage
-ååQ Y
-.
-ååY Z
-FirstPerson
-ååZ e
-.
-ååe f
-TreeId
-ååf l
-==
-ååm o
-relative
-ååp x
-.
-ååx y
-RelativeUserååy Ö
-.ååÖ Ü
-PersonååÜ å
-.ååå ç
-TreeIdååç ì
-&&ååî ñ
-relativeååó ü
-.ååü †
-LastSyncCheckåå† ≠
-.åå≠ Æ
-	CompareToååÆ ∑
-(åå∑ ∏
-marriageåå∏ ¿
-.åå¿ ¡
-	CreatedOnåå¡  
-)åå  À
-<ååÃ Õ
-$numååŒ œ
-)ååœ –
-.åå– —
-Countåå— ÷
-(åå÷ ◊
-)åå◊ ÿ
-;ååÿ Ÿ 
-totalNotifications
-çç &
-+=
-çç' )
-
-unitOfWork
-çç* 4
-.
-çç4 5
-Marriage
-çç5 =
-.
-çç= >
-Filter
-çç> D
-(
-ççD E
-marriage
-ççE M
-=>
-ççN P
-marriage
-ççQ Y
-.
-ççY Z
-FirstPerson
-ççZ e
-.
-ççe f
-TreeId
-ççf l
-==
-ççm o
-relative
-ççp x
-.
-ççx y
-RelativeUserççy Ö
-.ççÖ Ü
-PersonççÜ å
-.ççå ç
-TreeIdççç ì
-&&ççî ñ
-marriageççó ü
-.ççü †
-
-ModifiedOnçç† ™
-.çç™ ´
-HasValueçç´ ≥
-&&çç¥ ∂
-relativeçç∑ ø
-.ççø ¿
-LastSyncCheckçç¿ Õ
-.ççÕ Œ
-	CompareToççŒ ◊
-(çç◊ ÿ
-marriageççÿ ‡
-.çç‡ ·
-
-ModifiedOnçç· Î
-.ççÎ Ï
-ValueççÏ Ò
-)ççÒ Ú
-<ççÛ Ù
-$numççı ˆ
-)ççˆ ˜
-.çç˜ ¯
-Countçç¯ ˝
-(çç˝ ˛
-)çç˛ ˇ
-;ççˇ Ä 
-totalNotifications
-éé &
-+=
-éé' )
-
-unitOfWork
-éé* 4
-.
-éé4 5
-ParentChild
-éé5 @
-.
-éé@ A
-Filter
-ééA G
-(
-ééG H
-parentChild
-ééH S
-=>
-ééT V
-parentChild
-ééW b
-.
-ééb c
-Parent
-ééc i
-.
-ééi j
-TreeId
-ééj p
-==
-ééq s
-relative
-éét |
-.
-éé| }
-RelativeUseréé} â
-.ééâ ä
-Personééä ê
-.ééê ë
-TreeIdééë ó
-&&ééò ö
-relativeééõ £
-.éé£ §
-LastSyncCheckéé§ ±
-.éé± ≤
-	CompareToéé≤ ª
-(ééª º
-parentChildééº «
-.éé« »
-	CreatedOnéé» —
-)éé— “
-<éé” ‘
-$numéé’ ÷
-)éé÷ ◊
-.éé◊ ÿ
-Countééÿ ›
-(éé› ﬁ
-)ééﬁ ﬂ
-;ééﬂ ‡
-}
-èè 
-}
-êê 
-return
-ëë  
-totalNotifications
-ëë %
-;
-ëë% &
-}
-íí 	
-public
-îî 
-async
-îî 
-Task
-îî 
-<
-îî !
-NotificationsBundle
-îî -
->
-îî- .
-GetNotifications
-îî/ ?
-(
-îî? @
-Guid
-îî@ D
-userId
-îîE K
-)
-îîK L
-{
-ïï 	
-User
-ññ 
-user
-ññ 
-=
-ññ 
-
-unitOfWork
-ññ "
-.
-ññ" #
-User
-ññ# '
-.
-ññ' (
-Filter
-ññ( .
-(
-ññ. /
-user
-ññ/ 3
-=>
-ññ4 6
-user
-ññ7 ;
-.
-ññ; <
-Id
-ññ< >
-==
-ññ? A
-userId
-ññB H
-)
-ññH I
-.
-ññI J
+ÄÄ( )
 Include
-ññJ Q
+ÄÄ) 0
 (
-ññQ R
+ÄÄ0 1
 u
-ññR S
+ÄÄ1 2
 =>
-ññT V
+ÄÄ3 5
 u
-ññW X
+ÄÄ6 7
 .
-ññX Y
+ÄÄ7 8
+SentRequests
+ÄÄ8 D
+)
+ÄÄD E
+.
+ÅÅ( )
+Include
+ÅÅ) 0
+(
+ÅÅ0 1
+u
+ÅÅ1 2
+=>
+ÅÅ3 5
+u
+ÅÅ6 7
+.
+ÅÅ7 8
 UserRelatives
-ññY f
+ÅÅ8 E
 )
-ññf g
+ÅÅE F
 .
-ññg h
-ThenInclude
-ññh s
+ÇÇ( )
+FirstOrDefault
+ÇÇ) 7
 (
-ññs t
-r
-ññt u
-=>
-ññv x
-r
-ññy z
-.
-ññz {
-RelativeUserññ{ á
-)ññá à
-.ññà â
-ThenIncludeññâ î
-(ññî ï
-ruññï ó
-=>ññò ö
-ruññõ ù
-.ññù û
-Personññû §
-)ññ§ •
-.ññ• ¶
-FirstOrDefaultññ¶ ¥
-(ññ¥ µ
-)ññµ ∂
-;ññ∂ ∑!
-NotificationsBundle
-óó 
-notifications
-óó  -
-=
-óó. /
-new
-óó0 3!
-NotificationsBundle
-óó4 G
-(
-óóG H
+ÇÇ7 8
 )
-óóH I
+ÇÇ8 9
+)
+ÇÇ9 :
 ;
-óóI J
-notifications
-òò 
-.
-òò 
-RequestsReceived
-òò *
-=
-òò+ ,
-await
-òò- 2
-_requestService
-òò3 B
-.
-òòB C!
-GetRequestsReceived
-òòC V
-(
-òòV W
-userId
-òòW ]
-)
-òò] ^
-;
-òò^ _
-notifications
-ôô 
-.
-ôô 
-RequestsResponded
-ôô +
-=
-ôô, -
-await
-ôô. 3
-_requestService
-ôô4 C
-.
-ôôC D"
-GetRequestsResponded
-ôôD X
-(
-ôôX Y
-userId
-ôôY _
-)
-ôô_ `
-;
-ôô` a
+ÇÇ: ;
 if
-õõ 
+ÑÑ 
 (
-õõ 
+ÑÑ 
 user
-õõ 
+ÑÑ 
 ==
-õõ 
+ÑÑ 
 null
-õõ 
+ÑÑ 
 )
-õõ 
+ÑÑ 
 {
-úú 
+ÖÖ 
 return
-ùù 
-notifications
-ùù $
+ÜÜ 
+$num
+ÜÜ 
 ;
-ùù$ %
+ÜÜ 
 }
-ûû 
-if
-†† 
-(
-†† 
+áá 
+int
+ââ  
+totalNotifications
+ââ "
+=
+ââ# $
+$num
+ââ% &
+;
+ââ& ' 
+totalNotifications
+ää 
++=
+ää !
 user
-†† 
+ää" &
 .
-†† 
+ää& '
+ReceivedRequests
+ää' 7
+.
+ää7 8
+Count
+ää8 =
+(
+ää= >
+x
+ää> ?
+=>
+ää@ B
+!
+ääC D
+x
+ääD E
+.
+ääE F
+ReceiverResponded
+ääF W
+)
+ääW X
+;
+ääX Y 
+totalNotifications
+ãã 
++=
+ãã !
+user
+ãã" &
+.
+ãã& '
+SentRequests
+ãã' 3
+.
+ãã3 4
+Count
+ãã4 9
+(
+ãã9 :
+x
+ãã: ;
+=>
+ãã< >
+x
+ãã? @
+.
+ãã@ A
+ReceiverResponded
+ããA R
+)
+ããR S
+;
+ããS T
+if
+çç 
+(
+çç 
+user
+çç 
+.
+çç 
 NotifyBirthdays
-†† $
+çç $
 )
-††$ %
+çç$ %
 {
-°° 
-List
-¢¢ 
-<
-¢¢ 
-EventInTreeModel
-¢¢ %
->
-¢¢% &
-eventsInTree
-¢¢' 3
-=
-¢¢4 5
-(
-¢¢6 7
-await
-¢¢7 <
-_personService
-¢¢= K
+éé  
+totalNotifications
+èè "
++=
+èè# %
+
+unitOfWork
+èè& 0
 .
-¢¢K L
-GetEventsInTree
-¢¢L [
-(
-¢¢[ \
-user
-¢¢\ `
-.
-¢¢` a
+èè0 1
 Person
-¢¢a g
+èè1 7
 .
-¢¢g h
-TreeId
-¢¢h n
-)
-¢¢n o
-)
-¢¢o p
-;
-¢¢p q
-notifications
-££ 
-.
-££ 
-EventsToday
-££ )
-=
-££* +
-eventsInTree
-££, 8
-.
-££8 9
-FindAll
-££9 @
+èè7 8
+Filter
+èè8 >
 (
-££@ A
-e
-££A B
+èè> ?
+p
+èè? @
 =>
-££C E
-e
-££F G
+èèA C
+p
+èèD E
 .
-££G H
-Date
-££H L
-.
-££L M
-Day
-££M P
+èèE F
+TreeId
+èèF L
 ==
-££Q S
-DateTime
-££T \
+èèM O
+user
+èèP T
 .
-££\ ]
-Today
-££] b
+èèT U
+Person
+èèU [
 .
-££b c
-Day
-££c f
+èè[ \
+TreeId
+èè\ b
 &&
-££g i
-e
-££j k
+èèc e
+p
+èèf g
 .
-££k l
-Date
-££l p
+èèg h
+	BirthDate
+èèh q
 .
-££p q
-Month
-££q v
+èèq r
+HasValue
+èèr z
+&&
+èè{ }
+p
+èè~ 
+.èè Ä
+	BirthDateèèÄ â
+.èèâ ä
+Valueèèä è
+.èèè ê
+	DayOfYearèèê ô
+==èèö ú
+DateTimeèèù •
+.èè• ¶
+Nowèè¶ ©
+.èè© ™
+	DayOfYearèè™ ≥
+)èè≥ ¥
+.èè¥ µ
+Countèèµ ∫
+(èè∫ ª
+)èèª º
+;èèº Ω 
+totalNotifications
+êê "
++=
+êê# %
+
+unitOfWork
+êê& 0
+.
+êê0 1
+Marriage
+êê1 9
+.
+êê9 :
+Filter
+êê: @
+(
+êê@ A
+m
+êêA B
+=>
+êêC E
+m
+êêF G
+.
+êêG H
+FirstPerson
+êêH S
+.
+êêS T
+TreeId
+êêT Z
 ==
-££w y
-DateTime££z Ç
-.££Ç É
-Today££É à
-.££à â
-Month££â é
-)££é è
-;££è ê
-}
-§§ 
-else
-•• 
-{
-¶¶ 
-notifications
-ßß 
-.
-ßß 
-EventsToday
-ßß )
-=
-ßß* +
-new
-ßß, /
-List
-ßß0 4
-<
-ßß4 5
-EventInTreeModel
-ßß5 E
->
-ßßE F
-(
-ßßF G
-)
-ßßG H
-;
-ßßH I
-}
-®® 
-notifications
-©© 
-.
-©© 
-RelativeUpdates
-©© )
-=
-©©* +
-new
-©©, /
-List
-©©0 4
-<
-©©4 5
-RelativeUpdates
-©©5 D
->
-©©D E
-(
-©©E F
-)
-©©F G
-;
-©©G H
-if
-™™ 
-(
-™™ 
+êê[ ]
 user
-™™ 
+êê^ b
 .
-™™ 
+êêb c
+Person
+êêc i
+.
+êêi j
+TreeId
+êêj p
+&&
+êêq s
+m
+êêt u
+.
+êêu v
+	StartDate
+êêv 
+.êê Ä
+	DayOfYearêêÄ â
+==êêä å
+DateTimeêêç ï
+.êêï ñ
+Nowêêñ ô
+.êêô ö
+	DayOfYearêêö £
+)êê£ §
+.êê§ •
+Countêê• ™
+(êê™ ´
+)êê´ ¨
+;êê¨ ≠
+}
+ëë 
+if
+ìì 
+(
+ìì 
+user
+ìì 
+.
+ìì 
 NotifyUpdates
-™™ "
+ìì "
 )
-™™" #
+ìì" #
 {
-´´ 
+îî 
 foreach
-¨¨ 
+ïï 
 (
-¨¨ 
+ïï 
 var
-¨¨ 
+ïï 
 relative
-¨¨ %
+ïï %
 in
-¨¨& (
+ïï& (
 user
-¨¨) -
+ïï) -
 .
-¨¨- .
+ïï- .
 UserRelatives
-¨¨. ;
+ïï. ;
 )
-¨¨; <
+ïï; <
 {
-≠≠ 
-RelativeUpdates
-ÆÆ #
-relativeUpdates
-ÆÆ$ 3
-=
-ÆÆ4 5
-new
-ÆÆ6 9
-RelativeUpdates
-ÆÆ: I
-(
-ÆÆI J
-)
-ÆÆJ K
-;
-ÆÆK L
-relativeUpdates
-ØØ #
-.
-ØØ# $
-Updates
-ØØ$ +
-.
-ØØ+ ,
-AddRange
-ØØ, 4
-(
-ØØ4 5
+ññ  
+totalNotifications
+óó &
++=
+óó' )
 
 unitOfWork
-ØØ5 ?
+óó* 4
 .
-ØØ? @
+óó4 5
 Person
-ØØ@ F
+óó5 ;
 .
-ØØF G
+óó; <
 Filter
-ØØG M
+óó< B
 (
-ØØM N
+óóB C
 person
-ØØN T
+óóC I
 =>
-ØØU W
+óóJ L
 person
-ØØX ^
+óóM S
 .
-ØØ^ _
+óóS T
 TreeId
-ØØ_ e
+óóT Z
 ==
-ØØf h
+óó[ ]
 relative
-ØØi q
+óó^ f
 .
-ØØq r
+óóf g
 RelativeUser
-ØØr ~
+óóg s
 .
-ØØ~ 
-PersonØØ Ö
-.ØØÖ Ü
-TreeIdØØÜ å
-&&ØØç è
-relativeØØê ò
-.ØØò ô
-LastSyncCheckØØô ¶
-.ØØ¶ ß
-	CompareToØØß ∞
-(ØØ∞ ±
-personØØ± ∑
-.ØØ∑ ∏
-	CreatedOnØØ∏ ¡
-)ØØ¡ ¬
-<ØØ√ ƒ
-$numØØ≈ ∆
-)ØØ∆ «
-.
-∞∞ 
-Select
-∞∞ 
-(
-∞∞  
-person
-∞∞  &
-=>
-∞∞' )
-new
-∞∞* -
-UpdateInfoModel
-∞∞. =
-(
-∞∞= >
-)
-∞∞> ?
-{
-±± 
-ReferenceId
-≤≤ '
-=
-≤≤( )
-person
-≤≤* 0
-.
-≤≤0 1
-Id
-≤≤1 3
-,
-≤≤3 4
-
-UpdateType
-≥≥ &
-=
-≥≥' (
-
-UpdateType
-≥≥) 3
-.
-≥≥3 4
-PersonCreated
-≥≥4 A
-,
-≥≥A B!
-AffectedPeopleNames
-¥¥ /
-=
-¥¥0 1$
-GetAffectedPersonNames
-¥¥2 H
-(
-¥¥H I
-person
-¥¥I O
-,
-¥¥O P
-null
-¥¥Q U
-)
-¥¥U V
-}
-µµ 
-)
-µµ 
-.
-µµ 
-ToList
-µµ !
-(
-µµ! "
-)
-µµ" #
-)
-µµ# $
-;
-µµ$ %
-relativeUpdates
-∂∂ #
-.
-∂∂# $
-Updates
-∂∂$ +
-.
-∂∂+ ,
-AddRange
-∂∂, 4
-(
-∂∂4 5
-
-unitOfWork
-∂∂5 ?
-.
-∂∂? @
+óós t
 Person
-∂∂@ F
+óót z
 .
-∂∂F G
+óóz {
+TreeIdóó{ Å
+&&óóÇ Ñ
+relativeóóÖ ç
+.óóç é
+LastSyncCheckóóé õ
+.óóõ ú
+	CompareToóóú •
+(óó• ¶
+personóó¶ ¨
+.óó¨ ≠
+	CreatedOnóó≠ ∂
+)óó∂ ∑
+<óó∏ π
+$numóó∫ ª
+)óóª º
+.óóº Ω
+CountóóΩ ¬
+(óó¬ √
+)óó√ ƒ
+;óóƒ ≈ 
+totalNotifications
+òò &
++=
+òò' )
+
+unitOfWork
+òò* 4
+.
+òò4 5
+Person
+òò5 ;
+.
+òò; <
 Filter
-∂∂G M
+òò< B
 (
-∂∂M N
+òòB C
 person
-∂∂N T
+òòC I
 =>
-∂∂U W
+òòJ L
 person
-∂∂X ^
+òòM S
 .
-∂∂^ _
+òòS T
 TreeId
-∂∂_ e
+òòT Z
 ==
-∂∂f h
+òò[ ]
 relative
-∂∂i q
+òò^ f
 .
-∂∂q r
+òòf g
 RelativeUser
-∂∂r ~
+òòg s
 .
-∂∂~ 
-Person∂∂ Ö
-.∂∂Ö Ü
-TreeId∂∂Ü å
-&&∂∂ç è
-person∂∂ê ñ
-.∂∂ñ ó
+òòs t
+Person
+òòt z
+.
+òòz {
+TreeIdòò{ Å
+&&òòÇ Ñ
+personòòÖ ã
+.òòã å
 
-ModifiedOn∂∂ó °
-.∂∂° ¢
-HasValue∂∂¢ ™
-&&∂∂´ ≠
-relative∂∂Æ ∂
-.∂∂∂ ∑
-LastSyncCheck∂∂∑ ƒ
-.∂∂ƒ ≈
-	CompareTo∂∂≈ Œ
-(∂∂Œ œ
-person∂∂œ ’
-.∂∂’ ÷
+ModifiedOnòòå ñ
+.òòñ ó
+HasValueòòó ü
+&&òò† ¢
+relativeòò£ ´
+.òò´ ¨
+LastSyncCheckòò¨ π
+.òòπ ∫
+	CompareToòò∫ √
+(òò√ ƒ
+personòòƒ  
+.òò  À
 
-ModifiedOn∂∂÷ ‡
-.∂∂‡ ·
-Value∂∂· Ê
-)∂∂Ê Á
-<∂∂Ë È
-$num∂∂Í Î
-)∂∂Î Ï
-.
-∑∑ 
-Select
-∑∑ 
-(
-∑∑  
-person
-∑∑  &
-=>
-∑∑' )
-new
-∑∑* -
-UpdateInfoModel
-∑∑. =
-(
-∑∑= >
-)
-∑∑> ?
-{
-∏∏ 
-ReferenceId
-ππ '
-=
-ππ( )
-person
-ππ* 0
-.
-ππ0 1
-Id
-ππ1 3
-,
-ππ3 4
-
-UpdateType
-∫∫ &
-=
-∫∫' (
-
-UpdateType
-∫∫) 3
-.
-∫∫3 4
-PersonModified
-∫∫4 B
-,
-∫∫B C!
-AffectedPeopleNames
-ªª /
-=
-ªª0 1$
-GetAffectedPersonNames
-ªª2 H
-(
-ªªH I
-person
-ªªI O
-,
-ªªO P
-null
-ªªQ U
-)
-ªªU V
-}
-ºº 
-)
-ºº 
-.
-ºº 
-ToList
-ºº !
-(
-ºº! "
-)
-ºº" #
-)
-ºº# $
-;
-ºº$ %
-relativeUpdates
-ΩΩ #
-.
-ΩΩ# $
-Updates
-ΩΩ$ +
-.
-ΩΩ+ ,
-AddRange
-ΩΩ, 4
-(
-ΩΩ4 5
+ModifiedOnòòÀ ’
+.òò’ ÷
+Valueòò÷ €
+)òò€ ‹
+<òò› ﬁ
+$numòòﬂ ‡
+)òò‡ ·
+.òò· ‚
+Countòò‚ Á
+(òòÁ Ë
+)òòË È
+;òòÈ Í 
+totalNotifications
+ôô &
++=
+ôô' )
 
 unitOfWork
-ΩΩ5 ?
+ôô* 4
 .
-ΩΩ? @
+ôô4 5
 Marriage
-ΩΩ@ H
+ôô5 =
 .
-ΩΩH I
+ôô= >
 Filter
-ΩΩI O
+ôô> D
 (
-ΩΩO P
+ôôD E
 marriage
-ΩΩP X
+ôôE M
 =>
-ΩΩY [
+ôôN P
 marriage
-ΩΩ\ d
+ôôQ Y
 .
-ΩΩd e
+ôôY Z
 FirstPerson
-ΩΩe p
+ôôZ e
 .
-ΩΩp q
+ôôe f
 TreeId
-ΩΩq w
+ôôf l
 ==
-ΩΩx z
-relativeΩΩ{ É
-.ΩΩÉ Ñ
-RelativeUserΩΩÑ ê
-.ΩΩê ë
-PersonΩΩë ó
-.ΩΩó ò
-TreeIdΩΩò û
-&&ΩΩü °
-relativeΩΩ¢ ™
-.ΩΩ™ ´
-LastSyncCheckΩΩ´ ∏
-.ΩΩ∏ π
-	CompareToΩΩπ ¬
-(ΩΩ¬ √
-marriageΩΩ√ À
-.ΩΩÀ Ã
-	CreatedOnΩΩÃ ’
-)ΩΩ’ ÷
-<ΩΩ◊ ÿ
-$numΩΩŸ ⁄
-)ΩΩ⁄ €
+ôôm o
+relative
+ôôp x
 .
-ææ 
-Select
-ææ 
-(
-ææ  
-marriage
-ææ  (
-=>
-ææ) +
-new
-ææ, /
-UpdateInfoModel
-ææ0 ?
-(
-ææ? @
-)
-ææ@ A
-{
-øø 
-ReferenceId
-¿¿ '
-=
-¿¿( )
-marriage
-¿¿* 2
-.
-¿¿2 3
-FirstPersonId
-¿¿3 @
-,
-¿¿@ A
-
-UpdateType
-¡¡ &
-=
-¡¡' (
-
-UpdateType
-¡¡) 3
-.
-¡¡3 4
-MarriageCreated
-¡¡4 C
-,
-¡¡C D!
-AffectedPeopleNames
-¬¬ /
-=
-¬¬0 1$
-GetAffectedPersonNames
-¬¬2 H
-(
-¬¬H I
-marriage
-¬¬I Q
-.
-¬¬Q R
-FirstPerson
-¬¬R ]
-,
-¬¬] ^
-marriage
-¬¬_ g
-.
-¬¬g h
-SecondPerson
-¬¬h t
-)
-¬¬t u
-}
-√√ 
-)
-√√ 
-.
-√√ 
-ToList
-√√ !
-(
-√√! "
-)
-√√" #
-)
-√√# $
-;
-√√$ %
-relativeUpdates
-ƒƒ #
-.
-ƒƒ# $
-Updates
-ƒƒ$ +
-.
-ƒƒ+ ,
-AddRange
-ƒƒ, 4
-(
-ƒƒ4 5
+ôôx y
+RelativeUserôôy Ö
+.ôôÖ Ü
+PersonôôÜ å
+.ôôå ç
+TreeIdôôç ì
+&&ôôî ñ
+relativeôôó ü
+.ôôü †
+LastSyncCheckôô† ≠
+.ôô≠ Æ
+	CompareToôôÆ ∑
+(ôô∑ ∏
+marriageôô∏ ¿
+.ôô¿ ¡
+	CreatedOnôô¡  
+)ôô  À
+<ôôÃ Õ
+$numôôŒ œ
+)ôôœ –
+.ôô– —
+Countôô— ÷
+(ôô÷ ◊
+)ôô◊ ÿ
+;ôôÿ Ÿ 
+totalNotifications
+öö &
++=
+öö' )
 
 unitOfWork
-ƒƒ5 ?
+öö* 4
 .
-ƒƒ? @
+öö4 5
 Marriage
-ƒƒ@ H
+öö5 =
 .
-ƒƒH I
+öö= >
 Filter
-ƒƒI O
+öö> D
 (
-ƒƒO P
+ööD E
 marriage
-ƒƒP X
+ööE M
 =>
-ƒƒY [
+ööN P
 marriage
-ƒƒ\ d
+ööQ Y
 .
-ƒƒd e
+ööY Z
 FirstPerson
-ƒƒe p
+ööZ e
 .
-ƒƒp q
+ööe f
 TreeId
-ƒƒq w
+ööf l
 ==
-ƒƒx z
-relativeƒƒ{ É
-.ƒƒÉ Ñ
-RelativeUserƒƒÑ ê
-.ƒƒê ë
-Personƒƒë ó
-.ƒƒó ò
-TreeIdƒƒò û
-&&ƒƒü °
-marriageƒƒ¢ ™
-.ƒƒ™ ´
+ööm o
+relative
+ööp x
+.
+ööx y
+RelativeUserööy Ö
+.ööÖ Ü
+PersonööÜ å
+.ööå ç
+TreeIdööç ì
+&&ööî ñ
+marriageööó ü
+.ööü †
 
-ModifiedOnƒƒ´ µ
-.ƒƒµ ∂
-HasValueƒƒ∂ æ
-&&ƒƒø ¡
-relativeƒƒ¬  
-.ƒƒ  À
-LastSyncCheckƒƒÀ ÿ
-.ƒƒÿ Ÿ
-	CompareToƒƒŸ ‚
-(ƒƒ‚ „
-marriageƒƒ„ Î
-.ƒƒÎ Ï
+ModifiedOnöö† ™
+.öö™ ´
+HasValueöö´ ≥
+&&öö¥ ∂
+relativeöö∑ ø
+.ööø ¿
+LastSyncChecköö¿ Õ
+.ööÕ Œ
+	CompareToööŒ ◊
+(öö◊ ÿ
+marriageööÿ ‡
+.öö‡ ·
 
-ModifiedOnƒƒÏ ˆ
-.ƒƒˆ ˜
-Valueƒƒ˜ ¸
-)ƒƒ¸ ˝
-<ƒƒ˛ ˇ
-$numƒƒÄ Å
-)ƒƒÅ Ç
-.
-≈≈ 
-Select
-≈≈ 
-(
-≈≈  
-marriage
-≈≈  (
-=>
-≈≈) +
-new
-≈≈, /
-UpdateInfoModel
-≈≈0 ?
-(
-≈≈? @
-)
-≈≈@ A
-{
-∆∆ 
-ReferenceId
-«« '
-=
-««( )
-marriage
-««* 2
-.
-««2 3
-FirstPersonId
-««3 @
-,
-««@ A
-
-UpdateType
-»» &
-=
-»»' (
-
-UpdateType
-»») 3
-.
-»»3 4
-MarriageModified
-»»4 D
-,
-»»D E!
-AffectedPeopleNames
-…… /
-=
-……0 1$
-GetAffectedPersonNames
-……2 H
-(
-……H I
-marriage
-……I Q
-.
-……Q R
-FirstPerson
-……R ]
-,
-……] ^
-marriage
-……_ g
-.
-……g h
-SecondPerson
-……h t
-)
-……t u
-}
-   
-)
-   
-.
-   
-ToList
-   !
-(
-  ! "
-)
-  " #
-)
-  # $
-;
-  $ %
-relativeUpdates
-ÀÀ #
-.
-ÀÀ# $
-Updates
-ÀÀ$ +
-.
-ÀÀ+ ,
-AddRange
-ÀÀ, 4
-(
-ÀÀ4 5
+ModifiedOnöö· Î
+.ööÎ Ï
+ValueööÏ Ò
+)ööÒ Ú
+<ööÛ Ù
+$numööı ˆ
+)ööˆ ˜
+.öö˜ ¯
+Countöö¯ ˝
+(öö˝ ˛
+)öö˛ ˇ
+;ööˇ Ä 
+totalNotifications
+õõ &
++=
+õõ' )
 
 unitOfWork
-ÀÀ5 ?
+õõ* 4
 .
-ÀÀ? @
+õõ4 5
 ParentChild
-ÀÀ@ K
+õõ5 @
 .
-ÀÀK L
+õõ@ A
 Filter
-ÀÀL R
+õõA G
 (
-ÀÀR S
+õõG H
 parentChild
-ÀÀS ^
+õõH S
 =>
-ÀÀ_ a
+õõT V
 parentChild
-ÀÀb m
+õõW b
 .
-ÀÀm n
+õõb c
 Parent
-ÀÀn t
+õõc i
 .
-ÀÀt u
+õõi j
 TreeId
-ÀÀu {
+õõj p
 ==
-ÀÀ| ~
-relativeÀÀ á
-.ÀÀá à
-RelativeUserÀÀà î
-.ÀÀî ï
-PersonÀÀï õ
-.ÀÀõ ú
-TreeIdÀÀú ¢
-&&ÀÀ£ •
-relativeÀÀ¶ Æ
-.ÀÀÆ Ø
-LastSyncCheckÀÀØ º
-.ÀÀº Ω
-	CompareToÀÀΩ ∆
-(ÀÀ∆ «
-parentChildÀÀ« “
-.ÀÀ“ ”
-	CreatedOnÀÀ” ‹
-)ÀÀ‹ ›
-<ÀÀﬁ ﬂ
-$numÀÀ‡ ·
-)ÀÀ· ‚
+õõq s
+relative
+õõt |
 .
-ÃÃ 
-Select
-ÃÃ 
-(
-ÃÃ  
-parentChild
-ÃÃ  +
-=>
-ÃÃ, .
-new
-ÃÃ/ 2
-UpdateInfoModel
-ÃÃ3 B
-(
-ÃÃB C
-)
-ÃÃC D
-{
-ÕÕ 
-ReferenceId
-ŒŒ '
-=
-ŒŒ( )
-parentChild
-ŒŒ* 5
-.
-ŒŒ5 6
-ParentId
-ŒŒ6 >
-,
-ŒŒ> ?
-
-UpdateType
-œœ &
-=
-œœ' (
-
-UpdateType
-œœ) 3
-.
-œœ3 4
-ParentChildAdded
-œœ4 D
-,
-œœD E!
-AffectedPeopleNames
-–– /
-=
-––0 1$
-GetAffectedPersonNames
-––2 H
-(
-––H I
-parentChild
-––I T
-.
-––T U
-Parent
-––U [
-,
-––[ \
-parentChild
-––] h
-.
-––h i
-Child
-––i n
-)
-––n o
+õõ| }
+RelativeUserõõ} â
+.õõâ ä
+Personõõä ê
+.õõê ë
+TreeIdõõë ó
+&&õõò ö
+relativeõõõ £
+.õõ£ §
+LastSyncCheckõõ§ ±
+.õõ± ≤
+	CompareToõõ≤ ª
+(õõª º
+parentChildõõº «
+.õõ« »
+	CreatedOnõõ» —
+)õõ— “
+<õõ” ‘
+$numõõ’ ÷
+)õõ÷ ◊
+.õõ◊ ÿ
+Countõõÿ ›
+(õõ› ﬁ
+)õõﬁ ﬂ
+;õõﬂ ‡
 }
-—— 
-)
-—— 
-.
-—— 
-ToList
-—— !
-(
-——! "
-)
-——" #
-)
-——# $
+úú 
+}
+ùù 
+return
+ûû  
+totalNotifications
+ûû %
 ;
-——$ %
-if
-““ 
+ûû% &
+}
+üü 	
+public
+°° 
+async
+°° 
+Task
+°° 
+<
+°° !
+NotificationsBundle
+°° -
+>
+°°- .
+GetNotifications
+°°/ ?
 (
-““ 
-relativeUpdates
-““ '
-.
-““' (
-Updates
-““( /
-.
-““/ 0
-Any
-““0 3
-(
-““3 4
+°°? @
+Guid
+°°@ D
+userId
+°°E K
 )
-““4 5
-)
-““5 6
+°°K L
 {
-”” 
-relativeUpdates
-‘‘ '
+¢¢ 	
+User
+££ 
+user
+££ 
+=
+££ 
+
+unitOfWork
+££ "
 .
-‘‘' (
+££" #
+User
+££# '
+.
+££' (
+Filter
+££( .
+(
+££. /
+user
+££/ 3
+=>
+££4 6
+user
+££7 ;
+.
+££; <
+Id
+££< >
+==
+££? A
+userId
+££B H
+)
+££H I
+.
+££I J
+Include
+££J Q
+(
+££Q R
+u
+££R S
+=>
+££T V
+u
+££W X
+.
+££X Y
+UserRelatives
+££Y f
+)
+££f g
+.
+££g h
+ThenInclude
+££h s
+(
+££s t
+r
+££t u
+=>
+££v x
+r
+££y z
+.
+££z {
+RelativeUser££{ á
+)££á à
+.££à â
+ThenInclude££â î
+(££î ï
+ru££ï ó
+=>££ò ö
+ru££õ ù
+.££ù û
+Person££û §
+)££§ •
+.££• ¶
+FirstOrDefault££¶ ¥
+(££¥ µ
+)££µ ∂
+;££∂ ∑!
+NotificationsBundle
+§§ 
+notifications
+§§  -
+=
+§§. /
+new
+§§0 3!
+NotificationsBundle
+§§4 G
+(
+§§G H
+)
+§§H I
+;
+§§I J
+notifications
+•• 
+.
+•• 
+RequestsReceived
+•• *
+=
+••+ ,
+await
+••- 2
+_requestService
+••3 B
+.
+••B C!
+GetRequestsReceived
+••C V
+(
+••V W
+userId
+••W ]
+)
+••] ^
+;
+••^ _
+notifications
+¶¶ 
+.
+¶¶ 
+RequestsResponded
+¶¶ +
+=
+¶¶, -
+await
+¶¶. 3
+_requestService
+¶¶4 C
+.
+¶¶C D"
+GetRequestsResponded
+¶¶D X
+(
+¶¶X Y
+userId
+¶¶Y _
+)
+¶¶_ `
+;
+¶¶` a
+if
+®® 
+(
+®® 
+user
+®® 
+==
+®® 
+null
+®® 
+)
+®® 
+{
+©© 
+return
+™™ 
+notifications
+™™ $
+;
+™™$ %
+}
+´´ 
+if
+≠≠ 
+(
+≠≠ 
+user
+≠≠ 
+.
+≠≠ 
+NotifyBirthdays
+≠≠ $
+)
+≠≠$ %
+{
+ÆÆ 
+List
+ØØ 
+<
+ØØ 
+EventInTreeModel
+ØØ %
+>
+ØØ% &
+eventsInTree
+ØØ' 3
+=
+ØØ4 5
+(
+ØØ6 7
+await
+ØØ7 <
+_personService
+ØØ= K
+.
+ØØK L
+GetEventsInTree
+ØØL [
+(
+ØØ[ \
+user
+ØØ\ `
+.
+ØØ` a
+Person
+ØØa g
+.
+ØØg h
+TreeId
+ØØh n
+)
+ØØn o
+)
+ØØo p
+;
+ØØp q
+notifications
+∞∞ 
+.
+∞∞ 
+EventsToday
+∞∞ )
+=
+∞∞* +
+eventsInTree
+∞∞, 8
+.
+∞∞8 9
+FindAll
+∞∞9 @
+(
+∞∞@ A
+e
+∞∞A B
+=>
+∞∞C E
+e
+∞∞F G
+.
+∞∞G H
+Date
+∞∞H L
+.
+∞∞L M
+Day
+∞∞M P
+==
+∞∞Q S
+DateTime
+∞∞T \
+.
+∞∞\ ]
+Today
+∞∞] b
+.
+∞∞b c
+Day
+∞∞c f
+&&
+∞∞g i
+e
+∞∞j k
+.
+∞∞k l
+Date
+∞∞l p
+.
+∞∞p q
+Month
+∞∞q v
+==
+∞∞w y
+DateTime∞∞z Ç
+.∞∞Ç É
+Today∞∞É à
+.∞∞à â
+Month∞∞â é
+)∞∞é è
+;∞∞è ê
+}
+±± 
+else
+≤≤ 
+{
+≥≥ 
+notifications
+¥¥ 
+.
+¥¥ 
+EventsToday
+¥¥ )
+=
+¥¥* +
+new
+¥¥, /
+List
+¥¥0 4
+<
+¥¥4 5
+EventInTreeModel
+¥¥5 E
+>
+¥¥E F
+(
+¥¥F G
+)
+¥¥G H
+;
+¥¥H I
+}
+µµ 
+notifications
+∑∑ 
+.
+∑∑ 
+RelativeUpdates
+∑∑ )
+=
+∑∑* +
+new
+∑∑, /
+List
+∑∑0 4
+<
+∑∑4 5
+RelativeUpdates
+∑∑5 D
+>
+∑∑D E
+(
+∑∑E F
+)
+∑∑F G
+;
+∑∑G H
+if
+ππ 
+(
+ππ 
+user
+ππ 
+.
+ππ 
+NotifyUpdates
+ππ "
+)
+ππ" #
+{
+∫∫ 
+foreach
+ªª 
+(
+ªª 
+var
+ªª 
+relative
+ªª %
+in
+ªª& (
+user
+ªª) -
+.
+ªª- .
+UserRelatives
+ªª. ;
+)
+ªª; <
+{
+ºº 
+RelativeUpdates
+ΩΩ #
+relativeUpdates
+ΩΩ$ 3
+=
+ΩΩ4 5
+new
+ΩΩ6 9
+RelativeUpdates
+ΩΩ: I
+(
+ΩΩI J
+)
+ΩΩJ K
+;
+ΩΩK L
+relativeUpdates
+ææ #
+.
+ææ# $
+Updates
+ææ$ +
+.
+ææ+ ,
+AddRange
+ææ, 4
+(
+ææ4 5
+
+unitOfWork
+ææ5 ?
+.
+ææ? @
+Person
+ææ@ F
+.
+ææF G
+Filter
+ææG M
+(
+ææM N
+person
+ææN T
+=>
+ææU W
+person
+ææX ^
+.
+ææ^ _
+TreeId
+ææ_ e
+==
+ææf h
+relative
+ææi q
+.
+ææq r
+RelativeUser
+æær ~
+.
+ææ~ 
+Personææ Ö
+.ææÖ Ü
+TreeIdææÜ å
+&&ææç è
+relativeææê ò
+.ææò ô
+LastSyncCheckææô ¶
+.ææ¶ ß
+	CompareToææß ∞
+(ææ∞ ±
+personææ± ∑
+.ææ∑ ∏
+	CreatedOnææ∏ ¡
+)ææ¡ ¬
+<ææ√ ƒ
+$numææ≈ ∆
+)ææ∆ «
+.
+øø 
+Select
+øø 
+(
+øø  
+person
+øø  &
+=>
+øø' )
+new
+øø* -
+UpdateInfoModel
+øø. =
+(
+øø= >
+)
+øø> ?
+{
+¿¿ 
+ReferenceId
+¡¡ '
+=
+¡¡( )
+person
+¡¡* 0
+.
+¡¡0 1
+Id
+¡¡1 3
+,
+¡¡3 4
+
+UpdateType
+¬¬ &
+=
+¬¬' (
+
+UpdateType
+¬¬) 3
+.
+¬¬3 4
+PersonCreated
+¬¬4 A
+,
+¬¬A B!
+AffectedPeopleNames
+√√ /
+=
+√√0 1$
+GetAffectedPersonNames
+√√2 H
+(
+√√H I
+person
+√√I O
+,
+√√O P
+null
+√√Q U
+)
+√√U V
+}
+ƒƒ 
+)
+ƒƒ 
+.
+ƒƒ 
+ToList
+ƒƒ !
+(
+ƒƒ! "
+)
+ƒƒ" #
+)
+ƒƒ# $
+;
+ƒƒ$ %
+relativeUpdates
+∆∆ #
+.
+∆∆# $
+Updates
+∆∆$ +
+.
+∆∆+ ,
+AddRange
+∆∆, 4
+(
+∆∆4 5
+
+unitOfWork
+∆∆5 ?
+.
+∆∆? @
+Person
+∆∆@ F
+.
+∆∆F G
+Filter
+∆∆G M
+(
+∆∆M N
+person
+∆∆N T
+=>
+∆∆U W
+person
+∆∆X ^
+.
+∆∆^ _
+TreeId
+∆∆_ e
+==
+∆∆f h
+relative
+∆∆i q
+.
+∆∆q r
+RelativeUser
+∆∆r ~
+.
+∆∆~ 
+Person∆∆ Ö
+.∆∆Ö Ü
+TreeId∆∆Ü å
+&&∆∆ç è
+person∆∆ê ñ
+.∆∆ñ ó
+
+ModifiedOn∆∆ó °
+.∆∆° ¢
+HasValue∆∆¢ ™
+&&∆∆´ ≠
+relative∆∆Æ ∂
+.∆∆∂ ∑
+LastSyncCheck∆∆∑ ƒ
+.∆∆ƒ ≈
+	CompareTo∆∆≈ Œ
+(∆∆Œ œ
+person∆∆œ ’
+.∆∆’ ÷
+
+ModifiedOn∆∆÷ ‡
+.∆∆‡ ·
+Value∆∆· Ê
+)∆∆Ê Á
+<∆∆Ë È
+$num∆∆Í Î
+)∆∆Î Ï
+.
+«« 
+Select
+«« 
+(
+««  
+person
+««  &
+=>
+««' )
+new
+««* -
+UpdateInfoModel
+««. =
+(
+««= >
+)
+««> ?
+{
+»» 
+ReferenceId
+…… '
+=
+……( )
+person
+……* 0
+.
+……0 1
+Id
+……1 3
+,
+……3 4
+
+UpdateType
+   &
+=
+  ' (
+
+UpdateType
+  ) 3
+.
+  3 4
+PersonModified
+  4 B
+,
+  B C!
+AffectedPeopleNames
+ÀÀ /
+=
+ÀÀ0 1$
+GetAffectedPersonNames
+ÀÀ2 H
+(
+ÀÀH I
+person
+ÀÀI O
+,
+ÀÀO P
+null
+ÀÀQ U
+)
+ÀÀU V
+}
+ÃÃ 
+)
+ÃÃ 
+.
+ÃÃ 
+ToList
+ÃÃ !
+(
+ÃÃ! "
+)
+ÃÃ" #
+)
+ÃÃ# $
+;
+ÃÃ$ %
+relativeUpdates
+ŒŒ #
+.
+ŒŒ# $
+Updates
+ŒŒ$ +
+.
+ŒŒ+ ,
+AddRange
+ŒŒ, 4
+(
+ŒŒ4 5
+
+unitOfWork
+ŒŒ5 ?
+.
+ŒŒ? @
+Marriage
+ŒŒ@ H
+.
+ŒŒH I
+Filter
+ŒŒI O
+(
+ŒŒO P
+marriage
+ŒŒP X
+=>
+ŒŒY [
+marriage
+ŒŒ\ d
+.
+ŒŒd e
+FirstPerson
+ŒŒe p
+.
+ŒŒp q
+TreeId
+ŒŒq w
+==
+ŒŒx z
+relativeŒŒ{ É
+.ŒŒÉ Ñ
+RelativeUserŒŒÑ ê
+.ŒŒê ë
+PersonŒŒë ó
+.ŒŒó ò
+TreeIdŒŒò û
+&&ŒŒü °
+relativeŒŒ¢ ™
+.ŒŒ™ ´
+LastSyncCheckŒŒ´ ∏
+.ŒŒ∏ π
+	CompareToŒŒπ ¬
+(ŒŒ¬ √
+marriageŒŒ√ À
+.ŒŒÀ Ã
+	CreatedOnŒŒÃ ’
+)ŒŒ’ ÷
+<ŒŒ◊ ÿ
+$numŒŒŸ ⁄
+)ŒŒ⁄ €
+.
+œœ 
+Select
+œœ 
+(
+œœ  
+marriage
+œœ  (
+=>
+œœ) +
+new
+œœ, /
+UpdateInfoModel
+œœ0 ?
+(
+œœ? @
+)
+œœ@ A
+{
+–– 
+ReferenceId
+—— '
+=
+——( )
+marriage
+——* 2
+.
+——2 3
+FirstPersonId
+——3 @
+,
+——@ A
+
+UpdateType
+““ &
+=
+““' (
+
+UpdateType
+““) 3
+.
+““3 4
+MarriageCreated
+““4 C
+,
+““C D!
+AffectedPeopleNames
+”” /
+=
+””0 1$
+GetAffectedPersonNames
+””2 H
+(
+””H I
+marriage
+””I Q
+.
+””Q R
+FirstPerson
+””R ]
+,
+””] ^
+marriage
+””_ g
+.
+””g h
+SecondPerson
+””h t
+)
+””t u
+}
+‘‘ 
+)
+‘‘ 
+.
+‘‘ 
+ToList
+‘‘ !
+(
+‘‘! "
+)
+‘‘" #
+)
+‘‘# $
+;
+‘‘$ %
+relativeUpdates
+÷÷ #
+.
+÷÷# $
+Updates
+÷÷$ +
+.
+÷÷+ ,
+AddRange
+÷÷, 4
+(
+÷÷4 5
+
+unitOfWork
+÷÷5 ?
+.
+÷÷? @
+Marriage
+÷÷@ H
+.
+÷÷H I
+Filter
+÷÷I O
+(
+÷÷O P
+marriage
+÷÷P X
+=>
+÷÷Y [
+marriage
+÷÷\ d
+.
+÷÷d e
+FirstPerson
+÷÷e p
+.
+÷÷p q
+TreeId
+÷÷q w
+==
+÷÷x z
+relative÷÷{ É
+.÷÷É Ñ
+RelativeUser÷÷Ñ ê
+.÷÷ê ë
+Person÷÷ë ó
+.÷÷ó ò
+TreeId÷÷ò û
+&&÷÷ü °
+marriage÷÷¢ ™
+.÷÷™ ´
+
+ModifiedOn÷÷´ µ
+.÷÷µ ∂
+HasValue÷÷∂ æ
+&&÷÷ø ¡
+relative÷÷¬  
+.÷÷  À
+LastSyncCheck÷÷À ÿ
+.÷÷ÿ Ÿ
+	CompareTo÷÷Ÿ ‚
+(÷÷‚ „
+marriage÷÷„ Î
+.÷÷Î Ï
+
+ModifiedOn÷÷Ï ˆ
+.÷÷ˆ ˜
+Value÷÷˜ ¸
+)÷÷¸ ˝
+<÷÷˛ ˇ
+$num÷÷Ä Å
+)÷÷Å Ç
+.
+◊◊ 
+Select
+◊◊ 
+(
+◊◊  
+marriage
+◊◊  (
+=>
+◊◊) +
+new
+◊◊, /
+UpdateInfoModel
+◊◊0 ?
+(
+◊◊? @
+)
+◊◊@ A
+{
+ÿÿ 
+ReferenceId
+ŸŸ '
+=
+ŸŸ( )
+marriage
+ŸŸ* 2
+.
+ŸŸ2 3
+FirstPersonId
+ŸŸ3 @
+,
+ŸŸ@ A
+
+UpdateType
+⁄⁄ &
+=
+⁄⁄' (
+
+UpdateType
+⁄⁄) 3
+.
+⁄⁄3 4
+MarriageModified
+⁄⁄4 D
+,
+⁄⁄D E!
+AffectedPeopleNames
+€€ /
+=
+€€0 1$
+GetAffectedPersonNames
+€€2 H
+(
+€€H I
+marriage
+€€I Q
+.
+€€Q R
+FirstPerson
+€€R ]
+,
+€€] ^
+marriage
+€€_ g
+.
+€€g h
+SecondPerson
+€€h t
+)
+€€t u
+}
+‹‹ 
+)
+‹‹ 
+.
+‹‹ 
+ToList
+‹‹ !
+(
+‹‹! "
+)
+‹‹" #
+)
+‹‹# $
+;
+‹‹$ %
+relativeUpdates
+ﬁﬁ #
+.
+ﬁﬁ# $
+Updates
+ﬁﬁ$ +
+.
+ﬁﬁ+ ,
+AddRange
+ﬁﬁ, 4
+(
+ﬁﬁ4 5
+
+unitOfWork
+ﬁﬁ5 ?
+.
+ﬁﬁ? @
+ParentChild
+ﬁﬁ@ K
+.
+ﬁﬁK L
+Filter
+ﬁﬁL R
+(
+ﬁﬁR S
+parentChild
+ﬁﬁS ^
+=>
+ﬁﬁ_ a
+parentChild
+ﬁﬁb m
+.
+ﬁﬁm n
+Parent
+ﬁﬁn t
+.
+ﬁﬁt u
+TreeId
+ﬁﬁu {
+==
+ﬁﬁ| ~
+relativeﬁﬁ á
+.ﬁﬁá à
+RelativeUserﬁﬁà î
+.ﬁﬁî ï
+Personﬁﬁï õ
+.ﬁﬁõ ú
+TreeIdﬁﬁú ¢
+&&ﬁﬁ£ •
+relativeﬁﬁ¶ Æ
+.ﬁﬁÆ Ø
+LastSyncCheckﬁﬁØ º
+.ﬁﬁº Ω
+	CompareToﬁﬁΩ ∆
+(ﬁﬁ∆ «
+parentChildﬁﬁ« “
+.ﬁﬁ“ ”
+	CreatedOnﬁﬁ” ‹
+)ﬁﬁ‹ ›
+<ﬁﬁﬁ ﬂ
+$numﬁﬁ‡ ·
+)ﬁﬁ· ‚
+.
+ﬂﬂ 
+Select
+ﬂﬂ 
+(
+ﬂﬂ  
+parentChild
+ﬂﬂ  +
+=>
+ﬂﬂ, .
+new
+ﬂﬂ/ 2
+UpdateInfoModel
+ﬂﬂ3 B
+(
+ﬂﬂB C
+)
+ﬂﬂC D
+{
+‡‡ 
+ReferenceId
+·· '
+=
+··( )
+parentChild
+··* 5
+.
+··5 6
+ParentId
+··6 >
+,
+··> ?
+
+UpdateType
+‚‚ &
+=
+‚‚' (
+
+UpdateType
+‚‚) 3
+.
+‚‚3 4
+ParentChildAdded
+‚‚4 D
+,
+‚‚D E!
+AffectedPeopleNames
+„„ /
+=
+„„0 1$
+GetAffectedPersonNames
+„„2 H
+(
+„„H I
+parentChild
+„„I T
+.
+„„T U
+Parent
+„„U [
+,
+„„[ \
+parentChild
+„„] h
+.
+„„h i
+Child
+„„i n
+)
+„„n o
+}
+‰‰ 
+)
+‰‰ 
+.
+‰‰ 
+ToList
+‰‰ !
+(
+‰‰! "
+)
+‰‰" #
+)
+‰‰# $
+;
+‰‰$ %
+if
+ÊÊ 
+(
+ÊÊ 
+relativeUpdates
+ÊÊ '
+.
+ÊÊ' (
+Updates
+ÊÊ( /
+.
+ÊÊ/ 0
+Any
+ÊÊ0 3
+(
+ÊÊ3 4
+)
+ÊÊ4 5
+)
+ÊÊ5 6
+{
+ÁÁ 
+relativeUpdates
+ËË '
+.
+ËË' (
 
 RelativeId
-‘‘( 2
+ËË( 2
 =
-‘‘3 4
+ËË3 4
 relative
-‘‘5 =
+ËË5 =
 .
-‘‘= >
+ËË= >
 Id
-‘‘> @
+ËË> @
 ;
-‘‘@ A
+ËË@ A
 relativeUpdates
-’’ '
+ÈÈ '
 .
-’’' (
+ÈÈ' (
 Relative
-’’( 0
+ÈÈ( 0
 =
-’’1 2
+ÈÈ1 2
 _mapper
-’’3 :
+ÈÈ3 :
 .
-’’: ;
+ÈÈ: ;
 Map
-’’; >
+ÈÈ; >
 <
-’’> ? 
+ÈÈ> ? 
 GenericPersonModel
-’’? Q
+ÈÈ? Q
 >
-’’Q R
+ÈÈQ R
 (
-’’R S
+ÈÈR S
 relative
-’’S [
+ÈÈS [
 .
-’’[ \
+ÈÈ[ \
 RelativeUser
-’’\ h
+ÈÈ\ h
 )
-’’h i
+ÈÈh i
 ;
-’’i j
+ÈÈi j
 relativeUpdates
-÷÷ '
+ÍÍ '
 .
-÷÷' (
+ÍÍ' (
 Relative
-÷÷( 0
+ÍÍ( 0
 .
-÷÷0 1
+ÍÍ0 1
 	ImageFile
-÷÷1 :
+ÍÍ1 :
 =
-÷÷; <
+ÍÍ; <
 await
-÷÷= B$
+ÍÍ= B$
 _fileManagementService
-÷÷C Y
+ÍÍC Y
 .
-÷÷Y Z
+ÍÍY Z
 GetFile
-÷÷Z a
+ÍÍZ a
 (
-÷÷a b
+ÍÍa b
 relative
-÷÷b j
+ÍÍb j
 .
-÷÷j k
+ÍÍj k
 RelativeUser
-÷÷k w
+ÍÍk w
 .
-÷÷w x
+ÍÍw x
 Person
-÷÷x ~
+ÍÍx ~
 .
-÷÷~ 
-Image÷÷ Ñ
-)÷÷Ñ Ö
-;÷÷Ö Ü
+ÍÍ~ 
+ImageÍÍ Ñ
+)ÍÍÑ Ö
+;ÍÍÖ Ü
 notifications
-◊◊ %
+ÎÎ %
 .
-◊◊% &
+ÎÎ% &
 RelativeUpdates
-◊◊& 5
+ÎÎ& 5
 .
-◊◊5 6
+ÎÎ5 6
 Add
-◊◊6 9
+ÎÎ6 9
 (
-◊◊9 :
+ÎÎ9 :
 relativeUpdates
-◊◊: I
+ÎÎ: I
 )
-◊◊I J
+ÎÎI J
 ;
-◊◊J K
+ÎÎJ K
 }
-ÿÿ 
+ÏÏ 
 }
-ŸŸ 
+ÓÓ 
 }
-⁄⁄ 
+ÔÔ 
 return
-€€ 
+ÒÒ 
 notifications
-€€  
+ÒÒ  
 ;
-€€  !
+ÒÒ  !
 }
-‹‹ 	
+ÚÚ 	
 private
-ﬁﬁ 
+ÙÙ 
 static
-ﬁﬁ 
+ÙÙ 
 List
-ﬁﬁ 
+ÙÙ 
 <
-ﬁﬁ 
+ÙÙ 
 string
-ﬁﬁ "
+ÙÙ "
 >
-ﬁﬁ" #$
+ÙÙ" #$
 GetAffectedPersonNames
-ﬁﬁ$ :
+ÙÙ$ :
 (
-ﬁﬁ: ;
+ÙÙ: ;
 Person
-ﬁﬁ; A
+ÙÙ; A
 firstPerson
-ﬁﬁB M
+ÙÙB M
 ,
-ﬁﬁM N
+ÙÙM N
 Person
-ﬁﬁO U
+ÙÙO U
 secondPerson
-ﬁﬁV b
+ÙÙV b
 )
-ﬁﬁb c
+ÙÙb c
 {
-ﬂﬂ 	
+ıı 	
 List
-‡‡ 
+ˆˆ 
 <
-‡‡ 
+ˆˆ 
 string
-‡‡ 
+ˆˆ 
 >
-‡‡ 
+ˆˆ 
 affectedNames
-‡‡ &
+ˆˆ &
 =
-‡‡' (
+ˆˆ' (
 new
-‡‡) ,
+ˆˆ) ,
 List
-‡‡- 1
+ˆˆ- 1
 <
-‡‡1 2
+ˆˆ1 2
 string
-‡‡2 8
+ˆˆ2 8
 >
-‡‡8 9
+ˆˆ8 9
 (
-‡‡9 :
+ˆˆ9 :
 )
-‡‡: ;
+ˆˆ: ;
 ;
-‡‡; <
+ˆˆ; <
 affectedNames
-·· 
+˜˜ 
 .
-·· 
+˜˜ 
 Add
-·· 
+˜˜ 
 (
-·· 
+˜˜ 
 firstPerson
-·· )
+˜˜ )
 .
-··) *
+˜˜) *
 	FirstName
-··* 3
+˜˜* 3
 +
-··4 5
+˜˜4 5
 $str
-··6 9
+˜˜6 9
 +
-··: ;
+˜˜: ;
 firstPerson
-··< G
+˜˜< G
 .
-··G H
+˜˜G H
 LastName
-··H P
+˜˜H P
 )
-··P Q
+˜˜P Q
 ;
-··Q R
+˜˜Q R
 if
-‚‚ 
+˘˘ 
 (
-‚‚ 
+˘˘ 
 secondPerson
-‚‚ 
+˘˘ 
 !=
-‚‚ 
+˘˘ 
 null
-‚‚  $
+˘˘  $
 )
-‚‚$ %
+˘˘$ %
 {
-„„ 
+˙˙ 
 affectedNames
-‰‰ 
+˚˚ 
 .
-‰‰ 
+˚˚ 
 Add
-‰‰ !
+˚˚ !
 (
-‰‰! "
+˚˚! "
 secondPerson
-‰‰" .
+˚˚" .
 .
-‰‰. /
+˚˚. /
 	FirstName
-‰‰/ 8
+˚˚/ 8
 +
-‰‰9 :
+˚˚9 :
 $str
-‰‰; >
+˚˚; >
 +
-‰‰? @
+˚˚? @
 secondPerson
-‰‰A M
+˚˚A M
 .
-‰‰M N
+˚˚M N
 LastName
-‰‰N V
+˚˚N V
 )
-‰‰V W
+˚˚V W
 ;
-‰‰W X
+˚˚W X
 }
-ÂÂ 
+¸¸ 
 return
-ÊÊ 
+˛˛ 
 affectedNames
-ÊÊ  
+˛˛  
 ;
-ÊÊ  !
+˛˛  !
 }
-ÁÁ 	
+ˇˇ 	
 public
-ÈÈ 
+ÅÅ 
 async
-ÈÈ 
+ÅÅ 
 Task
-ÈÈ 
+ÅÅ 
 <
-ÈÈ 
+ÅÅ 
 UserDetailsModel
-ÈÈ *
+ÅÅ *
 >
-ÈÈ* +
+ÅÅ* +
 
 UpdateUser
-ÈÈ, 6
+ÅÅ, 6
 (
-ÈÈ6 7
+ÅÅ6 7
 Guid
-ÈÈ7 ;
+ÅÅ7 ;
 userId
-ÈÈ< B
+ÅÅ< B
 ,
-ÈÈB C
+ÅÅB C
 UserUpdateModel
-ÈÈD S
+ÅÅD S
 user
-ÈÈT X
+ÅÅT X
 )
-ÈÈX Y
+ÅÅX Y
 {
-ÍÍ 	
+ÇÇ 	
 User
-ÎÎ 
+ÉÉ 
 userToUpdate
-ÎÎ 
+ÉÉ 
 =
-ÎÎ 
+ÉÉ 
 await
-ÎÎ  %
+ÉÉ  %
 
 unitOfWork
-ÎÎ& 0
+ÉÉ& 0
 .
-ÎÎ0 1
+ÉÉ0 1
 User
-ÎÎ1 5
+ÉÉ1 5
 .
-ÎÎ5 6
+ÉÉ5 6
 FindById
-ÎÎ6 >
+ÉÉ6 >
 (
-ÎÎ> ?
+ÉÉ> ?
 userId
-ÎÎ? E
+ÉÉ? E
 )
-ÎÎE F
+ÉÉE F
 ;
-ÎÎF G
+ÉÉF G
 if
-ÏÏ 
+ÑÑ 
 (
-ÏÏ 
+ÑÑ 
 userToUpdate
-ÏÏ 
+ÑÑ 
 ==
-ÏÏ 
+ÑÑ 
 null
-ÏÏ  $
+ÑÑ  $
 ||
-ÏÏ% '
+ÑÑ% '
 user
-ÏÏ( ,
+ÑÑ( ,
 ==
-ÏÏ- /
+ÑÑ- /
 null
-ÏÏ0 4
+ÑÑ0 4
 )
-ÏÏ4 5
+ÑÑ4 5
 {
-ÌÌ 
+ÖÖ 
 return
-ÓÓ 
+ÜÜ 
 null
-ÓÓ 
+ÜÜ 
 ;
-ÓÓ 
+ÜÜ 
 }
-ÔÔ 
+áá 
 userToUpdate
- 
+ââ 
 .
- 
+ââ 
 About
- 
+ââ 
 =
-  
+ââ  
 user
-! %
+ââ! %
 .
-% &
+ââ% &
 About
-& +
+ââ& +
 ;
-+ ,
+ââ+ ,
 userToUpdate
-ÒÒ 
+ää 
 .
-ÒÒ 
+ää 
 Email
-ÒÒ 
+ää 
 =
-ÒÒ  
+ää  
 user
-ÒÒ! %
+ää! %
 .
-ÒÒ% &
+ää% &
 Email
-ÒÒ& +
+ää& +
 ;
-ÒÒ+ ,
+ää+ ,
 userToUpdate
-ÚÚ 
+ãã 
 .
-ÚÚ 
+ãã 
 PhoneNumber
-ÚÚ $
+ãã $
 =
-ÚÚ% &
+ãã% &
 user
-ÚÚ' +
+ãã' +
 .
-ÚÚ+ ,
+ãã+ ,
 PhoneNumber
-ÚÚ, 7
+ãã, 7
 ;
-ÚÚ7 8
+ãã7 8
 User
-ÛÛ 
+åå 
 
 userEntity
-ÛÛ 
+åå 
 =
-ÛÛ 
+åå 
 await
-ÛÛ #
+åå #
 
 unitOfWork
-ÛÛ$ .
+åå$ .
 .
-ÛÛ. /
+åå. /
 User
-ÛÛ/ 3
+åå/ 3
 .
-ÛÛ3 4
+åå3 4
 Update
-ÛÛ4 :
+åå4 :
 (
-ÛÛ: ;
+åå: ;
 userToUpdate
-ÛÛ; G
+åå; G
 )
-ÛÛG H
+ååG H
 ;
-ÛÛH I
+ååH I
 UserDetailsModel
-ÙÙ 
+çç 
 returnEvent
-ÙÙ (
+çç (
 =
-ÙÙ) *
+çç) *
 _mapper
-ÙÙ+ 2
+çç+ 2
 .
-ÙÙ2 3
+çç2 3
 Map
-ÙÙ3 6
+çç3 6
 <
-ÙÙ6 7
+çç6 7
 UserDetailsModel
-ÙÙ7 G
+çç7 G
 >
-ÙÙG H
+ççG H
 (
-ÙÙH I
+ççH I
 
 userEntity
-ÙÙI S
+ççI S
 )
-ÙÙS T
+ççS T
 ;
-ÙÙT U
+ççT U
 return
-ıı 
+èè 
 returnEvent
-ıı 
+èè 
 ;
-ıı 
+èè 
 }
-ˆˆ 	
+êê 	
 public
-¯¯ 
+íí 
 async
-¯¯ 
+íí 
 Task
-¯¯ 
+íí 
 <
-¯¯ 
+íí 
 bool
-¯¯ 
+íí 
 >
-¯¯ $
+íí $
 CheckUsernameAvailable
-¯¯  6
+íí  6
 (
-¯¯6 7
+íí6 7
 string
-¯¯7 =
+íí7 =
 username
-¯¯> F
+íí> F
 )
-¯¯F G
+ííF G
 {
-˘˘ 	
+ìì 	
 User
-˙˙ 
+îî 
 user
-˙˙ 
+îî 
 =
-˙˙ 
+îî 
 await
-˙˙ 
+îî 
 Task
-˙˙ "
+îî "
 .
-˙˙" #
+îî" #
 Run
-˙˙# &
+îî# &
 (
-˙˙& '
+îî& '
 (
-˙˙' (
+îî' (
 )
-˙˙( )
+îî( )
 =>
-˙˙* ,
+îî* ,
 
 unitOfWork
-˙˙- 7
+îî- 7
 .
-˙˙7 8
+îî7 8
 User
-˙˙8 <
+îî8 <
 .
-˙˙< =
+îî< =
 Filter
-˙˙= C
+îî= C
 (
-˙˙C D
+îîC D
 x
-˙˙D E
+îîD E
 =>
-˙˙F H
+îîF H
 x
-˙˙I J
+îîI J
 .
-˙˙J K
+îîJ K
 Username
-˙˙K S
+îîK S
 ==
-˙˙T V
+îîT V
 username
-˙˙W _
+îîW _
 )
-˙˙_ `
+îî_ `
 .
-˙˙` a
+îî` a
 FirstOrDefault
-˙˙a o
+îîa o
 (
-˙˙o p
+îîo p
 )
-˙˙p q
+îîp q
 )
-˙˙q r
+îîq r
 ;
-˙˙r s
+îîr s
 return
-˚˚ 
+ïï 
 user
-˚˚ 
+ïï 
 ==
-˚˚ 
+ïï 
 default
-˚˚ "
+ïï "
 (
-˚˚" #
+ïï" #
 User
-˚˚# '
+ïï# '
 )
-˚˚' (
+ïï' (
 ;
-˚˚( )
+ïï( )
 }
-¸¸ 	
+ññ 	
 public
-˛˛ 
+òò 
 async
-˛˛ 
+òò 
 Task
-˛˛ 
+òò 
 <
-˛˛ 
+òò 
 bool
-˛˛ 
+òò 
 >
-˛˛ !
+òò !
 CheckEmailAvailable
-˛˛  3
+òò  3
 (
-˛˛3 4
+òò3 4
 string
-˛˛4 :
+òò4 :
 email
-˛˛; @
+òò; @
 )
-˛˛@ A
+òò@ A
 {
-ˇˇ 	
+ôô 	
 User
-ÄÄ 
+öö 
 user
-ÄÄ 
+öö 
 =
-ÄÄ 
+öö 
 await
-ÄÄ 
+öö 
 Task
-ÄÄ "
+öö "
 .
-ÄÄ" #
+öö" #
 Run
-ÄÄ# &
+öö# &
 (
-ÄÄ& '
+öö& '
 (
-ÄÄ' (
+öö' (
 )
-ÄÄ( )
+öö( )
 =>
-ÄÄ* ,
+öö* ,
 
 unitOfWork
-ÄÄ- 7
+öö- 7
 .
-ÄÄ7 8
+öö7 8
 User
-ÄÄ8 <
+öö8 <
 .
-ÄÄ< =
+öö< =
 Filter
-ÄÄ= C
+öö= C
 (
-ÄÄC D
+ööC D
 x
-ÄÄD E
+ööD E
 =>
-ÄÄF H
+ööF H
 x
-ÄÄI J
+ööI J
 .
-ÄÄJ K
+ööJ K
 Email
-ÄÄK P
+ööK P
 ==
-ÄÄQ S
+ööQ S
 email
-ÄÄT Y
+ööT Y
 )
-ÄÄY Z
+ööY Z
 .
-ÄÄZ [
+ööZ [
 FirstOrDefault
-ÄÄ[ i
+öö[ i
 (
-ÄÄi j
+ööi j
 )
-ÄÄj k
+ööj k
 )
-ÄÄk l
+öök l
 ;
-ÄÄl m
+ööl m
 return
-ÅÅ 
+õõ 
 user
-ÅÅ 
+õõ 
 ==
-ÅÅ 
+õõ 
 default
-ÅÅ "
+õõ "
 (
-ÅÅ" #
+õõ" #
 User
-ÅÅ# '
+õõ# '
 )
-ÅÅ' (
+õõ' (
 ;
-ÅÅ( )
+õõ( )
 }
-ÇÇ 	
+úú 	
 public
-ÑÑ 
+ûû 
 async
-ÑÑ 
+ûû 
 Task
-ÑÑ 
+ûû 
 <
-ÑÑ 
+ûû 
 UserSettingsModel
-ÑÑ +
+ûû +
 >
-ÑÑ+ ,
+ûû+ ,
 GetUserSettings
-ÑÑ- <
+ûû- <
 (
-ÑÑ< =
+ûû< =
 Guid
-ÑÑ= A
+ûû= A
 userId
-ÑÑB H
+ûûB H
 )
-ÑÑH I
+ûûH I
 {
-ÖÖ 	
+üü 	
 User
-ÜÜ 
+†† 
 user
-ÜÜ 
+†† 
 =
-ÜÜ 
+†† 
 await
-ÜÜ 
+†† 
 
 unitOfWork
-ÜÜ (
+†† (
 .
-ÜÜ( )
+††( )
 User
-ÜÜ) -
+††) -
 .
-ÜÜ- .
+††- .
 FindById
-ÜÜ. 6
+††. 6
 (
-ÜÜ6 7
+††6 7
 userId
-ÜÜ7 =
+††7 =
 )
-ÜÜ= >
+††= >
 ;
-ÜÜ> ?
+††> ?
 return
-áá 
+°° 
 _mapper
-áá 
+°° 
 .
-áá 
+°° 
 Map
-áá 
+°° 
 <
-áá 
+°° 
 UserSettingsModel
-áá 0
+°° 0
 >
-áá0 1
+°°0 1
 (
-áá1 2
+°°1 2
 user
-áá2 6
+°°2 6
 )
-áá6 7
+°°6 7
 ;
-áá7 8
+°°7 8
 }
-àà 	
+¢¢ 	
 public
-ää 
+§§ 
 async
-ää 
+§§ 
 Task
-ää 
+§§ 
 <
-ää 
+§§ 
 UserSettingsModel
-ää +
+§§ +
 >
-ää+ , 
+§§+ , 
 UpdateUserSettings
-ää- ?
+§§- ?
 (
-ää? @
+§§? @
 Guid
-ää@ D
+§§@ D
 userId
-ääE K
+§§E K
 ,
-ääK L
+§§K L
 UserSettingsModel
-ääM ^
+§§M ^
 userSettings
-ää_ k
+§§_ k
 )
-ääk l
+§§k l
 {
-ãã 	
+•• 	
 User
-åå 
+¶¶ 
 userToUpdate
-åå 
+¶¶ 
 =
-åå 
+¶¶ 
 await
-åå  %
+¶¶  %
 
 unitOfWork
-åå& 0
+¶¶& 0
 .
-åå0 1
+¶¶0 1
 User
-åå1 5
+¶¶1 5
 .
-åå5 6
+¶¶5 6
 FindById
-åå6 >
+¶¶6 >
 (
-åå> ?
+¶¶> ?
 userId
-åå? E
+¶¶? E
 )
-ååE F
+¶¶E F
 ;
-ååF G
+¶¶F G
 if
-çç 
+ßß 
 (
-çç 
+ßß 
 userToUpdate
-çç 
+ßß 
 ==
-çç 
+ßß 
 null
-çç  $
+ßß  $
 ||
-çç% '
+ßß% '
 userSettings
-çç( 4
+ßß( 4
 ==
-çç5 7
+ßß5 7
 null
-çç8 <
+ßß8 <
 )
-çç< =
+ßß< =
 {
-éé 
+®® 
 return
-èè 
+©© 
 null
-èè 
+©© 
 ;
-èè 
+©© 
 }
-êê 
+™™ 
 userToUpdate
-ëë 
+¨¨ 
 .
-ëë 
+¨¨ 
 NotifyUpdates
-ëë &
+¨¨ &
 =
-ëë' (
+¨¨' (
 userSettings
-ëë) 5
+¨¨) 5
 .
-ëë5 6
+¨¨5 6
 NotifyUpdates
-ëë6 C
+¨¨6 C
 ;
-ëëC D
+¨¨C D
 userToUpdate
-íí 
+≠≠ 
 .
-íí 
+≠≠ 
 NotifyBirthdays
-íí (
+≠≠ (
 =
-íí) *
+≠≠) *
 userSettings
-íí+ 7
+≠≠+ 7
 .
-íí7 8
+≠≠7 8
 NotifyBirthdays
-íí8 G
+≠≠8 G
 ;
-ííG H
+≠≠G H
 userToUpdate
-ìì 
+ÆÆ 
 .
-ìì 
+ÆÆ 
 SharePersonalInfo
-ìì *
+ÆÆ *
 =
-ìì+ ,
+ÆÆ+ ,
 userSettings
-ìì- 9
+ÆÆ- 9
 .
-ìì9 :
+ÆÆ9 :
 SharePersonalInfo
-ìì: K
+ÆÆ: K
 ;
-ììK L
+ÆÆK L
 userToUpdate
-îî 
+ØØ 
 .
-îî 
+ØØ 
 ShareLocation
-îî &
+ØØ &
 =
-îî' (
+ØØ' (
 userSettings
-îî) 5
+ØØ) 5
 .
-îî5 6
+ØØ5 6
 ShareLocation
-îî6 C
+ØØ6 C
 ;
-îîC D
+ØØC D
 User
-ïï 
+∞∞ 
 
 userEntity
-ïï 
+∞∞ 
 =
-ïï 
+∞∞ 
 await
-ïï #
+∞∞ #
 
 unitOfWork
-ïï$ .
+∞∞$ .
 .
-ïï. /
+∞∞. /
 User
-ïï/ 3
+∞∞/ 3
 .
-ïï3 4
+∞∞3 4
 Update
-ïï4 :
+∞∞4 :
 (
-ïï: ;
+∞∞: ;
 userToUpdate
-ïï; G
+∞∞; G
 )
-ïïG H
+∞∞G H
 ;
-ïïH I
+∞∞H I
 UserSettingsModel
-ññ 
+±± 
 returnEvent
-ññ )
+±± )
 =
-ññ* +
+±±* +
 _mapper
-ññ, 3
+±±, 3
 .
-ññ3 4
+±±3 4
 Map
-ññ4 7
+±±4 7
 <
-ññ7 8
+±±7 8
 UserSettingsModel
-ññ8 I
+±±8 I
 >
-ññI J
+±±I J
 (
-ññJ K
+±±J K
 
 userEntity
-ññK U
+±±K U
 )
-ññU V
+±±U V
 ;
-ññV W
+±±V W
 return
-óó 
+≥≥ 
 returnEvent
-óó 
+≥≥ 
 ;
-óó 
+≥≥ 
 }
-òò 	
+¥¥ 	
 public
-öö 
+∂∂ 
 async
-öö 
+∂∂ 
 Task
-öö 
+∂∂ 
 <
-öö 
+∂∂ 
 PositionModel
-öö '
+∂∂ '
 >
-öö' ( 
+∂∂' ( 
 UpdateUserPosition
-öö) ;
+∂∂) ;
 (
-öö; <
+∂∂; <
 Guid
-öö< @
+∂∂< @
 userId
-ööA G
+∂∂A G
 ,
-ööG H
+∂∂G H
 PositionModel
-ööI V
+∂∂I V
 position
-ööW _
+∂∂W _
 )
-öö_ `
+∂∂_ `
 {
-õõ 	
+∑∑ 	
 Position
-úú 
+∏∏ 
 positionInDb
-úú !
+∏∏ !
 =
-úú" #
+∏∏" #
 (
-úú$ %
+∏∏$ %
 await
-úú% *
+∏∏% *
 
 unitOfWork
-úú+ 5
+∏∏+ 5
 .
-úú5 6
+∏∏5 6
 User
-úú6 :
+∏∏6 :
 .
-úú: ;
+∏∏: ;
 FindById
-úú; C
+∏∏; C
 (
-úúC D
+∏∏C D
 userId
-úúD J
+∏∏D J
 )
-úúJ K
+∏∏J K
 )
-úúK L
+∏∏K L
 .
-úúL M
+∏∏L M
 Position
-úúM U
+∏∏M U
 ;
-úúU V
+∏∏U V
 if
-ùù 
+∫∫ 
 (
-ùù 
+∫∫ 
 positionInDb
-ùù 
+∫∫ 
 ==
-ùù 
+∫∫ 
 null
-ùù  $
+∫∫  $
 ||
-ùù% '
+∫∫% '
 position
-ùù( 0
+∫∫( 0
 ==
-ùù1 3
+∫∫1 3
 null
-ùù4 8
+∫∫4 8
 )
-ùù8 9
+∫∫8 9
 {
-ûû 
+ªª 
 return
-üü 
+ºº 
 null
-üü 
+ºº 
 ;
-üü 
+ºº 
 }
-†† 
+ΩΩ 
 positionInDb
-°° 
+øø 
 .
-°° 
+øø 
 	UpdatedOn
-°° "
+øø "
 =
-°°# $
+øø# $
 DateTime
-°°% -
+øø% -
 .
-°°- .
+øø- .
 Now
-°°. 1
+øø. 1
 ;
-°°1 2
+øø1 2
 positionInDb
-¢¢ 
+¿¿ 
 .
-¢¢ 
+¿¿ 
 Latitude
-¢¢ !
+¿¿ !
 =
-¢¢" #
+¿¿" #
 position
-¢¢$ ,
+¿¿$ ,
 .
-¢¢, -
+¿¿, -
 Latitude
-¢¢- 5
+¿¿- 5
 ;
-¢¢5 6
+¿¿5 6
 positionInDb
-££ 
+¡¡ 
 .
-££ 
+¡¡ 
 	Longitude
-££ "
+¡¡ "
 =
-££# $
+¡¡# $
 position
-££% -
+¡¡% -
 .
-££- .
+¡¡- .
 	Longitude
-££. 7
+¡¡. 7
 ;
-££7 8
+¡¡7 8
 Position
-§§ 
+¬¬ 
 positionEntity
-§§ #
+¬¬ #
 =
-§§$ %
+¬¬$ %
 await
-§§& +
+¬¬& +
 
 unitOfWork
-§§, 6
+¬¬, 6
 .
-§§6 7
+¬¬6 7
 Position
-§§7 ?
+¬¬7 ?
 .
-§§? @
+¬¬? @
 Update
-§§@ F
+¬¬@ F
 (
-§§F G
+¬¬F G
 positionInDb
-§§G S
+¬¬G S
 )
-§§S T
+¬¬S T
 ;
-§§T U
+¬¬T U
 PositionModel
-•• 
+√√ 
 returnEvent
-•• %
+√√ %
 =
-••& '
+√√& '
 _mapper
-••( /
+√√( /
 .
-••/ 0
+√√/ 0
 Map
-••0 3
+√√0 3
 <
-••3 4
+√√3 4
 PositionModel
-••4 A
+√√4 A
 >
-••A B
+√√A B
 (
-••B C
+√√B C
 positionEntity
-••C Q
+√√C Q
 )
-••Q R
+√√Q R
 ;
-••R S
+√√R S
 return
-¶¶ 
+≈≈ 
 returnEvent
-¶¶ 
+≈≈ 
 ;
-¶¶ 
+≈≈ 
 }
-ßß 	
+∆∆ 	
 }
-®® 
-}©© 
+«« 
+}»» 

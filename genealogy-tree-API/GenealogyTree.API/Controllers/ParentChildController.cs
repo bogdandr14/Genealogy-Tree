@@ -1,6 +1,6 @@
 ﻿using GenealogyTree.API.Attributes;
-using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.DTO.ParentChild;
+using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +15,7 @@ namespace GenealogyTree.API.Controllers
     public class ParentChildController : Controller
     {
         private readonly IParentChildService _parentChildService;
+
         public ParentChildController(IParentChildService parentChildService)
         {
             _parentChildService = parentChildService;
@@ -27,10 +28,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<ParentChildModel> parents = await _parentChildService.GetAllParentsForPerson(childId);
+
                 if (parents == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(parents);
             }
             catch (Exception e)
@@ -46,10 +49,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<ParentChildModel> children = await _parentChildService.GetAllChildrenForPerson(parentId);
+
                 if (children == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(children);
             }
             catch (Exception e)
@@ -65,10 +70,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericPersonModel> parents = await _parentChildService.GetParentSpouceOptions(personId);
+
                 if (parents == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(parents);
             }
             catch (Exception e)
@@ -85,10 +92,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericPersonModel> parents = await _parentChildService.GetChildrenOptions(personId);
+
                 if (parents == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(parents);
             }
             catch (Exception e)

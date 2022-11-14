@@ -15,6 +15,7 @@ namespace GenealogyTree.API.Controllers
     public class EducationController : Controller
     {
         private readonly IEducationService _educationService;
+
         public EducationController(IEducationService educationService)
         {
             _educationService = educationService;
@@ -28,10 +29,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<EducationModel> returnEvent = await Task.Run(() => _educationService.GetAllEducationsForUser(userId));
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -48,10 +51,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 EducationModel returnEvent = await _educationService.GetEducationAsync(id);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -115,10 +120,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericNameModel> returnEvent = await _educationService.GetAllEducationLevelsAsync();
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)

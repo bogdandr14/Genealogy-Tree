@@ -6,6 +6,7 @@ namespace GenealogyTree.API.Attributes
     public class MaxImageSizeAttribute : ValidationAttribute
     {
         private readonly int _maxImageSize;
+
         public MaxImageSizeAttribute(int maxImageSize)
         {
             _maxImageSize = maxImageSize;

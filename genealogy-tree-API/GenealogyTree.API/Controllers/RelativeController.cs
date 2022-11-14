@@ -51,7 +51,7 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 RelativeState canAdd = await _relativeService.CheckRelative(userId, relativeId);
-                
+
                 return Ok(canAdd);
             }
             catch (Exception e)
@@ -67,10 +67,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 RelativeModel relative = await _relativeService.MarkChanges(relativeId);
+
                 if (relative == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(relative);
             }
             catch (Exception e)
@@ -116,10 +118,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<RequestDetailsModel> returnEvent = await _requestService.GetRequestsSent(userId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -135,10 +139,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<RequestDetailsModel> returnEvent = await _requestService.GetRequestsReceived(userId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -154,10 +160,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<RequestResponseModel> returnEvent = await _requestService.GetRequestsResponded(userId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -173,10 +181,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 RequestCreateUpdateModel returnEvent = await _requestService.AddRequest(request);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -223,10 +233,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<UserPositionModel> returnEvent = await _relativeService.GetRelativesPosition(userId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)

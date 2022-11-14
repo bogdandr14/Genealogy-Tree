@@ -22,12 +22,6 @@ export class MarriageService extends BaseService {
       BaseService.noLoadingConfig
     );
   }
-  getCurrentMarriageForPerson(personId: number): Observable<MarriedPersonModel[]> {
-    return super.getMany<MarriedPersonModel>(
-      `person/${personId}/current`,
-      BaseService.noLoadingConfig
-    );
-  }
 
   getMarriage(marriageId: number): Observable<MarriageDetailsModel> {
     return this.getOneById(marriageId, null, BaseService.noLoadingConfig);

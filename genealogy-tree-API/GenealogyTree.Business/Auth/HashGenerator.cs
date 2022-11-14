@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GenealogyTree.Business.Auth
 {
-    internal static class Hash
+    internal static class HashGenerator
     {
         public static string CreateHash(string value, string salt)
         {

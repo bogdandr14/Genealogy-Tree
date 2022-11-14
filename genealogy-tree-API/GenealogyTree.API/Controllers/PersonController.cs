@@ -34,10 +34,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericPersonModel> returnEvent = await _personService.GetPeopleListInTree(treeId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -53,10 +55,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<PersonTreeInfoModel> returnEvent = await _personService.GetPeopleTreeDataInTree(treeId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -72,10 +76,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<EventInTreeModel> returnEvent = await _personService.GetEventsInTree(treeId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -91,10 +97,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 List<GenericPersonModel> returnEvent = await _personService.GetPeopleWithoutRelative(treeId);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -110,10 +118,12 @@ namespace GenealogyTree.API.Controllers
             try
             {
                 PersonDetailsModel returnEvent = await _personService.GetPersonAsync(id);
+
                 if (returnEvent == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(returnEvent);
             }
             catch (Exception e)
@@ -175,21 +185,6 @@ namespace GenealogyTree.API.Controllers
             {
                 Image createdImage = await _imageService.AddImageAsync(image.ToImageFile());
                 ImageFile imageFile = await _personService.UpdatePictureAsync(personId, createdImage.Id);
-                return Ok(imageFile);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
-
-        [HttpPut]
-        [Route("photo")]
-        public async Task<ActionResult<ImageFile>> UpdatePhoto([FromQuery] int personId, [FromQuery] int imageId)
-        {
-            try
-            {
-                ImageFile imageFile = await _personService.UpdatePictureAsync(personId, imageId);
                 return Ok(imageFile);
             }
             catch (Exception e)

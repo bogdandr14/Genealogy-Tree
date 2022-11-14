@@ -17,6 +17,7 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
         private readonly IMarriageService _marriageService;
+
         public ParentChildService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IMarriageService marriageService) : base(unitOfWork)
         {
             _mapper = mapper;
@@ -29,6 +30,7 @@ namespace GenealogyTree.Business.Services
             List<ParentChild> parentChildren = await Task.Run(() => unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Include(pc => pc.Parent).ToList());
             List<ParentModel> parentRelatives = _mapper.Map<List<ParentModel>>(parentChildren);
             List<ParentChildModel> parents = _mapper.Map<List<ParentChildModel>>(parentRelatives);
+
             return parents;
         }
 
@@ -37,6 +39,7 @@ namespace GenealogyTree.Business.Services
             List<ParentChild> parentChildren = await Task.Run(() => unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc => pc.Child).ToList());
             List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
             List<ParentChildModel> children = _mapper.Map<List<ParentChildModel>>(childRelatives);
+
             return children;
         }
 
@@ -44,17 +47,20 @@ namespace GenealogyTree.Business.Services
         {
             List<ParentChildModel> foundParents = await GetAllParentsForPerson(personId);
             List<ParentChildModel> ancestors = new List<ParentChildModel>();
+
             while (foundParents.Any())
             {
                 ancestors.AddRange(foundParents);
                 List<ParentChildModel> searchParents = new List<ParentChildModel>();
                 searchParents.AddRange(foundParents);
                 foundParents.Clear();
+
                 foreach (ParentChildModel parent in searchParents)
                 {
                     foundParents.AddRange(await GetAllParentsForPerson(parent.PersonId));
                 }
             }
+
             return ancestors;
         }
 
@@ -62,17 +68,20 @@ namespace GenealogyTree.Business.Services
         {
             List<ParentChildModel> foundChildren = await GetAllChildrenForPerson(personId);
             List<ParentChildModel> descendants = new List<ParentChildModel>();
+
             while (foundChildren.Any())
             {
                 descendants.AddRange(foundChildren);
                 List<ParentChildModel> searchChildren = new List<ParentChildModel>();
                 searchChildren.AddRange(foundChildren);
                 foundChildren.Clear();
+
                 foreach (ParentChildModel child in searchChildren)
                 {
                     foundChildren.AddRange(await GetAllChildrenForPerson(child.PersonId));
                 }
             }
+
             return descendants;
         }
 
@@ -82,20 +91,24 @@ namespace GenealogyTree.Business.Services
             foundRelatives.AddRange(await GetAllParentsForPerson(personId));
             foundRelatives.AddRange(await GetAllChildrenForPerson(personId));
             List<ParentChildModel> relatedPeople = new List<ParentChildModel>();
+
             while (foundRelatives.Any())
             {
                 relatedPeople.AddRange(foundRelatives);
                 List<ParentChildModel> searchRelatives = new List<ParentChildModel>();
                 searchRelatives.AddRange(foundRelatives);
                 foundRelatives.Clear();
+
                 foreach (int relativeId in searchRelatives.Select(relative => relative.PersonId))
                 {
                     foundRelatives.AddRange(await GetAllParentsForPerson(relativeId));
                     foundRelatives.AddRange(await GetAllChildrenForPerson(relativeId));
                 }
+
                 foundRelatives = foundRelatives.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
                 foundRelatives.RemoveAll(relative => relatedPeople.Exists(person => person.PersonId == relative.PersonId));
             }
+
             return relatedPeople;
         }
 
@@ -104,12 +117,15 @@ namespace GenealogyTree.Business.Services
             List<ParentChildModel> allAncestors = await GetAllAncestors(personId);
             List<ParentChildModel> relatedByAncestors = new List<ParentChildModel>();
             relatedByAncestors.AddRange(allAncestors);
+
             foreach (var ancestor in allAncestors)
             {
                 relatedByAncestors.AddRange(await GetAllDescendants(ancestor.PersonId));
             }
+
             relatedByAncestors.AddRange(await GetAllDescendants(personId));
             relatedByAncestors = relatedByAncestors.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
+
             return relatedByAncestors;
         }
 
@@ -118,12 +134,15 @@ namespace GenealogyTree.Business.Services
             List<ParentChildModel> allDescendants = await GetAllDescendants(personId);
             List<ParentChildModel> relatedByDescendants = new List<ParentChildModel>();
             relatedByDescendants.AddRange(allDescendants);
+
             foreach (var descendant in allDescendants)
             {
                 relatedByDescendants.AddRange(await GetAllAncestors(descendant.PersonId));
             }
+
             relatedByDescendants.AddRange(await GetAllAncestors(personId));
             relatedByDescendants = relatedByDescendants.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
+
             return relatedByDescendants;
         }
 
@@ -135,6 +154,7 @@ namespace GenealogyTree.Business.Services
 
             List<int> peopleWithoutParent = await GetPeopleWithoutParent(personId);
             List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
+
             return notRelated.Where((person) =>
                                         peopleWithoutParent.Exists((personId) => person.PersonId == personId) &&
                                         !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
@@ -145,20 +165,8 @@ namespace GenealogyTree.Business.Services
             List<GenericPersonModel> notRelatedByAncestors = await GetNotRelatedByAncestors(personId);
             List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Where(marriage => marriage.MarriageEnded == null)
                                     .Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
-            return notRelatedByAncestors.Where((person) => !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
-        }
 
-        public async Task<List<GenericPersonModel>> GetUnrelatedPeople(int personId)
-        {
-            List<int> relatedPeopleIds = (await GetAllRelatedPeople(personId)).Select((relative) => relative.PersonId).ToList();
-            List<int> marriedPeopleIds = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
-            foreach (var marriedPersonId in marriedPeopleIds)
-            {
-                List<int> relatedToMarriedPersonIds = (await GetAllRelatedPeople(marriedPersonId)).Select((person) => person.PersonId).ToList();
-                relatedPeopleIds.AddRange(relatedToMarriedPersonIds);
-            }
-            relatedPeopleIds.AddRange(marriedPeopleIds);
-            return await GetExcludedPeople(relatedPeopleIds, personId);
+            return notRelatedByAncestors.Where((person) => !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
         }
 
         public async Task<List<GenericPersonModel>> GetNotRelatedByAncestors(int personId)
@@ -177,6 +185,7 @@ namespace GenealogyTree.Business.Services
         {
             Person personToCheck = await unitOfWork.Person.FindById(personId);
             List<int> childrenWithoutParent = unitOfWork.Person.Filter((person) => !person.Parents.Any((parent) => parent.Parent.Gender == personToCheck.Gender)).Include(p => p.Parents).Select((person) => person.Id).ToList();
+
             return childrenWithoutParent;
         }
 
@@ -186,18 +195,21 @@ namespace GenealogyTree.Business.Services
             List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
             List<Person> excludedPeople = peopleInTree.Where(person => !includedPeopleIds.Exists(includedPersonId => includedPersonId == person.Id)).ToList();
             excludedPeople.RemoveAll(relative => person.Id == relative.Id);
+
             return await MapToGenericPersonModel(excludedPeople);
         }
 
         private async Task<List<GenericPersonModel>> MapToGenericPersonModel(List<Person> people)
         {
             List<GenericPersonModel> returnEvent = new List<GenericPersonModel>();
+
             foreach (var person in people)
             {
                 GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
                 returnEvent.Add(returnPerson);
             }
+
             return returnEvent;
         }
 
@@ -205,6 +217,7 @@ namespace GenealogyTree.Business.Services
         {
             ParentChild parentChild = await unitOfWork.ParentChild.FindById(parentChildId);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChild);
+
             return returnEvent;
         }
 
@@ -214,10 +227,12 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             ParentChild parentChildEntity = _mapper.Map<ParentChild>(parentChild);
             parentChildEntity.CreatedOn = DateTime.UtcNow;
             parentChildEntity = await unitOfWork.ParentChild.Create(parentChildEntity);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
+
             return returnEvent;
         }
 
@@ -242,6 +257,7 @@ namespace GenealogyTree.Business.Services
 
             ParentChild parentChildEntity = await unitOfWork.ParentChild.Update(parentChildInDb);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
+
             return returnEvent;
         }
 
@@ -249,6 +265,7 @@ namespace GenealogyTree.Business.Services
         {
             ParentChild educationEntity = await unitOfWork.ParentChild.Delete(parentChildId);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(educationEntity);
+
             return returnEvent;
         }
     }

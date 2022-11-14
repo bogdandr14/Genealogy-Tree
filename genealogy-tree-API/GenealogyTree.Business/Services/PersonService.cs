@@ -20,6 +20,7 @@ namespace GenealogyTree.Business.Services
         private readonly IFileManagementService _fileManagementService;
         private readonly IParentChildService _parentChildService;
         private readonly IMarriageService _marriageService;
+
         public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService) : base(unitOfWork)
         {
             _mapper = mapper;
@@ -36,17 +37,21 @@ namespace GenealogyTree.Business.Services
             personEntity.Marriages = await _marriageService.GetAllMarriagesForPerson(personId);
 
             personEntity.Children = await _parentChildService.GetAllChildrenForPerson(personId);
+
             foreach (var child in personEntity.Children)
             {
                 child.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(child.ImageId));
             }
+
             personEntity.Parents = await _parentChildService.GetAllParentsForPerson(personId);
 
             foreach (var parent in personEntity.Parents)
             {
                 parent.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(parent.ImageId));
             }
+
             personEntity.ImageFile = await _fileManagementService.GetFile(person.Image);
+
             if (person.RelativeForPerson != null)
             {
                 personEntity.UserId = person.RelativeForPerson.RelativeUserId;
@@ -54,11 +59,13 @@ namespace GenealogyTree.Business.Services
             else
             {
                 User user = unitOfWork.User.Filter(u => u.PersonId == person.Id).FirstOrDefault();
+
                 if (user != default(User))
                 {
                     personEntity.UserId = user.Id;
                 }
             }
+
             return personEntity;
         }
 
@@ -68,20 +75,25 @@ namespace GenealogyTree.Business.Services
                 .Include(p => p.RelativeForPerson).ToList();
             List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+
             foreach (var person in poepleList)
             {
                 GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
                 returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
+
                 if (person.RelativeForPerson != null)
                 {
                     returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
                 }
+
                 if (user != null && person.Id == user.PersonId)
                 {
                     returnPerson.UserId = user.Id;
                 }
+
                 returnPeopleList.Add(returnPerson);
             }
+
             return returnPeopleList;
         }
 
@@ -93,6 +105,7 @@ namespace GenealogyTree.Business.Services
                 .Include(p => p.FirstPersonMarriages)
                 .Include(p => p.SecondPersonMarriages)
                 .Include(p => p.RelativeForPerson).ToList();
+
             List<PersonTreeInfoModel> returnPeopleTreeData = new List<PersonTreeInfoModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
 
@@ -104,10 +117,12 @@ namespace GenealogyTree.Business.Services
                 {
                     returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
                 }
+
                 if (user != null && person.Id == user.PersonId)
                 {
                     returnPerson.UserId = user.Id;
                 }
+
                 returnPeopleTreeData.Add(returnPerson);
             }
             returnPeopleTreeData = AddPartnersToPeopleList(returnPeopleTreeData);
@@ -118,6 +133,7 @@ namespace GenealogyTree.Business.Services
         {
             List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId && p.DeathDate == null).ToList();
             List<EventInTreeModel> returnEventsList = new List<EventInTreeModel>();
+
             foreach (var person in poepleList)
             {
                 if (person.BirthDate.HasValue)
@@ -130,14 +146,17 @@ namespace GenealogyTree.Business.Services
                     });
                 }
             }
+
             List<Marriage> marriages = unitOfWork.Marriage.Filter(x => x.FirstPerson.TreeId == treeId && x.SecondPerson.TreeId == treeId && x.EndDate == null)
                 .Include(x => x.FirstPerson)
                 .Include(x => x.SecondPerson)
                 .ToList();
+
             foreach (var marriage in marriages)
             {
                 MarriageDetailsModel returnMarriage = _mapper.Map<MarriageDetailsModel>(marriage);
                 returnMarriage.PersonMarriedTo.ImageFile = await _fileManagementService.GetFile(marriage.FirstPerson != null ? marriage.FirstPerson.Image : marriage.SecondPerson.Image);
+
                 returnEventsList.Add(new EventInTreeModel()
                 {
                     Date = marriage.StartDate,
@@ -145,6 +164,7 @@ namespace GenealogyTree.Business.Services
                     AffectedPeople = await MapAffectedMarriageAnniversaryEvent(marriage)
                 });
             }
+
             return returnEventsList;
         }
 
@@ -153,6 +173,7 @@ namespace GenealogyTree.Business.Services
             List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId && p.RelativeForPerson == null).Include(p => p.RelativeForPerson).ToList();
             List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
             User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+
             foreach (var person in poepleList)
             {
                 if (user != null && person.Id != user.PersonId)
@@ -162,6 +183,7 @@ namespace GenealogyTree.Business.Services
                     returnPeopleList.Add(returnPerson);
                 }
             }
+
             return returnPeopleList;
         }
 
@@ -170,6 +192,7 @@ namespace GenealogyTree.Business.Services
             List<PersonBaseModel> peopleList = new List<PersonBaseModel>();
             peopleList.Add(await MapToPersonBaseModel(marriage.FirstPerson));
             peopleList.Add(await MapToPersonBaseModel(marriage.SecondPerson));
+
             return peopleList;
         }
 
@@ -177,6 +200,7 @@ namespace GenealogyTree.Business.Services
         {
             List<PersonBaseModel> peopleList = new List<PersonBaseModel>();
             peopleList.Add(await MapToPersonBaseModel(person));
+
             return peopleList;
         }
 
@@ -205,15 +229,18 @@ namespace GenealogyTree.Business.Services
                     returnPerson.MotherId = parent.ParentId;
                 }
             }
+
             returnPerson.PartnersIds = new List<int>();
             foreach (var marriage in person.FirstPersonMarriages)
             {
                 returnPerson.PartnersIds.Add(marriage.SecondPersonId);
             }
+
             foreach (var marriage in person.SecondPersonMarriages)
             {
                 returnPerson.PartnersIds.Add(marriage.FirstPersonId);
             }
+
             return returnPerson;
         }
 
@@ -250,6 +277,7 @@ namespace GenealogyTree.Business.Services
             {
                 mother = peopleList.Find(x => x.PersonId == person.MotherId);
             }
+
             if (mother.PartnersIds.FirstOrDefault(id => id == person.FatherId) == 0)
             {
                 mother.PartnersIds.Add(person.FatherId);
@@ -268,6 +296,7 @@ namespace GenealogyTree.Business.Services
             {
                 father = peopleList.Find(x => x.PersonId == person.FatherId);
             }
+
             if (father.PartnersIds.FirstOrDefault(id => id == person.MotherId) == default(int))
             {
                 father.PartnersIds.Add(person.MotherId);
@@ -281,11 +310,13 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Person personEntity = await addLocations(person);
             personEntity = removeAttachedEntities(personEntity);
             personEntity.CreatedOn = DateTime.UtcNow;
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
+
             return returnEvent;
         }
 
@@ -296,6 +327,7 @@ namespace GenealogyTree.Business.Services
             personEntity.BirthPlace = null;
             personEntity.LivingPlace = null;
             personEntity.RelativeForPerson = null;
+
             return personEntity;
         }
 
@@ -307,13 +339,16 @@ namespace GenealogyTree.Business.Services
             {
                 personEntity.LivingPlace = new Location();
             }
+
             personEntity.LivingPlaceId = (await unitOfWork.Location.Create(personEntity.LivingPlace)).Id;
 
             if (personEntity.BirthPlace == null)
             {
                 personEntity.BirthPlace = new Location();
             }
+
             personEntity.BirthPlaceId = (await unitOfWork.Location.Create(personEntity.BirthPlace)).Id;
+
             return personEntity;
         }
 
@@ -338,23 +373,27 @@ namespace GenealogyTree.Business.Services
             personInDb.ModifiedOn = DateTime.UtcNow;
             personInDb.NationalityId = person.Nationality.Id;
             personInDb.ReligionId = person.Religion.Id;
+
             if (person.LivingPlace != null)
             {
                 personInDb.LivingPlace.State = person.LivingPlace.State;
                 personInDb.LivingPlace.Country = person.LivingPlace.Country;
                 personInDb.LivingPlace.City = person.LivingPlace.City;
             }
+
             if (person.BirthPlace != null)
             {
                 personInDb.BirthPlace.State = person.BirthPlace.State;
                 personInDb.BirthPlace.Country = person.BirthPlace.Country;
                 personInDb.BirthPlace.City = person.BirthPlace.City;
             }
+
             await updateLocations(personInDb);
 
             Person personEntity = await unitOfWork.Person.Update(personInDb);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
+
             return returnEvent;
         }
 
@@ -364,6 +403,7 @@ namespace GenealogyTree.Business.Services
             {
                 await unitOfWork.Location.Update(person.LivingPlace);
             }
+
             if (person.BirthPlace != null && person.BirthPlace.Id != 0)
             {
                 await unitOfWork.Location.Update(person.BirthPlace);
@@ -376,6 +416,7 @@ namespace GenealogyTree.Business.Services
             int oldImageId = (person.ImageId == null) ? 0 : (int)person.ImageId;
             person.ImageId = imageId;
             Person personEntity = await unitOfWork.Person.Update(person);
+
             if (oldImageId != 0)
             {
                 await checkImageUsageAsync(oldImageId);
@@ -386,27 +427,34 @@ namespace GenealogyTree.Business.Services
         public async Task<PersonDetailsModel> DeletePersonAsync(int personId)
         {
             List<int> parentChildIds = unitOfWork.ParentChild.Filter(parentChild => parentChild.ParentId == personId || parentChild.ChildId == personId).Select(parentChild => parentChild.Id).ToList();
+
             foreach (var parentChildId in parentChildIds)
             {
                 await unitOfWork.ParentChild.Delete(parentChildId);
             }
+
             List<int> marriageIds = unitOfWork.Marriage.Filter(marriage => marriage.FirstPersonId == personId || marriage.SecondPersonId == personId).Select(marriage => marriage.Id).ToList();
+
             foreach (var marriageId in marriageIds)
             {
                 await unitOfWork.Marriage.Delete(marriageId);
             }
+
             Person personEntity = await unitOfWork.Person.Delete(personId);
             int oldImageId = (personEntity.ImageId == null) ? 0 : (int)personEntity.ImageId;
+
             if (oldImageId != 0)
             {
                 await checkImageUsageAsync(oldImageId);
             }
+
             return _mapper.Map<PersonDetailsModel>(personEntity);
         }
 
         private async Task checkImageUsageAsync(int imageId)
         {
             Image image = await _imageService.GetImageAsync(imageId);
+
             if (!image.People.Any())
             {
                 await _imageService.DeleteImageAsync(imageId);

@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace GenealogyTree.Business.Auth
 {
-    internal static class Salt
+    internal static class SaltGenerator
     {
         public static string Create()
         {

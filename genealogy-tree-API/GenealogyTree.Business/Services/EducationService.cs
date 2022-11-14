@@ -15,6 +15,7 @@ namespace GenealogyTree.Business.Services
     public class EducationService : BaseService, IEducationService
     {
         private readonly IMapper _mapper;
+
         public EducationService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
         {
             _mapper = mapper;
@@ -24,6 +25,7 @@ namespace GenealogyTree.Business.Services
         {
             List<Education> educations = unitOfWork.Education.Filter(x => x.UserId == userId).Include(e => e.EducationLevel).ToList();
             List<EducationModel> returnEvent = _mapper.Map<List<EducationModel>>(educations);
+
             return returnEvent;
         }
 
@@ -40,10 +42,12 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Education educationEntity = _mapper.Map<Education>(education);
             educationEntity.EducationLevel = null;
             educationEntity = await unitOfWork.Education.Create(educationEntity);
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
+
             return returnEvent;
         }
         public async Task<EducationModel> UpdateEducationAsync(EducationModel education)
@@ -52,10 +56,12 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             Education educationEntity = _mapper.Map<Education>(education);
             educationEntity.EducationLevel = null;
             educationEntity = await unitOfWork.Education.Update(educationEntity);
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
+
             return returnEvent;
         }
 
@@ -63,6 +69,7 @@ namespace GenealogyTree.Business.Services
         {
             Education educationEntity = await unitOfWork.Education.Delete(educationId);
             EducationModel returnEvent = _mapper.Map<EducationModel>(educationEntity);
+
             return returnEvent;
         }
 
@@ -70,6 +77,7 @@ namespace GenealogyTree.Business.Services
         {
             List<EducationLevel> educationLevels = unitOfWork.EducationLevel.GetAll().ToList();
             List<GenericNameModel> returnEvent = await Task.Run(() => _mapper.Map<List<GenericNameModel>>(educationLevels));
+
             return returnEvent;
         }
 
@@ -79,12 +87,15 @@ namespace GenealogyTree.Business.Services
             {
                 return null;
             }
+
             EducationLevel educationLevel = new EducationLevel()
             {
                 Name = educationLevelName
             };
+
             EducationLevel educationEntity = await unitOfWork.EducationLevel.Create(educationLevel);
             GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(educationEntity);
+
             return returnEvent;
         }
     }

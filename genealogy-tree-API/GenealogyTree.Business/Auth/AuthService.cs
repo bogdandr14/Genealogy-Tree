@@ -14,14 +14,17 @@ namespace GenealogyTree.Business.Auth
     public class AuthService : BaseService, IAuthService
     {
         private readonly IMapper _mapper;
+
         public AuthService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
         {
             _mapper = mapper;
         }
+
         public async Task<LoginResponseModel> Login(LoginModel userLogin)
         {
             User user = unitOfWork.User.Filter(x => x.Username == userLogin.Username).Include(u => u.Person).FirstOrDefault();
-            if (user != null && Hash.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
+            
+            if (user != null && HashGenerator.ValidateHash(userLogin.Password, user.PasswordSalt, user.PasswordHash))
             {
                 LoginResponseModel loginResponseModel = _mapper.Map<LoginResponseModel>(user);
                 loginResponseModel.Token = await Task.Run(() => TokenService.GenerateToken(user, UserRoles.User));
@@ -36,6 +39,7 @@ namespace GenealogyTree.Business.Auth
             {
                 return null;
             }
+
             if (unitOfWork.User.Filter(x => x.Email == userRegister.Email).FirstOrDefault() != default(User))
             {
                 return null;
@@ -45,9 +49,11 @@ namespace GenealogyTree.Business.Auth
             {
                 LastUpdate = DateTime.UtcNow
             };
+
             userTree = await unitOfWork.Tree.Create(userTree);
 
             Person person = _mapper.Map<Person>(userRegister);
+
             person.TreeId = userTree.Id;
             person.LivingPlace = new Location();
             person.BirthPlace = new Location();
@@ -59,8 +65,8 @@ namespace GenealogyTree.Business.Auth
             user.Id = Guid.NewGuid();
             user.PersonId = personCreated.Id;
             user.PositionId = position.Id; 
-            user.PasswordSalt = Salt.Create();
-            user.PasswordHash = Hash.CreateHash(userRegister.Password, user.PasswordSalt);
+            user.PasswordSalt = SaltGenerator.Create();
+            user.PasswordHash = HashGenerator.CreateHash(userRegister.Password, user.PasswordSalt);
             User createdUser = await unitOfWork.User.Create(user);
             UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(createdUser);
 
@@ -70,10 +76,11 @@ namespace GenealogyTree.Business.Auth
         public async Task<UserDetailsModel> UpdatePassword(UpdatePasswordModel updatePassword)
         {
             User user = unitOfWork.User.Filter(x => x.Username == updatePassword.Username).FirstOrDefault();
-            if (user != default(User) && Hash.ValidateHash(updatePassword.CurrentPassword, user.PasswordSalt, user.PasswordHash))
+
+            if (user != default(User) && HashGenerator.ValidateHash(updatePassword.CurrentPassword, user.PasswordSalt, user.PasswordHash))
             {
-                user.PasswordSalt = Salt.Create();
-                user.PasswordHash = Hash.CreateHash(updatePassword.NewPassword, user.PasswordSalt);
+                user.PasswordSalt = SaltGenerator.Create();
+                user.PasswordHash = HashGenerator.CreateHash(updatePassword.NewPassword, user.PasswordSalt);
                 await unitOfWork.User.Update(user);
                 UserDetailsModel returnEvent = _mapper.Map<UserDetailsModel>(user);
                 return returnEvent;
