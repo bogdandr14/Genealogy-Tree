@@ -1,6 +1,5 @@
-import { Guid } from 'guid-typescript';
 export class PositionModel {
-  userId: Guid;
+  personId: number;
   latitude: number;
   longitude: number;
 }

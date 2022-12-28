@@ -214,7 +214,8 @@ namespace GenealogyTree.Business.Helpers
 
             //position mapping
             CreateMap<User, UserPositionModel>()
-                .ForMember(x => x.UserId, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.PersonId, y => y.MapFrom(z => z.Person.Id))
+                .ForMember(x => x.Type, y => y.MapFrom(z => "CURRENT"))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Person.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.Person.LastName))
                 .ForMember(x => x.Latitude, y => y.MapFrom(z => z.Position.Latitude))

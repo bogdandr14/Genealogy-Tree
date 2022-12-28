@@ -317,6 +317,9 @@
   },
   "_map": {
     "currentLocation": "Aici ești tu",
+    "relativeLocation": "{ name } este aici",
+    "birthLocation": "{ name } s-a născut aici",
+    "liveLocation": "{ name } locuieşte aici",
     "updatedOn": "Actualizat la"
   },
   "_support": {

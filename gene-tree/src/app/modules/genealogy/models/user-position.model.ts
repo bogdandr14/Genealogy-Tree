@@ -6,4 +6,5 @@ export class UserPositionModel extends PositionModel {
   lastName: string;
   updatedOn: Date;
   imageFile: ImageFile;
+  type: string;
 }

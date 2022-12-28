@@ -20,14 +20,15 @@ namespace GenealogyTree.Business.Services
         private readonly IFileManagementService _fileManagementService;
         private readonly IParentChildService _parentChildService;
         private readonly IMarriageService _marriageService;
-
-        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService) : base(unitOfWork)
+        private readonly IGeoService _geoService;
+        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService, IGeoService geoService) : base(unitOfWork)
         {
             _mapper = mapper;
             _imageService = imageService;
             _fileManagementService = fileManagementService;
             _parentChildService = parentChildService;
             _marriageService = marriageService;
+            _geoService = geoService;
         }
 
         public async Task<PersonDetailsModel> GetPersonAsync(int personId)
@@ -379,6 +380,12 @@ namespace GenealogyTree.Business.Services
                 personInDb.LivingPlace.State = person.LivingPlace.State;
                 personInDb.LivingPlace.Country = person.LivingPlace.Country;
                 personInDb.LivingPlace.City = person.LivingPlace.City;
+                Coordinates coordinates = await _geoService.GetCoordinatesAsync(person.LivingPlace.State, person.LivingPlace.Country, person.LivingPlace.City);
+                if (coordinates != null)
+                {
+                    personInDb.LivingPlace.Latitude = coordinates.Latitude;
+                    personInDb.LivingPlace.Longitude = coordinates.Longitude;
+                }
             }
 
             if (person.BirthPlace != null)
@@ -386,6 +393,12 @@ namespace GenealogyTree.Business.Services
                 personInDb.BirthPlace.State = person.BirthPlace.State;
                 personInDb.BirthPlace.Country = person.BirthPlace.Country;
                 personInDb.BirthPlace.City = person.BirthPlace.City;
+                Coordinates coordinates = await _geoService.GetCoordinatesAsync(person.BirthPlace.State, person.BirthPlace.Country, person.BirthPlace.City);
+                if (coordinates != null)
+                {
+                    personInDb.BirthPlace.Latitude = coordinates.Latitude;
+                    personInDb.BirthPlace.Longitude = coordinates.Longitude;
+                }
             }
 
             await updateLocations(personInDb);
@@ -408,6 +421,7 @@ namespace GenealogyTree.Business.Services
             {
                 await unitOfWork.Location.Update(person.BirthPlace);
             }
+
         }
 
         public async Task<ImageFile> UpdatePictureAsync(int personId, int imageId)

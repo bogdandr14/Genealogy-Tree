@@ -130,7 +130,54 @@ namespace GenealogyTree.Business.Services
                 returnEvent.Add(userPositionToReturn);
             }
 
+            User user = unitOfWork.User.Filter(user => user.Id == userId).Include(ru => ru.Person).FirstOrDefault();
+
+            List<Person> people = unitOfWork.Person.Filter(person => person.TreeId == user.Person.TreeId)
+                        .Include(p => p.LivingPlace)
+                        .Include(p => p.BirthPlace)
+                        .ToList();
+            foreach (var person in people)
+            {
+                if (person.LivingPlace.Latitude != default(float) && person.LivingPlace.Longitude != default(float))
+                {
+                    returnEvent.Add(await MapLivingPlaceAsync(person));
+                }
+
+                if (person.BirthPlace.Latitude != default(float) && person.BirthPlace.Longitude != default(float))
+                {
+                    returnEvent.Add(await MapBirthPlaceAsync(person));
+                }
+            }
             return returnEvent;
+        }
+
+        private async Task<UserPositionModel> MapLivingPlaceAsync(Person person)
+        {
+            return new UserPositionModel()
+            {
+                PersonId = person.Id,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                Latitude = person.LivingPlace.Latitude,
+                Longitude = person.LivingPlace.Longitude,
+                Type = "LIVING",
+                ImageFile = await _fileManagementService.GetFile(person.Image)
+            };
+        }
+
+
+        private async Task<UserPositionModel> MapBirthPlaceAsync(Person person)
+        {
+            return new UserPositionModel()
+            {
+                PersonId = person.Id,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                Latitude = person.BirthPlace.Latitude,
+                Longitude = person.BirthPlace.Longitude,
+                Type = "BIRTH",
+                ImageFile = await _fileManagementService.GetFile(person.Image)
+            };
         }
     }
 }

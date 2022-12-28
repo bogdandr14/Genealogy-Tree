@@ -1,13 +1,13 @@
 import { Guid } from 'guid-typescript';
 import * as Leaflet from 'leaflet';
 
-export class UserMarker {
-  constructor(icon: Leaflet.icon, userId: Guid, lastVerified: Date) {
+export class PersonMarker {
+  constructor(icon: Leaflet.icon, personId: number, lastVerified: Date) {
     this.icon = icon;
-    this.userId = userId;
+    this.personId = personId;
     this.lastVerified = lastVerified;
   }
   icon: Leaflet.icon;
-  userId: Guid;
+  personId: number;
   lastVerified: Date;
 }

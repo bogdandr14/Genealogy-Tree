@@ -316,7 +316,10 @@
     "change": "Change image"
   },
   "_map": {
-    "currentLocation": "Here are you",
+    "currentLocation": "Your location",
+    "relativeLocation": "{ name }'s location",
+    "birthLocation": "{ name } was born here",
+    "liveLocation": "{ name } lives here",
     "updatedOn": "Updated on"
   },
   "_support": {
