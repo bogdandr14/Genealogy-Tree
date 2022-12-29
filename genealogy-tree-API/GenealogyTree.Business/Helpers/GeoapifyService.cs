@@ -3,6 +3,7 @@ using GenealogyTree.Domain.Interfaces.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace GenealogyTree.Business.Helpers
                 locationRequested = string.Concat(locationRequested, country + ",");
             }
 
-            locationRequested = string.Concat(locationRequested, state);//.Replace(" ", "%20").Replace(",", "%2C%20");
+            locationRequested = string.Concat(locationRequested, state);
 
             string requestUri = string.Format(_searchFormat, _baseAddress, locationRequested, _apiKey);
             HttpResponseMessage httpResponseMessage = await _geoapifyClient.GetAsync(requestUri);
