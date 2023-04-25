@@ -80,6 +80,7 @@ namespace GenealogyTree.API
                 });
             });
 
+            services.AddMemoryCache();
             services
                .RegisterAssemblyPublicNonGenericClasses(Assembly.GetAssembly(typeof(PersonService)))
                .Where(x => x.Name.EndsWith("Service")).AsPublicImplementedInterfaces(ServiceLifetime.Scoped);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Generic;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
@@ -12,15 +13,26 @@ namespace GenealogyTree.Business.Services
     public class NationalityService : BaseService, INationalityService
     {
         private readonly IMapper _mapper;
-        public NationalityService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
+        private readonly ICachingService _cachingService;
+
+        private readonly string _nationalitiesKey = "nationalities";
+
+        public NationalityService(IUnitOfWork unitOfWork, IMapper mapper, ICachingService cachingService) : base(unitOfWork)
         {
             _mapper = mapper;
+            _cachingService = cachingService;
         }
 
         public async Task<List<GenericNameModel>> GetAllNationalitiesAsync()
         {
+            if (_cachingService.IsObjectCached(_nationalitiesKey))
+            {
+                return _cachingService.GetObject<List<GenericNameModel>>(_nationalitiesKey);
+            }
+
             List<Nationality> nationalities = unitOfWork.Nationality.GetAll().ToList();
             List<GenericNameModel> returnEvent = await Task.Run(() => _mapper.Map<List<GenericNameModel>>(nationalities));
+            _cachingService.SetObject(_nationalitiesKey, returnEvent);
 
             return returnEvent;
         }
@@ -39,6 +51,7 @@ namespace GenealogyTree.Business.Services
 
             Nationality nationalityEntity = await unitOfWork.Nationality.Create(nationality);
             GenericNameModel returnEvent = _mapper.Map<GenericNameModel>(nationalityEntity);
+            _cachingService.Remove(_nationalitiesKey);
 
             return returnEvent;
         }

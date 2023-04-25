@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyTree.API", "GenealogyTree.API\GenealogyTree.API.csproj", "{24092F6D-2926-49DD-914C-7244B63F0E00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyTree.API", "GenealogyTree.API\GenealogyTree.API.csproj", "{24092F6D-2926-49DD-914C-7244B63F0E00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyTree.Data", "GenealogyTree.Data\GenealogyTree.Data.csproj", "{F775799E-6A87-4416-A882-558AF787E616}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyTree.Data", "GenealogyTree.Data\GenealogyTree.Data.csproj", "{F775799E-6A87-4416-A882-558AF787E616}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyTree.Domain", "GenealogyTree.Domain\GenealogyTree.Domain.csproj", "{F6E6E693-A5E6-4F9D-BBEC-ABC04AF7AF17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyTree.Domain", "GenealogyTree.Domain\GenealogyTree.Domain.csproj", "{F6E6E693-A5E6-4F9D-BBEC-ABC04AF7AF17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenealogyTree.Business", "GenealogyTree.Business\GenealogyTree.Business.csproj", "{155EB218-3255-4850-8746-983C15407C84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenealogyTree.Business", "GenealogyTree.Business\GenealogyTree.Business.csproj", "{155EB218-3255-4850-8746-983C15407C84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

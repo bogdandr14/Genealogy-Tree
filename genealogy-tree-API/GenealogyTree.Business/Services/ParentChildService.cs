@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using GenealogyTree.Domain.DTO;
+using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.DTO.ParentChild;
 using GenealogyTree.Domain.DTO.Person;
 using GenealogyTree.Domain.Entities;
@@ -17,28 +19,52 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
         private readonly IMarriageService _marriageService;
+        private readonly IImageService _imageService;
+        private readonly ICachingService _cachingService;
 
-        public ParentChildService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IMarriageService marriageService) : base(unitOfWork)
+        private readonly string _personParentsKey = "person_parents_{0}";
+        private readonly string _personChildrenKey = "person_children_{0}";
+/*        private readonly string _personAllRelatedKey = "person_all_related_{0}";
+        private readonly string _personChildrenOptionsKey = "person_children_options_{0}";
+        private readonly string _personSpouceOptionsKey = "person_spouce_options_{0}";*/
+        private readonly string _personTreeKey = "person_tree_key_{0}";
+        private readonly string _parentChildKey = "parent_child_key_{0}";
+
+        public ParentChildService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IMarriageService marriageService, IImageService imageService, ICachingService cachingService) : base(unitOfWork)
         {
             _mapper = mapper;
             _fileManagementService = fileManagementService;
             _marriageService = marriageService;
+            _imageService = imageService;
+            _cachingService = cachingService;
         }
 
         public async Task<List<ParentChildModel>> GetAllParentsForPerson(int childId)
         {
+            if (_cachingService.IsObjectCached(CacheKey(_personParentsKey, childId)))
+            {
+                return _cachingService.GetObject<List<ParentChildModel>>(CacheKey(_personParentsKey, childId));
+            }
+
             List<ParentChild> parentChildren = await Task.Run(() => unitOfWork.ParentChild.Filter(x => x.ChildId == childId).Include(pc => pc.Parent).ToList());
             List<ParentModel> parentRelatives = _mapper.Map<List<ParentModel>>(parentChildren);
             List<ParentChildModel> parents = _mapper.Map<List<ParentChildModel>>(parentRelatives);
+            _cachingService.SetObject(CacheKey(_personParentsKey, childId), parents);
 
             return parents;
         }
 
         public async Task<List<ParentChildModel>> GetAllChildrenForPerson(int parentId)
         {
+            if (_cachingService.IsObjectCached(CacheKey(_personChildrenKey, parentId)))
+            {
+                return _cachingService.GetObject<List<ParentChildModel>>(CacheKey(_personChildrenKey, parentId));
+            }
+
             List<ParentChild> parentChildren = await Task.Run(() => unitOfWork.ParentChild.Filter(x => x.ParentId == parentId).Include(pc => pc.Child).ToList());
             List<ChildModel> childRelatives = _mapper.Map<List<ChildModel>>(parentChildren);
             List<ParentChildModel> children = _mapper.Map<List<ParentChildModel>>(childRelatives);
+            _cachingService.SetObject(CacheKey(_personChildrenKey, parentId), children);
 
             return children;
         }
@@ -87,6 +113,11 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<ParentChildModel>> GetAllRelatedPeople(int personId)
         {
+            //if (_cachingService.IsObjectCached(CacheKey(_personAllRelatedKey, personId)))
+            //{
+            //    return _cachingService.GetObject<List<ParentChildModel>>(CacheKey(_personAllRelatedKey, personId));
+            //}
+
             List<ParentChildModel> foundRelatives = new List<ParentChildModel>();
             foundRelatives.AddRange(await GetAllParentsForPerson(personId));
             foundRelatives.AddRange(await GetAllChildrenForPerson(personId));
@@ -108,6 +139,7 @@ namespace GenealogyTree.Business.Services
                 foundRelatives = foundRelatives.GroupBy(relative => relative.PersonId).Select(relative => relative.First()).ToList();
                 foundRelatives.RemoveAll(relative => relatedPeople.Exists(person => person.PersonId == relative.PersonId));
             }
+            //_cachingService.SetObject(CacheKey(_personAllRelatedKey, personId), relatedPeople);
 
             return relatedPeople;
         }
@@ -148,6 +180,11 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericPersonModel>> GetChildrenOptions(int personId)
         {
+            //if (_cachingService.IsObjectCached(CacheKey(_personChildrenOptionsKey, personId)))
+            //{
+            //    return _cachingService.GetObject<List<GenericPersonModel>>(CacheKey(_personChildrenOptionsKey, personId));
+            //}
+
             List<GenericPersonModel> notRelatedByDescendants = await GetNotRelatedByDescendants(personId);
             List<GenericPersonModel> notRelatedByAncestors = await GetNotRelatedByAncestors(personId);
             List<GenericPersonModel> notRelated = notRelatedByDescendants.Where(notRelated => notRelatedByAncestors.Any(x => x.PersonId == notRelated.PersonId)).ToList();
@@ -155,18 +192,28 @@ namespace GenealogyTree.Business.Services
             List<int> peopleWithoutParent = await GetPeopleWithoutParent(personId);
             List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
 
-            return notRelated.Where((person) =>
+            List<GenericPersonModel> returnEvent = notRelated.Where((person) =>
                                         peopleWithoutParent.Exists((personId) => person.PersonId == personId) &&
                                         !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
+            //_cachingService.SetObject(CacheKey(_personChildrenOptionsKey, personId), returnEvent);
+
+            return await AddImagesGenericPersonModel(returnEvent);
         }
 
         public async Task<List<GenericPersonModel>> GetParentSpouceOptions(int personId)
         {
+            //if (_cachingService.IsObjectCached(CacheKey(_personSpouceOptionsKey, personId)))
+            //{
+            //    return _cachingService.GetObject<List<GenericPersonModel>>(CacheKey(_personSpouceOptionsKey, personId));
+            //}
             List<GenericPersonModel> notRelatedByAncestors = await GetNotRelatedByAncestors(personId);
             List<int> spouces = (await _marriageService.GetAllMarriagesForPerson(personId)).Where(marriage => marriage.MarriageEnded == null)
                                     .Select((marriage) => marriage.PersonMarriedTo.PersonId).ToList();
 
-            return notRelatedByAncestors.Where((person) => !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
+            List<GenericPersonModel> returnEvent = notRelatedByAncestors.Where((person) => !spouces.Exists((spouceId) => person.PersonId == spouceId)).ToList();
+            //_cachingService.SetObject(CacheKey(_personSpouceOptionsKey, personId), returnEvent);
+
+            return await AddImagesGenericPersonModel(returnEvent);
         }
 
         public async Task<List<GenericPersonModel>> GetNotRelatedByAncestors(int personId)
@@ -192,22 +239,33 @@ namespace GenealogyTree.Business.Services
         private async Task<List<GenericPersonModel>> GetExcludedPeople(List<int> includedPeopleIds, int personId)
         {
             Person person = await unitOfWork.Person.FindById(personId);
-            List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
-            List<Person> excludedPeople = peopleInTree.Where(person => !includedPeopleIds.Exists(includedPersonId => includedPersonId == person.Id)).ToList();
-            excludedPeople.RemoveAll(relative => person.Id == relative.Id);
+            List<GenericPersonModel> peopleInTreeConverted;
 
-            return await MapToGenericPersonModel(excludedPeople);
+            if (_cachingService.IsObjectCached(CacheKey(_personTreeKey, person.TreeId)))
+            {
+                peopleInTreeConverted = _cachingService.GetObject<List<GenericPersonModel>>(CacheKey(_personTreeKey, person.TreeId));
+            }
+            else
+            {
+                List<Person> peopleInTree = unitOfWork.Person.Filter(x => x.TreeId == person.TreeId).ToList();
+                peopleInTreeConverted = _mapper.Map<List<GenericPersonModel>>(peopleInTree);
+                _cachingService.SetObject(CacheKey(_personTreeKey, person.TreeId), peopleInTreeConverted);
+            }
+
+            List<GenericPersonModel> excludedPeople = peopleInTreeConverted.Where(person => !includedPeopleIds.Exists(includedPersonId => includedPersonId == person.PersonId)).ToList();
+            excludedPeople.RemoveAll(relative => person.Id == relative.PersonId);
+
+            return excludedPeople;
         }
 
-        private async Task<List<GenericPersonModel>> MapToGenericPersonModel(List<Person> people)
+        private async Task<List<GenericPersonModel>> AddImagesGenericPersonModel(List<GenericPersonModel> people)
         {
             List<GenericPersonModel> returnEvent = new List<GenericPersonModel>();
 
             foreach (var person in people)
             {
-                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
-                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
-                returnEvent.Add(returnPerson);
+                person.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(person.ImageId));
+                returnEvent.Add(person);
             }
 
             return returnEvent;
@@ -215,8 +273,14 @@ namespace GenealogyTree.Business.Services
 
         public async Task<ParentChildDetailsModel> GetParentChildAsync(int parentChildId)
         {
+            if (_cachingService.IsObjectCached(CacheKey(_parentChildKey, parentChildId)))
+            {
+                return _cachingService.GetObject<ParentChildDetailsModel>(CacheKey(_parentChildKey, parentChildId));
+            }
+
             ParentChild parentChild = await unitOfWork.ParentChild.FindById(parentChildId);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChild);
+            _cachingService.SetObject(CacheKey(_parentChildKey, parentChildId), returnEvent);
 
             return returnEvent;
         }
@@ -232,6 +296,9 @@ namespace GenealogyTree.Business.Services
             parentChildEntity.CreatedOn = DateTime.UtcNow;
             parentChildEntity = await unitOfWork.ParentChild.Create(parentChildEntity);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
+            _cachingService.Remove(CacheKey(_personParentsKey,parentChild.ChildId));
+            _cachingService.Remove(CacheKey(_personChildrenKey, parentChild.ParentId));
+            _cachingService.SetObject(CacheKey(_parentChildKey, parentChildEntity.Id), returnEvent);
 
             return returnEvent;
         }
@@ -257,14 +324,20 @@ namespace GenealogyTree.Business.Services
 
             ParentChild parentChildEntity = await unitOfWork.ParentChild.Update(parentChildInDb);
             ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
+            _cachingService.Remove(CacheKey(_personParentsKey, parentChild.ChildId));
+            _cachingService.Remove(CacheKey(_personChildrenKey, parentChild.ParentId));
+            _cachingService.SetObject(CacheKey(_parentChildKey, parentChildEntity.Id), returnEvent);
 
             return returnEvent;
         }
 
         public async Task<ParentChildDetailsModel> DeleteParentChildAsync(int parentChildId)
         {
-            ParentChild educationEntity = await unitOfWork.ParentChild.Delete(parentChildId);
-            ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(educationEntity);
+            ParentChild parentChildEntity = await unitOfWork.ParentChild.Delete(parentChildId);
+            ParentChildDetailsModel returnEvent = _mapper.Map<ParentChildDetailsModel>(parentChildEntity);
+            _cachingService.Remove(CacheKey(_personParentsKey, parentChildEntity.ChildId));
+            _cachingService.Remove(CacheKey(_personChildrenKey, parentChildEntity.ParentId));
+            _cachingService.Remove(CacheKey(_parentChildKey, parentChildEntity.Id));
 
             return returnEvent;
         }
