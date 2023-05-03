@@ -21,7 +21,13 @@ namespace GenealogyTree.Business.Services
         private readonly IParentChildService _parentChildService;
         private readonly IMarriageService _marriageService;
         private readonly IGeoService _geoService;
-        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService, IGeoService geoService) : base(unitOfWork)
+        private readonly ICachingService _cachingService;
+
+        private readonly string _personKey = "person_{0}";
+        private readonly string _userEducationsKey = "user_educations_{0}";
+        private readonly string _educationLevelsKey = "education_levels";
+
+        public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService, IGeoService geoService, ICachingService cachingService) : base(unitOfWork)
         {
             _mapper = mapper;
             _imageService = imageService;
@@ -29,43 +35,53 @@ namespace GenealogyTree.Business.Services
             _parentChildService = parentChildService;
             _marriageService = marriageService;
             _geoService = geoService;
+            _cachingService = cachingService;
         }
 
         public async Task<PersonDetailsModel> GetPersonAsync(int personId)
         {
-            Person person = await unitOfWork.Person.FindById(personId);
-            PersonDetailsModel personEntity = _mapper.Map<PersonDetailsModel>(person);
-            personEntity.Marriages = await _marriageService.GetAllMarriagesForPerson(personId);
+            PersonDetailsModel personEntity;
+            if (_cachingService.IsObjectCached(CacheKey(_personKey, personId)))
+            {
+                return _cachingService.GetObject<PersonDetailsModel>(CacheKey(_personKey, personId));
+            }
+            else
+            {
+                Person person = await unitOfWork.Person.FindById(personId);
+                personEntity = _mapper.Map<PersonDetailsModel>(person);
 
-            personEntity.Children = await _parentChildService.GetAllChildrenForPerson(personId);
+                personEntity.Marriages = await _marriageService.GetAllMarriagesForPerson(personId);
+                personEntity.Children = await _parentChildService.GetAllChildrenForPerson(personId);
+                personEntity.Parents = await _parentChildService.GetAllParentsForPerson(personId);
+
+                if (person.RelativeForPerson != null)
+                {
+                    personEntity.UserId = person.RelativeForPerson.RelativeUserId;
+                }
+                else
+                {
+                    User user = unitOfWork.User.Filter(u => u.PersonId == person.Id).FirstOrDefault();
+
+                    if (user != default(User))
+                    {
+                        personEntity.UserId = user.Id;
+                    }
+                }
+
+                _cachingService.SetObject(CacheKey(_personKey, personId), personEntity);
+            }
 
             foreach (var child in personEntity.Children)
             {
                 child.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(child.ImageId));
             }
 
-            personEntity.Parents = await _parentChildService.GetAllParentsForPerson(personId);
-
             foreach (var parent in personEntity.Parents)
             {
                 parent.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(parent.ImageId));
             }
 
-            personEntity.ImageFile = await _fileManagementService.GetFile(person.Image);
-
-            if (person.RelativeForPerson != null)
-            {
-                personEntity.UserId = person.RelativeForPerson.RelativeUserId;
-            }
-            else
-            {
-                User user = unitOfWork.User.Filter(u => u.PersonId == person.Id).FirstOrDefault();
-
-                if (user != default(User))
-                {
-                    personEntity.UserId = user.Id;
-                }
-            }
+            personEntity.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(personEntity.ImageId));
 
             return personEntity;
         }

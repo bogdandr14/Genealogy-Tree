@@ -18,16 +18,26 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
         private readonly IRelativeService _relativeService;
+        private readonly ICachingService _cachingService;
 
-        public RequestService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRelativeService relativeService) : base(unitOfWork)
+        private readonly string _requestsSentKey = "requests_sender_{0}";
+
+
+        public RequestService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRelativeService relativeService, ICachingService cachingService) : base(unitOfWork)
         {
             _mapper = mapper;
             _fileManagementService = fileManagementService;
             _relativeService = relativeService;
+            _cachingService = cachingService;
         }
 
         public async Task<List<RequestDetailsModel>> GetRequestsSent(Guid senderId)
         {
+            if (_cachingService.IsObjectCached(CacheKey(_requestsSentKey, senderId)))
+            {
+                return _cachingService.GetObject<List<RequestDetailsModel>>(CacheKey(_requestsSentKey, senderId));
+            }
+            TODO
             List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && !x.ReceiverResponded)
                                                 .Include(x => x.Receiver).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
                                                 .Include(x => x.Sender).ThenInclude(r => r.Person).ThenInclude(p => p.Image)
