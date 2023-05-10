@@ -2,6 +2,8 @@
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Marriage;
 using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.Request;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Interfaces;
 using GenealogyTree.Domain.Interfaces.Services;
@@ -24,8 +26,9 @@ namespace GenealogyTree.Business.Services
         private readonly ICachingService _cachingService;
 
         private readonly string _personKey = "person_{0}";
-        private readonly string _userEducationsKey = "user_educations_{0}";
-        private readonly string _educationLevelsKey = "education_levels";
+        private readonly string _peopleListInTreeKey = "people_list_in_tree_{0}";
+        private readonly string _peopleTreeInTreeKey = "people_tree_in_tree_{0}";
+        private readonly string _peopleWithoutRelativeInTreeKey = "people_without_relative_in_tree_{0}";
 
         public PersonService(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService, IFileManagementService fileManagementService, IParentChildService parentChildService, IMarriageService marriageService, IGeoService geoService, ICachingService cachingService) : base(unitOfWork)
         {
@@ -88,27 +91,37 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericPersonModel>> GetPeopleListInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId)
-                .Include(p => p.RelativeForPerson).ToList();
-            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
-            User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+            List<GenericPersonModel> peopleInTreeModels = new List<GenericPersonModel>();
 
-            foreach (var person in poepleList)
+            if (_cachingService.IsObjectCached(CacheKey(_peopleListInTreeKey, treeId)))
             {
-                GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
-                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
+                peopleInTreeModels = _cachingService.GetObject<List<GenericPersonModel>>(CacheKey(_peopleListInTreeKey, treeId));
+            }
+            else
+            {
+                List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId)
+                .Include(p => p.RelativeForPerson).ToList();
+                User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
 
-                if (person.RelativeForPerson != null)
+                peopleInTreeModels = _mapper.Map<List<GenericPersonModel>>(poepleList);
+                if(user != null)
                 {
-                    returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
+                    GenericPersonModel genericPersonModel = peopleInTreeModels.Find(person => person.PersonId == user.PersonId);
+                    if(genericPersonModel!= null)
+                    {
+                        peopleInTreeModels.Remove(genericPersonModel);
+                        genericPersonModel.UserId = user.Id;
+                        peopleInTreeModels.Add(genericPersonModel);
+                    }
                 }
+                _cachingService.SetObject(CacheKey(_peopleListInTreeKey, treeId), peopleInTreeModels);
+            }
 
-                if (user != null && person.Id == user.PersonId)
-                {
-                    returnPerson.UserId = user.Id;
-                }
-
-                returnPeopleList.Add(returnPerson);
+            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
+            foreach (var person in peopleInTreeModels)
+            {
+                person.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(person.ImageId));
+                returnPeopleList.Add(person);
             }
 
             return returnPeopleList;
@@ -116,33 +129,51 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<PersonTreeInfoModel>> GetPeopleTreeDataInTree(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId)
-                .Include(p => p.Parents)
-                .ThenInclude(p => p.Parent)
-                .Include(p => p.FirstPersonMarriages)
-                .Include(p => p.SecondPersonMarriages)
-                .Include(p => p.RelativeForPerson).ToList();
+            List<PersonTreeInfoModel> peopleInTreeModels = new List<PersonTreeInfoModel>();
+
+            if (_cachingService.IsObjectCached(CacheKey(_peopleTreeInTreeKey, treeId)))
+            {
+                peopleInTreeModels = _cachingService.GetObject<List<PersonTreeInfoModel>>(CacheKey(_peopleTreeInTreeKey, treeId));
+            }
+            else
+            {
+                List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId)
+                    .Include(p => p.Parents)
+                    .ThenInclude(p => p.Parent)
+                    .Include(p => p.FirstPersonMarriages)
+                    .Include(p => p.SecondPersonMarriages)
+                    .Include(p => p.RelativeForPerson).ToList();
+
+                User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+
+                foreach(Person person in poepleList)
+                {
+                    PersonTreeInfoModel returnPerson = MapPersonInfo(person);
+                    if (person.RelativeForPerson != null)
+                    {
+                        returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
+                    }
+
+                    if (user != null && person.Id == user.PersonId)
+                    {
+                        returnPerson.UserId = user.Id;
+                    }
+                    peopleInTreeModels.Add(returnPerson);
+                }
+
+                peopleInTreeModels = AddPartnersToPeopleList(peopleInTreeModels);
+
+                _cachingService.SetObject(CacheKey(_peopleTreeInTreeKey, treeId), peopleInTreeModels);
+            }
 
             List<PersonTreeInfoModel> returnPeopleTreeData = new List<PersonTreeInfoModel>();
-            User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
 
-            foreach (var person in poepleList)
+            foreach (var person in peopleInTreeModels)
             {
-                PersonTreeInfoModel returnPerson = MapPersonInfo(person);
-                returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
-                if (person.RelativeForPerson != null)
-                {
-                    returnPerson.UserId = person.RelativeForPerson.RelativeUserId;
-                }
-
-                if (user != null && person.Id == user.PersonId)
-                {
-                    returnPerson.UserId = user.Id;
-                }
-
-                returnPeopleTreeData.Add(returnPerson);
+                person.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(person.ImageId));
+                returnPeopleTreeData.Add(person);
             }
-            returnPeopleTreeData = AddPartnersToPeopleList(returnPeopleTreeData);
+
             return returnPeopleTreeData;
         }
 
@@ -187,18 +218,24 @@ namespace GenealogyTree.Business.Services
 
         public async Task<List<GenericPersonModel>> GetPeopleWithoutRelative(Guid treeId)
         {
-            List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId && p.RelativeForPerson == null).Include(p => p.RelativeForPerson).ToList();
-            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
-            User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
-
-            foreach (var person in poepleList)
+            List<GenericPersonModel> peopleWithoutRelatives;
+            if (_cachingService.IsObjectCached(CacheKey(_peopleWithoutRelativeInTreeKey, treeId)))
             {
-                if (user != null && person.Id != user.PersonId)
-                {
-                    GenericPersonModel returnPerson = _mapper.Map<GenericPersonModel>(person);
-                    returnPerson.ImageFile = await _fileManagementService.GetFile(person.Image);
-                    returnPeopleList.Add(returnPerson);
-                }
+                peopleWithoutRelatives = _cachingService.GetObject<List<GenericPersonModel>>(CacheKey(_peopleWithoutRelativeInTreeKey, treeId));
+            }
+            else
+            {
+                User user = unitOfWork.User.Filter(u => u.Person.TreeId == treeId).FirstOrDefault();
+                List<Person> poepleList = unitOfWork.Person.Filter(p => p.TreeId == treeId && p.RelativeForPerson == null && p.Id != user.PersonId).ToList();
+                peopleWithoutRelatives = _mapper.Map<List<GenericPersonModel>>(poepleList);
+                _cachingService.SetObject(CacheKey(_peopleWithoutRelativeInTreeKey, treeId), peopleWithoutRelatives);
+            }
+
+            List<GenericPersonModel> returnPeopleList = new List<GenericPersonModel>();
+            foreach (var person in peopleWithoutRelatives)
+            {
+                person.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(person.ImageId));
+                returnPeopleList.Add(person);
             }
 
             return returnPeopleList;
@@ -333,6 +370,7 @@ namespace GenealogyTree.Business.Services
             personEntity.CreatedOn = DateTime.UtcNow;
             personEntity = await unitOfWork.Person.Create(personEntity);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
+            RemoveCachedResources(personEntity.TreeId);
 
             return returnEvent;
         }
@@ -422,6 +460,8 @@ namespace GenealogyTree.Business.Services
             Person personEntity = await unitOfWork.Person.Update(personInDb);
             PersonDetailsModel returnEvent = _mapper.Map<PersonDetailsModel>(personEntity);
             returnEvent.ImageFile = await _fileManagementService.GetFile(personEntity.Image);
+            RemoveCachedResources(personEntity.TreeId);
+            _cachingService.Remove(CacheKey(_personKey, personEntity.Id));
 
             return returnEvent;
         }
@@ -438,6 +478,13 @@ namespace GenealogyTree.Business.Services
                 await unitOfWork.Location.Update(person.BirthPlace);
             }
 
+        }
+
+        private void RemoveCachedResources(Guid treeId)
+        {
+            _cachingService.Remove(CacheKey(_peopleListInTreeKey, treeId));
+            _cachingService.Remove(CacheKey(_peopleTreeInTreeKey, treeId));
+            _cachingService.Remove(CacheKey(_peopleWithoutRelativeInTreeKey, treeId));          
         }
 
         public async Task<ImageFile> UpdatePictureAsync(int personId, int imageId)
@@ -460,17 +507,20 @@ namespace GenealogyTree.Business.Services
 
             foreach (var parentChildId in parentChildIds)
             {
-                await unitOfWork.ParentChild.Delete(parentChildId);
+                await _parentChildService.DeleteParentChildAsync(parentChildId);
             }
 
             List<int> marriageIds = unitOfWork.Marriage.Filter(marriage => marriage.FirstPersonId == personId || marriage.SecondPersonId == personId).Select(marriage => marriage.Id).ToList();
 
             foreach (var marriageId in marriageIds)
             {
-                await unitOfWork.Marriage.Delete(marriageId);
+                await _marriageService.DeleteMarriageAsync(marriageId);
             }
 
             Person personEntity = await unitOfWork.Person.Delete(personId);
+            _cachingService.Remove(CacheKey(_personKey, personEntity.Id));
+            RemoveCachedResources(personEntity.TreeId);
+
             int oldImageId = (personEntity.ImageId == null) ? 0 : (int)personEntity.ImageId;
 
             if (oldImageId != 0)

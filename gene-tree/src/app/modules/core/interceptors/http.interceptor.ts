@@ -38,11 +38,11 @@ export class AppHttpInterceptor implements HttpInterceptor {
       (req.url.includes('photo/') || req.url.includes('.png'))
         ? {
           ...req,
-          headers: req.headers.delete('Content-Type'),
+          headers: req.headers.delete('Content-Type').set('Access-Control-Allow-Origin', 'http://localhost:8100'),
         }
         : {
           ...req,
-          headers: req.headers.set('Content-Type', 'application/json'),//this.resolveHttpHeaders(config?.httpHeaders, req)
+          headers: req.headers.set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'http://localhost:8100'),//this.resolveHttpHeaders(config?.httpHeaders, req)
         }
     );
 

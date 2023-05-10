@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GenealogyTree.Domain.DTO.Relative;
+using GenealogyTree.Domain.DTO.Request;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Enums;
@@ -17,23 +18,41 @@ namespace GenealogyTree.Business.Services
     {
         private readonly IMapper _mapper;
         private readonly IFileManagementService _fileManagementService;
+        private readonly IImageService _imageService;
+        private readonly ICachingService _cachingService;
 
-        public RelativeService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService) : base(unitOfWork)
+        private readonly string _relativesKey = "user_relatives_{0}";
+        private readonly string _relativeKey = "relative_{0}";
+
+
+        public RelativeService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IImageService imageService, ICachingService cachingService) : base(unitOfWork)
         {
             _mapper = mapper;
             _fileManagementService = fileManagementService;
+            _imageService = imageService;
+            _cachingService = cachingService;
         }
 
         public async Task<List<RelativeModel>> GetAllRelativesForUser(Guid userId)
         {
-            List<Relative> relatives = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == userId).Include(r => r.RelativeUser).ThenInclude(u => u.Person).ToList();
+            List<RelativeModel> relativeModels;
+            if (_cachingService.IsObjectCached(CacheKey(_relativesKey, userId)))
+            {
+                relativeModels = _cachingService.GetObject<List<RelativeModel>>(CacheKey(_relativesKey, userId));
+            }
+            else
+            {
+                List<Relative> relatives = unitOfWork.Relatives.Filter(x => x.PrimaryUserId == userId).Include(r => r.RelativeUser).ThenInclude(u => u.Person).ToList();
+                relativeModels = _mapper.Map<List<RelativeModel>>(relatives);
+                _cachingService.SetObject(CacheKey(_relativesKey, userId), relativeModels);
+            }
+
             List<RelativeModel> returnEvent = new List<RelativeModel>();
 
-            foreach (var relative in relatives)
+            foreach (var relative in relativeModels)
             {
-                RelativeModel personToReturn = _mapper.Map<RelativeModel>(relative);
-                personToReturn.RelativeUser.ImageFile = await _fileManagementService.GetFile(relative.RelativeUser.Person.Image);
-                returnEvent.Add(personToReturn);
+                relative.RelativeUser.ImageFile = await _fileManagementService.GetFile(await _imageService.GetImageAsync(relative.RelativeUser.ImageId));
+                returnEvent.Add(relative);
             }
 
             return returnEvent;
@@ -41,11 +60,17 @@ namespace GenealogyTree.Business.Services
 
         public async Task<RelativeModel> GetRelative(int relativeId)
         {
+            if (_cachingService.IsObjectCached(CacheKey(_relativeKey, relativeId)))
+            {
+                return _cachingService.GetObject<RelativeModel>(CacheKey(_relativeKey, relativeId));
+            }
+
             Relative relative = await unitOfWork.Relatives.FindById(relativeId);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relative);
 
             return returnEvent;
         }
+
         public async Task<RelativeState> CheckRelative(Guid userId, Guid relativeId)
         {
             bool isAlreadyRelative = await Task.Run(() => unitOfWork.Relatives.Filter(r => (r.PrimaryUserId == userId && r.RelativeUserId == relativeId)).Any());
@@ -71,6 +96,9 @@ namespace GenealogyTree.Business.Services
             relativeToUpdate.LastSyncCheck = DateTime.Now;
             Relative relativeEntity = await unitOfWork.Relatives.Update(relativeToUpdate);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
+
+            _cachingService.Remove(CacheKey(_relativesKey, relativeToUpdate.PrimaryUserId));
+            _cachingService.Remove(CacheKey(_relativeKey, relativeId));
 
             return returnEvent;
         }
@@ -101,6 +129,9 @@ namespace GenealogyTree.Business.Services
                 returnEvent = _mapper.Map<RelativeModel>(createdReceiverRelative);
             }
 
+            _cachingService.Remove(CacheKey(_relativesKey, usersToLink.PrimaryUserId));
+            _cachingService.Remove(CacheKey(_relativesKey, usersToLink.LinkedUserId));
+
             return returnEvent;
         }
 
@@ -108,6 +139,9 @@ namespace GenealogyTree.Business.Services
         {
             Relative relativeEntity = await unitOfWork.Relatives.Delete(relativeId);
             RelativeModel returnEvent = _mapper.Map<RelativeModel>(relativeEntity);
+
+            _cachingService.Remove(CacheKey(_relativesKey, relativeEntity.PrimaryUserId));
+            _cachingService.Remove(CacheKey(_relativeKey, relativeId));
 
             return returnEvent;
         }
@@ -164,7 +198,6 @@ namespace GenealogyTree.Business.Services
                 ImageFile = await _fileManagementService.GetFile(person.Image)
             };
         }
-
 
         private async Task<UserPositionModel> MapBirthPlaceAsync(Person person)
         {

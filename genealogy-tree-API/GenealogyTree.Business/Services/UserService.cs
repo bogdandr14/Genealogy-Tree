@@ -2,6 +2,7 @@
 using GenealogyTree.Domain;
 using GenealogyTree.Domain.DTO;
 using GenealogyTree.Domain.DTO.Person;
+using GenealogyTree.Domain.DTO.Request;
 using GenealogyTree.Domain.DTO.User;
 using GenealogyTree.Domain.Entities;
 using GenealogyTree.Domain.Enums;
@@ -22,13 +23,17 @@ namespace GenealogyTree.Business.Services
         private readonly IFileManagementService _fileManagementService;
         private readonly IRequestService _requestService;
         private readonly IPersonService _personService;
+        private readonly ICachingService _cachingService;
 
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRequestService requestService, IPersonService personService) : base(unitOfWork)
+        private readonly string _treeRootKey = "tree_root_user_{0}";
+
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IFileManagementService fileManagementService, IRequestService requestService, IPersonService personService, ICachingService cachingService) : base(unitOfWork)
         {
             _mapper = mapper;
             _fileManagementService = fileManagementService;
             _requestService = requestService;
             _personService = personService;
+            _cachingService = cachingService;
         }
 
         public async Task<UsersFound> FindUsers(InfiniteScrollFilter filter)
@@ -111,11 +116,18 @@ namespace GenealogyTree.Business.Services
         }
         public async Task<GenericPersonModel> GetTreeRoot(Guid treeId)
         {
+            if (_cachingService.IsObjectCached(CacheKey(_treeRootKey, treeId)))
+            {
+                return _cachingService.GetObject<GenericPersonModel> (CacheKey(_treeRootKey, treeId));
+            }
+
             User user = await Task.Run(() => unitOfWork.User.Filter(x => x.Person.TreeId == treeId)
                         .Include(u => u.Person)
                         .FirstOrDefault());
 
             GenericPersonModel userEntity = _mapper.Map<GenericPersonModel>(user);
+
+            _cachingService.SetObject(CacheKey(_treeRootKey, treeId), userEntity);
 
             return userEntity;
         }
