@@ -14,7 +14,7 @@ namespace GenealogyTree.Business.Services
         private readonly IMapper _mapper;
         private readonly ICachingService _cachingService;
 
-        private readonly string _religionsKey;
+        private readonly string _religionsKey = "religions";
         public ReligionService(IUnitOfWork repositoryWrapper, IMapper mapper, ICachingService cachingService) : base(repositoryWrapper)
         {
             _mapper = mapper;

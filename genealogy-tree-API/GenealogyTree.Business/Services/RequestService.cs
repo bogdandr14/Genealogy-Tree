@@ -143,7 +143,7 @@ namespace GenealogyTree.Business.Services
         {
             if (_cachingService.IsObjectCached(CacheKey(_requestsRespondedKey, senderId)))
             {
-                return _cachingService.GetObject<List<RequestResponseModel>>(CacheKey(_requestsReceivedKey, senderId));
+                return _cachingService.GetObject<List<RequestResponseModel>>(CacheKey(_requestsRespondedKey, senderId));
             }
 
             List<Request> requests = unitOfWork.Requests.Filter(x => x.SenderId == senderId && x.ReceiverResponded)
