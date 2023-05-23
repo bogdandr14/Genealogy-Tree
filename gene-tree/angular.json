@@ -31,6 +31,11 @@
                 "output": "./svg"
               },
               {
+                "glob": "**/*.js",
+                "input": "src/assets",
+                "output": "./js"
+              },
+              {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images/",
                 "output": "assets"
@@ -43,7 +48,8 @@
               "src/assets/css/leaflet.extra-markers.min.css"
             ],
             "scripts": [
-              "src/assets/js/leaflet.extra-markers.min.js"
+              "src/assets/js/leaflet.extra-markers.min.js",
+              "src/familytree.js"
             ],
             "aot": false,
             "vendorChunk": true,
